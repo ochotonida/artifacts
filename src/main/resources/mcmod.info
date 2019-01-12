@@ -1,0 +1,16 @@
+[
+{
+  "modid": "artifacts",
+  "name": "Artifacts",
+  "description": "More exploration fun!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/ochotonida/artifacts",
+  "updateUrl": "https://github.com/ochotonida/artifacts/blob/master/update.json",
+  "authorList": ["ochotonida"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
