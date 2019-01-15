@@ -8,6 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static artifacts.Artifacts.MODID;
@@ -32,17 +33,22 @@ public class Artifacts {
     @SidedProxy(serverSide = "artifacts.common.CommonProxy", clientSide = "artifacts.client.ClientProxy")
     public static CommonProxy proxy;
 
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        proxy.init(event);
+    }
+
     @Mod.EventBusSubscriber
     public static class RegistrationHandler {
 
         @SubscribeEvent
         public static void registerItems(RegistryEvent.Register<Item> event) {
-            ArtifactsItems.registerItems(event.getRegistry());
+            ModItems.registerItems(event.getRegistry());
         }
 
         @SubscribeEvent
         public static void registerItemModels(ModelRegistryEvent event) {
-            ArtifactsItems.registerModels();
+            ModItems.registerModels();
         }
 
     }

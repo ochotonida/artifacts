@@ -13,13 +13,13 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class PotionEffectBauble extends BaubleBase {
+public class BaublePotionEffect extends BaubleBase {
 
     public final Potion effect;
 
     public final int effectAmplifier;
 
-    public PotionEffectBauble(String name, BaubleType type, Potion effect, int effectamplifier) {
+    public BaublePotionEffect(String name, BaubleType type, Potion effect, int effectamplifier) {
         super(name, type);
         this.effect = effect;
         this.effectAmplifier = effectamplifier;
