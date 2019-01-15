@@ -2,7 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.ModItems;
-import artifacts.client.model.ModelLightningAmulet;
+import artifacts.client.model.ModelAmulet;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.render.IRenderBauble;
@@ -18,7 +18,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class BaubleLightningAmulet extends BaubleBase implements IRenderBauble {
 
-    public static final ModelBase MODEL = new ModelLightningAmulet();
+    public static final ModelBase MODEL = new ModelAmulet();
     public static final ResourceLocation TEXTURES = new ResourceLocation(Artifacts.MODID,"textures/entity/lightning_amulet.png");
 
     public BaubleLightningAmulet() {
@@ -26,13 +26,14 @@ public class BaubleLightningAmulet extends BaubleBase implements IRenderBauble {
     }
 
     public static void onLivingHurt(LivingHurtEvent event) {
-        if (!event.getEntity().world.isRemote && event.getEntity() instanceof EntityPlayer && BaubleType.AMULET.hasSlot(BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleLightningAmulet))) {
+        if (!event.getEntity().world.isRemote && event.getEntity() instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleLightningAmulet) != -1) {
             if (event.getSource() == DamageSource.LIGHTNING_BOLT) {
                 event.setCanceled(true);
-            } else if (event.getSource().getTrueSource() instanceof EntityLiving && ((EntityPlayer) event.getEntity()).getRNG().nextInt(2) == 0) {
+            } else if (event.getSource().getTrueSource() instanceof EntityLiving && !((EntityPlayer) event.getEntity()).getCooldownTracker().hasCooldown(ModItems.baubleLightningAmulet)) {
                 EntityLiving attacker = (EntityLiving) event.getSource().getTrueSource();
                 if (attacker.world.canSeeSky(attacker.getPosition())) {
                     attacker.world.addWeatherEffect(new EntityLightningBolt(attacker.world, attacker.posX, attacker.posY, attacker.posZ, false));
+                    ((EntityPlayer) event.getEntity()).getCooldownTracker().setCooldown(ModItems.baubleLightningAmulet, 160);
                 }
             }
         }
