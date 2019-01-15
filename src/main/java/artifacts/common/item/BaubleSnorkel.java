@@ -25,7 +25,7 @@ public class BaubleSnorkel extends BaublePotionEffect implements IRenderBauble {
 
     @Override
     public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType renderType, float partialTicks) {
-        if(renderType == RenderType.HEAD) {
+        if (renderType == RenderType.HEAD) {
             GlStateManager.pushMatrix();
 
             Helper.translateToHeadLevel(player);
