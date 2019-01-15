@@ -8,8 +8,4 @@ public class CommonProxy {
     public void registerItemRenderer(Item item, int meta, String name) {
 
     }
-
-    public void init(FMLInitializationEvent event) {
-
-    }
 }
