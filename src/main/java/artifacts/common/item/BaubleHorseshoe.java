@@ -18,7 +18,6 @@ public class BaubleHorseshoe extends BaubleBase {
     public BaubleHorseshoe() {
         super("bauble_horseshoe", BaubleType.CHARM);
         setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1);
-
     }
 
     @SubscribeEvent
