@@ -17,9 +17,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.Nonnull;
 
-@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BaubleBase extends Item implements IBauble {
 
@@ -51,7 +50,7 @@ public class BaubleBase extends Item implements IBauble {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
         IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
         for (int i = 0; i < baubles.getSlots(); i++) {
             if (baubles.getStackInSlot(i).isEmpty() && baubles.isItemValidForSlot(i, player.getHeldItem(hand), player)) {
