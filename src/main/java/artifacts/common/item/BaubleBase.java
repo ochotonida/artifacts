@@ -1,5 +1,6 @@
 package artifacts.common.item;
 
+import artifacts.Artifacts;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
@@ -37,6 +38,10 @@ public class BaubleBase extends Item implements IBauble {
         this.setMaxStackSize(1);
         this.type = type;
         this.name = name;
+    }
+
+    public void registerModel() {
+        Artifacts.proxy.registerItemRenderer(this, 0, name);
     }
 
     @Override

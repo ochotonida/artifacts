@@ -1,7 +1,9 @@
 package artifacts;
 
 import artifacts.common.CommonProxy;
+import artifacts.common.item.BaubleWhoopieCushion;
 import net.minecraft.item.Item;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +30,11 @@ public class Artifacts {
 
     @Mod.EventBusSubscriber
     public static class RegistrationHandler {
+
+        @SubscribeEvent
+        public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
+            event.getRegistry().register(BaubleWhoopieCushion.FART);
+        }
 
         @SubscribeEvent
         public static void registerItems(RegistryEvent.Register<Item> event) {
