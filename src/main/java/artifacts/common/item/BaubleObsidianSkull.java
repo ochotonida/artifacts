@@ -1,14 +1,20 @@
 package artifacts.common.item;
 
+import artifacts.Artifacts;
 import artifacts.ModItems;
+import artifacts.client.model.ModelObsidianSkull;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
+import baubles.api.render.IRenderBauble;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -21,10 +27,14 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @Mod.EventBusSubscriber
-public class BaubleObsidianSkull extends BaubleBase {
+public class BaubleObsidianSkull extends BaubleBase implements IRenderBauble {
+
+    protected ModelBase model = new ModelObsidianSkull();
+
+    protected ResourceLocation textures = new ResourceLocation(Artifacts.MODID, "textures/entity/obsidian_skull.png");
 
     public BaubleObsidianSkull() {
-        super("bauble_obsidian_skull", BaubleType.CHARM);
+        super("bauble_obsidian_skull", BaubleType.BELT);
     }
 
     @Override
@@ -33,6 +43,15 @@ public class BaubleObsidianSkull extends BaubleBase {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         tooltip.add(I18n.translateToLocal("tooltip." + name + ".name"));
+    }
+
+    @Override
+    public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType renderType, float partialticks) {
+        if (renderType == RenderType.BODY) {
+            Helper.rotateIfSneaking(player);
+            Minecraft.getMinecraft().renderEngine.bindTexture(textures);
+            model.render(player, 0, 0, 0, 0, 0, 1/16F);
+        }
     }
 
     @SubscribeEvent
