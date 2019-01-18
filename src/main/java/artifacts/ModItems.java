@@ -18,6 +18,8 @@ public class ModItems {
     public static BaubleBase baubleHorseshoe = new BaubleHorseshoe();
     public static BaubleBase baubleShield = new BaubleShield();
     public static BaubleBase baubleObsidianSkull = new BaubleObsidianSkull();
+    public static BaubleBase baublePanicNecklace = new BaublePanicNecklace();
+    public static BaubleBase baubleWhoopieCushion = new BaubleWhoopieCushion();
 
 
     public static void registerItems(IForgeRegistry<Item> registry) {

@@ -6,6 +6,8 @@ item.bauble_thorns_amulet.name=Thorn Pendant
 item.bauble_horseshoe.name=Lucky Horseshoe
 item.bauble_shield.name=Cobalt Shield
 item.bauble_obsidian_skull.name=Obsidian Skull
+item.bauble_panic_necklace.name=Panic Necklace
+item.bauble_whoopie_cushion.name=Whoopie Cushion
 
 tooltip.bauble_lightning_amulet.name=Causes attackers to get struck by lightning
 tooltip.bauble_fire_amulet.name=Causes attackers to catch on fire
@@ -13,3 +15,5 @@ tooltip.bauble_thorns_amulet.name=Has a chance to damage attackers when worn
 tooltip.bauble_horseshoe.name=Negates fall damage from any height
 tooltip.bauble_shield.name=Prevents knockback from attacks
 tooltip.bauble_obsidian_skull.name=Applies fire resistance when hurt by fire
+tooltip.bauble_panic_necklace.name=Increases speed after taking damage
+tooltip.bauble_whoopie_cushion.name=???
