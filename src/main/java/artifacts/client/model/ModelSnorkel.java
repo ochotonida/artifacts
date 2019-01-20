@@ -34,7 +34,7 @@ public class ModelSnorkel extends ModelBase {
         if (((EntityPlayer) entity).getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty()) {
             GlStateManager.pushMatrix();
 
-            GlStateManager.scale(1.1875, 1.1875, 1.1875);
+            GlStateManager.scale(1.2, 1.2, 1.2);
             this.head.render(scale);
 
             GlStateManager.enableBlend();

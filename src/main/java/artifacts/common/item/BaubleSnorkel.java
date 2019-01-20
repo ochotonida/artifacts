@@ -35,7 +35,7 @@ public class BaubleSnorkel extends BaublePotionEffect implements IRenderBauble {
             GlStateManager.rotate(180, 0, 0, 1);
             GlStateManager.scale(1/0.55F, 1/0.55F, 1/0.55F);
             GlStateManager.scale(1/16F, 1/16F, 1/16F);
-            GlStateManager.translate(0, 0, 4);
+            GlStateManager.translate(0, 0, 4.25);
 
             Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURES);
             MODEL.render(player, 0, 0, 0, 0, 0, 1);

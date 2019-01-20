@@ -26,30 +26,30 @@ public class ModelObsidianSkull extends ModelBase {
     public ModelRenderer skull9;
 
     public ModelObsidianSkull() {
-        this.textureWidth = 32;
-        this.textureHeight = 32;
+        textureWidth = 32;
+        textureHeight = 32;
 
-        this.belt = new ModelRenderer(this, 0, 0);
-        this.skull1 = new ModelRenderer(this, 0, 16);
-        this.skull2 = new ModelRenderer(this, 0, 28);
-        this.skull3 = new ModelRenderer(this, 24, 0);
-        this.skull4 = new ModelRenderer(this, 24, 3);
-        this.skull5 = new ModelRenderer(this, 24, 6);
-        this.skull6 = new ModelRenderer(this, 16, 28);
-        this.skull7 = new ModelRenderer(this, 24, 9);
-        this.skull8 = new ModelRenderer(this, 24, 13);
-        this.skull9 = new ModelRenderer(this, 24, 17);
+        belt = new ModelRenderer(this, 0, 0);
+        skull1 = new ModelRenderer(this, 0, 16);
+        skull2 = new ModelRenderer(this, 0, 28);
+        skull3 = new ModelRenderer(this, 24, 0);
+        skull4 = new ModelRenderer(this, 24, 3);
+        skull5 = new ModelRenderer(this, 24, 6);
+        skull6 = new ModelRenderer(this, 16, 28);
+        skull7 = new ModelRenderer(this, 24, 9);
+        skull8 = new ModelRenderer(this, 24, 13);
+        skull9 = new ModelRenderer(this, 24, 17);
 
-        this.belt.addBox(-4, 0, -2, 8, 12, 4, 0);
-        this.skull1.addBox(0, 0, 1, 7, 6, 6, 0);
-        this.skull2.addBox(0, 0, 0, 7, 2, 1, 0);
-        this.skull3.addBox(0, 2, 0, 1, 2, 1, 0);
-        this.skull4.addBox(3, 2, 0, 1, 2, 1, 0);
-        this.skull5.addBox(6, 2, 0, 1, 2, 1, 0);
-        this.skull6.addBox(0, 4, 0, 7, 2, 1, 0);
-        this.skull7.addBox(1, 6, 0, 1, 1, 3, 0);
-        this.skull8.addBox(3, 6, 0, 1, 1, 3, 0);
-        this.skull9.addBox(5, 6, 0, 1, 1, 3, 0);
+        belt.addBox(-4, 0, -2, 8, 12, 4);
+        skull1.addBox(0, 0, 1, 7, 6, 6);
+        skull2.addBox(0, 0, 0, 7, 2, 1);
+        skull3.addBox(0, 2, 0, 1, 2, 1);
+        skull4.addBox(3, 2, 0, 1, 2, 1);
+        skull5.addBox(6, 2, 0, 1, 2, 1);
+        skull6.addBox(0, 4, 0, 7, 2, 1);
+        skull7.addBox(1, 6, 0, 1, 1, 3);
+        skull8.addBox(3, 6, 0, 1, 1, 3);
+        skull9.addBox(5, 6, 0, 1, 1, 3);
     }
 
     @Override
@@ -58,21 +58,23 @@ public class ModelObsidianSkull extends ModelBase {
 
         GlStateManager.scale(7/6F, 7/6F, 7/6F);
 
-        GlStateManager.scale(hasPants ? 1 : 0.9F, 1, hasPants ? 1.2F : 1.1F);
-        this.belt.render(scale);
-        GlStateManager.scale(hasPants ? 1 : 1/0.9F, 1, hasPants ? 1/1.2F : 1/1.1F);
+        GlStateManager.scale(1, 1, hasPants ? 1.2F : 1.1F);
+        belt.render(scale);
+        GlStateManager.scale(1, 1, hasPants ? 1/1.2F : 1/1.1F);
 
         GlStateManager.scale(1/2F, 1/2F, 1/2F);
         GlStateManager.translate(0, 1, -1/2F);
+        GlStateManager.translate(1/5F, 0, 0);
+        GlStateManager.rotate(-25, 0, 1, 0);
 
-        this.skull1.render(scale);
-        this.skull2.render(scale);
-        this.skull3.render(scale);
-        this.skull4.render(scale);
-        this.skull5.render(scale);
-        this.skull6.render(scale);
-        this.skull7.render(scale);
-        this.skull8.render(scale);
-        this.skull9.render(scale);
+        skull1.render(scale);
+        skull2.render(scale);
+        skull3.render(scale);
+        skull4.render(scale);
+        skull5.render(scale);
+        skull6.render(scale);
+        skull7.render(scale);
+        skull8.render(scale);
+        skull9.render(scale);
     }
 }
