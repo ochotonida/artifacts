@@ -11,6 +11,8 @@ item.bauble_whoopie_cushion.name=Whoopie Cushion
 item.bauble_bottled_cloud.name=Cloud in a Bottle
 item.bauble_bottled_fart.name=Fart in a Jar
 
+tooltip.bauble_balloon.name=Allows the wearer to jump higher
+tooltip.bauble_snorkel.name=Allows the wearer to breathe underwater
 tooltip.bauble_lightning_amulet.name=Causes attackers to get struck by lightning
 tooltip.bauble_fire_amulet.name=Causes attackers to catch on fire
 tooltip.bauble_thorns_amulet.name=Has a chance to damage attackers when worn
