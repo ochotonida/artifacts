@@ -1,6 +1,6 @@
 package artifacts.common.item;
 
-import artifacts.ModItems;
+import artifacts.common.ModItems;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import net.minecraft.client.util.ITooltipFlag;

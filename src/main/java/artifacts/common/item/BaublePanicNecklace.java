@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.ModItems;
+import artifacts.common.ModItems;
 import artifacts.client.model.ModelPanicNecklace;
 import baubles.api.BaublesApi;
 import net.minecraft.entity.player.EntityPlayer;

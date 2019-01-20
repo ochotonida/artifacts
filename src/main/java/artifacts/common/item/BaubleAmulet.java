@@ -1,6 +1,6 @@
 package artifacts.common.item;
 
-import artifacts.ModItems;
+import artifacts.common.ModItems;
 import artifacts.client.model.ModelAmulet;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
