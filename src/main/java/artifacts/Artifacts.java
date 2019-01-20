@@ -1,6 +1,7 @@
 package artifacts;
 
 import artifacts.common.CommonProxy;
+import artifacts.common.ModItems;
 import artifacts.common.item.BaubleWhoopieCushion;
 import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
@@ -8,6 +9,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static artifacts.Artifacts.MODID;
@@ -27,6 +29,11 @@ public class Artifacts {
 
     @SidedProxy(serverSide = "artifacts.common.CommonProxy", clientSide = "artifacts.client.ClientProxy")
     public static CommonProxy proxy;
+
+    @Mod.EventHandler
+    public static void init(FMLInitializationEvent event) {
+        proxy.init();
+    }
 
     @Mod.EventBusSubscriber
     public static class RegistrationHandler {

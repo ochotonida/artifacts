@@ -8,6 +8,8 @@ item.bauble_shield.name=Cobalt Shield
 item.bauble_obsidian_skull.name=Obsidian Skull
 item.bauble_panic_necklace.name=Panic Necklace
 item.bauble_whoopie_cushion.name=Whoopie Cushion
+item.bauble_bottled_cloud.name=Cloud in a Bottle
+item.bauble_bottled_fart.name=Fart in a Jar
 
 tooltip.bauble_lightning_amulet.name=Causes attackers to get struck by lightning
 tooltip.bauble_fire_amulet.name=Causes attackers to catch on fire
@@ -17,3 +19,5 @@ tooltip.bauble_shield.name=Prevents knockback from attacks
 tooltip.bauble_obsidian_skull.name=Applies fire resistance when hurt by fire
 tooltip.bauble_panic_necklace.name=Increases speed after taking damage
 tooltip.bauble_whoopie_cushion.name=???
+tooltip.bauble_bottled_cloud.name=Allows the wearer to double jump
+tooltip.bauble_bottled_fart.name=Allows the wearer to double jump...

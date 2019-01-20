@@ -1,5 +1,6 @@
-package artifacts;
+package artifacts.common;
 
+import artifacts.Artifacts;
 import artifacts.common.item.*;
 import baubles.api.BaubleType;
 import net.minecraft.init.MobEffects;
@@ -13,13 +14,15 @@ public class ModItems {
     public static BaubleBase baubleBalloon = new BaublePotionEffect("bauble_balloon", BaubleType.RING, MobEffects.JUMP_BOOST, 1).setEquipSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.5F);
     public static BaubleBase baubleSnorkel = new BaubleSnorkel();
     public static BaubleBase baubleLightningAmulet = new BaubleAmulet("bauble_lightning_amulet", new ResourceLocation(Artifacts.MODID,"textures/entity/lightning_amulet.png"));
-    public static BaubleBase baubleFireAmulet = new BaubleAmulet("bauble_fire_amulet", new ResourceLocation(Artifacts.MODID,"textures/entity/bauble_panic_necklace.png"));
+    public static BaubleBase baubleFireAmulet = new BaubleAmulet("bauble_fire_amulet", new ResourceLocation(Artifacts.MODID,"textures/entity/fire_amulet.png"));
     public static BaubleBase baubleThornsAmulet = new BaubleAmulet("bauble_thorns_amulet", new ResourceLocation(Artifacts.MODID,"textures/entity/thorns_amulet.png"));
     public static BaubleBase baubleHorseshoe = new BaubleHorseshoe();
     public static BaubleBase baubleShield = new BaubleShield();
     public static BaubleBase baubleObsidianSkull = new BaubleObsidianSkull();
     public static BaubleBase baublePanicNecklace = new BaublePanicNecklace();
     public static BaubleBase baubleWhoopieCushion = new BaubleWhoopieCushion();
+    public static BaubleBase baubleBottledCloud = new BaubleBottledCloud("bauble_bottled_cloud", false);
+    public static BaubleBase baubleBottledFart = new BaubleBottledCloud("bauble_bottled_fart", true);
 
 
     public static void registerItems(IForgeRegistry<Item> registry) {
@@ -33,7 +36,9 @@ public class ModItems {
                 baubleHorseshoe,
                 baubleShield,
                 baublePanicNecklace,
-                baubleWhoopieCushion
+                baubleWhoopieCushion,
+                baubleBottledCloud,
+                baubleBottledFart
         );
     }
 
@@ -48,7 +53,9 @@ public class ModItems {
                 baubleHorseshoe,
                 baubleShield,
                 baublePanicNecklace,
-                baubleWhoopieCushion
+                baubleWhoopieCushion,
+                baubleBottledCloud,
+                baubleBottledFart
         );
     }
 
