@@ -16,8 +16,8 @@ public class ModItems {
     public static BaubleBase baubleShockPendant = new BaubleAmulet("shock_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/shock_pendant.png"));
     public static BaubleBase baubleFlamePendant = new BaubleAmulet("flame_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/flame_pendant.png"));
     public static BaubleBase baubleThornPendant = new BaubleAmulet("thorn_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/thorn_pendant.png"));
-    public static BaubleBase baubleLuckyHorseshoe = new BaubleLuckyHorseshoe();
-    public static BaubleBase baubleCobaltShield = new BaubleCobaltShield();
+    public static BaubleBase baubleLuckyHorseshoe = new BaubleBase("lucky_horseshoe", BaubleType.CHARM).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1);
+    public static BaubleBase baubleCobaltShield = new BaubleBase("cobalt_shield", BaubleType.CHARM).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1);
     public static BaubleBase baubleObsidianSkull = new BaubleObsidianSkull();
     public static BaubleBase baublePanicNecklace = new BaublePanicNecklace();
     public static BaubleBase baubleWhoopieCushion = new BaubleWhoopieCushion();
