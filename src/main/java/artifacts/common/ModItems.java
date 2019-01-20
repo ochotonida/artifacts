@@ -11,51 +11,54 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModItems {
 
-    public static BaubleBase baubleBalloon = new BaublePotionEffect("bauble_balloon", BaubleType.RING, MobEffects.JUMP_BOOST, 1).setEquipSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.5F);
+    public static BaubleBase baubleRedShinyBalloon = new BaublePotionEffect("shiny_red_balloon", BaubleType.RING, MobEffects.JUMP_BOOST, 1).setEquipSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.5F);
     public static BaubleBase baubleSnorkel = new BaubleSnorkel();
-    public static BaubleBase baubleLightningAmulet = new BaubleAmulet("bauble_lightning_amulet", new ResourceLocation(Artifacts.MODID,"textures/entity/lightning_amulet.png"));
-    public static BaubleBase baubleFireAmulet = new BaubleAmulet("bauble_fire_amulet", new ResourceLocation(Artifacts.MODID,"textures/entity/fire_amulet.png"));
-    public static BaubleBase baubleThornsAmulet = new BaubleAmulet("bauble_thorns_amulet", new ResourceLocation(Artifacts.MODID,"textures/entity/thorns_amulet.png"));
-    public static BaubleBase baubleHorseshoe = new BaubleHorseshoe();
-    public static BaubleBase baubleShield = new BaubleShield();
+    public static BaubleBase baubleShockPendant = new BaubleAmulet("shock_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/shock_pendant.png"));
+    public static BaubleBase baubleFlamePendant = new BaubleAmulet("flame_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/flame_pendant.png"));
+    public static BaubleBase baubleThornPendant = new BaubleAmulet("thorn_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/thorn_pendant.png"));
+    public static BaubleBase baubleLuckyHorseshoe = new BaubleLuckyHorseshoe();
+    public static BaubleBase baubleCobaltShield = new BaubleCobaltShield();
     public static BaubleBase baubleObsidianSkull = new BaubleObsidianSkull();
     public static BaubleBase baublePanicNecklace = new BaublePanicNecklace();
     public static BaubleBase baubleWhoopieCushion = new BaubleWhoopieCushion();
-    public static BaubleBase baubleBottledCloud = new BaubleBottledCloud("bauble_bottled_cloud", false);
-    public static BaubleBase baubleBottledFart = new BaubleBottledCloud("bauble_bottled_fart", true);
+    public static BaubleBase baubleBottledCloud = new BaubleBottledCloud("bottled_cloud", false);
+    public static BaubleBase baubleBottledFart = new BaubleBottledCloud("bottled_fart", true);
+    public static BaubleBase baubleMagmaRing = new BaubleBase("magma_ring", BaubleType.RING);
 
 
     public static void registerItems(IForgeRegistry<Item> registry) {
         registry.registerAll(
-                baubleBalloon,
+                baubleRedShinyBalloon,
                 baubleObsidianSkull,
                 baubleSnorkel,
-                baubleLightningAmulet,
-                baubleFireAmulet,
-                baubleThornsAmulet,
-                baubleHorseshoe,
-                baubleShield,
+                baubleShockPendant,
+                baubleFlamePendant,
+                baubleThornPendant,
+                baubleLuckyHorseshoe,
+                baubleCobaltShield,
                 baublePanicNecklace,
                 baubleWhoopieCushion,
                 baubleBottledCloud,
-                baubleBottledFart
+                baubleBottledFart,
+                baubleMagmaRing
         );
     }
 
     public static void registerModels() {
         registerAllModels(
-                baubleBalloon,
+                baubleRedShinyBalloon,
                 baubleObsidianSkull,
                 baubleSnorkel,
-                baubleLightningAmulet,
-                baubleFireAmulet,
-                baubleThornsAmulet,
-                baubleHorseshoe,
-                baubleShield,
+                baubleShockPendant,
+                baubleFlamePendant,
+                baubleThornPendant,
+                baubleLuckyHorseshoe,
+                baubleCobaltShield,
                 baublePanicNecklace,
                 baubleWhoopieCushion,
                 baubleBottledCloud,
-                baubleBottledFart
+                baubleBottledFart,
+                baubleMagmaRing
         );
     }
 

@@ -40,10 +40,16 @@ public class BaubleBase extends Item implements IBauble {
     public BaubleBase(String name, BaubleType type) {
         super();
         setRegistryName(name);
-        setUnlocalizedName(name);
+        setUnlocalizedName(Artifacts.MODID + ":" + name);
         this.setMaxStackSize(1);
         this.type = type;
         this.name = name;
+    }
+
+    public BaubleBase setEquipSound(SoundEvent sound, float pitch) {
+        equipSound = sound;
+        equipPitch = pitch;
+        return this;
     }
 
     @Override
@@ -51,7 +57,7 @@ public class BaubleBase extends Item implements IBauble {
     @SuppressWarnings("deprecation")
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(I18n.translateToLocal("tooltip." + name + ".name"));
+        tooltip.add(I18n.translateToLocal("tooltip." + Artifacts.MODID + ":" + name + ".name"));
     }
 
     public void registerModel() {
@@ -82,12 +88,6 @@ public class BaubleBase extends Item implements IBauble {
             }
         }
         return new ActionResult<>(EnumActionResult.FAIL, player.getHeldItem(hand));
-    }
-
-    public BaubleBase setEquipSound(SoundEvent sound, float pitch) {
-        equipSound = sound;
-        equipPitch = pitch;
-        return this;
     }
 
     @Override

@@ -10,10 +10,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
-public class BaubleShield extends BaubleBase {
+public class BaubleCobaltShield extends BaubleBase {
 
-    public BaubleShield() {
-        super("bauble_shield", BaubleType.CHARM);
+    public BaubleCobaltShield() {
+        super("cobalt_shield", BaubleType.CHARM);
         setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1);
     }
 
@@ -21,7 +21,7 @@ public class BaubleShield extends BaubleBase {
     @SuppressWarnings("unused")
     public static void onLivingKnockback(LivingKnockBackEvent event) {
         if (event.getEntity() instanceof EntityPlayer) {
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleShield) != -1) {
+            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleCobaltShield) != -1) {
                 event.setCanceled(true);
             }
         }

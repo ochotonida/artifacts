@@ -6,16 +6,14 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
-import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber
 @MethodsReturnNonnullByDefault
 public class BaubleWhoopieCushion extends BaubleBase {
 
     public static final SoundEvent FART = new SoundEvent(new ResourceLocation(Artifacts.MODID, "fart")).setRegistryName("fart");
 
     public BaubleWhoopieCushion() {
-        super("bauble_whoopie_cushion", BaubleType.BELT);
+        super("whoopie_cushion", BaubleType.BELT);
         setMaxDamage(0);
         setEquipSound(FART, 1);
     }

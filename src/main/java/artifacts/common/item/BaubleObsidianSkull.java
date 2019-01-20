@@ -23,10 +23,10 @@ public class BaubleObsidianSkull extends BaubleBase implements IRenderBauble {
 
     protected ModelBase model = new ModelObsidianSkull();
 
-    protected ResourceLocation textures = new ResourceLocation(Artifacts.MODID, "textures/entity/obsidian_skull.png");
+    protected ResourceLocation textures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/obsidian_skull.png");
 
     public BaubleObsidianSkull() {
-        super("bauble_obsidian_skull", BaubleType.BELT);
+        super("obsidian_skull", BaubleType.BELT);
     }
 
     @Override

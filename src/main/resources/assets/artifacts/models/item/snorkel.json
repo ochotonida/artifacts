@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "artifacts:items/bauble_shield"
+    "layer0": "artifacts:items/snorkel"
   }
 }

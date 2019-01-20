@@ -47,32 +47,32 @@ public class BaubleAmulet extends BaubleBase implements IRenderBauble {
         if (!event.getEntity().world.isRemote && event.getEntity() instanceof EntityPlayer) {
 
             // lightning amulet
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleLightningAmulet) != -1) {
+            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleShockPendant) != -1) {
                 if (event.getSource() == DamageSource.LIGHTNING_BOLT) {
                     event.setCanceled(true);
-                } else if (event.getSource().getTrueSource() instanceof EntityLiving && !((EntityPlayer) event.getEntity()).getCooldownTracker().hasCooldown(ModItems.baubleLightningAmulet)) {
+                } else if (event.getSource().getTrueSource() instanceof EntityLiving && !((EntityPlayer) event.getEntity()).getCooldownTracker().hasCooldown(ModItems.baubleShockPendant)) {
                     EntityLiving attacker = (EntityLiving) event.getSource().getTrueSource();
                     if (attacker.world.canSeeSky(attacker.getPosition())) {
                         attacker.world.addWeatherEffect(new EntityLightningBolt(attacker.world, attacker.posX, attacker.posY, attacker.posZ, false));
-                        ((EntityPlayer) event.getEntity()).getCooldownTracker().setCooldown(ModItems.baubleLightningAmulet, 320);
+                        ((EntityPlayer) event.getEntity()).getCooldownTracker().setCooldown(ModItems.baubleShockPendant, 320);
                     }
                 }
             }
 
             // fire amulet
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleFireAmulet) != -1) {
-                if (event.getSource().getTrueSource() instanceof EntityLiving && !((EntityPlayer) event.getEntity()).getCooldownTracker().hasCooldown(ModItems.baubleFireAmulet)) {
+            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleFlamePendant) != -1) {
+                if (event.getSource().getTrueSource() instanceof EntityLiving && !((EntityPlayer) event.getEntity()).getCooldownTracker().hasCooldown(ModItems.baubleFlamePendant)) {
                     EntityLiving attacker = (EntityLiving) event.getSource().getTrueSource();
                     if (!attacker.isImmuneToFire() && attacker.attackable()) {
                         attacker.setFire(4);
                         attacker.attackEntityFrom(new EntityDamageSource("onFire", event.getEntity()).setFireDamage(), 2);
-                        ((EntityPlayer) event.getEntity()).getCooldownTracker().setCooldown(ModItems.baubleFireAmulet, 160);
+                        ((EntityPlayer) event.getEntity()).getCooldownTracker().setCooldown(ModItems.baubleFlamePendant, 160);
                     }
                 }
             }
 
             // thorns amulet
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleThornsAmulet) != -1) {
+            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleThornPendant) != -1) {
                 if (event.getSource().getTrueSource() instanceof EntityLiving) {
                     EntityLiving attacker = (EntityLiving) event.getSource().getTrueSource();
                     Random random = ((EntityPlayer) event.getEntity()).getRNG();

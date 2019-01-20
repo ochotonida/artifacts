@@ -16,10 +16,10 @@ import net.minecraft.util.ResourceLocation;
 public class BaubleSnorkel extends BaublePotionEffect implements IRenderBauble {
 
     public static final ModelBase MODEL = new ModelSnorkel();
-    public static final ResourceLocation TEXTURES = new ResourceLocation(Artifacts.MODID,"textures/entity/snorkel.png");
+    public static final ResourceLocation TEXTURES = new ResourceLocation(Artifacts.MODID,"textures/entity/layer/snorkel.png");
 
     public BaubleSnorkel() {
-        super("bauble_snorkel", BaubleType.HEAD, MobEffects.WATER_BREATHING, 0);
+        super("snorkel", BaubleType.HEAD, MobEffects.WATER_BREATHING, 0);
         setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1);
     }
 

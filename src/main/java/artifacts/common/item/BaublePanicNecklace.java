@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class BaublePanicNecklace extends BaubleAmulet {
 
     public BaublePanicNecklace() {
-        super("bauble_panic_necklace", new ResourceLocation(Artifacts.MODID, "textures/entity/panic_necklace.png"));
+        super("panic_necklace", new ResourceLocation(Artifacts.MODID, "textures/entity/layer/panic_necklace.png"));
         model = new ModelPanicNecklace();
     }
 
