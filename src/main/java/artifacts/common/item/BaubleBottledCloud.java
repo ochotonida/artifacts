@@ -33,9 +33,9 @@ public class BaubleBottledCloud extends BaubleBase implements IRenderBauble {
         super(name, BaubleType.BELT);
         this.isFart = isFart;
         if (isFart) {
-            textures = new ResourceLocation(Artifacts.MODID, "textures/entity/bottled_fart.png");
+            textures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/bottled_fart.png");
         } else {
-            textures = new ResourceLocation(Artifacts.MODID, "textures/entity/bottled_cloud.png");
+            textures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/bottled_cloud.png");
         }
 
     }
