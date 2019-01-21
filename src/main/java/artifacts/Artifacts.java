@@ -10,6 +10,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static artifacts.Artifacts.MODID;
@@ -29,6 +30,11 @@ public class Artifacts {
 
     @SidedProxy(serverSide = "artifacts.common.CommonProxy", clientSide = "artifacts.client.ClientProxy")
     public static CommonProxy proxy;
+
+    @Mod.EventHandler
+    public static void preInit(FMLPreInitializationEvent event) {
+        proxy.preInit();
+    }
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
