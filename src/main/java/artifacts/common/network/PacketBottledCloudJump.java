@@ -1,6 +1,6 @@
 package artifacts.common.network;
 
-import artifacts.common.item.BaubleWhoopieCushion;
+import artifacts.common.ModSoundEvents;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
@@ -39,7 +39,7 @@ public class PacketBottledCloudJump implements IMessage {
                 player.fallDistance = 0;
                 player.jump();
                 if (message.isFart) {
-                    player.playSound(BaubleWhoopieCushion.FART, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
+                    player.playSound(ModSoundEvents.FART, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
                 } else {
                     player.playSound(SoundEvents.BLOCK_CLOTH_FALL, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
                 }

@@ -2,6 +2,7 @@ package artifacts;
 
 import artifacts.common.CommonProxy;
 import artifacts.common.ModItems;
+import artifacts.common.ModSoundEvents;
 import artifacts.common.item.BaubleWhoopieCushion;
 import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
@@ -46,7 +47,11 @@ public class Artifacts {
 
         @SubscribeEvent
         public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
-            event.getRegistry().register(BaubleWhoopieCushion.FART);
+            event.getRegistry().register(ModSoundEvents.FART);
+            event.getRegistry().register(ModSoundEvents.MIMIC_CLOSE);
+            event.getRegistry().register(ModSoundEvents.MIMIC_OPEN);
+            event.getRegistry().register(ModSoundEvents.MIMIC_HURT);
+            event.getRegistry().register(ModSoundEvents.MIMIC_DEATH);
         }
 
         @SubscribeEvent

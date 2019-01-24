@@ -3,6 +3,7 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.model.ModelBottledCloud;
 import artifacts.common.CommonProxy;
+import artifacts.common.ModSoundEvents;
 import artifacts.common.network.PacketBottledCloudJump;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
@@ -78,7 +79,7 @@ public class BaubleBottledCloud extends BaubleBase implements IRenderBauble {
                                 player.jump();
                                 player.fallDistance = 0;
                                 if (((BaubleBottledCloud) stack.getItem()).isFart) {
-                                    player.playSound(BaubleWhoopieCushion.FART, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
+                                    player.playSound(ModSoundEvents.FART, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
                                 } else {
                                     player.playSound(SoundEvents.BLOCK_CLOTH_FALL, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
                                 }

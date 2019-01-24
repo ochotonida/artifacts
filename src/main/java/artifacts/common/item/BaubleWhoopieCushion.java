@@ -1,21 +1,19 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
+import artifacts.common.ModSoundEvents;
 import baubles.api.BaubleType;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
 
 @MethodsReturnNonnullByDefault
 public class BaubleWhoopieCushion extends BaubleBase {
 
-    public static final SoundEvent FART = new SoundEvent(new ResourceLocation(Artifacts.MODID, "fart")).setRegistryName("fart");
-
     public BaubleWhoopieCushion() {
         super("whoopie_cushion", BaubleType.BELT);
         setMaxDamage(0);
-        setEquipSound(FART, 1);
+        setEquipSound(ModSoundEvents.FART, 1);
     }
 
     @Override
@@ -31,7 +29,7 @@ public class BaubleWhoopieCushion extends BaubleBase {
         } else if (stack.getMetadata() == 0 && player.isSneaking()) {
             stack.setItemDamage(1);
             if (player.getRNG().nextInt(3) == 0) {
-                player.playSound(FART, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
+                player.playSound(ModSoundEvents.FART, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
             }
         }
     }

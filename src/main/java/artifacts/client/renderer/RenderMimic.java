@@ -19,7 +19,7 @@ public class RenderMimic extends RenderLiving<EntityMimic> {
     private static final ResourceLocation TEXTURES = new ResourceLocation(Artifacts.MODID, "textures/entity/mimic/mimic.png");
 
     protected RenderMimic(RenderManager renderManager) {
-        super(renderManager, new ModelMimic(), 0.5F);
+        super(renderManager, new ModelMimic(), 0.45F);
     }
 
     @Override
