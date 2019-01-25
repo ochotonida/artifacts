@@ -12,6 +12,25 @@ item.artifacts:bottled_cloud.name=Cloud in a Bottle
 item.artifacts:bottled_fart.name=Fart in a Jar
 item.artifacts:magma_stone.name=Magma Stone
 
+item.artifacts:everlasting_porkchop.name=Everlasting Raw Porkchop
+item.artifacts:everlasting_cooked_porkchop.name=Everlasting Cooked Porkchop
+item.artifacts:everlasting_beef.name=Everlasting Raw Beef
+item.artifacts:everlasting_cooked_beef.name=Everlasting Steak
+item.artifacts:everlasting_chicken.name=Everlasting Raw Chicken
+item.artifacts:everlasting_cooked_chicken.name=Everlasting Cooked Chicken
+item.artifacts:everlasting_rotten_flesh.name=Everlasting Rotten Flesh
+item.artifacts:everlasting_spider_eye.name=Everlasting Spider Eye
+item.artifacts:everlasting_rabbit.name=Everlasting Raw Rabbit
+item.artifacts:everlasting_cooked_rabbit.name=Everlasting Cooked Rabbit
+item.artifacts:everlasting_mutton.name=Everlasting Raw Mutton
+item.artifacts:everlasting_cooked_mutton.name=Everlasting Cooked Mutton
+item.artifacts:everlasting_rabbit_stew.name=Everlasting Rabbit Stew
+item.artifacts:everlasting_cod.name=Everlasting Raw Cod
+item.artifacts:everlasting_cooked_cod.name=Everlasting Cooked Cod
+item.artifacts:everlasting_salmon.name=Everlasting Raw Salmon
+item.artifacts:everlasting_cooked_salmon.name=Everlasting Cooked Salmon
+item.artifacts:everlasting_clownfish.name=Everlasting Clownfish
+
 tooltip.artifacts:shiny_red_balloon.name=Allows the wearer to jump higher
 tooltip.artifacts:snorkel.name=Allows the wearer to breathe underwater
 tooltip.artifacts:shock_pendant.name=Causes attackers to get struck by lightning
