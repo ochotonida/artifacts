@@ -49,10 +49,6 @@ public class EntityMimic extends EntityLiving implements IMob {
         return SoundCategory.HOSTILE;
     }
 
-    public void setDormant() {
-        isDormant = true;
-    }
-
     @Override
     public boolean canDespawn() {
         return false;
@@ -138,12 +134,14 @@ public class EntityMimic extends EntityLiving implements IMob {
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source.isProjectile() && ticksInAir <= 0) {
+            playSound(ModSoundEvents.MIMIC_HURT, getSoundVolume(), getSoundPitch());
+            return false;
+        }
         if (super.attackEntityFrom(source, amount)) {
-            /*
-             * if (getAttackTarget() == null && source.getTrueSource() instanceof EntityLivingBase) {
-             *     setAttackTarget((EntityLivingBase) source.getTrueSource());
-             * }
-             */
+            if (source.getTrueSource() instanceof EntityPlayer) {
+                setAttackTarget((EntityLivingBase) source.getTrueSource());
+            }
             return true;
         }
         return false;
