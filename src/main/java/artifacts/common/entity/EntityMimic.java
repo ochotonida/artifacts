@@ -30,6 +30,7 @@ import java.util.function.Predicate;
 public class EntityMimic extends EntityLiving implements IMob {
 
     public int ticksInAir;
+
     public boolean isDormant;
 
     public EntityMimic(World world) {
@@ -93,12 +94,14 @@ public class EntityMimic extends EntityLiving implements IMob {
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setInteger("ticksInAir", ticksInAir);
+        compound.setBoolean("isDormant", isDormant);
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         ticksInAir = compound.getInteger("ticksInAir");
+        isDormant = compound.getBoolean("isDormant");
     }
 
     @Override
