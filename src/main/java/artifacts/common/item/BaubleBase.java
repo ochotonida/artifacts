@@ -41,7 +41,8 @@ public class BaubleBase extends Item implements IBauble {
         super();
         setRegistryName(name);
         setUnlocalizedName(Artifacts.MODID + ":" + name);
-        this.setMaxStackSize(1);
+        setCreativeTab(Artifacts.CREATIVE_TAB);
+        setMaxStackSize(1);
         this.type = type;
         this.name = name;
     }

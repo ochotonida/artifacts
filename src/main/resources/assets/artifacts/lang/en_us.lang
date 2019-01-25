@@ -27,3 +27,5 @@ tooltip.artifacts:bottled_fart.name=Allows the wearer to double jump
 tooltip.artifacts:magma_stone.name=Causes the wearer's meelee attacks to inflict fire damage
 
 entity.artifacts:mimic.name=Mimic
+
+itemGroup.artifacts:creativetab=Artifacts
