@@ -42,10 +42,10 @@ public class BaubleObsidianSkull extends BaubleBase implements IRenderBauble {
     @SuppressWarnings("unused")
     public static void onLivingHurt(LivingHurtEvent event) {
         if (event.getEntity() instanceof EntityPlayer) {
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleObsidianSkull) != -1 && !((EntityPlayer) event.getEntity()).getCooldownTracker().hasCooldown(ModItems.baubleObsidianSkull)) {
+            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.OBSIDIAN_SKULL) != -1 && !((EntityPlayer) event.getEntity()).getCooldownTracker().hasCooldown(ModItems.OBSIDIAN_SKULL)) {
                 if (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA) {
                     event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE,400, 0,true,true));
-                    ((EntityPlayer) event.getEntity()).getCooldownTracker().setCooldown(ModItems.baubleObsidianSkull, 1600);
+                    ((EntityPlayer) event.getEntity()).getCooldownTracker().setCooldown(ModItems.OBSIDIAN_SKULL, 1600);
                 }
             }
         }

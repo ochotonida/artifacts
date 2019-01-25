@@ -23,7 +23,7 @@ public class CommonEventHandler {
         if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof EntityDamageSourceIndirect) && !((EntityDamageSource) event.getSource()).getIsThornsDamage()) {
             if (event.getSource().getTrueSource() instanceof EntityPlayer) {
                 EntityPlayer attacker = (EntityPlayer) event.getSource().getTrueSource();
-                if (BaublesApi.isBaubleEquipped(attacker, ModItems.baubleMagmaStone) != -1 && !event.getEntity().isImmuneToFire()) {
+                if (BaublesApi.isBaubleEquipped(attacker, ModItems.MAGMA_STONE) != -1 && !event.getEntity().isImmuneToFire()) {
                     event.getEntity().setFire(3);
                 }
             }
@@ -33,7 +33,7 @@ public class CommonEventHandler {
     @SubscribeEvent
     public static void onLivingKnockback(LivingKnockBackEvent event) {
         if (event.getEntity() instanceof EntityPlayer) {
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleCobaltShield) != -1) {
+            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.COBALT_SHIELD) != -1) {
                 event.setCanceled(true);
             }
         }
@@ -42,7 +42,7 @@ public class CommonEventHandler {
     @SubscribeEvent
     public static void onLivingFall(LivingFallEvent event) {
         if (event.getEntity() instanceof EntityPlayer) {
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baubleLuckyHorseshoe) != -1) {
+            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.LUCKY_HORSESHOE) != -1) {
                 if (event.getDistance() > 5) {
                     PotionEffect potioneffect = event.getEntityLiving().getActivePotionEffect(MobEffects.JUMP_BOOST);
                     float f = potioneffect == null ? 0.0F : (float)(potioneffect.getAmplifier() + 1);

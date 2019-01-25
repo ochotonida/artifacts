@@ -82,7 +82,7 @@ public class Artifacts {
         @Override
         @Nonnull
         public ItemStack getTabIconItem() {
-            return new ItemStack(ModItems.baublePanicNecklace);
+            return new ItemStack(ModItems.PANIC_NECKLACE);
         }
     }
 }

@@ -24,7 +24,7 @@ public class BaublePanicNecklace extends BaubleAmulet {
     @SuppressWarnings("unused")
     public static void onLivingHurt(LivingHurtEvent event) {
         if (event.getEntity() instanceof EntityPlayer && event.getAmount() >= 1) {
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.baublePanicNecklace) != -1) {
+            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.PANIC_NECKLACE) != -1) {
                 event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SPEED, 70, 1, true, false));
             }
         }
