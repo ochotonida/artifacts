@@ -3,6 +3,7 @@ package artifacts;
 import artifacts.common.CommonProxy;
 import artifacts.common.ModItems;
 import artifacts.common.ModSoundEvents;
+import artifacts.common.worldgen.WorldGenUndergroundChest;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nonnull;
 
@@ -45,6 +47,7 @@ public class Artifacts {
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
         proxy.init();
+        GameRegistry.registerWorldGenerator(new WorldGenUndergroundChest(), 0);
     }
 
     @Mod.EventBusSubscriber

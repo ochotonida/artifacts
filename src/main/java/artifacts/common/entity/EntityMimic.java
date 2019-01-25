@@ -141,6 +141,7 @@ public class EntityMimic extends EntityLiving implements IMob {
         if (super.attackEntityFrom(source, amount)) {
             if (source.getTrueSource() instanceof EntityPlayer) {
                 setAttackTarget((EntityLivingBase) source.getTrueSource());
+                isDormant = false;
             }
             return true;
         }
@@ -153,7 +154,7 @@ public class EntityMimic extends EntityLiving implements IMob {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
         return ModSoundEvents.MIMIC_HURT;
     }
 
@@ -175,6 +176,10 @@ public class EntityMimic extends EntityLiving implements IMob {
         this.motionY = 0.5;
         this.isAirBorne = true;
         ForgeHooks.onLivingJump(this);
+    }
+
+    public void setDormant() {
+        isDormant = true;
     }
 
     static class AIMimicAttack extends EntityAIBase {
