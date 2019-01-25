@@ -2,6 +2,7 @@ package artifacts;
 
 import artifacts.common.CommonProxy;
 import artifacts.common.ModItems;
+import artifacts.common.ModRecipes;
 import artifacts.common.ModSoundEvents;
 import artifacts.common.worldgen.WorldGenUndergroundChest;
 import net.minecraft.creativetab.CreativeTabs;
@@ -48,6 +49,7 @@ public class Artifacts {
     public static void init(FMLInitializationEvent event) {
         proxy.init();
         GameRegistry.registerWorldGenerator(new WorldGenUndergroundChest(), 0);
+        ModRecipes.initRecipes();
     }
 
     @Mod.EventBusSubscriber
