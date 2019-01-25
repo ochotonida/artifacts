@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:bottled_cloud"
+    },
+    {
+      "item": "artifacts:whoopie_cushion"
+    }
+  ],
+  "result": {
+    "item": "artifacts:bottled_fart"
+  }
+}
