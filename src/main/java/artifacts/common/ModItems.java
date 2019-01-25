@@ -23,7 +23,7 @@ public class ModItems {
     public static BaubleBase baubleWhoopieCushion = new BaubleWhoopieCushion();
     public static BaubleBase baubleBottledCloud = new BaubleBottledCloud("bottled_cloud", false);
     public static BaubleBase baubleBottledFart = new BaubleBottledCloud("bottled_fart", true);
-    public static BaubleBase baubleMagmaRing = new BaubleBase("magma_ring", BaubleType.RING);
+    public static BaubleBase baubleMagmaStone = new BaubleBase("magma_stone", BaubleType.RING);
 
 
     public static void registerItems(IForgeRegistry<Item> registry) {
@@ -40,7 +40,7 @@ public class ModItems {
                 baubleWhoopieCushion,
                 baubleBottledCloud,
                 baubleBottledFart,
-                baubleMagmaRing
+                baubleMagmaStone
         );
     }
 
@@ -58,7 +58,7 @@ public class ModItems {
                 baubleWhoopieCushion,
                 baubleBottledCloud,
                 baubleBottledFart,
-                baubleMagmaRing
+                baubleMagmaStone
         );
     }
 

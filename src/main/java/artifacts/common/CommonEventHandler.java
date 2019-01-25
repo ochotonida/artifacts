@@ -23,7 +23,7 @@ public class CommonEventHandler {
         if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof EntityDamageSourceIndirect) && !((EntityDamageSource) event.getSource()).getIsThornsDamage()) {
             if (event.getSource().getTrueSource() instanceof EntityPlayer) {
                 EntityPlayer attacker = (EntityPlayer) event.getSource().getTrueSource();
-                if (BaublesApi.isBaubleEquipped(attacker, ModItems.baubleMagmaRing) != -1 && !event.getEntity().isImmuneToFire()) {
+                if (BaublesApi.isBaubleEquipped(attacker, ModItems.baubleMagmaStone) != -1 && !event.getEntity().isImmuneToFire()) {
                     event.getEntity().setFire(3);
                 }
             }
