@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -32,6 +33,8 @@ public class EntityMimic extends EntityLiving implements IMob {
     public int ticksInAir;
 
     public boolean isDormant;
+
+    public @Nullable ResourceLocation loottable;
 
     public EntityMimic(World world) {
         super(world);
@@ -95,6 +98,9 @@ public class EntityMimic extends EntityLiving implements IMob {
         super.writeEntityToNBT(compound);
         compound.setInteger("ticksInAir", ticksInAir);
         compound.setBoolean("isDormant", isDormant);
+        if (loottable != null) {
+            compound.setString("loottable", loottable.toString());
+        }
     }
 
     @Override
@@ -102,6 +108,9 @@ public class EntityMimic extends EntityLiving implements IMob {
         super.readEntityFromNBT(compound);
         ticksInAir = compound.getInteger("ticksInAir");
         isDormant = compound.getBoolean("isDormant");
+        if (compound.hasKey("loottable")) {
+            loottable = new ResourceLocation(compound.getString("loottable"));
+        }
     }
 
     @Override
@@ -172,6 +181,16 @@ public class EntityMimic extends EntityLiving implements IMob {
 
     protected SoundEvent getLandingSound() {
         return ModSoundEvents.MIMIC_CLOSE;
+    }
+
+    @Nullable
+    @Override
+    protected ResourceLocation getLootTable() {
+        return loottable;
+    }
+
+    public void setLoottable(@Nullable ResourceLocation loottable) {
+        this.loottable = loottable;
     }
 
     @Override

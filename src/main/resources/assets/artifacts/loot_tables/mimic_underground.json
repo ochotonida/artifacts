@@ -1,0 +1,66 @@
+{
+  "name": "mimic_underground",
+  "pools": [
+    {
+      "name": "pool",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "artifacts:shiny_red_balloon",
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "artifacts:thorn_pendant",
+          "weight": 4
+        },
+        {
+          "type": "item",
+          "name": "artifacts:flame_pendant",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "artifacts:shock_pendant",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "artifacts:cobalt_shield",
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "artifacts:obsidian_skull",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "artifacts:panic_necklace",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "artifacts:magma_stone",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "artifacts:bottled_cloud",
+          "weight": 4
+        },
+        {
+          "type": "item",
+          "name": "artifacts:snorkel",
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "artifacts:lucky_horseshoe",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

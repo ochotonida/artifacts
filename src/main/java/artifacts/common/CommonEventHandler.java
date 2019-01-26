@@ -29,7 +29,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class CommonEventHandler {
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
-        if (event.getName().toString().equals("minecraft:gameplay/fishing/fish")) {
+        if (ModConfig.everlastingFishWeight > 0 && event.getName().toString().equals("minecraft:gameplay/fishing/fish")) {
             LootFunction[] functions = new LootFunction[1];
             functions[0] = new GenerateEverlastingFish(new LootCondition[0]);
             event.getTable().getPool("main").addEntry(new LootEntryItem(Items.FISH, ModConfig.everlastingFishWeight, 0, functions, new LootCondition[0], "everlasting_fish"));
