@@ -4,11 +4,14 @@ import artifacts.common.CommonProxy;
 import artifacts.common.ModItems;
 import artifacts.common.ModRecipes;
 import artifacts.common.ModSoundEvents;
+import artifacts.common.loot.GenerateEverlastingFish;
 import artifacts.common.worldgen.WorldGenUndergroundChest;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.storage.loot.functions.LootFunctionManager;
+import net.minecraft.world.storage.loot.properties.EntityPropertyManager;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -50,6 +53,7 @@ public class Artifacts {
         proxy.init();
         GameRegistry.registerWorldGenerator(new WorldGenUndergroundChest(), 0);
         ModRecipes.initRecipes();
+        LootFunctionManager.registerFunction(new GenerateEverlastingFish.Serializer());
     }
 
     @Mod.EventBusSubscriber
