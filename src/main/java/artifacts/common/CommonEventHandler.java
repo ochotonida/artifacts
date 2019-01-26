@@ -6,18 +6,15 @@ import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -26,43 +23,44 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class CommonEventHandler {
 
     @SubscribeEvent
-    public static void onItemFished(ItemFishedEvent event) {
-        for (int i = 0; i < event.getDrops().size(); i++) {
-            if (event.getEntityLiving().getRNG().nextInt(1) == 0) {
-                ItemStack stack = event.getDrops().get(i);
-                if (stack.getItem() == Items.FISH) {
-
-                    if (ItemFishFood.FishType.byItemStack(stack) == ItemFishFood.FishType.COD) {
-                        event.getDrops().set(i, new ItemStack(ModItems.EVERLASTING_COD));
-                    } else if (ItemFishFood.FishType.byItemStack(stack) == ItemFishFood.FishType.SALMON) {
-                        event.getDrops().set(i, new ItemStack(ModItems.EVERLASTING_SALMON));
-                    } else if (ItemFishFood.FishType.byItemStack(stack) == ItemFishFood.FishType.CLOWNFISH) {
-                        event.getDrops().set(i, new ItemStack(ModItems.EVERLASTING_CLOWNFISH));
-                    }
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
     public static void onLivingDrops(LivingDropsEvent event) {
         if (!(event.getSource().getTrueSource() instanceof EntityPlayer)) {
             return;
         }
 
-        if (event.getEntityLiving().getRNG().nextInt(2500) == 0) {
+        if (event.getEntityLiving().getRNG().nextDouble() < ModConfig.everlastingFoodChance) {
             Item item;
 
             if (event.getEntity() instanceof EntityPig) {
-                item = ModItems.EVERLASTING_PORKCHOP;
+                if (event.getEntityLiving().isBurning()) {
+                    item = ModItems.EVERLASTING_COOKED_PORKCHOP;
+                } else {
+                    item = ModItems.EVERLASTING_PORKCHOP;
+                }
             } else if (event.getEntity() instanceof EntityCow) {
-                item = ModItems.EVERLASTING_BEEF;
+                if (event.getEntityLiving().isBurning()) {
+                    item = ModItems.EVERLASTING_COOKED_BEEF;
+                } else {
+                    item = ModItems.EVERLASTING_BEEF;
+                }
             } else if (event.getEntity() instanceof EntitySheep) {
-                item = ModItems.EVERLASTING_MUTTON;
+                if (event.getEntityLiving().isBurning()) {
+                    item = ModItems.EVERLASTING_COOKED_MUTTON;
+                } else {
+                    item = ModItems.EVERLASTING_MUTTON;
+                }
             } else if (event.getEntity() instanceof EntityChicken) {
-                item = ModItems.EVERLASTING_CHICKEN;
+                if (event.getEntityLiving().isBurning()) {
+                    item = ModItems.EVERLASTING_COOKED_CHICKEN;
+                } else {
+                    item = ModItems.EVERLASTING_CHICKEN;
+                }
             } else if (event.getEntity() instanceof EntityRabbit) {
-                item = ModItems.EVERLASTING_RABBIT;
+                if (event.getEntityLiving().isBurning()) {
+                    item = ModItems.EVERLASTING_COOKED_RABBIT;
+                } else {
+                    item = ModItems.EVERLASTING_RABBIT;
+                }
             } else if (event.getEntity() instanceof EntityZombie) {
                 item = ModItems.EVERLASTING_ROTTEN_FLESH;
             } else if (event.getEntity() instanceof EntitySpider) {

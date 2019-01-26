@@ -6,7 +6,6 @@ import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -22,11 +21,15 @@ public class WorldGenUndergroundChest implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (random.nextDouble() > ModConfig.undergroundChestChance) {
-            return;
+        for (double chestChance = ModConfig.undergroundChestChance; chestChance > 0; chestChance--) {
+            if (random.nextDouble() <= chestChance) {
+                generateChest(world, random, chunkX, chunkZ);
+            }
         }
+    }
 
-        BlockPos pos = getFirstTopSolidBlock(world, new BlockPos(chunkX * 16 + 8 + random.nextInt(16), 1, chunkZ * 16 + 8 + random.nextInt(16)));
+    private void generateChest(World world, Random random, int chunkX, int chunkZ) {
+        BlockPos pos = getFirstTopSolidBlock(world, new BlockPos(chunkX * 16 + 8 + random.nextInt(16), ModConfig.undergroundChestMinHeight, chunkZ * 16 + 8 + random.nextInt(16)));
 
         if (pos != null) {
             if (random.nextDouble() < ModConfig.undergroundChestMimicRatio) {
@@ -39,12 +42,11 @@ public class WorldGenUndergroundChest implements IWorldGenerator {
                 world.setBlockState(pos, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[random.nextInt(4)]));
             }
         }
-
     }
 
     @Nullable
     private BlockPos getFirstTopSolidBlock(World world, BlockPos pos) {
-        while (pos.getY() <= ModConfig.underGroundChestMaxHeight) {
+        while (pos.getY() <= ModConfig.undergroundChestMaxHeight) {
             IBlockState downState = world.getBlockState(pos.down());
             if (downState.isSideSolid(world, pos, EnumFacing.UP) && world.isAirBlock(pos)) {
                 return pos;
