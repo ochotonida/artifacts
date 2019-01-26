@@ -1,4 +1,4 @@
-package artifacts.common.loot;
+package artifacts.common.loot.functions;
 
 import artifacts.Artifacts;
 import artifacts.common.ModConfig;

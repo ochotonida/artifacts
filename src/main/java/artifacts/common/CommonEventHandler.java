@@ -1,6 +1,6 @@
 package artifacts.common;
 
-import artifacts.common.loot.GenerateEverlastingFish;
+import artifacts.common.loot.functions.GenerateEverlastingFish;
 import baubles.api.BaublesApi;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySpider;
