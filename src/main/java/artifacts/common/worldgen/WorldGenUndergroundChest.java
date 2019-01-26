@@ -2,7 +2,7 @@ package artifacts.common.worldgen;
 
 import artifacts.common.ModConfig;
 import artifacts.common.entity.EntityMimic;
-import artifacts.common.loot.ModLootTables;
+import artifacts.common.ModLootTables;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -36,7 +36,6 @@ public class WorldGenUndergroundChest implements IWorldGenerator {
 
         if (pos != null) {
             if (random.nextDouble() < ModConfig.undergroundChestMimicRatio) {
-                System.out.println(pos.getX() + " " + pos.getY() + " " + pos.getZ());
                 EntityMimic mimic = new EntityMimic(world);
                 mimic.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, random.nextInt(4) * 90, 0);
                 mimic.setDormant();
@@ -58,7 +57,7 @@ public class WorldGenUndergroundChest implements IWorldGenerator {
     private BlockPos getFirstTopSolidBlock(World world, BlockPos pos) {
         while (pos.getY() <= ModConfig.undergroundChestMaxHeight) {
             IBlockState downState = world.getBlockState(pos.down());
-            if (downState.isSideSolid(world, pos, EnumFacing.UP) && world.isAirBlock(pos)) {
+            if (downState.isSideSolid(world, pos.down(), EnumFacing.UP) && world.isAirBlock(pos)) {
                 return pos;
             }
             pos = pos.up();

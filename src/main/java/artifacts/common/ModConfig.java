@@ -16,12 +16,24 @@ public class ModConfig {
     public static double undergroundChestMimicRatio = 0.2;
 
     @Config.RangeInt(min = 1, max = 255)
-    @Config.Comment({"maximum height underground chest can generate at", "underground chests generate in the lowest valid position at a randomly chosen x and y in the chunk"})
+    @Config.Comment({"minimum height underground chest can generate at", "underground chests generate in the lowest valid position at a randomly chosen x and y in the chunk"})
     public static int undergroundChestMinHeight = 1;
 
     @Config.RangeInt(min = 1, max = 255)
     @Config.Comment({"maximum height underground chest can generate at"})
     public static int undergroundChestMaxHeight = 45;
+
+    @Config.RangeDouble(min = 0)
+    @Config.Comment({"per-chunk chance an underwater chest is attempted to generate, from y = 255 to y = minHeight, with at least minDepth - 1 water blocks above it", "setting this to 0 prevents underwater chests from generating", "for values higher than 1, the amount of per-chunk attempts lies between floor(value) and ceil(value)"})
+    public static double underwaterChestChance = 0.001;
+
+    @Config.RangeInt(min = 1, max = 255)
+    @Config.Comment("the minimum y level an underwater chest can generate at")
+    public static int underwaterChestMinHeight = 1;
+
+    @Config.RangeInt(min = 2)
+    @Config.Comment("the minimum amount of water blocks between the surface and chest, chest included")
+    public static int underwaterChestMinDepth = 20;
 
     @Config.RangeDouble(min = 0, max = 1)
     @Config.Comment({"chance for a mob to drop everlasting food"})
