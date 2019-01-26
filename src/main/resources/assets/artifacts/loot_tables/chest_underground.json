@@ -1,0 +1,36 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "minecraft:chests/abandoned_mineshaft",
+          "weight": 10
+        },
+        {
+          "type": "loot_table",
+          "name": "minecraft:chests/simple_dungeon",
+          "weight": 10
+        },
+        {
+          "type": "loot_table",
+          "name": "minecraft:chests/stronghold_library",
+          "weight": 10
+        },
+        {
+          "type": "loot_table",
+          "name": "artifacts:underground_chest/potions",
+          "weight": 10
+        },
+        {
+          "type": "loot_table",
+          "name": "artifacts:underground_chest/tnt",
+          "weight": 10
+        }
+      ]
+    }
+  ]
+}
+

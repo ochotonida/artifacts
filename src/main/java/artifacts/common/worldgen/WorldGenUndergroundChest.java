@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import javax.annotation.Nullable;
@@ -37,6 +36,7 @@ public class WorldGenUndergroundChest implements IWorldGenerator {
 
         if (pos != null) {
             if (random.nextDouble() < ModConfig.undergroundChestMimicRatio) {
+                System.out.println(pos.getX() + " " + pos.getY() + " " + pos.getZ());
                 EntityMimic mimic = new EntityMimic(world);
                 mimic.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, random.nextInt(4) * 90, 0);
                 mimic.setDormant();
@@ -48,7 +48,7 @@ public class WorldGenUndergroundChest implements IWorldGenerator {
                 TileEntity tileentity = world.getTileEntity(pos);
 
                 if (tileentity instanceof TileEntityChest) {
-                    ((TileEntityChest)tileentity).setLootTable(LootTableList.CHESTS_SPAWN_BONUS_CHEST, random.nextLong());
+                    ((TileEntityChest)tileentity).setLootTable(ModLootTables.CHEST_UNDERGROUND, random.nextLong());
                 }
             }
         }

@@ -4,7 +4,8 @@ import artifacts.common.CommonProxy;
 import artifacts.common.ModItems;
 import artifacts.common.ModRecipes;
 import artifacts.common.ModSoundEvents;
-import artifacts.common.loot.GenerateEverlastingFish;
+import artifacts.common.loot.functions.AddRandomEffect;
+import artifacts.common.loot.functions.GenerateEverlastingFish;
 import artifacts.common.worldgen.WorldGenUndergroundChest;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -53,6 +54,7 @@ public class Artifacts {
         GameRegistry.registerWorldGenerator(new WorldGenUndergroundChest(), 0);
         ModRecipes.initRecipes();
         LootFunctionManager.registerFunction(new GenerateEverlastingFish.Serializer());
+        LootFunctionManager.registerFunction(new AddRandomEffect.Serializer());
     }
 
     @Mod.EventBusSubscriber
