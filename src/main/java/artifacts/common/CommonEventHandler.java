@@ -27,6 +27,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber
 @SuppressWarnings("unused")
 public class CommonEventHandler {
+
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
         if (ModConfig.everlastingFishWeight > 0 && event.getName().toString().equals("minecraft:gameplay/fishing/fish")) {
