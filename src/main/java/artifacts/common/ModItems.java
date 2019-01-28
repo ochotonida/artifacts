@@ -25,8 +25,9 @@ public class ModItems {
     public static final BaubleBase BOTTLED_CLOUD = new BaubleBottledCloud("bottled_cloud", false);
     public static final BaubleBase BOTTLED_FART = new BaubleBottledCloud("bottled_fart", true);
     public static final BaubleBase MAGMA_STONE = new BaubleBase("magma_stone", BaubleType.RING);
-    public static final BaubleBase FERAL_CLAWS = new BaubleFeralClaws("feral_claws");
-    public static final BaubleBase POWER_GLOVE = new BaubleFeralClaws("power_glove");
+    public static final BaubleBase FERAL_CLAWS = new BaubleFeralClaws();
+    public static final BaubleBase POWER_GLOVE = new BaublePowerGlove();
+    public static final BaubleBase MECHANICAL_GLOVE = new BaubleMechanicalGlove();
 
     public static final ItemEverlastingFood EVERLASTING_PORKCHOP = new ItemEverlastingFood("everlasting_porkchop", 3, 0.3F);
     public static final ItemEverlastingFood EVERLASTING_COOKED_PORKCHOP = new ItemEverlastingFood("everlasting_cooked_porkchop", 8, 0.8F);
@@ -64,6 +65,7 @@ public class ModItems {
                 MAGMA_STONE,
                 FERAL_CLAWS,
                 POWER_GLOVE,
+                MECHANICAL_GLOVE,
 
                 EVERLASTING_PORKCHOP,
                 EVERLASTING_COOKED_PORKCHOP,
@@ -102,6 +104,7 @@ public class ModItems {
         MAGMA_STONE.registerModel();
         FERAL_CLAWS.registerModel();
         POWER_GLOVE.registerModel();
+        MECHANICAL_GLOVE.registerModel();
 
         EVERLASTING_PORKCHOP.registerModel();
         EVERLASTING_COOKED_PORKCHOP.registerModel();
