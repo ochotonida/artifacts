@@ -12,7 +12,6 @@ item.artifacts:bottled_cloud.name=Cloud in a Bottle
 item.artifacts:bottled_fart.name=Fart in a Jar
 item.artifacts:magma_stone.name=Magma Stone
 item.artifacts:feral_claws.name=Feral Claws
-item.artifacts:titan_glove.name=Titan Glove
 item.artifacts:power_glove.name=Power Glove
 
 item.artifacts:everlasting_porkchop.name=Everlasting Raw Porkchop
@@ -48,8 +47,7 @@ tooltip.artifacts:bottled_cloud.name=Allows the wearer to double jump
 tooltip.artifacts:bottled_fart.name=Allows the wearer to double jump
 tooltip.artifacts:magma_stone.name=Causes the wearer's meelee attacks to inflict fire damage
 tooltip.artifacts:feral_claws.name=Increases attack speed
-tooltip.artifacts:titan_glove.name=Increases meelee knockback
-tooltip.artifacts:power_glove.name=Increases attack speed and meelee knockback
+tooltip.artifacts:power_glove.name=Increases attack damage
 
 entity.artifacts:mimic.name=Mimic
 

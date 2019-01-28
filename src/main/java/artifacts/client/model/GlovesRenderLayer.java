@@ -25,7 +25,6 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
     private final ModelPlayer model;
 
     public final ResourceLocation feralClawsTextures;
-    public final ResourceLocation titanGloveTextures;
     public final ResourceLocation powerGloveTextures;
 
     public GlovesRenderLayer(boolean smallArms, RenderPlayer renderPlayer) {
@@ -33,7 +32,6 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
         this.model = new ModelPlayer(0.5F, smallArms);
         model.setVisible(false);
         this.feralClawsTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/feral_claws_" + (smallArms ? "slim" : "normal") + ".png");
-        this.titanGloveTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/titan_glove_" + (smallArms ? "slim" : "normal") + ".png");
         this.powerGloveTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/power_glove_" + (smallArms ? "slim" : "normal") + ".png");
     }
 
@@ -69,9 +67,7 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
     }
 
     private @Nullable ResourceLocation getTextures(ItemStack stack) {
-        if (stack.getItem() == ModItems.TITAN_GLOVE) {
-            return titanGloveTextures;
-        } else if (stack.getItem() == ModItems.POWER_GLOVE) {
+        if (stack.getItem() == ModItems.POWER_GLOVE) {
             return powerGloveTextures;
         } else if (stack.getItem() == ModItems.FERAL_CLAWS) {
             return feralClawsTextures;
