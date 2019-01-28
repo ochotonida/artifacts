@@ -14,7 +14,7 @@ import java.util.UUID;
 public interface IBaubleAttackDamageBoost extends IBauble {
 
     UUID ATTACK_DAMAGE_BOOST_UUID = UUID.fromString("15fab7b9-5916-460b-a8e8-8434849a0662");
-    AttributeModifier ATTACK_DAMAGE_BOOST = (new AttributeModifier(ATTACK_DAMAGE_BOOST_UUID, "attack speed boost", 4, 0)).setSaved(true);
+    AttributeModifier ATTACK_DAMAGE_BOOST = (new AttributeModifier(ATTACK_DAMAGE_BOOST_UUID, "attack speed boost", 3, 0)).setSaved(true);
 
     default void setAttackDamageBoost(EntityLivingBase player, ItemStack stack) {
         System.out.println("x");
