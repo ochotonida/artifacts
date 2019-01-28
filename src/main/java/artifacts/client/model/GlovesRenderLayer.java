@@ -7,7 +7,6 @@ import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
 import baubles.common.Config;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -23,7 +22,7 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
 
     private final RenderPlayer renderPlayer;
 
-    private final ModelBiped model;
+    private final ModelPlayer model;
 
     public final ResourceLocation feralClawsTextures;
     public final ResourceLocation titanGloveTextures;
@@ -53,14 +52,18 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
         if (textures != null) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(textures);
             model.bipedLeftArm.showModel = true;
+            model.bipedLeftArmwear.showModel = true;
             model.render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+            model.bipedLeftArmwear.showModel = false;
             model.bipedLeftArm.showModel = false;
         }
         textures = getTextures(baubleHandler.getStackInSlot(BaubleType.RING.getValidSlots()[1]));
         if (textures != null) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(textures);
             model.bipedRightArm.showModel = true;
+            model.bipedRightArmwear.showModel = true;
             model.render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+            model.bipedRightArmwear.showModel = false;
             model.bipedRightArm.showModel = false;
         }
     }
