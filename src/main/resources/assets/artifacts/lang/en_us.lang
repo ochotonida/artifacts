@@ -13,6 +13,8 @@ item.artifacts:bottled_fart.name=Fart in a Jar
 item.artifacts:magma_stone.name=Magma Stone
 item.artifacts:feral_claws.name=Feral Claws
 item.artifacts:power_glove.name=Power Glove
+item.artifacts:mechanical_glove.name=Mechanical Glove
+item.artifacts:fire_gauntlet.name=Fire Gauntlet
 
 item.artifacts:everlasting_porkchop.name=Everlasting Raw Porkchop
 item.artifacts:everlasting_cooked_porkchop.name=Everlasting Cooked Porkchop
@@ -46,8 +48,10 @@ tooltip.artifacts:whoopie_cushion.name=Increases flatulence
 tooltip.artifacts:bottled_cloud.name=Allows the wearer to double jump
 tooltip.artifacts:bottled_fart.name=Allows the wearer to double jump
 tooltip.artifacts:magma_stone.name=Causes the wearer's meelee attacks to inflict fire damage
-tooltip.artifacts:feral_claws.name=Increases attack speed
-tooltip.artifacts:power_glove.name=Increases attack damage
+tooltip.artifacts:feral_claws.name=Increases meelee attack speed
+tooltip.artifacts:power_glove.name=Increases meelee attack damage
+tooltip.artifacts:mechanical_glove.name=Increases attack damage and speed
+tooltip.artifacts:fire_gauntlet.nam=Increases meelee attack damage and speed, Causes the wearer's meelee attacks to inflict fire damage
 
 entity.artifacts:mimic.name=Mimic
 

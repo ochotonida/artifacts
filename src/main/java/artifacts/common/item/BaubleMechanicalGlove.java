@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 
 public class BaubleMechanicalGlove extends BaubleBase implements IBaubleAttackSpeedBoost, IBaubleAttackDamageBoost {
 
-    public BaubleMechanicalGlove() {
-        super("mechanical_glove", BaubleType.RING);
+    public BaubleMechanicalGlove(String name) {
+        super(name, BaubleType.RING);
     }
 
     @Override

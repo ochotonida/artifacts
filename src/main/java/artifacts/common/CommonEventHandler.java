@@ -20,7 +20,10 @@ import net.minecraft.world.storage.loot.LootEntryItem;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -93,8 +96,10 @@ public class CommonEventHandler {
         if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof EntityDamageSourceIndirect) && !((EntityDamageSource) event.getSource()).getIsThornsDamage()) {
             if (event.getSource().getTrueSource() instanceof EntityPlayer) {
                 EntityPlayer attacker = (EntityPlayer) event.getSource().getTrueSource();
-                if (BaublesApi.isBaubleEquipped(attacker, ModItems.MAGMA_STONE) != -1 && !event.getEntity().isImmuneToFire()) {
-                    event.getEntity().setFire(3);
+                if (BaublesApi.isBaubleEquipped(attacker, ModItems.MAGMA_STONE) != -1 || BaublesApi.isBaubleEquipped(attacker, ModItems.FIRE_GAUNTLET) != -1) {
+                    if (!event.getEntity().isImmuneToFire()) {
+                        event.getEntity().setFire(4);
+                    }
                 }
             }
         }
