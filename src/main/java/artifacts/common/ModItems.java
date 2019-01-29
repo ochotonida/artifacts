@@ -30,7 +30,7 @@ public class ModItems {
     public static final BaubleBase MECHANICAL_GLOVE = new BaubleMechanicalGlove("mechanical_glove");
     public static final BaubleBase FIRE_GAUNTLET = new BaubleMechanicalGlove("fire_gauntlet");
     public static final BaubleBase PHILOSOPHERS_STONE = new BaubleBase("philosophers_stone", BaubleType.CHARM);
-    public static final BaubleBase STAR_CLOAK = new BaubleBase("star_cloak", BaubleType.BODY);
+    public static final BaubleBase STAR_CLOAK = new BaubleStarCloak();
 
     public static final ItemEverlastingFood EVERLASTING_PORKCHOP = new ItemEverlastingFood("everlasting_porkchop", 3, 0.3F);
     public static final ItemEverlastingFood EVERLASTING_COOKED_PORKCHOP = new ItemEverlastingFood("everlasting_cooked_porkchop", 8, 0.8F);
