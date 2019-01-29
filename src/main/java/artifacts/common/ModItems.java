@@ -12,7 +12,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModItems {
 
-    public static final BaubleBase SHINY_RED_BALLOON = new BaublePotionEffect("shiny_red_balloon", BaubleType.RING, MobEffects.JUMP_BOOST, 1).setEquipSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.5F);
+    public static final BaubleBase SHINY_RED_BALLOON = new BaublePotionEffect("shiny_red_balloon", BaubleType.CHARM, MobEffects.JUMP_BOOST, 1).setEquipSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.5F);
     public static final BaubleBase SNORKEL = new BaubleSnorkel();
     public static final BaubleBase SHOCK_PENDANT = new BaubleAmulet("shock_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/shock_pendant.png"));
     public static final BaubleBase FLAME_PENDANT = new BaubleAmulet("flame_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/flame_pendant.png"));
