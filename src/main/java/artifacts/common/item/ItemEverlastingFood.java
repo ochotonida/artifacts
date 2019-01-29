@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -21,7 +22,7 @@ public class ItemEverlastingFood extends ItemFood {
         super(amount, saturation, false);
         setRegistryName(name);
         setUnlocalizedName(Artifacts.MODID + ":" + name);
-        setCreativeTab(Artifacts.CREATIVE_TAB);
+        setCreativeTab(CreativeTabs.FOOD);
         setMaxStackSize(1);
         this.name = name;
     }
