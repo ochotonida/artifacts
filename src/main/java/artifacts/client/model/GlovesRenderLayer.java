@@ -26,6 +26,8 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
 
     public final ResourceLocation feralClawsTextures;
     public final ResourceLocation powerGloveTextures;
+    public final ResourceLocation mechanicalGloveTextures;
+    public final ResourceLocation fireGauntletTextures;
 
     public GlovesRenderLayer(boolean smallArms, RenderPlayer renderPlayer) {
         this.renderPlayer = renderPlayer;
@@ -33,6 +35,8 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
         model.setVisible(false);
         this.feralClawsTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/feral_claws_" + (smallArms ? "slim" : "normal") + ".png");
         this.powerGloveTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/power_glove_" + (smallArms ? "slim" : "normal") + ".png");
+        this.mechanicalGloveTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/mechanical_glove_" + (smallArms ? "slim" : "normal") + ".png");
+        this.fireGauntletTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/fire_gauntlet_" + (smallArms ? "slim" : "normal") + ".png");
     }
 
     @Override
@@ -71,6 +75,10 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
             return powerGloveTextures;
         } else if (stack.getItem() == ModItems.FERAL_CLAWS) {
             return feralClawsTextures;
+        } else if (stack.getItem() == ModItems.MECHANICAL_GLOVE) {
+            return mechanicalGloveTextures;
+        } else if (stack.getItem() == ModItems.FIRE_GAUNTLET) {
+            return fireGauntletTextures;
         }
         return null;
     }
