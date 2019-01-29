@@ -1,5 +1,6 @@
 package artifacts.common;
 
+import artifacts.common.entity.EntityHallowStar;
 import artifacts.common.loot.functions.GenerateEverlastingFish;
 import baubles.api.BaublesApi;
 import net.minecraft.entity.item.EntityItem;
@@ -106,6 +107,17 @@ public class CommonEventHandler {
                     if (!event.getEntity().isImmuneToFire()) {
                         event.getEntity().setFire(4);
                     }
+                }
+            }
+        }
+        if (!event.getEntity().world.isRemote && event.getEntityLiving() instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntityLiving(), ModItems.STAR_CLOAK) != -1) {
+            if (event.getEntityLiving().world.canSeeSky(event.getEntityLiving().getPosition())) {
+                int stars = ModConfig.starCloakStarsMin;
+                if (ModConfig.starCloakStarsMax > ModConfig.starCloakStarsMin) {
+                    stars += event.getEntityLiving().getRNG().nextInt(ModConfig.starCloakStarsMax - ModConfig.starCloakStarsMin + 1);
+                }
+                for (int i = 0; i < stars; i++) {
+                    event.getEntityLiving().world.spawnEntity(new EntityHallowStar(event.getEntityLiving().world, event.getEntityLiving()));
                 }
             }
         }

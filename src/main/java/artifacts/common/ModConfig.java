@@ -47,4 +47,15 @@ public class ModConfig {
     @Config.Comment({"weight for the default entry with the generate_everlasting_fish function in the regular fish loottable", "setting this to 0 will prevent an entry from being created"})
     public static int everlastingFishWeight = 1;
 
+    @Config.RangeInt(min = 0)
+    @Config.Comment({"Minimum amount of falling stars that spawn when struck while wearing a star cloak"})
+    public static int starCloakStarsMin = 3;
+
+    @Config.RangeInt(min = 0)
+    @Config.Comment({"Maximum amount of falling stars that spawn when struck while wearing a star cloak"})
+    public static int starCloakStarsMax = 8;
+
+    @Config.RangeInt(min = 0)
+    @Config.Comment({"Damage to entities when striking an entity for hallow stars"})
+    public static int starCloakDamage = 3;
 }
