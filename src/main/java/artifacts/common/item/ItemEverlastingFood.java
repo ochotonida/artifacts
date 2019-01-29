@@ -42,6 +42,7 @@ public class ItemEverlastingFood extends ItemFood {
     }
 
     @Override
+    @SuppressWarnings("NullableProblems")
     public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) {
         if (entityLiving instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer)entityLiving;

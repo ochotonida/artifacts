@@ -17,7 +17,6 @@ public interface IBaubleAttackDamageBoost extends IBauble {
     AttributeModifier ATTACK_DAMAGE_BOOST = (new AttributeModifier(ATTACK_DAMAGE_BOOST_UUID, "attack speed boost", 3, 0)).setSaved(true);
 
     default void setAttackDamageBoost(EntityLivingBase player, ItemStack stack) {
-        System.out.println("x");
         if (!(player instanceof EntityPlayer)) {
             return;
         }
