@@ -16,8 +16,8 @@ public class CommonProxy {
     public static final SimpleNetworkWrapper NETWORK_HANDLER_INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("artifacts");
 
     public void preInit() {
-        EntityRegistry.registerModEntity(new ResourceLocation(Artifacts.MODID, "mimic"), EntityMimic.class, Artifacts.MODID + ":mimic", 0, Artifacts.instance, 64, 3, true);
-        EntityRegistry.registerModEntity(new ResourceLocation(Artifacts.MODID, "hallow_star"), EntityHallowStar.class, Artifacts.MODID + ":hallow_star", 1, Artifacts.instance, 64, 3, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(Artifacts.MODID, "mimic"), EntityMimic.class, Artifacts.MODID + ".mimic", 0, Artifacts.instance, 64, 3, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(Artifacts.MODID, "hallow_star"), EntityHallowStar.class, Artifacts.MODID + ".hallow_star", 1, Artifacts.instance, 64, 3, true);
     }
 
     public void init() {

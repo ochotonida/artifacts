@@ -40,7 +40,7 @@ public class BaubleBase extends Item implements IBauble {
     public BaubleBase(String name, BaubleType type) {
         super();
         setRegistryName(name);
-        setUnlocalizedName(Artifacts.MODID + ":" + name);
+        setUnlocalizedName(Artifacts.MODID + "." + name);
         setCreativeTab(Artifacts.CREATIVE_TAB);
         setMaxStackSize(1);
         this.type = type;
@@ -58,7 +58,7 @@ public class BaubleBase extends Item implements IBauble {
     @SuppressWarnings("deprecation")
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(I18n.translateToLocal("tooltip." + Artifacts.MODID + ":" + name + ".name"));
+        tooltip.add(I18n.translateToLocal("tooltip." + Artifacts.MODID + "." + name + ".name"));
     }
 
     public void registerModel() {

@@ -21,7 +21,7 @@ public class ItemEverlastingFood extends ItemFood {
     public ItemEverlastingFood(String name, int amount, float saturation) {
         super(amount, saturation, false);
         setRegistryName(name);
-        setUnlocalizedName(Artifacts.MODID + ":" + name);
+        setUnlocalizedName(Artifacts.MODID + "." + name);
         setCreativeTab(CreativeTabs.FOOD);
         setMaxStackSize(1);
         this.name = name;

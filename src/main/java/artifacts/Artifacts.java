@@ -24,9 +24,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nonnull;
 
-import static artifacts.Artifacts.MODID;
-import static artifacts.Artifacts.MODNAME;
-import static artifacts.Artifacts.VERSION;
+import static artifacts.Artifacts.*;
 
 @SuppressWarnings("unused")
 @Mod(modid = MODID, name = MODNAME, version = VERSION, updateJSON = "https://github.com/ochotonida/artifacts/blob/master/update.json")
@@ -85,7 +83,7 @@ public class Artifacts {
     public static class CreativeTab extends CreativeTabs {
 
         public CreativeTab() {
-            super(MODID + ":creativetab");
+            super(MODID + ".creativetab");
         }
 
         @Override
