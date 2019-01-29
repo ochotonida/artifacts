@@ -20,16 +20,22 @@ import net.minecraft.world.storage.loot.LootEntryItem;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 @SuppressWarnings("unused")
 public class CommonEventHandler {
+
+    @SubscribeEvent
+    public static void onItemUseStart(LivingEntityUseItemEvent.Start event) {
+        if (event.getEntityLiving() instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntityLiving(), ModItems.PHILOSOPHERS_STONE) != -1) {
+            if (event.getItem().getItem() == Items.POTIONITEM) {
+                event.setDuration(event.getDuration() / 4);
+            }
+        }
+    }
 
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
