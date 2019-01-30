@@ -28,15 +28,10 @@ public class RenderHallowStar extends Render<EntityHallowStar> {
     }
 
     public void doRender(EntityHallowStar entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        float ageInTicks = entity.ticksAlive + partialTicks;
-        float scale = 0.625F;
-        if (ageInTicks < 15F) {
-            scale *= ageInTicks / 15F;
-        }
         GlStateManager.pushMatrix();
         bindEntityTexture(entity);
         GlStateManager.translate((float) x, (float) y, (float) z);
-        MODEL.render(entity, 0, 0, ageInTicks * 30, 0, 0, scale);
+        MODEL.render(entity, 0, 0, (entity.ticksAlive + partialTicks) * 30, 0, 0, 1 / 16F);
         GlStateManager.popMatrix();
 
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
