@@ -28,6 +28,9 @@ public class BaubleSnorkel extends BaublePotionEffect implements IRenderBauble {
         if (renderType == RenderType.HEAD) {
             GlStateManager.pushMatrix();
 
+            GlStateManager.enableLighting();
+            GlStateManager.enableRescaleNormal();
+
             Helper.translateToHeadLevel(player);
             Helper.translateToFace();
             Helper.defaultTransforms();

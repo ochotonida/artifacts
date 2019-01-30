@@ -11,6 +11,7 @@ import baubles.api.render.IRenderBauble;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -44,6 +45,8 @@ public class BaubleBottledCloud extends BaubleBase implements IRenderBauble {
     @Override
     public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType renderType, float partialticks) {
         if (renderType == RenderType.BODY) {
+            GlStateManager.enableLighting();
+            GlStateManager.enableRescaleNormal();
             Helper.rotateIfSneaking(player);
             Minecraft.getMinecraft().renderEngine.bindTexture(textures);
             model.render(player, partialticks, 0, 0, 0, 0, 1/16F);

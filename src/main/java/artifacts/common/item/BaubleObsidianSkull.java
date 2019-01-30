@@ -1,13 +1,14 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.common.ModItems;
 import artifacts.client.model.ModelObsidianSkull;
+import artifacts.common.ModItems;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.render.IRenderBauble;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -32,6 +33,8 @@ public class BaubleObsidianSkull extends BaubleBase implements IRenderBauble {
     @Override
     public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType renderType, float partialticks) {
         if (renderType == RenderType.BODY) {
+            GlStateManager.enableLighting();
+            GlStateManager.enableRescaleNormal();
             Helper.rotateIfSneaking(player);
             Minecraft.getMinecraft().renderEngine.bindTexture(textures);
             model.render(player, 0, 0, 0, 0, 0, 1/16F);

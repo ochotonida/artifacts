@@ -8,6 +8,7 @@ import baubles.api.cap.IBaublesItemHandler;
 import baubles.common.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelPlayer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,6 +45,9 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
         if (!Config.renderBaubles || player.getActivePotionEffect(MobEffects.INVISIBILITY) != null) {
             return;
         }
+
+        GlStateManager.enableLighting();
+        GlStateManager.enableRescaleNormal();
 
         model.setModelAttributes(renderPlayer.getMainModel());
         model.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, player);
