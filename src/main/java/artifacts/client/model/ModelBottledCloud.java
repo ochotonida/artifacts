@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import org.lwjgl.opengl.GL11;
 
 public class ModelBottledCloud extends ModelBase {
 
@@ -52,6 +53,7 @@ public class ModelBottledCloud extends ModelBase {
         lid.render(scale);
 
         GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GlStateManager.color(1, 1, 1, 0.5F);
         GlStateManager.translate(3.5F/16F, 4.5F/16F, 3.5F/16F);
 

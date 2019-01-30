@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import org.lwjgl.opengl.GL11;
 
 public class ModelSnorkel extends ModelBase {
     public ModelRenderer snorkelbox1;
@@ -38,6 +39,7 @@ public class ModelSnorkel extends ModelBase {
             this.head.render(scale);
 
             GlStateManager.enableBlend();
+            GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GlStateManager.color(1, 1, 1, 0.3F);
             this.headOverlay.render(scale);
             GlStateManager.disableBlend();
