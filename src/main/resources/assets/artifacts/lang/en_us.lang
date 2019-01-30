@@ -17,6 +17,7 @@ item.artifacts.mechanical_glove.name=Mechanical Glove
 item.artifacts.fire_gauntlet.name=Fire Gauntlet
 item.artifacts.philosophers_stone.name=Philosopher's Stone
 item.artifacts.star_cloak.name=Star Cloak
+item.artifacts.pocket_piston.name=Pocket Piston
 
 item.artifacts.everlasting_porkchop.name=Everlasting Raw Porkchop
 item.artifacts.everlasting_cooked_porkchop.name=Everlasting Cooked Porkchop
@@ -56,6 +57,7 @@ tooltip.artifacts.mechanical_glove.name=Increases attack damage and speed
 tooltip.artifacts.fire_gauntlet.name=Increases meelee attack damage and speed, Causes the wearer's meelee attacks to inflict fire damage
 tooltip.artifacts.philosophers_stone.name=Decreases the time it takes to drink potions
 tooltip.artifacts.star_cloak.name=Causes stars to fall when injured
+tooltip.artifacts.pocket_piston.name=Increases knockback
 
 entity.artifacts.mimic.name=Mimic
 

@@ -31,6 +31,7 @@ public class ModItems {
     public static final BaubleBase FIRE_GAUNTLET = new BaubleMechanicalGlove("fire_gauntlet");
     public static final BaubleBase PHILOSOPHERS_STONE = new BaubleBase("philosophers_stone", BaubleType.CHARM);
     public static final BaubleBase STAR_CLOAK = new BaubleStarCloak();
+    public static final BaubleBase POCKET_PISTON = new BaubleBase("pocket_piston", BaubleType.RING);
 
     public static final ItemEverlastingFood EVERLASTING_PORKCHOP = new ItemEverlastingFood("everlasting_porkchop", 3, 0.3F);
     public static final ItemEverlastingFood EVERLASTING_COOKED_PORKCHOP = new ItemEverlastingFood("everlasting_cooked_porkchop", 8, 0.8F);
@@ -72,6 +73,7 @@ public class ModItems {
                 FIRE_GAUNTLET,
                 PHILOSOPHERS_STONE,
                 STAR_CLOAK,
+                POCKET_PISTON,
 
                 EVERLASTING_PORKCHOP,
                 EVERLASTING_COOKED_PORKCHOP,
@@ -114,6 +116,7 @@ public class ModItems {
         FIRE_GAUNTLET.registerModel();
         PHILOSOPHERS_STONE.registerModel();
         STAR_CLOAK.registerModel();
+        POCKET_PISTON.registerModel();
 
         EVERLASTING_PORKCHOP.registerModel();
         EVERLASTING_COOKED_PORKCHOP.registerModel();

@@ -30,6 +30,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class CommonEventHandler {
 
     @SubscribeEvent
+    public static void onLivingKnockBack(LivingKnockBackEvent event) {
+        if (event.getAttacker() instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) event.getAttacker(), ModItems.POCKET_PISTON) != -1) {
+            event.setStrength(event.getStrength() * 2);
+        }
+    }
+
+    @SubscribeEvent
     public static void onItemUseStart(LivingEntityUseItemEvent.Start event) {
         if (event.getEntityLiving() instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntityLiving(), ModItems.PHILOSOPHERS_STONE) != -1) {
             if (event.getItem().getItem() == Items.POTIONITEM) {
