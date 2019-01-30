@@ -52,7 +52,7 @@ public interface IRenderCloak extends IRenderBauble {
 
             // save these values to revert them later to prevent some rendering issues
             float lastLightmapX = OpenGlHelper.lastBrightnessX;
-            float lastLightMapY = OpenGlHelper.lastBrightnessY;
+            float lastLightmapY = OpenGlHelper.lastBrightnessY;
 
             int light = 15728880;
             int lightmapX = light % 65536;
@@ -61,7 +61,7 @@ public interface IRenderCloak extends IRenderBauble {
             Minecraft.getMinecraft().renderEngine.bindTexture(getTextureOverlay());
             model.render(1);
 
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastLightmapX, lastLightMapY);
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastLightmapX, lastLightmapY);
         }
     }
 }
