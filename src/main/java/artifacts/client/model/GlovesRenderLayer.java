@@ -4,7 +4,6 @@ import artifacts.Artifacts;
 import artifacts.common.ModItems;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
-import baubles.api.cap.IBaublesItemHandler;
 import baubles.common.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelPlayer;
@@ -15,6 +14,7 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -64,40 +64,47 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
         model.setModelAttributes(renderPlayer.getMainModel());
         model.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, player);
 
-        IBaublesItemHandler baubleHandler = BaublesApi.getBaublesHandler(player);
+        renderArm(EnumHandSide.LEFT, player, false, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+        renderArm(EnumHandSide.RIGHT, player, false, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-        ResourceLocation textures = getTextures(baubleHandler.getStackInSlot(BaubleType.RING.getValidSlots()[0]));
-        if (textures != null) {
-            Minecraft.getMinecraft().getTextureManager().bindTexture(textures);
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lightmapX, lightmapY);
+        renderArm(EnumHandSide.LEFT, player, true, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+        renderArm(EnumHandSide.RIGHT, player, true, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastLightmapX, lastLightmapY);
+    }
+
+    private void renderArm(EnumHandSide hand, @Nonnull EntityPlayer player, boolean overlay, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        if (!setTextures(player, hand, overlay)) {
+            return;
+        }
+
+        if (hand == EnumHandSide.LEFT) {
             model.bipedLeftArm.showModel = true;
             model.bipedLeftArmwear.showModel = true;
-            model.render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-            textures = getOverlayTextures(baubleHandler.getStackInSlot(BaubleType.RING.getValidSlots()[0]));
-            if (textures != null) {
-                Minecraft.getMinecraft().getTextureManager().bindTexture(textures);
-                OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lightmapX, lightmapY);
-                model.render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-                OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastLightmapX, lastLightmapY);
-            }
-            model.bipedLeftArmwear.showModel = false;
-            model.bipedLeftArm.showModel = false;
-        }
-        textures = getTextures(baubleHandler.getStackInSlot(BaubleType.RING.getValidSlots()[1]));
-        if (textures != null) {
-            Minecraft.getMinecraft().getTextureManager().bindTexture(textures);
+        } else {
             model.bipedRightArm.showModel = true;
             model.bipedRightArmwear.showModel = true;
-            model.render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-            textures = getOverlayTextures(baubleHandler.getStackInSlot(BaubleType.RING.getValidSlots()[1]));
-            if (textures != null) {
-                Minecraft.getMinecraft().getTextureManager().bindTexture(textures);
-                OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lightmapX, lightmapY);
-                model.render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-                OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastLightmapX, lastLightmapY);
-            }
+        }
+
+        model.render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+        if (hand == EnumHandSide.LEFT) {
+            model.bipedLeftArmwear.showModel = false;
+            model.bipedLeftArm.showModel = false;
+        } else {
             model.bipedRightArmwear.showModel = false;
             model.bipedRightArm.showModel = false;
         }
+    }
+
+    private boolean setTextures(EntityPlayer player, EnumHandSide hand, boolean overlay) {
+        ItemStack stack = BaublesApi.getBaublesHandler(player).getStackInSlot(BaubleType.RING.getValidSlots()[hand == EnumHandSide.LEFT ? 0 : 1]);
+        ResourceLocation textures = overlay ? getOverlayTextures(stack) : getTextures(stack);
+        if (textures != null) {
+            Minecraft.getMinecraft().getTextureManager().bindTexture(textures);
+            return true;
+        }
+        return false;
     }
 
     private @Nullable ResourceLocation getTextures(ItemStack stack) {
@@ -117,7 +124,7 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
 
     private @Nullable
     ResourceLocation getOverlayTextures(ItemStack stack) {
-        if (stack.getItem() == ModItems.FIRE_GAUNTLET) {
+        if (stack.getItem() == ModItems.FIRE_GAUNTLET || stack.getItem() == ModItems.MAGMA_STONE) {
             return fireGauntletOverlayTextures;
         }
         return null;
