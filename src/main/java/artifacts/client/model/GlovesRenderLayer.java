@@ -31,6 +31,7 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
     public final ResourceLocation mechanicalGloveTextures;
     public final ResourceLocation fireGauntletTextures;
     public final ResourceLocation fireGauntletOverlayTextures;
+    public final ResourceLocation pocketPistonTextures;
 
     public GlovesRenderLayer(boolean smallArms, RenderPlayer renderPlayer) {
         this.renderPlayer = renderPlayer;
@@ -41,6 +42,7 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
         mechanicalGloveTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/mechanical_glove_" + (smallArms ? "slim" : "normal") + ".png");
         fireGauntletTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/fire_gauntlet_" + (smallArms ? "slim" : "normal") + ".png");
         fireGauntletOverlayTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/fire_gauntlet_overlay_" + (smallArms ? "slim" : "normal") + ".png");
+        pocketPistonTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/pocket_piston_" + (smallArms ? "slim" : "normal") + ".png");
     }
 
     @Override
@@ -107,6 +109,8 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
             return mechanicalGloveTextures;
         } else if (stack.getItem() == ModItems.FIRE_GAUNTLET) {
             return fireGauntletTextures;
+        } else if (stack.getItem() == ModItems.POCKET_PISTON) {
+            return pocketPistonTextures;
         }
         return null;
     }
