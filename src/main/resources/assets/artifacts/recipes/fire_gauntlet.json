@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:magma_stone"
+    },
+    {
+      "item": "artifacts:mechanical_glove"
+    }
+  ],
+  "result": {
+    "item": "artifacts:fire_gauntlet"
+  }
+}

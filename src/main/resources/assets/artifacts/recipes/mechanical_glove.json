@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:feral_claws"
+    },
+    {
+      "item": "artifacts:power_glove"
+    }
+  ],
+  "result": {
+    "item": "artifacts:mechanical_glove"
+  }
+}
