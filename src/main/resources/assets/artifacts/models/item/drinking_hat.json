@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "artifacts:items/philosophers_stone"
+    "layer0": "artifacts:items/drinking_hat"
   }
 }

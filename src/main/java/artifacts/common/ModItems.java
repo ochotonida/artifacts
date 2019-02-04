@@ -29,7 +29,7 @@ public class ModItems {
     public static final BaubleBase POWER_GLOVE = new BaublePowerGlove();
     public static final BaubleBase MECHANICAL_GLOVE = new BaubleMechanicalGlove("mechanical_glove");
     public static final BaubleBase FIRE_GAUNTLET = new BaubleMechanicalGlove("fire_gauntlet");
-    public static final BaubleBase PHILOSOPHERS_STONE = new BaubleBase("philosophers_stone", BaubleType.CHARM);
+    public static final BaubleBase DRINKING_HAT = new BaubleBase("drinking_hat", BaubleType.HEAD);
     public static final BaubleBase STAR_CLOAK = new BaubleStarCloak();
     public static final BaubleBase POCKET_PISTON = new BaubleBase("pocket_piston", BaubleType.RING);
 
@@ -71,7 +71,7 @@ public class ModItems {
                 POWER_GLOVE,
                 MECHANICAL_GLOVE,
                 FIRE_GAUNTLET,
-                PHILOSOPHERS_STONE,
+                DRINKING_HAT,
                 STAR_CLOAK,
                 POCKET_PISTON,
 
@@ -114,7 +114,7 @@ public class ModItems {
         POWER_GLOVE.registerModel();
         MECHANICAL_GLOVE.registerModel();
         FIRE_GAUNTLET.registerModel();
-        PHILOSOPHERS_STONE.registerModel();
+        DRINKING_HAT.registerModel();
         STAR_CLOAK.registerModel();
         POCKET_PISTON.registerModel();
 
