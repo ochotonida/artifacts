@@ -24,14 +24,14 @@ public class LayerSnorkel extends LayerBauble {
 
     public LayerSnorkel(RenderPlayer renderPlayer) {
         super(renderPlayer);
-        snorkelMouthPiece = new ModelRenderer(model, 0, 14 + 32);
+        snorkelMouthPiece = new ModelRenderer(model, 0, 46);
         snorkelGoggles = new ModelRenderer(model, 28, 32);
-        snorkelGogglesOverlay = new ModelRenderer(model, 28, 16 + 32);
+        snorkelGogglesOverlay = new ModelRenderer(model, 28, 48);
         snorkelTubeThing = new ModelRenderer(model, 0, 32);
 
         snorkelMouthPiece.addBox(-2, -1.5F, -6, 8, 2, 2, 0);
-        snorkelGoggles.addBox(-4, -7, -4, 8, 8, 8, 0);
-        snorkelGogglesOverlay.addBox(-4, -7, -4, 8, 8, 8, 0);
+        snorkelGoggles.addBox(-4, -7, -4, 8, 8, 8, 1);
+        snorkelGogglesOverlay.addBox(-4, -7, -4, 8, 8, 8, 1);
         snorkelTubeThing.addBox(4, -5, -3, 2, 2, 12, 0);
         snorkelTubeThing.rotateAngleX = 0.7853F;
 
@@ -53,6 +53,11 @@ public class LayerSnorkel extends LayerBauble {
         if (BaublesApi.isBaubleEquipped(player, ModItems.SNORKEL) == -1) {
             return;
         }
+
+        if (player.isSneaking()) {
+            GlStateManager.translate(0, 0.2F, 0);
+        }
+
         Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURES);
 
         snorkelMouthPiece.showModel = true;
@@ -64,8 +69,6 @@ public class LayerSnorkel extends LayerBauble {
         snorkelTubeThing.showModel = false;
 
         if (player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty()) {
-            GlStateManager.scale(1.2, 1.2, 1.2);
-
             snorkelGoggles.showModel = true;
             model.bipedHead.render(scale);
             snorkelGoggles.showModel = false;
@@ -77,6 +80,8 @@ public class LayerSnorkel extends LayerBauble {
             snorkelGogglesOverlay.showModel = true;
             model.bipedHead.render(scale);
             snorkelGogglesOverlay.showModel = false;
+
+            GlStateManager.disableBlend();
         }
     }
 }
