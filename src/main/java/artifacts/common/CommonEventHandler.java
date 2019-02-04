@@ -61,7 +61,7 @@ public class CommonEventHandler {
             return;
         }
 
-        if (event.getEntityLiving().getRNG().nextDouble() < ModConfig.everlastingFoodChance) {
+        if (event.getEntityLiving().getRNG().nextDouble() < ModConfig.everlastingFoodChance && !event.getEntityLiving().isChild()) {
             Item item;
 
             if (event.getEntity() instanceof EntityPig) {
