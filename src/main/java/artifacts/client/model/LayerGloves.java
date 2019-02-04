@@ -6,6 +6,7 @@ import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelPlayer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class GlovesRenderLayer extends LayerBauble {
+public class LayerGloves extends LayerBauble {
 
     public final ResourceLocation feralClawsTextures;
     public final ResourceLocation powerGloveTextures;
@@ -25,7 +26,7 @@ public class GlovesRenderLayer extends LayerBauble {
     public final ResourceLocation fireGauntletOverlayTextures;
     public final ResourceLocation pocketPistonTextures;
 
-    public GlovesRenderLayer(boolean smallArms, RenderPlayer renderPlayer) {
+    public LayerGloves(boolean smallArms, RenderPlayer renderPlayer) {
         super(renderPlayer, new ModelPlayer(0.5F, smallArms));
         model.setVisible(false);
         feralClawsTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/feral_claws_" + (smallArms ? "slim" : "normal") + ".png");
@@ -49,8 +50,10 @@ public class GlovesRenderLayer extends LayerBauble {
         renderArm(EnumHandSide.RIGHT, player, false, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lightmapX, lightmapY);
+        GlStateManager.disableLighting();
         renderArm(EnumHandSide.LEFT, player, true, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
         renderArm(EnumHandSide.RIGHT, player, true, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+        GlStateManager.enableLighting();
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastLightmapX, lastLightmapY);
     }
 
