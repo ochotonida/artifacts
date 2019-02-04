@@ -12,16 +12,23 @@ public class BaublePotionEffect extends BaubleBase {
 
     public final int effectAmplifier;
 
-    public BaublePotionEffect(String name, BaubleType type, Potion effect, int effectamplifier) {
+    public final int duration;
+
+    public BaublePotionEffect(String name, BaubleType type, Potion effect, int effectamplifier, int duration) {
         super(name, type);
         this.effect = effect;
         this.effectAmplifier = effectamplifier;
+        this.duration = Math.max(duration, 40);
+    }
+
+    public BaublePotionEffect(String name, BaubleType type, Potion effect, int effectAmplifier) {
+        this(name, type, effect, effectAmplifier, 0);
     }
 
     @Override
     public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
         if (player.ticksExisted % 39 == 0) {
-            player.addPotionEffect(new PotionEffect(effect,40, effectAmplifier,true,false));
+            player.addPotionEffect(new PotionEffect(effect, duration, effectAmplifier, true, false));
         }
     }
 }

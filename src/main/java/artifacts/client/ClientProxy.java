@@ -1,8 +1,9 @@
 package artifacts.client;
 
 import artifacts.Artifacts;
-import artifacts.client.model.GlovesRenderLayer;
 import artifacts.client.model.LayerDrinkingHat;
+import artifacts.client.model.LayerGloves;
+import artifacts.client.model.LayerNightVisionGoggles;
 import artifacts.client.model.LayerSnorkel;
 import artifacts.client.renderer.RenderHallowStar;
 import artifacts.client.renderer.RenderMimic;
@@ -33,16 +34,18 @@ public class ClientProxy extends CommonProxy {
         super.init();
 
         Map<String, RenderPlayer> skinMap = Minecraft.getMinecraft().getRenderManager().getSkinMap();
-        RenderPlayer render;
-        render = skinMap.get("default");
-        render.addLayer(new GlovesRenderLayer(false, render));
-        render.addLayer(new LayerSnorkel(render));
-        render.addLayer(new LayerDrinkingHat(render));
 
-        render = skinMap.get("slim");
-        render.addLayer(new GlovesRenderLayer(true, render));
-        render.addLayer(new LayerSnorkel(render));
-        render.addLayer(new LayerDrinkingHat(render));
+        RenderPlayer renderPlayer = skinMap.get("default");
+        renderPlayer.addLayer(new LayerGloves(false, renderPlayer));
+        renderPlayer.addLayer(new LayerSnorkel(renderPlayer));
+        renderPlayer.addLayer(new LayerDrinkingHat(renderPlayer));
+        renderPlayer.addLayer(new LayerNightVisionGoggles(renderPlayer));
+
+        renderPlayer = skinMap.get("slim");
+        renderPlayer.addLayer(new LayerGloves(true, renderPlayer));
+        renderPlayer.addLayer(new LayerSnorkel(renderPlayer));
+        renderPlayer.addLayer(new LayerDrinkingHat(renderPlayer));
+        renderPlayer.addLayer(new LayerNightVisionGoggles(renderPlayer));
     }
 
     @Override
