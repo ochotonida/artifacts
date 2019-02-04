@@ -1,4 +1,4 @@
-package artifacts.client.model;
+package artifacts.client.model.layer;
 
 import baubles.common.Config;
 import net.minecraft.client.model.ModelPlayer;

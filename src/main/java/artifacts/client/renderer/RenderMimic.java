@@ -1,7 +1,7 @@
 package artifacts.client.renderer;
 
 import artifacts.Artifacts;
-import artifacts.client.model.ModelMimic;
+import artifacts.client.model.entity.ModelMimic;
 import artifacts.common.entity.EntityMimic;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;

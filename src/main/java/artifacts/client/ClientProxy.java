@@ -1,10 +1,10 @@
 package artifacts.client;
 
 import artifacts.Artifacts;
-import artifacts.client.model.LayerDrinkingHat;
-import artifacts.client.model.LayerGloves;
-import artifacts.client.model.LayerNightVisionGoggles;
-import artifacts.client.model.LayerSnorkel;
+import artifacts.client.model.layer.LayerDrinkingHat;
+import artifacts.client.model.layer.LayerGloves;
+import artifacts.client.model.layer.LayerNightVisionGoggles;
+import artifacts.client.model.layer.LayerSnorkel;
 import artifacts.client.renderer.RenderHallowStar;
 import artifacts.client.renderer.RenderMimic;
 import artifacts.common.CommonProxy;

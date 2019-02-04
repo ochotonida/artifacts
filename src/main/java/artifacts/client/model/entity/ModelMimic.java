@@ -1,4 +1,4 @@
-package artifacts.client.model;
+package artifacts.client.model.entity;
 
 import artifacts.common.entity.EntityMimic;
 import net.minecraft.client.model.ModelBase;

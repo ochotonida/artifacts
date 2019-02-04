@@ -1,4 +1,4 @@
-package artifacts.client.model;
+package artifacts.client.model.layer;
 
 import artifacts.Artifacts;
 import artifacts.common.ModItems;

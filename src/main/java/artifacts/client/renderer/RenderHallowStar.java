@@ -1,7 +1,7 @@
 package artifacts.client.renderer;
 
 import artifacts.Artifacts;
-import artifacts.client.model.ModelHallowStar;
+import artifacts.client.model.entity.ModelHallowStar;
 import artifacts.common.entity.EntityHallowStar;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
