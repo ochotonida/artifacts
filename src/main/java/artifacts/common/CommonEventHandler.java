@@ -30,13 +30,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @SuppressWarnings("unused")
 public class CommonEventHandler {
 
-    @SubscribeEvent
-    public static void onLivingKnockBack(LivingKnockBackEvent event) {
-        if (event.getAttacker() instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) event.getAttacker(), ModItems.POCKET_PISTON) != -1) {
-            event.setStrength(event.getStrength() * 2);
-        }
-    }
-
+    // drinking helmet
     @SubscribeEvent
     public static void onItemUseStart(LivingEntityUseItemEvent.Start event) {
         if (event.getEntityLiving() instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntityLiving(), ModItems.DRINKING_HAT) != -1) {
@@ -46,6 +40,7 @@ public class CommonEventHandler {
         }
     }
 
+    // everlasting fish
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
         if (ModConfig.everlastingFishWeight > 0 && event.getName().toString().equals("minecraft:gameplay/fishing/fish")) {
@@ -55,6 +50,7 @@ public class CommonEventHandler {
         }
     }
 
+    // everlasting food
     @SubscribeEvent
     public static void onLivingDrops(LivingDropsEvent event) {
         if (!(event.getSource().getTrueSource() instanceof EntityPlayer)) {
@@ -108,6 +104,7 @@ public class CommonEventHandler {
 
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
+        // magma stone/fire gauntlet
         if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof EntityDamageSourceIndirect) && !((EntityDamageSource) event.getSource()).getIsThornsDamage()) {
             if (event.getSource().getTrueSource() instanceof EntityPlayer) {
                 EntityPlayer attacker = (EntityPlayer) event.getSource().getTrueSource();
@@ -118,6 +115,8 @@ public class CommonEventHandler {
                 }
             }
         }
+
+        // star cloak
         if (!event.getEntity().world.isRemote && event.getEntityLiving() instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntityLiving(), ModItems.STAR_CLOAK) != -1) {
             if (event.getEntityLiving().world.canSeeSky(event.getEntityLiving().getPosition())) {
                 int stars = ModConfig.starCloakStarsMin;
@@ -133,13 +132,20 @@ public class CommonEventHandler {
 
     @SubscribeEvent
     public static void onLivingKnockback(LivingKnockBackEvent event) {
+        // cobalt shield
         if (event.getEntity() instanceof EntityPlayer) {
             if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.COBALT_SHIELD) != -1) {
                 event.setCanceled(true);
             }
         }
+
+        // pocket piston
+        if (event.getAttacker() instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) event.getAttacker(), ModItems.POCKET_PISTON) != -1) {
+            event.setStrength(event.getStrength() * 2);
+        }
     }
 
+    // lucky horseshoe
     @SubscribeEvent
     public static void onLivingFall(LivingFallEvent event) {
         if (event.getEntity() instanceof EntityPlayer) {
