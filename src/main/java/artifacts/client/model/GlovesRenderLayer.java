@@ -4,15 +4,11 @@ import artifacts.Artifacts;
 import artifacts.common.ModItems;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
-import baubles.common.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelPlayer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
@@ -20,11 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
-
-    private final RenderPlayer renderPlayer;
-
-    private final ModelPlayer model;
+public class GlovesRenderLayer extends LayerBauble {
 
     public final ResourceLocation feralClawsTextures;
     public final ResourceLocation powerGloveTextures;
@@ -34,8 +26,7 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
     public final ResourceLocation pocketPistonTextures;
 
     public GlovesRenderLayer(boolean smallArms, RenderPlayer renderPlayer) {
-        this.renderPlayer = renderPlayer;
-        model = new ModelPlayer(0.5F, smallArms);
+        super(renderPlayer, new ModelPlayer(0.5F, smallArms));
         model.setVisible(false);
         feralClawsTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/feral_claws_" + (smallArms ? "slim" : "normal") + ".png");
         powerGloveTextures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/power_glove_" + (smallArms ? "slim" : "normal") + ".png");
@@ -46,23 +37,13 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
     }
 
     @Override
-    public void doRenderLayer(@Nonnull EntityPlayer player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        if (!Config.renderBaubles || player.getActivePotionEffect(MobEffects.INVISIBILITY) != null) {
-            return;
-        }
-
-        GlStateManager.enableLighting();
-        GlStateManager.enableRescaleNormal();
-
+    protected void renderLayer(@Nonnull EntityPlayer player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         float lastLightmapX = OpenGlHelper.lastBrightnessX;
         float lastLightmapY = OpenGlHelper.lastBrightnessY;
 
         int light = 15728880;
         int lightmapX = light % 65536;
         int lightmapY = light / 65536;
-
-        model.setModelAttributes(renderPlayer.getMainModel());
-        model.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, player);
 
         renderArm(EnumHandSide.LEFT, player, false, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
         renderArm(EnumHandSide.RIGHT, player, false, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
@@ -128,10 +109,5 @@ public class GlovesRenderLayer implements LayerRenderer<EntityPlayer> {
             return fireGauntletOverlayTextures;
         }
         return null;
-    }
-
-    @Override
-    public boolean shouldCombineTextures() {
-        return false;
     }
 }
