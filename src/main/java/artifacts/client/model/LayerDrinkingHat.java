@@ -31,7 +31,7 @@ public class LayerDrinkingHat extends LayerBauble {
         canLeft = new ModelRenderer(model, 0, 41);
         canRight = new ModelRenderer(model, 12, 41);
         strawLeft = new ModelRenderer(model, 0, 32);
-        strawRight = new ModelRenderer(model, 18, 32);
+        strawRight = new ModelRenderer(model, 17, 32);
         strawMiddle = new ModelRenderer(model, 0, 50);
 
         hat.addBox(-4, -8, -4, 8, 8, 8, 1);
