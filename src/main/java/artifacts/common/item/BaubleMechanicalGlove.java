@@ -2,12 +2,14 @@ package artifacts.common.item;
 
 import baubles.api.BaubleType;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 
 public class BaubleMechanicalGlove extends BaubleBase implements IBaubleAttackSpeedBoost, IBaubleAttackDamageBoost {
 
     public BaubleMechanicalGlove(String name) {
         super(name, BaubleType.RING);
+        setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON);
     }
 
     @Override

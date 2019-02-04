@@ -13,25 +13,25 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModItems {
 
     public static final BaubleBase SHINY_RED_BALLOON = new BaublePotionEffect("shiny_red_balloon", BaubleType.CHARM, MobEffects.JUMP_BOOST, 1).setEquipSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.5F);
-    public static final BaubleBase SNORKEL = new BaublePotionEffect("snorkel", BaubleType.HEAD, MobEffects.WATER_BREATHING, 0).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1);
+    public static final BaubleBase SNORKEL = new BaublePotionEffect("snorkel", BaubleType.HEAD, MobEffects.WATER_BREATHING, 0).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
     public static final BaubleBase SHOCK_PENDANT = new BaubleAmulet("shock_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/shock_pendant.png"));
     public static final BaubleBase FLAME_PENDANT = new BaubleAmulet("flame_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/flame_pendant.png"));
     public static final BaubleBase THORN_PENDANT = new BaubleAmulet("thorn_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/thorn_pendant.png"));
-    public static final BaubleBase LUCKY_HORSESHOE = new BaubleBase("lucky_horseshoe", BaubleType.CHARM).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1);
-    public static final BaubleBase COBALT_SHIELD = new BaubleBase("cobalt_shield", BaubleType.CHARM).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1);
+    public static final BaubleBase LUCKY_HORSESHOE = new BaubleBase("lucky_horseshoe", BaubleType.CHARM).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_GOLD);
+    public static final BaubleBase COBALT_SHIELD = new BaubleBase("cobalt_shield", BaubleType.CHARM).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON);
     public static final BaubleBase OBSIDIAN_SKULL = new BaubleObsidianSkull();
     public static final BaubleBase PANIC_NECKLACE = new BaublePanicNecklace();
     public static final BaubleBase WHOOPIE_CUSHION = new BaubleWhoopieCushion();
     public static final BaubleBase BOTTLED_CLOUD = new BaubleBottledCloud("bottled_cloud", false);
     public static final BaubleBase BOTTLED_FART = new BaubleBottledCloud("bottled_fart", true);
-    public static final BaubleBase MAGMA_STONE = new BaubleBase("magma_stone", BaubleType.RING);
+    public static final BaubleBase MAGMA_STONE = new BaubleBase("magma_stone", BaubleType.RING).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
     public static final BaubleBase FERAL_CLAWS = new BaubleFeralClaws();
     public static final BaubleBase POWER_GLOVE = new BaublePowerGlove();
     public static final BaubleBase MECHANICAL_GLOVE = new BaubleMechanicalGlove("mechanical_glove");
     public static final BaubleBase FIRE_GAUNTLET = new BaubleMechanicalGlove("fire_gauntlet");
-    public static final BaubleBase DRINKING_HAT = new BaubleBase("drinking_hat", BaubleType.HEAD);
+    public static final BaubleBase DRINKING_HAT = new BaubleBase("drinking_hat", BaubleType.HEAD).setEquipSound(SoundEvents.ITEM_BOTTLE_FILL);
     public static final BaubleBase STAR_CLOAK = new BaubleStarCloak();
-    public static final BaubleBase POCKET_PISTON = new BaubleBase("pocket_piston", BaubleType.RING);
+    public static final BaubleBase POCKET_PISTON = new BaubleBase("pocket_piston", BaubleType.RING).setEquipSound(SoundEvents.BLOCK_PISTON_EXTEND, SoundEvents.BLOCK_PISTON_CONTRACT);
 
     public static final ItemEverlastingFood EVERLASTING_PORKCHOP = new ItemEverlastingFood("everlasting_porkchop", 3, 0.3F);
     public static final ItemEverlastingFood EVERLASTING_COOKED_PORKCHOP = new ItemEverlastingFood("everlasting_cooked_porkchop", 8, 0.8F);

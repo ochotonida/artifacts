@@ -34,6 +34,7 @@ public class BaubleBase extends Item implements IBauble {
     public final String name;
 
     protected SoundEvent equipSound = SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+    protected SoundEvent unequipSound = SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
 
     protected float equipPitch = 1;
 
@@ -47,10 +48,23 @@ public class BaubleBase extends Item implements IBauble {
         this.name = name;
     }
 
-    public BaubleBase setEquipSound(SoundEvent sound, float pitch) {
-        equipSound = sound;
-        equipPitch = pitch;
+    public BaubleBase setEquipSound(SoundEvent equipSound, SoundEvent unequipSound, float equipPitch) {
+        this.equipSound = equipSound;
+        this.unequipSound = unequipSound;
+        this.equipPitch = equipPitch;
         return this;
+    }
+
+    public BaubleBase setEquipSound(SoundEvent equipSound, float pitch) {
+        return setEquipSound(equipSound, equipSound, pitch);
+    }
+
+    public BaubleBase setEquipSound(SoundEvent equipSound, SoundEvent unequipSound) {
+        return setEquipSound(equipSound, unequipSound, 1);
+    }
+
+    public BaubleBase setEquipSound(SoundEvent equipSound) {
+        return setEquipSound(equipSound, equipSound, 1);
     }
 
     @Override
@@ -98,6 +112,6 @@ public class BaubleBase extends Item implements IBauble {
 
     @Override
     public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {
-        player.playSound(equipSound, .75F, 2 * equipPitch);
+        player.playSound(unequipSound, .75F, equipPitch);
     }
 }

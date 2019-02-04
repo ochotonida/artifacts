@@ -2,12 +2,14 @@ package artifacts.common.item;
 
 import baubles.api.BaubleType;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 
 public class BaubleFeralClaws extends BaubleBase implements IBaubleAttackSpeedBoost {
 
     public BaubleFeralClaws() {
         super("feral_claws", BaubleType.RING);
+        setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC);
     }
 
     @Override

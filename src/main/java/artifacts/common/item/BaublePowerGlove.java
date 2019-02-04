@@ -2,15 +2,14 @@ package artifacts.common.item;
 
 import baubles.api.BaubleType;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-
-import java.util.UUID;
 
 public class BaublePowerGlove extends BaubleBase implements IBaubleAttackDamageBoost {
 
     public BaublePowerGlove() {
         super("power_glove", BaubleType.RING);
-        System.out.println(UUID.randomUUID());
+        setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
     }
 
     @Override

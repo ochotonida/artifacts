@@ -33,6 +33,7 @@ public class BaubleBottledCloud extends BaubleBase implements IRenderBauble {
 
     public BaubleBottledCloud(String name, boolean isFart) {
         super(name, BaubleType.BELT);
+        setEquipSound(SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH);
         this.isFart = isFart;
         if (isFart) {
             textures = new ResourceLocation(Artifacts.MODID, "textures/entity/layer/bottled_fart.png");

@@ -13,7 +13,7 @@ public class BaubleWhoopieCushion extends BaubleBase {
     public BaubleWhoopieCushion() {
         super("whoopie_cushion", BaubleType.BELT);
         setMaxDamage(0);
-        setEquipSound(ModSoundEvents.FART, 1);
+        setEquipSound(ModSoundEvents.FART);
     }
 
     @Override
