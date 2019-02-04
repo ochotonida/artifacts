@@ -2,6 +2,7 @@ package artifacts.client;
 
 import artifacts.Artifacts;
 import artifacts.client.model.GlovesRenderLayer;
+import artifacts.client.model.LayerSnorkel;
 import artifacts.client.renderer.RenderHallowStar;
 import artifacts.client.renderer.RenderMimic;
 import artifacts.common.CommonProxy;
@@ -34,9 +35,11 @@ public class ClientProxy extends CommonProxy {
         RenderPlayer render;
         render = skinMap.get("default");
         render.addLayer(new GlovesRenderLayer(false, render));
+        render.addLayer(new LayerSnorkel(render));
 
         render = skinMap.get("slim");
         render.addLayer(new GlovesRenderLayer(true, render));
+        render.addLayer(new LayerSnorkel(render));
     }
 
     @Override

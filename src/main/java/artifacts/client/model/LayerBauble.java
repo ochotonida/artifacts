@@ -22,6 +22,7 @@ public abstract class LayerBauble implements LayerRenderer<EntityPlayer> {
     public LayerBauble(RenderPlayer renderPlayer, ModelPlayer model) {
         this.renderPlayer = renderPlayer;
         this.model = model;
+        model.setVisible(false);
     }
 
     @Override
