@@ -60,5 +60,6 @@ tooltip.artifacts.star_cloak.name=Causes stars to fall when injured
 tooltip.artifacts.pocket_piston.name=Increases knockback
 
 entity.artifacts.mimic.name=Mimic
+entity.artifacts.hallow_star.name=Hallow Star
 
 itemGroup.artifacts.creativetab=Artifacts
