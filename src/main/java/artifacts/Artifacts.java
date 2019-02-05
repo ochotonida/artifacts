@@ -6,8 +6,8 @@ import artifacts.common.ModRecipes;
 import artifacts.common.ModSoundEvents;
 import artifacts.common.loot.functions.AddRandomEffect;
 import artifacts.common.loot.functions.GenerateEverlastingFish;
+import artifacts.common.worldgen.WorldGenOceanShrine;
 import artifacts.common.worldgen.WorldGenUndergroundChest;
-import artifacts.common.worldgen.WorldGenUnderwaterChest;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -51,7 +51,7 @@ public class Artifacts {
     public static void init(FMLInitializationEvent event) {
         proxy.init();
         GameRegistry.registerWorldGenerator(new WorldGenUndergroundChest(), 0);
-        GameRegistry.registerWorldGenerator(new WorldGenUnderwaterChest(), 0);
+        GameRegistry.registerWorldGenerator(new WorldGenOceanShrine(), 0);
         ModRecipes.initRecipes();
         LootFunctionManager.registerFunction(new GenerateEverlastingFish.Serializer());
         LootFunctionManager.registerFunction(new AddRandomEffect.Serializer());
