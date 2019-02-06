@@ -67,4 +67,7 @@ tooltip.artifacts.ultimate_pendant.name=When worn, has a chance to damage attack
 entity.artifacts.mimic.name=Mimic
 entity.artifacts.hallow_star.name=Hallow Star
 
+death.attack.artifacts.hallow_star=%s was hit by falling star
+death.attack.artifacts.hallow_star.player=%1$s was hit by %2$s's falling star
+
 itemGroup.artifacts.creativetab=Artifacts

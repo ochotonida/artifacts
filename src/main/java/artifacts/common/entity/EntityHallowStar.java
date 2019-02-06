@@ -1,5 +1,6 @@
 package artifacts.common.entity;
 
+import artifacts.Artifacts;
 import artifacts.common.ModConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -7,7 +8,7 @@ import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -108,7 +109,7 @@ public class EntityHallowStar extends Entity {
         if (!this.world.isRemote && result.entityHit != shootingEntity && !(result.entityHit instanceof EntityHallowStar)) {
             if (result.entityHit != null) {
                 if (!result.entityHit.isImmuneToFire()) {
-                    result.entityHit.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, shootingEntity), ModConfig.starCloakDamage);
+                    result.entityHit.attackEntityFrom(new EntityDamageSourceIndirect(Artifacts.MODID + ".hallow_star", this, shootingEntity).setProjectile(), ModConfig.starCloakDamage);
                 }
             }
             world.setEntityState(this, (byte) 3);
