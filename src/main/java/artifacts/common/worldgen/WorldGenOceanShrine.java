@@ -40,12 +40,12 @@ public class WorldGenOceanShrine implements IWorldGenerator {
     @Nullable
     private BlockPos getUnderwaterBlock(World world, BlockPos pos) {
         int depth = 0;
-        while (pos.getY() >= ModConfig.underwaterShrineMinHeight) {
+        while (pos.getY() >= 1) {
             if (world.getBlockState(pos).getMaterial().isLiquid()) {
                 depth++;
 
                 if (world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP)) {
-                    if (depth >= ModConfig.underwaterShrineMinDepth) {
+                    if (depth >= 20) {
                         return pos;
                     }
                 }

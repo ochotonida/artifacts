@@ -32,7 +32,7 @@ public class WorldGenUndergroundChest implements IWorldGenerator {
     }
 
     private void generateChest(World world, Random random, int chunkX, int chunkZ) {
-        BlockPos pos = getFirstTopSolidBlock(world, new BlockPos(chunkX * 16 + 8 + random.nextInt(16), ModConfig.undergroundChestMinHeight, chunkZ * 16 + 8 + random.nextInt(16)));
+        BlockPos pos = getFirstTopSolidBlock(world, new BlockPos(chunkX * 16 + 8 + random.nextInt(16), 1, chunkZ * 16 + 8 + random.nextInt(16)));
 
         if (pos != null) {
             if (random.nextDouble() < ModConfig.undergroundChestMimicRatio) {
@@ -54,7 +54,7 @@ public class WorldGenUndergroundChest implements IWorldGenerator {
 
     @Nullable
     private BlockPos getFirstTopSolidBlock(World world, BlockPos pos) {
-        while (pos.getY() <= ModConfig.undergroundChestMaxHeight) {
+        while (pos.getY() <= 45) {
             IBlockState downState = world.getBlockState(pos.down());
             if (downState.isSideSolid(world, pos.down(), EnumFacing.UP) && world.isAirBlock(pos)) {
                 return pos;
