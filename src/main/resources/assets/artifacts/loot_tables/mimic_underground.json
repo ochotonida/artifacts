@@ -46,13 +46,38 @@
         },
         {
           "type": "item",
+          "name": "artifacts:feral_claws",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "artifacts:power_glove",
+          "weight": 2
+        },
+        {
+          "type": "item",
           "name": "artifacts:bottled_cloud",
           "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:lucky_horseshoe",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "artifacts:star_cloak",
           "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "artifacts:night_vision_goggles",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "artifacts:pocket_piston",
+          "weight": 3
         }
       ]
     }
