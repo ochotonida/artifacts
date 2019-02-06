@@ -1,8 +1,8 @@
 package artifacts.common.worldgen;
 
 import artifacts.common.ModConfig;
-import artifacts.common.entity.EntityMimic;
 import artifacts.common.ModLootTables;
+import artifacts.common.entity.EntityMimic;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -40,7 +40,6 @@ public class WorldGenUndergroundChest implements IWorldGenerator {
                 mimic.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, random.nextInt(4) * 90, 0);
                 mimic.setDormant();
                 mimic.enablePersistence();
-                mimic.setLoottable(ModLootTables.MIMIC_UNDERGROUND);
                 world.spawnEntity(mimic);
             } else {
                 world.setBlockState(pos, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[random.nextInt(4)]), 2);

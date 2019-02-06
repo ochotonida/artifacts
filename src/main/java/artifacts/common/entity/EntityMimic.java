@@ -1,9 +1,13 @@
 package artifacts.common.entity;
 
+import artifacts.common.ModLootTables;
 import artifacts.common.ModSoundEvents;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -33,8 +37,6 @@ public class EntityMimic extends EntityLiving implements IMob {
     public int ticksInAir;
 
     public boolean isDormant;
-
-    public @Nullable ResourceLocation loottable;
 
     public EntityMimic(World world) {
         super(world);
@@ -98,9 +100,6 @@ public class EntityMimic extends EntityLiving implements IMob {
         super.writeEntityToNBT(compound);
         compound.setInteger("ticksInAir", ticksInAir);
         compound.setBoolean("isDormant", isDormant);
-        if (loottable != null) {
-            compound.setString("loottable", loottable.toString());
-        }
     }
 
     @Override
@@ -108,9 +107,6 @@ public class EntityMimic extends EntityLiving implements IMob {
         super.readEntityFromNBT(compound);
         ticksInAir = compound.getInteger("ticksInAir");
         isDormant = compound.getBoolean("isDormant");
-        if (compound.hasKey("loottable")) {
-            loottable = new ResourceLocation(compound.getString("loottable"));
-        }
     }
 
     @Override
@@ -186,11 +182,7 @@ public class EntityMimic extends EntityLiving implements IMob {
     @Nullable
     @Override
     protected ResourceLocation getLootTable() {
-        return loottable;
-    }
-
-    public void setLoottable(@Nullable ResourceLocation loottable) {
-        this.loottable = loottable;
+        return ModLootTables.MIMIC_UNDERGROUND;
     }
 
     @Override
