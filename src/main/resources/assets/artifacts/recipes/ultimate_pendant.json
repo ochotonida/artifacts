@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:thorn_pendant"
+    },
+    {
+      "item": "artifacts:flame_pendant"
+    },
+    {
+      "item": "artifacts:shock_pendant"
+    }
+  ],
+  "result": {
+    "item": "artifacts:ultimate_pendant"
+  }
+}
