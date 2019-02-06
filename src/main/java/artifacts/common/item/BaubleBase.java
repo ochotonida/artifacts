@@ -6,6 +6,7 @@ import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import baubles.api.cap.IBaublesItemHandler;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,7 +73,11 @@ public class BaubleBase extends Item implements IBauble {
     @SuppressWarnings("deprecation")
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(I18n.translateToLocal("tooltip." + Artifacts.MODID + "." + name + ".name"));
+        if (GuiScreen.isShiftKeyDown()) {
+            tooltip.add(I18n.translateToLocal("tooltip." + Artifacts.MODID + "." + name + ".name"));
+        } else {
+            tooltip.add(I18n.translateToLocal("tooltip." + Artifacts.MODID + ".shiftinfo.name"));
+        }
     }
 
     public void registerModel() {
