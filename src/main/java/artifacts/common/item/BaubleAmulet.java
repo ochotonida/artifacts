@@ -11,8 +11,10 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -35,24 +37,20 @@ public class BaubleAmulet extends BaubleBase implements IRenderBauble {
         setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_CHAIN);
     }
 
-    @Override
-    public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, IRenderBauble.RenderType renderType, float partialTicks) {
-        if (renderType == RenderType.BODY) {
-            GlStateManager.enableLighting();
-            GlStateManager.enableRescaleNormal();
-            Helper.rotateIfSneaking(player);
-            Minecraft.getMinecraft().renderEngine.bindTexture(textures);
-            model.render(player, 0, 0, 0, 0, 0, 1/16F);
-        }
-    }
-
     @SubscribeEvent
     @SuppressWarnings("unused")
     public static void onLivingHurt(LivingHurtEvent event) {
-        if (!event.getEntity().world.isRemote && event.getEntity() instanceof EntityPlayer) {
+        if (!event.getEntity().world.isRemote && event.getEntity() instanceof EntityPlayer && event.getAmount() >= 1) {
 
-            // lightning amulet
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.SHOCK_PENDANT) != -1) {
+            // panic necklace
+            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.PANIC_NECKLACE) != -1) {
+                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SPEED, 70, 1, true, false));
+            }
+
+            boolean hasUltimatePendant = BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.ULTIMATE_PENDANT) != -1;
+
+            // shock pendant
+            if (hasUltimatePendant || BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.SHOCK_PENDANT) != -1) {
                 if (event.getSource() == DamageSource.LIGHTNING_BOLT) {
                     event.setCanceled(true);
                 } else if (event.getSource().getTrueSource() instanceof EntityLiving && !((EntityPlayer) event.getEntity()).getCooldownTracker().hasCooldown(ModItems.SHOCK_PENDANT)) {
@@ -64,8 +62,8 @@ public class BaubleAmulet extends BaubleBase implements IRenderBauble {
                 }
             }
 
-            // fire amulet
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.FLAME_PENDANT) != -1) {
+            // flame pendant
+            if (hasUltimatePendant || BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.FLAME_PENDANT) != -1) {
                 if (event.getSource().getTrueSource() instanceof EntityLiving && !((EntityPlayer) event.getEntity()).getCooldownTracker().hasCooldown(ModItems.FLAME_PENDANT)) {
                     EntityLiving attacker = (EntityLiving) event.getSource().getTrueSource();
                     if (!attacker.isImmuneToFire() && attacker.attackable()) {
@@ -76,8 +74,8 @@ public class BaubleAmulet extends BaubleBase implements IRenderBauble {
                 }
             }
 
-            // thorns amulet
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.THORN_PENDANT) != -1) {
+            // thorn pendant
+            if (hasUltimatePendant || BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.THORN_PENDANT) != -1) {
                 if (event.getSource().getTrueSource() instanceof EntityLiving) {
                     EntityLiving attacker = (EntityLiving) event.getSource().getTrueSource();
                     Random random = ((EntityPlayer) event.getEntity()).getRNG();
@@ -87,5 +85,21 @@ public class BaubleAmulet extends BaubleBase implements IRenderBauble {
                 }
             }
         }
+    }
+
+    @Override
+    public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, IRenderBauble.RenderType renderType, float partialTicks) {
+        if (renderType == RenderType.BODY) {
+            GlStateManager.enableLighting();
+            GlStateManager.enableRescaleNormal();
+            Helper.rotateIfSneaking(player);
+            Minecraft.getMinecraft().renderEngine.bindTexture(textures);
+            model.render(player, 0, 0, 0, 0, 0, 1 / 16F);
+        }
+    }
+
+    public BaubleAmulet setModel(ModelBase model) {
+        this.model = model;
+        return this;
     }
 }

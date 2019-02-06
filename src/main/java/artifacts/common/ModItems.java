@@ -1,6 +1,8 @@
 package artifacts.common;
 
 import artifacts.Artifacts;
+import artifacts.client.model.ModelPanicNecklace;
+import artifacts.client.model.ModelUltimatePendant;
 import artifacts.common.item.*;
 import baubles.api.BaubleType;
 import net.minecraft.init.MobEffects;
@@ -17,10 +19,11 @@ public class ModItems {
     public static final BaubleBase SHOCK_PENDANT = new BaubleAmulet("shock_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/shock_pendant.png"));
     public static final BaubleBase FLAME_PENDANT = new BaubleAmulet("flame_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/flame_pendant.png"));
     public static final BaubleBase THORN_PENDANT = new BaubleAmulet("thorn_pendant", new ResourceLocation(Artifacts.MODID,"textures/entity/layer/thorn_pendant.png"));
+    public static final BaubleBase PANIC_NECKLACE = new BaubleAmulet("panic_necklace", new ResourceLocation(Artifacts.MODID, "textures/entity/layer/panic_necklace.png")).setModel(new ModelPanicNecklace());
+    public static final BaubleBase ULTIMATE_PENDANT = new BaubleAmulet("ultimate_pendant", new ResourceLocation(Artifacts.MODID, "textures/entity/layer/ultimate_pendant.png")).setModel(new ModelUltimatePendant());
     public static final BaubleBase LUCKY_HORSESHOE = new BaubleBase("lucky_horseshoe", BaubleType.CHARM).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_GOLD);
     public static final BaubleBase COBALT_SHIELD = new BaubleBase("cobalt_shield", BaubleType.CHARM).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON);
     public static final BaubleBase OBSIDIAN_SKULL = new BaubleObsidianSkull();
-    public static final BaubleBase PANIC_NECKLACE = new BaublePanicNecklace();
     public static final BaubleBase WHOOPIE_CUSHION = new BaubleWhoopieCushion();
     public static final BaubleBase BOTTLED_CLOUD = new BaubleBottledCloud("bottled_cloud", false);
     public static final BaubleBase BOTTLED_FART = new BaubleBottledCloud("bottled_fart", true);
@@ -61,9 +64,10 @@ public class ModItems {
                 SHOCK_PENDANT,
                 FLAME_PENDANT,
                 THORN_PENDANT,
+                ULTIMATE_PENDANT,
+                PANIC_NECKLACE,
                 LUCKY_HORSESHOE,
                 COBALT_SHIELD,
-                PANIC_NECKLACE,
                 WHOOPIE_CUSHION,
                 BOTTLED_CLOUD,
                 BOTTLED_FART,
@@ -105,6 +109,7 @@ public class ModItems {
         SHOCK_PENDANT.registerModel();
         FLAME_PENDANT.registerModel();
         THORN_PENDANT.registerModel();
+        ULTIMATE_PENDANT.registerModel();
         LUCKY_HORSESHOE.registerModel();
         COBALT_SHIELD.registerModel();
         PANIC_NECKLACE.registerModel();
