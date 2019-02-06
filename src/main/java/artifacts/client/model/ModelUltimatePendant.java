@@ -41,11 +41,9 @@ public class ModelUltimatePendant extends ModelBase {
 
         light += 40;
 
-        GlStateManager.disableLighting();
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, light, light);
         gem.render(scale);
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastLightmapX, lastLightmapY);
-        GlStateManager.enableLighting();
 
         GlStateManager.popMatrix();
     }

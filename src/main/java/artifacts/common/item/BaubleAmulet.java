@@ -94,7 +94,7 @@ public class BaubleAmulet extends BaubleBase implements IRenderBauble {
             GlStateManager.enableRescaleNormal();
             Helper.rotateIfSneaking(player);
             Minecraft.getMinecraft().renderEngine.bindTexture(textures);
-            model.render(player, 0, 0, 0, 0, 0, 1 / 16F);
+            model.render(player, 0, 0, player.ticksExisted + partialTicks, 0, 0, 1 / 16F);
         }
     }
 
