@@ -40,8 +40,8 @@ item.artifacts.everlasting_clownfish.name=Everlasting Clownfish
 
 tooltip.artifacts.shiny_red_balloon.name=Allows the wearer to jump higher
 tooltip.artifacts.snorkel.name=Allows the wearer to breathe underwater
-tooltip.artifacts.shock_pendant.name=Causes attackers to get struck by lightning
-tooltip.artifacts.flame_pendant.name=Causes attackers to catch on fire
+tooltip.artifacts.shock_pendant.name=Has a chance to strike attackers with lightning when worn
+tooltip.artifacts.flame_pendant.name=Has a chance to light attackers on fire when worn
 tooltip.artifacts.thorn_pendant.name=Has a chance to damage attackers when worn
 tooltip.artifacts.lucky_horseshoe.name=Negates fall damage from any height
 tooltip.artifacts.cobalt_shield.name=Prevents knockback from attacks

@@ -53,23 +53,23 @@ public class BaubleAmulet extends BaubleBase implements IRenderBauble {
             if (hasUltimatePendant || BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.SHOCK_PENDANT) != -1) {
                 if (event.getSource() == DamageSource.LIGHTNING_BOLT) {
                     event.setCanceled(true);
-                } else if (event.getSource().getTrueSource() instanceof EntityLiving && !((EntityPlayer) event.getEntity()).getCooldownTracker().hasCooldown(ModItems.SHOCK_PENDANT)) {
+                } else if (event.getSource().getTrueSource() instanceof EntityLiving) {
                     EntityLiving attacker = (EntityLiving) event.getSource().getTrueSource();
-                    if (attacker.world.canSeeSky(attacker.getPosition())) {
+                    Random random = ((EntityPlayer) event.getEntity()).getRNG();
+                    if (attacker.world.canSeeSky(attacker.getPosition()) && random.nextFloat() < 0.15F) {
                         attacker.world.addWeatherEffect(new EntityLightningBolt(attacker.world, attacker.posX, attacker.posY, attacker.posZ, false));
-                        ((EntityPlayer) event.getEntity()).getCooldownTracker().setCooldown(ModItems.SHOCK_PENDANT, 320);
                     }
                 }
             }
 
             // flame pendant
             if (hasUltimatePendant || BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntity(), ModItems.FLAME_PENDANT) != -1) {
-                if (event.getSource().getTrueSource() instanceof EntityLiving && !((EntityPlayer) event.getEntity()).getCooldownTracker().hasCooldown(ModItems.FLAME_PENDANT)) {
+                if (event.getSource().getTrueSource() instanceof EntityLiving) {
                     EntityLiving attacker = (EntityLiving) event.getSource().getTrueSource();
-                    if (!attacker.isImmuneToFire() && attacker.attackable()) {
+                    Random random = ((EntityPlayer) event.getEntity()).getRNG();
+                    if (!attacker.isImmuneToFire() && attacker.attackable() && random.nextFloat() < 0.30F) {
                         attacker.setFire(4);
                         attacker.attackEntityFrom(new EntityDamageSource("onFire", event.getEntity()).setFireDamage(), 2);
-                        ((EntityPlayer) event.getEntity()).getCooldownTracker().setCooldown(ModItems.FLAME_PENDANT, 160);
                     }
                 }
             }
@@ -79,7 +79,7 @@ public class BaubleAmulet extends BaubleBase implements IRenderBauble {
                 if (event.getSource().getTrueSource() instanceof EntityLiving) {
                     EntityLiving attacker = (EntityLiving) event.getSource().getTrueSource();
                     Random random = ((EntityPlayer) event.getEntity()).getRNG();
-                    if (attacker.attackable() && random.nextFloat() < 0.45) {
+                    if (attacker.attackable() && random.nextFloat() < 0.45F) {
                         attacker.attackEntityFrom(DamageSource.causeThornsDamage(event.getEntity()), 1 + random.nextInt(4));
                     }
                 }
