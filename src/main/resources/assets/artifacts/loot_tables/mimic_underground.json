@@ -7,7 +7,7 @@
         {
           "type": "item",
           "name": "artifacts:shiny_red_balloon",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
@@ -27,7 +27,7 @@
         {
           "type": "item",
           "name": "artifacts:cobalt_shield",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
@@ -77,6 +77,11 @@
         {
           "type": "item",
           "name": "artifacts:pocket_piston",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "artifacts:whoopie_cushion",
           "weight": 3
         }
       ]
