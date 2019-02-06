@@ -56,6 +56,6 @@ public class ModConfig {
     public static int starCloakStarsMax = 8;
 
     @Config.RangeInt(min = 0)
-    @Config.Comment({"Damage to entities when striking an entity for hallow stars"})
-    public static int starCloakDamage = 3;
+    @Config.Comment({"Hallow star damage when striking an entity"})
+    public static int starCloakDamage = 4;
 }
