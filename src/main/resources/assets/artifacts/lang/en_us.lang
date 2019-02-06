@@ -18,6 +18,8 @@ item.artifacts.fire_gauntlet.name=Fire Gauntlet
 item.artifacts.drinking_hat.name=Drinking Hat
 item.artifacts.star_cloak.name=Star Cloak
 item.artifacts.pocket_piston.name=Pocket Piston
+item.artifacts.night_vision_goggles.name=Night Vision Goggles
+item.artifacts.ultimate_pendant.name=Pendant of Ultimate Wrath
 
 item.artifacts.everlasting_porkchop.name=Everlasting Raw Porkchop
 item.artifacts.everlasting_cooked_porkchop.name=Everlasting Cooked Porkchop
@@ -58,6 +60,8 @@ tooltip.artifacts.fire_gauntlet.name=Increases meelee attack damage and speed, C
 tooltip.artifacts.drinking_hat.name=Decreases the time it takes to drink drinkable items
 tooltip.artifacts.star_cloak.name=Causes stars to fall when injured
 tooltip.artifacts.pocket_piston.name=Increases knockback
+tooltip.artifacts.night_vision_goggles.name=Grants the wearer night vision
+tooltip.artifacts.ultimate_pendant.name=When worn, has a chance to damage attackers, light them on fire, and strike them with lightning
 
 entity.artifacts.mimic.name=Mimic
 entity.artifacts.hallow_star.name=Hallow Star
