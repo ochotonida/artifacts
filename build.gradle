@@ -40,10 +40,14 @@ dependencies {
             name = "CurseForge"
             url = "https://minecraft.curseforge.com/api/maven/"
         }
+        maven {
+            url = "http://www.ryanliptak.com/maven/"
+        }
     }
 
     dependencies {
-        compile 'baubles:Baubles:1.12:1.5.2'
+        compile "baubles:Baubles:1.12:1.5.2"
+        compile "applecore:AppleCore:1.10.2-2.2.2:api"
     }
 
 }
