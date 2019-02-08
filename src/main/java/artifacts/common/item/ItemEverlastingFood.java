@@ -2,15 +2,10 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.common.ModConfig;
-import artifacts.common.ModItems;
 import artifacts.common.loot.functions.GenerateEverlastingFish;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -20,16 +15,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootEntryItem;
+import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
@@ -149,56 +140,43 @@ public class ItemEverlastingFood extends Item implements IEdible {
             functions[0] = new GenerateEverlastingFish(new LootCondition[0]);
             event.getTable().getPool("main").addEntry(new LootEntryItem(Items.FISH, ModConfig.everlastingFishWeight, 0, functions, new LootCondition[0], "everlasting_fish"));
         }
-    }
 
-    @SubscribeEvent
-    public static void onLivingDrops(LivingDropsEvent event) {
-        if (!(event.getSource().getTrueSource() instanceof EntityPlayer)) {
-            return;
-        }
-
-        if (event.getEntityLiving().getRNG().nextDouble() < ModConfig.everlastingFoodChance && !event.getEntityLiving().isChild()) {
-            Item item;
-
-            if (event.getEntity() instanceof EntityPig) {
-                if (event.getEntityLiving().isBurning()) {
-                    item = ModItems.EVERLASTING_COOKED_PORKCHOP;
-                } else {
-                    item = ModItems.EVERLASTING_PORKCHOP;
-                }
-            } else if (event.getEntity() instanceof EntityCow) {
-                if (event.getEntityLiving().isBurning()) {
-                    item = ModItems.EVERLASTING_COOKED_BEEF;
-                } else {
-                    item = ModItems.EVERLASTING_BEEF;
-                }
-            } else if (event.getEntity() instanceof EntitySheep) {
-                if (event.getEntityLiving().isBurning()) {
-                    item = ModItems.EVERLASTING_COOKED_MUTTON;
-                } else {
-                    item = ModItems.EVERLASTING_MUTTON;
-                }
-            } else if (event.getEntity() instanceof EntityChicken) {
-                if (event.getEntityLiving().isBurning()) {
-                    item = ModItems.EVERLASTING_COOKED_CHICKEN;
-                } else {
-                    item = ModItems.EVERLASTING_CHICKEN;
-                }
-            } else if (event.getEntity() instanceof EntityRabbit) {
-                if (event.getEntityLiving().isBurning()) {
-                    item = ModItems.EVERLASTING_COOKED_RABBIT;
-                } else {
-                    item = ModItems.EVERLASTING_RABBIT;
-                }
-            } else if (event.getEntity() instanceof EntityZombie) {
-                item = ModItems.EVERLASTING_ROTTEN_FLESH;
-            } else if (event.getEntity() instanceof EntitySpider) {
-                item = ModItems.EVERLASTING_SPIDER_EYE;
-            } else {
-                return;
+        if (ModConfig.enableEverlastingFood) {
+            ResourceLocation location;
+            switch (event.getName().toString()) {
+                case "minecraft:entities/cow":
+                case "minecraft:entities/mushroom_cow":
+                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/beef");
+                    break;
+                case "minecraft:entities/pig":
+                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/porkchop");
+                    break;
+                case "minecraft:entities/chicken":
+                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/chicken");
+                    break;
+                case "minecraft:entities/sheep":
+                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/mutton");
+                    break;
+                case "minecraft:entities/rabbit":
+                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/rabbit");
+                    break;
+                case "minecraft:entities/spider":
+                case "minecraft:entities/cave_spider":
+                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/spider_eye");
+                    break;
+                case "minecraft:entities/zombie":
+                case "minecraft:entities/husk":
+                case "minecraft:entities/zombie_villager":
+                case "minecraft:entities/zombie_pigman":
+                case "minecraft:entities/zombie_horse":
+                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/rotten_flesh");
+                    break;
+                default:
+                    return;
             }
 
-            event.getDrops().add(new EntityItem(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, new ItemStack(item)));
+            LootEntry entry = new LootEntryTable(location, 1, 0, new LootCondition[0], "entry#0");
+            event.getTable().addPool(new LootPool(new LootEntry[]{entry}, new LootCondition[]{}, new RandomValueRange(1), new RandomValueRange(0), "everlasting_food"));
         }
     }
 }
