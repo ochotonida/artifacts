@@ -1,8 +1,8 @@
 {
   "homepage": "https://github.com/ochotonida/artifacts",
   "1.12.2": {
-    "1.12.2-1.0.0": "Initial release",
-    "1.12.2-1.0.1": "Added JER support"
+    "1.12.2-1.0.0": "initial release",
+    "1.12.2-1.0.1": "added jer support,\nfixed an everlasting food duplication glitch"
   },
   "promos": {
     "1.12.2-latest": "1.12.2-1.0.1",
