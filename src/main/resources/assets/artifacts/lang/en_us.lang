@@ -71,3 +71,5 @@ death.attack.artifacts.hallow_star=%s was hit by falling star
 death.attack.artifacts.hallow_star.player=%1$s was hit by %2$s's falling star
 
 itemGroup.artifacts.creativetab=Artifacts
+
+dungeon.artifacts.underground_chest=Underground Chest

@@ -37,17 +37,20 @@ dependencies {
 
     repositories {
         maven {
-            name = "CurseForge"
             url = "https://minecraft.curseforge.com/api/maven/"
         }
         maven {
             url = "http://www.ryanliptak.com/maven/"
+        }
+        maven {
+            url = "https://dl.bintray.com/way2muchnoise/dev"
         }
     }
 
     dependencies {
         compile "baubles:Baubles:1.12:1.5.2"
         compile "applecore:AppleCore:1.10.2-2.2.2:api"
+        compile "jeresources:JustEnoughResources-1.12.2:0.8.9.48"
     }
 
 }

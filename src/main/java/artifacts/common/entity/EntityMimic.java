@@ -42,6 +42,7 @@ public class EntityMimic extends EntityLiving implements IMob {
         super(world);
         moveHelper = new MimicMoveHelper(this);
         setSize(14/16F, 14/16F);
+        experienceValue = 10;
     }
 
     @Nullable

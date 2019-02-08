@@ -4,6 +4,7 @@ import artifacts.common.CommonProxy;
 import artifacts.common.ModItems;
 import artifacts.common.ModRecipes;
 import artifacts.common.ModSoundEvents;
+import artifacts.common.compat.JustEnoughResources;
 import artifacts.common.loot.functions.AddRandomEffect;
 import artifacts.common.loot.functions.GenerateEverlastingFish;
 import artifacts.common.worldgen.WorldGenOceanShrine;
@@ -55,6 +56,7 @@ public class Artifacts {
         ModRecipes.initRecipes();
         LootFunctionManager.registerFunction(new GenerateEverlastingFish.Serializer());
         LootFunctionManager.registerFunction(new AddRandomEffect.Serializer());
+        JustEnoughResources.init();
     }
 
     @Mod.EventBusSubscriber
