@@ -1,7 +1,6 @@
 package artifacts.common.loot.functions;
 
 import artifacts.Artifacts;
-import artifacts.common.ModConfig;
 import artifacts.common.ModItems;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
@@ -26,17 +25,14 @@ public class GenerateEverlastingFish extends LootFunction {
 
     @Override
     public ItemStack apply(ItemStack stack, Random random, LootContext context) {
-        if (random.nextDouble() < ModConfig.everlastingFishChance) {
-            switch (random.nextInt(4)) {
-                case 0:
-                    return new ItemStack(ModItems.EVERLASTING_SALMON);
-                case 1:
-                    return new ItemStack(ModItems.EVERLASTING_CLOWNFISH);
-                default:
-                    return new ItemStack(ModItems.EVERLASTING_COD);
-            }
+        switch (random.nextInt(4)) {
+            case 0:
+                return new ItemStack(ModItems.EVERLASTING_SALMON);
+            case 1:
+                return new ItemStack(ModItems.EVERLASTING_CLOWNFISH);
+            default:
+                return new ItemStack(ModItems.EVERLASTING_COD);
         }
-        return stack;
     }
 
     public static class Serializer extends LootFunction.Serializer<GenerateEverlastingFish> {

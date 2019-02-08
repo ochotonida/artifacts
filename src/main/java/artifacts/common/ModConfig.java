@@ -22,14 +22,6 @@ public class ModConfig {
     @Config.Comment({"whether animals can drop everlasting food"})
     public static boolean enableEverlastingFood = true;
 
-    @Config.RangeDouble(min = 0, max = 1)
-    @Config.Comment({"chance for an everlasting fish to generate instead of the regular item when a loot table entry with the generate_everlasting_fish function is rolled", "the loot function generate_everlasting_fish randomly replaces the rolled item with an everlasting fish"})
-    public static double everlastingFishChance = 0.05;
-
-    @Config.RangeInt(min = 0)
-    @Config.Comment({"weight for the default entry with the generate_everlasting_fish function in the regular fish loottable", "setting this to 0 will prevent a loottable entry from being created"})
-    public static int everlastingFishWeight = 1;
-
     @Config.RangeInt(min = 0)
     @Config.Comment({"Minimum amount of falling stars that spawn when struck while wearing a star cloak"})
     public static int starCloakStarsMin = 3;

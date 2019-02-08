@@ -33,7 +33,7 @@ public class Artifacts {
 
     public static final String MODID = "artifacts";
     public static final String MODNAME = "Artifacts";
-    public static final String VERSION = "1.12.2-1.0.0";
+    public static final String VERSION = "1.12.2-1.0.1";
 
     public static final CreativeTab CREATIVE_TAB = new CreativeTab();
 

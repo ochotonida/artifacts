@@ -19,6 +19,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
+import net.minecraft.world.storage.loot.conditions.RandomChance;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.Loader;
@@ -135,48 +136,50 @@ public class ItemEverlastingFood extends Item implements IEdible {
 
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
-        if (ModConfig.everlastingFishWeight > 0 && event.getName().toString().equals("minecraft:gameplay/fishing/fish")) {
+        if (!ModConfig.enableEverlastingFood) {
+            return;
+        }
+
+        if (event.getName().toString().equals("minecraft:gameplay/fishing/fish")) {
             LootFunction[] functions = new LootFunction[1];
-            functions[0] = new GenerateEverlastingFish(new LootCondition[0]);
-            event.getTable().getPool("main").addEntry(new LootEntryItem(Items.FISH, ModConfig.everlastingFishWeight, 0, functions, new LootCondition[0], "everlasting_fish"));
+            functions[0] = new GenerateEverlastingFish(new LootCondition[]{new RandomChance(0.05F)});
+            event.getTable().getPool("main").addEntry(new LootEntryItem(Items.FISH, 1, 0, functions, new LootCondition[0], "everlasting_fish"));
         }
 
-        if (ModConfig.enableEverlastingFood) {
-            ResourceLocation location;
-            switch (event.getName().toString()) {
-                case "minecraft:entities/cow":
-                case "minecraft:entities/mushroom_cow":
-                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/beef");
-                    break;
-                case "minecraft:entities/pig":
-                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/porkchop");
-                    break;
-                case "minecraft:entities/chicken":
-                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/chicken");
-                    break;
-                case "minecraft:entities/sheep":
-                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/mutton");
-                    break;
-                case "minecraft:entities/rabbit":
-                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/rabbit");
-                    break;
-                case "minecraft:entities/spider":
-                case "minecraft:entities/cave_spider":
-                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/spider_eye");
-                    break;
-                case "minecraft:entities/zombie":
-                case "minecraft:entities/husk":
-                case "minecraft:entities/zombie_villager":
-                case "minecraft:entities/zombie_pigman":
-                case "minecraft:entities/zombie_horse":
-                    location = new ResourceLocation(Artifacts.MODID, "everlasting_food/rotten_flesh");
-                    break;
-                default:
-                    return;
-            }
-
-            LootEntry entry = new LootEntryTable(location, 1, 0, new LootCondition[0], "entry#0");
-            event.getTable().addPool(new LootPool(new LootEntry[]{entry}, new LootCondition[]{}, new RandomValueRange(1), new RandomValueRange(0), "everlasting_food"));
+        ResourceLocation location;
+        switch (event.getName().toString()) {
+            case "minecraft:entities/cow":
+            case "minecraft:entities/mushroom_cow":
+                location = new ResourceLocation(Artifacts.MODID, "everlasting_food/beef");
+                break;
+            case "minecraft:entities/pig":
+                location = new ResourceLocation(Artifacts.MODID, "everlasting_food/porkchop");
+                break;
+            case "minecraft:entities/chicken":
+                location = new ResourceLocation(Artifacts.MODID, "everlasting_food/chicken");
+                break;
+            case "minecraft:entities/sheep":
+                location = new ResourceLocation(Artifacts.MODID, "everlasting_food/mutton");
+                break;
+            case "minecraft:entities/rabbit":
+                location = new ResourceLocation(Artifacts.MODID, "everlasting_food/rabbit");
+                break;
+            case "minecraft:entities/spider":
+            case "minecraft:entities/cave_spider":
+                location = new ResourceLocation(Artifacts.MODID, "everlasting_food/spider_eye");
+                break;
+            case "minecraft:entities/zombie":
+            case "minecraft:entities/husk":
+            case "minecraft:entities/zombie_villager":
+            case "minecraft:entities/zombie_pigman":
+            case "minecraft:entities/zombie_horse":
+                location = new ResourceLocation(Artifacts.MODID, "everlasting_food/rotten_flesh");
+                break;
+            default:
+                return;
         }
+
+        LootEntry entry = new LootEntryTable(location, 1, 0, new LootCondition[0], "entry#0");
+        event.getTable().addPool(new LootPool(new LootEntry[]{entry}, new LootCondition[]{}, new RandomValueRange(1), new RandomValueRange(0), "everlasting_food"));
     }
 }
