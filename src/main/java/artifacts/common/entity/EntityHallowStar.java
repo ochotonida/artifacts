@@ -40,7 +40,9 @@ public class EntityHallowStar extends Entity {
         double offSetY = 25 + rand.nextDouble() * 15;
         setPosition(shooter.posX + offSetX - 1 + rand.nextFloat() * 2, shooter.posY + offSetY, shooter.posZ + offSetZ - 1 + rand.nextFloat() * 2);
         double velocity = Math.sqrt(offSetX * offSetX + offSetY * offSetY + offSetZ * offSetZ);
-        setVelocity(-offSetX * 1.5 / velocity, -offSetY * 1.5 / velocity, -offSetZ * 1.5 / velocity);
+        motionX = -offSetX * 1.5 / velocity;
+        motionY = -offSetY * 1.5 / velocity;
+        motionZ = -offSetZ * 1.5 / velocity;
     }
 
     @Override
