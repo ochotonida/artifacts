@@ -1,10 +1,7 @@
 package artifacts.client;
 
 import artifacts.Artifacts;
-import artifacts.client.model.layer.LayerDrinkingHat;
-import artifacts.client.model.layer.LayerGloves;
-import artifacts.client.model.layer.LayerNightVisionGoggles;
-import artifacts.client.model.layer.LayerSnorkel;
+import artifacts.client.model.layer.*;
 import artifacts.client.renderer.RenderHallowStar;
 import artifacts.client.renderer.RenderMimic;
 import artifacts.common.CommonProxy;
@@ -40,12 +37,14 @@ public class ClientProxy extends CommonProxy {
         renderPlayer.addLayer(new LayerSnorkel(renderPlayer));
         renderPlayer.addLayer(new LayerDrinkingHat(renderPlayer));
         renderPlayer.addLayer(new LayerNightVisionGoggles(renderPlayer));
+        renderPlayer.addLayer(new LayerShirt(renderPlayer, false));
 
         renderPlayer = skinMap.get("slim");
         renderPlayer.addLayer(new LayerGloves(true, renderPlayer));
         renderPlayer.addLayer(new LayerSnorkel(renderPlayer));
         renderPlayer.addLayer(new LayerDrinkingHat(renderPlayer));
         renderPlayer.addLayer(new LayerNightVisionGoggles(renderPlayer));
+        renderPlayer.addLayer(new LayerShirt(renderPlayer, true));
     }
 
     @Override

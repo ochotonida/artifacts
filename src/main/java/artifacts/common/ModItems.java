@@ -36,6 +36,7 @@ public class ModItems {
     public static final BaubleBase STAR_CLOAK = new BaubleStarCloak();
     public static final BaubleBase POCKET_PISTON = new BaubleBase("pocket_piston", BaubleType.RING).setEquipSound(SoundEvents.BLOCK_PISTON_EXTEND, SoundEvents.BLOCK_PISTON_CONTRACT);
     public static final BaubleBase NIGHT_VISION_GOGGLES = new BaublePotionEffect("night_vision_goggles", BaubleType.HEAD, MobEffects.NIGHT_VISION, 0, 300).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+    public static final BaubleBase TINY_SHIRT = new BaubleTinyShirt();
 
     public static final ItemEverlastingFood EVERLASTING_PORKCHOP = new ItemEverlastingFood("everlasting_porkchop", 3, 0.3F);
     public static final ItemEverlastingFood EVERLASTING_COOKED_PORKCHOP = new ItemEverlastingFood("everlasting_cooked_porkchop", 8, 0.8F);
@@ -80,6 +81,7 @@ public class ModItems {
                 STAR_CLOAK,
                 POCKET_PISTON,
                 NIGHT_VISION_GOGGLES,
+                TINY_SHIRT,
 
                 EVERLASTING_PORKCHOP,
                 EVERLASTING_COOKED_PORKCHOP,
@@ -125,6 +127,7 @@ public class ModItems {
         STAR_CLOAK.registerModel();
         POCKET_PISTON.registerModel();
         NIGHT_VISION_GOGGLES.registerModel();
+        TINY_SHIRT.registerModel();
 
         EVERLASTING_PORKCHOP.registerModel();
         EVERLASTING_COOKED_PORKCHOP.registerModel();

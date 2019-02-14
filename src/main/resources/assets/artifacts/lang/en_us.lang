@@ -20,6 +20,7 @@ item.artifacts.star_cloak.name=Star Cloak
 item.artifacts.pocket_piston.name=Pocket Piston
 item.artifacts.night_vision_goggles.name=Night Vision Goggles
 item.artifacts.ultimate_pendant.name=Pendant of Ultimate Wrath
+item.artifacts.tiny_shirt.name=Tiny Shirt
 
 item.artifacts.everlasting_porkchop.name=Everlasting Raw Porkchop
 item.artifacts.everlasting_cooked_porkchop.name=Everlasting Cooked Porkchop
@@ -63,6 +64,7 @@ tooltip.artifacts.star_cloak.name=When worn, causes stars to fall when injured
 tooltip.artifacts.pocket_piston.name=Increases knockback from all attacks when worn
 tooltip.artifacts.night_vision_goggles.name=Grants the wearer night vision
 tooltip.artifacts.ultimate_pendant.name=When worn, has a chance to damage attackers, light them on fire, and strike them with lightning
+tooltip.artifacts.tiny_shirt.name=Shrinks the player when worn
 
 entity.artifacts.mimic.name=Mimic
 entity.artifacts.hallow_star.name=Hallow Star

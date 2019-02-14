@@ -21,7 +21,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.5.2768"
+    version = "1.12.2-14.23.5.2811"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -51,6 +51,7 @@ dependencies {
         compile "baubles:Baubles:1.12:1.5.2"
         compile "applecore:AppleCore:1.10.2-2.2.2:api"
         compile "jeresources:JustEnoughResources-1.12.2:0.8.9.48"
+        compile "artemislib:ArtemisLib:1.12.2:v1.0.2"
     }
 
 }
