@@ -1,6 +1,6 @@
 package artifacts.common.item;
 
-import artifacts.common.ModItems;
+import artifacts.common.init.ModItems;
 import baubles.api.BaublesApi;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EntityDamageSource;

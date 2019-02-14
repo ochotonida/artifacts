@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.common.ModSoundEvents;
+import artifacts.common.init.ModSoundEvents;
 import baubles.api.BaubleType;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.EntityLivingBase;

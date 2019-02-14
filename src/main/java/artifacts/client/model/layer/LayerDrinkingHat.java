@@ -1,7 +1,7 @@
 package artifacts.client.model.layer;
 
 import artifacts.Artifacts;
-import artifacts.common.ModItems;
+import artifacts.common.init.ModItems;
 import baubles.api.BaublesApi;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;

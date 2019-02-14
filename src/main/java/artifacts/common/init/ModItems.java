@@ -1,4 +1,4 @@
-package artifacts.common;
+package artifacts.common.init;
 
 import artifacts.Artifacts;
 import artifacts.client.model.ModelPanicNecklace;

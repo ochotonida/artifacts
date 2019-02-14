@@ -1,7 +1,7 @@
 package artifacts.common.entity;
 
-import artifacts.common.ModLootTables;
-import artifacts.common.ModSoundEvents;
+import artifacts.common.init.ModLootTables;
+import artifacts.common.init.ModSoundEvents;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIBase;

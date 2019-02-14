@@ -1,7 +1,7 @@
 package artifacts.common.loot.functions;
 
 import artifacts.Artifacts;
-import artifacts.common.ModItems;
+import artifacts.common.init.ModItems;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;

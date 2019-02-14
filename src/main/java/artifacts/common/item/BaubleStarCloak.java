@@ -2,7 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.common.ModConfig;
-import artifacts.common.ModItems;
+import artifacts.common.init.ModItems;
 import artifacts.common.entity.EntityHallowStar;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;

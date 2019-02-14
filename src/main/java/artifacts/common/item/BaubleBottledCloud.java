@@ -2,8 +2,8 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.model.ModelBottledCloud;
-import artifacts.common.CommonProxy;
-import artifacts.common.ModSoundEvents;
+import artifacts.common.init.ModNetworkHandler;
+import artifacts.common.init.ModSoundEvents;
 import artifacts.common.network.PacketBottledCloudJump;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
@@ -79,7 +79,7 @@ public class BaubleBottledCloud extends BaubleBase implements IRenderBauble {
                             canDoubleJump = false;
                             ItemStack stack = BaublesApi.getBaublesHandler(player).getStackInSlot(BaubleType.BELT.getValidSlots()[0]);
                             if (stack.getItem() instanceof BaubleBottledCloud) {
-                                CommonProxy.NETWORK_HANDLER_INSTANCE.sendToServer(new PacketBottledCloudJump(((BaubleBottledCloud) stack.getItem()).isFart));
+                                ModNetworkHandler.NETWORK_HANDLER_INSTANCE.sendToServer(new PacketBottledCloudJump(((BaubleBottledCloud) stack.getItem()).isFart));
                                 player.jump();
                                 player.fallDistance = 0;
                                 if (((BaubleBottledCloud) stack.getItem()).isFart) {

@@ -1,7 +1,7 @@
 package artifacts.common.worldgen;
 
 import artifacts.common.ModConfig;
-import artifacts.common.ModLootTables;
+import artifacts.common.init.ModLootTables;
 import artifacts.common.entity.EntityMimic;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;

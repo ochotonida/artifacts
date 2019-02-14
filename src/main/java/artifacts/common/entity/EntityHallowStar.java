@@ -94,10 +94,10 @@ public class EntityHallowStar extends Entity {
         ticksAlive = compound.getInteger("tickAlive");
 
         if (compound.hasKey("direction", 9) && compound.getTagList("direction", 6).tagCount() == 3) {
-            NBTTagList nbttaglist1 = compound.getTagList("direction", 6);
-            motionX = nbttaglist1.getDoubleAt(0);
-            motionY = nbttaglist1.getDoubleAt(1);
-            motionZ = nbttaglist1.getDoubleAt(2);
+            NBTTagList nbtTagList = compound.getTagList("direction", 6);
+            motionX = nbtTagList.getDoubleAt(0);
+            motionY = nbtTagList.getDoubleAt(1);
+            motionZ = nbtTagList.getDoubleAt(2);
         }
     }
 
@@ -118,11 +118,6 @@ public class EntityHallowStar extends Entity {
         }
         playSound(SoundEvents.BLOCK_WOOD_PLACE, 1, 1);
         setDead();
-    }
-
-    @Override
-    public void setDead() {
-        super.setDead();
     }
 
     public float getBrightness() {

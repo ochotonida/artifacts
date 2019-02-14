@@ -36,7 +36,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SuppressWarnings("unused")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-@Optional.Interface(iface = "squeek.applecore.api.food.IEdible", modid = "applecore")
+@Optional.Interface(iface = "squeek.applecore.jerApi.food.IEdible", modid = "applecore")
 public class ItemEverlastingFood extends Item implements IEdible {
 
     public final String name;
