@@ -1,5 +1,6 @@
 package artifacts.common.worldgen;
 
+import artifacts.Artifacts;
 import artifacts.common.ModConfig;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -17,7 +18,7 @@ import java.util.Random;
 
 public class WorldGenOceanShrine implements IWorldGenerator {
 
-    private static final ResourceLocation STRUCTURE = new ResourceLocation("artifacts:ocean_shrine");
+    private static final ResourceLocation STRUCTURE = new ResourceLocation(Artifacts.MODID, "ocean_shrine");
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
