@@ -2,12 +2,11 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.common.ModConfig;
-import artifacts.common.init.ModItems;
 import artifacts.common.entity.EntityHallowStar;
+import artifacts.common.init.ModItems;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,7 +24,6 @@ public class BaubleStarCloak extends BaubleBase implements IRenderCloak {
 
     public BaubleStarCloak() {
         super("star_cloak", BaubleType.BODY);
-        setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
     }
 
     @Override

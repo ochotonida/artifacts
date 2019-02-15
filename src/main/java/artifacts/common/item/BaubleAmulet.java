@@ -12,7 +12,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -34,7 +33,6 @@ public class BaubleAmulet extends BaubleBase implements IRenderBauble {
     public BaubleAmulet(String name, ResourceLocation textures) {
         super(name, BaubleType.AMULET);
         this.textures = textures;
-        setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_CHAIN);
     }
 
     @SubscribeEvent
