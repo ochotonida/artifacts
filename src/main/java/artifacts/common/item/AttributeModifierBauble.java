@@ -61,7 +61,7 @@ public class AttributeModifierBauble extends BaubleBase {
             for (IAttribute attribute : modifier.affectedAttributes) {
                 IAttributeInstance instance = player.getAttributeMap().getAttributeInstance(attribute);
                 if (instance.getModifier(modifier.getID()) != null) {
-                    instance.removeModifier(modifier);
+                    instance.removeModifier(modifier.getID());
                 }
             }
         }
