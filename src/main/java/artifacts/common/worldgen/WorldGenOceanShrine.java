@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
@@ -14,14 +15,25 @@ import net.minecraft.world.gen.structure.template.Template;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 
 public class WorldGenOceanShrine implements IWorldGenerator {
 
     private static final ResourceLocation STRUCTURE = new ResourceLocation(Artifacts.MODID, "ocean_shrine");
 
+    private final List<Integer> whitelistedDimensions;
+
+    public WorldGenOceanShrine(List<Integer> whitelistedDimensions) {
+        this.whitelistedDimensions = whitelistedDimensions;
+    }
+
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+        if (world.getWorldType() == WorldType.FLAT || !whitelistedDimensions.contains(world.provider.getDimension())) {
+            return;
+        }
+
         for (double chestChance = ModConfig.underwaterShrineChance; chestChance > 0; chestChance--) {
             if (random.nextDouble() <= chestChance) {
                 BlockPos pos = getUnderwaterBlock(world, new BlockPos(chunkX * 16 + 8 + random.nextInt(16), 255, chunkZ * 16 + 8 + random.nextInt(16)));

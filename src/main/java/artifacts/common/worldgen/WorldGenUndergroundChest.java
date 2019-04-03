@@ -1,8 +1,8 @@
 package artifacts.common.worldgen;
 
 import artifacts.common.ModConfig;
-import artifacts.common.init.ModLootTables;
 import artifacts.common.entity.EntityMimic;
+import artifacts.common.init.ModLootTables;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -11,19 +11,31 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class WorldGenUndergroundChest implements IWorldGenerator {
 
+    private final List<Integer> whitelistedDimensions;
+
+    public WorldGenUndergroundChest(List<Integer> whitelistedDimensions) {
+        this.whitelistedDimensions = whitelistedDimensions;
+    }
+
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+        if (world.getWorldType() == WorldType.FLAT || !whitelistedDimensions.contains(world.provider.getDimension())) {
+            return;
+        }
+
         for (double chestChance = ModConfig.undergroundChestChance; chestChance > 0; chestChance--) {
             if (random.nextDouble() <= chestChance) {
                 generateChest(world, random, chunkX, chunkZ);
