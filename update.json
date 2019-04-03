@@ -3,10 +3,11 @@
   "1.12.2": {
     "1.12.2-1.0.0": "initial release",
     "1.12.2-1.0.1": "added jer support,\nfixed an everlasting food duplication glitch",
-    "1.12.2-1.0.2": "fixed a bug that caused servers to crash when using the star cloak"
+    "1.12.2-1.0.2": "fixed a bug that caused servers to crash when using the star cloak",
+    "1.12.2-1.1.0": "added optional support for artemislib,\n fixed a crash with everlasting food,\n fixed certain bauble effects staying active when unequipped,\n added dimension whitelists for worldgen,\n fixed worldgen occurring in flat worlds"
   },
   "promos": {
-    "1.12.2-latest": "1.12.2-1.0.2",
-    "1.12.2-recommended": "1.12.2-1.0.2"
+    "1.12.2-latest": "1.12.2-1.1.0",
+    "1.12.2-recommended": "1.12.2-1.1.0"
   }
 }
