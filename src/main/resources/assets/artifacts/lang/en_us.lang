@@ -42,6 +42,7 @@ item.artifacts.everlasting_cooked_salmon.name=Everlasting Cooked Salmon
 item.artifacts.everlasting_clownfish.name=Everlasting Clownfish
 
 tooltip.artifacts.shiftinfo.name=<Press shift for more info>
+tooltip.artifacts.artemislibinfo.name=This item requires ArtemisLib to function!
 tooltip.artifacts.shiny_red_balloon.name=Allows the wearer to jump higher
 tooltip.artifacts.snorkel.name=Allows the wearer to breathe underwater
 tooltip.artifacts.shock_pendant.name=Has a chance to strike attackers with lightning when worn

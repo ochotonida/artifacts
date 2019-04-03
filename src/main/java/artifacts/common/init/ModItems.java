@@ -36,7 +36,7 @@ public class ModItems {
     public static final BaubleBase STAR_CLOAK = new BaubleStarCloak().setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
     public static final BaubleBase POCKET_PISTON = new BaubleBase("pocket_piston", BaubleType.RING).setEquipSound(SoundEvents.BLOCK_PISTON_EXTEND, SoundEvents.BLOCK_PISTON_CONTRACT);
     public static final BaubleBase NIGHT_VISION_GOGGLES = new BaublePotionEffect("night_vision_goggles", BaubleType.HEAD, MobEffects.NIGHT_VISION, 0, 300).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
-    public static final BaubleBase TINY_SHIRT = new AttributeModifierBauble("tiny_shirt", BaubleType.BODY, AttributeModifierBauble.ExtendedAttributeModifier.SHRINKING).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC);
+    public static BaubleBase TINY_SHIRT;
 
     public static final ItemEverlastingFood EVERLASTING_PORKCHOP = new ItemEverlastingFood("everlasting_porkchop", 3, 0.3F);
     public static final ItemEverlastingFood EVERLASTING_COOKED_PORKCHOP = new ItemEverlastingFood("everlasting_cooked_porkchop", 8, 0.8F);
@@ -58,6 +58,8 @@ public class ModItems {
     public static final ItemEverlastingFood EVERLASTING_CLOWNFISH = new ItemEverlastingFood("everlasting_clownfish", 1, 0.1F);
 
     public static void registerItems(IForgeRegistry<Item> registry) {
+        TINY_SHIRT = new BaubleTinyShirt().setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC);
+
         registry.registerAll(
                 SHINY_RED_BALLOON,
                 OBSIDIAN_SKULL,

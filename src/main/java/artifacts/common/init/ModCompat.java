@@ -1,14 +1,25 @@
 package artifacts.common.init;
 
 import artifacts.common.entity.EntityMimic;
+import artifacts.common.item.AttributeModifierBauble;
 import jeresources.api.IJERAPI;
 import jeresources.api.JERPlugin;
 import jeresources.api.conditionals.LightLevel;
+import net.minecraftforge.fml.common.Loader;
 
 public class ModCompat {
 
     @JERPlugin
     public static IJERAPI jerApi;
+
+    public static boolean isArtemisLibLoaded;
+
+    public static void preInit() {
+        if (Loader.isModLoaded("artemislib")) {
+            isArtemisLibLoaded = true;
+            AttributeModifierBauble.ExtendedAttributeModifier.initShrinkingModifier();
+        }
+    }
 
     public static void init() {
         if (jerApi == null) {
