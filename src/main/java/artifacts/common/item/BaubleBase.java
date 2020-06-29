@@ -100,8 +100,8 @@ public class BaubleBase extends Item implements IBauble {
         for (int i = 0; i < baubles.getSlots(); i++) {
             if (baubles.getStackInSlot(i).isEmpty() && baubles.isItemValidForSlot(i, player.getHeldItem(hand), player)) {
                 baubles.setStackInSlot(i, player.getHeldItem(hand).copy());
-                if (!player.capabilities.isCreativeMode){
-                    player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+                if (!player.capabilities.isCreativeMode) {
+                    player.getHeldItem(hand).setCount(0);
                 }
                 onEquipped(player.getHeldItem(hand), player);
                 return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
