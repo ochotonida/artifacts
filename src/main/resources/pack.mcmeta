@@ -1,6 +1,7 @@
 {
     "pack": {
         "description": "artifacts resources",
-        "pack_format": 3
+        "pack_format": 5,
+        "_comment": "woop woop"
     }
 }

@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+issueTrackerURL="https://github.com/ochotonida/artifacts/issues"
+
+[[mods]]
+modId="artifacts"
+version="1.15.2-2.0.0"
+displayName="Artifacts"
+# todo updateJSONURL=""
+displayURL="https://www.curseforge.com/minecraft/mc-mods/artifacts"
+# todo logoFile="examplemod.png" A file name (in the root of the mod JAR) containing a logo for display
+description='''
+More exploration fun!
+Adds various new uncraftables to the loot pool.
+'''
+
+[[dependencies.artifacts]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.artifacts]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2]"
+    ordering="NONE"
+    side="BOTH"
