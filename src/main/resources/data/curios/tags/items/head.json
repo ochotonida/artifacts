@@ -1,7 +1,8 @@
 {
   "values": [
     "artifacts:snorkel",
-    "artifacts:drinking_hat",
-    "artifacts:novelty_drinking_hat"
+    "artifacts:plastic_drinking_hat",
+    "artifacts:novelty_drinking_hat",
+    "artifacts:night_vision_goggles"
   ]
 }
