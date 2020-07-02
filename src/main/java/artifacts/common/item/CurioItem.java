@@ -1,7 +1,6 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
@@ -45,11 +44,7 @@ public abstract class CurioItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        if (!Screen.hasShiftDown()) {
-            tooltip.add(new TranslationTextComponent("tooltip.artifacts.shiftinfo").applyTextStyle(TextFormatting.GRAY));
-        } else {
-            tooltip.add(new TranslationTextComponent("tooltip.artifacts." + name).applyTextStyle(TextFormatting.GRAY));
-        }
+        tooltip.add(new TranslationTextComponent("tooltip.artifacts." + name).applyTextStyle(TextFormatting.GRAY));
     }
 
     protected static class Provider implements ICapabilityProvider {

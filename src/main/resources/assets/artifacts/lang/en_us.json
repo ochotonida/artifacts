@@ -1,6 +1,9 @@
 {
   "item.artifacts.snorkel": "Snorkel",
-  "tooltip.artifacts.shiftinfo": "<Press shift for more info>",
-  "tooltip.artifacts.snorkel": "Allows the wearer to breathe underwater"
+  "item.artifacts.drinking_hat": "Plastic Drinking Hat",
+  "item.artifacts.novelty_drinking_hat": "Novelty Drinking Hat",
+  "tooltip.artifacts.snorkel": "Allows the wearer to breathe underwater",
+  "tooltip.artifacts.drinking_hat": "Decreases the time it takes to drink drinkable items when worn",
+  "tooltip.artifacts.novelty_drinking_hat": "'Hey! I'm #1, and I let gravity do my drinking!'"
 }
 
