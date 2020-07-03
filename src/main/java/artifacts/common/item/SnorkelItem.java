@@ -32,8 +32,8 @@ public class SnorkelItem extends CurioItem {
 
             @Override
             public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
-                if (livingEntity.ticksExisted % 20 == 0) {
-                    livingEntity.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 39, 0, true, false));
+                if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
+                    livingEntity.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 19, 0, true, false));
                 }
             }
 

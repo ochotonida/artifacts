@@ -33,7 +33,7 @@ public class NightVisionGogglesItem extends CurioItem {
 
             @Override
             public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
-                if (livingEntity.ticksExisted % 20 == 0) {
+                if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
                     livingEntity.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 319, 0, true, false));
                 }
             }
