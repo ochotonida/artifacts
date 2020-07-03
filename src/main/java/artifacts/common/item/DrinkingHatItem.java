@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
@@ -34,6 +35,11 @@ public class DrinkingHatItem extends CurioItem {
     public DrinkingHatItem(String name, boolean isNoveltyHat) {
         super(new Properties(), name);
         this.isNoveltyHat = isNoveltyHat;
+    }
+
+    @Override
+    public Rarity getRarity(ItemStack stack) {
+        return isNoveltyHat ? Rarity.EPIC : Rarity.RARE;
     }
 
     @SubscribeEvent
