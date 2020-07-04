@@ -35,7 +35,7 @@ public class Artifacts {
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
-        String[] slots = {"head", "hands", "ring", "necklace"};
+        String[] slots = {"head", "hands", "ring", "necklace", "feet"};
         for (String slot : slots) {
             InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> new CurioIMCMessage(slot));
         }

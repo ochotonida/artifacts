@@ -14,6 +14,7 @@ public class Items {
     public static final Item SHOCK_PENDANT = new PendantItem("shock_pendant");
     public static final Item FLAME_PENDANT = new PendantItem("flame_pendant");
     public static final Item THORN_PENDANT = new PendantItem("thorn_pendant");
+    public static final Item FLIPPERS = new FlippersItem();
 
     public static void registerAll(IForgeRegistry<Item> registry) {
         registry.registerAll(
@@ -24,7 +25,8 @@ public class Items {
                 PANIC_NECKLACE,
                 SHOCK_PENDANT,
                 FLAME_PENDANT,
-                THORN_PENDANT
+                THORN_PENDANT,
+                FLIPPERS
         );
     }
 }
