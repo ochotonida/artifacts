@@ -24,7 +24,6 @@ import top.theillusivec4.curios.api.CuriosAPI;
 
 import javax.annotation.Nullable;
 
-@Mod.EventBusSubscriber
 public class DrinkingHatItem extends CurioItem {
 
     private static final ResourceLocation DRINKING_HAT_TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/plastic_drinking_hat.png");
@@ -39,16 +38,6 @@ public class DrinkingHatItem extends CurioItem {
     @Override
     public Rarity getRarity(ItemStack stack) {
         return isNoveltyHat ? Rarity.EPIC : Rarity.RARE;
-    }
-
-    @SubscribeEvent
-    @SuppressWarnings("unused")
-    public static void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-        if (CuriosAPI.getCurioEquipped(Items.PLASTIC_DRINKING_HAT, event.getEntityLiving()).isPresent()) {
-            if (event.getItem().getUseAction() == UseAction.DRINK) {
-                event.setDuration(event.getDuration() / 4);
-            }
-        }
     }
 
     @Nullable
@@ -79,5 +68,19 @@ public class DrinkingHatItem extends CurioItem {
                 model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
         });
+    }
+
+    @Mod.EventBusSubscriber
+    @SuppressWarnings("unused")
+    public static class Events {
+
+        @SubscribeEvent
+        public static void onItemUseStart(LivingEntityUseItemEvent.Start event) {
+            if (CuriosAPI.getCurioEquipped(Items.PLASTIC_DRINKING_HAT, event.getEntityLiving()).isPresent()) {
+                if (event.getItem().getUseAction() == UseAction.DRINK) {
+                    event.setDuration(event.getDuration() / 4);
+                }
+            }
+        }
     }
 }

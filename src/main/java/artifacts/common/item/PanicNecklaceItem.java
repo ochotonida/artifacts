@@ -26,23 +26,12 @@ import top.theillusivec4.curios.api.capability.ICurio;
 
 import javax.annotation.Nullable;
 
-@Mod.EventBusSubscriber
 public class PanicNecklaceItem extends CurioItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/panic_necklace.png");
 
     public PanicNecklaceItem() {
         super(new Properties(), "panic_necklace");
-    }
-
-    @SubscribeEvent
-    @SuppressWarnings("unused")
-    public static void onLivingHurt(LivingHurtEvent event) {
-        if (!event.getEntity().world.isRemote && event.getAmount() >= 1) {
-            if (CuriosAPI.getCurioEquipped(Items.PANIC_NECKLACE, event.getEntityLiving()).isPresent()) {
-                event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, 70, 1, true, false));
-            }
-        }
     }
 
     @Nullable
@@ -73,5 +62,19 @@ public class PanicNecklaceItem extends CurioItem {
                 model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
         });
+    }
+
+    @Mod.EventBusSubscriber
+    @SuppressWarnings("unused")
+    public static class Events {
+
+        @SubscribeEvent
+        public static void onLivingHurt(LivingHurtEvent event) {
+            if (!event.getEntity().world.isRemote && event.getAmount() >= 1) {
+                if (CuriosAPI.getCurioEquipped(Items.PANIC_NECKLACE, event.getEntityLiving()).isPresent()) {
+                    event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, 70, 1, true, false));
+                }
+            }
+        }
     }
 }
