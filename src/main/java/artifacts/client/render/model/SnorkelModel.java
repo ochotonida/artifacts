@@ -7,7 +7,7 @@ import net.minecraft.entity.LivingEntity;
 public class SnorkelModel extends BipedModel<LivingEntity> {
 
     public SnorkelModel() {
-        super(0.45F, 0, 64, 64);
+        super(0.5F, 0, 64, 64);
 
         ModelRenderer snorkelMouthPiece = new ModelRenderer(this, 0, 46);
         ModelRenderer snorkelTube = new ModelRenderer(this, 0, 32);

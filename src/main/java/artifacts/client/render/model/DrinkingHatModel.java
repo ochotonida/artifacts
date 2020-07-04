@@ -9,7 +9,7 @@ public class DrinkingHatModel extends BipedModel<LivingEntity> {
     protected ModelRenderer hatShade;
 
     public DrinkingHatModel() {
-        super(0.45F, 0, 64, 64);
+        super(0.5F, 0, 64, 64);
 
         hatShade = new ModelRenderer(this, 0, 52);
         ModelRenderer straw = new ModelRenderer(this, 0, 50);

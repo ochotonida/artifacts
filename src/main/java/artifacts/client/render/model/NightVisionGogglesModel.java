@@ -7,7 +7,7 @@ import net.minecraft.entity.LivingEntity;
 public class NightVisionGogglesModel extends BipedModel<LivingEntity> {
 
     public NightVisionGogglesModel() {
-        super(0.45F, 0, 64, 64);
+        super(0.5F, 0, 64, 64);
 
         ModelRenderer goggles = new ModelRenderer(this, 0, 37);
         ModelRenderer eyeLeft = new ModelRenderer(this, 0, 32);
