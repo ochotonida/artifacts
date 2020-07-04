@@ -4,10 +4,16 @@
   "item.artifacts.novelty_drinking_hat": "Novelty Drinking Hat",
   "item.artifacts.night_vision_goggles": "Night Vision Goggles",
   "item.artifacts.panic_necklace": "Panic Necklace",
+  "item.artifacts.shock_pendant": "Shock Pendant",
+  "item.artifacts.flame_pendant": "Flame Pendant",
+  "item.artifacts.thorn_pendant": "Thorn Pendant",
   "tooltip.artifacts.snorkel": "Allows the wearer to breathe underwater",
-  "tooltip.artifacts.plastic_drinking_hat": "Decreases the time it takes to drink drinkable items when worn",
+  "tooltip.artifacts.plastic_drinking_hat": "Decreases the time it takes to drink drinkable items",
   "tooltip.artifacts.novelty_drinking_hat": "'Hey! I'm #1, and I let gravity do my drinking!'",
   "tooltip.artifacts.night_vision_goggles": "Allows the wearer to see in the dark",
-  "tooltip.artifacts.panic_necklace": "Increases the wearer's movement speed after taking damage"
+  "tooltip.artifacts.panic_necklace": "Increases the wearer's movement speed after taking damage",
+  "tooltip.artifacts.shock_pendant": "Has a chance to strike attackers with lightning",
+  "tooltip.artifacts.flame_pendant": "Has a chance to light attackers on fire",
+  "tooltip.artifacts.thorn_pendant": "Has a chance to damage attackers"
 }
 

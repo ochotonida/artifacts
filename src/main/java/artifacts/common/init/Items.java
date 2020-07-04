@@ -1,9 +1,6 @@
 package artifacts.common.init;
 
-import artifacts.common.item.DrinkingHatItem;
-import artifacts.common.item.NightVisionGogglesItem;
-import artifacts.common.item.PanicNecklaceItem;
-import artifacts.common.item.SnorkelItem;
+import artifacts.common.item.*;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -14,6 +11,9 @@ public class Items {
     public static final Item SNORKEL = new SnorkelItem();
     public static final Item NIGHT_VISION_GOGGLES = new NightVisionGogglesItem();
     public static final Item PANIC_NECKLACE = new PanicNecklaceItem();
+    public static final Item SHOCK_PENDANT = new PendantItem("shock_pendant");
+    public static final Item FLAME_PENDANT = new PendantItem("flame_pendant");
+    public static final Item THORN_PENDANT = new PendantItem("thorn_pendant");
 
     public static void registerAll(IForgeRegistry<Item> registry) {
         registry.registerAll(
@@ -21,7 +21,10 @@ public class Items {
                 NOVELTY_DRINKING_HAT,
                 SNORKEL,
                 NIGHT_VISION_GOGGLES,
-                PANIC_NECKLACE
+                PANIC_NECKLACE,
+                SHOCK_PENDANT,
+                FLAME_PENDANT,
+                THORN_PENDANT
         );
     }
 }
