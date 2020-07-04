@@ -1,6 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
+import artifacts.client.RenderTypes;
 import artifacts.client.render.model.NightVisionGogglesModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -15,20 +16,20 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import top.theillusivec4.curios.api.capability.ICurio;
 
 import javax.annotation.Nullable;
 
 public class NightVisionGogglesItem extends CurioItem {
 
-    private static final ResourceLocation NIGHT_VISION_GOGGLES_TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/night_vision_goggles.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/night_vision_goggles.png");
+    private static final ResourceLocation TEXTURE_GLOW = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/night_vision_goggles_glow.png");
 
     public NightVisionGogglesItem() {
         super(new Item.Properties(), "night_vision_goggles");
     }
 
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
-        return createProvider(new CurioItem.Curio() {
+        return Curio.createProvider(new Curio(this) {
             private Object model;
 
             @Override
@@ -49,9 +50,13 @@ public class NightVisionGogglesItem extends CurioItem {
                     model = new NightVisionGogglesModel();
                 }
                 NightVisionGogglesModel model = (NightVisionGogglesModel) this.model;
-                ICurio.RenderHelper.followHeadRotations(entity, model.goggles, model.eyeLeftOverlay, model.eyeRightOverlay);
-                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(NIGHT_VISION_GOGGLES_TEXTURE), false, stack.hasEffect());
-                model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+                Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
+
+                IVertexBuilder buffer = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(TEXTURE), false, stack.hasEffect());
+                model.render(matrixStack, buffer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+
+                buffer = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.unlit(TEXTURE_GLOW), false, stack.hasEffect());
+                model.render(matrixStack, buffer, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
         });
     }

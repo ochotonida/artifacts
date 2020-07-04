@@ -21,7 +21,6 @@ import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosAPI;
-import top.theillusivec4.curios.api.capability.ICurio;
 
 import javax.annotation.Nullable;
 
@@ -55,7 +54,7 @@ public class DrinkingHatItem extends CurioItem {
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
-        return createProvider(new Curio() {
+        return Curio.createProvider(new Curio(this) {
             private Object model;
 
             @Override
@@ -74,8 +73,8 @@ public class DrinkingHatItem extends CurioItem {
                     model = new DrinkingHatModel();
                 }
                 DrinkingHatModel model = (DrinkingHatModel) this.model;
-                model.setModelVisibilities(entity, isNoveltyHat);
-                ICurio.RenderHelper.followHeadRotations(entity, model.hat, model.hatShade, model.straw);
+                model.setModelVisibilities(isNoveltyHat);
+                Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
                 IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(isNoveltyHat ? NOVELTY_DRINKING_HAT_TEXTURE : DRINKING_HAT_TEXTURE), false, stack.hasEffect());
                 model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }

@@ -1,6 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
+import artifacts.client.RenderTypes;
 import artifacts.client.render.model.SnorkelModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -14,7 +15,6 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import top.theillusivec4.curios.api.capability.ICurio;
 
 import javax.annotation.Nullable;
 
@@ -27,7 +27,7 @@ public class SnorkelItem extends CurioItem {
     }
 
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
-        return createProvider(new Curio() {
+        return Curio.createProvider(new Curio(this) {
             private Object model;
 
             @Override
@@ -48,9 +48,8 @@ public class SnorkelItem extends CurioItem {
                     model = new SnorkelModel();
                 }
                 SnorkelModel model = (SnorkelModel) this.model;
-                model.setModelVisibilities(entity);
-                ICurio.RenderHelper.followHeadRotations(entity, model.snorkel, model.goggles, model.gogglesOverlay);
-                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(SNORKEL_TEXTURE), false, stack.hasEffect());
+                Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
+                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.translucent(SNORKEL_TEXTURE), false, stack.hasEffect());
                 model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
         });
