@@ -2,7 +2,6 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.DrinkingHatModel;
-import artifacts.common.init.Items;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -76,7 +75,7 @@ public class DrinkingHatItem extends CurioItem {
 
         @SubscribeEvent
         public static void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-            if (CuriosAPI.getCurioEquipped(Items.PLASTIC_DRINKING_HAT, event.getEntityLiving()).isPresent()) {
+            if (CuriosAPI.getCurioEquipped(stack -> stack.getItem() instanceof DrinkingHatItem, event.getEntityLiving()).isPresent()) {
                 if (event.getItem().getUseAction() == UseAction.DRINK) {
                     event.setDuration(event.getDuration() / 4);
                 }
