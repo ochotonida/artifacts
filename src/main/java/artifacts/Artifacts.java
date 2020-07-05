@@ -1,9 +1,11 @@
 package artifacts;
 
 import artifacts.common.init.Items;
+import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Tuple;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
@@ -35,10 +37,11 @@ public class Artifacts {
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
-        String[] slots = {"head", "hands", "ring", "necklace", "feet"};
+        String[] slots = {"head", "necklace", "belt", "feet"};
         for (String slot : slots) {
             InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> new CurioIMCMessage(slot));
         }
+        InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_ICON, () -> new Tuple<>("feet", PlayerContainer.EMPTY_ARMOR_SLOT_BOOTS));
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
