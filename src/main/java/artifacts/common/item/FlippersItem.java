@@ -19,7 +19,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nullable;
 
-public class FlippersItem extends CurioItem {
+public class FlippersItem extends ArtifactItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/flippers.png");
 

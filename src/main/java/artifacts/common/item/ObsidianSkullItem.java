@@ -24,7 +24,7 @@ import top.theillusivec4.curios.api.CuriosAPI;
 
 import javax.annotation.Nullable;
 
-public class ObsidianSkullItem extends CurioItem {
+public class ObsidianSkullItem extends ArtifactItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/obsidian_skull.png");
 

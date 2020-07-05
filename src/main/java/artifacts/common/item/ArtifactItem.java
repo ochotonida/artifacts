@@ -15,11 +15,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-public abstract class CurioItem extends Item {
+public abstract class ArtifactItem extends Item {
 
     private final String name;
 
-    public CurioItem(Properties properties, String name) {
+    public ArtifactItem(Properties properties, String name) {
         super(properties.maxStackSize(1).group(Artifacts.CREATIVE_TAB));
         setRegistryName(new ResourceLocation(Artifacts.MODID, name));
         this.name = name;

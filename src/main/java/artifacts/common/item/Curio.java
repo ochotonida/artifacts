@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -15,10 +16,10 @@ import top.theillusivec4.curios.api.capability.ICurio;
 
 abstract class Curio implements ICurio {
 
-    private final CurioItem curioItem;
+    private final Item curioItem;
     private final SoundEvent equipSound = getEquipSound();
 
-    public Curio(CurioItem item) {
+    public Curio(Item item) {
         curioItem = item;
     }
 

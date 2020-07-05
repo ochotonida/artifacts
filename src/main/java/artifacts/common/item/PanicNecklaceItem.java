@@ -26,7 +26,7 @@ import top.theillusivec4.curios.api.capability.ICurio;
 
 import javax.annotation.Nullable;
 
-public class PanicNecklaceItem extends CurioItem {
+public class PanicNecklaceItem extends ArtifactItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/panic_necklace.png");
 

@@ -19,7 +19,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nullable;
 
-public class NightVisionGogglesItem extends CurioItem {
+public class NightVisionGogglesItem extends ArtifactItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/night_vision_goggles.png");
     private static final ResourceLocation TEXTURE_GLOW = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/night_vision_goggles_glow.png");

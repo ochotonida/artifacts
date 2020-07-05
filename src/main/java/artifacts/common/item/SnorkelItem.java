@@ -18,7 +18,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nullable;
 
-public class SnorkelItem extends CurioItem {
+public class SnorkelItem extends ArtifactItem {
 
     private static final ResourceLocation SNORKEL_TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/snorkel.png");
 

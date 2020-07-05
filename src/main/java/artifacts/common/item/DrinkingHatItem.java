@@ -23,7 +23,7 @@ import top.theillusivec4.curios.api.CuriosAPI;
 
 import javax.annotation.Nullable;
 
-public class DrinkingHatItem extends CurioItem {
+public class DrinkingHatItem extends ArtifactItem {
 
     private static final ResourceLocation DRINKING_HAT_TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/plastic_drinking_hat.png");
     private static final ResourceLocation NOVELTY_DRINKING_HAT_TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/novelty_drinking_hat.png");

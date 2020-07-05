@@ -24,7 +24,7 @@ import top.theillusivec4.curios.api.capability.ICurio;
 
 import javax.annotation.Nullable;
 
-public class PendantItem extends CurioItem {
+public class PendantItem extends ArtifactItem {
 
     private final ResourceLocation texture;
 
