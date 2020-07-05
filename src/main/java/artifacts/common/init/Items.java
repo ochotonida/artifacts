@@ -15,6 +15,7 @@ public class Items {
     public static final Item FLAME_PENDANT = new PendantItem("flame_pendant");
     public static final Item THORN_PENDANT = new PendantItem("thorn_pendant");
     public static final Item FLIPPERS = new FlippersItem();
+    public static final Item OBSIDIAN_SKULL = new ObsidianSkullItem();
 
     public static void registerAll(IForgeRegistry<Item> registry) {
         registry.registerAll(
@@ -26,7 +27,8 @@ public class Items {
                 SHOCK_PENDANT,
                 FLAME_PENDANT,
                 THORN_PENDANT,
-                FLIPPERS
+                FLIPPERS,
+                OBSIDIAN_SKULL
         );
     }
 }
