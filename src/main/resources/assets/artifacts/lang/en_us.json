@@ -10,6 +10,7 @@
   "item.artifacts.thorn_pendant": "Thorn Pendant",
   "item.artifacts.flippers": "Flippers",
   "item.artifacts.obsidian_skull": "Obsidian Skull",
+  "item.artifacts.umbrella": "Umbrella",
   "tooltip.artifacts.snorkel": "Allows the wearer to breathe underwater",
   "tooltip.artifacts.plastic_drinking_hat": "Decreases the time it takes to drink drinkable items",
   "tooltip.artifacts.novelty_drinking_hat": "'Hey! I'm #1, and I let gravity do my drinking!'",
@@ -19,6 +20,7 @@
   "tooltip.artifacts.flame_pendant": "Has a chance to light attackers on fire",
   "tooltip.artifacts.thorn_pendant": "Has a chance to damage attackers",
   "tooltip.artifacts.flippers": "Improves agility while in water",
-  "tooltip.artifacts.obsidian_skull": "The wearer becomes temporarily immune to fire damage when hurt by fire"
+  "tooltip.artifacts.obsidian_skull": "The wearer becomes temporarily immune to fire damage when hurt by fire",
+  "tooltip.artifacts.umbrella": "Functions both as a shield and a glider"
 }
 
