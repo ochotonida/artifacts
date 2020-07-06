@@ -69,7 +69,7 @@ public class DrinkingHatItem extends ArtifactItem {
         });
     }
 
-    @Mod.EventBusSubscriber
+    @Mod.EventBusSubscriber(modid = Artifacts.MODID)
     @SuppressWarnings("unused")
     public static class Events {
 

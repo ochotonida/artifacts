@@ -57,7 +57,7 @@ public class ObsidianSkullItem extends ArtifactItem {
         });
     }
 
-    @Mod.EventBusSubscriber
+    @Mod.EventBusSubscriber(modid = Artifacts.MODID)
     @SuppressWarnings("unused")
     public static class Events {
 
