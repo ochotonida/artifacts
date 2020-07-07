@@ -3,25 +3,30 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.RenderTypes;
 import artifacts.client.render.model.FlippersModel;
+import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class FlippersItem extends ArtifactItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/flippers.png");
+
+    private static final UUID FLIPPER_SWIM_SPEED_UUID = UUID.fromString("63f1bb32-d301-419b-ab52-5d1af94eed1d");
+    private static final AttributeModifier FLIPPER_SWIM_SPEED = new AttributeModifier(FLIPPER_SWIM_SPEED_UUID, "artifacts:flipper_swim_speed", 1, AttributeModifier.Operation.ADDITION).setSaved(false);
+
 
     public FlippersItem() {
         super(new Item.Properties(), "flippers");
@@ -32,10 +37,10 @@ public class FlippersItem extends ArtifactItem {
             private Object model;
 
             @Override
-            public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
-                if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
-                    livingEntity.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 19, 0, true, false));
-                }
+            public Multimap<String, AttributeModifier> getAttributeModifiers(String identifier) {
+                Multimap<String, AttributeModifier> result = super.getAttributeModifiers(identifier);
+                result.put(LivingEntity.SWIM_SPEED.getName(), FLIPPER_SWIM_SPEED);
+                return result;
             }
 
             @Override
