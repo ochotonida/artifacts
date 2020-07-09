@@ -1,5 +1,8 @@
 {
   "curios.identifier.feet": "Feet",
+  "itemGroup.artifacts": "Artifacts",
+  "entity.artifacts.mimic": "Mimic",
+  "item.artifacts.mimic_spawn_egg": "Mimic Spawn Egg",
   "item.artifacts.snorkel": "Snorkel",
   "item.artifacts.plastic_drinking_hat": "Plastic Drinking Hat",
   "item.artifacts.novelty_drinking_hat": "Novelty Drinking Hat",

@@ -1,7 +1,11 @@
 package artifacts.common.init;
 
+import artifacts.Artifacts;
 import artifacts.common.item.*;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.SpawnEggItem;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class Items {
@@ -17,8 +21,9 @@ public class Items {
     public static final Item FLIPPERS = new FlippersItem();
     public static final Item OBSIDIAN_SKULL = new ObsidianSkullItem();
     public static final Item UMBRELLA = new UmbrellaItem();
+    public static final Item MIMIC_SPAWN_EGG = new SpawnEggItem(Entities.MIMIC, 0x805113, 0x212121, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(new ResourceLocation(Artifacts.MODID, "mimic_spawn_egg"));
 
-    public static void registerAll(IForgeRegistry<Item> registry) {
+    public static void register(IForgeRegistry<Item> registry) {
         registry.registerAll(
                 PLASTIC_DRINKING_HAT,
                 NOVELTY_DRINKING_HAT,
@@ -30,7 +35,8 @@ public class Items {
                 THORN_PENDANT,
                 FLIPPERS,
                 OBSIDIAN_SKULL,
-                UMBRELLA
+                UMBRELLA,
+                MIMIC_SPAWN_EGG
         );
     }
 }

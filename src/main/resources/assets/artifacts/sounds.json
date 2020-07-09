@@ -1,0 +1,28 @@
+{
+  "mimic.close": {
+    "sounds": [
+      "block/chest/close",
+      "block/chest/close2",
+      "block/chest/close3"
+    ]
+  },
+  "mimic.open": {
+    "sounds": [
+      "block/chest/open"
+    ]
+  },
+  "mimic.hurt": {
+    "sounds": [
+      "artifacts:mimic/hurt1",
+      "artifacts:mimic/hurt2",
+      "artifacts:mimic/hurt3"
+    ]
+  },
+  "mimic.death": {
+    "category": "hostile",
+    "sounds": [
+      "artifacts:mimic/death1",
+      "artifacts:mimic/death2"
+    ]
+  }
+}
