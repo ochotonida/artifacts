@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.DrinkingHatModel;
+import artifacts.client.render.model.curio.DrinkingHatModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

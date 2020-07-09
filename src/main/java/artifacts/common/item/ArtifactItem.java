@@ -20,7 +20,7 @@ public class ArtifactItem extends Item {
     private final String name;
 
     public ArtifactItem(Properties properties, String name) {
-        super(properties.maxStackSize(8).group(Artifacts.CREATIVE_TAB));
+        super(properties.maxStackSize(1).group(Artifacts.CREATIVE_TAB));
         setRegistryName(new ResourceLocation(Artifacts.MODID, name));
         this.name = name;
     }

@@ -1,4 +1,4 @@
-package artifacts.client.render.model;
+package artifacts.client.render.model.curio;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

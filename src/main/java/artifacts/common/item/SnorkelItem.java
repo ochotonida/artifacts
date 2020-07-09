@@ -2,7 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.RenderTypes;
-import artifacts.client.render.model.SnorkelModel;
+import artifacts.client.render.model.curio.SnorkelModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

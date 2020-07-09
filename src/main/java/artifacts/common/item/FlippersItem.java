@@ -2,7 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.RenderTypes;
-import artifacts.client.render.model.FlippersModel;
+import artifacts.client.render.model.curio.FlippersModel;
 import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

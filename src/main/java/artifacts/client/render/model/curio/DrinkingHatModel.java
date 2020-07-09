@@ -1,4 +1,4 @@
-package artifacts.client.render.model;
+package artifacts.client.render.model.curio;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;

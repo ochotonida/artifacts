@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.ObsidianSkullModel;
+import artifacts.client.render.model.curio.ObsidianSkullModel;
 import artifacts.common.init.Items;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
