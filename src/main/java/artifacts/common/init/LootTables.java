@@ -23,10 +23,12 @@ public class LootTables {
                 "chests/abandoned_mineshaft",
                 "chests/desert_pyramid",
                 "chests/underwater_ruin_big",
-                "chests/simple_dungeon"
+                "chests/simple_dungeon",
+                "entities/cow"
         );
 
         @SubscribeEvent
+        @SuppressWarnings("unused")
         public static void onLootTableLoad(LootTableLoadEvent event) {
             String prefix = "minecraft:";
             String name = event.getName().toString();
