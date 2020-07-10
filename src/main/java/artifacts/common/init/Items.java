@@ -2,6 +2,7 @@ package artifacts.common.init;
 
 import artifacts.Artifacts;
 import artifacts.common.item.*;
+import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
@@ -21,6 +22,8 @@ public class Items {
     public static final Item FLIPPERS = new FlippersItem();
     public static final Item OBSIDIAN_SKULL = new ObsidianSkullItem();
     public static final Item UMBRELLA = new UmbrellaItem();
+    public static final Item EVERLASTING_BEEF = new EverlastingFoodItem(new Item.Properties().food(Foods.BEEF), "everlasting_beef");
+    public static final Item ETERNAL_STEAK = new EverlastingFoodItem(new Item.Properties().food(Foods.COOKED_BEEF), "eternal_steak");
     public static final Item MIMIC_SPAWN_EGG = new SpawnEggItem(Entities.MIMIC, 0x805113, 0x212121, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(new ResourceLocation(Artifacts.MODID, "mimic_spawn_egg"));
 
     public static void register(IForgeRegistry<Item> registry) {
@@ -36,6 +39,8 @@ public class Items {
                 FLIPPERS,
                 OBSIDIAN_SKULL,
                 UMBRELLA,
+                EVERLASTING_BEEF,
+                ETERNAL_STEAK,
                 MIMIC_SPAWN_EGG
         );
     }
