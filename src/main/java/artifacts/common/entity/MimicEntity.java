@@ -52,8 +52,8 @@ public class MimicEntity extends MobEntity implements IMob {
     @Override
     protected void registerAttributes() {
         super.registerAttributes();
-        getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5);
-        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50);
+        getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8);
+        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80);
         getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24);
         getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1);
     }
@@ -111,18 +111,15 @@ public class MimicEntity extends MobEntity implements IMob {
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source.isProjectile() && ticksInAir <= 0) {
+        if (source.getTrueSource() instanceof PlayerEntity) {
+            setAttackTarget((LivingEntity) source.getTrueSource());
+            isDormant = false;
+        }
+        if (ticksInAir <= 0) {
             playSound(SoundEvents.MIMIC_HURT, getSoundVolume(), getSoundPitch());
             return false;
         }
-        if (super.attackEntityFrom(source, amount)) {
-            if (source.getTrueSource() instanceof PlayerEntity) {
-                setAttackTarget((LivingEntity) source.getTrueSource());
-                isDormant = false;
-            }
-            return true;
-        }
-        return false;
+        return super.attackEntityFrom(source, amount);
     }
 
     @Override
