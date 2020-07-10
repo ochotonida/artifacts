@@ -1,0 +1,29 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "artifacts:flame_pendant",
+          "weight": 6
+        },
+        {
+          "type": "item",
+          "name": "artifacts:thorn_pendant",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "artifacts:shock_pendant",
+          "weight": 4
+        },
+        {
+          "type": "empty",
+          "weight": 80
+        }
+      ]
+    }
+  ]
+}
