@@ -11,6 +11,10 @@ public class DrinkingHatModel extends BipedModel<LivingEntity> {
     public DrinkingHatModel() {
         super(0.5F, 0, 64, 64);
 
+        setVisible(false);
+        bipedHead.showModel = true;
+        bipedHeadwear.showModel = true;
+
         hatShade = new ModelRenderer(this, 0, 52);
         ModelRenderer straw = new ModelRenderer(this, 0, 50);
         ModelRenderer canLeft = new ModelRenderer(this, 0, 41);
@@ -34,9 +38,5 @@ public class DrinkingHatModel extends BipedModel<LivingEntity> {
 
         strawLeft.rotateAngleX = 0.7853F;
         strawRight.rotateAngleX = 0.7853F;
-    }
-
-    public void setModelVisibilities(boolean hasShade) {
-        hatShade.showModel = hasShade;
     }
 }

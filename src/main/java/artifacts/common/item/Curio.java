@@ -1,12 +1,14 @@
 package artifacts.common.item;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -44,6 +46,23 @@ abstract class Curio implements ICurio {
     public boolean canEquip(String identifier, LivingEntity entity) {
         return !CuriosAPI.getCurioEquipped(curioItem, entity).isPresent();
     }
+
+    @Override
+    public boolean hasRender(String identifier, LivingEntity livingEntity) {
+        return true;
+    }
+
+    @Override
+    public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+        BipedModel<LivingEntity> model = getModel();
+        Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
+        IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture()), false, false);
+        model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+    }
+
+    protected abstract BipedModel<LivingEntity> getModel();
+
+    protected abstract ResourceLocation getTexture();
 
     protected static class Provider implements ICapabilityProvider {
 

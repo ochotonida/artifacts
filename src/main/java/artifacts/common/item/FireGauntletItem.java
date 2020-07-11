@@ -19,8 +19,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosAPI;
 
-import javax.annotation.Nullable;
-
 public class FireGauntletItem extends ArtifactItem {
 
     private static final ResourceLocation TEXTURE_DEFAULT = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/fire_gauntlet_default.png");
@@ -32,7 +30,6 @@ public class FireGauntletItem extends ArtifactItem {
         super(new Properties(), "fire_gauntlet");
     }
 
-    @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
         return Curio.createProvider(new GloveCurio(this) {
@@ -54,8 +51,13 @@ public class FireGauntletItem extends ArtifactItem {
             }
 
             @Override
-            protected ResourceLocation getTexture(boolean smallArms) {
-                return smallArms ? TEXTURE_SLIM : TEXTURE_DEFAULT;
+            protected ResourceLocation getTexture() {
+                return TEXTURE_DEFAULT;
+            }
+
+            @Override
+            protected ResourceLocation getSlimTexture() {
+                return TEXTURE_SLIM;
             }
 
             protected ResourceLocation getGlowTexture(boolean smallArms) {

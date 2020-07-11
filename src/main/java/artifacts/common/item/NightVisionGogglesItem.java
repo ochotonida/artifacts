@@ -17,8 +17,6 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import javax.annotation.Nullable;
-
 public class NightVisionGogglesItem extends ArtifactItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/night_vision_goggles.png");
@@ -28,7 +26,8 @@ public class NightVisionGogglesItem extends ArtifactItem {
         super(new Item.Properties(), "night_vision_goggles");
     }
 
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
         return Curio.createProvider(new Curio(this) {
             private Object model;
 
@@ -40,23 +39,23 @@ public class NightVisionGogglesItem extends ArtifactItem {
             }
 
             @Override
-            public boolean hasRender(String identifier, LivingEntity livingEntity) {
-                return true;
+            protected NightVisionGogglesModel getModel() {
+                if (model == null) {
+                    model = new NightVisionGogglesModel();
+                }
+                return (NightVisionGogglesModel) model;
+            }
+
+            @Override
+            protected ResourceLocation getTexture() {
+                return TEXTURE;
             }
 
             @Override
             public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-                if (model == null) {
-                    model = new NightVisionGogglesModel();
-                }
-                NightVisionGogglesModel model = (NightVisionGogglesModel) this.model;
-                Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
-
-                IVertexBuilder buffer = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(TEXTURE), false, stack.hasEffect());
-                model.render(matrixStack, buffer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
-
-                buffer = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.unlit(TEXTURE_GLOW), false, stack.hasEffect());
-                model.render(matrixStack, buffer, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+                super.render(identifier, matrixStack, renderTypeBuffer, light, entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch);
+                IVertexBuilder buffer = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.unlit(TEXTURE_GLOW), false, stack.hasEffect());
+                getModel().render(matrixStack, buffer, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
         });
     }

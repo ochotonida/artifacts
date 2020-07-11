@@ -3,11 +3,6 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.FlippersModel;
 import com.google.common.collect.Multimap;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.Item;
@@ -16,7 +11,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class FlippersItem extends ArtifactItem {
@@ -31,7 +25,8 @@ public class FlippersItem extends ArtifactItem {
         super(new Item.Properties(), "flippers");
     }
 
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
         return Curio.createProvider(new Curio(this) {
             private Object model;
 
@@ -43,19 +38,16 @@ public class FlippersItem extends ArtifactItem {
             }
 
             @Override
-            public boolean hasRender(String identifier, LivingEntity livingEntity) {
-                return true;
+            protected FlippersModel getModel() {
+                if (model == null) {
+                    model = new FlippersModel();
+                }
+                return (FlippersModel) model;
             }
 
             @Override
-            public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-                if (!(model instanceof FlippersModel)) {
-                    model = new FlippersModel();
-                }
-                FlippersModel model = (FlippersModel) this.model;
-                Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
-                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(TEXTURE), false, stack.hasEffect());
-                model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+            protected ResourceLocation getTexture() {
+                return TEXTURE;
             }
         });
     }

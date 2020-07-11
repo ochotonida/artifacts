@@ -14,6 +14,8 @@ public class ObsidianSkullModel extends BipedModel<LivingEntity> {
     public ObsidianSkullModel() {
         super(0.5F, 0, 32, 32);
 
+        setVisible(false);
+
         bipedBody = new ModelRenderer(this, 0, 0);
         belt = new ModelRenderer(this, 0, 0);
         skull = new ModelRenderer(this, 0, 16);

@@ -9,6 +9,10 @@ public class FlippersModel extends BipedModel<LivingEntity> {
     public FlippersModel() {
         super(0.5F, 0, 64, 96);
 
+        setVisible(false);
+        bipedLeftLeg.showModel = true;
+        bipedRightLeg.showModel = true;
+
         ModelRenderer flipperLeft = new ModelRenderer(this, 0, 32);
         ModelRenderer flipperRight = new ModelRenderer(this, 0, 52);
         flipperLeft.addBox(-2, 11.5F, -16, 9, 1, 20);

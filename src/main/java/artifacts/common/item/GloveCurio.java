@@ -25,9 +25,29 @@ public abstract class GloveCurio extends Curio {
         return entity instanceof AbstractClientPlayerEntity && ((AbstractClientPlayerEntity) entity).getSkinType().equals("slim");
     }
 
+    protected ResourceLocation getTexture(boolean smallArms) {
+        return smallArms ? getSlimTexture() : getTexture();
+    }
+
+    protected abstract ResourceLocation getSlimTexture();
+
+    protected GloveModel getModel(boolean smallArms) {
+        return (smallArms ? getSlimModel() : getModel());
+    }
+
+    protected GloveModel getSlimModel() {
+        if (model_slim == null) {
+            model_slim = new GloveModel(true);
+        }
+        return (GloveModel) model_slim;
+    }
+
     @Override
-    public boolean hasRender(String identifier, LivingEntity livingEntity) {
-        return true;
+    protected GloveModel getModel() {
+        if (model_default == null) {
+            model_default = new GloveModel(false);
+        }
+        return (GloveModel) model_default;
     }
 
     @Override
@@ -36,16 +56,6 @@ public abstract class GloveCurio extends Curio {
         GloveModel model = getModel(smallArms);
         Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
         IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture(smallArms)), false, false);
-        model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
-    }
-
-    protected abstract ResourceLocation getTexture(boolean smallArms);
-
-    protected GloveModel getModel(boolean smallArms) {
-        if (model_default == null) {
-            model_default = new GloveModel(false);
-            model_slim = new GloveModel(true);
-        }
-        return (GloveModel) (smallArms ? model_slim : model_default);
+        model.renderRightArm(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 }

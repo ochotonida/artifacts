@@ -1,5 +1,6 @@
 package artifacts.client.render.model.curio;
 
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
@@ -7,7 +8,11 @@ import net.minecraft.entity.LivingEntity;
 public class SnorkelModel extends BipedModel<LivingEntity> {
 
     public SnorkelModel() {
-        super(0.5F, 0, 64, 64);
+        super(RenderType::getEntityTranslucent, 0.5F, 0, 64, 64);
+
+        setVisible(false);
+        bipedHead.showModel = true;
+        bipedHeadwear.showModel = true;
 
         ModelRenderer snorkelMouthPiece = new ModelRenderer(this, 0, 46);
         ModelRenderer snorkelTube = new ModelRenderer(this, 0, 32);

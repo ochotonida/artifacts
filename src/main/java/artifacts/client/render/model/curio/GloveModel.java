@@ -11,7 +11,6 @@ public class GloveModel extends PlayerModel<LivingEntity> {
         super(0.5F, smallArms);
 
         setVisible(false);
-
     }
 
     public void renderLeftArm(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {

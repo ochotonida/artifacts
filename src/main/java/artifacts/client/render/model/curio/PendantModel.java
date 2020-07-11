@@ -2,6 +2,7 @@ package artifacts.client.render.model.curio;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
@@ -9,7 +10,9 @@ import net.minecraft.entity.LivingEntity;
 public class PendantModel extends BipedModel<LivingEntity> {
 
     public PendantModel() {
-        super(0, 0, 64, 64);
+        super(RenderType::getEntityTranslucent, 0, 0, 64, 64);
+
+        setVisible(false);
 
         bipedBody = new ModelRenderer(this, 0, 0);
         ModelRenderer gem = new ModelRenderer(this, 50, 0);
