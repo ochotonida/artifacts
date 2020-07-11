@@ -57,7 +57,7 @@ public class PanicNecklaceItem extends ArtifactItem {
         public static void onLivingHurt(LivingHurtEvent event) {
             if (!event.getEntity().world.isRemote && event.getAmount() >= 1) {
                 if (CuriosAPI.getCurioEquipped(Items.PANIC_NECKLACE, event.getEntityLiving()).isPresent()) {
-                    event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, 70, 1, true, false));
+                    event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, 70, 1, false, false));
                 }
             }
         }

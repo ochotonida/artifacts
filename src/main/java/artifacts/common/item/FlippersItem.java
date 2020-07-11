@@ -17,8 +17,7 @@ public class FlippersItem extends ArtifactItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/flippers.png");
 
-    private static final UUID FLIPPER_SWIM_SPEED_UUID = UUID.fromString("63f1bb32-d301-419b-ab52-5d1af94eed1d");
-    private static final AttributeModifier FLIPPER_SWIM_SPEED = new AttributeModifier(FLIPPER_SWIM_SPEED_UUID, "artifacts:flipper_swim_speed", 1, AttributeModifier.Operation.ADDITION).setSaved(false);
+    private static final AttributeModifier FLIPPER_SWIM_SPEED = new AttributeModifier(UUID.fromString("63f1bb32-d301-419b-ab52-5d1af94eed1d"), "artifacts:flipper_swim_speed", 1, AttributeModifier.Operation.ADDITION).setSaved(false);
 
 
     public FlippersItem() {

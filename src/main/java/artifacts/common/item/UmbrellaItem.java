@@ -28,8 +28,7 @@ import java.util.UUID;
 
 public class UmbrellaItem extends ArtifactItem {
 
-    private static final UUID UMBRELLA_SLOW_FALLING_UUID = UUID.fromString("a7a25453-2065-4a96-bc83-df600e13f390");
-    private static final AttributeModifier UMBRELLA_SLOW_FALLING = new AttributeModifier(UMBRELLA_SLOW_FALLING_UUID, "artifacts:umbrella_slow_falling", -0.875, AttributeModifier.Operation.MULTIPLY_TOTAL).setSaved(false);
+    private static final AttributeModifier UMBRELLA_SLOW_FALLING = new AttributeModifier(UUID.fromString("a7a25453-2065-4a96-bc83-df600e13f390"), "artifacts:umbrella_slow_falling", -0.875, AttributeModifier.Operation.MULTIPLY_TOTAL).setSaved(false);
 
     public UmbrellaItem() {
         super(new Properties(), "umbrella");
