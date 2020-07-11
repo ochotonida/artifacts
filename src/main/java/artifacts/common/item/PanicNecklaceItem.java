@@ -22,7 +22,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosAPI;
-import top.theillusivec4.curios.api.capability.ICurio;
 
 import javax.annotation.Nullable;
 
@@ -56,8 +55,7 @@ public class PanicNecklaceItem extends ArtifactItem {
                     model = new PanicNecklaceModel();
                 }
                 PanicNecklaceModel model = (PanicNecklaceModel) this.model;
-                ICurio.RenderHelper.translateIfSneaking(matrixStack, entity);
-                ICurio.RenderHelper.rotateIfSneaking(matrixStack, entity);
+                RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
                 IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, RenderType.getEntityTranslucent(TEXTURE), false, stack.hasEffect());
                 model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
