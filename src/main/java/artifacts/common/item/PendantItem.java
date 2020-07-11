@@ -1,13 +1,13 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.RenderTypes;
 import artifacts.client.render.model.curio.PendantModel;
 import artifacts.common.init.Items;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
@@ -57,7 +57,7 @@ public class PendantItem extends ArtifactItem {
                 PendantModel model = (PendantModel) this.model;
                 ICurio.RenderHelper.translateIfSneaking(matrixStack, entity);
                 ICurio.RenderHelper.rotateIfSneaking(matrixStack, entity);
-                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.translucent(texture), false, stack.hasEffect());
+                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, RenderType.getEntityTranslucent(texture), false, stack.hasEffect());
                 model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
         });

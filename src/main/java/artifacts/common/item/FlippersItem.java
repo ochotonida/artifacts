@@ -1,7 +1,6 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.RenderTypes;
 import artifacts.client.render.model.curio.FlippersModel;
 import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -55,10 +54,9 @@ public class FlippersItem extends ArtifactItem {
                 }
                 FlippersModel model = (FlippersModel) this.model;
                 Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
-                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.translucent(TEXTURE), false, stack.hasEffect());
+                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(TEXTURE), false, stack.hasEffect());
                 model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
         });
     }
-
 }

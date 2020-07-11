@@ -1,12 +1,12 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.RenderTypes;
 import artifacts.client.render.model.curio.SnorkelModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -49,7 +49,7 @@ public class SnorkelItem extends ArtifactItem {
                 }
                 SnorkelModel model = (SnorkelModel) this.model;
                 Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
-                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.translucent(SNORKEL_TEXTURE), false, stack.hasEffect());
+                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, RenderType.getEntityTranslucent(SNORKEL_TEXTURE), false, stack.hasEffect());
                 model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
         });
