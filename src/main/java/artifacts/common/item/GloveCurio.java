@@ -14,8 +14,8 @@ import net.minecraft.util.ResourceLocation;
 
 public abstract class GloveCurio extends Curio {
 
-    private Object model_default;
-    private Object model_slim;
+    protected Object model_default;
+    protected Object model_slim;
 
     public GloveCurio(Item item) {
         super(item);

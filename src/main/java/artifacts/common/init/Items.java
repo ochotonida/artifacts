@@ -25,6 +25,7 @@ public class Items {
     public static final Item EVERLASTING_BEEF = new EverlastingFoodItem(new Item.Properties().food(Foods.BEEF), "everlasting_beef");
     public static final Item ETERNAL_STEAK = new EverlastingFoodItem(new Item.Properties().food(Foods.COOKED_BEEF), "eternal_steak");
     public static final Item FIRE_GAUNTLET = new FireGauntletItem();
+    public static final Item FERAL_CLAWS = new FeralClawsItem();
     public static final Item MIMIC_SPAWN_EGG = new SpawnEggItem(Entities.MIMIC, 0x805113, 0x212121, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(new ResourceLocation(Artifacts.MODID, "mimic_spawn_egg"));
 
     public static void register(IForgeRegistry<Item> registry) {
@@ -43,7 +44,8 @@ public class Items {
                 EVERLASTING_BEEF,
                 ETERNAL_STEAK,
                 FIRE_GAUNTLET,
-                MIMIC_SPAWN_EGG
+                MIMIC_SPAWN_EGG,
+                FERAL_CLAWS
         );
     }
 }
