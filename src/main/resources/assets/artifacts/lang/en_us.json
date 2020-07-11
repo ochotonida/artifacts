@@ -17,6 +17,7 @@
   "item.artifacts.umbrella": "Umbrella",
   "item.artifacts.everlasting_beef": "Everlasting Beef",
   "item.artifacts.eternal_steak": "Eternal Steak",
+  "item.artifacts.fire_gauntlet": "Fire Gauntlet",
   "tooltip.artifacts.snorkel": "Allows the wearer to breathe underwater",
   "tooltip.artifacts.plastic_drinking_hat": "Decreases the time it takes to drink drinkable items",
   "tooltip.artifacts.novelty_drinking_hat": "'Hey! I'm #1, and I let gravity do my drinking!'",
@@ -29,6 +30,7 @@
   "tooltip.artifacts.obsidian_skull": "The wearer becomes temporarily immune to fire damage when hurt by fire",
   "tooltip.artifacts.umbrella": "Functions both as a shield and a glider",
   "tooltip.artifacts.everlasting_beef": "Not consumed when eaten",
-  "tooltip.artifacts.eternal_steak": "Not consumed when eaten"
+  "tooltip.artifacts.eternal_steak": "Not consumed when eaten",
+  "tooltip.artifacts.fire_gauntlet": "Melee attacks deal fire damage"
 }
 
