@@ -11,6 +11,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class Items {
 
+    public static final Item MIMIC_SPAWN_EGG = new SpawnEggItem(Entities.MIMIC, 0x805113, 0x212121, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(new ResourceLocation(Artifacts.MODID, "mimic_spawn_egg"));
     public static final Item PLASTIC_DRINKING_HAT = new DrinkingHatItem("plastic_drinking_hat", false);
     public static final Item NOVELTY_DRINKING_HAT = new DrinkingHatItem("novelty_drinking_hat", true);
     public static final Item SNORKEL = new SnorkelItem();
@@ -28,10 +29,11 @@ public class Items {
     public static final Item FERAL_CLAWS = new FeralClawsItem();
     public static final Item POCKET_PISTON = new PocketPistonItem();
     public static final Item POWER_GLOVE = new PowerGloveItem();
-    public static final Item MIMIC_SPAWN_EGG = new SpawnEggItem(Entities.MIMIC, 0x805113, 0x212121, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(new ResourceLocation(Artifacts.MODID, "mimic_spawn_egg"));
+    public static final Item CROSS_NECKLACE = new CrossNecklaceItem();
 
     public static void register(IForgeRegistry<Item> registry) {
         registry.registerAll(
+                MIMIC_SPAWN_EGG,
                 PLASTIC_DRINKING_HAT,
                 NOVELTY_DRINKING_HAT,
                 SNORKEL,
@@ -46,10 +48,10 @@ public class Items {
                 EVERLASTING_BEEF,
                 ETERNAL_STEAK,
                 FIRE_GAUNTLET,
-                MIMIC_SPAWN_EGG,
                 FERAL_CLAWS,
                 POCKET_PISTON,
-                POWER_GLOVE
+                POWER_GLOVE,
+                CROSS_NECKLACE
         );
     }
 }
