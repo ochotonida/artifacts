@@ -20,6 +20,7 @@
   "item.artifacts.fire_gauntlet": "Fire Gauntlet",
   "item.artifacts.feral_claws": "Feral claws",
   "item.artifacts.pocket_piston": "Pocket Piston",
+  "item.artifacts.power_glove": "Power Glove",
   "tooltip.artifacts.snorkel": "Allows the wearer to breathe underwater",
   "tooltip.artifacts.plastic_drinking_hat": "Decreases the time it takes to drink drinkable items",
   "tooltip.artifacts.novelty_drinking_hat": "'Hey! I'm #1, and I let gravity do my drinking!'",
@@ -35,6 +36,7 @@
   "tooltip.artifacts.eternal_steak": "Not consumed when eaten",
   "tooltip.artifacts.fire_gauntlet": "Melee attacks deal fire damage",
   "tooltip.artifacts.feral_claws": "Increases the wearer's attack speed",
-  "tooltip.artifacts.pocket_piston": "Increases knockback dealt by the wearer"
+  "tooltip.artifacts.pocket_piston": "Increases knockback dealt by the wearer",
+  "tooltip.artifacts.power_glove": "Increases damage dealt by the wearer"
 }
 

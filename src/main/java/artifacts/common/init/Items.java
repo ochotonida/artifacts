@@ -27,6 +27,7 @@ public class Items {
     public static final Item FIRE_GAUNTLET = new FireGauntletItem();
     public static final Item FERAL_CLAWS = new FeralClawsItem();
     public static final Item POCKET_PISTON = new PocketPistonItem();
+    public static final Item POWER_GLOVE = new PowerGloveItem();
     public static final Item MIMIC_SPAWN_EGG = new SpawnEggItem(Entities.MIMIC, 0x805113, 0x212121, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(new ResourceLocation(Artifacts.MODID, "mimic_spawn_egg"));
 
     public static void register(IForgeRegistry<Item> registry) {
@@ -47,7 +48,8 @@ public class Items {
                 FIRE_GAUNTLET,
                 MIMIC_SPAWN_EGG,
                 FERAL_CLAWS,
-                POCKET_PISTON
+                POCKET_PISTON,
+                POWER_GLOVE
         );
     }
 }
