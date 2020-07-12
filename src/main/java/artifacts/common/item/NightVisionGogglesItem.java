@@ -15,6 +15,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class NightVisionGogglesItem extends ArtifactItem {
@@ -39,6 +41,7 @@ public class NightVisionGogglesItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected NightVisionGogglesModel getModel() {
                 if (model == null) {
                     model = new NightVisionGogglesModel();
@@ -47,11 +50,13 @@ public class NightVisionGogglesItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
                 return TEXTURE;
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
                 super.render(identifier, matrixStack, renderTypeBuffer, light, entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch);
                 IVertexBuilder buffer = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.unlit(TEXTURE_GLOW), false, false);

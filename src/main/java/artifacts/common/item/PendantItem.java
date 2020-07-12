@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.*;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,6 +37,7 @@ public class PendantItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected PendantModel getModel() {
                 if (model == null) {
                     model = new PendantModel();
@@ -43,6 +46,7 @@ public class PendantItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
                 return texture;
             }

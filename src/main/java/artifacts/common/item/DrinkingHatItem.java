@@ -9,6 +9,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -44,6 +46,7 @@ public class DrinkingHatItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected DrinkingHatModel getModel() {
                 if (model == null) {
                     model = new DrinkingHatModel();
@@ -52,6 +55,7 @@ public class DrinkingHatItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
                 return isNoveltyHat ? TEXTURE_NOVELTY : TEXTURE_DEFAULT;
             }

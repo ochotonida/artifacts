@@ -6,6 +6,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,11 +27,13 @@ public class PocketPistonItem extends ArtifactItem {
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
         return Curio.createProvider(new GloveCurio(this) {
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getSlimTexture() {
                 return TEXTURE_SLIM;
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
                 return TEXTURE_DEFAULT;
             }

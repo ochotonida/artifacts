@@ -6,6 +6,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class CrossNecklaceItem extends ArtifactItem {
@@ -29,6 +31,7 @@ public class CrossNecklaceItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected CrossNecklaceModel getModel() {
                 if (model == null) {
                     model = new CrossNecklaceModel();
@@ -37,6 +40,7 @@ public class CrossNecklaceItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
                 return TEXTURE;
             }

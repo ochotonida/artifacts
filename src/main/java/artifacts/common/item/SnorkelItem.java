@@ -8,6 +8,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class SnorkelItem extends ArtifactItem {
@@ -24,6 +26,14 @@ public class SnorkelItem extends ArtifactItem {
             private Object model;
 
             @Override
+            public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
+                if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
+                    livingEntity.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 19, 0, true, false));
+                }
+            }
+
+            @Override
+            @OnlyIn(Dist.CLIENT)
             protected SnorkelModel getModel() {
                 if (model == null) {
                     model = new SnorkelModel();
@@ -32,15 +42,9 @@ public class SnorkelItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
                 return TEXTURE;
-            }
-
-            @Override
-            public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
-                if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
-                    livingEntity.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 19, 0, true, false));
-                }
             }
         });
     }

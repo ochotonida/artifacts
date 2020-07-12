@@ -10,6 +10,8 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -30,6 +32,7 @@ public class ObsidianSkullItem extends ArtifactItem {
             private Object model;
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ObsidianSkullModel getModel() {
                 if (model == null) {
                     model = new ObsidianSkullModel();
@@ -38,6 +41,7 @@ public class ObsidianSkullItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
                 return TEXTURE;
             }

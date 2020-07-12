@@ -11,6 +11,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public abstract class GloveCurio extends Curio {
 
@@ -21,20 +23,25 @@ public abstract class GloveCurio extends Curio {
         super(item);
     }
 
+    @OnlyIn(Dist.CLIENT)
     protected static boolean hasSmallArms(Entity entity) {
         return entity instanceof AbstractClientPlayerEntity && ((AbstractClientPlayerEntity) entity).getSkinType().equals("slim");
     }
 
+    @OnlyIn(Dist.CLIENT)
     protected ResourceLocation getTexture(boolean smallArms) {
         return smallArms ? getSlimTexture() : getTexture();
     }
 
+    @OnlyIn(Dist.CLIENT)
     protected abstract ResourceLocation getSlimTexture();
 
+    @OnlyIn(Dist.CLIENT)
     protected GloveModel getModel(boolean smallArms) {
         return (smallArms ? getSlimModel() : getModel());
     }
 
+    @OnlyIn(Dist.CLIENT)
     protected GloveModel getSlimModel() {
         if (model_slim == null) {
             model_slim = new GloveModel(true);
@@ -43,6 +50,7 @@ public abstract class GloveCurio extends Curio {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     protected GloveModel getModel() {
         if (model_default == null) {
             model_default = new GloveModel(false);
@@ -51,6 +59,7 @@ public abstract class GloveCurio extends Curio {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         boolean smallArms = hasSmallArms(entity);
         GloveModel model = getModel(smallArms);

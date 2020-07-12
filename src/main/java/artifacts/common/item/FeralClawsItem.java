@@ -8,6 +8,8 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import java.util.UUID;
@@ -35,15 +37,18 @@ public class FeralClawsItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
                 return TEXTURE_DEFAULT;
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getSlimTexture() {
                 return TEXTURE_SLIM;
             }
 
+            @OnlyIn(Dist.CLIENT)
             protected FeralClawsModel getSlimModel() {
                 if (model_slim == null) {
                     model_slim = new FeralClawsModel(true);
@@ -52,6 +57,7 @@ public class FeralClawsItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected FeralClawsModel getModel() {
                 if (model_default == null) {
                     model_default = new FeralClawsModel(false);

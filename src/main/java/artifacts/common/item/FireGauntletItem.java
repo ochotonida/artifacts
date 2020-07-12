@@ -13,6 +13,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.*;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -40,6 +42,7 @@ public class FireGauntletItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
                 boolean smallArms = hasSmallArms(entity);
                 GloveModel model = getModel(smallArms);
@@ -51,15 +54,18 @@ public class FireGauntletItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
                 return TEXTURE_DEFAULT;
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getSlimTexture() {
                 return TEXTURE_SLIM;
             }
 
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getGlowTexture(boolean smallArms) {
                 return smallArms ? TEXTURE_SLIM_GLOW : TEXTURE_DEFAULT_GLOW;
             }

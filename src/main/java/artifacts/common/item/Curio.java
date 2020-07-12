@@ -9,6 +9,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.*;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -48,11 +50,13 @@ abstract class Curio implements ICurio {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public boolean hasRender(String identifier, LivingEntity livingEntity) {
         return true;
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         BipedModel<LivingEntity> model = getModel();
         Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
@@ -60,8 +64,10 @@ abstract class Curio implements ICurio {
         model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 
+    @OnlyIn(Dist.CLIENT)
     protected abstract BipedModel<LivingEntity> getModel();
 
+    @OnlyIn(Dist.CLIENT)
     protected abstract ResourceLocation getTexture();
 
     protected static class Provider implements ICapabilityProvider {
@@ -78,6 +84,7 @@ abstract class Curio implements ICurio {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static final class RenderHelper {
         private RenderHelper() {
         }
