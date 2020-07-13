@@ -23,6 +23,8 @@
   "item.artifacts.power_glove": "Power Glove",
   "item.artifacts.cross_necklace": "Cross Necklace",
   "item.artifacts.universal_antidote": "Universal Antidote",
+  "item.artifacts.lucky_scarf": "Lucky Scarf",
+  "item.artifacts.superstitious_hat": "Superstitious Hat",
   "tooltip.artifacts.snorkel": "Allows the wearer to breathe underwater",
   "tooltip.artifacts.plastic_drinking_hat": "Decreases the time it takes to drink drinkable items",
   "tooltip.artifacts.novelty_drinking_hat": "'Hey! I'm #1, and I let gravity do my drinking!'",
@@ -41,6 +43,8 @@
   "tooltip.artifacts.pocket_piston": "Increases knockback dealt by the wearer",
   "tooltip.artifacts.power_glove": "Increases damage dealt by the wearer",
   "tooltip.artifacts.cross_necklace": "Increases the length of invincibility after taking damage",
-  "tooltip.artifacts.universal_antidote": "Greatly reduces the duration of negative effects"
+  "tooltip.artifacts.universal_antidote": "Greatly reduces the duration of negative effects",
+  "tooltip.artifacts.lucky_scarf": "Applies an extra level of fortune to mined blocks",
+  "tooltip.artifacts.superstitious_hat": "Applies an extra level of looting to killed entities"
 }
 

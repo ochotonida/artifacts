@@ -31,6 +31,8 @@ public class Items {
     public static final Item POWER_GLOVE = new PowerGloveItem();
     public static final Item CROSS_NECKLACE = new CrossNecklaceItem();
     public static final Item UNIVERSAL_ANTIDOTE = new UniversalAntidoteItem();
+    public static final Item LUCKY_SCARF = new LuckyScarfItem();
+    public static final Item SUPERSTITIOUS_HAT = new SuperstitiousHatItem();
 
     public static void register(IForgeRegistry<Item> registry) {
         registry.registerAll(
@@ -53,7 +55,9 @@ public class Items {
                 POCKET_PISTON,
                 POWER_GLOVE,
                 CROSS_NECKLACE,
-                UNIVERSAL_ANTIDOTE
+                UNIVERSAL_ANTIDOTE,
+                LUCKY_SCARF,
+                SUPERSTITIOUS_HAT
         );
     }
 }

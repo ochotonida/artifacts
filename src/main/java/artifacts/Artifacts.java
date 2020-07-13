@@ -3,6 +3,7 @@ package artifacts;
 import artifacts.client.render.MimicRenderer;
 import artifacts.common.init.Entities;
 import artifacts.common.init.Items;
+import artifacts.common.init.LootModifiers;
 import artifacts.common.init.SoundEvents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.PlayerContainer;
@@ -13,6 +14,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -67,6 +69,11 @@ public class Artifacts {
         @SubscribeEvent
         public static void registerSoundEvents(RegistryEvent.Register<SoundEvent> event) {
             SoundEvents.register(event.getRegistry());
+        }
+
+        @SubscribeEvent
+        public static void registerLootModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
+            LootModifiers.register(event.getRegistry());
         }
 
         @SubscribeEvent
