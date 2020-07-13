@@ -3,17 +3,25 @@ package artifacts.client.render.model.curio;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+
+import java.util.function.Function;
 
 public class ScarfModel extends BipedModel<LivingEntity> {
 
     private final ModelRenderer bipedCape;
 
     public ScarfModel() {
-        super(0.5F, 0, 64, 32);
+        this(RenderType::getEntityCutoutNoCull);
+    }
+
+    public ScarfModel(Function<ResourceLocation, RenderType> renderType) {
+        super(renderType, 0.5F, 0, 64, 32);
         bipedCape = new ModelRenderer(this, 32, 0);
         bipedCape.addBox(-5, 0, 0, 5, 12, 2);
         bipedBody = new ModelRenderer(this, 0, 16);
