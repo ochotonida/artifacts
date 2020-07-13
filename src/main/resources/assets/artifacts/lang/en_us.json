@@ -26,6 +26,7 @@
   "item.artifacts.lucky_scarf": "Lucky Scarf",
   "item.artifacts.superstitious_hat": "Superstitious Hat",
   "item.artifacts.scarf_of_invisibility": "Scarf of Invisibility",
+  "item.artifacts.digging_claws": "Digging Claws",
   "tooltip.artifacts.snorkel": "Allows the wearer to breathe underwater",
   "tooltip.artifacts.plastic_drinking_hat": "Decreases the time it takes to drink drinkable items",
   "tooltip.artifacts.novelty_drinking_hat": "'Hey! I'm #1, and I let gravity do my drinking!'",
@@ -36,7 +37,7 @@
   "tooltip.artifacts.thorn_pendant": "Has a chance to damage attackers",
   "tooltip.artifacts.flippers": "Improves agility while in water",
   "tooltip.artifacts.obsidian_skull": "The wearer becomes temporarily immune to fire damage when hurt by fire",
-  "tooltip.artifacts.umbrella": "Functions both as a shield and a glider",
+  "tooltip.artifacts.umbrella": "Can be used both as a shield and as a glider",
   "tooltip.artifacts.everlasting_beef": "Not consumed when eaten",
   "tooltip.artifacts.eternal_steak": "Not consumed when eaten",
   "tooltip.artifacts.fire_gauntlet": "Melee attacks deal fire damage",
@@ -47,6 +48,7 @@
   "tooltip.artifacts.universal_antidote": "Greatly reduces the duration of negative effects",
   "tooltip.artifacts.lucky_scarf": "Applies an extra level of fortune to mined blocks",
   "tooltip.artifacts.superstitious_hat": "Applies an extra level of looting to killed entities",
-  "tooltip.artifacts.scarf_of_invisibility": "Turns the wearer invisible"
+  "tooltip.artifacts.scarf_of_invisibility": "Turns the wearer invisible",
+  "tooltip.artifacts.digging_claws": "Increases the wearer's mining speed"
 }
 

@@ -2,9 +2,9 @@ package artifacts.client.render.model.curio;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class FeralClawsModel extends GloveModel {
+public class ClawsModel extends GloveModel {
 
-    public FeralClawsModel(boolean smallArms) {
+    public ClawsModel(boolean smallArms) {
         super(smallArms);
 
         ModelRenderer clawLeft1 = new ModelRenderer(this, 0, 0);
