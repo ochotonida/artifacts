@@ -51,7 +51,7 @@
   "tooltip.artifacts.lucky_scarf": "Applies an extra level of fortune to mined blocks",
   "tooltip.artifacts.superstitious_hat": "Applies an extra level of looting to killed entities",
   "tooltip.artifacts.scarf_of_invisibility": "Turns the wearer invisible",
-  "tooltip.artifacts.digging_claws": "Increases the wearer's mining speed",
+  "tooltip.artifacts.digging_claws": "Increases the wearer's mining speed and base mining level",
   "tooltip.artifacts.steadfast_spikes": "Grants immunity to knockback",
   "tooltip.artifacts.universal_attractor": "Attracts nearby items"
 }

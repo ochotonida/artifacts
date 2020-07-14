@@ -65,7 +65,14 @@ public class DiggingClawsItem extends ArtifactItem {
         @SubscribeEvent
         public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
             if (CuriosAPI.getCurioEquipped(Items.DIGGING_CLAWS, event.getEntityLiving()).isPresent()) {
-                event.setNewSpeed(event.getNewSpeed() + 4);
+                event.setNewSpeed(event.getNewSpeed() + 3);
+            }
+        }
+
+        @SubscribeEvent
+        public static void onHarvestCheck(PlayerEvent.HarvestCheck event) {
+            if (!event.canHarvest() && CuriosAPI.getCurioEquipped(Items.DIGGING_CLAWS, event.getEntityLiving()).isPresent()) {
+                event.setCanHarvest(event.canHarvest() || event.getTargetBlock().getHarvestLevel() <= 2);
             }
         }
     }
