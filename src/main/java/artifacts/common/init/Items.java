@@ -36,6 +36,7 @@ public class Items {
     public static final Item SCARF_OF_INVISIBILITY = new ScarfOfInvisibilityItem();
     public static final Item DIGGING_CLAWS = new DiggingClawsItem();
     public static final Item STEADFAST_SPIKES = new SteadfastSpikesItem();
+    public static final Item MAGNET = new MagnetItem();
 
     public static void register(IForgeRegistry<Item> registry) {
         registry.registerAll(
@@ -63,7 +64,8 @@ public class Items {
                 SUPERSTITIOUS_HAT,
                 SCARF_OF_INVISIBILITY,
                 DIGGING_CLAWS,
-                STEADFAST_SPIKES
+                STEADFAST_SPIKES,
+                MAGNET
         );
     }
 }

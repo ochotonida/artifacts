@@ -28,6 +28,7 @@
   "item.artifacts.scarf_of_invisibility": "Scarf of Invisibility",
   "item.artifacts.digging_claws": "Digging Claws",
   "item.artifacts.steadfast_spikes": "Steadfast Spikes",
+  "item.artifacts.magnet": "Magnet",
   "tooltip.artifacts.snorkel": "Allows the wearer to breathe underwater",
   "tooltip.artifacts.plastic_drinking_hat": "Decreases the time it takes to drink drinkable items",
   "tooltip.artifacts.novelty_drinking_hat": "'Hey! I'm #1, and I let gravity do my drinking!'",
@@ -51,6 +52,7 @@
   "tooltip.artifacts.superstitious_hat": "Applies an extra level of looting to killed entities",
   "tooltip.artifacts.scarf_of_invisibility": "Turns the wearer invisible",
   "tooltip.artifacts.digging_claws": "Increases the wearer's mining speed",
-  "tooltip.artifacts.steadfast_spikes": "Grants immunity to knockback"
+  "tooltip.artifacts.steadfast_spikes": "Grants immunity to knockback",
+  "tooltip.artifacts.magnet": "Attracts nearby items"
 }
 
