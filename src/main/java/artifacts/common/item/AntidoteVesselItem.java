@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.UniversalAntidoteModel;
+import artifacts.client.render.model.curio.AntidoteVesselModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -18,12 +18,12 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UniversalAntidoteItem extends ArtifactItem {
+public class AntidoteVesselItem extends ArtifactItem {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/universal_antidote.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/antidote_vessel.png");
 
-    public UniversalAntidoteItem() {
-        super(new Properties(), "universal_antidote");
+    public AntidoteVesselItem() {
+        super(new Properties(), "antidote_vessel");
     }
 
     @Nullable
@@ -55,11 +55,11 @@ public class UniversalAntidoteItem extends ArtifactItem {
 
             @Override
             @OnlyIn(Dist.CLIENT)
-            protected UniversalAntidoteModel getModel() {
+            protected AntidoteVesselModel getModel() {
                 if (model == null) {
-                    model = new UniversalAntidoteModel();
+                    model = new AntidoteVesselModel();
                 }
-                return (UniversalAntidoteModel) model;
+                return (AntidoteVesselModel) model;
             }
 
             @Override

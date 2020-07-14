@@ -30,13 +30,13 @@ public class Items {
     public static final Item POCKET_PISTON = new PocketPistonItem();
     public static final Item POWER_GLOVE = new PowerGloveItem();
     public static final Item CROSS_NECKLACE = new CrossNecklaceItem();
-    public static final Item UNIVERSAL_ANTIDOTE = new UniversalAntidoteItem();
+    public static final Item ANTIDOTE_VESSEL = new AntidoteVesselItem();
     public static final Item LUCKY_SCARF = new LuckyScarfItem();
     public static final Item SUPERSTITIOUS_HAT = new SuperstitiousHatItem();
     public static final Item SCARF_OF_INVISIBILITY = new ScarfOfInvisibilityItem();
     public static final Item DIGGING_CLAWS = new DiggingClawsItem();
     public static final Item STEADFAST_SPIKES = new SteadfastSpikesItem();
-    public static final Item MAGNET = new MagnetItem();
+    public static final Item UNIVERSAL_ATTRACTOR = new UniversalAttractorItem();
 
     public static void register(IForgeRegistry<Item> registry) {
         registry.registerAll(
@@ -59,13 +59,13 @@ public class Items {
                 POCKET_PISTON,
                 POWER_GLOVE,
                 CROSS_NECKLACE,
-                UNIVERSAL_ANTIDOTE,
+                ANTIDOTE_VESSEL,
                 LUCKY_SCARF,
                 SUPERSTITIOUS_HAT,
                 SCARF_OF_INVISIBILITY,
                 DIGGING_CLAWS,
                 STEADFAST_SPIKES,
-                MAGNET
+                UNIVERSAL_ATTRACTOR
         );
     }
 }

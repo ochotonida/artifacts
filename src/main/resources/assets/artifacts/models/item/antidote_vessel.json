@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "artifacts:item/universal_antidote"
+    "layer0": "artifacts:item/antidote_vessel"
   }
 }

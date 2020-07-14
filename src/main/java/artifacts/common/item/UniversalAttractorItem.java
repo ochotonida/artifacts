@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.MagnetModel;
+import artifacts.client.render.model.curio.UniversalAttractorModel;
 import artifacts.common.init.Items;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -22,12 +22,12 @@ import top.theillusivec4.curios.api.CuriosAPI;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MagnetItem extends ArtifactItem {
+public class UniversalAttractorItem extends ArtifactItem {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/magnet.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/universal_attractor.png");
 
-    public MagnetItem() {
-        super(new Properties(), "magnet");
+    public UniversalAttractorItem() {
+        super(new Properties(), "universal_attractor");
     }
 
     public static int getCooldown(ItemStack stack) {
@@ -78,11 +78,11 @@ public class MagnetItem extends ArtifactItem {
 
             @Override
             @OnlyIn(Dist.CLIENT)
-            protected MagnetModel getModel() {
+            protected UniversalAttractorModel getModel() {
                 if (model == null) {
-                    model = new MagnetModel();
+                    model = new UniversalAttractorModel();
                 }
-                return (MagnetModel) model;
+                return (UniversalAttractorModel) model;
             }
 
             @Override
@@ -99,7 +99,7 @@ public class MagnetItem extends ArtifactItem {
 
         @SubscribeEvent
         public static void onItemToss(ItemTossEvent event) {
-            CuriosAPI.getCurioEquipped(Items.MAGNET, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, 100));
+            CuriosAPI.getCurioEquipped(Items.UNIVERSAL_ATTRACTOR, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, 100));
         }
     }
 }
