@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "artifacts:flippers",
     "artifacts:steadfast_spikes"

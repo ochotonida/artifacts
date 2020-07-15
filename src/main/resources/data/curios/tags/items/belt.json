@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "artifacts:obsidian_skull",
     "artifacts:antidote_vessel",

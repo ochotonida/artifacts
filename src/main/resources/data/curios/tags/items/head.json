@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "artifacts:snorkel",
     "artifacts:plastic_drinking_hat",
