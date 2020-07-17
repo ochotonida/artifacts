@@ -53,7 +53,7 @@ public class MimicEntity extends MobEntity implements IMob {
     protected void registerAttributes() {
         super.registerAttributes();
         getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8);
-        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80);
+        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(65);
         getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24);
         getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1);
     }
@@ -115,7 +115,7 @@ public class MimicEntity extends MobEntity implements IMob {
             setAttackTarget((LivingEntity) source.getTrueSource());
             isDormant = false;
         }
-        if (ticksInAir <= 0) {
+        if (ticksInAir <= 0 && !source.isCreativePlayer() && source.getTrueSource() != null) {
             playSound(SoundEvents.MIMIC_HURT, getSoundVolume(), getSoundPitch());
             return false;
         }
