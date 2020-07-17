@@ -55,7 +55,7 @@ public class UniversalAttractorItem extends ArtifactItem {
                 if (cooldown <= 0) {
                     Vec3d playerPos = entity.getPositionVector().add(0, 0.75, 0);
 
-                    int range = 4;
+                    int range = 5;
                     List<ItemEntity> items = entity.world.getEntitiesWithinAABB(ItemEntity.class, new AxisAlignedBB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
                     int pulled = 0;
                     for (ItemEntity item : items) {
@@ -64,11 +64,11 @@ public class UniversalAttractorItem extends ArtifactItem {
                                 break;
                             }
 
-                            Vec3d newPos = playerPos.subtract(item.getPositionVector().add(0, item.getHeight() / 2, 0));
-                            if (Math.sqrt(newPos.x * newPos.x + newPos.y * newPos.y + newPos.z * newPos.z) > 1) {
-                                newPos = newPos.normalize();
+                            Vec3d motion = playerPos.subtract(item.getPositionVector().add(0, item.getHeight() / 2, 0));
+                            if (Math.sqrt(motion.x * motion.x + motion.y * motion.y + motion.z * motion.z) > 1) {
+                                motion = motion.normalize();
                             }
-                            item.setMotion(newPos.scale(0.4));
+                            item.setMotion(motion.scale(0.6));
                         }
                     }
                 } else {
