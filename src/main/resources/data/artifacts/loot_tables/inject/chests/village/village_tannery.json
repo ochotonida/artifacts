@@ -6,22 +6,12 @@
       "entries": [
         {
           "type": "item",
-          "name": "artifacts:snorkel",
-          "weight": 25
-        },
-        {
-          "type": "item",
-          "name": "artifacts:flippers",
-          "weight": 25
-        },
-        {
-          "type": "item",
           "name": "artifacts:umbrella",
           "weight": 15
         },
         {
           "type": "empty",
-          "weight": 35
+          "weight": 85
         }
       ]
     }

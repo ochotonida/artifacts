@@ -6,27 +6,27 @@
       "entries": [
         {
           "type": "item",
-          "name": "artifacts:plastic_drinking_hat",
+          "name": "artifacts:power_glove",
+          "weight": 15
+        },
+        {
+          "type": "item",
+          "name": "artifacts:antidote_vessel",
           "weight": 10
         },
         {
           "type": "item",
-          "name": "artifacts:thorn_pendant",
-          "weight": 10
+          "name": "artifacts:superstitious_hat",
+          "weight": 15
         },
         {
           "type": "item",
-          "name": "artifacts:night_vision_goggles",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "artifacts:shock_pendant",
+          "name": "artifacts:lucky_scarf",
           "weight": 10
         },
         {
           "type": "empty",
-          "weight": 60
+          "weight": 50
         }
       ]
     }

@@ -6,22 +6,27 @@
       "entries": [
         {
           "type": "item",
+          "name": "artifacts:fire_gauntlet",
+          "weight": 15
+        },
+        {
+          "type": "item",
           "name": "artifacts:flame_pendant",
-          "weight": 4
+          "weight": 10
         },
         {
           "type": "item",
-          "name": "artifacts:thorn_pendant",
-          "weight": 8
+          "name": "artifacts:cross_necklace",
+          "weight": 10
         },
         {
           "type": "item",
-          "name": "artifacts:shock_pendant",
-          "weight": 8
+          "name": "artifacts:obsidian_skull",
+          "weight": 15
         },
         {
           "type": "empty",
-          "weight": 80
+          "weight": 50
         }
       ]
     }

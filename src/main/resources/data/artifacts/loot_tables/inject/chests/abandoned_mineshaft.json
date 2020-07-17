@@ -7,26 +7,31 @@
         {
           "type": "item",
           "name": "artifacts:night_vision_goggles",
-          "weight": 6
+          "weight": 12
         },
         {
           "type": "item",
           "name": "artifacts:panic_necklace",
-          "weight": 6
+          "weight": 12
         },
         {
           "type": "item",
           "name": "artifacts:obsidian_skull",
-          "weight": 3
+          "weight": 6
         },
         {
           "type": "item",
           "name": "artifacts:plastic_drinking_hat",
-          "weight": 5
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "artifacts:novelty_drinking_hat",
+          "weight": 4
         },
         {
           "type": "empty",
-          "weight": 80
+          "weight": 56
         }
       ]
     }

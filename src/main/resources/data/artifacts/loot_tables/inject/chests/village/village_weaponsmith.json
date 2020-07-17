@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "artifacts:feral_claws",
+          "weight": 10
+        },
+        {
+          "type": "empty",
+          "weight": 90
+        }
+      ]
+    }
+  ]
+}

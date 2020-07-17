@@ -14,16 +14,25 @@ import java.util.List;
 
 public class LootTables {
 
-    public static final ResourceLocation MIMIC = new ResourceLocation(Artifacts.MODID, "mimic");
+    public static final ResourceLocation MIMIC = new ResourceLocation(Artifacts.MODID, "entities/mimic");
+    public static final ResourceLocation CAMPSITE_CHEST = new ResourceLocation(Artifacts.MODID, "chests/campsite_chest");
 
     @Mod.EventBusSubscriber(modid = Artifacts.MODID)
     public static class LootTableEvents {
 
         public static final List<String> LOOT_TABLE_LOCATIONS = Arrays.asList(
+                "chests/village/village_armorer",
+                "chests/village/village_butcher",
+                "chests/village/village_tannery",
+                "chests/village/village_temple",
+                "chests/village/village_toolsmith",
+                "chests/village/village_weaponsmith",
                 "chests/abandoned_mineshaft",
+                "chests/buried_treasure",
                 "chests/desert_pyramid",
+                "chests/jungle_temple",
                 "chests/underwater_ruin_big",
-                "chests/simple_dungeon",
+                "chests/woodland_mansion",
                 "entities/cow"
         );
 
