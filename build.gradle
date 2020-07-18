@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.15.2-2.0.0'
+version = '1.15.2-2.1.0'
 group = 'artifacts'
 archivesBaseName = 'Artifacts'
 
@@ -30,7 +30,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                artifacts {
                     source sourceSets.main
                 }
             }
@@ -46,7 +46,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                artifacts {
                     source sourceSets.main
                 }
             }
@@ -61,10 +61,10 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'artifacts', '--all', '--output', file('src/generated/resources/')
 
             mods {
-                examplemod {
+                artifacts {
                     source sourceSets.main
                 }
             }
