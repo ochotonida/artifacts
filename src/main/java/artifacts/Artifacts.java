@@ -34,7 +34,7 @@ public class Artifacts {
         @Override
         @OnlyIn(Dist.CLIENT)
         public ItemStack createIcon() {
-            return new ItemStack(Items.SNORKEL);
+            return new ItemStack(Items.PLASTIC_DRINKING_HAT);
         }
     };
 
