@@ -7,7 +7,12 @@
         {
           "type": "item",
           "name": "artifacts:umbrella",
-          "weight": 15
+          "weight": 20
+        },
+        {
+          "type": "item",
+          "name": "artifacts:kitty_slippers",
+          "weight": 5
         },
         {
           "type": "empty",

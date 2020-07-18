@@ -123,6 +123,11 @@
           "type": "item",
           "name": "artifacts:universal_attractor",
           "weight": 4
+        },
+        {
+          "type": "item",
+          "name": "artifacts:kitty_slippers",
+          "weight": 4
         }
       ]
     }
