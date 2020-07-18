@@ -52,10 +52,11 @@ public class MimicEntity extends MobEntity implements IMob {
     @Override
     protected void registerAttributes() {
         super.registerAttributes();
-        getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8);
-        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(65);
-        getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24);
-        getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1);
+        getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6);
+        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60);
+        getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16);
+        getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5);
+        getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class MimicEntity extends MobEntity implements IMob {
         goalSelector.addGoal(2, new AttackGoal(this));
         goalSelector.addGoal(3, new FaceRandomGoal(this));
         goalSelector.addGoal(5, new HopGoal(this));
-        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, (entity) -> Math.abs(entity.getPosY() - getPosY()) <= 4));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 1, true, false, (entity) -> !isDormant || getDistance(entity) < getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getValue() / 2.5));
     }
 
     @Override
@@ -110,10 +111,15 @@ public class MimicEntity extends MobEntity implements IMob {
     }
 
     @Override
+    public void setAttackTarget(LivingEntity entity) {
+        isDormant = false;
+        super.setAttackTarget(entity);
+    }
+
+    @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (source.getTrueSource() instanceof PlayerEntity) {
             setAttackTarget((LivingEntity) source.getTrueSource());
-            isDormant = false;
         }
         if (ticksInAir <= 0 && !source.isCreativePlayer() && source.getTrueSource() != null) {
             playSound(SoundEvents.MIMIC_HURT, getSoundVolume(), getSoundPitch());
@@ -278,7 +284,7 @@ public class MimicEntity extends MobEntity implements IMob {
         @Override
         public void tick() {
             if (mimic.getMoveHelper() instanceof MimicMovementController) {
-                ((MimicMovementController) mimic.getMoveHelper()).setSpeed(1.5);
+                ((MimicMovementController) mimic.getMoveHelper()).setSpeed(1);
             }
         }
     }
@@ -288,7 +294,6 @@ public class MimicEntity extends MobEntity implements IMob {
         private final MimicEntity mimic;
         private float rotationDegrees;
         private int jumpDelay;
-        private boolean isAggressive;
 
         public MimicMovementController(MimicEntity mimic) {
             super(mimic);
@@ -299,7 +304,9 @@ public class MimicEntity extends MobEntity implements IMob {
 
         public void setDirection(float rotation, boolean isAggressive) {
             this.rotationDegrees = rotation;
-            this.isAggressive = isAggressive;
+            if (isAggressive && jumpDelay > 20) {
+                jumpDelay = mimic.rand.nextInt(10) + 10;
+            }
         }
 
         public void setSpeed(double speed) {
@@ -309,9 +316,7 @@ public class MimicEntity extends MobEntity implements IMob {
 
         @Override
         public void tick() {
-            mimic.rotationYaw = limitAngle(mimic.rotationYaw, rotationDegrees, 90);
-            mimic.rotationYawHead = mimic.rotationYaw;
-            mimic.renderYawOffset = mimic.rotationYaw;
+            mimic.rotationYawHead = mimic.renderYawOffset = mimic.rotationYaw = limitAngle(mimic.rotationYaw, rotationDegrees, 90);
 
             if (action != Action.MOVE_TO) {
                 mimic.setMoveForward(0);
@@ -320,13 +325,8 @@ public class MimicEntity extends MobEntity implements IMob {
                 if (mimic.onGround) {
                     mimic.setAIMoveSpeed((float) (speed * mimic.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue()));
                     if (jumpDelay-- > 0) {
-                        mimic.moveStrafing = 0;
-                        mimic.moveForward = 0;
+                        mimic.moveStrafing = mimic.moveForward = 0;
                         mimic.setAIMoveSpeed(0);
-
-                        if (isAggressive && jumpDelay > 20) {
-                            jumpDelay = mimic.rand.nextInt(10) + 10;
-                        }
                     } else {
                         jumpDelay = mimic.rand.nextInt(320) + 640;
 
