@@ -1,20 +1,19 @@
 package artifacts.common.world;
 
-import artifacts.Artifacts;
 import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.Entities;
 import artifacts.common.init.LootTables;
 import net.minecraft.block.*;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.blockstateprovider.BlockStateProvider;
+import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.common.Tags;
@@ -26,8 +25,32 @@ import java.util.Random;
 
 public class CampsiteFeature extends Feature<NoFeatureConfig> {
 
-    public static ResourceLocation CRAFTING_STATIONS = new ResourceLocation(Artifacts.MODID, "campsite/crafting_stations");
-    public static ResourceLocation DECORATION_BLOCKS = new ResourceLocation(Artifacts.MODID, "campsite/decorations");
+    public static final BlockStateProvider CRAFTING_STATION_PROVIDER = new WeightedBlockStateProvider()
+            .addWeightedBlockstate(Blocks.CRAFTING_TABLE.getDefaultState(), 5)
+            .addWeightedBlockstate(Blocks.FURNACE.getDefaultState(), 5)
+            .addWeightedBlockstate(Blocks.BLAST_FURNACE.getDefaultState(), 5)
+            .addWeightedBlockstate(Blocks.SMOKER.getDefaultState(), 5)
+            .addWeightedBlockstate(Blocks.SMITHING_TABLE.getDefaultState(), 5)
+            .addWeightedBlockstate(Blocks.FLETCHING_TABLE.getDefaultState(), 5)
+            .addWeightedBlockstate(Blocks.CARTOGRAPHY_TABLE.getDefaultState(), 5)
+            .addWeightedBlockstate(Blocks.ANVIL.getDefaultState(), 2)
+            .addWeightedBlockstate(Blocks.CHIPPED_ANVIL.getDefaultState(), 2)
+            .addWeightedBlockstate(Blocks.DAMAGED_ANVIL.getDefaultState(), 1);
+
+    public static final BlockStateProvider DECORATION_PROVIDER = new WeightedBlockStateProvider()
+            .addWeightedBlockstate(Blocks.LANTERN.getDefaultState(), 5)
+            .addWeightedBlockstate(Blocks.TORCH.getDefaultState(), 3)
+            .addWeightedBlockstate(Blocks.REDSTONE_TORCH.getDefaultState(), 3)
+            .addWeightedBlockstate(Blocks.CAKE.getDefaultState(), 1)
+            .addWeightedBlockstate(Blocks.BREWING_STAND.getDefaultState(), 4);
+
+    public static final BlockStateProvider ORE_PROVIDER = new WeightedBlockStateProvider()
+            .addWeightedBlockstate(Blocks.IRON_ORE.getDefaultState(), 6)
+            .addWeightedBlockstate(Blocks.REDSTONE_ORE.getDefaultState(), 6)
+            .addWeightedBlockstate(Blocks.LAPIS_ORE.getDefaultState(), 6)
+            .addWeightedBlockstate(Blocks.GOLD_ORE.getDefaultState(), 4)
+            .addWeightedBlockstate(Blocks.DIAMOND_ORE.getDefaultState(), 2)
+            .addWeightedBlockstate(Blocks.EMERALD_ORE.getDefaultState(), 1);
 
     public CampsiteFeature() {
         super(NoFeatureConfig::deserialize);
@@ -45,7 +68,11 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
         }
         Collections.shuffle(positions);
 
+        if (random.nextInt(4) == 0) {
+            generateOreVein(world, pos.down(), random);
+        }
         generateLightSource(world, pos, random);
+
         generateContainer(world, positions.remove(0), random);
         if (random.nextBoolean()) {
             generateContainer(world, positions.remove(0), random);
@@ -103,24 +130,37 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
     }
 
     public void generateCraftingStation(IWorld world, BlockPos pos, Random random) {
-        Tag<Block> craftingStations = BlockTags.getCollection().get(CRAFTING_STATIONS);
-        if (craftingStations != null) {
-            BlockState state = craftingStations.getRandomElement(random).getDefaultState();
-            world.setBlockState(pos, state, 0);
-            if (random.nextBoolean() && Block.hasEnoughSolidSide(world, pos.down(), Direction.UP) && world.isAirBlock(pos.up())) {
-                generateDecoration(world, pos.up(), random);
-            }
+        BlockState state = CRAFTING_STATION_PROVIDER.getBlockState(random, pos);
+        world.setBlockState(pos, state, 0);
+        if (random.nextBoolean() && world.isAirBlock(pos.up())) {
+            generateDecoration(world, pos.up(), random);
         }
+
     }
 
     public void generateDecoration(IWorld world, BlockPos pos, Random random) {
         if (random.nextBoolean()) {
-            Tag<Block> craftingStations = BlockTags.getCollection().get(DECORATION_BLOCKS);
-            if (craftingStations != null) {
-                world.setBlockState(pos, craftingStations.getRandomElement(random).getDefaultState(), 2);
+            world.setBlockState(pos, DECORATION_PROVIDER.getBlockState(random, pos), 2);
+            return;
+        }
+        world.setBlockState(pos, BlockTags.FLOWER_POTS.getRandomElement(random).getDefaultState(), 2);
+    }
+
+    public void generateOreVein(IWorld world, BlockPos pos, Random random) {
+        BlockState ore = ORE_PROVIDER.getBlockState(random, pos);
+        List<BlockPos> positions = new ArrayList<>();
+        positions.add(pos);
+        for (int i = 4 + random.nextInt(12); i > 0; i--) {
+            pos = positions.remove(0);
+            world.setBlockState(pos, ore, 2);
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                if (world.getBlockState(pos.offset(direction)).getMaterial().blocksMovement() && !world.getBlockState(pos.offset(direction).up()).getMaterial().blocksMovement()) {
+                    positions.add(pos.offset(direction));
+                }
+            }
+            if (positions.size() == 0) {
                 return;
             }
         }
-        world.setBlockState(pos, BlockTags.FLOWER_POTS.getRandomElement(random).getDefaultState(), 2);
     }
 }
