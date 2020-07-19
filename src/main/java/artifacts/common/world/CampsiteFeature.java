@@ -1,5 +1,6 @@
 package artifacts.common.world;
 
+import artifacts.common.config.Config;
 import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.Entities;
 import artifacts.common.init.LootTables;
@@ -68,9 +69,10 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
         }
         Collections.shuffle(positions);
 
-        if (random.nextInt(4) == 0) {
+        if (random.nextFloat() < Config.campsiteOreChance) {
             generateOreVein(world, pos.down(), random);
         }
+
         generateLightSource(world, pos, random);
 
         generateContainer(world, positions.remove(0), random);
@@ -105,7 +107,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
     }
 
     public void generateContainer(IWorld world, BlockPos pos, Random random) {
-        if (random.nextFloat() < 0.2) {
+        if (random.nextFloat() < Config.campsiteMimicChance) {
             MimicEntity mimic = Entities.MIMIC.create(world.getWorld());
             if (mimic != null) {
                 mimic.setDormant();

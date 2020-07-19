@@ -1,6 +1,7 @@
 package artifacts.common.init;
 
 import artifacts.Artifacts;
+import artifacts.common.config.Config;
 import artifacts.common.world.CampsiteFeature;
 import artifacts.common.world.InCaveWithChance;
 import net.minecraft.util.ResourceLocation;
@@ -23,11 +24,11 @@ public class Features {
     }
 
     public static void addFeatures() {
-        Placement<ChanceConfig> inCave = new InCaveWithChance(ChanceConfig::deserialize);
+        Placement<ChanceConfig> placement = new InCaveWithChance(ChanceConfig::deserialize);
 
         for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
             if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {
-                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, CAMPSITE_FEATURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(inCave.configure(new ChanceConfig((int) (1 / 0.20)))));
+                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, CAMPSITE_FEATURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(placement.configure(new ChanceConfig((int) (1 / Config.campsiteChance)))));
             }
         }
     }
