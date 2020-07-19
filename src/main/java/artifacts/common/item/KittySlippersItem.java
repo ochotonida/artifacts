@@ -13,6 +13,8 @@ import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -36,6 +38,7 @@ public class KittySlippersItem extends ArtifactItem {
             private Object model;
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected KittySlippersModel getModel() {
                 if (model == null) {
                     model = new KittySlippersModel();
@@ -44,6 +47,7 @@ public class KittySlippersItem extends ArtifactItem {
             }
 
             @Override
+            @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
                 return TEXTURE;
             }
