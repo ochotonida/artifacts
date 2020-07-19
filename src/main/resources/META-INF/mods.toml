@@ -4,7 +4,7 @@ issueTrackerURL="https://github.com/ochotonida/artifacts/issues"
 
 [[mods]]
 modId="artifacts"
-version="1.15.2-2.1.1"
+version="1.15.2-2.2.0"
 displayName="Artifacts"
 # todo updateJSONURL=""
 displayURL="https://www.curseforge.com/minecraft/mc-mods/artifacts"
