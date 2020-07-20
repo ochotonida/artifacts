@@ -32,7 +32,6 @@ public class UmbrellaItem extends ArtifactItem {
 
     public UmbrellaItem() {
         super(new Properties(), "umbrella");
-        // TODO this.addPropertyOverride(new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1 : 0);
         DispenserBlock.registerDispenseBehavior(this, ArmorItem.DISPENSER_BEHAVIOR);
     }
 

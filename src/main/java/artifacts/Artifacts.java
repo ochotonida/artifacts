@@ -7,7 +7,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.api.distmarker.Dist;
@@ -55,6 +57,7 @@ public class Artifacts {
         @SubscribeEvent
         public static void setupClient(final FMLClientSetupEvent event) {
             RenderingRegistry.registerEntityRenderingHandler(Entities.MIMIC, MimicRenderer::new);
+            ItemModelsProperties.func_239418_a_(Items.UMBRELLA, new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1 : 0);
         }
 
         @SubscribeEvent
