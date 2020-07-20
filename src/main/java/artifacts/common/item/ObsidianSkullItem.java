@@ -16,7 +16,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class ObsidianSkullItem extends ArtifactItem {
 
@@ -55,7 +55,7 @@ public class ObsidianSkullItem extends ArtifactItem {
         @SubscribeEvent
         public static void onLivingHurt(LivingHurtEvent event) {
             if (!event.getEntity().world.isRemote && event.getAmount() >= 1 && (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA) && event.getEntity() instanceof PlayerEntity) {
-                if (CuriosAPI.getCurioEquipped(Items.OBSIDIAN_SKULL, event.getEntityLiving()).isPresent() && !((PlayerEntity) event.getEntity()).getCooldownTracker().hasCooldown(Items.OBSIDIAN_SKULL)) {
+                if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.OBSIDIAN_SKULL, event.getEntityLiving()).isPresent() && !((PlayerEntity) event.getEntity()).getCooldownTracker().hasCooldown(Items.OBSIDIAN_SKULL)) {
                     event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 600, 0, false, true));
                     ((PlayerEntity) event.getEntity()).getCooldownTracker().setCooldown(Items.OBSIDIAN_SKULL, 2400);
                 }

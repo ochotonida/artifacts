@@ -15,7 +15,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class DrinkingHatItem extends ArtifactItem {
 
@@ -68,7 +68,7 @@ public class DrinkingHatItem extends ArtifactItem {
 
         @SubscribeEvent
         public static void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-            if (CuriosAPI.getCurioEquipped(stack -> stack.getItem() instanceof DrinkingHatItem, event.getEntityLiving()).isPresent()) {
+            if (CuriosApi.getCuriosHelper().findEquippedCurio(stack -> stack.getItem() instanceof DrinkingHatItem, event.getEntityLiving()).isPresent()) {
                 if (event.getItem().getUseAction() == UseAction.DRINK) {
                     event.setDuration(event.getDuration() / 4);
                 }

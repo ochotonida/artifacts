@@ -16,7 +16,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class PanicNecklaceItem extends ArtifactItem {
 
@@ -60,7 +60,7 @@ public class PanicNecklaceItem extends ArtifactItem {
         @SubscribeEvent
         public static void onLivingHurt(LivingHurtEvent event) {
             if (!event.getEntity().world.isRemote && event.getAmount() >= 1) {
-                if (CuriosAPI.getCurioEquipped(Items.PANIC_NECKLACE, event.getEntityLiving()).isPresent()) {
+                if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.PANIC_NECKLACE, event.getEntityLiving()).isPresent()) {
                     event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, 70, 1, false, false));
                 }
             }

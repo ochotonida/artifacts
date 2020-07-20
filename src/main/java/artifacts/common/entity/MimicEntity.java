@@ -3,6 +3,8 @@ package artifacts.common.entity;
 import artifacts.common.init.LootTables;
 import artifacts.common.init.SoundEvents;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
@@ -49,14 +51,13 @@ public class MimicEntity extends MobEntity implements IMob {
         return false;
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6);
-        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60);
-        getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16);
-        getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5);
-        getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1);
+    public static AttributeModifierMap.MutableAttribute getAttributes() {
+        return MobEntity.func_233666_p_()
+                .func_233815_a_(Attributes.field_233818_a_, 60)
+                .func_233815_a_(Attributes.field_233819_b_, 16)
+                .func_233815_a_(Attributes.field_233820_c_, 0.5)
+                .func_233815_a_(Attributes.field_233821_d_, 1)
+                .func_233815_a_(Attributes.field_233823_f_, 6);
     }
 
     @Override
@@ -66,7 +67,8 @@ public class MimicEntity extends MobEntity implements IMob {
         goalSelector.addGoal(2, new AttackGoal(this));
         goalSelector.addGoal(3, new FaceRandomGoal(this));
         goalSelector.addGoal(5, new HopGoal(this));
-        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 1, true, false, (entity) -> !isDormant || getDistance(entity) < getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getValue() / 2.5));
+        // noinspection ConstantConditions
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 1, true, false, (entity) -> !isDormant || getDistance(entity) < getAttribute(Attributes.field_233819_b_).getValue() / 2.5));
     }
 
     @Override
@@ -105,7 +107,8 @@ public class MimicEntity extends MobEntity implements IMob {
     @Override
     public void onCollideWithPlayer(PlayerEntity player) {
         super.onCollideWithPlayer(player);
-        if (player.getEntityWorld().getDifficulty() != Difficulty.PEACEFUL && canEntityBeSeen(player) && getDistanceSq(player) < 1 && player.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue())) {
+        // noinspection ConstantConditions
+        if (player.getEntityWorld().getDifficulty() != Difficulty.PEACEFUL && canEntityBeSeen(player) && getDistanceSq(player) < 1 && player.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getAttribute(Attributes.field_233823_f_).getValue())) {
             applyEnchantments(this, player);
         }
     }
@@ -323,7 +326,8 @@ public class MimicEntity extends MobEntity implements IMob {
             } else {
                 action = Action.WAIT;
                 if (mimic.onGround) {
-                    mimic.setAIMoveSpeed((float) (speed * mimic.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue()));
+                    // noinspection ConstantConditions
+                    mimic.setAIMoveSpeed((float) (speed * mimic.getAttribute(Attributes.field_233821_d_).getValue()));
                     if (jumpDelay-- > 0) {
                         mimic.moveStrafing = mimic.moveForward = 0;
                         mimic.setAIMoveSpeed(0);
@@ -334,7 +338,8 @@ public class MimicEntity extends MobEntity implements IMob {
                         mimic.playSound(mimic.getJumpingSound(), mimic.getSoundVolume(), mimic.getSoundPitch());
                     }
                 } else {
-                    mimic.setAIMoveSpeed((float) (speed * mimic.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue()));
+                    // noinspection ConstantConditions
+                    mimic.setAIMoveSpeed((float) (speed * mimic.getAttribute(Attributes.field_233821_d_).getValue()));
                 }
             }
         }

@@ -3,19 +3,22 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.PendantModel;
 import artifacts.common.init.Items;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.*;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class PendantItem extends ArtifactItem {
 
@@ -60,23 +63,28 @@ public class PendantItem extends ArtifactItem {
         @SubscribeEvent
         public static void onLivingHurt(LivingHurtEvent event) {
             if (!event.getEntity().world.isRemote && event.getAmount() >= 1) {
-                if (event.getSource() == DamageSource.LIGHTNING_BOLT && CuriosAPI.getCurioEquipped(Items.SHOCK_PENDANT, event.getEntityLiving()).isPresent()) {
+                if (event.getSource() == DamageSource.LIGHTNING_BOLT && CuriosApi.getCuriosHelper().findEquippedCurio(Items.SHOCK_PENDANT, event.getEntityLiving()).isPresent()) {
                     event.setCanceled(true);
                 } else if (event.getSource().getTrueSource() instanceof LivingEntity) {
-                    if (CuriosAPI.getCurioEquipped(Items.SHOCK_PENDANT, event.getEntityLiving()).isPresent()) {
+                    if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.SHOCK_PENDANT, event.getEntityLiving()).isPresent()) {
                         LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-                        if (attacker.world.canSeeSky(attacker.getPosition()) && event.getEntityLiving().getRNG().nextFloat() < 0.20F) {
-                            ((ServerWorld) attacker.world).addLightningBolt(new LightningBoltEntity(attacker.world, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(), false));
+                        if (attacker.world.canSeeSky(new BlockPos(attacker.getPositionVec())) && event.getEntityLiving().getRNG().nextFloat() < 0.20F) {
+                            LightningBoltEntity lightningBolt = EntityType.LIGHTNING_BOLT.create(attacker.world);
+                            if (lightningBolt != null) {
+                                lightningBolt.func_233576_c_(Vector3d.func_237492_c_(new BlockPos(attacker.getPositionVec())));
+                                lightningBolt.setCaster(attacker instanceof ServerPlayerEntity ? (ServerPlayerEntity) attacker : null);
+                                attacker.world.addEntity(lightningBolt);
+                            }
                         }
                     }
-                    if (CuriosAPI.getCurioEquipped(Items.FLAME_PENDANT, event.getEntityLiving()).isPresent()) {
+                    if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.FLAME_PENDANT, event.getEntityLiving()).isPresent()) {
                         LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-                        if (!attacker.isImmuneToFire() && attacker.attackable() && event.getEntityLiving().getRNG().nextFloat() < 0.30F) {
+                        if (!attacker.func_230279_az_() && attacker.attackable() && event.getEntityLiving().getRNG().nextFloat() < 0.30F) {
                             attacker.setFire(4);
                             attacker.attackEntityFrom(new EntityDamageSource("onFire", event.getEntity()).setFireDamage(), 2);
                         }
                     }
-                    if (CuriosAPI.getCurioEquipped(Items.THORN_PENDANT, event.getEntityLiving()).isPresent()) {
+                    if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.THORN_PENDANT, event.getEntityLiving()).isPresent()) {
                         LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
                         if (attacker.attackable() && random.nextFloat() < 0.45F) {
                             attacker.attackEntityFrom(DamageSource.causeThornsDamage(event.getEntity()), 1 + event.getEntityLiving().getRNG().nextInt(4));

@@ -3,8 +3,9 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.ClawsModel;
 import com.google.common.collect.Multimap;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
@@ -30,9 +31,9 @@ public class FeralClawsItem extends ArtifactItem {
         return Curio.createProvider(new GloveCurio(this) {
 
             @Override
-            public Multimap<String, AttributeModifier> getAttributeModifiers(String identifier) {
-                Multimap<String, AttributeModifier> result = super.getAttributeModifiers(identifier);
-                result.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), FERAL_CLAWS_ATTACK_SPEED);
+            public Multimap<Attribute, AttributeModifier> getAttributeModifiers(String identifier) {
+                Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(identifier);
+                result.put(Attributes.field_233825_h_, FERAL_CLAWS_ATTACK_SPEED);
                 return result;
             }
 

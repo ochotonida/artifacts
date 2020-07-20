@@ -4,6 +4,7 @@ import artifacts.Artifacts;
 import artifacts.common.entity.MimicEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -14,5 +15,6 @@ public class Entities {
     public static void register(IForgeRegistry<EntityType<?>> registry) {
         MIMIC.setRegistryName(Artifacts.MODID, "mimic");
         registry.registerAll(MIMIC);
+        GlobalEntityTypeAttributes.put(MIMIC, MimicEntity.getAttributes().func_233813_a_());
     }
 }

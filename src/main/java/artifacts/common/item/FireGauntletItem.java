@@ -19,7 +19,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class FireGauntletItem extends ArtifactItem {
 
@@ -43,14 +43,14 @@ public class FireGauntletItem extends ArtifactItem {
 
             @Override
             @OnlyIn(Dist.CLIENT)
-            public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+            public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
                 boolean smallArms = hasSmallArms(entity);
                 GloveModel model = getModel(smallArms);
                 Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
                 IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture(smallArms)), false, false);
-                model.renderRightArm(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+                model.renderHand(index == 0, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                 vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
-                model.renderRightArm(matrixStack, vertexBuilder, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+                model.renderHand(index == 0, matrixStack, vertexBuilder, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
 
             @Override
@@ -81,8 +81,8 @@ public class FireGauntletItem extends ArtifactItem {
             if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof IndirectEntityDamageSource) && !((EntityDamageSource) event.getSource()).getIsThornsDamage()) {
                 if (event.getSource().getTrueSource() instanceof LivingEntity) {
                     LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-                    if (CuriosAPI.getCurioEquipped(Items.FIRE_GAUNTLET, attacker).isPresent()) {
-                        if (!event.getEntity().isImmuneToFire()) {
+                    if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.FIRE_GAUNTLET, attacker).isPresent()) {
+                        if (!event.getEntity().func_230279_az_()) {
                             event.getEntity().setFire(4);
                         }
                     }

@@ -12,7 +12,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class PocketPistonItem extends ArtifactItem {
 
@@ -46,7 +46,7 @@ public class PocketPistonItem extends ArtifactItem {
 
         @SubscribeEvent
         public static void onLivingKnockback(LivingKnockBackEvent event) {
-            if (event.getAttacker() instanceof LivingEntity && CuriosAPI.getCurioEquipped(Items.POCKET_PISTON, (LivingEntity) event.getAttacker()).isPresent()) {
+            if (event.getAttacker() instanceof LivingEntity && CuriosApi.getCuriosHelper().findEquippedCurio(Items.POCKET_PISTON, (LivingEntity) event.getAttacker()).isPresent()) {
                 event.setStrength(event.getStrength() * 2);
             }
         }

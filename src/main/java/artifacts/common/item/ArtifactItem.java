@@ -33,6 +33,6 @@ public class ArtifactItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        tooltip.add(new TranslationTextComponent("tooltip.artifacts." + name).applyTextStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("tooltip.artifacts." + name).func_240699_a_(TextFormatting.GRAY));
     }
 }

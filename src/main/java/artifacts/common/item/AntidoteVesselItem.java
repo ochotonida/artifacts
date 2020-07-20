@@ -38,7 +38,7 @@ public class AntidoteVesselItem extends ArtifactItem {
             }
 
             @Override
-            public void onCurioTick(String identifier, int index, LivingEntity entity) {
+            public void curioTick(String identifier, int index, LivingEntity entity) {
                 Map<Effect, EffectInstance> effects = new HashMap<>();
 
                 entity.getActivePotionMap().forEach((effect, instance) -> {

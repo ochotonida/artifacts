@@ -13,12 +13,12 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.15.2-2.2.0'
+version = '1.16.1-2.2.0'
 group = 'artifacts'
 archivesBaseName = 'Artifacts'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200514-1.15.1'
+    mappings channel: 'snapshot', version: '20200514-1.16'
     runs {
         client {
             workingDirectory project.file('run')
@@ -77,13 +77,17 @@ repositories {
         name "curios"
         url "https://maven.theillusivec4.top/"
     }
+
+    maven {
+        url "https://maven.tterrag.com/"
+    }
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.15.2-31.2.28'
+    minecraft 'net.minecraftforge:forge:1.16.1-32.0.70'
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.15.2-2.0.2.4:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.15.2-2.0.2.4")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.16.1-3.0-beta4:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.16.1-3.0-beta4")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

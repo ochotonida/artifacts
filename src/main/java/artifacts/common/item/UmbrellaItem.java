@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
@@ -16,10 +16,10 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,11 +28,11 @@ import java.util.UUID;
 
 public class UmbrellaItem extends ArtifactItem {
 
-    private static final AttributeModifier UMBRELLA_SLOW_FALLING = new AttributeModifier(UUID.fromString("a7a25453-2065-4a96-bc83-df600e13f390"), "artifacts:umbrella_slow_falling", -0.875, AttributeModifier.Operation.MULTIPLY_TOTAL).setSaved(false);
+    private static final AttributeModifier UMBRELLA_SLOW_FALLING = new AttributeModifier(UUID.fromString("a7a25453-2065-4a96-bc83-df600e13f390"), "artifacts:umbrella_slow_falling", -0.875, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
     public UmbrellaItem() {
         super(new Properties(), "umbrella");
-        this.addPropertyOverride(new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1 : 0);
+        // TODO this.addPropertyOverride(new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1 : 0);
         DispenserBlock.registerDispenseBehavior(this, ArmorItem.DISPENSER_BEHAVIOR);
     }
 
@@ -61,16 +61,18 @@ public class UmbrellaItem extends ArtifactItem {
         @SubscribeEvent
         public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
             LivingEntity entity = event.getEntityLiving();
-            IAttributeInstance gravity = entity.getAttribute(LivingEntity.ENTITY_GRAVITY);
-            if (!entity.onGround && !entity.isInWater() && event.getEntity().getMotion().y < 0 && !entity.isPotionActive(Effects.SLOW_FALLING)
-                    && (entity.getHeldItemOffhand().getItem() == Items.UMBRELLA
-                    || entity.getHeldItemMainhand().getItem() == Items.UMBRELLA) && !(entity.isHandActive() && !entity.getActiveItemStack().isEmpty() && entity.getActiveItemStack().getItem().getUseAction(entity.getActiveItemStack()) == UseAction.BLOCK)) {
-                if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                    gravity.applyModifier(UMBRELLA_SLOW_FALLING);
+            ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
+            if (gravity != null) {
+                if (!entity.func_233570_aj_() && !entity.isInWater() && event.getEntity().getMotion().y < 0 && !entity.isPotionActive(Effects.SLOW_FALLING)
+                        && (entity.getHeldItemOffhand().getItem() == Items.UMBRELLA
+                        || entity.getHeldItemMainhand().getItem() == Items.UMBRELLA) && !(entity.isHandActive() && !entity.getActiveItemStack().isEmpty() && entity.getActiveItemStack().getItem().getUseAction(entity.getActiveItemStack()) == UseAction.BLOCK)) {
+                    if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
+                        gravity.func_233767_b_(UMBRELLA_SLOW_FALLING);
+                    }
+                    entity.fallDistance = 0;
+                } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
+                    gravity.removeModifier(UMBRELLA_SLOW_FALLING);
                 }
-                entity.fallDistance = 0;
-            } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                gravity.removeModifier(UMBRELLA_SLOW_FALLING);
             }
         }
     }

@@ -22,7 +22,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class KittySlippersItem extends ArtifactItem {
 
@@ -60,7 +60,7 @@ public class KittySlippersItem extends ArtifactItem {
 
         @SubscribeEvent
         public static void onLivingDamage(LivingDamageEvent event) {
-            if (event.getEntityLiving() instanceof PlayerEntity && CuriosAPI.getCurioEquipped(Items.KITTY_SLIPPERS, event.getEntityLiving()).isPresent()) {
+            if (event.getEntityLiving() instanceof PlayerEntity && CuriosApi.getCuriosHelper().findEquippedCurio(Items.KITTY_SLIPPERS, event.getEntityLiving()).isPresent()) {
                 event.getEntity().world.playSound(null, event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY(), event.getEntityLiving().getPosZ(), SoundEvents.ENTITY_CAT_HURT, SoundCategory.PLAYERS, 1, (event.getEntityLiving().getRNG().nextFloat() - event.getEntityLiving().getRNG().nextFloat()) * 0.2F + 1.0F);
             }
         }
@@ -68,7 +68,7 @@ public class KittySlippersItem extends ArtifactItem {
         @SubscribeEvent
         public static void onSetAttackTarget(LivingSetAttackTargetEvent event) {
             if (event.getEntityLiving() instanceof CreeperEntity && event.getTarget() != null) {
-                if (CuriosAPI.getCurioEquipped(Items.KITTY_SLIPPERS, event.getTarget()).isPresent()) {
+                if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.KITTY_SLIPPERS, event.getTarget()).isPresent()) {
                     ((MobEntity) event.getEntityLiving()).setAttackTarget(null);
                 }
             }
@@ -77,7 +77,7 @@ public class KittySlippersItem extends ArtifactItem {
         @SubscribeEvent
         public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
             if (event.getEntityLiving() instanceof CreeperEntity && event.getEntityLiving().getRevengeTarget() != null) {
-                if (CuriosAPI.getCurioEquipped(Items.KITTY_SLIPPERS, event.getEntityLiving().getRevengeTarget()).isPresent()) {
+                if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.KITTY_SLIPPERS, event.getEntityLiving().getRevengeTarget()).isPresent()) {
                     event.getEntityLiving().setRevengeTarget(null);
                 }
             }
@@ -86,7 +86,7 @@ public class KittySlippersItem extends ArtifactItem {
         @SubscribeEvent
         public static void onJoinWorld(EntityJoinWorldEvent event) {
             if (event.getEntity() instanceof CreeperEntity) {
-                ((CreeperEntity) event.getEntity()).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreeperEntity) event.getEntity(), PlayerEntity.class, (entity) -> entity != null && CuriosAPI.getCurioEquipped(Items.KITTY_SLIPPERS, entity).isPresent(), 6, 1, 1.3, EntityPredicates.CAN_AI_TARGET::test));
+                ((CreeperEntity) event.getEntity()).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreeperEntity) event.getEntity(), PlayerEntity.class, (entity) -> entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(Items.KITTY_SLIPPERS, entity).isPresent(), 6, 1, 1.3, EntityPredicates.CAN_AI_TARGET::test));
             }
         }
     }

@@ -24,7 +24,7 @@ public class Features {
     }
 
     public static void addFeatures() {
-        Placement<ChanceConfig> placement = new InCaveWithChance(ChanceConfig::deserialize);
+        Placement<ChanceConfig> placement = new InCaveWithChance(ChanceConfig.field_236950_a_);
 
         for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
             if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {

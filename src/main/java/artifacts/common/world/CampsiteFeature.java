@@ -10,13 +10,14 @@ import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.blockstateprovider.BlockStateProvider;
 import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraftforge.common.Tags;
 
 import java.util.ArrayList;
@@ -54,11 +55,11 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
             .addWeightedBlockstate(Blocks.EMERALD_ORE.getDefaultState(), 1);
 
     public CampsiteFeature() {
-        super(NoFeatureConfig::deserialize);
+        super(NoFeatureConfig.field_236558_a_);
     }
 
     @Override
-    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean func_230362_a_(ISeedReader world, StructureManager manager, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
         List<BlockPos> positions = new ArrayList<>();
         BlockPos.getAllInBox(pos.add(-3, 0, -3), pos.add(3, 0, 3)).forEach((blockPos -> positions.add(blockPos.toImmutable())));
         positions.remove(pos);
@@ -122,7 +123,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
                 }
                 world.setBlockState(pos, Tags.Blocks.CHESTS_WOODEN.getRandomElement(random).getDefaultState().with(ChestBlock.FACING, Direction.Plane.HORIZONTAL.random(random)), 2);
             } else {
-                world.setBlockState(pos, Blocks.BARREL.getDefaultState().with(BarrelBlock.PROPERTY_FACING, Direction.random(random)), 2);
+                world.setBlockState(pos, Blocks.BARREL.getDefaultState().with(BarrelBlock.PROPERTY_FACING, Direction.func_239631_a_(random)), 2);
             }
             TileEntity container = world.getTileEntity(pos);
             if (container instanceof LockableLootTileEntity) {

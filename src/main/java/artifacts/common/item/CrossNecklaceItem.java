@@ -24,7 +24,7 @@ public class CrossNecklaceItem extends ArtifactItem {
             private Object model;
 
             @Override
-            public void onCurioTick(String identifier, int index, LivingEntity entity) {
+            public void curioTick(String identifier, int index, LivingEntity entity) {
                 if (entity.hurtResistantTime > 10 && entity.ticksExisted % 2 == 0) {
                     entity.hurtResistantTime++;
                 }

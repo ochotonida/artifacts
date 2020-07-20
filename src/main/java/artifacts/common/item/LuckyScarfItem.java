@@ -10,19 +10,19 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootContext;
+import net.minecraft.loot.LootParameterSets;
+import net.minecraft.loot.LootParameters;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootParameterSets;
-import net.minecraft.world.storage.loot.LootParameters;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.conditions.ILootCondition;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.List;
 
@@ -72,7 +72,7 @@ public class LuckyScarfItem extends ArtifactItem {
 
             Entity entity = context.get(LootParameters.THIS_ENTITY);
             BlockState blockState = context.get(LootParameters.BLOCK_STATE);
-            if (blockState == null || !(entity instanceof LivingEntity) || !CuriosAPI.getCurioEquipped(artifacts.common.init.Items.LUCKY_SCARF, (LivingEntity) entity).isPresent()) {
+            if (blockState == null || !(entity instanceof LivingEntity) || !CuriosApi.getCuriosHelper().findEquippedCurio(artifacts.common.init.Items.LUCKY_SCARF, (LivingEntity) entity).isPresent()) {
                 return generatedLoot;
             }
 

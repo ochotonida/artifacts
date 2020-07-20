@@ -9,14 +9,15 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
-import top.theillusivec4.curios.api.CuriosAPI;
-import top.theillusivec4.curios.api.capability.CuriosCapability;
-import top.theillusivec4.curios.api.capability.ICurio;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.CuriosCapability;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 abstract class Curio implements ICurio {
 
@@ -36,8 +37,8 @@ abstract class Curio implements ICurio {
     }
 
     @Override
-    public void playEquipSound(LivingEntity entity) {
-        entity.world.playSound(null, entity.getPosition(), equipSound, SoundCategory.NEUTRAL, 1, 1);
+    public void playRightClickEquipSound(LivingEntity entity) {
+        entity.world.playSound(null, new BlockPos(entity.getPositionVec()), equipSound, SoundCategory.NEUTRAL, 1, 1);
     }
 
     public boolean canRightClickEquip() {
@@ -46,18 +47,19 @@ abstract class Curio implements ICurio {
 
     @Override
     public boolean canEquip(String identifier, LivingEntity entity) {
-        return !CuriosAPI.getCurioEquipped(curioItem, entity).isPresent();
+        return !CuriosApi.getCuriosHelper().findEquippedCurio(curioItem, entity).isPresent();
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public boolean hasRender(String identifier, LivingEntity livingEntity) {
+    public boolean canRender(String identifier, int index, LivingEntity livingEntity) {
         return true;
     }
 
+
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         BipedModel<LivingEntity> model = getModel();
         Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
         IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture()), false, false);
