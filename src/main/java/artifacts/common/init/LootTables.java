@@ -28,6 +28,8 @@ public class LootTables {
                 "chests/village/village_toolsmith",
                 "chests/village/village_weaponsmith",
                 "chests/abandoned_mineshaft",
+                "chests/bastion_hoglin_stable",
+                "chests/bastion_treasure",
                 "chests/buried_treasure",
                 "chests/desert_pyramid",
                 "chests/jungle_temple",
