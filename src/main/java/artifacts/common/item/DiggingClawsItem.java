@@ -65,7 +65,7 @@ public class DiggingClawsItem extends ArtifactItem {
         @SubscribeEvent
         public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
             if (CuriosAPI.getCurioEquipped(Items.DIGGING_CLAWS, event.getEntityLiving()).isPresent()) {
-                event.setNewSpeed(event.getNewSpeed() + 3);
+                event.setNewSpeed(event.getNewSpeed() + 4);
             }
         }
 
