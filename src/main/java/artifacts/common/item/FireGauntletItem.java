@@ -83,7 +83,7 @@ public class FireGauntletItem extends ArtifactItem {
                     LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
                     if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.FIRE_GAUNTLET, attacker).isPresent()) {
                         if (!event.getEntity().func_230279_az_()) {
-                            event.getEntity().setFire(4);
+                            event.getEntity().setFire(8);
                         }
                     }
                 }
