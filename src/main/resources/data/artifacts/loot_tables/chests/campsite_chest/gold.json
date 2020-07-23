@@ -264,20 +264,6 @@
         },
         {
           "type": "item",
-          "name": "minecraft:gilded_blackstone",
-          "weight": 8,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 4,
-                "max": 12
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
           "name": "minecraft:light_weighted_pressure_plate",
           "weight": 3,
           "functions": [
