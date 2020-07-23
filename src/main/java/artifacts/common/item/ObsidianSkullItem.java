@@ -57,7 +57,7 @@ public class ObsidianSkullItem extends ArtifactItem {
             if (!event.getEntity().world.isRemote && event.getAmount() >= 1 && (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA) && event.getEntity() instanceof PlayerEntity) {
                 if (CuriosAPI.getCurioEquipped(Items.OBSIDIAN_SKULL, event.getEntityLiving()).isPresent() && !((PlayerEntity) event.getEntity()).getCooldownTracker().hasCooldown(Items.OBSIDIAN_SKULL)) {
                     event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 600, 0, false, true));
-                    ((PlayerEntity) event.getEntity()).getCooldownTracker().setCooldown(Items.OBSIDIAN_SKULL, 2400);
+                    ((PlayerEntity) event.getEntity()).getCooldownTracker().setCooldown(Items.OBSIDIAN_SKULL, 1200);
                 }
             }
         }
