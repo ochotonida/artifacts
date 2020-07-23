@@ -7,26 +7,47 @@
         {
           "type": "item",
           "name": "artifacts:snorkel",
-          "weight": 15
+          "weight": 12
         },
         {
           "type": "item",
           "name": "artifacts:flippers",
-          "weight": 15
+          "weight": 12
         },
         {
           "type": "item",
-          "name": "artifacts:antidote_vessel",
+          "name": "artifacts:feral_claws",
           "weight": 10
         },
         {
           "type": "item",
           "name": "artifacts:digging_claws",
+          "weight": 7
+        },
+        {
+          "type": "item",
+          "name": "artifacts:plastic_drinking_hat",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "artifacts:novelty_drinking_hat",
+          "weight": 4
+        },
+        {
+          "type": "item",
+          "name": "artifacts:umbrella",
           "weight": 20
         },
         {
-          "type": "empty",
-          "weight": 40
+          "type": "item",
+          "name": "artifacts:kitty_slippers",
+          "weight": 15
+        },
+        {
+          "type": "item",
+          "name": "artifacts:lucky_scarf",
+          "weight": 10
         }
       ]
     }

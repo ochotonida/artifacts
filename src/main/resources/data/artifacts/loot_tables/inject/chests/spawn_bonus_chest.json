@@ -6,12 +6,8 @@
       "entries": [
         {
           "type": "item",
-          "name": "artifacts:feral_claws",
-          "weight": 20
-        },
-        {
-          "type": "empty",
-          "weight": 80
+          "name": "artifacts:umbrella",
+          "weight": 1
         }
       ]
     }

@@ -35,6 +35,7 @@ public class LootTables {
                 "chests/nether_bridge",
                 "chests/pillager_outpost",
                 "chests/shipwreck_treasure",
+                "chests/spawn_bonus_chest",
                 "chests/stronghold_corridor",
                 "chests/underwater_ruin_big",
                 "chests/woodland_mansion",

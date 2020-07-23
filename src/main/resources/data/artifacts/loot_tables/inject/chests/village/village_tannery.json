@@ -7,16 +7,21 @@
         {
           "type": "item",
           "name": "artifacts:umbrella",
-          "weight": 20
+          "weight": 15
         },
         {
           "type": "item",
           "name": "artifacts:kitty_slippers",
+          "weight": 20
+        },
+        {
+          "type": "item",
+          "name": "artifacts:scarf_of_invisibility",
           "weight": 5
         },
         {
           "type": "empty",
-          "weight": 85
+          "weight": 60
         }
       ]
     }

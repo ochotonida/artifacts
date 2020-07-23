@@ -10,8 +10,13 @@
           "weight": 10
         },
         {
+          "type": "item",
+          "name": "artifacts:superstitious_hat",
+          "weight": 20
+        },
+        {
           "type": "empty",
-          "weight": 90
+          "weight": 70
         }
       ]
     }
