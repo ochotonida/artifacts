@@ -32,7 +32,12 @@ public class LootTables {
                 "chests/bastion_treasure",
                 "chests/buried_treasure",
                 "chests/desert_pyramid",
+                "chests/end_city_treasure",
                 "chests/jungle_temple",
+                "chests/nether_bridge",
+                "chests/pillager_outpost",
+                "chests/shipwreck_treasure",
+                "chests/stronghold_corridor",
                 "chests/underwater_ruin_big",
                 "chests/woodland_mansion",
                 "entities/cow"
