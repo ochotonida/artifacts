@@ -65,21 +65,21 @@ public class PendantItem extends ArtifactItem {
                 } else if (event.getSource().getTrueSource() instanceof LivingEntity) {
                     if (CuriosAPI.getCurioEquipped(Items.SHOCK_PENDANT, event.getEntityLiving()).isPresent()) {
                         LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-                        if (attacker.world.canSeeSky(attacker.getPosition()) && event.getEntityLiving().getRNG().nextFloat() < 0.20F) {
+                        if (attacker.world.canSeeSky(attacker.getPosition()) && event.getEntityLiving().getRNG().nextFloat() < 0.25F) {
                             ((ServerWorld) attacker.world).addLightningBolt(new LightningBoltEntity(attacker.world, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(), false));
                         }
                     }
                     if (CuriosAPI.getCurioEquipped(Items.FLAME_PENDANT, event.getEntityLiving()).isPresent()) {
                         LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-                        if (!attacker.isImmuneToFire() && attacker.attackable() && event.getEntityLiving().getRNG().nextFloat() < 0.30F) {
-                            attacker.setFire(4);
+                        if (!attacker.isImmuneToFire() && attacker.attackable() && event.getEntityLiving().getRNG().nextFloat() < 0.40F) {
+                            attacker.setFire(8);
                             attacker.attackEntityFrom(new EntityDamageSource("onFire", event.getEntity()).setFireDamage(), 2);
                         }
                     }
                     if (CuriosAPI.getCurioEquipped(Items.THORN_PENDANT, event.getEntityLiving()).isPresent()) {
                         LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-                        if (attacker.attackable() && random.nextFloat() < 0.45F) {
-                            attacker.attackEntityFrom(DamageSource.causeThornsDamage(event.getEntity()), 1 + event.getEntityLiving().getRNG().nextInt(4));
+                        if (attacker.attackable() && random.nextFloat() < 0.5F) {
+                            attacker.attackEntityFrom(DamageSource.causeThornsDamage(event.getEntity()), 2 + event.getEntityLiving().getRNG().nextInt(5));
                         }
                     }
                 }
