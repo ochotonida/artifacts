@@ -18,6 +18,14 @@ public class CrossNecklaceItem extends ArtifactItem {
         super(new Properties(), "cross_necklace");
     }
 
+    private static boolean canApplyBonus(ItemStack stack) {
+        return stack.getOrCreateTag().getBoolean("CanApplyBonus");
+    }
+
+    private static void setCanApplyBonus(ItemStack stack, boolean canApplyBonus) {
+        stack.getOrCreateTag().putBoolean("CanApplyBonus", canApplyBonus);
+    }
+
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
         return Curio.createProvider(new Curio(this) {
@@ -25,8 +33,13 @@ public class CrossNecklaceItem extends ArtifactItem {
 
             @Override
             public void curioTick(String identifier, int index, LivingEntity entity) {
-                if (entity.hurtResistantTime > 10 && entity.ticksExisted % 2 == 0) {
-                    entity.hurtResistantTime++;
+                if (entity.hurtResistantTime <= 10) {
+                    setCanApplyBonus(stack, true);
+                } else {
+                    if (canApplyBonus(stack)) {
+                        entity.hurtResistantTime += 20;
+                        setCanApplyBonus(stack, false);
+                    }
                 }
             }
 
