@@ -103,7 +103,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
                 return;
             }
         }
-        world.setBlockState(pos, Blocks.CAMPFIRE.getDefaultState().with(CampfireBlock.LIT, random.nextInt(3) != 0), 2);
+        world.setBlockState(pos, Blocks.CAMPFIRE.getDefaultState().with(CampfireBlock.LIT, random.nextInt(3) == 0), 2);
     }
 
     public void generateContainer(IWorld world, BlockPos pos, Random random) {
