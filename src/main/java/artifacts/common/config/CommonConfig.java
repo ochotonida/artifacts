@@ -29,7 +29,7 @@ public class CommonConfig {
         campsiteMimicChance = builder
                 .comment("Chance for a container of a campsite to be replaced by a mimic")
                 .translation(Artifacts.MODID + ".config.campsite_mimic_chance")
-                .defineInRange("campsite_mimic_chance", 0.2, 0, 1);
+                .defineInRange("campsite_mimic_chance", 0.3, 0, 1);
         campsiteOreChance = builder
                 .comment("Chance for an ore vein to generate underneath a campsite")
                 .translation(Artifacts.MODID + ".config.campsite_ore_chance")
