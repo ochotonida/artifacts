@@ -17,7 +17,7 @@ public class CommonConfig {
         campsiteChance = builder
                 .comment("Per-chunk chance a campsite is attempted to be generated. Not every attempt succeeds, this also depends on the density and shape of caves")
                 .translation(Artifacts.MODID + ".config.campsite_chance")
-                .defineInRange("campsite_chance", 0.2, 0, 1);
+                .defineInRange("campsite_chance", 0.125, 0, 1);
         campsiteMinY = builder
                 .comment("The minimum y-level at which a campsite can generate")
                 .translation(Artifacts.MODID + ".config.campsite_min_y")
