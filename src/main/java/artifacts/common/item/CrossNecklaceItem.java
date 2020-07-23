@@ -32,7 +32,7 @@ public class CrossNecklaceItem extends ArtifactItem {
             private Object model;
 
             @Override
-            public void curioTick(String identifier, int index, LivingEntity entity) {
+            public void onCurioTick(String identifier, int index, LivingEntity entity) {
                 if (entity.hurtResistantTime <= 10) {
                     setCanApplyBonus(stack, true);
                 } else {
