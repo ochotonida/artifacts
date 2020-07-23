@@ -54,6 +54,18 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
             .addWeightedBlockstate(Blocks.DIAMOND_ORE.getDefaultState(), 2)
             .addWeightedBlockstate(Blocks.EMERALD_ORE.getDefaultState(), 1);
 
+    public static final BlockStateProvider CAMPFIRE_PROVIDER = new WeightedBlockStateProvider()
+            .addWeightedBlockstate(Blocks.CAMPFIRE.getDefaultState().with(CampfireBlock.LIT, false), 12)
+            .addWeightedBlockstate(Blocks.CAMPFIRE.getDefaultState().with(CampfireBlock.LIT, true), 3)
+            .addWeightedBlockstate(Blocks.field_235367_mf_.getDefaultState().with(CampfireBlock.LIT, true), 1);
+
+    public static final BlockStateProvider LANTERN_PROVIDER = new WeightedBlockStateProvider()
+            .addWeightedBlockstate(Blocks.LANTERN.getDefaultState().with(LanternBlock.HANGING, true), 6)
+            .addWeightedBlockstate(Blocks.field_235366_md_.getDefaultState().with(LanternBlock.HANGING, true), 2)
+            .addWeightedBlockstate(Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.DOWN), 1)
+            .addWeightedBlockstate(Blocks.field_235383_mw_.getDefaultState(), 1)
+            .addWeightedBlockstate(Blocks.GLOWSTONE.getDefaultState(), 1);
+
     public CampsiteFeature() {
         super(NoFeatureConfig.field_236558_a_);
     }
@@ -96,15 +108,11 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
                 currentPos = currentPos.up();
             }
             if (currentPos.getY() - pos.getY() > 2 && !world.isAirBlock(currentPos.up())) {
-                if (random.nextInt(12) == 0) {
-                    world.setBlockState(currentPos, Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.DOWN), 2);
-                } else {
-                    world.setBlockState(currentPos, Blocks.LANTERN.getDefaultState().with(LanternBlock.HANGING, true), 2);
-                }
+                world.setBlockState(currentPos, LANTERN_PROVIDER.getBlockState(random, currentPos), 2);
                 return;
             }
         }
-        world.setBlockState(pos, Blocks.CAMPFIRE.getDefaultState().with(CampfireBlock.LIT, random.nextInt(3) != 0), 2);
+        world.setBlockState(pos, CAMPFIRE_PROVIDER.getBlockState(random, pos), 2);
     }
 
     public void generateContainer(IWorld world, BlockPos pos, Random random) {
@@ -117,7 +125,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
             }
         } else {
             if (random.nextBoolean()) {
-                if (random.nextInt(4) == 0) {
+                if (random.nextInt(5) == 0) {
                     world.setBlockState(pos, Blocks.TRAPPED_CHEST.getDefaultState().with(ChestBlock.FACING, Direction.Plane.HORIZONTAL.random(random)), 2);
                     world.setBlockState(pos.down(), Blocks.TNT.getDefaultState(), 0);
                 }
@@ -142,11 +150,11 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
     }
 
     public void generateDecoration(IWorld world, BlockPos pos, Random random) {
-        if (random.nextBoolean()) {
+        if (random.nextInt(3) == 0) {
             world.setBlockState(pos, DECORATION_PROVIDER.getBlockState(random, pos), 2);
-            return;
+        } else {
+            world.setBlockState(pos, BlockTags.FLOWER_POTS.getRandomElement(random).getDefaultState(), 2);
         }
-        world.setBlockState(pos, BlockTags.FLOWER_POTS.getRandomElement(random).getDefaultState(), 2);
     }
 
     public void generateOreVein(IWorld world, BlockPos pos, Random random) {
