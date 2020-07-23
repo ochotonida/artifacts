@@ -6,23 +6,28 @@
       "entries": [
         {
           "type": "item",
-          "name": "artifacts:fire_gauntlet",
-          "weight": 7
+          "name": "artifacts:plastic_drinking_hat",
+          "weight": 6
         },
         {
           "type": "item",
-          "name": "artifacts:flame_pendant",
-          "weight": 5
+          "name": "artifacts:novelty_drinking_hat",
+          "weight": 1
         },
         {
           "type": "item",
           "name": "artifacts:cross_necklace",
-          "weight": 5
+          "weight": 6
         },
         {
           "type": "item",
-          "name": "artifacts:obsidian_skull",
-          "weight": 8
+          "name": "artifacts:night_vision_goggles",
+          "weight": 6
+        },
+        {
+          "type": "item",
+          "name": "artifacts:pocket_piston",
+          "weight": 6
         },
         {
           "type": "empty",

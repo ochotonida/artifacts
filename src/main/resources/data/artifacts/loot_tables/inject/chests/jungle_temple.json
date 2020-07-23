@@ -7,16 +7,12 @@
         {
           "type": "loot_table",
           "name": "artifacts:artifact",
-          "weight": 50
+          "weight": 65
         },
         {
           "type": "item",
           "name": "artifacts:kitty_slippers",
-          "weight": 20
-        },
-        {
-          "type": "empty",
-          "weight": 30
+          "weight": 35
         }
       ]
     }

@@ -10,8 +10,13 @@
           "weight": 10
         },
         {
+          "type": "item",
+          "name": "artifacts:antidote_vessel",
+          "weight": 10
+        },
+        {
           "type": "empty",
-          "weight": 90
+          "weight": 80
         }
       ]
     }

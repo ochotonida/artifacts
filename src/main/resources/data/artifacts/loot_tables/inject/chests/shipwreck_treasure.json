@@ -22,7 +22,7 @@
         {
           "type": "item",
           "name": "artifacts:steadfast_spikes",
-          "weight": 10
+          "weight": 5
         },
         {
           "type": "item",
@@ -37,11 +37,16 @@
         {
           "type": "item",
           "name": "artifacts:night_vision_goggles",
-          "weight": 5
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "artifacts:obsidian_skull",
+          "weight": 10
         },
         {
           "type": "empty",
-          "weight": 50
+          "weight": 40
         }
       ]
     }

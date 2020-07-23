@@ -6,32 +6,37 @@
       "entries": [
         {
           "type": "item",
+          "name": "artifacts:night_vision_goggles",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "artifacts:thorn_pendant",
+          "weight": 10
+        },
+        {
+          "type": "item",
           "name": "artifacts:fire_gauntlet",
           "weight": 10
         },
         {
           "type": "item",
-          "name": "artifacts:cross_necklace",
+          "name": "artifacts:power_glove",
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "artifacts:universal_attractor",
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "artifacts:obsidian_skull",
           "weight": 10
         },
         {
           "type": "item",
-          "name": "artifacts:steadfast_spikes",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "artifacts:panic_necklace",
-          "weight": 10
-        },
-        {
-          "type": "loot_table",
-          "name": "artifacts:artifact",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "artifacts:antidote_vessel",
+          "name": "artifacts:lucky_scarf",
           "weight": 10
         },
         {

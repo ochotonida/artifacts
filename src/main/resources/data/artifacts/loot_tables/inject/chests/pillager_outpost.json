@@ -7,17 +7,12 @@
         {
           "type": "item",
           "name": "artifacts:panic_necklace",
-          "weight": 10
+          "weight": 15
         },
         {
           "type": "item",
           "name": "artifacts:pocket_piston",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "artifacts:shock_pendant",
-          "weight": 10
+          "weight": 15
         },
         {
           "type": "item",
@@ -27,17 +22,21 @@
         {
           "type": "item",
           "name": "artifacts:power_glove",
-          "weight": 5
+          "weight": 10
         },
         {
           "type": "item",
           "name": "artifacts:cross_necklace",
-          "weight": 5
+          "weight": 10
         },
         {
           "type": "item",
-          "name": "artifacts:night_vision_goggles",
+          "name": "artifacts:scarf_of_invisibility",
           "weight": 10
+        },
+        {
+          "type": "empty",
+          "weight": 30
         }
       ]
     }
