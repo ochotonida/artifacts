@@ -28,9 +28,9 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
 
     public static final BlockStateProvider CRAFTING_STATION_PROVIDER = new WeightedBlockStateProvider()
             .addWeightedBlockstate(Blocks.CRAFTING_TABLE.getDefaultState(), 5)
-            .addWeightedBlockstate(Blocks.FURNACE.getDefaultState(), 5)
-            .addWeightedBlockstate(Blocks.BLAST_FURNACE.getDefaultState(), 5)
-            .addWeightedBlockstate(Blocks.SMOKER.getDefaultState(), 5)
+            .addWeightedBlockstate(Blocks.FURNACE.getDefaultState().with(FurnaceBlock.LIT, false), 5)
+            .addWeightedBlockstate(Blocks.BLAST_FURNACE.getDefaultState().with(BlastFurnaceBlock.LIT, false), 5)
+            .addWeightedBlockstate(Blocks.SMOKER.getDefaultState().with(SmokerBlock.LIT, false), 5)
             .addWeightedBlockstate(Blocks.SMITHING_TABLE.getDefaultState(), 5)
             .addWeightedBlockstate(Blocks.FLETCHING_TABLE.getDefaultState(), 5)
             .addWeightedBlockstate(Blocks.CARTOGRAPHY_TABLE.getDefaultState(), 5)
