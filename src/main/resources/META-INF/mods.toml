@@ -4,11 +4,10 @@ issueTrackerURL="https://github.com/ochotonida/artifacts/issues"
 
 [[mods]]
 modId="artifacts"
-version="1.16.1-2.2.0"
+version="1.16.1-2.3.0"
 displayName="Artifacts"
-# todo updateJSONURL=""
 displayURL="https://www.curseforge.com/minecraft/mc-mods/artifacts"
-# todo logoFile="examplemod.png" A file name (in the root of the mod JAR) containing a logo for display
+logoFile="logo.png"
 description='''Adds various new powerful uncraftable items to make exploration a bit more interesting'''
 
 [[dependencies.artifacts]]
@@ -28,6 +27,6 @@ description='''Adds various new powerful uncraftable items to make exploration a
 [[dependencies.artifacts]]
     modId="curios"
     mandatory=true
-    versionRange="[FORGE-1.16.1-3.0-beta4,)"
+    versionRange="[FORGE-1.16.1-3.0,)"
     ordering="AFTER"
     side="BOTH"
