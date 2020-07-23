@@ -12,8 +12,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 4,
-                "max": 12
+                "min": 1,
+                "max": 5
               }
             }
           ]
@@ -26,8 +26,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 4,
-                "max": 12
+                "min": 1,
+                "max": 5
               }
             }
           ]
@@ -40,8 +40,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 4,
-                "max": 12
+                "min": 1,
+                "max": 5
               }
             }
           ]
@@ -54,8 +54,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 4,
-                "max": 12
+                "min": 1,
+                "max": 5
               }
             }
           ]
@@ -69,7 +69,7 @@
               "function": "set_count",
               "count": {
                 "min": 1,
-                "max": 6
+                "max": 3
               }
             }
           ]
@@ -82,8 +82,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 4,
-                "max": 12
+                "min": 1,
+                "max": 5
               }
             }
           ]
@@ -96,8 +96,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 4,
-                "max": 12
+                "min": 1,
+                "max": 5
               }
             }
           ]
@@ -110,8 +110,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 4,
-                "max": 12
+                "min": 1,
+                "max": 5
               }
             }
           ]
@@ -124,8 +124,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 4,
-                "max": 12
+                "min": 1,
+                "max": 5
               }
             }
           ]
@@ -138,8 +138,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 4,
-                "max": 12
+                "min": 1,
+                "max": 5
               }
             }
           ]
@@ -152,8 +152,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 4,
-                "max": 12
+                "min": 1,
+                "max": 5
               }
             }
           ]
