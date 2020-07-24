@@ -128,6 +128,11 @@
           "type": "item",
           "name": "artifacts:kitty_slippers",
           "weight": 8
+        },
+        {
+          "type": "item",
+          "name": "artifacts:running_shoes",
+          "weight": 8
         }
       ]
     }

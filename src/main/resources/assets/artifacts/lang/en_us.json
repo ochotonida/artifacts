@@ -34,6 +34,7 @@
   "item.artifacts.steadfast_spikes": "Steadfast Spikes",
   "item.artifacts.universal_attractor": "Universal Attractor",
   "item.artifacts.kitty_slippers": "Kitty Slippers",
+  "item.artifacts.running_shoes": "Running Shoes",
   "tooltip.artifacts.snorkel": "Allows the wearer to breathe underwater",
   "tooltip.artifacts.plastic_drinking_hat": "Decreases the time it takes to drink drinkable items",
   "tooltip.artifacts.novelty_drinking_hat": "'Hey! I'm #1, and I let gravity do my drinking!'",
@@ -59,5 +60,6 @@
   "tooltip.artifacts.digging_claws": "Increases the wearer's mining speed and base mining level",
   "tooltip.artifacts.steadfast_spikes": "Grants immunity to knockback",
   "tooltip.artifacts.universal_attractor": "Attracts nearby items",
-  "tooltip.artifacts.kitty_slippers": "Creepers avoid the wearer"
+  "tooltip.artifacts.kitty_slippers": "Creepers avoid the wearer",
+  "tooltip.artifacts.running_shoes": "Increases movement speed and step height while sprinting"
 }
