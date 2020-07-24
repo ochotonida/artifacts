@@ -15,8 +15,13 @@
           "weight": 10
         },
         {
+          "type": "loot_table",
+          "name": "artifacts:artifact",
+          "weight": 10
+        },
+        {
           "type": "empty",
-          "weight": 85
+          "weight": 75
         }
       ]
     }
