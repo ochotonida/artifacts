@@ -56,7 +56,7 @@ public class RunningShoesItem extends ArtifactItem {
                         movementSpeed.applyModifier(RUNNING_SHOES_SPEED_BOOST);
                     }
                     if (livingEntity instanceof PlayerEntity) {
-                        livingEntity.stepHeight = Math.max(livingEntity.stepHeight, 1);
+                        livingEntity.stepHeight = Math.max(livingEntity.stepHeight, 1.1F);
                     }
                 } else if (movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
                     movementSpeed.removeModifier(RUNNING_SHOES_SPEED_BOOST);
