@@ -61,7 +61,9 @@ abstract class Curio implements ICurio {
     @OnlyIn(Dist.CLIENT)
     public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         BipedModel<LivingEntity> model = getModel();
-        Curio.RenderHelper.setBodyRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, partialTicks, netHeadYaw, headPitch, model);
+        model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
+        ICurio.RenderHelper.followBodyRotations(entity, model);
         IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture()), false, false);
         model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
@@ -83,18 +85,6 @@ abstract class Curio implements ICurio {
         @Override
         public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
             return CuriosCapability.ITEM.orEmpty(cap, capability);
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static final class RenderHelper {
-        private RenderHelper() {
-        }
-
-        public static void setBodyRotationAngles(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float partialTicks, float netHeadYaw, float headPitch, BipedModel<LivingEntity> model) {
-            ICurio.RenderHelper.followBodyRotations(entity, model);
-            model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-            model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
         }
     }
 }

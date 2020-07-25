@@ -19,6 +19,8 @@ public class GloveModel extends PlayerModel<LivingEntity> {
         if (Minecraft.getInstance().gameSettings.mainHand == HandSide.LEFT) {
             mainHand = !mainHand;
         }
+        bipedRightArmwear.copyModelAngles(bipedRightArm);
+        bipedLeftArmwear.copyModelAngles(bipedLeftArm);
         bipedLeftArm.showModel = !mainHand;
         bipedLeftArmwear.showModel = !mainHand;
         bipedRightArm.showModel = mainHand;
