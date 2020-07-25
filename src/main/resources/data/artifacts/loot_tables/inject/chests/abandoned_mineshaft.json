@@ -7,12 +7,12 @@
         {
           "type": "item",
           "name": "artifacts:night_vision_goggles",
-          "weight": 10
+          "weight": 8
         },
         {
           "type": "item",
           "name": "artifacts:panic_necklace",
-          "weight": 10
+          "weight": 8
         },
         {
           "type": "item",
@@ -22,7 +22,7 @@
         {
           "type": "item",
           "name": "artifacts:plastic_drinking_hat",
-          "weight": 10
+          "weight": 8
         },
         {
           "type": "item",
@@ -32,16 +32,16 @@
         {
           "type": "item",
           "name": "artifacts:superstitious_hat",
-          "weight": 10
+          "weight": 8
         },
         {
           "type": "item",
           "name": "artifacts:digging_claws",
-          "weight": 10
+          "weight": 8
         },
         {
           "type": "empty",
-          "weight": 30
+          "weight": 40
         }
       ]
     }

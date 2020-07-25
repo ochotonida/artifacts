@@ -12,11 +12,16 @@
         {
           "type": "item",
           "name": "artifacts:superstitious_hat",
-          "weight": 20
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "artifacts:running_shoes",
+          "weight": 10
         },
         {
           "type": "empty",
-          "weight": 70
+          "weight": 75
         }
       ]
     }
