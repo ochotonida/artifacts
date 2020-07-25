@@ -17,7 +17,7 @@
         {
           "type": "item",
           "name": "artifacts:feral_claws",
-          "weight": 8
+          "weight": 7
         },
         {
           "type": "item",
@@ -27,31 +27,36 @@
         {
           "type": "item",
           "name": "artifacts:plastic_drinking_hat",
-          "weight": 8
+          "weight": 7
         },
         {
           "type": "item",
           "name": "artifacts:novelty_drinking_hat",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "item",
           "name": "artifacts:umbrella",
-          "weight": 15
-        },
-        {
-          "type": "item",
-          "name": "artifacts:kitty_slippers",
           "weight": 10
         },
         {
           "type": "item",
+          "name": "artifacts:kitty_slippers",
+          "weight": 7
+        },
+        {
+          "type": "item",
+          "name": "artifacts:bunny_hoppers",
+          "weight": 7
+        },
+        {
+          "type": "item",
           "name": "artifacts:lucky_scarf",
-          "weight": 8
+          "weight": 7
         },
         {
           "type": "empty",
-          "weight": 22
+          "weight": 27
         }
       ]
     }
