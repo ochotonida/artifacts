@@ -7,17 +7,17 @@
         {
           "type": "item",
           "name": "artifacts:snorkel",
-          "weight": 15
+          "weight": 10
         },
         {
           "type": "item",
           "name": "artifacts:flippers",
-          "weight": 15
+          "weight": 10
         },
         {
           "type": "item",
           "name": "artifacts:superstitious_hat",
-          "weight": 15
+          "weight": 10
         },
         {
           "type": "item",
@@ -27,17 +27,21 @@
         {
           "type": "item",
           "name": "artifacts:fire_gauntlet",
-          "weight": 15
+          "weight": 10
         },
         {
           "type": "item",
           "name": "artifacts:cross_necklace",
-          "weight": 15
+          "weight": 10
         },
         {
           "type": "item",
           "name": "artifacts:power_glove",
-          "weight": 15
+          "weight": 10
+        },
+        {
+          "type": "empty",
+          "weight": 30
         }
       ]
     }

@@ -40,21 +40,6 @@
           "weight": 8
         }
       ]
-    },
-    {
-      "name": "artifact",
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "loot_table",
-          "name": "artifacts:artifact",
-          "weight": 10
-        },
-        {
-          "type": "empty",
-          "weight": 70
-        }
-      ]
     }
   ]
 }

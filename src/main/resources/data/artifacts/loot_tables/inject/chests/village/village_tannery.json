@@ -12,7 +12,7 @@
         {
           "type": "item",
           "name": "artifacts:kitty_slippers",
-          "weight": 20
+          "weight": 15
         },
         {
           "type": "item",
@@ -21,7 +21,7 @@
         },
         {
           "type": "empty",
-          "weight": 60
+          "weight": 65
         }
       ]
     }
