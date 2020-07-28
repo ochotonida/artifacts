@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-public class ArtifactItem extends Item {
+public abstract class ArtifactItem extends Item {
 
     private final String name;
 

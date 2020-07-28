@@ -119,8 +119,9 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
                 if (random.nextInt(4) == 0) {
                     world.setBlockState(pos, Blocks.TRAPPED_CHEST.getDefaultState().with(ChestBlock.FACING, Direction.Plane.HORIZONTAL.random(random)), 2);
                     world.setBlockState(pos.down(), Blocks.TNT.getDefaultState(), 0);
+                } else {
+                    world.setBlockState(pos, Tags.Blocks.CHESTS_WOODEN.getRandomElement(random).getDefaultState().with(ChestBlock.FACING, Direction.Plane.HORIZONTAL.random(random)), 2);
                 }
-                world.setBlockState(pos, Tags.Blocks.CHESTS_WOODEN.getRandomElement(random).getDefaultState().with(ChestBlock.FACING, Direction.Plane.HORIZONTAL.random(random)), 2);
             } else {
                 world.setBlockState(pos, Blocks.BARREL.getDefaultState().with(BarrelBlock.PROPERTY_FACING, Direction.random(random)), 2);
             }

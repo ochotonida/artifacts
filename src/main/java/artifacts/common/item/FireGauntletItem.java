@@ -48,11 +48,11 @@ public class FireGauntletItem extends ArtifactItem {
                 GloveModel model = getModel(smallArms);
                 model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                 model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
-                ICurio.RenderHelper.followBodyRotations(entity, model);
+                RenderHelper.followBodyRotations(entity, model);
                 IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture(smallArms)), false, false);
-                model.renderRightArm(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+                model.renderHand(index == 0, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                 vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
-                model.renderRightArm(matrixStack, vertexBuilder, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+                model.renderHand(index == 0, matrixStack, vertexBuilder, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
 
             @Override

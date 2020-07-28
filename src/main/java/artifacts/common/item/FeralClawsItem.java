@@ -50,19 +50,19 @@ public class FeralClawsItem extends ArtifactItem {
 
             @OnlyIn(Dist.CLIENT)
             protected ClawsModel getSlimModel() {
-                if (model_slim == null) {
-                    model_slim = new ClawsModel(true);
+                if (modelSlim == null) {
+                    modelSlim = new ClawsModel(true);
                 }
-                return (ClawsModel) model_slim;
+                return (ClawsModel) modelSlim;
             }
 
             @Override
             @OnlyIn(Dist.CLIENT)
             protected ClawsModel getModel() {
-                if (model_default == null) {
-                    model_default = new ClawsModel(false);
+                if (modelDefault == null) {
+                    modelDefault = new ClawsModel(false);
                 }
-                return (ClawsModel) model_default;
+                return (ClawsModel) modelDefault;
             }
         });
     }
