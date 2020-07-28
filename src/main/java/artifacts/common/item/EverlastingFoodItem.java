@@ -11,6 +11,7 @@ public class EverlastingFoodItem extends ArtifactItem {
         super(properties, name);
     }
 
+    @Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity entity) {
         if (isFood()) {
             entity.onFoodEaten(world, stack.copy());
