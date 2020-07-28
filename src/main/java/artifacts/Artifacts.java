@@ -62,8 +62,8 @@ public class Artifacts {
 
         @SubscribeEvent
         public static void enqueueIMC(final InterModEnqueueEvent event) {
-            SlotTypePreset[] Types = {SlotTypePreset.HEAD, SlotTypePreset.NECKLACE, SlotTypePreset.BELT};
-            for (SlotTypePreset type : Types) {
+            SlotTypePreset[] types = {SlotTypePreset.HEAD, SlotTypePreset.NECKLACE, SlotTypePreset.BELT};
+            for (SlotTypePreset type : types) {
                 InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> type.getMessageBuilder().build());
             }
             InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HANDS.getMessageBuilder().size(2).build());
