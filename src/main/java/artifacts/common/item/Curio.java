@@ -19,7 +19,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
-abstract class Curio implements ICurio {
+public abstract class Curio implements ICurio {
 
     private final Item curioItem;
     private final SoundEvent equipSound = getEquipSound();
@@ -63,7 +63,7 @@ abstract class Curio implements ICurio {
         BipedModel<LivingEntity> model = getModel();
         model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
-        ICurio.RenderHelper.followBodyRotations(entity, model);
+        RenderHelper.followBodyRotations(entity, model);
         IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture()), false, false);
         model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }

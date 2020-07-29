@@ -13,12 +13,11 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public abstract class GloveCurio extends Curio {
 
-    protected Object model_default;
-    protected Object model_slim;
+    protected Object modelDefault;
+    protected Object modelSlim;
 
     public GloveCurio(Item item) {
         super(item);
@@ -44,19 +43,19 @@ public abstract class GloveCurio extends Curio {
 
     @OnlyIn(Dist.CLIENT)
     protected GloveModel getSlimModel() {
-        if (model_slim == null) {
-            model_slim = new GloveModel(true);
+        if (modelSlim == null) {
+            modelSlim = new GloveModel(true);
         }
-        return (GloveModel) model_slim;
+        return (GloveModel) modelSlim;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     protected GloveModel getModel() {
-        if (model_default == null) {
-            model_default = new GloveModel(false);
+        if (modelDefault == null) {
+            modelDefault = new GloveModel(false);
         }
-        return (GloveModel) model_default;
+        return (GloveModel) modelDefault;
     }
 
     @Override
@@ -71,7 +70,7 @@ public abstract class GloveCurio extends Curio {
         GloveModel model = getModel(smallArms);
         model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
-        ICurio.RenderHelper.followBodyRotations(entity, model);
+        RenderHelper.followBodyRotations(entity, model);
         IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture(smallArms)), false, false);
         model.renderHand(index == 0, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
