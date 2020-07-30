@@ -4,6 +4,7 @@ import artifacts.Artifacts;
 import artifacts.client.render.model.curio.ScarfModel;
 import com.google.gson.JsonObject;
 import net.minecraft.block.BlockState;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -25,6 +26,7 @@ import net.minecraftforge.common.loot.LootModifier;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.List;
+import java.util.Map;
 
 public class LuckyScarfItem extends ArtifactItem {
 
@@ -79,7 +81,9 @@ public class LuckyScarfItem extends ArtifactItem {
             ItemStack fakeTool = tool.isEmpty() ? new ItemStack(Items.BARRIER) : tool.copy();
             fakeTool.getOrCreateTag().putBoolean("HasAppliedFortuneBonus", true);
 
-            fakeTool.addEnchantment(Enchantments.FORTUNE, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, fakeTool) + 1);
+            Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(fakeTool);
+            enchantments.put(Enchantments.FORTUNE, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, fakeTool) + 1);
+            EnchantmentHelper.setEnchantments(enchantments, fakeTool);
             LootContext.Builder builder = new LootContext.Builder(context);
             builder.withParameter(LootParameters.TOOL, fakeTool);
             LootContext newContext = builder.build(LootParameterSets.BLOCK);
