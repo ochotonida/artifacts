@@ -21,4 +21,9 @@ public class EverlastingFoodItem extends ArtifactItem {
         }
         return stack;
     }
+
+    @Override
+    public int getUseDuration(ItemStack stack) {
+        return 24;
+    }
 }
