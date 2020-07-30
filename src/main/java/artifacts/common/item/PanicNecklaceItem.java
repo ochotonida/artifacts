@@ -2,7 +2,6 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.PanicNecklaceModel;
-import artifacts.common.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
@@ -12,10 +11,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
 
 public class PanicNecklaceItem extends ArtifactItem {
@@ -24,6 +22,15 @@ public class PanicNecklaceItem extends ArtifactItem {
 
     public PanicNecklaceItem() {
         super(new Properties(), "panic_necklace");
+        MinecraftForge.EVENT_BUS.addListener(this::onLivingHurt);
+    }
+
+    public void onLivingHurt(LivingHurtEvent event) {
+        if (!event.getEntity().world.isRemote && event.getAmount() >= 1) {
+            if (CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+                event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, 160, 0, false, false));
+            }
+        }
     }
 
     @Override
@@ -51,19 +58,5 @@ public class PanicNecklaceItem extends ArtifactItem {
                 return TEXTURE;
             }
         });
-    }
-
-    @Mod.EventBusSubscriber(modid = Artifacts.MODID)
-    @SuppressWarnings("unused")
-    public static class Events {
-
-        @SubscribeEvent
-        public static void onLivingHurt(LivingHurtEvent event) {
-            if (!event.getEntity().world.isRemote && event.getAmount() >= 1) {
-                if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.PANIC_NECKLACE, event.getEntityLiving()).isPresent()) {
-                    event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, 160, 0, false, false));
-                }
-            }
-        }
     }
 }

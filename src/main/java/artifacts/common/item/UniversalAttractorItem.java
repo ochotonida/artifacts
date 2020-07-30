@@ -2,7 +2,6 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.UniversalAttractorModel;
-import artifacts.common.init.Items;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,10 +12,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import javax.annotation.Nullable;
@@ -28,6 +26,11 @@ public class UniversalAttractorItem extends ArtifactItem {
 
     public UniversalAttractorItem() {
         super(new Properties(), "universal_attractor");
+        MinecraftForge.EVENT_BUS.addListener(this::onItemToss);
+    }
+
+    public void onItemToss(ItemTossEvent event) {
+        CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, 100));
     }
 
     public static int getCooldown(ItemStack stack) {
@@ -91,15 +94,5 @@ public class UniversalAttractorItem extends ArtifactItem {
                 return TEXTURE;
             }
         });
-    }
-
-    @Mod.EventBusSubscriber(modid = Artifacts.MODID)
-    @SuppressWarnings("unused")
-    public static class Events {
-
-        @SubscribeEvent
-        public static void onItemToss(ItemTossEvent event) {
-            CuriosApi.getCuriosHelper().findEquippedCurio(Items.UNIVERSAL_ATTRACTOR, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, 100));
-        }
     }
 }
