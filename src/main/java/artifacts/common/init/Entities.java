@@ -15,6 +15,6 @@ public class Entities {
     public static void register(IForgeRegistry<EntityType<?>> registry) {
         MIMIC.setRegistryName(Artifacts.MODID, "mimic");
         registry.registerAll(MIMIC);
-        GlobalEntityTypeAttributes.put(MIMIC, MimicEntity.getAttributes().func_233813_a_());
+        GlobalEntityTypeAttributes.put(MIMIC, MimicEntity.getAttributes().create());
     }
 }

@@ -71,7 +71,7 @@ public class PendantItem extends ArtifactItem {
                         if (attacker.world.canSeeSky(new BlockPos(attacker.getPositionVec())) && event.getEntityLiving().getRNG().nextFloat() < 0.25F) {
                             LightningBoltEntity lightningBolt = EntityType.LIGHTNING_BOLT.create(attacker.world);
                             if (lightningBolt != null) {
-                                lightningBolt.func_233576_c_(Vector3d.func_237492_c_(new BlockPos(attacker.getPositionVec())));
+                                lightningBolt.moveForced(Vector3d.copyCenteredHorizontally(attacker.getPosition()));
                                 lightningBolt.setCaster(attacker instanceof ServerPlayerEntity ? (ServerPlayerEntity) attacker : null);
                                 attacker.world.addEntity(lightningBolt);
                             }
@@ -79,7 +79,7 @@ public class PendantItem extends ArtifactItem {
                     }
                     if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.FLAME_PENDANT, event.getEntityLiving()).isPresent()) {
                         LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-                        if (!attacker.func_230279_az_() && attacker.attackable() && event.getEntityLiving().getRNG().nextFloat() < 0.40F) {
+                        if (!attacker.isImmuneToFire() && attacker.attackable() && event.getEntityLiving().getRNG().nextFloat() < 0.40F) {
                             attacker.setFire(8);
                             attacker.attackEntityFrom(new EntityDamageSource("onFire", event.getEntity()).setFireDamage(), 2);
                         }

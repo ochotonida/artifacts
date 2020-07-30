@@ -31,7 +31,7 @@ public class PowerGloveItem extends ArtifactItem {
             @Override
             public Multimap<Attribute, AttributeModifier> getAttributeModifiers(String identifier) {
                 Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(identifier);
-                result.put(Attributes.field_233823_f_, POWER_GLOVE_ATTACK_DAMAGE);
+                result.put(Attributes.ATTACK_DAMAGE, POWER_GLOVE_ATTACK_DAMAGE);
                 return result;
             }
 

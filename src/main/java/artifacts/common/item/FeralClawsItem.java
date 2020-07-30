@@ -33,7 +33,7 @@ public class FeralClawsItem extends ArtifactItem {
             @Override
             public Multimap<Attribute, AttributeModifier> getAttributeModifiers(String identifier) {
                 Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(identifier);
-                result.put(Attributes.field_233825_h_, FERAL_CLAWS_ATTACK_SPEED);
+                result.put(Attributes.ATTACK_SPEED, FERAL_CLAWS_ATTACK_SPEED);
                 return result;
             }
 

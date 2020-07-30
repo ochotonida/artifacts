@@ -53,11 +53,11 @@ public class MimicEntity extends MobEntity implements IMob {
 
     public static AttributeModifierMap.MutableAttribute getAttributes() {
         return MobEntity.func_233666_p_()
-                .func_233815_a_(Attributes.field_233818_a_, 60)
-                .func_233815_a_(Attributes.field_233819_b_, 16)
-                .func_233815_a_(Attributes.field_233820_c_, 0.5)
-                .func_233815_a_(Attributes.field_233821_d_, 1)
-                .func_233815_a_(Attributes.field_233823_f_, 6);
+                .createMutableAttribute(Attributes.MAX_HEALTH, 60)
+                .createMutableAttribute(Attributes.FOLLOW_RANGE, 16)
+                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 1)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 6);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class MimicEntity extends MobEntity implements IMob {
         goalSelector.addGoal(3, new FaceRandomGoal(this));
         goalSelector.addGoal(5, new HopGoal(this));
         // noinspection ConstantConditions
-        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 1, true, false, (entity) -> !isDormant || getDistance(entity) < getAttribute(Attributes.field_233819_b_).getValue() / 2.5));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 1, true, false, (entity) -> !isDormant || getDistance(entity) < getAttribute(Attributes.FOLLOW_RANGE).getValue() / 2.5));
     }
 
     @Override
@@ -108,7 +108,7 @@ public class MimicEntity extends MobEntity implements IMob {
     public void onCollideWithPlayer(PlayerEntity player) {
         super.onCollideWithPlayer(player);
         // noinspection ConstantConditions
-        if (player.getEntityWorld().getDifficulty() != Difficulty.PEACEFUL && canEntityBeSeen(player) && getDistanceSq(player) < 1 && player.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getAttribute(Attributes.field_233823_f_).getValue())) {
+        if (player.getEntityWorld().getDifficulty() != Difficulty.PEACEFUL && canEntityBeSeen(player) && getDistanceSq(player) < 1 && player.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
             applyEnchantments(this, player);
         }
     }
@@ -327,7 +327,7 @@ public class MimicEntity extends MobEntity implements IMob {
                 action = Action.WAIT;
                 if (mimic.onGround) {
                     // noinspection ConstantConditions
-                    mimic.setAIMoveSpeed((float) (speed * mimic.getAttribute(Attributes.field_233821_d_).getValue()));
+                    mimic.setAIMoveSpeed((float) (speed * mimic.getAttribute(Attributes.MOVEMENT_SPEED).getValue()));
                     if (jumpDelay-- > 0) {
                         mimic.moveStrafing = mimic.moveForward = 0;
                         mimic.setAIMoveSpeed(0);
@@ -339,7 +339,7 @@ public class MimicEntity extends MobEntity implements IMob {
                     }
                 } else {
                     // noinspection ConstantConditions
-                    mimic.setAIMoveSpeed((float) (speed * mimic.getAttribute(Attributes.field_233821_d_).getValue()));
+                    mimic.setAIMoveSpeed((float) (speed * mimic.getAttribute(Attributes.MOVEMENT_SPEED).getValue()));
                 }
             }
         }

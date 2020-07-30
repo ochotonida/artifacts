@@ -62,11 +62,11 @@ public class UmbrellaItem extends ArtifactItem {
             LivingEntity entity = event.getEntityLiving();
             ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
             if (gravity != null) {
-                if (!entity.func_233570_aj_() && !entity.isInWater() && event.getEntity().getMotion().y < 0 && !entity.isPotionActive(Effects.SLOW_FALLING)
+                if (!entity.isOnGround() && !entity.isInWater() && event.getEntity().getMotion().y < 0 && !entity.isPotionActive(Effects.SLOW_FALLING)
                         && (entity.getHeldItemOffhand().getItem() == Items.UMBRELLA
                         || entity.getHeldItemMainhand().getItem() == Items.UMBRELLA) && !(entity.isHandActive() && !entity.getActiveItemStack().isEmpty() && entity.getActiveItemStack().getItem().getUseAction(entity.getActiveItemStack()) == UseAction.BLOCK)) {
                     if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                        gravity.func_233767_b_(UMBRELLA_SLOW_FALLING);
+                        gravity.applyNonPersistentModifier(UMBRELLA_SLOW_FALLING);
                     }
                     entity.fallDistance = 0;
                 } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {

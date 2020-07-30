@@ -33,7 +33,7 @@ public class SteadfastSpikesItem extends ArtifactItem {
             @Override
             public Multimap<Attribute, AttributeModifier> getAttributeModifiers(String identifier) {
                 Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(identifier);
-                result.put(Attributes.field_233820_c_, STEADFAST_SPIKES_KNOCKBACK_RESISTANCE);
+                result.put(Attributes.KNOCKBACK_RESISTANCE, STEADFAST_SPIKES_KNOCKBACK_RESISTANCE);
                 return result;
             }
 

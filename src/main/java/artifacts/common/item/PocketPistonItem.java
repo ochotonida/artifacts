@@ -49,7 +49,7 @@ public class PocketPistonItem extends ArtifactItem {
         public static void onLivingAttack(LivingAttackEvent event) {
             if (event.getSource().getTrueSource() instanceof LivingEntity && CuriosApi.getCuriosHelper().findEquippedCurio(Items.POCKET_PISTON, (LivingEntity) event.getSource().getTrueSource()).isPresent()) {
                 LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-                event.getEntityLiving().func_233627_a_(1.5F, MathHelper.sin((float) (attacker.rotationYaw * (Math.PI / 180))), -MathHelper.cos((float) (attacker.rotationYaw * (Math.PI / 180))));
+                event.getEntityLiving().applyKnockback(1.5F, MathHelper.sin((float) (attacker.rotationYaw * (Math.PI / 180))), -MathHelper.cos((float) (attacker.rotationYaw * (Math.PI / 180))));
             }
         }
     }

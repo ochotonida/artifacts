@@ -51,10 +51,10 @@ public class RunningShoesItem extends ArtifactItem {
             @Override
             @SuppressWarnings("ConstantConditions")
             public void curioTick(String identifier, int index, LivingEntity livingEntity) {
-                ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.field_233821_d_);
+                ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
                 if (livingEntity.isSprinting()) {
                     if (!movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
-                        movementSpeed.func_233767_b_(RUNNING_SHOES_SPEED_BOOST);
+                        movementSpeed.applyNonPersistentModifier(RUNNING_SHOES_SPEED_BOOST);
                     }
                     if (livingEntity instanceof PlayerEntity) {
                         livingEntity.stepHeight = Math.max(livingEntity.stepHeight, 1.1F);
@@ -68,7 +68,7 @@ public class RunningShoesItem extends ArtifactItem {
             @Override
             @SuppressWarnings("ConstantConditions")
             public void onUnequip(String identifier, int index, LivingEntity livingEntity) {
-                ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.field_233821_d_);
+                ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
                 if (movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
                     movementSpeed.removeModifier(RUNNING_SHOES_SPEED_BOOST);
                     livingEntity.stepHeight = 0.6F;

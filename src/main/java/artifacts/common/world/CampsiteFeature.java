@@ -57,13 +57,13 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
     public static final BlockStateProvider CAMPFIRE_PROVIDER = new WeightedBlockStateProvider()
             .addWeightedBlockstate(Blocks.CAMPFIRE.getDefaultState().with(CampfireBlock.LIT, false), 12)
             .addWeightedBlockstate(Blocks.CAMPFIRE.getDefaultState().with(CampfireBlock.LIT, true), 3)
-            .addWeightedBlockstate(Blocks.field_235367_mf_.getDefaultState().with(CampfireBlock.LIT, true), 1);
+            .addWeightedBlockstate(Blocks.SOUL_CAMPFIRE.getDefaultState().with(CampfireBlock.LIT, true), 1);
 
     public static final BlockStateProvider LANTERN_PROVIDER = new WeightedBlockStateProvider()
             .addWeightedBlockstate(Blocks.LANTERN.getDefaultState().with(LanternBlock.HANGING, true), 6)
-            .addWeightedBlockstate(Blocks.field_235366_md_.getDefaultState().with(LanternBlock.HANGING, true), 2)
+            .addWeightedBlockstate(Blocks.SOUL_LANTERN.getDefaultState().with(LanternBlock.HANGING, true), 2)
             .addWeightedBlockstate(Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.DOWN), 1)
-            .addWeightedBlockstate(Blocks.field_235383_mw_.getDefaultState(), 1)
+            .addWeightedBlockstate(Blocks.SHROOMLIGHT.getDefaultState(), 1)
             .addWeightedBlockstate(Blocks.GLOWSTONE.getDefaultState(), 1);
 
     public CampsiteFeature() {
