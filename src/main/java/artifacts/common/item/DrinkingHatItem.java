@@ -1,9 +1,7 @@
 package artifacts.common.item;
 
-import artifacts.Artifacts;
 import artifacts.client.render.model.curio.DrinkingHatModel;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
 import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
@@ -11,27 +9,27 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class DrinkingHatItem extends ArtifactItem {
 
-    private static final ResourceLocation TEXTURE_DEFAULT = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/plastic_drinking_hat.png");
-    private static final ResourceLocation TEXTURE_NOVELTY = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/novelty_drinking_hat.png");
+    private final ResourceLocation texture;
 
-    private final boolean isNoveltyHat;
-
-    public DrinkingHatItem(String name, boolean isNoveltyHat) {
+    public DrinkingHatItem(String name, ResourceLocation texture) {
         super(new Properties(), name);
-        this.isNoveltyHat = isNoveltyHat;
+        this.texture = texture;
+        MinecraftForge.EVENT_BUS.addListener(this::onItemUseStart);
     }
 
-    @Override
-    public Rarity getRarity(ItemStack stack) {
-        return isNoveltyHat ? Rarity.EPIC : Rarity.RARE;
+    public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
+        if (CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+            if (event.getItem().getUseAction() == UseAction.DRINK) {
+                event.setDuration(event.getDuration() / 4);
+            }
+        }
     }
 
     @Override
@@ -57,22 +55,8 @@ public class DrinkingHatItem extends ArtifactItem {
             @Override
             @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
-                return isNoveltyHat ? TEXTURE_NOVELTY : TEXTURE_DEFAULT;
+                return texture;
             }
         });
-    }
-
-    @Mod.EventBusSubscriber(modid = Artifacts.MODID)
-    @SuppressWarnings("unused")
-    public static class Events {
-
-        @SubscribeEvent
-        public static void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-            if (CuriosAPI.getCurioEquipped(stack -> stack.getItem() instanceof DrinkingHatItem, event.getEntityLiving()).isPresent()) {
-                if (event.getItem().getUseAction() == UseAction.DRINK) {
-                    event.setDuration(event.getDuration() / 4);
-                }
-            }
-        }
     }
 }

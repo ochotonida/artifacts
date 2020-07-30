@@ -12,14 +12,14 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class Items {
 
     public static final Item MIMIC_SPAWN_EGG = new SpawnEggItem(Entities.MIMIC, 0x805113, 0x212121, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(new ResourceLocation(Artifacts.MODID, "mimic_spawn_egg"));
-    public static final Item PLASTIC_DRINKING_HAT = new DrinkingHatItem("plastic_drinking_hat", false);
-    public static final Item NOVELTY_DRINKING_HAT = new DrinkingHatItem("novelty_drinking_hat", true);
+    public static final Item PLASTIC_DRINKING_HAT = new DrinkingHatItem("plastic_drinking_hat", new ResourceLocation(Artifacts.MODID, "textures/entity/curio/plastic_drinking_hat.png"));
+    public static final Item NOVELTY_DRINKING_HAT = new DrinkingHatItem("novelty_drinking_hat", new ResourceLocation(Artifacts.MODID, "textures/entity/curio/novelty_drinking_hat.png"));
     public static final Item SNORKEL = new SnorkelItem();
     public static final Item NIGHT_VISION_GOGGLES = new NightVisionGogglesItem();
     public static final Item PANIC_NECKLACE = new PanicNecklaceItem();
-    public static final Item SHOCK_PENDANT = new PendantItem("shock_pendant");
-    public static final Item FLAME_PENDANT = new PendantItem("flame_pendant");
-    public static final Item THORN_PENDANT = new PendantItem("thorn_pendant");
+    public static final Item SHOCK_PENDANT = new ShockPendantItem();
+    public static final Item FLAME_PENDANT = new FlamePendantItem();
+    public static final Item THORN_PENDANT = new ThornPendantItem();
     public static final Item FLIPPERS = new FlippersItem();
     public static final Item OBSIDIAN_SKULL = new ObsidianSkullItem();
     public static final Item UMBRELLA = new UmbrellaItem();

@@ -3,7 +3,6 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.RenderTypes;
 import artifacts.client.render.model.curio.GloveModel;
-import artifacts.common.init.Items;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -15,11 +14,10 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class FireGauntletItem extends ArtifactItem {
 
@@ -30,6 +28,16 @@ public class FireGauntletItem extends ArtifactItem {
 
     public FireGauntletItem() {
         super(new Properties(), "fire_gauntlet");
+        MinecraftForge.EVENT_BUS.addListener(this::onLivingHurt);
+    }
+
+    public void onLivingHurt(LivingHurtEvent event) {
+        if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof IndirectEntityDamageSource) && !((EntityDamageSource) event.getSource()).getIsThornsDamage() && event.getSource().getTrueSource() instanceof LivingEntity) {
+            LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
+            if (CuriosApi.getCuriosHelper().findEquippedCurio(this, attacker).isPresent() && !event.getEntity().isImmuneToFire()) {
+                event.getEntity().setFire(8);
+            }
+        }
     }
 
     @Override
@@ -43,7 +51,7 @@ public class FireGauntletItem extends ArtifactItem {
 
             @Override
             @OnlyIn(Dist.CLIENT)
-            public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+            public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
                 boolean smallArms = hasSmallArms(entity);
                 GloveModel model = getModel(smallArms);
                 model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
@@ -72,24 +80,5 @@ public class FireGauntletItem extends ArtifactItem {
                 return smallArms ? TEXTURE_SLIM_GLOW : TEXTURE_DEFAULT_GLOW;
             }
         });
-    }
-
-    @Mod.EventBusSubscriber(modid = Artifacts.MODID)
-    @SuppressWarnings("unused")
-    public static class Events {
-
-        @SubscribeEvent
-        public static void onLivingHurt(LivingHurtEvent event) {
-            if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof IndirectEntityDamageSource) && !((EntityDamageSource) event.getSource()).getIsThornsDamage()) {
-                if (event.getSource().getTrueSource() instanceof LivingEntity) {
-                    LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-                    if (CuriosAPI.getCurioEquipped(Items.FIRE_GAUNTLET, attacker).isPresent()) {
-                        if (!event.getEntity().isImmuneToFire()) {
-                            event.getEntity().setFire(8);
-                        }
-                    }
-                }
-            }
-        }
     }
 }

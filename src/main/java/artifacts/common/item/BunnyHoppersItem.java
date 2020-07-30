@@ -2,7 +2,6 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.BunnyHoppersModel;
-import artifacts.common.init.Items;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -14,11 +13,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
 
 public class BunnyHoppersItem extends ArtifactItem {
@@ -27,6 +25,20 @@ public class BunnyHoppersItem extends ArtifactItem {
 
     public BunnyHoppersItem() {
         super(new Properties(), "bunny_hoppers");
+        MinecraftForge.EVENT_BUS.addListener(this::onLivingDamage);
+        MinecraftForge.EVENT_BUS.addListener(this::onLivingFall);
+    }
+
+    public void onLivingDamage(LivingDamageEvent event) {
+        if (event.getEntityLiving() instanceof PlayerEntity && CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+            event.getEntity().world.playSound(null, event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY(), event.getEntityLiving().getPosZ(), SoundEvents.ENTITY_RABBIT_HURT, SoundCategory.PLAYERS, 1, (event.getEntityLiving().getRNG().nextFloat() - event.getEntityLiving().getRNG().nextFloat()) * 0.2F + 1.0F);
+        }
+    }
+
+    public void onLivingFall(LivingFallEvent event) {
+        if (event.getEntityLiving() instanceof PlayerEntity && CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+            event.setDamageMultiplier(0);
+        }
     }
 
     @Override
@@ -56,24 +68,5 @@ public class BunnyHoppersItem extends ArtifactItem {
                 return TEXTURE;
             }
         });
-    }
-
-    @Mod.EventBusSubscriber(modid = Artifacts.MODID)
-    @SuppressWarnings("unused")
-    public static class Events {
-
-        @SubscribeEvent
-        public static void onLivingDamage(LivingDamageEvent event) {
-            if (event.getEntityLiving() instanceof PlayerEntity && CuriosApi.getCuriosHelper().findEquippedCurio(Items.BUNNY_HOPPERS, event.getEntityLiving()).isPresent()) {
-                event.getEntity().world.playSound(null, event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY(), event.getEntityLiving().getPosZ(), SoundEvents.ENTITY_RABBIT_HURT, SoundCategory.PLAYERS, 1, (event.getEntityLiving().getRNG().nextFloat() - event.getEntityLiving().getRNG().nextFloat()) * 0.2F + 1.0F);
-            }
-        }
-
-        @SubscribeEvent
-        public static void onLivingFall(LivingFallEvent event) {
-            if (event.getEntityLiving() instanceof PlayerEntity && CuriosApi.getCuriosHelper().findEquippedCurio(Items.BUNNY_HOPPERS, event.getEntityLiving()).isPresent()) {
-                event.setDamageMultiplier(0);
-            }
-        }
     }
 }

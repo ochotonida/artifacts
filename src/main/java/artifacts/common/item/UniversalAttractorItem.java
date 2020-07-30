@@ -2,7 +2,6 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.UniversalAttractorModel;
-import artifacts.common.init.Items;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,14 +9,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -28,6 +26,11 @@ public class UniversalAttractorItem extends ArtifactItem {
 
     public UniversalAttractorItem() {
         super(new Properties(), "universal_attractor");
+        MinecraftForge.EVENT_BUS.addListener(this::onItemToss);
+    }
+
+    public void onItemToss(ItemTossEvent event) {
+        CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, 100));
     }
 
     public static int getCooldown(ItemStack stack) {
@@ -46,14 +49,14 @@ public class UniversalAttractorItem extends ArtifactItem {
 
             // magnet logic from Botania, see https://github.com/Vazkii/Botania
             @Override
-            public void onCurioTick(String identifier, int index, LivingEntity entity) {
+            public void curioTick(String identifier, int index, LivingEntity entity) {
                 if (entity.isSpectator() || !(entity instanceof PlayerEntity)) {
                     return;
                 }
 
                 int cooldown = getCooldown(stack);
                 if (cooldown <= 0) {
-                    Vec3d playerPos = entity.getPositionVector().add(0, 0.75, 0);
+                    Vector3d playerPos = entity.getPositionVec().add(0, 0.75, 0);
 
                     int range = 5;
                     List<ItemEntity> items = entity.world.getEntitiesWithinAABB(ItemEntity.class, new AxisAlignedBB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
@@ -64,7 +67,7 @@ public class UniversalAttractorItem extends ArtifactItem {
                                 break;
                             }
 
-                            Vec3d motion = playerPos.subtract(item.getPositionVector().add(0, item.getHeight() / 2, 0));
+                            Vector3d motion = playerPos.subtract(item.getPositionVec().add(0, item.getHeight() / 2, 0));
                             if (Math.sqrt(motion.x * motion.x + motion.y * motion.y + motion.z * motion.z) > 1) {
                                 motion = motion.normalize();
                             }
@@ -91,15 +94,5 @@ public class UniversalAttractorItem extends ArtifactItem {
                 return TEXTURE;
             }
         });
-    }
-
-    @Mod.EventBusSubscriber(modid = Artifacts.MODID)
-    @SuppressWarnings("unused")
-    public static class Events {
-
-        @SubscribeEvent
-        public static void onItemToss(ItemTossEvent event) {
-            CuriosAPI.getCurioEquipped(Items.UNIVERSAL_ATTRACTOR, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, 100));
-        }
     }
 }

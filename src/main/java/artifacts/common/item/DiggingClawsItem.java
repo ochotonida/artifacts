@@ -2,17 +2,15 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.ClawsModel;
-import artifacts.common.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class DiggingClawsItem extends ArtifactItem {
 
@@ -21,6 +19,20 @@ public class DiggingClawsItem extends ArtifactItem {
 
     public DiggingClawsItem() {
         super(new Properties(), "digging_claws");
+        MinecraftForge.EVENT_BUS.addListener(this::onBreakSpeed);
+        MinecraftForge.EVENT_BUS.addListener(this::onHarvestCheck);
+    }
+
+    public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+        if (CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+            event.setNewSpeed(event.getNewSpeed() + 4);
+        }
+    }
+
+    public void onHarvestCheck(PlayerEvent.HarvestCheck event) {
+        if (!event.canHarvest() && CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+            event.setCanHarvest(event.canHarvest() || event.getTargetBlock().getHarvestLevel() <= 2);
+        }
     }
 
     @Override
@@ -56,24 +68,5 @@ public class DiggingClawsItem extends ArtifactItem {
                 return (ClawsModel) modelDefault;
             }
         });
-    }
-
-    @Mod.EventBusSubscriber(modid = Artifacts.MODID)
-    @SuppressWarnings("unused")
-    public static class Events {
-
-        @SubscribeEvent
-        public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
-            if (CuriosAPI.getCurioEquipped(Items.DIGGING_CLAWS, event.getEntityLiving()).isPresent()) {
-                event.setNewSpeed(event.getNewSpeed() + 4);
-            }
-        }
-
-        @SubscribeEvent
-        public static void onHarvestCheck(PlayerEvent.HarvestCheck event) {
-            if (!event.canHarvest() && CuriosAPI.getCurioEquipped(Items.DIGGING_CLAWS, event.getEntityLiving()).isPresent()) {
-                event.setCanHarvest(event.canHarvest() || event.getTargetBlock().getHarvestLevel() <= 2);
-            }
-        }
     }
 }
