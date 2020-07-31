@@ -40,6 +40,7 @@ public class Items {
     public static final Item KITTY_SLIPPERS = new KittySlippersItem();
     public static final Item RUNNING_SHOES = new RunningShoesItem();
     public static final Item BUNNY_HOPPERS = new BunnyHoppersItem();
+    public static final Item CRYSTAL_HEART = new CrystalHeartItem();
 
     public static void register(IForgeRegistry<Item> registry) {
         registry.registerAll(
@@ -71,7 +72,8 @@ public class Items {
                 UNIVERSAL_ATTRACTOR,
                 KITTY_SLIPPERS,
                 RUNNING_SHOES,
-                BUNNY_HOPPERS
+                BUNNY_HOPPERS,
+                CRYSTAL_HEART
         );
     }
 }

@@ -17,7 +17,7 @@
         {
           "type": "item",
           "name": "artifacts:steadfast_spikes",
-          "weight": 15
+          "weight": 10
         },
         {
           "type": "item",
@@ -25,9 +25,14 @@
           "weight": 15
         },
         {
+          "type": "item",
+          "name": "artifacts:crystal_heart",
+          "weight": 20
+        },
+        {
           "type": "loot_table",
           "name": "artifacts:artifact",
-          "weight": 20
+          "weight": 10
         },
         {
           "type": "item",

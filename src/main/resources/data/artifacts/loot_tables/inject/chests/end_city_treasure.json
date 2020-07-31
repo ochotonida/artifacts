@@ -7,7 +7,12 @@
         {
           "type": "loot_table",
           "name": "artifacts:artifact",
-          "weight": 60
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "name": "artifacts:crystal_heart",
+          "weight": 10
         },
         {
           "type": "empty",
