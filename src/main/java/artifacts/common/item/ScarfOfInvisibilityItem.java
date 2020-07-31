@@ -29,7 +29,7 @@ public class ScarfOfInvisibilityItem extends ArtifactItem {
             @Override
             public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
                 if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
-                    livingEntity.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, 19, 0, true, false));
+                    livingEntity.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, 39, 0, true, false));
                 }
             }
 
