@@ -74,7 +74,7 @@ public class LuckyScarfItem extends ArtifactItem {
 
             Entity entity = context.get(LootParameters.THIS_ENTITY);
             BlockState blockState = context.get(LootParameters.BLOCK_STATE);
-            if (blockState == null || !(entity instanceof LivingEntity) || !CuriosAPI.getCurioEquipped(artifacts.common.init.Items.LUCKY_SCARF, (LivingEntity) entity).isPresent()) {
+            if (blockState == null || !(entity instanceof LivingEntity) || !CuriosAPI.getCurioEquipped(stack -> stack.getItem() instanceof LuckyScarfItem, (LivingEntity) entity).isPresent()) {
                 return generatedLoot;
             }
 
