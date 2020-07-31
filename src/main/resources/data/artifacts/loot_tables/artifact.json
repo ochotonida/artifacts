@@ -143,6 +143,11 @@
           "type": "item",
           "name": "artifacts:crystal_heart",
           "weight": 6
+        },
+        {
+          "type": "item",
+          "name": "artifacts:villager_hat",
+          "weight": 8
         }
       ]
     }
