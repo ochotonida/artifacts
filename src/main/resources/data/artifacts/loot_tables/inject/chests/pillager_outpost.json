@@ -35,8 +35,13 @@
           "weight": 10
         },
         {
+          "type": "item",
+          "name": "artifacts:crystal_heart",
+          "weight": 8
+        },
+        {
           "type": "empty",
-          "weight": 30
+          "weight": 22
         }
       ]
     }

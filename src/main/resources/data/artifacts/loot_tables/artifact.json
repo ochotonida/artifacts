@@ -138,6 +138,11 @@
           "type": "item",
           "name": "artifacts:bunny_hoppers",
           "weight": 8
+        },
+        {
+          "type": "item",
+          "name": "artifacts:crystal_heart",
+          "weight": 6
         }
       ]
     }
