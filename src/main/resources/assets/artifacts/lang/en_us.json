@@ -37,6 +37,7 @@
   "item.artifacts.running_shoes": "Running Shoes",
   "item.artifacts.bunny_hoppers": "Bunny Hoppers",
   "item.artifacts.crystal_heart": "Crystal Heart",
+  "item.artifacts.villager_hat": "Villager Hat",
   "tooltip.artifacts.snorkel": "Allows the wearer to breathe underwater",
   "tooltip.artifacts.plastic_drinking_hat": "Decreases the time it takes to drink drinkable items",
   "tooltip.artifacts.novelty_drinking_hat": "'Hey! I'm #1, and I let gravity do my drinking!'\nDecreases the time it takes to drink drinkable items",
@@ -65,5 +66,6 @@
   "tooltip.artifacts.kitty_slippers": "Creepers avoid the wearer",
   "tooltip.artifacts.running_shoes": "Increases movement speed and step height while sprinting",
   "tooltip.artifacts.bunny_hoppers": "Increases the wearer's jump height and grants immunity to fall damage",
-  "tooltip.artifacts.crystal_heart": "Increases the wearer's maximum health"
+  "tooltip.artifacts.crystal_heart": "Increases the wearer's maximum health",
+  "tooltip.artifacts.villager_hat": "Decreases trading prices and villagers occasionally give gifts to the wearer"
 }

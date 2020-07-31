@@ -27,6 +27,7 @@ public class Items {
                 new DrinkingHatItem("novelty_drinking_hat", new ResourceLocation(Artifacts.MODID, "textures/entity/curio/novelty_drinking_hat.png")),
                 new SnorkelItem(),
                 new NightVisionGogglesItem(),
+                new VillagerHatItem(),
                 new SuperstitiousHatItem(),
                 new LuckyScarfItem(),
                 new ScarfOfInvisibilityItem(),
