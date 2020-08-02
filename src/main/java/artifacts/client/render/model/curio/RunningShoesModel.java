@@ -14,10 +14,10 @@ public class RunningShoesModel extends BipedModel<LivingEntity> {
         ModelRenderer leftShoeTip = new ModelRenderer(this, 0, 16);
         ModelRenderer rightShoeTip = new ModelRenderer(this, 16, 16);
 
-        bipedLeftLeg.addBox(-2, 0, -2, 4, 12, 4, 0.5F);
-        bipedRightLeg.addBox(-2, 0, -2, 4, 12, 4, 0.5F);
-        leftShoeTip.addBox(-2, 9.375F, -3.625F, 4, 3, 1, 0.5F, 0.125F, 0.125F);
-        rightShoeTip.addBox(-2, 9.375F, -3.625F, 4, 3, 1, 0.5F, 0.125F, 0.125F);
+        bipedLeftLeg.addBox(0, 0, -2, 4, 12, 4, 0.5F);
+        bipedRightLeg.addBox(-4, 0, -2, 4, 12, 4, 0.5F);
+        leftShoeTip.addBox(0, 9.375F, -3.625F, 4, 3, 1, 0.5F, 0.125F, 0.125F);
+        rightShoeTip.addBox(-4, 9.375F, -3.625F, 4, 3, 1, 0.5F, 0.125F, 0.125F);
 
         bipedLeftLeg.addChild(leftShoeTip);
         bipedRightLeg.addChild(rightShoeTip);
