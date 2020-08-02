@@ -11,6 +11,8 @@ public class CommonConfig {
     final ForgeConfigSpec.IntValue campsiteMinY;
     final ForgeConfigSpec.IntValue campsiteMaxY;
 
+    final ForgeConfigSpec.IntValue everlastingFoodCooldown;
+
     CommonConfig(ForgeConfigSpec.Builder builder) {
         builder.push("campsite");
 
@@ -35,6 +37,12 @@ public class CommonConfig {
                 .translation(Artifacts.MODID + ".config.campsite_ore_chance")
                 .defineInRange("campsite_ore_chance", 0.25, 0, 1);
 
+        builder.pop();
+        builder.push("items");
+        everlastingFoodCooldown = builder
+                .comment("Cooldown in ticks for the Everlasting Beef and Eternal Steak items")
+                .translation(Artifacts.MODID + ".config.eternal_food_cooldown")
+                .defineInRange("eternal_food_cooldown", 300, 0, Integer.MAX_VALUE);
         builder.pop();
     }
 }
