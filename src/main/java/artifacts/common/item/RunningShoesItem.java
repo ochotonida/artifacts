@@ -3,9 +3,9 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.RunningShoesModel;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -49,12 +49,11 @@ public class RunningShoesItem extends ArtifactItem {
             }
 
             @Override
-            @SuppressWarnings("ConstantConditions")
-            public void curioTick(String identifier, int index, LivingEntity livingEntity) {
-                ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.field_233821_d_);
+            public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
+                IAttributeInstance movementSpeed = livingEntity.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
                 if (livingEntity.isSprinting()) {
                     if (!movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
-                        movementSpeed.func_233767_b_(RUNNING_SHOES_SPEED_BOOST);
+                        movementSpeed.applyModifier(RUNNING_SHOES_SPEED_BOOST);
                     }
                     if (livingEntity instanceof PlayerEntity) {
                         livingEntity.stepHeight = Math.max(livingEntity.stepHeight, 1);
@@ -66,9 +65,8 @@ public class RunningShoesItem extends ArtifactItem {
             }
 
             @Override
-            @SuppressWarnings("ConstantConditions")
-            public void onUnequip(String identifier, int index, LivingEntity livingEntity) {
-                ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.field_233821_d_);
+            public void onUnequipped(String identifier, LivingEntity livingEntity) {
+                IAttributeInstance movementSpeed = livingEntity.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
                 if (movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
                     movementSpeed.removeModifier(RUNNING_SHOES_SPEED_BOOST);
                     livingEntity.stepHeight = 0.6F;
