@@ -18,6 +18,8 @@ public class Config {
     public static int campsiteMinY;
     public static int campsiteMaxY;
 
+    public static int everlastingFoodCooldown;
+
     static {
         final Pair<CommonConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
         COMMON = specPair.getLeft();
@@ -30,6 +32,8 @@ public class Config {
         Config.campsiteOreChance = COMMON.campsiteOreChance.get();
         Config.campsiteMinY = COMMON.campsiteMinY.get();
         Config.campsiteMaxY = COMMON.campsiteMaxY.get();
+
+        Config.everlastingFoodCooldown = COMMON.everlastingFoodCooldown.get();
     }
 
     @SubscribeEvent

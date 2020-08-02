@@ -1,5 +1,6 @@
 package artifacts.common.item;
 
+import artifacts.common.config.Config;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ public class EverlastingFoodItem extends ArtifactItem {
         if (isFood()) {
             entity.onFoodEaten(world, stack.copy());
             if (!world.isRemote && entity instanceof PlayerEntity) {
-                ((PlayerEntity) entity).getCooldownTracker().setCooldown(this, 200);
+                ((PlayerEntity) entity).getCooldownTracker().setCooldown(this, Config.everlastingFoodCooldown);
             }
         }
         return stack;
