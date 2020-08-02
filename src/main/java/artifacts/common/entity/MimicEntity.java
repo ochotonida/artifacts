@@ -26,6 +26,7 @@ import java.util.EnumSet;
 public class MimicEntity extends MobEntity implements IMob {
 
     public int ticksInAir;
+    public int attackCooldown;
     public boolean isDormant;
 
     public MimicEntity(EntityType<? extends MimicEntity> type, World world) {
@@ -56,8 +57,8 @@ public class MimicEntity extends MobEntity implements IMob {
                 .createMutableAttribute(Attributes.MAX_HEALTH, 60)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 16)
                 .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 1)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 6);
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.8)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5);
     }
 
     @Override
@@ -102,13 +103,18 @@ public class MimicEntity extends MobEntity implements IMob {
                 ticksInAir = 0;
             }
         }
+
+        if (attackCooldown > 0) {
+            attackCooldown--;
+        }
     }
 
     @Override
     public void onCollideWithPlayer(PlayerEntity player) {
         super.onCollideWithPlayer(player);
         // noinspection ConstantConditions
-        if (player.getEntityWorld().getDifficulty() != Difficulty.PEACEFUL && canEntityBeSeen(player) && getDistanceSq(player) < 1 && player.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
+        if (attackCooldown <= 0 && player.getEntityWorld().getDifficulty() != Difficulty.PEACEFUL && canEntityBeSeen(player) && getDistanceSq(player.getBoundingBox().getCenter().subtract(0, getBoundingBox().getYSize() / 2, 0)) < 1 && player.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
+            attackCooldown = 20;
             applyEnchantments(this, player);
         }
     }
@@ -124,7 +130,7 @@ public class MimicEntity extends MobEntity implements IMob {
         if (source.getTrueSource() instanceof PlayerEntity) {
             setAttackTarget((LivingEntity) source.getTrueSource());
         }
-        if (ticksInAir <= 0 && !source.isCreativePlayer() && source.getTrueSource() != null) {
+        if (ticksInAir <= 0 && source.isProjectile() && !source.isUnblockable()) {
             playSound(SoundEvents.MIMIC_HURT, getSoundVolume(), getSoundPitch());
             return false;
         }
@@ -307,8 +313,8 @@ public class MimicEntity extends MobEntity implements IMob {
 
         public void setDirection(float rotation, boolean isAggressive) {
             this.rotationDegrees = rotation;
-            if (isAggressive && jumpDelay > 20) {
-                jumpDelay = mimic.rand.nextInt(10) + 10;
+            if (isAggressive && jumpDelay > 10) {
+                jumpDelay = 10;
             }
         }
 
