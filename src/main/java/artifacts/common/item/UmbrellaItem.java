@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,18 +39,16 @@ public class UmbrellaItem extends ArtifactItem {
 
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
-        if (gravity != null) {
-            if (!entity.isOnGround() && !entity.isInWater() && event.getEntity().getMotion().y < 0 && !entity.isPotionActive(Effects.SLOW_FALLING)
-                    && (entity.getHeldItemOffhand().getItem() == this
-                    || entity.getHeldItemMainhand().getItem() == this) && !(entity.isHandActive() && !entity.getActiveItemStack().isEmpty() && entity.getActiveItemStack().getItem().getUseAction(entity.getActiveItemStack()) == UseAction.BLOCK)) {
-                if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                    gravity.applyNonPersistentModifier(UMBRELLA_SLOW_FALLING);
-                }
-                entity.fallDistance = 0;
-            } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                gravity.removeModifier(UMBRELLA_SLOW_FALLING);
+        IAttributeInstance gravity = entity.getAttribute(LivingEntity.ENTITY_GRAVITY);
+        if (!entity.onGround && !entity.isInWater() && event.getEntity().getMotion().y < 0 && !entity.isPotionActive(Effects.SLOW_FALLING)
+                && (entity.getHeldItemOffhand().getItem() == this
+                || entity.getHeldItemMainhand().getItem() == this) && !(entity.isHandActive() && !entity.getActiveItemStack().isEmpty() && entity.getActiveItemStack().getItem().getUseAction(entity.getActiveItemStack()) == UseAction.BLOCK)) {
+            if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
+                gravity.applyModifier(UMBRELLA_SLOW_FALLING);
             }
+            entity.fallDistance = 0;
+        } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
+            gravity.removeModifier(UMBRELLA_SLOW_FALLING);
         }
     }
 

@@ -41,7 +41,7 @@ public class VillagerHatItem extends ArtifactItem {
             }
 
             @Override
-            public void curioTick(String identifier, int index, LivingEntity livingEntity) {
+            public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
                 if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
                     livingEntity.addPotionEffect(new EffectInstance(Effects.HERO_OF_THE_VILLAGE, 39, 1, true, false));
                 }

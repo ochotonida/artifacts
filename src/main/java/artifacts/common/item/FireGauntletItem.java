@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.CuriosAPI;
 
 public class FireGauntletItem extends ArtifactItem {
 
@@ -34,7 +34,7 @@ public class FireGauntletItem extends ArtifactItem {
     public void onLivingHurt(LivingHurtEvent event) {
         if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof IndirectEntityDamageSource) && !((EntityDamageSource) event.getSource()).getIsThornsDamage() && event.getSource().getTrueSource() instanceof LivingEntity) {
             LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-            if (CuriosApi.getCuriosHelper().findEquippedCurio(this, attacker).isPresent() && !event.getEntity().isImmuneToFire()) {
+            if (CuriosAPI.getCurioEquipped(this, attacker).isPresent() && !event.getEntity().isImmuneToFire()) {
                 event.getEntity().setFire(8);
             }
         }
@@ -51,16 +51,16 @@ public class FireGauntletItem extends ArtifactItem {
 
             @Override
             @OnlyIn(Dist.CLIENT)
-            public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+            public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
                 boolean smallArms = hasSmallArms(entity);
                 GloveModel model = getModel(smallArms);
                 model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                 model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
                 RenderHelper.followBodyRotations(entity, model);
                 IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture(smallArms)), false, false);
-                model.renderHand(index == 0, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+                model.renderHand(true, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
                 vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
-                model.renderHand(index == 0, matrixStack, vertexBuilder, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+                model.renderHand(true, matrixStack, vertexBuilder, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
             }
 
             @Override

@@ -5,13 +5,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import top.theillusivec4.curios.api.CuriosApi;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
+import top.theillusivec4.curios.api.CuriosAPI;
 
 public class PocketPistonItem extends ArtifactItem {
 
@@ -20,13 +19,12 @@ public class PocketPistonItem extends ArtifactItem {
 
     public PocketPistonItem() {
         super(new Properties(), "pocket_piston");
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingAttack);
+        MinecraftForge.EVENT_BUS.addListener(this::onLivingKnockBack);
     }
 
-    public void onLivingAttack(LivingAttackEvent event) {
-        if (event.getSource().getTrueSource() instanceof LivingEntity && CuriosApi.getCuriosHelper().findEquippedCurio(this, (LivingEntity) event.getSource().getTrueSource()).isPresent()) {
-            LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-            event.getEntityLiving().applyKnockback(1.5F, MathHelper.sin((float) (attacker.rotationYaw * (Math.PI / 180))), -MathHelper.cos((float) (attacker.rotationYaw * (Math.PI / 180))));
+    public void onLivingKnockBack(LivingKnockBackEvent event) {
+        if (event.getAttacker() instanceof LivingEntity && CuriosAPI.getCurioEquipped(this, (LivingEntity) event.getAttacker()).isPresent()) {
+            event.setStrength(event.getStrength() * 2);
         }
     }
 

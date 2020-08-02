@@ -3,9 +3,9 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.CrystalHeartModel;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
@@ -31,20 +31,20 @@ public class CrystalHeartItem extends ArtifactItem {
             private Object model;
 
             @Override
-            public void onEquip(String identifier, int index, LivingEntity entity) {
+            public void onEquipped(String identifier, LivingEntity entity) {
                 if (!entity.world.isRemote()) {
-                    ModifiableAttributeInstance health = entity.getAttribute(Attributes.MAX_HEALTH);
-                    if (health != null && !health.hasModifier(HEALTH_BONUS)) {
-                        health.applyPersistentModifier(HEALTH_BONUS);
+                    IAttributeInstance health = entity.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
+                    if (!health.hasModifier(HEALTH_BONUS)) {
+                        health.applyModifier(HEALTH_BONUS);
                     }
                 }
             }
 
             @Override
-            public void onUnequip(String identifier, int index, LivingEntity entity) {
+            public void onUnequipped(String identifier, LivingEntity entity) {
                 if (!entity.world.isRemote()) {
-                    ModifiableAttributeInstance health = entity.getAttribute(Attributes.MAX_HEALTH);
-                    if (health != null && health.hasModifier(HEALTH_BONUS)) {
+                    IAttributeInstance health = entity.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
+                    if (health.hasModifier(HEALTH_BONUS)) {
                         health.removeModifier(HEALTH_BONUS);
                         if (entity.getHealth() > entity.getMaxHealth()) {
                             entity.setHealth(entity.getMaxHealth());

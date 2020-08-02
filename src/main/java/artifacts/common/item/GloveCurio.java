@@ -67,6 +67,6 @@ public abstract class GloveCurio extends Curio {
         model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
         RenderHelper.followBodyRotations(entity, model);
         IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture(smallArms)), false, false);
-        model.renderRightArm(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        model.renderHand(true, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 }

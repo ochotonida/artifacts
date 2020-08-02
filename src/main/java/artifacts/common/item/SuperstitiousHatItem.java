@@ -12,7 +12,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
-import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.CuriosAPI;
 
 import javax.annotation.Nullable;
 
@@ -27,7 +27,7 @@ public class SuperstitiousHatItem extends ArtifactItem {
 
     public void onLootingLevel(LootingLevelEvent event) {
         Entity killerEntity = event.getDamageSource().getTrueSource();
-        if (killerEntity instanceof LivingEntity && CuriosApi.getCuriosHelper().findEquippedCurio(this, (LivingEntity) killerEntity).isPresent()) {
+        if (killerEntity instanceof LivingEntity && CuriosAPI.getCurioEquipped(this, (LivingEntity) killerEntity).isPresent()) {
             event.setLootingLevel(event.getLootingLevel() + 1);
         }
     }

@@ -12,15 +12,339 @@
     }
   },
   "criteria": {
-    "find_artifact": {
+    "snorkel": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "artifacts:artifact"
+            "item": "artifacts:snorkel"
+          }
+        ]
+      }
+    },
+    "plastic_drinking_hat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:plastic_drinking_hat"
+          }
+        ]
+      }
+    },
+    "novelty_drinking_hat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:novelty_drinking_hat"
+          }
+        ]
+      }
+    },
+    "night_vision_goggles": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:night_vision_goggles"
+          }
+        ]
+      }
+    },
+    "panic_necklace": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:panic_necklace"
+          }
+        ]
+      }
+    },
+    "shock_pendant": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:shock_pendant"
+          }
+        ]
+      }
+    },
+    "flame_pendant": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:flame_pendant"
+          }
+        ]
+      }
+    },
+    "flippers": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:flippers"
+          }
+        ]
+      }
+    },
+    "obsidian_skull": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:obsidian_skull"
+          }
+        ]
+      }
+    },
+    "umbrella": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:umbrella"
+          }
+        ]
+      }
+    },
+    "thorn_pendant": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:thorn_pendant"
+          }
+        ]
+      }
+    },
+    "everlasting_beef": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:everlasting_beef"
+          }
+        ]
+      }
+    },
+    "eternal_steak": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:eternal_steak"
+          }
+        ]
+      }
+    },
+    "fire_gauntlet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:fire_gauntlet"
+          }
+        ]
+      }
+    },
+    "feral_claws": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:feral_claws"
+          }
+        ]
+      }
+    },
+    "pocket_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:pocket_piston"
+          }
+        ]
+      }
+    },
+    "power_glove": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:power_glove"
+          }
+        ]
+      }
+    },
+    "cross_necklace": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:cross_necklace"
+          }
+        ]
+      }
+    },
+    "antidote_vessel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:antidote_vessel"
+          }
+        ]
+      }
+    },
+    "lucky_scarf": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:lucky_scarf"
+          }
+        ]
+      }
+    },
+    "superstitious_hat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:superstitious_hat"
+          }
+        ]
+      }
+    },
+    "scarf_of_invisibility": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:scarf_of_invisibility"
+          }
+        ]
+      }
+    },
+    "digging_claws": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:digging_claws"
+          }
+        ]
+      }
+    },
+    "steadfast_spikes": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:steadfast_spikes"
+          }
+        ]
+      }
+    },
+    "universal_attractor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:universal_attractor"
+          }
+        ]
+      }
+    },
+    "kitty_slippers": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:kitty_slippers"
+          }
+        ]
+      }
+    },
+    "running_shoes": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:running_shoes"
+          }
+        ]
+      }
+    },
+    "bunny_hoppers": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:bunny_hoppers"
+          }
+        ]
+      }
+    },
+    "crystal_heart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:crystal_heart"
+          }
+        ]
+      }
+    },
+    "villager_hat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "artifacts:villager_hat"
           }
         ]
       }
     }
-  }
+  },
+  "requirements": [
+    [
+      "snorkel",
+      "plastic_drinking_hat",
+      "novelty_drinking_hat",
+      "night_vision_goggles",
+      "panic_necklace",
+      "shock_pendant",
+      "flame_pendant",
+      "thorn_pendant",
+      "flippers",
+      "obsidian_skull",
+      "umbrella",
+      "everlasting_beef",
+      "eternal_steak",
+      "fire_gauntlet",
+      "feral_claws",
+      "pocket_piston",
+      "power_glove",
+      "cross_necklace",
+      "antidote_vessel",
+      "lucky_scarf",
+      "superstitious_hat",
+      "scarf_of_invisibility",
+      "digging_claws",
+      "steadfast_spikes",
+      "universal_attractor",
+      "kitty_slippers",
+      "running_shoes",
+      "bunny_hoppers",
+      "crystal_heart",
+      "villager_hat"
+    ]
+  ]
 }

@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.CuriosAPI;
 
 public class ObsidianSkullItem extends ArtifactItem {
 
@@ -27,7 +27,7 @@ public class ObsidianSkullItem extends ArtifactItem {
 
     public void onLivingHurt(LivingHurtEvent event) {
         if (!event.getEntity().world.isRemote && event.getAmount() >= 1 && (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA) && event.getEntity() instanceof PlayerEntity) {
-            if (CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent() && !((PlayerEntity) event.getEntity()).getCooldownTracker().hasCooldown(this)) {
+            if (CuriosAPI.getCurioEquipped(this, event.getEntityLiving()).isPresent() && !((PlayerEntity) event.getEntity()).getCooldownTracker().hasCooldown(this)) {
                 event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 600, 0, false, true));
                 ((PlayerEntity) event.getEntity()).getCooldownTracker().setCooldown(this, 1200);
             }

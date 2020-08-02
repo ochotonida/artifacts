@@ -12,7 +12,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.CuriosAPI;
 
 public class DrinkingHatItem extends ArtifactItem {
 
@@ -25,7 +25,7 @@ public class DrinkingHatItem extends ArtifactItem {
     }
 
     public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-        if (CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+        if (CuriosAPI.getCurioEquipped(this, event.getEntityLiving()).isPresent()) {
             if (event.getItem().getUseAction() == UseAction.DRINK) {
                 event.setDuration(event.getDuration() / 4);
             }

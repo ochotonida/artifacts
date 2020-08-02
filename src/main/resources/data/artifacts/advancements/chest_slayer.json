@@ -16,11 +16,7 @@
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": {
-          "condition": "minecraft:entity_properties",
-          "predicate": {
-            "type": "artifacts:mimic"
-          },
-          "entity": "this"
+          "type": "artifacts:mimic"
         }
       }
     }

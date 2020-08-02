@@ -17,7 +17,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
-import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.CuriosAPI;
 
 public class BunnyHoppersItem extends ArtifactItem {
 
@@ -30,13 +30,13 @@ public class BunnyHoppersItem extends ArtifactItem {
     }
 
     public void onLivingDamage(LivingDamageEvent event) {
-        if (event.getEntityLiving() instanceof PlayerEntity && CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+        if (event.getEntityLiving() instanceof PlayerEntity && CuriosAPI.getCurioEquipped(this, event.getEntityLiving()).isPresent()) {
             event.getEntity().world.playSound(null, event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY(), event.getEntityLiving().getPosZ(), SoundEvents.ENTITY_RABBIT_HURT, SoundCategory.PLAYERS, 1, (event.getEntityLiving().getRNG().nextFloat() - event.getEntityLiving().getRNG().nextFloat()) * 0.2F + 1.0F);
         }
     }
 
     public void onLivingFall(LivingFallEvent event) {
-        if (event.getEntityLiving() instanceof PlayerEntity && CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+        if (event.getEntityLiving() instanceof PlayerEntity && CuriosAPI.getCurioEquipped(this, event.getEntityLiving()).isPresent()) {
             event.setDamageMultiplier(0);
         }
     }
@@ -47,7 +47,7 @@ public class BunnyHoppersItem extends ArtifactItem {
             private Object model;
 
             @Override
-            public void curioTick(String identifier, int index, LivingEntity livingEntity) {
+            public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
                 if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
                     livingEntity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 39, 1, true, false));
                 }

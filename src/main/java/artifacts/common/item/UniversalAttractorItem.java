@@ -9,13 +9,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
-import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.CuriosAPI;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -30,7 +30,7 @@ public class UniversalAttractorItem extends ArtifactItem {
     }
 
     public void onItemToss(ItemTossEvent event) {
-        CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, 100));
+        CuriosAPI.getCurioEquipped(this, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, 100));
     }
 
     public static int getCooldown(ItemStack stack) {
@@ -49,14 +49,14 @@ public class UniversalAttractorItem extends ArtifactItem {
 
             // magnet logic from Botania, see https://github.com/Vazkii/Botania
             @Override
-            public void curioTick(String identifier, int index, LivingEntity entity) {
+            public void onCurioTick(String identifier, int index, LivingEntity entity) {
                 if (entity.isSpectator() || !(entity instanceof PlayerEntity)) {
                     return;
                 }
 
                 int cooldown = getCooldown(stack);
                 if (cooldown <= 0) {
-                    Vector3d playerPos = entity.getPositionVec().add(0, 0.75, 0);
+                    Vec3d playerPos = entity.getPositionVec().add(0, 0.75, 0);
 
                     int range = 5;
                     List<ItemEntity> items = entity.world.getEntitiesWithinAABB(ItemEntity.class, new AxisAlignedBB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
@@ -67,7 +67,7 @@ public class UniversalAttractorItem extends ArtifactItem {
                                 break;
                             }
 
-                            Vector3d motion = playerPos.subtract(item.getPositionVec().add(0, item.getHeight() / 2, 0));
+                            Vec3d motion = playerPos.subtract(item.getPositionVec().add(0, item.getHeight() / 2, 0));
                             if (Math.sqrt(motion.x * motion.x + motion.y * motion.y + motion.z * motion.z) > 1) {
                                 motion = motion.normalize();
                             }
