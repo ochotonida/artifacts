@@ -4,7 +4,7 @@ issueTrackerURL="https://github.com/ochotonida/artifacts/issues"
 
 [[mods]]
 modId="artifacts"
-version="1.15.2-2.5.0"
+version="1.15.2-2.5.1"
 displayName="Artifacts"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/artifacts"
 logoFile="logo.png"
