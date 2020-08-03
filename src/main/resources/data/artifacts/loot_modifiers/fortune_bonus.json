@@ -1,4 +1,4 @@
 {
-  "conditions": [],
-  "function": "artifacts:fortune_bonus"
+  "type": "artifacts:fortune_bonus",
+  "conditions": []
 }

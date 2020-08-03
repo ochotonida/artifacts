@@ -12,10 +12,7 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.HandSide;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -66,9 +63,8 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
         player.setActiveHand(hand);
-        return ActionResult.resultConsume(itemstack);
+        return ActionResult.newResult(ActionResultType.SUCCESS, player.getHeldItem(hand));
     }
 
     @SuppressWarnings("unused")

@@ -36,7 +36,7 @@ public class KittySlippersItem extends ArtifactItem {
 
     public void onLivingDamage(LivingDamageEvent event) {
         if (event.getEntityLiving() instanceof PlayerEntity && CuriosAPI.getCurioEquipped(this, event.getEntityLiving()).isPresent()) {
-            event.getEntity().world.playSound(null, event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY(), event.getEntityLiving().getPosZ(), SoundEvents.ENTITY_CAT_HURT, SoundCategory.PLAYERS, 1, (event.getEntityLiving().getRNG().nextFloat() - event.getEntityLiving().getRNG().nextFloat()) * 0.2F + 1.0F);
+            event.getEntity().world.playSound(null, event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ, SoundEvents.ENTITY_CAT_HURT, SoundCategory.PLAYERS, 1, (event.getEntityLiving().getRNG().nextFloat() - event.getEntityLiving().getRNG().nextFloat()) * 0.2F + 1.0F);
         }
     }
 

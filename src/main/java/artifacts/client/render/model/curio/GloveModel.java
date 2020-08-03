@@ -1,7 +1,5 @@
 package artifacts.client.render.model.curio;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.PlayerModel;
 import net.minecraft.entity.LivingEntity;
@@ -15,7 +13,7 @@ public class GloveModel extends PlayerModel<LivingEntity> {
         setVisible(false);
     }
 
-    public void renderHand(boolean mainHand, MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+    public void renderHand(boolean mainHand, LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if (Minecraft.getInstance().gameSettings.mainHand == HandSide.LEFT) {
             mainHand = !mainHand;
         }
@@ -25,6 +23,6 @@ public class GloveModel extends PlayerModel<LivingEntity> {
         bipedLeftArmwear.showModel = !mainHand;
         bipedRightArm.showModel = mainHand;
         bipedRightArmwear.showModel = mainHand;
-        render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
     }
 }

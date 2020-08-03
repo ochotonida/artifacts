@@ -87,7 +87,7 @@ public class LuckyScarfItem extends ArtifactItem {
             LootContext.Builder builder = new LootContext.Builder(context);
             builder.withParameter(LootParameters.TOOL, fakeTool);
             LootContext newContext = builder.build(LootParameterSets.BLOCK);
-            LootTable lootTable = context.getWorld().getServer().getLootTableManager().getLootTableFromLocation(blockState.getBlock().getLootTable());
+            LootTable lootTable = context.getLootTableManager().getLootTableFromLocation(blockState.getBlock().getLootTable());
             return lootTable.generate(newContext);
         }
 

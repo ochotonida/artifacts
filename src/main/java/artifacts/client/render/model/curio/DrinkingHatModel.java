@@ -1,12 +1,12 @@
 package artifacts.client.render.model.curio;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
 
 public class DrinkingHatModel extends BipedModel<LivingEntity> {
 
-    protected ModelRenderer hatShade;
+    protected RendererModel hatShade;
 
     public DrinkingHatModel() {
         super(0.5F, 0, 64, 64);
@@ -15,12 +15,12 @@ public class DrinkingHatModel extends BipedModel<LivingEntity> {
         bipedHead.showModel = true;
         bipedHeadwear.showModel = true;
 
-        hatShade = new ModelRenderer(this, 0, 52);
-        ModelRenderer straw = new ModelRenderer(this, 0, 50);
-        ModelRenderer canLeft = new ModelRenderer(this, 0, 41);
-        ModelRenderer canRight = new ModelRenderer(this, 12, 41);
-        ModelRenderer strawLeft = new ModelRenderer(this, 0, 32);
-        ModelRenderer strawRight = new ModelRenderer(this, 17, 32);
+        hatShade = new RendererModel(this, 0, 52);
+        RendererModel straw = new RendererModel(this, 0, 50);
+        RendererModel canLeft = new RendererModel(this, 0, 41);
+        RendererModel canRight = new RendererModel(this, 12, 41);
+        RendererModel strawLeft = new RendererModel(this, 0, 32);
+        RendererModel strawRight = new RendererModel(this, 17, 32);
 
         hatShade.addBox(-4, -6, -8, 8, 1, 4);
         straw.addBox(-6, -1, -5, 12, 1, 1);

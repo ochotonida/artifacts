@@ -1,36 +1,27 @@
 package artifacts.client.render.model.curio;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-
-import java.util.function.Function;
 
 public class ScarfModel extends BipedModel<LivingEntity> {
 
-    private final ModelRenderer bipedCape;
+    private final RendererModel bipedCape;
 
     public ScarfModel() {
-        this(RenderType::getEntityCutoutNoCull);
-    }
-
-    public ScarfModel(Function<ResourceLocation, RenderType> renderType) {
-        super(renderType, 0.5F, 0, 64, 32);
-        bipedCape = new ModelRenderer(this, 32, 0);
+        super(0.5F, 0, 64, 32);
+        bipedCape = new RendererModel(this, 32, 0);
         bipedCape.addBox(-5, 0, 0, 5, 12, 2);
-        bipedBody = new ModelRenderer(this, 0, 16);
+        bipedBody = new RendererModel(this, 0, 16);
         bipedBody.addBox(-6.01F, -2, -4, 12, 6, 8);
     }
 
     @Override
-    public void setRotationAngles(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+    public void setRotationAngles(LivingEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
+        super.setRotationAngles(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
         bipedCape.copyModelAngles(bipedBody);
         bipedCape.rotationPointZ += 1.99F;
     }
@@ -39,9 +30,9 @@ public class ScarfModel extends BipedModel<LivingEntity> {
     public void setLivingAnimations(LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks) {
         if (entity instanceof AbstractClientPlayerEntity) {
             AbstractClientPlayerEntity player = (AbstractClientPlayerEntity) entity;
-            double x = MathHelper.lerp(partialTicks, player.prevChasingPosX, player.chasingPosX) - MathHelper.lerp(partialTicks, player.prevPosX, player.getPosX());
-            double y = MathHelper.lerp(partialTicks, player.prevChasingPosY, player.chasingPosY) - MathHelper.lerp(partialTicks, player.prevPosY, player.getPosY());
-            double z = MathHelper.lerp(partialTicks, player.prevChasingPosZ, player.chasingPosZ) - MathHelper.lerp(partialTicks, player.prevPosZ, player.getPosZ());
+            double x = MathHelper.lerp(partialTicks, player.prevChasingPosX, player.chasingPosX) - MathHelper.lerp(partialTicks, player.prevPosX, player.posX);
+            double y = MathHelper.lerp(partialTicks, player.prevChasingPosY, player.chasingPosY) - MathHelper.lerp(partialTicks, player.prevPosY, player.posY);
+            double z = MathHelper.lerp(partialTicks, player.prevChasingPosZ, player.chasingPosZ) - MathHelper.lerp(partialTicks, player.prevPosZ, player.posZ);
             float f = player.prevRenderYawOffset + (player.renderYawOffset - player.prevRenderYawOffset);
             double d3 = MathHelper.sin(f * ((float) Math.PI / 180));
             double d4 = -MathHelper.cos(f * ((float) Math.PI / 180));
@@ -61,9 +52,15 @@ public class ScarfModel extends BipedModel<LivingEntity> {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        bipedCape.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-        bipedBody.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-        bipedHead.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void render(LivingEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        GlStateManager.color4f(1, 1, 1, 1);
+        GlStateManager.enableNormalize();
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        bipedCape.render(scale);
+        bipedBody.render(scale);
+        bipedHead.render(scale);
+        GlStateManager.disableBlend();
+        GlStateManager.disableNormalize();
     }
 }

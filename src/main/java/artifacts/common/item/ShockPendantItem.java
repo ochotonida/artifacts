@@ -22,8 +22,8 @@ public class ShockPendantItem extends PendantItem {
             } else if (event.getSource().getTrueSource() instanceof LivingEntity) {
                 if (CuriosAPI.getCurioEquipped(this, event.getEntityLiving()).isPresent()) {
                     LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-                    if (attacker.world.canSeeSky(new BlockPos(attacker.getPositionVec())) && event.getEntityLiving().getRNG().nextFloat() < 0.25F) {
-                        LightningBoltEntity lightningBolt = new LightningBoltEntity(attacker.world, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(), false);
+                    if (attacker.world.canBlockSeeSky(new BlockPos(attacker.getPositionVec())) && event.getEntityLiving().getRNG().nextFloat() < 0.25F) {
+                        LightningBoltEntity lightningBolt = new LightningBoltEntity(attacker.world, attacker.posX, attacker.posY, attacker.posZ, false);
                         lightningBolt.setCaster(attacker instanceof ServerPlayerEntity ? (ServerPlayerEntity) attacker : null);
                         attacker.world.addEntity(lightningBolt);
                     }

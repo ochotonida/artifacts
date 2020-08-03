@@ -1,21 +1,20 @@
 package artifacts.client.render.model.curio;
 
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
 
 public class CrystalHeartModel extends BipedModel<LivingEntity> {
 
     public CrystalHeartModel() {
-        super(RenderType::getEntityTranslucent, 0.5F, 0, 32, 32);
+        super(0.5F, 0, 32, 32);
 
-        bipedBody = new ModelRenderer(this, 0, 0);
-        ModelRenderer heart1 = new ModelRenderer(this, 0, 16);
-        ModelRenderer heart2 = new ModelRenderer(this, 6, 16);
-        ModelRenderer heart3 = new ModelRenderer(this, 0, 20);
-        ModelRenderer heart4 = new ModelRenderer(this, 4, 20);
-        ModelRenderer heart5 = new ModelRenderer(this, 8, 20);
+        bipedBody = new RendererModel(this, 0, 0);
+        RendererModel heart1 = new RendererModel(this, 0, 16);
+        RendererModel heart2 = new RendererModel(this, 6, 16);
+        RendererModel heart3 = new RendererModel(this, 0, 20);
+        RendererModel heart4 = new RendererModel(this, 4, 20);
+        RendererModel heart5 = new RendererModel(this, 8, 20);
 
         bipedBody.addBox(-4, 0, -2, 8, 12, 4, 0.5F);
 

@@ -1,25 +1,25 @@
 package artifacts.client.render.model.curio;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
 
 public class BunnyHoppersModel extends BipedModel<LivingEntity> {
 
     public BunnyHoppersModel() {
         super(0.51F);
-        ModelRenderer head1 = new ModelRenderer(this, 0, 0);
-        ModelRenderer head2 = new ModelRenderer(this, 32, 0);
-        ModelRenderer earLeft1 = new ModelRenderer(this, 20, 0);
-        ModelRenderer earLeft2 = new ModelRenderer(this, 52, 0);
-        ModelRenderer earRight1 = new ModelRenderer(this, 26, 0);
-        ModelRenderer earRight2 = new ModelRenderer(this, 58, 0);
-        ModelRenderer bipedLeftLegwear = new ModelRenderer(this, 16, 16);
-        ModelRenderer bipedRightLegwear = new ModelRenderer(this, 48, 16);
-        ModelRenderer nose1 = new ModelRenderer(this, 0, 9);
-        ModelRenderer nose2 = new ModelRenderer(this, 32, 9);
-        ModelRenderer tail1 = new ModelRenderer(this, 20, 6);
-        ModelRenderer tail2 = new ModelRenderer(this, 52, 6);
+        RendererModel head1 = new RendererModel(this, 0, 0);
+        RendererModel head2 = new RendererModel(this, 32, 0);
+        RendererModel earLeft1 = new RendererModel(this, 20, 0);
+        RendererModel earLeft2 = new RendererModel(this, 52, 0);
+        RendererModel earRight1 = new RendererModel(this, 26, 0);
+        RendererModel earRight2 = new RendererModel(this, 58, 0);
+        RendererModel bipedLeftLegwear = new RendererModel(this, 16, 16);
+        RendererModel bipedRightLegwear = new RendererModel(this, 48, 16);
+        RendererModel nose1 = new RendererModel(this, 0, 9);
+        RendererModel nose2 = new RendererModel(this, 32, 9);
+        RendererModel tail1 = new RendererModel(this, 20, 6);
+        RendererModel tail2 = new RendererModel(this, 52, 6);
 
         head1.addBox(-2.5F, 8.51F, -7.01F, 5, 4, 5);
         head2.addBox(-2.5F, 8.51F, -7, 5, 4, 5);

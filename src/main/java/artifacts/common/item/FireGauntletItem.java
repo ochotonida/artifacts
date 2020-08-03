@@ -1,13 +1,10 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.RenderTypes;
 import artifacts.client.render.model.curio.GloveModel;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import com.mojang.blaze3d.platform.GLX;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -51,16 +48,24 @@ public class FireGauntletItem extends ArtifactItem {
 
             @Override
             @OnlyIn(Dist.CLIENT)
-            public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+            public void doRender(String identifier, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
                 boolean smallArms = hasSmallArms(entity);
                 GloveModel model = getModel(smallArms);
-                model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+                model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
                 model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
                 RenderHelper.followBodyRotations(entity, model);
-                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture(smallArms)), false, false);
-                model.renderHand(true, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
-                vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
-                model.renderHand(true, matrixStack, vertexBuilder, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+
+                Minecraft.getInstance().getTextureManager().bindTexture(getTexture(smallArms));
+                model.renderHand(true, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+                Minecraft.getInstance().getTextureManager().bindTexture(getGlowTexture(smallArms));
+                GlStateManager.disableLighting();
+                int light = 15728880;
+                int lightMapX = light % 65536;
+                int lightMapY = light / 65536;
+                GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, lightMapX, lightMapY);
+                model.renderHand(true, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                GlStateManager.enableLighting();
             }
 
             @Override

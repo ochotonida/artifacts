@@ -2,7 +2,6 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.ScarfModel;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -37,7 +36,7 @@ public class ScarfOfInvisibilityItem extends ArtifactItem {
             @OnlyIn(Dist.CLIENT)
             protected ScarfModel getModel() {
                 if (model == null) {
-                    model = new ScarfModel(RenderType::getEntityTranslucent);
+                    model = new ScarfModel();
                 }
                 return (ScarfModel) model;
             }

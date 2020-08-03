@@ -1,9 +1,8 @@
 package artifacts.client.render.model.curio;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
 
 public class CrossNecklaceModel extends BipedModel<LivingEntity> {
@@ -13,10 +12,10 @@ public class CrossNecklaceModel extends BipedModel<LivingEntity> {
 
         setVisible(false);
 
-        bipedBody = new ModelRenderer(this, 0, 0);
-        ModelRenderer cross1 = new ModelRenderer(this, 52, 0);
-        ModelRenderer cross2 = new ModelRenderer(this, 56, 0);
-        ModelRenderer cross3 = new ModelRenderer(this, 60, 0);
+        bipedBody = new RendererModel(this, 0, 0);
+        RendererModel cross1 = new RendererModel(this, 52, 0);
+        RendererModel cross2 = new RendererModel(this, 56, 0);
+        RendererModel cross3 = new RendererModel(this, 60, 0);
 
         bipedBody.addBox(-(2 * 8 + 1) / 2F, -1 / 2F, -(2 * 4 + 1) / 2F, 2 * 8 + 1, 2 * 12 + 1, 2 * 4 + 1);
         cross1.addBox(-0.5F, 4.5F, -5, 1, 4, 1);
@@ -29,8 +28,8 @@ public class CrossNecklaceModel extends BipedModel<LivingEntity> {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, IVertexBuilder buffer, int light, int overlay, float red, float green, float blue, float alpha) {
-        matrixStack.scale(0.5F, 0.5F, 0.5F);
-        bipedBody.render(matrixStack, buffer, light, overlay, red, green, blue, alpha);
+    public void render(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        GlStateManager.scalef(0.5F, 0.5F, 0.5F);
+        bipedBody.render(scale);
     }
 }

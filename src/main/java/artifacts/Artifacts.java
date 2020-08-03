@@ -2,14 +2,13 @@ package artifacts;
 
 import artifacts.client.render.MimicRenderer;
 import artifacts.common.config.Config;
+import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.*;
 import net.minecraft.entity.EntityType;
-import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -55,7 +54,7 @@ public class Artifacts {
 
         @SubscribeEvent
         public static void setupClient(final FMLClientSetupEvent event) {
-            RenderingRegistry.registerEntityRenderingHandler(Entities.MIMIC, MimicRenderer::new);
+            RenderingRegistry.registerEntityRenderingHandler(MimicEntity.class, MimicRenderer::new);
         }
 
         @SubscribeEvent
@@ -64,7 +63,7 @@ public class Artifacts {
             for (String slot : slots) {
                 InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> new CurioIMCMessage(slot));
             }
-            InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_ICON, () -> new Tuple<>("feet", PlayerContainer.EMPTY_ARMOR_SLOT_BOOTS));
+            //InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_ICON, () -> new Tuple<>("feet", new ResourceLocation("item/empty_armor_slot_boots")));
         }
 
         @SubscribeEvent

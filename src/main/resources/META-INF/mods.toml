@@ -1,10 +1,10 @@
 modLoader="javafml"
-loaderVersion="[31,)"
+loaderVersion="[28,)"
 issueTrackerURL="https://github.com/ochotonida/artifacts/issues"
 
 [[mods]]
 modId="artifacts"
-version="1.15.2-2.5.0"
+version="1.14.2-2.5.0"
 displayName="Artifacts"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/artifacts"
 logoFile="logo.png"
@@ -13,20 +13,20 @@ description='''Adds various new powerful uncraftable items to make exploration a
 [[dependencies.artifacts]]
     modId="forge"
     mandatory=true
-    versionRange="[31,)"
+    versionRange="[28,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.artifacts]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15.2]"
+    versionRange="[1.14.4]"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.artifacts]]
     modId="curios"
     mandatory=true
-    versionRange="[FORGE-1.15.2-2.0.2.4,)"
+    versionRange="[FORGE-1.14.4-1.0.6.1,)"
     ordering="AFTER"
     side="BOTH"

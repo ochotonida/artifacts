@@ -1,7 +1,7 @@
 package artifacts.client.render.model.curio;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
 
 public class ObsidianSkullModel extends BipedModel<LivingEntity> {
@@ -9,11 +9,11 @@ public class ObsidianSkullModel extends BipedModel<LivingEntity> {
     public ObsidianSkullModel() {
         super(0.5F, 0, 32, 32);
 
-        bipedBody = new ModelRenderer(this, 0, 0);
-        ModelRenderer skull = new ModelRenderer(this, 0, 16);
+        bipedBody = new RendererModel(this, 0, 0);
+        RendererModel skull = new RendererModel(this, 0, 16);
 
-        ModelRenderer tooth1 = new ModelRenderer(this, 18, 16);
-        ModelRenderer tooth2 = new ModelRenderer(this, 18, 19);
+        RendererModel tooth1 = new RendererModel(this, 18, 16);
+        RendererModel tooth2 = new RendererModel(this, 18, 19);
 
         bipedBody.addBox(-4, 0, -2, 8, 12, 4, 0.5F);
 

@@ -1,20 +1,20 @@
 package artifacts.client.render.model.curio;
 
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 
 public class ClawsModel extends GloveModel {
 
     public ClawsModel(boolean smallArms) {
         super(smallArms);
 
-        ModelRenderer clawLeftUpper1 = new ModelRenderer(this, 0, 6);
-        ModelRenderer clawRightUpper1 = new ModelRenderer(this, 0, 38);
-        ModelRenderer clawLeftUpper2 = new ModelRenderer(this, 8, 6);
-        ModelRenderer clawRightUpper2 = new ModelRenderer(this, 8, 38);
-        ModelRenderer clawLeftLower1 = new ModelRenderer(this, 0, 0);
-        ModelRenderer clawRightLower1 = new ModelRenderer(this, 0, 32);
-        ModelRenderer clawLeftLower2 = new ModelRenderer(this, 8, 0);
-        ModelRenderer clawRightLower2 = new ModelRenderer(this, 8, 32);
+        RendererModel clawLeftUpper1 = new RendererModel(this, 0, 6);
+        RendererModel clawRightUpper1 = new RendererModel(this, 0, 38);
+        RendererModel clawLeftUpper2 = new RendererModel(this, 8, 6);
+        RendererModel clawRightUpper2 = new RendererModel(this, 8, 38);
+        RendererModel clawLeftLower1 = new RendererModel(this, 0, 0);
+        RendererModel clawRightLower1 = new RendererModel(this, 0, 32);
+        RendererModel clawLeftLower2 = new RendererModel(this, 8, 0);
+        RendererModel clawRightLower2 = new RendererModel(this, 8, 32);
         clawLeftUpper1.addBox(3, 10, -1.5F, 1, 4, 1);
         clawRightUpper1.addBox(-4, 10, -1.5F, 1, 4, 1);
         clawLeftUpper2.addBox(3, 10, 0.5F, 1, 4, 1);

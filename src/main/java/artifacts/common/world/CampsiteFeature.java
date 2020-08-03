@@ -13,8 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
-import net.minecraft.world.gen.blockstateprovider.BlockStateProvider;
-import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.common.Tags;
@@ -26,35 +24,59 @@ import java.util.Random;
 
 public class CampsiteFeature extends Feature<NoFeatureConfig> {
 
-    public static final BlockStateProvider CRAFTING_STATION_PROVIDER = new WeightedBlockStateProvider()
-            .addWeightedBlockstate(Blocks.CRAFTING_TABLE.getDefaultState(), 5)
-            .addWeightedBlockstate(Blocks.FURNACE.getDefaultState().with(FurnaceBlock.LIT, false), 5)
-            .addWeightedBlockstate(Blocks.BLAST_FURNACE.getDefaultState().with(BlastFurnaceBlock.LIT, false), 5)
-            .addWeightedBlockstate(Blocks.SMOKER.getDefaultState().with(SmokerBlock.LIT, false), 5)
-            .addWeightedBlockstate(Blocks.SMITHING_TABLE.getDefaultState(), 5)
-            .addWeightedBlockstate(Blocks.FLETCHING_TABLE.getDefaultState(), 5)
-            .addWeightedBlockstate(Blocks.CARTOGRAPHY_TABLE.getDefaultState(), 5)
-            .addWeightedBlockstate(Blocks.ANVIL.getDefaultState(), 2)
-            .addWeightedBlockstate(Blocks.CHIPPED_ANVIL.getDefaultState(), 2)
-            .addWeightedBlockstate(Blocks.DAMAGED_ANVIL.getDefaultState(), 1);
-
-    public static final BlockStateProvider DECORATION_PROVIDER = new WeightedBlockStateProvider()
-            .addWeightedBlockstate(Blocks.LANTERN.getDefaultState(), 5)
-            .addWeightedBlockstate(Blocks.TORCH.getDefaultState(), 3)
-            .addWeightedBlockstate(Blocks.REDSTONE_TORCH.getDefaultState(), 3)
-            .addWeightedBlockstate(Blocks.CAKE.getDefaultState(), 1)
-            .addWeightedBlockstate(Blocks.BREWING_STAND.getDefaultState(), 4);
-
-    public static final BlockStateProvider ORE_PROVIDER = new WeightedBlockStateProvider()
-            .addWeightedBlockstate(Blocks.IRON_ORE.getDefaultState(), 6)
-            .addWeightedBlockstate(Blocks.REDSTONE_ORE.getDefaultState(), 6)
-            .addWeightedBlockstate(Blocks.LAPIS_ORE.getDefaultState(), 6)
-            .addWeightedBlockstate(Blocks.GOLD_ORE.getDefaultState(), 4)
-            .addWeightedBlockstate(Blocks.DIAMOND_ORE.getDefaultState(), 2)
-            .addWeightedBlockstate(Blocks.EMERALD_ORE.getDefaultState(), 1);
-
     public CampsiteFeature() {
         super(NoFeatureConfig::deserialize);
+    }
+
+    public static BlockState getRandomCraftingStation(Random random) {
+        switch (random.nextInt(8)) {
+            case 0:
+                return Blocks.FURNACE.getDefaultState().with(FurnaceBlock.LIT, false);
+            case 1:
+                return Blocks.BLAST_FURNACE.getDefaultState().with(BlastFurnaceBlock.LIT, false);
+            case 2:
+                return Blocks.SMOKER.getDefaultState().with(SmokerBlock.LIT, false);
+            case 3:
+                return Blocks.SMITHING_TABLE.getDefaultState();
+            case 4:
+                return Blocks.FLETCHING_TABLE.getDefaultState();
+            case 5:
+                return Blocks.CARTOGRAPHY_TABLE.getDefaultState();
+            case 6:
+                return Blocks.ANVIL.getDefaultState();
+            default:
+                return Blocks.CRAFTING_TABLE.getDefaultState();
+        }
+    }
+
+    public static BlockState getRandomOre(Random random) {
+        switch (random.nextInt(4)) {
+            case 0:
+                return Blocks.IRON_ORE.getDefaultState();
+            case 1:
+                return Blocks.REDSTONE_ORE.getDefaultState();
+            case 2:
+                return Blocks.LAPIS_ORE.getDefaultState();
+            default:
+                if (random.nextInt(4) != 0) {
+                    return Blocks.GOLD_ORE.getDefaultState();
+                } else if (random.nextBoolean()) {
+                    return Blocks.DIAMOND_ORE.getDefaultState();
+                } else {
+                    return Blocks.EMERALD_ORE.getDefaultState();
+                }
+        }
+    }
+
+    public static BlockState getRandomDecoration(Random random) {
+        switch (random.nextInt(4)) {
+            case 0:
+                return Blocks.CAKE.getDefaultState();
+            case 1:
+                return Blocks.BREWING_STAND.getDefaultState();
+            default:
+                return Blocks.LANTERN.getDefaultState();
+        }
     }
 
     @Override
@@ -133,8 +155,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
     }
 
     public void generateCraftingStation(IWorld world, BlockPos pos, Random random) {
-        BlockState state = CRAFTING_STATION_PROVIDER.getBlockState(random, pos);
-        world.setBlockState(pos, state, 0);
+        world.setBlockState(pos, getRandomCraftingStation(random), 0);
         if (random.nextBoolean() && world.isAirBlock(pos.up())) {
             generateDecoration(world, pos.up(), random);
         }
@@ -143,14 +164,14 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
 
     public void generateDecoration(IWorld world, BlockPos pos, Random random) {
         if (random.nextBoolean()) {
-            world.setBlockState(pos, DECORATION_PROVIDER.getBlockState(random, pos), 2);
+            world.setBlockState(pos, getRandomDecoration(random), 2);
             return;
         }
         world.setBlockState(pos, BlockTags.FLOWER_POTS.getRandomElement(random).getDefaultState(), 2);
     }
 
     public void generateOreVein(IWorld world, BlockPos pos, Random random) {
-        BlockState ore = ORE_PROVIDER.getBlockState(random, pos);
+        BlockState ore = getRandomOre(random);
         List<BlockPos> positions = new ArrayList<>();
         positions.add(pos);
         for (int i = 4 + random.nextInt(12); i > 0; i--) {
