@@ -34,7 +34,7 @@ public class WorldGenOceanShrine implements IWorldGenerator {
             return;
         }
 
-        for (double chestChance = ModConfig.underwaterShrineChance; chestChance > 0; chestChance--) {
+        for (double chestChance = ModConfig.general.underwaterShrineChance; chestChance > 0; chestChance--) {
             if (random.nextDouble() <= chestChance) {
                 BlockPos pos = getUnderwaterBlock(world, new BlockPos(chunkX * 16 + 8 + random.nextInt(16), 255, chunkZ * 16 + 8 + random.nextInt(16)));
 

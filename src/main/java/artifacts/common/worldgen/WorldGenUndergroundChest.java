@@ -36,7 +36,7 @@ public class WorldGenUndergroundChest implements IWorldGenerator {
             return;
         }
 
-        for (double chestChance = ModConfig.undergroundChestChance; chestChance > 0; chestChance--) {
+        for (double chestChance = ModConfig.general.undergroundChestChance; chestChance > 0; chestChance--) {
             if (random.nextDouble() <= chestChance) {
                 generateChest(world, random, chunkX, chunkZ);
             }
@@ -47,7 +47,7 @@ public class WorldGenUndergroundChest implements IWorldGenerator {
         BlockPos pos = getFirstTopSolidBlock(world, new BlockPos(chunkX * 16 + 8 + random.nextInt(16), 1, chunkZ * 16 + 8 + random.nextInt(16)));
 
         if (pos != null) {
-            if (random.nextDouble() < ModConfig.undergroundChestMimicRatio) {
+            if (random.nextDouble() < ModConfig.general.undergroundChestMimicRatio) {
                 EntityMimic mimic = new EntityMimic(world);
                 mimic.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, random.nextInt(4) * 90, 0);
                 mimic.setDormant();
