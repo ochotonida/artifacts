@@ -11,8 +11,8 @@ import java.util.List;
 public class ModWorldGen {
 
     public static void init() {
-        GameRegistry.registerWorldGenerator(new WorldGenUndergroundChest(getDimensionList(ModConfig.undergroundChestDimensions)), 0);
-        GameRegistry.registerWorldGenerator(new WorldGenOceanShrine(getDimensionList(ModConfig.underwaterShrineDimensions)), 0);
+        GameRegistry.registerWorldGenerator(new WorldGenUndergroundChest(getDimensionList(ModConfig.general.undergroundChestDimensions)), 0);
+        GameRegistry.registerWorldGenerator(new WorldGenOceanShrine(getDimensionList(ModConfig.general.underwaterShrineDimensions)), 0);
     }
 
     private static List<Integer> getDimensionList(String dimensionString) {

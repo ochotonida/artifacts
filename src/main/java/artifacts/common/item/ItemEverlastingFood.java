@@ -136,7 +136,7 @@ public class ItemEverlastingFood extends Item implements IEdible {
 
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
-        if (!ModConfig.enableEverlastingFood) {
+        if (!ModConfig.general.enableEverlastingFood) {
             return;
         }
 

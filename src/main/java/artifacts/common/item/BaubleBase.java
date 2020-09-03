@@ -1,6 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
+import artifacts.common.ModConfig;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
@@ -73,7 +74,7 @@ public class BaubleBase extends Item implements IBauble {
     @SuppressWarnings("deprecation")
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        if (GuiScreen.isShiftKeyDown()) {
+        if (GuiScreen.isShiftKeyDown() || ModConfig.client.alwaysShowTooltip) {
             tooltip.add(I18n.translateToLocal("tooltip." + Artifacts.MODID + "." + name + ".name"));
         } else {
             tooltip.add(I18n.translateToLocal("tooltip." + Artifacts.MODID + ".shiftinfo.name"));
