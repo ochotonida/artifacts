@@ -2,17 +2,13 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.SuperstitiousHatModel;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.event.entity.living.LootingLevelEvent;
-import top.theillusivec4.curios.api.CuriosApi;
 
 import javax.annotation.Nullable;
 
@@ -22,14 +18,6 @@ public class SuperstitiousHatItem extends ArtifactItem {
 
     public SuperstitiousHatItem() {
         super(new Properties(), "superstitious_hat");
-        MinecraftForge.EVENT_BUS.addListener(this::onLootingLevel);
-    }
-
-    public void onLootingLevel(LootingLevelEvent event) {
-        Entity killerEntity = event.getDamageSource().getTrueSource();
-        if (killerEntity instanceof LivingEntity && CuriosApi.getCuriosHelper().findEquippedCurio(this, (LivingEntity) killerEntity).isPresent()) {
-            event.setLootingLevel(event.getLootingLevel() + 1);
-        }
     }
 
     @Nullable
@@ -51,6 +39,11 @@ public class SuperstitiousHatItem extends ArtifactItem {
             @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getTexture() {
                 return TEXTURE;
+            }
+
+            @Override
+            public int getLootingBonus(String identifier, LivingEntity livingEntity, ItemStack curio, int index) {
+                return 1;
             }
         });
     }

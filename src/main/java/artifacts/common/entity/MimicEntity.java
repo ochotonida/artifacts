@@ -18,9 +18,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class MimicEntity extends MobEntity implements IMob {
@@ -35,12 +36,13 @@ public class MimicEntity extends MobEntity implements IMob {
         experienceValue = 10;
     }
 
+    @Nullable
     @Override
-    public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
+    public ILivingEntityData onInitialSpawn(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnData, @Nullable CompoundNBT dataTag) {
         if (getMoveHelper() instanceof MimicMovementController) {
             ((MimicMovementController) moveController).setDirection(rand.nextInt(4) * 90, false);
         }
-        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+        return super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
     }
 
     public SoundCategory getSoundCategory() {

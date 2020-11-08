@@ -11,13 +11,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.blockstateprovider.BlockStateProvider;
 import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraftforge.common.Tags;
 
 import java.util.ArrayList;
@@ -71,7 +69,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
     }
 
     @Override
-    public boolean func_230362_a_(ISeedReader world, StructureManager manager, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig featureConfig) {
         List<BlockPos> positions = new ArrayList<>();
         BlockPos.getAllInBox(pos.add(-3, 0, -3), pos.add(3, 0, 3)).forEach((blockPos -> positions.add(blockPos.toImmutable())));
         positions.remove(pos);
@@ -101,21 +99,21 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
         return true;
     }
 
-    public void generateLightSource(IWorld world, BlockPos pos, Random random) {
+    public void generateLightSource(ISeedReader world, BlockPos pos, Random random) {
         if (random.nextInt(4) != 0) {
             BlockPos currentPos = pos;
             while (currentPos.getY() - pos.getY() < 8 && world.isAirBlock(currentPos.up())) {
                 currentPos = currentPos.up();
             }
             if (currentPos.getY() - pos.getY() > 2 && !world.isAirBlock(currentPos.up())) {
-                world.setBlockState(currentPos, LANTERN_PROVIDER.getBlockState(random, currentPos), 2);
+                setBlockState(world, currentPos, LANTERN_PROVIDER.getBlockState(random, currentPos));
                 return;
             }
         }
-        world.setBlockState(pos, CAMPFIRE_PROVIDER.getBlockState(random, pos), 2);
+        setBlockState(world, pos, CAMPFIRE_PROVIDER.getBlockState(random, pos));
     }
 
-    public void generateContainer(IWorld world, BlockPos pos, Random random) {
+    public void generateContainer(ISeedReader world, BlockPos pos, Random random) {
         if (random.nextFloat() < Config.campsiteMimicChance) {
             MimicEntity mimic = Entities.MIMIC.create(world.getWorld());
             if (mimic != null) {
@@ -126,13 +124,14 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
         } else {
             if (random.nextBoolean()) {
                 if (random.nextInt(5) == 0) {
-                    world.setBlockState(pos, Blocks.TRAPPED_CHEST.getDefaultState().with(ChestBlock.FACING, Direction.Plane.HORIZONTAL.random(random)), 2);
-                    world.setBlockState(pos.down(), Blocks.TNT.getDefaultState(), 0);
+                    setBlockState(world, pos, Blocks.TRAPPED_CHEST.getDefaultState().with(ChestBlock.FACING, Direction.Plane.HORIZONTAL.random(random)));
+                    setBlockState(world, pos.down(), Blocks.TNT.getDefaultState());
                 } else {
-                    world.setBlockState(pos, Tags.Blocks.CHESTS_WOODEN.getRandomElement(random).getDefaultState().with(ChestBlock.FACING, Direction.Plane.HORIZONTAL.random(random)), 2);
+                    Block chestBlock = Config.useModdedChests ? Tags.Blocks.CHESTS_WOODEN.getRandomElement(random) : Blocks.CHEST;
+                    setBlockState(world, pos, chestBlock.getDefaultState().with(ChestBlock.FACING, Direction.Plane.HORIZONTAL.random(random)));
                 }
             } else {
-                world.setBlockState(pos, Blocks.BARREL.getDefaultState().with(BarrelBlock.PROPERTY_FACING, Direction.func_239631_a_(random)), 2);
+                setBlockState(world, pos, Blocks.BARREL.getDefaultState().with(BarrelBlock.PROPERTY_FACING, Direction.getRandomDirection(random)));
             }
             TileEntity container = world.getTileEntity(pos);
             if (container instanceof LockableLootTileEntity) {
@@ -141,30 +140,30 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
         }
     }
 
-    public void generateCraftingStation(IWorld world, BlockPos pos, Random random) {
+    public void generateCraftingStation(ISeedReader world, BlockPos pos, Random random) {
         BlockState state = CRAFTING_STATION_PROVIDER.getBlockState(random, pos);
-        world.setBlockState(pos, state, 0);
+        setBlockState(world, pos, state);
         if (random.nextBoolean() && world.isAirBlock(pos.up())) {
             generateDecoration(world, pos.up(), random);
         }
 
     }
 
-    public void generateDecoration(IWorld world, BlockPos pos, Random random) {
+    public void generateDecoration(ISeedReader world, BlockPos pos, Random random) {
         if (random.nextInt(3) == 0) {
-            world.setBlockState(pos, DECORATION_PROVIDER.getBlockState(random, pos), 2);
+            setBlockState(world, pos, DECORATION_PROVIDER.getBlockState(random, pos));
         } else {
-            world.setBlockState(pos, BlockTags.FLOWER_POTS.getRandomElement(random).getDefaultState(), 2);
+            setBlockState(world, pos, BlockTags.FLOWER_POTS.getRandomElement(random).getDefaultState());
         }
     }
 
-    public void generateOreVein(IWorld world, BlockPos pos, Random random) {
+    public void generateOreVein(ISeedReader world, BlockPos pos, Random random) {
         BlockState ore = ORE_PROVIDER.getBlockState(random, pos);
         List<BlockPos> positions = new ArrayList<>();
         positions.add(pos);
         for (int i = 4 + random.nextInt(12); i > 0; i--) {
             pos = positions.remove(0);
-            world.setBlockState(pos, ore, 2);
+            setBlockState(world, pos, ore);
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 if (world.getBlockState(pos.offset(direction)).getMaterial().blocksMovement() && !world.getBlockState(pos.offset(direction).up()).getMaterial().blocksMovement()) {
                     positions.add(pos.offset(direction));

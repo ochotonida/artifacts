@@ -2,7 +2,10 @@ package artifacts;
 
 import artifacts.client.render.MimicRenderer;
 import artifacts.common.config.Config;
-import artifacts.common.init.*;
+import artifacts.common.init.Entities;
+import artifacts.common.init.Features;
+import artifacts.common.init.Items;
+import artifacts.common.init.SoundEvents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.item.Item;
@@ -11,11 +14,15 @@ import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -44,20 +51,29 @@ public class Artifacts {
 
     public Artifacts() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
+        MinecraftForge.EVENT_BUS.addListener(this::addFeatures);
+    }
+
+    public void addFeatures(BiomeLoadingEvent event) {
+        if (event.getCategory() != Biome.Category.NETHER && event.getCategory() != Biome.Category.THEEND && !Config.biomeBlacklist.contains(event.getName())) {
+            event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_STRUCTURES).add(() -> Features.UNDERGROUND_CAMPSITE);
+        }
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
 
         @SubscribeEvent
-        public static void commonSetup(FMLCommonSetupEvent event) {
-            Features.addFeatures();
+        public static void commonSetup(final FMLCommonSetupEvent event) {
+            event.enqueueWork(
+                    Features::registerConfiguredFeatures
+            );
         }
 
         @SubscribeEvent
-        public static void setupClient(final FMLClientSetupEvent event) {
+        public static void clientSetup(final FMLClientSetupEvent event) {
             RenderingRegistry.registerEntityRenderingHandler(Entities.MIMIC, MimicRenderer::new);
-            ItemModelsProperties.func_239418_a_(Items.UMBRELLA, new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1 : 0);
+            ItemModelsProperties.registerProperty(Items.UMBRELLA, new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1 : 0);
         }
 
         @SubscribeEvent
@@ -86,13 +102,13 @@ public class Artifacts {
         }
 
         @SubscribeEvent
-        public static void registerLootModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
-            LootModifiers.register(event.getRegistry());
+        public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
+            Features.registerFeatures(event.getRegistry());
         }
 
         @SubscribeEvent
-        public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
-            Features.registerFeatures(event.getRegistry());
+        public static void registerPlacements(RegistryEvent.Register<Placement<?>> event) {
+            Features.registerPlacements(event.getRegistry());
         }
     }
 }

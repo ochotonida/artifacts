@@ -5,31 +5,38 @@ import artifacts.common.config.Config;
 import artifacts.common.world.CampsiteFeature;
 import artifacts.common.world.InCaveWithChance;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class Features {
 
-    public static final Feature<NoFeatureConfig> CAMPSITE_FEATURE = new CampsiteFeature();
+    public static Placement<ChanceConfig> placement = new InCaveWithChance(ChanceConfig.CODEC);
+
+    public static Feature<NoFeatureConfig> campsite = new CampsiteFeature();
+
+    public static ConfiguredFeature<?, ?> UNDERGROUND_CAMPSITE;
 
     public static void registerFeatures(IForgeRegistry<Feature<?>> registry) {
-        registry.register(CAMPSITE_FEATURE.setRegistryName(new ResourceLocation(Artifacts.MODID, "campsite")));
+        campsite.setRegistryName(Artifacts.MODID, "campsite");
+        registry.register(campsite);
     }
 
-    public static void addFeatures() {
-        Placement<ChanceConfig> placement = new InCaveWithChance(ChanceConfig.field_236950_a_);
+    public static void registerConfiguredFeatures() {
+        UNDERGROUND_CAMPSITE = campsite
+                .withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)
+                .withPlacement(placement.configure(new ChanceConfig(Config.campsiteChance)));
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Artifacts.MODID, "underground_campsite"), UNDERGROUND_CAMPSITE);
+    }
 
-        for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
-            if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {
-                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, CAMPSITE_FEATURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(placement.configure(new ChanceConfig((int) (1 / Config.campsiteChance)))));
-            }
-        }
+    public static void registerPlacements(IForgeRegistry<Placement<?>> registry) {
+        placement.setRegistryName(new ResourceLocation(Artifacts.MODID, "in_cave_with_chance"));
+        registry.register(placement);
     }
 }

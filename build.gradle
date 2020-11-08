@@ -13,12 +13,12 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.1-2.5.2'
+version = '1.16.3-2.6.0'
 group = 'artifacts'
 archivesBaseName = 'Artifacts'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200723-1.16.1'
+    mappings channel: 'snapshot', version: '20201028-1.16.3'
     runs {
         client {
             workingDirectory project.file('run')
@@ -51,24 +51,6 @@ minecraft {
                 }
             }
         }
-
-        data {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', ''
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            args '--mod', 'artifacts', '--all', '--output', file('src/generated/resources/')
-
-            mods {
-                artifacts {
-                    source sourceSets.main
-                }
-            }
-        }
     }
 }
 
@@ -84,10 +66,10 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.1-32.0.99'
+    minecraft 'net.minecraftforge:forge:1.16.3-34.1.42'
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.16.1-3.0:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.16.1-3.0")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.3-4.0.2.0:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.3-4.0.2.0")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
