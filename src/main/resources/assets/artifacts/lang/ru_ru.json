@@ -2,6 +2,10 @@
   "curios.identifier.feet": "Ноги",
   "curios.modifiers.feet": "Когда на ногах:",
   "itemGroup.artifacts": "Артефакты",
+  "artifacts.advancements.amateur_archaeologist.title": "Археолог-любитель",
+  "artifacts.advancements.amateur_archaeologist.description": "Найти артефакт",
+  "artifacts.advancements.chest_slayer.title": "Убийца сундуков",
+  "artifacts.advancements.chest_slayer.description": "Убейте мимика",
   "entity.artifacts.mimic": "Мимик",
   "item.artifacts.mimic_spawn_egg": "Яйцо призыва Мимика",
   "item.artifacts.snorkel": "Дыхательная трубка",
@@ -30,6 +34,10 @@
   "item.artifacts.steadfast_spikes": "Устойчивые шипы",
   "item.artifacts.universal_attractor": "Универсальный аттрактор",
   "item.artifacts.kitty_slippers": "Тапочки 'Кошечки'",
+  "item.artifacts.running_shoes": "Беговая обувь",
+  "item.artifacts.bunny_hoppers": "Обувь прыгуна",
+  "item.artifacts.crystal_heart": "Хрустальное сердце",
+  "item.artifacts.villager_hat": "Шляпа деревенского жителя",
   "tooltip.artifacts.snorkel": "Владелец может дышать под водой",
   "tooltip.artifacts.plastic_drinking_hat": "Уменьшается время, необходимое для питья",
   "tooltip.artifacts.novelty_drinking_hat": "'Хей! Я #1, и я позволил гравитации делать для меня напитки!'",
@@ -55,5 +63,9 @@
   "tooltip.artifacts.digging_claws": "У владельца увеличивается скорость и базовый уровень майнинга",
   "tooltip.artifacts.steadfast_spikes": "Даётся иммунитет к отбрасыванию",
   "tooltip.artifacts.universal_attractor": "Предметы рядом будут притягиваться",
-  "tooltip.artifacts.kitty_slippers": "Криперы будут избегать владельца"
+  "tooltip.artifacts.kitty_slippers": "Криперы будут избегать владельца",
+  "tooltip.artifacts.running_shoes": "Увеличивает скорость передвижения во время бега",
+  "tooltip.artifacts.bunny_hoppers": "Увеличивает высоту прыжка и дает иммунитет к урону от падения",
+  "tooltip.artifacts.crystal_heart": "Увеличивает максимальное количество жизней владельца",
+  "tooltip.artifacts.villager_hat": "Снижает цены при торговле, а также жители иногда дарят владельцу подарки"
 }
