@@ -7,37 +7,37 @@
         {
           "type": "loot_table",
           "name": "minecraft:chests/stronghold_library",
-          "weight": 10
+          "weight": 15
         },
         {
           "type": "loot_table",
           "name": "minecraft:chests/simple_dungeon",
-          "weight": 20
+          "weight": 25
         },
         {
           "type": "loot_table",
           "name": "artifacts:chests/campsite_chest/tnt",
-          "weight": 5
+          "weight": 7
         },
         {
           "type": "loot_table",
           "name": "artifacts:chests/campsite_chest/fish",
-          "weight": 5
+          "weight": 7
         },
         {
           "type": "loot_table",
           "name": "artifacts:chests/campsite_chest/gold",
-          "weight": 5
+          "weight": 2
         },
         {
           "type": "loot_table",
           "name": "artifacts:chests/campsite_chest/diamonds",
-          "weight": 3
+          "weight": 1
         },
         {
           "type": "loot_table",
           "name": "artifacts:chests/campsite_chest/junk",
-          "weight": 8
+          "weight": 15
         }
       ]
     }

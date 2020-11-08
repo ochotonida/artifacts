@@ -7,7 +7,7 @@
         {
           "type": "item",
           "name": "artifacts:plastic_drinking_hat",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
@@ -17,26 +17,26 @@
         {
           "type": "item",
           "name": "artifacts:cross_necklace",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:night_vision_goggles",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:pocket_piston",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:running_shoes",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "empty",
-          "weight": 74
+          "weight": 79
         }
       ]
     }

@@ -7,11 +7,11 @@
         {
           "type": "item",
           "name": "artifacts:feral_claws",
-          "weight": 15
+          "weight": 10
         },
         {
           "type": "empty",
-          "weight": 75
+          "weight": 90
         }
       ]
     }

@@ -7,22 +7,22 @@
         {
           "type": "item",
           "name": "artifacts:snorkel",
-          "weight": 10
+          "weight": 9
         },
         {
           "type": "item",
           "name": "artifacts:flippers",
-          "weight": 10
+          "weight": 9
         },
         {
           "type": "item",
           "name": "artifacts:feral_claws",
-          "weight": 7
+          "weight": 5
         },
         {
           "type": "item",
           "name": "artifacts:digging_claws",
-          "weight": 6
+          "weight": 4
         },
         {
           "type": "item",
@@ -37,26 +37,26 @@
         {
           "type": "item",
           "name": "artifacts:umbrella",
-          "weight": 10
+          "weight": 8
         },
         {
           "type": "item",
           "name": "artifacts:kitty_slippers",
-          "weight": 7
+          "weight": 5
         },
         {
           "type": "item",
           "name": "artifacts:bunny_hoppers",
-          "weight": 7
+          "weight": 6
         },
         {
           "type": "item",
           "name": "artifacts:lucky_scarf",
-          "weight": 7
+          "weight": 5
         },
         {
           "type": "empty",
-          "weight": 27
+          "weight": 40
         }
       ]
     }

@@ -7,17 +7,17 @@
         {
           "type": "item",
           "name": "artifacts:night_vision_goggles",
-          "weight": 10
+          "weight": 5
         },
         {
           "type": "item",
           "name": "artifacts:thorn_pendant",
-          "weight": 10
+          "weight": 6
         },
         {
           "type": "item",
           "name": "artifacts:fire_gauntlet",
-          "weight": 10
+          "weight": 5
         },
         {
           "type": "item",
@@ -32,16 +32,16 @@
         {
           "type": "item",
           "name": "artifacts:obsidian_skull",
-          "weight": 10
+          "weight": 5
         },
         {
           "type": "item",
           "name": "artifacts:lucky_scarf",
-          "weight": 10
+          "weight": 4
         },
         {
           "type": "empty",
-          "weight": 40
+          "weight": 65
         }
       ]
     }

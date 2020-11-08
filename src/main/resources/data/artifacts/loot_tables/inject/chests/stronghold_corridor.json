@@ -7,7 +7,7 @@
         {
           "type": "item",
           "name": "artifacts:power_glove",
-          "weight": 15
+          "weight": 10
         },
         {
           "type": "item",
@@ -32,11 +32,11 @@
         {
           "type": "loot_table",
           "name": "artifacts:artifact",
-          "weight": 20
+          "weight": 15
         },
         {
           "type": "empty",
-          "weight": 20
+          "weight": 30
         }
       ]
     }

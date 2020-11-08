@@ -7,7 +7,7 @@
         {
           "type": "item",
           "name": "artifacts:digging_claws",
-          "weight": 15
+          "weight": 7
         },
         {
           "type": "item",
@@ -16,7 +16,7 @@
         },
         {
           "type": "empty",
-          "weight": 75
+          "weight": 83
         }
       ]
     }
