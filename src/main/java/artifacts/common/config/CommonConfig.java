@@ -10,8 +10,8 @@ public class CommonConfig {
 
     final ForgeConfigSpec.ConfigValue<List<String>> biomeBlacklist;
     final ForgeConfigSpec.IntValue campsiteChance;
-    final ForgeConfigSpec.DoubleValue campsiteMimicChance;
-    final ForgeConfigSpec.DoubleValue campsiteOreChance;
+    final ForgeConfigSpec.IntValue campsiteMimicChance;
+    final ForgeConfigSpec.IntValue campsiteOreChance;
     final ForgeConfigSpec.IntValue campsiteMinY;
     final ForgeConfigSpec.IntValue campsiteMaxY;
     final ForgeConfigSpec.BooleanValue useModdedChests;
@@ -40,13 +40,13 @@ public class CommonConfig {
                 .translation(Artifacts.MODID + ".config.campsite_max_y")
                 .defineInRange("campsite_max_y", 45, 0, 255);
         campsiteMimicChance = builder
-                .comment("Chance for a container of a campsite to be replaced by a mimic")
+                .comment("Probability for a container of a campsite to be replaced by a mimic")
                 .translation(Artifacts.MODID + ".config.campsite_mimic_chance")
-                .defineInRange("campsite_mimic_chance", 0.3, 0, 1);
+                .defineInRange("campsite_mimic_chance", 30, 0, 100);
         campsiteOreChance = builder
-                .comment("Chance for an ore vein to generate underneath a campsite")
+                .comment("Probability for an ore vein to generate underneath a campsite")
                 .translation(Artifacts.MODID + ".config.campsite_ore_chance")
-                .defineInRange("campsite_ore_chance", 0.25, 0, 1);
+                .defineInRange("campsite_ore_chance", 25, 0, 100);
         useModdedChests = builder
                 .comment("Whether to use wooden chests from other mods when generating campsites, may make it easier to distinguish them from mimics")
                 .translation(Artifacts.MODID + ".config.use_modded_chests")

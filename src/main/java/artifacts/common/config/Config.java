@@ -35,8 +35,8 @@ public class Config {
     public static void bakeCommon() {
         Config.biomeBlacklist = COMMON.biomeBlacklist.get().stream().map(ResourceLocation::new).collect(Collectors.toSet());
         Config.campsiteChance = COMMON.campsiteChance.get();
-        Config.campsiteMimicChance = COMMON.campsiteMimicChance.get();
-        Config.campsiteOreChance = COMMON.campsiteOreChance.get();
+        Config.campsiteMimicChance = COMMON.campsiteMimicChance.get() / 100D;
+        Config.campsiteOreChance = COMMON.campsiteOreChance.get() / 100D;
         Config.campsiteMinY = COMMON.campsiteMinY.get();
         Config.campsiteMaxY = COMMON.campsiteMaxY.get();
         Config.useModdedChests = COMMON.useModdedChests.get();
