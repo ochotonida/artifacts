@@ -58,7 +58,7 @@ public class MimicEntity extends MobEntity implements IMob {
         return MobEntity.func_233666_p_()
                 .createMutableAttribute(Attributes.MAX_HEALTH, 60)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 16)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
+                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.8)
                 .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5);
     }
@@ -136,6 +136,10 @@ public class MimicEntity extends MobEntity implements IMob {
             playSound(SoundEvents.MIMIC_HURT, getSoundVolume(), getSoundPitch());
             return false;
         }
+
+        if (isOnGround() && getRNG().nextBoolean() && getMoveHelper() instanceof MimicMovementController) {
+            ((MimicMovementController) getMoveHelper()).setDirection(getRNG().nextInt(4) * 90, true);
+        }
         return super.attackEntityFrom(source, amount);
     }
 
@@ -178,15 +182,12 @@ public class MimicEntity extends MobEntity implements IMob {
 
         @Override
         public boolean shouldExecute() {
-            LivingEntity livingEntity = mimic.getAttackTarget();
+            LivingEntity target = mimic.getAttackTarget();
 
-            if (livingEntity == null) {
-                return false;
-            } else if (!livingEntity.isAlive()) {
-                return false;
-            } else {
-                return !(livingEntity instanceof PlayerEntity) || !((PlayerEntity) livingEntity).abilities.disableDamage;
-            }
+            return target instanceof PlayerEntity
+                    && target.isAlive()
+                    && target.getEntityWorld().getDifficulty() != Difficulty.PEACEFUL
+                    && !((PlayerEntity) target).abilities.disableDamage;
         }
 
         @Override
@@ -197,17 +198,13 @@ public class MimicEntity extends MobEntity implements IMob {
 
         @Override
         public boolean shouldContinueExecuting() {
-            LivingEntity livingEntity = mimic.getAttackTarget();
+            LivingEntity target = mimic.getAttackTarget();
 
-            if (livingEntity == null) {
-                return false;
-            } else if (!livingEntity.isAlive()) {
-                return false;
-            } else if (livingEntity instanceof PlayerEntity && ((PlayerEntity) livingEntity).abilities.disableDamage) {
-                return false;
-            } else {
-                return --timeRemaining > 0;
-            }
+            return target instanceof PlayerEntity
+                    && target.isAlive()
+                    && target.getEntityWorld().getDifficulty() != Difficulty.PEACEFUL
+                    && !((PlayerEntity) target).abilities.disableDamage
+                    && --timeRemaining > 0;
         }
 
         @Override
@@ -313,9 +310,9 @@ public class MimicEntity extends MobEntity implements IMob {
             jumpDelay = mimic.rand.nextInt(320) + 640;
         }
 
-        public void setDirection(float rotation, boolean isAggressive) {
+        public void setDirection(float rotation, boolean shouldJump) {
             this.rotationDegrees = rotation;
-            if (isAggressive && jumpDelay > 10) {
+            if (shouldJump && jumpDelay > 10) {
                 jumpDelay = 10;
             }
         }
