@@ -22,7 +22,6 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 public abstract class Curio implements ICurio {
 
     private final Item curioItem;
-    private final SoundEvent equipSound = getEquipSound();
 
     public Curio(Item item) {
         curioItem = item;
@@ -38,7 +37,7 @@ public abstract class Curio implements ICurio {
 
     @Override
     public void playRightClickEquipSound(LivingEntity entity) {
-        entity.world.playSound(null, new BlockPos(entity.getPositionVec()), equipSound, SoundCategory.NEUTRAL, 1, 1);
+        entity.world.playSound(null, new BlockPos(entity.getPositionVec()), getEquipSound(), SoundCategory.NEUTRAL, 1, 1);
     }
 
     public boolean canRightClickEquip() {
