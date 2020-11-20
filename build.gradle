@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.3-2.6.1'
+version = '1.16.4-2.6.2'
 group = 'artifacts'
 archivesBaseName = 'Artifacts'
 
@@ -66,10 +66,10 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.3-34.1.42'
+    minecraft 'net.minecraftforge:forge:1.16.4-35.0.22'
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.3-4.0.2.0:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.3-4.0.2.0")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.2.1:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.2.1")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
