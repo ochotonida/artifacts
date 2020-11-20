@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "artifacts:pocket_piston",
+    "artifacts:plastic_drinking_hat",
+    "artifacts:kitty_slippers",
+    "artifacts:bunny_hoppers"
+  ]
+}

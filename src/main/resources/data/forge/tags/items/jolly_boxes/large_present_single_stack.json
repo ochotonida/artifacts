@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "artifacts:flippers",
+    "artifacts:obsidian_skull",
+    "artifacts:night_vision_goggles",
+    "artifacts:umbrella",
+    "artifacts:snorkel",    
+    "artifacts:running_shoes"
+  ]
+}
