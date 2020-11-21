@@ -32,7 +32,7 @@ public abstract class Curio implements ICurio {
     }
 
     protected SoundEvent getEquipSound() {
-        return SoundEvents.ITEM_ARMOR_EQUIP_LEATHER;
+        return SoundEvents.ITEM_ARMOR_EQUIP_GENERIC;
     }
 
     @Override

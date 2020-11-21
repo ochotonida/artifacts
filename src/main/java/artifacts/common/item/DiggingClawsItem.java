@@ -5,6 +5,8 @@ import artifacts.client.render.model.curio.ClawsModel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,6 +40,11 @@ public class DiggingClawsItem extends ArtifactItem {
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
         return Curio.createProvider(new GloveCurio(this) {
+
+            @Override
+            protected SoundEvent getEquipSound() {
+                return SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE;
+            }
 
             @Override
             @OnlyIn(Dist.CLIENT)

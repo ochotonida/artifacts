@@ -9,6 +9,8 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,6 +40,11 @@ public class ObsidianSkullItem extends ArtifactItem {
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
         return Curio.createProvider(new Curio(this) {
             private Object model;
+
+            @Override
+            protected SoundEvent getEquipSound() {
+                return SoundEvents.ITEM_ARMOR_EQUIP_IRON;
+            }
 
             @Override
             @OnlyIn(Dist.CLIENT)

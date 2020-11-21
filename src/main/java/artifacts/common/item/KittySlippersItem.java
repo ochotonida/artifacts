@@ -8,10 +8,7 @@ import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -66,6 +63,11 @@ public class KittySlippersItem extends ArtifactItem {
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
         return Curio.createProvider(new Curio(this) {
             private Object model;
+
+            @Override
+            protected SoundEvent getEquipSound() {
+                return SoundEvents.ENTITY_CAT_AMBIENT;
+            }
 
             @Override
             @OnlyIn(Dist.CLIENT)

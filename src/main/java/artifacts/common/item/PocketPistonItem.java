@@ -5,6 +5,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -33,6 +35,12 @@ public class PocketPistonItem extends ArtifactItem {
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
         return Curio.createProvider(new GloveCurio(this) {
+
+            @Override
+            protected SoundEvent getEquipSound() {
+                return SoundEvents.BLOCK_PISTON_EXTEND;
+            }
+
             @Override
             @OnlyIn(Dist.CLIENT)
             protected ResourceLocation getSlimTexture() {

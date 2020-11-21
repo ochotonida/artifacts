@@ -9,6 +9,8 @@ import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -29,6 +31,11 @@ public class CrystalHeartItem extends ArtifactItem {
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
         return Curio.createProvider(new Curio(this) {
             private Object model;
+
+            @Override
+            protected SoundEvent getEquipSound() {
+                return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+            }
 
             @Override
             public void onEquip(String identifier, int index, LivingEntity entity) {
