@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.KittySlippersModel;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.monster.CreeperEntity;
@@ -32,8 +33,18 @@ public class KittySlippersItem extends ArtifactItem {
     }
 
     public void onLivingDamage(LivingDamageEvent event) {
-        if (event.getEntityLiving() instanceof PlayerEntity && CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
-            event.getEntity().world.playSound(null, event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY(), event.getEntityLiving().getPosZ(), SoundEvents.ENTITY_CAT_HURT, SoundCategory.PLAYERS, 1, (event.getEntityLiving().getRNG().nextFloat() - event.getEntityLiving().getRNG().nextFloat()) * 0.2F + 1.0F);
+        LivingEntity entity = event.getEntityLiving();
+        if (CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent()) {
+            entity.world.playSound(
+                    null,
+                    entity.getPosX(),
+                    entity.getPosY(),
+                    entity.getPosZ(),
+                    SoundEvents.ENTITY_CAT_HURT,
+                    SoundCategory.NEUTRAL,
+                    1,
+                    (entity.getRNG().nextFloat() - entity.getRNG().nextFloat()) * 0.2F + 1
+            );
         }
     }
 
