@@ -25,8 +25,13 @@
           "weight": 5
         },
         {
+          "type": "item",
+          "name": "artifacts:whoopee_cushion",
+          "weight": 5
+        },
+        {
           "type": "empty",
-          "weight": 66
+          "weight": 61
         }
       ]
     }

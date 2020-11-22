@@ -16,6 +16,8 @@ public class Items {
     public static Item BUNNY_HOPPERS;
     @ObjectHolder(Artifacts.MODID + ":umbrella")
     public static Item UMBRELLA;
+    @ObjectHolder(Artifacts.MODID + ":whoopee_cushion")
+    public static Item WHOOPEE_CUSHION;
 
     public static void register(IForgeRegistry<Item> registry) {
         registry.registerAll(
@@ -49,7 +51,9 @@ public class Items {
                 new KittySlippersItem(),
                 new RunningShoesItem(),
                 new SteadfastSpikesItem(),
-                new FlippersItem()
+                new FlippersItem(),
+                new CloudInABottleItem(),
+                new WhoopeeCushionItem()
         );
     }
 }

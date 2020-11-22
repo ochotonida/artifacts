@@ -19,10 +19,15 @@
     ]
   },
   "mimic.death": {
-    "category": "hostile",
     "sounds": [
       "artifacts:mimic/death1",
       "artifacts:mimic/death2"
+    ]
+  },
+  "fart": {
+    "sounds": [
+      "artifacts:fart1",
+      "artifacts:fart2"
     ]
   }
 }

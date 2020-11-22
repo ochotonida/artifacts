@@ -6,6 +6,7 @@ import artifacts.common.init.Entities;
 import artifacts.common.init.Features;
 import artifacts.common.init.Items;
 import artifacts.common.init.SoundEvents;
+import artifacts.common.network.NetworkHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.item.Item;
@@ -65,9 +66,10 @@ public class Artifacts {
 
         @SubscribeEvent
         public static void commonSetup(final FMLCommonSetupEvent event) {
-            event.enqueueWork(
-                    Features::registerConfiguredFeatures
-            );
+            event.enqueueWork(() -> {
+                Features.registerConfiguredFeatures();
+                NetworkHandler.register();
+            });
         }
 
         @SubscribeEvent

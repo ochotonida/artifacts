@@ -7,17 +7,17 @@
         {
           "type": "item",
           "name": "artifacts:flame_pendant",
-          "weight": 10
+          "weight": 9
         },
         {
           "type": "item",
           "name": "artifacts:thorn_pendant",
-          "weight": 10
+          "weight": 9
         },
         {
           "type": "item",
           "name": "artifacts:shock_pendant",
-          "weight": 10
+          "weight": 7
         },
         {
           "type": "item",
@@ -32,6 +32,11 @@
         {
           "type": "item",
           "name": "artifacts:universal_attractor",
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "artifacts:whoopee_cushion",
           "weight": 5
         },
         {

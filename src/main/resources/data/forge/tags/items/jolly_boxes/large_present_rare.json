@@ -5,13 +5,14 @@
     "artifacts:shock_pendant",
     "artifacts:flame_pendant",
     "artifacts:thorn_pendant",
-    "artifacts:panic_necklace",    
-    "artifacts:cross_necklace",    
-    "artifacts:villager_hat",    
-    "artifacts:universal_attractor",    
-    "artifacts:digging_claws",    
-    "artifacts:superstitious_hat",    
-    "artifacts:lucky_scarf",    
-    "artifacts:crystal_heart"
+    "artifacts:panic_necklace",
+    "artifacts:cross_necklace",
+    "artifacts:villager_hat",
+    "artifacts:universal_attractor",
+    "artifacts:digging_claws",
+    "artifacts:superstitious_hat",
+    "artifacts:lucky_scarf",
+    "artifacts:crystal_heart",
+    "artifacts:cloud_in_a_bottle"
   ]
 }

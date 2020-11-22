@@ -7,12 +7,12 @@
         {
           "type": "item",
           "name": "artifacts:panic_necklace",
-          "weight": 12
+          "weight": 10
         },
         {
           "type": "item",
           "name": "artifacts:pocket_piston",
-          "weight": 12
+          "weight": 10
         },
         {
           "type": "item",
@@ -37,11 +37,16 @@
         {
           "type": "item",
           "name": "artifacts:crystal_heart",
-          "weight": 7
+          "weight": 6
+        },
+        {
+          "type": "item",
+          "name": "artifacts:cloud_in_a_bottle",
+          "weight": 6
         },
         {
           "type": "empty",
-          "weight": 37
+          "weight": 36
         }
       ]
     }

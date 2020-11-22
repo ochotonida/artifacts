@@ -148,6 +148,16 @@
           "type": "item",
           "name": "artifacts:villager_hat",
           "weight": 8
+        },
+        {
+          "type": "item",
+          "name": "artifacts:cloud_in_a_bottle",
+          "weight": 8
+        },
+        {
+          "type": "item",
+          "name": "artifacts:whoopee_cushion",
+          "weight": 10
         }
       ]
     }

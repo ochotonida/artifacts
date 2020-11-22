@@ -16,6 +16,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.CuriosApi;
 
 public class BunnyHoppersItem extends ArtifactItem {
@@ -25,7 +26,7 @@ public class BunnyHoppersItem extends ArtifactItem {
     public BunnyHoppersItem() {
         super(new Properties(), "bunny_hoppers");
         MinecraftForge.EVENT_BUS.addListener(this::onLivingDamage);
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingFall);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, this::onLivingFall);
     }
 
     public void onLivingDamage(LivingDamageEvent event) {

@@ -17,27 +17,32 @@
         {
           "type": "item",
           "name": "artifacts:superstitious_hat",
-          "weight": 8
+          "weight": 6
         },
         {
           "type": "item",
           "name": "artifacts:lucky_scarf",
-          "weight": 8
+          "weight": 6
         },
         {
           "type": "item",
           "name": "artifacts:fire_gauntlet",
-          "weight": 8
+          "weight": 7
         },
         {
           "type": "item",
           "name": "artifacts:cross_necklace",
-          "weight": 8
+          "weight": 7
         },
         {
           "type": "item",
           "name": "artifacts:power_glove",
-          "weight": 8
+          "weight": 7
+        },
+        {
+          "type": "item",
+          "name": "artifacts:cloud_in_a_bottle",
+          "weight": 7
         },
         {
           "type": "empty",
