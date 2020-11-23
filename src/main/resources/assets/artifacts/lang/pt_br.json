@@ -39,6 +39,8 @@
   "item.artifacts.bunny_hoppers": "Sapato de Coelhos Saltitantes",
   "item.artifacts.crystal_heart": "Coração de Cristal",
   "item.artifacts.villager_hat": "Chapéu de Aldeão",
+  "item.artifacts.cloud_in_a_bottle": "Nuvem na Garrafa",
+  "item.artifacts.whoopee_cushion": "Almofada Engraçadinha",
   "tooltip.artifacts.snorkel": "Permite que o usuário respire debaixo d'água",
   "tooltip.artifacts.plastic_drinking_hat": "Diminui o tempo necessário para beber itens potáveis",
   "tooltip.artifacts.novelty_drinking_hat": "'Ei! Sou o número 1# e deixo a gravidade beber! '\nDiminui o tempo necessário para beber itens potáveis",
@@ -68,5 +70,7 @@
   "tooltip.artifacts.running_shoes": "Aumenta a velocidade de movimento e a altura do passo enquanto corre",
   "tooltip.artifacts.bunny_hoppers": "Aumenta a altura do pulo do usuário e concede imunidade a dano por queda",
   "tooltip.artifacts.crystal_heart": "Aumenta a saúde máxima do usuário",
-  "tooltip.artifacts.villager_hat": "Diminui os preços de negociação e os aldeões ocasionalmente dão presentes ao usuárior"
+  "tooltip.artifacts.villager_hat": "Diminui os preços de negociação e os aldeões ocasionalmente dão presentes ao usuárior",
+  "tooltip.artifacts.cloud_in_a_bottle": "Permite que o usuário dê um salto duplo",
+  "tooltip.artifacts.whoopee_cushion": "Aumenta a flatulência do usuário"
 }
