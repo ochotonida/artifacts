@@ -5,7 +5,7 @@ license="MIT"
 
 [[mods]]
 modId="artifacts"
-version="1.16.4-2.7.0"
+version="1.16.4-2.7.1"
 displayName="Artifacts"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/artifacts"
 logoFile="logo.png"
