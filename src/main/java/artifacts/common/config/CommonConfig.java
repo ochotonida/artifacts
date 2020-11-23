@@ -19,6 +19,8 @@ public class CommonConfig {
     final ForgeConfigSpec.IntValue everlastingFoodCooldown;
 
     CommonConfig(ForgeConfigSpec.Builder builder) {
+        builder.comment("To disable items or to change the frequency at which artifacts appear, override the loot tables from this mod with a datapack\nCosmetic slots are disabled by default, they can be enabled using the Curios config, see https://github.com/TheIllusiveC4/Curios/wiki/How-to-Use:-Users#creating-a-new-slot-type");
+
         builder.push("campsite");
 
         biomeBlacklist = builder
@@ -34,7 +36,7 @@ public class CommonConfig {
         campsiteMinY = builder
                 .comment("The minimum y-level at which a campsite can generate")
                 .translation(Artifacts.MODID + ".config.campsite_min_y")
-                .defineInRange("campsite_min_y", 0, 0, 255);
+                .defineInRange("campsite_min_y", 1, 1, 255);
         campsiteMaxY = builder
                 .comment("The maximum y-level at which a campsite can generate")
                 .translation(Artifacts.MODID + ".config.campsite_max_y")
