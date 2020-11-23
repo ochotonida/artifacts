@@ -7,16 +7,16 @@
         {
           "type": "item",
           "name": "artifacts:digging_claws",
-          "weight": 7
+          "weight": 6
         },
         {
           "type": "item",
           "name": "artifacts:pocket_piston",
-          "weight": 10
+          "weight": 9
         },
         {
           "type": "empty",
-          "weight": 83
+          "weight": 85
         }
       ]
     }

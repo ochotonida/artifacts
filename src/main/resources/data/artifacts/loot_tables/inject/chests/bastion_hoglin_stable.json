@@ -7,7 +7,7 @@
         {
           "type": "item",
           "name": "artifacts:everlasting_beef",
-          "weight": 5
+          "weight": 3
         },
         {
           "type": "item",
@@ -22,7 +22,7 @@
         {
           "type": "loot_table",
           "name": "artifacts:artifact",
-          "weight": 10
+          "weight": 12
         },
         {
           "type": "empty",

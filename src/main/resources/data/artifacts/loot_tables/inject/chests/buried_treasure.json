@@ -7,12 +7,12 @@
         {
           "type": "item",
           "name": "artifacts:snorkel",
-          "weight": 9
+          "weight": 8
         },
         {
           "type": "item",
           "name": "artifacts:flippers",
-          "weight": 9
+          "weight": 8
         },
         {
           "type": "item",
@@ -27,36 +27,36 @@
         {
           "type": "item",
           "name": "artifacts:plastic_drinking_hat",
-          "weight": 7
+          "weight": 5
         },
         {
           "type": "item",
           "name": "artifacts:novelty_drinking_hat",
-          "weight": 2
+          "weight": 1
         },
         {
           "type": "item",
           "name": "artifacts:umbrella",
-          "weight": 8
-        },
-        {
-          "type": "item",
-          "name": "artifacts:kitty_slippers",
-          "weight": 5
-        },
-        {
-          "type": "item",
-          "name": "artifacts:bunny_hoppers",
           "weight": 6
         },
         {
           "type": "item",
-          "name": "artifacts:lucky_scarf",
+          "name": "artifacts:kitty_slippers",
+          "weight": 4
+        },
+        {
+          "type": "item",
+          "name": "artifacts:bunny_hoppers",
           "weight": 5
         },
         {
+          "type": "item",
+          "name": "artifacts:lucky_scarf",
+          "weight": 4
+        },
+        {
           "type": "empty",
-          "weight": 40
+          "weight": 50
         }
       ]
     }

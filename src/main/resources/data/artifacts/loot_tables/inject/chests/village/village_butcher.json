@@ -7,11 +7,11 @@
         {
           "type": "item",
           "name": "artifacts:everlasting_beef",
-          "weight": 2
+          "weight": 1
         },
         {
           "type": "empty",
-          "weight": 98
+          "weight": 99
         }
       ]
     }

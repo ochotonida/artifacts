@@ -5,11 +5,6 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "loot_table",
-          "name": "artifacts:artifact",
-          "weight": 65
-        },
-        {
           "type": "item",
           "name": "artifacts:kitty_slippers",
           "weight": 25
@@ -18,6 +13,10 @@
           "type": "item",
           "name": "artifacts:bunny_hoppers",
           "weight": 10
+        },
+        {
+          "type": "empty",
+          "weight": 65
         }
       ]
     }

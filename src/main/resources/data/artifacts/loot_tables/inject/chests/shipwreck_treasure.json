@@ -7,51 +7,51 @@
         {
           "type": "item",
           "name": "artifacts:snorkel",
-          "weight": 5
+          "weight": 6
         },
         {
           "type": "item",
           "name": "artifacts:flippers",
-          "weight": 5
+          "weight": 6
         },
         {
           "type": "item",
           "name": "artifacts:scarf_of_invisibility",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:steadfast_spikes",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:universal_attractor",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:feral_claws",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:night_vision_goggles",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:obsidian_skull",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:running_shoes",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "empty",
-          "weight": 55
+          "weight": 60
         }
       ]
     }

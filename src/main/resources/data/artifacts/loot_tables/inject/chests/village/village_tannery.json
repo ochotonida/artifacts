@@ -7,31 +7,31 @@
         {
           "type": "item",
           "name": "artifacts:umbrella",
-          "weight": 15
+          "weight": 10
         },
         {
           "type": "item",
           "name": "artifacts:kitty_slippers",
-          "weight": 7
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:bunny_hoppers",
-          "weight": 7
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:scarf_of_invisibility",
-          "weight": 5
+          "weight": 3
         },
         {
           "type": "item",
           "name": "artifacts:whoopee_cushion",
-          "weight": 5
+          "weight": 4
         },
         {
           "type": "empty",
-          "weight": 61
+          "weight": 75
         }
       ]
     }

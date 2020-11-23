@@ -7,11 +7,11 @@
         {
           "type": "item",
           "name": "artifacts:villager_hat",
-          "weight": 10
+          "weight": 4
         },
         {
           "type": "empty",
-          "weight": 90
+          "weight": 96
         }
       ]
     }

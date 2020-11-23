@@ -6,11 +6,6 @@
       "entries": [
         {
           "type": "item",
-          "name": "artifacts:umbrella",
-          "weight": 1
-        },
-        {
-          "type": "item",
           "name": "artifacts:whoopee_cushion",
           "weight": 1
         }
