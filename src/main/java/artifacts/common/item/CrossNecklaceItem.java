@@ -2,23 +2,18 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.CrossNecklaceModel;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-public class CrossNecklaceItem extends ArtifactItem {
+public class CrossNecklaceItem extends CurioItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/cross_necklace.png");
-
-    public CrossNecklaceItem() {
-        super(new Properties(), "cross_necklace");
-    }
 
     private static boolean canApplyBonus(ItemStack stack) {
         return stack.getOrCreateTag().getBoolean("CanApplyBonus");
@@ -29,41 +24,30 @@ public class CrossNecklaceItem extends ArtifactItem {
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
-        return Curio.createProvider(new Curio(this) {
-            private Object model;
+    protected SoundEvent getEquipSound() {
+        return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+    }
 
-            @Override
-            protected SoundEvent getEquipSound() {
-                return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+    @Override
+    public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
+        if (entity.hurtResistantTime <= 10) {
+            setCanApplyBonus(stack, true);
+        } else {
+            if (canApplyBonus(stack)) {
+                entity.hurtResistantTime += 20;
+                setCanApplyBonus(stack, false);
             }
+        }
+    }
 
-            @Override
-            public void curioTick(String identifier, int index, LivingEntity entity) {
-                if (entity.hurtResistantTime <= 10) {
-                    setCanApplyBonus(stack, true);
-                } else {
-                    if (canApplyBonus(stack)) {
-                        entity.hurtResistantTime += 20;
-                        setCanApplyBonus(stack, false);
-                    }
-                }
-            }
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    protected BipedModel<LivingEntity> createModel() {
+        return new CrossNecklaceModel();
+    }
 
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            protected CrossNecklaceModel getModel() {
-                if (model == null) {
-                    model = new CrossNecklaceModel();
-                }
-                return (CrossNecklaceModel) model;
-            }
-
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            protected ResourceLocation getTexture() {
-                return TEXTURE;
-            }
-        });
+    @Override
+    protected ResourceLocation getTexture() {
+        return TEXTURE;
     }
 }

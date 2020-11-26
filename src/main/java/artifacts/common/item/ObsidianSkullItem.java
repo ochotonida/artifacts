@@ -2,9 +2,9 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.ObsidianSkullModel;
+import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -14,16 +14,14 @@ import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 
-public class ObsidianSkullItem extends ArtifactItem {
+public class ObsidianSkullItem extends CurioItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/obsidian_skull.png");
 
     public ObsidianSkullItem() {
-        super(new Properties(), "obsidian_skull");
         MinecraftForge.EVENT_BUS.addListener(this::onLivingHurt);
     }
 
@@ -41,29 +39,18 @@ public class ObsidianSkullItem extends ArtifactItem {
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
-        return Curio.createProvider(new Curio(this) {
-            private Object model;
+    protected SoundEvent getEquipSound() {
+        return SoundEvents.ITEM_ARMOR_EQUIP_IRON;
+    }
 
-            @Override
-            protected SoundEvent getEquipSound() {
-                return SoundEvents.ITEM_ARMOR_EQUIP_IRON;
-            }
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    protected BipedModel<LivingEntity> createModel() {
+        return new ObsidianSkullModel();
+    }
 
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            protected ObsidianSkullModel getModel() {
-                if (model == null) {
-                    model = new ObsidianSkullModel();
-                }
-                return (ObsidianSkullModel) model;
-            }
-
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            protected ResourceLocation getTexture() {
-                return TEXTURE;
-            }
-        });
+    @Override
+    protected ResourceLocation getTexture() {
+        return TEXTURE;
     }
 }

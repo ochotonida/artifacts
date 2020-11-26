@@ -7,10 +7,9 @@ import artifacts.common.network.DoubleJumpPacket;
 import artifacts.common.network.NetworkHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ResourceLocation;
@@ -21,20 +20,18 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 
-public class CloudInABottleItem extends ArtifactItem {
+public class CloudInABottleItem extends CurioItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/cloud_in_a_bottle.png");
 
     public CloudInABottleItem() {
-        super(new Item.Properties(), "cloud_in_a_bottle");
-        MinecraftForge.EVENT_BUS.register(new ClientJumpHandler());
+        MinecraftForge.EVENT_BUS.register(new DoubleJumpHandler());
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, this::onLivingFall);
     }
 
@@ -73,33 +70,22 @@ public class CloudInABottleItem extends ArtifactItem {
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
-        return Curio.createProvider(new Curio(this) {
-            private Object model;
-
-            @Override
-            protected SoundEvent getEquipSound() {
-                return SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH;
-            }
-
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            protected CloudInABottleModel getModel() {
-                if (model == null) {
-                    model = new CloudInABottleModel();
-                }
-                return (CloudInABottleModel) model;
-            }
-
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            protected ResourceLocation getTexture() {
-                return TEXTURE;
-            }
-        });
+    protected SoundEvent getEquipSound() {
+        return SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH;
     }
 
-    private class ClientJumpHandler {
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    protected BipedModel<LivingEntity> createModel() {
+        return new CloudInABottleModel();
+    }
+
+    @Override
+    protected ResourceLocation getTexture() {
+        return TEXTURE;
+    }
+
+    private class DoubleJumpHandler {
 
         @OnlyIn(Dist.CLIENT)
         private boolean canDoubleJump;

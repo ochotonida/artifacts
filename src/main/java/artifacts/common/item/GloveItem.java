@@ -9,69 +9,58 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
-public abstract class GloveCurio extends Curio {
+public abstract class GloveItem extends CurioItem {
 
-    protected Object modelDefault;
-    protected Object modelSlim;
+    private Object modelSlim;
 
-    public GloveCurio(Item item) {
-        super(item);
-    }
-
-    @OnlyIn(Dist.CLIENT)
     protected static boolean hasSmallArms(Entity entity) {
         return entity instanceof AbstractClientPlayerEntity && ((AbstractClientPlayerEntity) entity).getSkinType().equals("slim");
     }
 
-    @OnlyIn(Dist.CLIENT)
     protected ResourceLocation getTexture(boolean smallArms) {
         return smallArms ? getSlimTexture() : getTexture();
     }
 
-    @OnlyIn(Dist.CLIENT)
     protected abstract ResourceLocation getSlimTexture();
 
     @OnlyIn(Dist.CLIENT)
     protected GloveModel getModel(boolean smallArms) {
-        return (smallArms ? getSlimModel() : getModel());
+        return (smallArms ? getSlimModel() : (GloveModel) getModel());
     }
 
     @OnlyIn(Dist.CLIENT)
-    protected GloveModel getSlimModel() {
+    protected final GloveModel getSlimModel() {
         if (modelSlim == null) {
-            modelSlim = new GloveModel(true);
+            modelSlim = createModel(true);
         }
         return (GloveModel) modelSlim;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    protected GloveModel getModel() {
-        if (modelDefault == null) {
-            modelDefault = new GloveModel(false);
-        }
-        return (GloveModel) modelDefault;
+    protected final GloveModel createModel() {
+        return createModel(false);
     }
 
-    @Override
-    public boolean canRender(String identifier, int index, LivingEntity livingEntity) {
-        return index == 0 || index == 1;
-    }
-
-    @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+    protected GloveModel createModel(boolean smallArms) {
+        return new GloveModel(smallArms);
+    }
+
+    @Override
+    public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, ItemStack stack) {
         boolean smallArms = hasSmallArms(entity);
         GloveModel model = getModel(smallArms);
         model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
-        RenderHelper.followBodyRotations(entity, model);
+        ICurio.RenderHelper.followBodyRotations(entity, model);
         IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture(smallArms)), false, false);
-        model.renderHand(index == 0, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        model.renderHand(index % 2 == 0, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 }

@@ -8,8 +8,8 @@ import net.minecraft.world.World;
 
 public class EverlastingFoodItem extends ArtifactItem {
 
-    public EverlastingFoodItem(Properties properties, String name) {
-        super(properties, name);
+    public EverlastingFoodItem(Properties properties) {
+        super(properties);
     }
 
     @Override

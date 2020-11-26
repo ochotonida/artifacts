@@ -2,30 +2,27 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.KittySlippersModel;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 
-public class KittySlippersItem extends ArtifactItem {
+public class KittySlippersItem extends CurioItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/kitty_slippers.png");
 
     public KittySlippersItem() {
-        super(new Properties(), "kitty_slippers");
         MinecraftForge.EVENT_BUS.addListener(this::onLivingDamage);
         MinecraftForge.EVENT_BUS.addListener(this::onLivingSetAttackTarget);
         MinecraftForge.EVENT_BUS.addListener(this::onLivingUpdate);
@@ -71,29 +68,18 @@ public class KittySlippersItem extends ArtifactItem {
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
-        return Curio.createProvider(new Curio(this) {
-            private Object model;
+    protected SoundEvent getEquipSound() {
+        return SoundEvents.ENTITY_CAT_AMBIENT;
+    }
 
-            @Override
-            protected SoundEvent getEquipSound() {
-                return SoundEvents.ENTITY_CAT_AMBIENT;
-            }
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    protected BipedModel<LivingEntity> createModel() {
+        return new KittySlippersModel();
+    }
 
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            protected KittySlippersModel getModel() {
-                if (model == null) {
-                    model = new KittySlippersModel();
-                }
-                return (KittySlippersModel) model;
-            }
-
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            protected ResourceLocation getTexture() {
-                return TEXTURE;
-            }
-        });
+    @Override
+    protected ResourceLocation getTexture() {
+        return TEXTURE;
     }
 }

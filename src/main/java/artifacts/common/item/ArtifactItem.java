@@ -5,7 +5,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -17,12 +16,8 @@ import java.util.List;
 
 public abstract class ArtifactItem extends Item {
 
-    private final String name;
-
-    public ArtifactItem(Properties properties, String name) {
+    public ArtifactItem(Properties properties) {
         super(properties.maxStackSize(1).group(Artifacts.CREATIVE_TAB));
-        setRegistryName(new ResourceLocation(Artifacts.MODID, name));
-        this.name = name;
     }
 
     @Override
@@ -33,6 +28,6 @@ public abstract class ArtifactItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        tooltip.add(new TranslationTextComponent("tooltip.artifacts." + name).mergeStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent(getTranslationKey() + ".tooltip").mergeStyle(TextFormatting.GRAY));
     }
 }

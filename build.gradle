@@ -68,8 +68,8 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.4-35.0.22'
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.2.1:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.2.1")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.0:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.0")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
