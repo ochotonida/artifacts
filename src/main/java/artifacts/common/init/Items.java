@@ -41,6 +41,7 @@ public class Items {
                 new AntidoteVesselItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "antidote_vessel")),
                 new UniversalAttractorItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "universal_attractor")),
                 new CrystalHeartItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "crystal_heart")),
+                new CloudInABottleItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "cloud_in_a_bottle")),
                 new DiggingClawsItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "digging_claws")),
                 new FeralClawsItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "feral_claws")),
                 new PowerGloveItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "power_glove")),
@@ -51,7 +52,6 @@ public class Items {
                 new RunningShoesItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "running_shoes")),
                 new SteadfastSpikesItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "steadfast_spikes")),
                 new FlippersItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "flippers")),
-                new CloudInABottleItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "cloud_in_a_bottle")),
                 new WhoopeeCushionItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "whoopee_cushion"))
         );
     }
