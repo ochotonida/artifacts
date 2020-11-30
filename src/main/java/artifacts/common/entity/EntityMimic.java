@@ -242,9 +242,10 @@ public class EntityMimic extends EntityLiving implements IMob {
         }
 
         public void updateTask() {
-            // noinspection ConstantConditions
-            mimic.faceEntity(mimic.getAttackTarget(), 10, 10);
-            ((MimicMoveHelper) mimic.getMoveHelper()).setDirection(mimic.rotationYaw, true);
+            if (mimic.getAttackTarget() != null) {
+                mimic.faceEntity(mimic.getAttackTarget(), 10, 10);
+                ((MimicMoveHelper) mimic.getMoveHelper()).setDirection(mimic.rotationYaw, true);
+            }
         }
     }
 

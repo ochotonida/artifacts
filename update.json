@@ -7,10 +7,11 @@
     "1.12.2-1.1.0": "added optional support for artemislib,\n fixed a crash with everlasting food,\n fixed certain bauble effects staying active when unequipped,\n added dimension whitelists for worldgen,\n fixed worldgen occurring in flat worlds",
     "1.12.2-1.2.0": "added korean localisation",
     "1.12.2-1.2.1": "fixed an item duplication bug",
-    "1.12.2-1.2.2": "added a config option to always show tooltips"
+    "1.12.2-1.2.2": "added a config option to always show tooltips",
+    "1.12.2-1.2.3": "fixed a crash related to mimics"
   },
   "promos": {
-    "1.12.2-latest": "1.12.2-1.2.1",
-    "1.12.2-recommended": "1.12.2-1.2.1"
+    "1.12.2-latest": "1.12.2-1.2.3",
+    "1.12.2-recommended": "1.12.2-1.2.3"
   }
 }

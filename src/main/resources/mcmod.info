@@ -6,7 +6,7 @@
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "https://github.com/ochotonida/artifacts",
-  "updateUrl": "https://github.com/ochotonida/artifacts/blob/master/update.json",
+  "updateUrl": "https://raw.githubusercontent.com/ochotonida/artifacts/1.12/update.json",
   "authorList": ["ochotonida"],
   "credits": "",
   "logoFile": "",
