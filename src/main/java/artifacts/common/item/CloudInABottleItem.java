@@ -36,6 +36,8 @@ public class CloudInABottleItem extends CurioItem {
     }
 
     public static void jump(PlayerEntity player) {
+        player.fallDistance = 0;
+
         double upwardsMotion = 0.5;
         if (player.isPotionActive(Effects.JUMP_BOOST)) {
             // noinspection ConstantConditions
@@ -60,6 +62,12 @@ public class CloudInABottleItem extends CurioItem {
             player.addExhaustion(0.2F);
         } else {
             player.addExhaustion(0.05F);
+        }
+
+        if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.WHOOPEE_CUSHION, player).isPresent()) {
+            player.playSound(artifacts.common.init.SoundEvents.FART, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
+        } else {
+            player.playSound(SoundEvents.BLOCK_WOOL_FALL, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
         }
     }
 
@@ -97,33 +105,21 @@ public class CloudInABottleItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SuppressWarnings("unused")
         public void onClientTick(TickEvent.ClientTickEvent event) {
-            if (event.phase == TickEvent.Phase.END) {
-                ClientPlayerEntity player = Minecraft.getInstance().player;
+            ClientPlayerEntity player = Minecraft.getInstance().player;
 
-                if (player != null) {
-                    if ((player.isOnGround() || player.isOnLadder()) && !player.isInWater()) {
-                        hasReleasedJumpKey = false;
-                        canDoubleJump = true;
-                    } else {
-                        if (!player.movementInput.jump) {
-                            hasReleasedJumpKey = true;
-                        } else {
-                            if (!player.abilities.isFlying && canDoubleJump && hasReleasedJumpKey) {
-                                canDoubleJump = false;
-                                CuriosApi.getCuriosHelper().findEquippedCurio(CloudInABottleItem.this, player).ifPresent(stack -> {
+            if (event.phase == TickEvent.Phase.END && player != null) {
+                if ((player.isOnGround() || player.isOnLadder()) && !player.isInWater()) {
+                    hasReleasedJumpKey = false;
+                    canDoubleJump = true;
+                } else if (!player.movementInput.jump) {
+                    hasReleasedJumpKey = true;
+                } else if (!player.abilities.isFlying && canDoubleJump && hasReleasedJumpKey) {
+                    canDoubleJump = false;
 
-                                    NetworkHandler.INSTANCE.sendToServer(new DoubleJumpPacket());
-                                    jump(player);
-                                    player.fallDistance = 0;
-                                    if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.WHOOPEE_CUSHION, player).isPresent()) {
-                                        player.playSound(artifacts.common.init.SoundEvents.FART, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
-                                    } else {
-                                        player.playSound(SoundEvents.BLOCK_WOOL_FALL, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
-                                    }
-                                });
-                            }
-                        }
-                    }
+                    CuriosApi.getCuriosHelper().findEquippedCurio(CloudInABottleItem.this, player).ifPresent(stack -> {
+                        NetworkHandler.INSTANCE.sendToServer(new DoubleJumpPacket());
+                        jump(player);
+                    });
                 }
             }
         }
