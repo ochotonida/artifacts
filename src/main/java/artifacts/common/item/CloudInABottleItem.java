@@ -107,7 +107,7 @@ public class CloudInABottleItem extends CurioItem {
         public void onClientTick(TickEvent.ClientTickEvent event) {
             ClientPlayerEntity player = Minecraft.getInstance().player;
 
-            if (event.phase == TickEvent.Phase.END && player != null) {
+            if (event.phase == TickEvent.Phase.END && player != null && player.movementInput != null) {
                 if ((player.isOnGround() || player.isOnLadder()) && !player.isInWater()) {
                     hasReleasedJumpKey = false;
                     canDoubleJump = true;
