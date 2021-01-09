@@ -28,6 +28,11 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
         super(new Properties());
     }
 
+
+    protected boolean hasCurioEquipped(LivingEntity entity) {
+        return CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
+    }
+
     @Override
     public Rarity getRarity(ItemStack stack) {
         return Rarity.RARE;
