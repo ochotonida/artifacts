@@ -13,7 +13,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import top.theillusivec4.curios.api.CuriosApi;
 
 public class PanicNecklaceItem extends CurioItem {
 
@@ -25,7 +24,7 @@ public class PanicNecklaceItem extends CurioItem {
 
     public void onLivingHurt(LivingHurtEvent event) {
         if (!event.getEntity().world.isRemote && event.getAmount() >= 1) {
-            if (CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+            if (isEquippedBy(event.getEntityLiving())) {
                 event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, 160, 0, false, false));
             }
         }

@@ -14,19 +14,18 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
-import top.theillusivec4.curios.api.CuriosApi;
 
 public class BunnyHoppersItem extends HurtSoundModifyingItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/bunny_hoppers.png");
 
     public BunnyHoppersItem() {
-        super(SoundEvents.ENTITY_RABBIT_HURT, SoundEvents.ENTITY_RABBIT_DEATH);
+        super(SoundEvents.ENTITY_RABBIT_HURT);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, this::onLivingFall);
     }
 
     public void onLivingFall(LivingFallEvent event) {
-        if (CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+        if (isEquippedBy(event.getEntityLiving())) {
             event.setDamageMultiplier(0);
         }
     }

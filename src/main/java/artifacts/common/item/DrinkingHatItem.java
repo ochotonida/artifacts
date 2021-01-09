@@ -11,11 +11,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import top.theillusivec4.curios.api.CuriosApi;
 
 public class DrinkingHatItem extends CurioItem {
 
-    private final ResourceLocation texture; //TODO move to artifactItem (use name)
+    private final ResourceLocation texture;
 
     public DrinkingHatItem(ResourceLocation texture) {
         this.texture = texture;
@@ -23,7 +22,7 @@ public class DrinkingHatItem extends CurioItem {
     }
 
     public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-        if (CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+        if (isEquippedBy(event.getEntityLiving())) {
             if (event.getItem().getUseAction() == UseAction.DRINK) {
                 event.setDuration(event.getDuration() / 4);
             }

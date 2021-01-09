@@ -72,7 +72,7 @@ public class CloudInABottleItem extends CurioItem {
     }
 
     public void onLivingFall(LivingFallEvent event) {
-        if (CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+        if (isEquippedBy(event.getEntityLiving())) {
             event.setDistance(Math.max(0, event.getDistance() - 3));
         }
     }

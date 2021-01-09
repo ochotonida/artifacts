@@ -8,7 +8,6 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import top.theillusivec4.curios.api.CuriosApi;
 
 public class PocketPistonItem extends GloveItem {
 
@@ -20,7 +19,7 @@ public class PocketPistonItem extends GloveItem {
     }
 
     public void onLivingAttack(LivingAttackEvent event) {
-        if (event.getSource().getTrueSource() instanceof LivingEntity && CuriosApi.getCuriosHelper().findEquippedCurio(this, (LivingEntity) event.getSource().getTrueSource()).isPresent()) {
+        if (event.getSource().getTrueSource() instanceof LivingEntity && isEquippedBy((LivingEntity) event.getSource().getTrueSource())) {
             LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
             event.getEntityLiving().applyKnockback(1.5F, MathHelper.sin((float) (attacker.rotationYaw * (Math.PI / 180))), -MathHelper.cos((float) (attacker.rotationYaw * (Math.PI / 180))));
         }

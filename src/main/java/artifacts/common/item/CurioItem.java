@@ -29,7 +29,7 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
     }
 
 
-    protected boolean hasCurioEquipped(LivingEntity entity) {
+    protected boolean isEquippedBy(LivingEntity entity) {
         return CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
     }
 
@@ -54,7 +54,7 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
 
     @Override
     public boolean canEquip(String identifier, LivingEntity entity, ItemStack stack) {
-        return !CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
+        return !isEquippedBy(entity);
     }
 
     @Override

@@ -10,7 +10,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import top.theillusivec4.curios.api.CuriosApi;
 
 public class DiggingClawsItem extends GloveItem {
 
@@ -23,14 +22,14 @@ public class DiggingClawsItem extends GloveItem {
     }
 
     public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
-        if (CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
+        if (isEquippedBy(event.getPlayer())) {
             event.setNewSpeed(event.getNewSpeed() + 4);
         }
     }
 
     public void onHarvestCheck(PlayerEvent.HarvestCheck event) {
-        if (!event.canHarvest() && CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getEntityLiving()).isPresent()) {
-            event.setCanHarvest(event.canHarvest() || event.getTargetBlock().getHarvestLevel() <= 2);
+        if (!event.canHarvest() && isEquippedBy(event.getPlayer())) {
+            event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= 2);
         }
     }
 

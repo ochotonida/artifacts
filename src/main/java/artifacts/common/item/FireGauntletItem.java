@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class FireGauntletItem extends GloveItem {
@@ -30,7 +29,7 @@ public class FireGauntletItem extends GloveItem {
     public void onLivingHurt(LivingHurtEvent event) {
         if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof IndirectEntityDamageSource) && !((EntityDamageSource) event.getSource()).getIsThornsDamage() && event.getSource().getTrueSource() instanceof LivingEntity) {
             LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-            if (CuriosApi.getCuriosHelper().findEquippedCurio(this, attacker).isPresent() && !event.getEntity().isImmuneToFire()) {
+            if (isEquippedBy(attacker) && !event.getEntity().isImmuneToFire()) {
                 event.getEntity().setFire(8);
             }
         }

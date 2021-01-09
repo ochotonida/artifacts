@@ -21,7 +21,16 @@ public abstract class PendantItem extends CurioItem {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingHurt);
     }
 
-    public abstract void onLivingHurt(LivingHurtEvent event);
+    public void onLivingHurt(LivingHurtEvent event) {
+        if (isEquippedBy(event.getEntityLiving())
+                && !event.getEntity().world.isRemote()
+                && event.getAmount() >= 1
+                && event.getSource().getTrueSource() instanceof LivingEntity) {
+            applyEffect(event.getEntityLiving(), (LivingEntity) event.getSource().getTrueSource());
+        }
+    }
+
+    public abstract void applyEffect(LivingEntity target, LivingEntity attacker);
 
     @Override
     protected SoundEvent getEquipSound() {
