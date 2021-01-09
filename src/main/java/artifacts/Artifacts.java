@@ -34,7 +34,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
 
-@Mod("artifacts")
+@Mod(Artifacts.MODID)
 @SuppressWarnings("unused")
 public class Artifacts {
 
