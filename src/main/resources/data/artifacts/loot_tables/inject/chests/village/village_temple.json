@@ -7,16 +7,16 @@
         {
           "type": "item",
           "name": "artifacts:cross_necklace",
-          "weight": 15
+          "weight": 8
         },
         {
           "type": "item",
           "name": "artifacts:antidote_vessel",
-          "weight": 15
+          "weight": 8
         },
         {
           "type": "empty",
-          "weight": 70
+          "weight": 84
         }
       ]
     }

@@ -7,7 +7,7 @@
         {
           "type": "item",
           "name": "artifacts:plastic_drinking_hat",
-          "weight": 4
+          "weight": 3
         },
         {
           "type": "item",
@@ -22,7 +22,7 @@
         {
           "type": "item",
           "name": "artifacts:night_vision_goggles",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "item",
@@ -36,7 +36,7 @@
         },
         {
           "type": "empty",
-          "weight": 83
+          "weight": 85
         }
       ]
     }

@@ -7,27 +7,27 @@
         {
           "type": "item",
           "name": "artifacts:power_glove",
-          "weight": 10
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:antidote_vessel",
-          "weight": 10
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:superstitious_hat",
-          "weight": 15
+          "weight": 7
         },
         {
           "type": "item",
           "name": "artifacts:lucky_scarf",
-          "weight": 10
+          "weight": 6
         },
         {
           "type": "item",
           "name": "artifacts:universal_attractor",
-          "weight": 10
+          "weight": 4
         },
         {
           "type": "loot_table",
@@ -36,7 +36,7 @@
         },
         {
           "type": "empty",
-          "weight": 40
+          "weight": 65
         }
       ]
     }

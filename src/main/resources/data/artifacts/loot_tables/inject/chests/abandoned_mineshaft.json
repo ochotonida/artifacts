@@ -7,22 +7,22 @@
         {
           "type": "item",
           "name": "artifacts:night_vision_goggles",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "item",
           "name": "artifacts:panic_necklace",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "item",
           "name": "artifacts:obsidian_skull",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "item",
           "name": "artifacts:plastic_drinking_hat",
-          "weight": 4
+          "weight": 3
         },
         {
           "type": "item",
@@ -32,21 +32,21 @@
         {
           "type": "item",
           "name": "artifacts:superstitious_hat",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "item",
           "name": "artifacts:digging_claws",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "item",
           "name": "artifacts:cloud_in_a_bottle",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "empty",
-          "weight": 77
+          "weight": 84
         }
       ]
     }

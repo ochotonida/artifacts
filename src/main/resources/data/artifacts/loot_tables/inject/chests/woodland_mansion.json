@@ -7,11 +7,11 @@
         {
           "type": "loot_table",
           "name": "artifacts:artifact",
-          "weight": 30
+          "weight": 25
         },
         {
           "type": "empty",
-          "weight": 70
+          "weight": 75
         }
       ]
     }

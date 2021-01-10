@@ -12,21 +12,21 @@
         {
           "type": "item",
           "name": "artifacts:bunny_hoppers",
-          "weight": 10
+          "weight": 7
         },
         {
           "type": "item",
           "name": "artifacts:flame_pendant",
-          "weight": 10
+          "weight": 8
         },
         {
           "type": "loot_table",
           "name": "artifacts:artifact",
-          "weight": 12
+          "weight": 7
         },
         {
           "type": "empty",
-          "weight": 75
+          "weight": 85
         }
       ]
     }

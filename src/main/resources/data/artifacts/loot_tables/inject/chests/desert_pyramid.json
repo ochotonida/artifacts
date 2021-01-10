@@ -27,7 +27,7 @@
         {
           "type": "item",
           "name": "artifacts:scarf_of_invisibility",
-          "weight": 4
+          "weight": 2
         },
         {
           "type": "item",
@@ -37,7 +37,7 @@
         {
           "type": "item",
           "name": "artifacts:whoopee_cushion",
-          "weight": 5
+          "weight": 7
         },
         {
           "type": "empty",

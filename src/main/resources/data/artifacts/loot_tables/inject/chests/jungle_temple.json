@@ -7,16 +7,16 @@
         {
           "type": "item",
           "name": "artifacts:kitty_slippers",
-          "weight": 25
+          "weight": 15
         },
         {
           "type": "item",
           "name": "artifacts:bunny_hoppers",
-          "weight": 10
+          "weight": 5
         },
         {
           "type": "empty",
-          "weight": 65
+          "weight": 80
         }
       ]
     }

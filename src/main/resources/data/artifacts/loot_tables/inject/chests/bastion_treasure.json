@@ -7,37 +7,41 @@
         {
           "type": "item",
           "name": "artifacts:fire_gauntlet",
-          "weight": 15
+          "weight": 8
         },
         {
           "type": "item",
           "name": "artifacts:cross_necklace",
-          "weight": 15
+          "weight": 7
         },
         {
           "type": "item",
           "name": "artifacts:steadfast_spikes",
-          "weight": 10
+          "weight": 5
         },
         {
           "type": "item",
           "name": "artifacts:panic_necklace",
-          "weight": 15
+          "weight": 8
         },
         {
           "type": "item",
           "name": "artifacts:crystal_heart",
-          "weight": 20
+          "weight": 10
         },
         {
           "type": "loot_table",
           "name": "artifacts:artifact",
-          "weight": 10
+          "weight": 5
         },
         {
           "type": "item",
           "name": "artifacts:antidote_vessel",
-          "weight": 15
+          "weight": 7
+        },
+        {
+          "type": "empty",
+          "weight": 50
         }
       ]
     }

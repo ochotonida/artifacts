@@ -7,41 +7,41 @@
         {
           "type": "item",
           "name": "artifacts:night_vision_goggles",
-          "weight": 5
+          "weight": 2
         },
         {
           "type": "item",
           "name": "artifacts:thorn_pendant",
-          "weight": 6
+          "weight": 4
         },
         {
           "type": "item",
           "name": "artifacts:fire_gauntlet",
-          "weight": 5
+          "weight": 3
         },
         {
           "type": "item",
           "name": "artifacts:power_glove",
-          "weight": 5
+          "weight": 3
         },
         {
           "type": "item",
           "name": "artifacts:universal_attractor",
-          "weight": 5
+          "weight": 3
         },
         {
           "type": "item",
           "name": "artifacts:obsidian_skull",
-          "weight": 5
+          "weight": 3
         },
         {
           "type": "item",
           "name": "artifacts:lucky_scarf",
-          "weight": 4
+          "weight": 2
         },
         {
           "type": "empty",
-          "weight": 65
+          "weight": 80
         }
       ]
     }
