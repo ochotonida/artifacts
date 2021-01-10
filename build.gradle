@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.4-2.7.4'
+version = '1.16.4-2.7.5'
 group = 'artifacts'
 archivesBaseName = 'Artifacts'
 
