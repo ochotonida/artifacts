@@ -24,7 +24,7 @@ public class Items {
                 // misc
                 new UmbrellaItem().setRegistryName(new ResourceLocation(Artifacts.MODID, "umbrella")),
                 new EverlastingFoodItem(new Item.Properties().food(new Food.Builder().hunger(3).saturation(0.3F).build())).setRegistryName(new ResourceLocation(Artifacts.MODID, "everlasting_beef")),
-                new EverlastingFoodItem(new Item.Properties().food(new Food.Builder().hunger(8).saturation(0.8F).meat().build())).setRegistryName(new ResourceLocation(Artifacts.MODID, "eternal_steak")),
+                new EverlastingFoodItem(new Item.Properties().food(new Food.Builder().hunger(8).saturation(0.8F).build())).setRegistryName(new ResourceLocation(Artifacts.MODID, "eternal_steak")),
 
                 // head
                 new DrinkingHatItem(new ResourceLocation(Artifacts.MODID, "textures/entity/curio/plastic_drinking_hat.png")).setRegistryName(new ResourceLocation(Artifacts.MODID, "plastic_drinking_hat")),
