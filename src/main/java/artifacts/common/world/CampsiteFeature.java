@@ -133,10 +133,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
             } else {
                 setBlockState(world, pos, Blocks.BARREL.getDefaultState().with(BarrelBlock.PROPERTY_FACING, Direction.getRandomDirection(random)));
             }
-            TileEntity container = world.getTileEntity(pos);
-            if (container instanceof LockableLootTileEntity) {
-                ((LockableLootTileEntity) container).setLootTable(LootTables.CAMPSITE_CHEST, random.nextLong());
-            }
+            LockableLootTileEntity.setLootTable(world, random, pos, LootTables.CAMPSITE_CHEST);
         }
     }
 
