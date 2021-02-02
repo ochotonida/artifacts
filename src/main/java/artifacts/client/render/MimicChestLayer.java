@@ -12,24 +12,31 @@ import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.model.RenderMaterial;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.state.properties.ChestType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
+import net.minecraftforge.fml.ModList;
 
 import java.util.Calendar;
 
 public class MimicChestLayer extends LayerRenderer<MimicEntity, MimicModel> {
 
     private final MimicChestLayerModel model;
-    private boolean isChristmas;
+    public final RenderMaterial material;
+
 
     public MimicChestLayer(IEntityRenderer<MimicEntity, MimicModel> entityRenderer) {
         super(entityRenderer);
 
         model = new MimicChestLayerModel();
 
-        Calendar calendar = Calendar.getInstance();
-        if (calendar.get(Calendar.MONTH) + 1 == 12 && calendar.get(Calendar.DATE) >= 24 && calendar.get(Calendar.DATE) <= 26) {
-            isChristmas = true;
+        if (ModList.get().isLoaded("lootr")) {
+            material = new RenderMaterial(AtlasTexture.LOCATION_BLOCKS_TEXTURE, new ResourceLocation("lootr", "chest"));
+        } else {
+            Calendar calendar = Calendar.getInstance();
+            boolean isChristmas = calendar.get(Calendar.MONTH) + 1 == 12 && calendar.get(Calendar.DATE) >= 24 && calendar.get(Calendar.DATE) <= 26;
+            material = Atlases.getChestMaterial(null, ChestType.SINGLE, isChristmas);
         }
     }
 
@@ -44,14 +51,10 @@ public class MimicChestLayer extends LayerRenderer<MimicEntity, MimicModel> {
             getEntityModel().copyModelAttributesTo(model);
             model.setLivingAnimations(mimic, limbSwing, limbSwingAmount, partialTicks);
             model.setRotationAngles(mimic, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-            IVertexBuilder builder = getChestMaterial().getBuffer(buffer, RenderType::getEntityCutout);
+            IVertexBuilder builder = material.getBuffer(buffer, RenderType::getEntityCutout);
             model.render(matrixStack, builder, packedLight, LivingRenderer.getPackedOverlay(mimic, 0), 1, 1, 1, 1);
 
             matrixStack.pop();
         }
-    }
-
-    private RenderMaterial getChestMaterial() {
-        return Atlases.getChestMaterial(null, ChestType.SINGLE, isChristmas);
     }
 }
