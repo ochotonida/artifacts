@@ -58,7 +58,7 @@ public class MimicEntity extends MobEntity implements IMob {
         return MobEntity.func_233666_p_()
                 .createMutableAttribute(Attributes.MAX_HEALTH, 60)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 16)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1)
+                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.8)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.8)
                 .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5);
     }
