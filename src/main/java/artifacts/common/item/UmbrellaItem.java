@@ -77,16 +77,20 @@ public class UmbrellaItem extends ArtifactItem {
     public static class ClientEvents {
 
         @SubscribeEvent
-        public static void onLivingRender(RenderLivingEvent.Pre<?, BipedModel<?>> event) {
+        public static void onLivingRender(RenderLivingEvent.Pre<?, ?> event) {
+            if (!(event.getRenderer().getEntityModel() instanceof BipedModel)) {
+                return;
+            }
             LivingEntity entity = event.getEntity();
+            BipedModel<?> model = (BipedModel<?>) event.getRenderer().getEntityModel();
             if (!(entity.isHandActive() && !entity.getActiveItemStack().isEmpty() && entity.getActiveItemStack().getItem().getUseAction(entity.getActiveItemStack()) == UseAction.BLOCK)) {
                 boolean isHoldingOffHand = entity.getHeldItemOffhand().getItem() instanceof UmbrellaItem;
                 boolean isHoldingMainHand = entity.getHeldItemMainhand().getItem() instanceof UmbrellaItem;
                 if ((isHoldingMainHand && Minecraft.getInstance().gameSettings.mainHand == HandSide.RIGHT) || (isHoldingOffHand && Minecraft.getInstance().gameSettings.mainHand == HandSide.LEFT)) {
-                    event.getRenderer().getEntityModel().rightArmPose = BipedModel.ArmPose.THROW_SPEAR;
+                    model.rightArmPose = BipedModel.ArmPose.THROW_SPEAR;
                 }
                 if ((isHoldingMainHand && Minecraft.getInstance().gameSettings.mainHand == HandSide.LEFT) || (isHoldingOffHand && Minecraft.getInstance().gameSettings.mainHand == HandSide.RIGHT)) {
-                    event.getRenderer().getEntityModel().leftArmPose = BipedModel.ArmPose.THROW_SPEAR;
+                    model.leftArmPose = BipedModel.ArmPose.THROW_SPEAR;
                 }
             }
         }
