@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.Arrays;
 import java.util.List;
 
-public class LootTables {
+public class ModLootTables {
 
     public static final ResourceLocation MIMIC = new ResourceLocation(Artifacts.MODID, "entities/mimic");
     public static final ResourceLocation CAMPSITE_CHEST = new ResourceLocation(Artifacts.MODID, "chests/campsite_chest");

@@ -1,7 +1,7 @@
 package artifacts.common.entity;
 
-import artifacts.common.init.LootTables;
-import artifacts.common.init.SoundEvents;
+import artifacts.common.init.ModLootTables;
+import artifacts.common.init.ModSoundEvents;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -133,7 +133,7 @@ public class MimicEntity extends MobEntity implements IMob {
             setAttackTarget((LivingEntity) source.getTrueSource());
         }
         if (ticksInAir <= 0 && source.isProjectile() && !source.isUnblockable()) {
-            playSound(SoundEvents.MIMIC_HURT, getSoundVolume(), getSoundPitch());
+            playSound(ModSoundEvents.MIMIC_HURT.get(), getSoundVolume(), getSoundPitch());
             return false;
         }
 
@@ -145,25 +145,25 @@ public class MimicEntity extends MobEntity implements IMob {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundEvents.MIMIC_HURT;
+        return ModSoundEvents.MIMIC_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.MIMIC_DEATH;
+        return ModSoundEvents.MIMIC_DEATH.get();
     }
 
     protected SoundEvent getJumpingSound() {
-        return SoundEvents.MIMIC_OPEN;
+        return ModSoundEvents.MIMIC_OPEN.get();
     }
 
     protected SoundEvent getLandingSound() {
-        return SoundEvents.MIMIC_CLOSE;
+        return ModSoundEvents.MIMIC_CLOSE.get();
     }
 
     @Override
     protected ResourceLocation getLootTable() {
-        return LootTables.MIMIC;
+        return ModLootTables.MIMIC;
     }
 
     public void setDormant() {

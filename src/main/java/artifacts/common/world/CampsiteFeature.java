@@ -2,12 +2,11 @@ package artifacts.common.world;
 
 import artifacts.common.config.Config;
 import artifacts.common.entity.MimicEntity;
-import artifacts.common.init.Entities;
-import artifacts.common.init.LootTables;
+import artifacts.common.init.ModEntities;
+import artifacts.common.init.ModLootTables;
 import net.minecraft.block.*;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -115,7 +114,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
 
     public void generateContainer(ISeedReader world, BlockPos pos, Random random) {
         if (random.nextFloat() < Config.campsiteMimicChance) {
-            MimicEntity mimic = Entities.MIMIC.create(world.getWorld());
+            MimicEntity mimic = ModEntities.MIMIC.create(world.getWorld());
             if (mimic != null) {
                 mimic.setDormant();
                 mimic.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
@@ -133,7 +132,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
             } else {
                 setBlockState(world, pos, Blocks.BARREL.getDefaultState().with(BarrelBlock.PROPERTY_FACING, Direction.getRandomDirection(random)));
             }
-            LockableLootTileEntity.setLootTable(world, random, pos, LootTables.CAMPSITE_CHEST);
+            LockableLootTileEntity.setLootTable(world, random, pos, ModLootTables.CAMPSITE_CHEST);
         }
     }
 

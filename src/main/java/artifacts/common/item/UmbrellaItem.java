@@ -31,7 +31,6 @@ public class UmbrellaItem extends ArtifactItem {
     private static final AttributeModifier UMBRELLA_SLOW_FALLING = new AttributeModifier(UUID.fromString("a7a25453-2065-4a96-bc83-df600e13f390"), "artifacts:umbrella_slow_falling", -0.875, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
     public UmbrellaItem() {
-        super(new Properties());
         DispenserBlock.registerDispenseBehavior(this, ArmorItem.DISPENSER_BEHAVIOR);
         MinecraftForge.EVENT_BUS.addListener(this::onLivingUpdate);
     }

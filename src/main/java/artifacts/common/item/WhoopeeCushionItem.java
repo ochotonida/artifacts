@@ -2,7 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.WhoopeeCushionModel;
-import artifacts.common.init.SoundEvents;
+import artifacts.common.init.ModSoundEvents;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -26,7 +26,7 @@ public class WhoopeeCushionItem extends CurioItem {
             } else if (!tag.getBoolean("HasFarted") && entity.isSneaking()) {
                 tag.putBoolean("HasFarted", true);
                 if (entity.getRNG().nextInt(8) == 0) {
-                    entity.world.playSound(null, entity.getPosX(), entity.getPosY(), entity.getPosZ(), SoundEvents.FART, SoundCategory.PLAYERS, 1, 0.9F + entity.getRNG().nextFloat() * 0.2F);
+                    entity.world.playSound(null, entity.getPosX(), entity.getPosY(), entity.getPosZ(), ModSoundEvents.FART.get(), SoundCategory.PLAYERS, 1, 0.9F + entity.getRNG().nextFloat() * 0.2F);
                 }
             }
         }
@@ -34,7 +34,7 @@ public class WhoopeeCushionItem extends CurioItem {
 
     @Override
     protected SoundEvent getEquipSound() {
-        return SoundEvents.FART;
+        return ModSoundEvents.FART.get();
     }
 
     @Override

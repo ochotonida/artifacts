@@ -2,7 +2,8 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.CloudInABottleModel;
-import artifacts.common.init.Items;
+import artifacts.common.init.ModItems;
+import artifacts.common.init.ModSoundEvents;
 import artifacts.common.network.DoubleJumpPacket;
 import artifacts.common.network.NetworkHandler;
 import net.minecraft.client.Minecraft;
@@ -64,8 +65,8 @@ public class CloudInABottleItem extends CurioItem {
             player.addExhaustion(0.05F);
         }
 
-        if (CuriosApi.getCuriosHelper().findEquippedCurio(Items.WHOOPEE_CUSHION, player).isPresent()) {
-            player.playSound(artifacts.common.init.SoundEvents.FART, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
+        if (CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.WHOOPEE_CUSHION.get(), player).isPresent()) {
+            player.playSound(ModSoundEvents.FART.get(), 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
         } else {
             player.playSound(SoundEvents.BLOCK_WOOL_FALL, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
         }

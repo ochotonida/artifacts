@@ -1,6 +1,6 @@
 package artifacts.common.item;
 
-import artifacts.Artifacts;
+import artifacts.common.init.ModItems;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,12 +17,11 @@ import java.util.List;
 public abstract class ArtifactItem extends Item {
 
     public ArtifactItem(Properties properties) {
-        super(properties.maxStackSize(1).group(Artifacts.CREATIVE_TAB));
+        super(properties);
     }
 
-    @Override
-    public Rarity getRarity(ItemStack stack) {
-        return Rarity.RARE;
+    public ArtifactItem() {
+        super(new Properties().maxStackSize(1).group(ModItems.CREATIVE_TAB).rarity(Rarity.RARE));
     }
 
     @Override

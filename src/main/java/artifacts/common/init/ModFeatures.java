@@ -13,30 +13,24 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-public class Features {
+public class ModFeatures {
 
-    public static Placement<ChanceConfig> placement = new InCaveWithChance(ChanceConfig.CODEC);
+    public static final DeferredRegister<Feature<?>> FEATURE_REGISTRY = DeferredRegister.create(ForgeRegistries.FEATURES, Artifacts.MODID);
+    public static final DeferredRegister<Placement<?>> PLACEMENT_REGISTRY = DeferredRegister.create(ForgeRegistries.DECORATORS, Artifacts.MODID);
 
-    public static Feature<NoFeatureConfig> campsite = new CampsiteFeature();
+    public static final RegistryObject<InCaveWithChance> IN_CAVE_WITH_CHANCE = PLACEMENT_REGISTRY.register("in_cave_with_chance", () -> new InCaveWithChance(ChanceConfig.CODEC));
+    public static final RegistryObject<Feature<NoFeatureConfig>> CAMPSITE = FEATURE_REGISTRY.register("campsite", CampsiteFeature::new);
 
     public static ConfiguredFeature<?, ?> UNDERGROUND_CAMPSITE;
 
-    public static void registerFeatures(IForgeRegistry<Feature<?>> registry) {
-        campsite.setRegistryName(Artifacts.MODID, "campsite");
-        registry.register(campsite);
-    }
-
     public static void registerConfiguredFeatures() {
-        UNDERGROUND_CAMPSITE = campsite
+        UNDERGROUND_CAMPSITE = CAMPSITE.get()
                 .withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)
-                .withPlacement(placement.configure(new ChanceConfig(Config.campsiteChance)));
+                .withPlacement(IN_CAVE_WITH_CHANCE.get().configure(new ChanceConfig(Config.campsiteChance)));
         Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Artifacts.MODID, "underground_campsite"), UNDERGROUND_CAMPSITE);
-    }
-
-    public static void registerPlacements(IForgeRegistry<Placement<?>> registry) {
-        placement.setRegistryName(new ResourceLocation(Artifacts.MODID, "in_cave_with_chance"));
-        registry.register(placement);
     }
 }

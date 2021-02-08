@@ -24,11 +24,6 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
 
     private Object model;
 
-    public CurioItem() {
-        super(new Properties());
-    }
-
-
     protected boolean isEquippedBy(LivingEntity entity) {
         return CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
     }
