@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "artifacts:artifact"
+            "tag": "artifacts:artifacts"
           }
         ]
       }

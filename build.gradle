@@ -51,7 +51,24 @@ minecraft {
                 }
             }
         }
+
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', ''
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'artifacts', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            environment 'target', 'fmluserdevdata'
+            mods {
+                artifacts {
+                    source sourceSets.main
+                }
+            }
+        }
     }
+}
+
+sourceSets {
+    main.resources.srcDirs += 'src/generated/resources'
 }
 
 repositories {

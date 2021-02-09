@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "artifacts:item/cloud_in_a_bottle"
+  }
+}
