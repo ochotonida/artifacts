@@ -27,7 +27,7 @@ public class CommonConfig {
                 .worldRestart()
                 .comment("List of biome IDs in which campsites are not allowed to generate. End and nether biomes are excluded by default.\n To blacklist all biomes from a single mod, use 'modid:*'")
                 .translation(Artifacts.MODID + ".config.biome_blacklist")
-                .define("biome_blacklist", Lists.newArrayList("minecraft:void"));
+                .define("biome_blacklist", Lists.newArrayList("minecraft:void", "undergarden:*", "the_bumblezone:*"));
         campsiteChance = builder
                 .worldRestart()
                 .comment("Per-chunk probability (as a percentage) a campsite is attempted to be generated. Not every attempt succeeds, this also depends on the density and shape of caves")
