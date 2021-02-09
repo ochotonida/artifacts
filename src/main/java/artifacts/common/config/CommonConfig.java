@@ -25,7 +25,7 @@ public class CommonConfig {
 
         biomeBlacklist = builder
                 .worldRestart()
-                .comment("List of biome IDs in which campsites are not allowed to generate. End and nether biomes are excluded by default.")
+                .comment("List of biome IDs in which campsites are not allowed to generate. End and nether biomes are excluded by default.\n To blacklist all biomes from a single mod, use 'modid:*'")
                 .translation(Artifacts.MODID + ".config.biome_blacklist")
                 .define("biome_blacklist", Lists.newArrayList("minecraft:void"));
         campsiteChance = builder
