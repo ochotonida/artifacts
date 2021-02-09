@@ -23,13 +23,13 @@ public class DiggingClawsItem extends GloveItem {
 
     public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
         if (isEquippedBy(event.getPlayer())) {
-            event.setNewSpeed(event.getNewSpeed() + 4);
+            event.setNewSpeed(event.getNewSpeed() + 3.2F);
         }
     }
 
     public void onHarvestCheck(PlayerEvent.HarvestCheck event) {
         if (!event.canHarvest() && isEquippedBy(event.getPlayer())) {
-            event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= 2);
+            event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= 1);
         }
     }
 
