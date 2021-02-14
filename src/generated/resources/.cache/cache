@@ -27,12 +27,13 @@ cb15a92a5fe3e33fea7a475c2c611985e84d9c50 assets/artifacts/models/item/shock_pend
 054b4828051d84cb4bd0a6e0b56b49d8d2ed767f assets/artifacts/models/item/superstitious_hat.json
 48f65b3a1077b8a8d1144fd8cae4ce253b29c831 assets/artifacts/models/item/thorn_pendant.json
 82fa9915dee6bc7d7628dd91e7593aa18414ba0c assets/artifacts/models/item/universal_attractor.json
+802096403b56927e6b35b1adc77f0edb3041fe5e assets/artifacts/models/item/vampiric_glove.json
 6a8cac6712ea1e7f1871ac2196cc6b63a36c497a assets/artifacts/models/item/villager_hat.json
 728e0514a50338a0c61b913219c760c99429fc88 assets/artifacts/models/item/whoopee_cushion.json
-6592be8e29fecf8a2cd6a86aa003a8e5a30e3e5a data/artifacts/tags/items/artifacts.json
+e8333591730f9a206b446607d902412929b28948 data/artifacts/tags/items/artifacts.json
 d3247c9cf9ab8deabe7e5513cde72c97a5ab8002 data/curios/tags/items/belt.json
 780e1301f1d02678c169e3f3f7bb363a8355a0af data/curios/tags/items/curio.json
 7e68f0e6d19b5c905ae9a3ca9b4d22aec0bb299a data/curios/tags/items/feet.json
-53f085dc4811b4d1deb14166249f839882916721 data/curios/tags/items/hands.json
+e139f9823c524929e807b3b2bee30ff1c439de61 data/curios/tags/items/hands.json
 f258857d0bda1b92bfe2fe46bb0a9babc7aa3ae1 data/curios/tags/items/head.json
 5d8f6d286ceb387e0aeb6a47f53ee45d44664425 data/curios/tags/items/necklace.json

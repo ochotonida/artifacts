@@ -62,7 +62,8 @@ public class ItemTags extends ItemTagsProvider {
                 ModItems.FERAL_CLAWS.get(),
                 ModItems.FIRE_GAUNTLET.get(),
                 ModItems.POCKET_PISTON.get(),
-                ModItems.POWER_GLOVE.get()
+                ModItems.POWER_GLOVE.get(),
+                ModItems.VAMPIRIC_GLOVE.get()
         );
 
         getOrCreateBuilder(HEAD).add(

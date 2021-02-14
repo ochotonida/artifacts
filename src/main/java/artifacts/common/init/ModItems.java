@@ -62,7 +62,8 @@ public class ModItems {
             FERAL_CLAWS = REGISTRY.register("feral_claws", FeralClawsItem::new),
             POWER_GLOVE = REGISTRY.register("power_glove", PowerGloveItem::new),
             FIRE_GAUNTLET = REGISTRY.register("fire_gauntlet", FireGauntletItem::new),
-            POCKET_PISTON = REGISTRY.register("pocket_piston", PocketPistonItem::new);
+            POCKET_PISTON = REGISTRY.register("pocket_piston", PocketPistonItem::new),
+            VAMPIRIC_GLOVE = REGISTRY.register("vampiric_glove", VampiricGloveItem::new);
 
     // feet
     public static final RegistryObject<Item>
