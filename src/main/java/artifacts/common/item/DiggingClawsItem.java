@@ -16,7 +16,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 public class DiggingClawsItem extends GloveItem {
 
     private static final ResourceLocation TEXTURE_DEFAULT = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/digging_claws_default.png");
-    private static final ResourceLocation TEXTURE_SLIM = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/digging_claws_default.png");
+    private static final ResourceLocation TEXTURE_SLIM = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/digging_claws_slim.png");
 
     public DiggingClawsItem() {
         MinecraftForge.EVENT_BUS.addListener(this::onBreakSpeed);

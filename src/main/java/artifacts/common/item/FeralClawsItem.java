@@ -20,7 +20,7 @@ import java.util.UUID;
 public class FeralClawsItem extends GloveItem {
 
     private static final ResourceLocation TEXTURE_DEFAULT = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/feral_claws_default.png");
-    private static final ResourceLocation TEXTURE_SLIM = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/feral_claws_default.png");
+    private static final ResourceLocation TEXTURE_SLIM = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/feral_claws_slim.png");
 
     public static AttributeModifier FERAL_CLAWS_ATTACK_SPEED = new AttributeModifier(UUID.fromString("7a3367b2-0a38-491d-b5c7-338d5d0c1dd4"), "artifacts:feral_claws_attack_speed", 1, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
