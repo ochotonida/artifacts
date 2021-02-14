@@ -10,13 +10,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
@@ -34,17 +31,8 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
     }
 
     @Override
-    public boolean canRightClickEquip(ItemStack stack) {
+    public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
         return true;
-    }
-
-    protected SoundEvent getEquipSound() {
-        return SoundEvents.ITEM_ARMOR_EQUIP_GENERIC;
-    }
-
-    @Override
-    public void playRightClickEquipSound(LivingEntity entity, ItemStack stack) {
-        entity.world.playSound(null, new BlockPos(entity.getPositionVec()), getEquipSound(), SoundCategory.NEUTRAL, 1, 1);
     }
 
     @Override

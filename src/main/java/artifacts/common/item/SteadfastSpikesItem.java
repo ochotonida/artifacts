@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
@@ -22,8 +23,8 @@ public class SteadfastSpikesItem extends CurioItem {
     private static final AttributeModifier STEADFAST_SPIKES_KNOCKBACK_RESISTANCE = new AttributeModifier(UUID.fromString("2aa3958f-49f5-47ba-a707-a4679ad7ff17"), "artifacts:steadfast_spikes_knockback_resistance", 1, AttributeModifier.Operation.ADDITION);
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(String identifier, ItemStack stack) {
-        Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(identifier, stack);
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
         result.put(Attributes.KNOCKBACK_RESISTANCE, STEADFAST_SPIKES_KNOCKBACK_RESISTANCE);
         return result;
     }

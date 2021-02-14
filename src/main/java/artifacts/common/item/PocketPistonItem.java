@@ -2,12 +2,14 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class PocketPistonItem extends GloveItem {
 
@@ -26,8 +28,8 @@ public class PocketPistonItem extends GloveItem {
     }
 
     @Override
-    protected SoundEvent getEquipSound() {
-        return SoundEvents.BLOCK_PISTON_EXTEND;
+    public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
+        return new ICurio.SoundInfo(SoundEvents.BLOCK_PISTON_EXTEND, 1, 1);
     }
 
     @Override

@@ -9,9 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class WhoopeeCushionItem extends CurioItem {
 
@@ -33,8 +34,8 @@ public class WhoopeeCushionItem extends CurioItem {
     }
 
     @Override
-    protected SoundEvent getEquipSound() {
-        return ModSoundEvents.FART.get();
+    public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
+        return new ICurio.SoundInfo(ModSoundEvents.FART.get(), 1, 1);
     }
 
     @Override
