@@ -1,5 +1,6 @@
 package artifacts.client.render;
 
+import artifacts.common.config.Config;
 import artifacts.common.item.GloveItem;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
@@ -28,7 +29,7 @@ public class FirstPersonGloveRenderHandler {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onRenderHand(RenderHandEvent event) {
-        if (!event.isCanceled() && Minecraft.getInstance().player != null) {
+        if (!event.isCanceled() && Minecraft.getInstance().player != null && Config.showFirstPersonGloves) {
             event.getMatrixStack().push();
             ClientPlayerEntity player = Minecraft.getInstance().player;
             HandSide handside = event.getHand() == Hand.MAIN_HAND ? player.getPrimaryHand() : player.getPrimaryHand().opposite();
