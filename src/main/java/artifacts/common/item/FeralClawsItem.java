@@ -22,8 +22,6 @@ public class FeralClawsItem extends GloveItem {
     private static final ResourceLocation TEXTURE_DEFAULT = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/feral_claws_default.png");
     private static final ResourceLocation TEXTURE_SLIM = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/feral_claws_slim.png");
 
-    public static AttributeModifier FERAL_CLAWS_ATTACK_SPEED = new AttributeModifier(UUID.fromString("7a3367b2-0a38-491d-b5c7-338d5d0c1dd4"), "artifacts:feral_claws_attack_speed", 1, AttributeModifier.Operation.MULTIPLY_TOTAL);
-
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
         return new ICurio.SoundInfo(SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 1, 1);
@@ -32,7 +30,7 @@ public class FeralClawsItem extends GloveItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
-        result.put(Attributes.ATTACK_SPEED, FERAL_CLAWS_ATTACK_SPEED);
+        result.put(Attributes.ATTACK_SPEED, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "feral_claws_attack_speed").toString(), 1, AttributeModifier.Operation.MULTIPLY_TOTAL));
         return result;
     }
 

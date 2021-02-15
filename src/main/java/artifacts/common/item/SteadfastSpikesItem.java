@@ -20,12 +20,10 @@ public class SteadfastSpikesItem extends CurioItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/steadfast_spikes.png");
 
-    private static final AttributeModifier STEADFAST_SPIKES_KNOCKBACK_RESISTANCE = new AttributeModifier(UUID.fromString("2aa3958f-49f5-47ba-a707-a4679ad7ff17"), "artifacts:steadfast_spikes_knockback_resistance", 1, AttributeModifier.Operation.ADDITION);
-
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
-        result.put(Attributes.KNOCKBACK_RESISTANCE, STEADFAST_SPIKES_KNOCKBACK_RESISTANCE);
+        result.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "steadfast_spikes_knockback_resistance").toString(), 1, AttributeModifier.Operation.ADDITION));
         return result;
     }
 
