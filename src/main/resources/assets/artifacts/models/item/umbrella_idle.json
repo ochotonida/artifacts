@@ -5,16 +5,19 @@
   },
   "perspectives": {
     "first_person_right_hand": {
-      "parent": "artifacts:item/umbrella_blocking_in_hand"
+      "parent": "artifacts:item/umbrella_idle_in_hand"
     },
     "first_person_left_hand": {
-      "parent": "artifacts:item/umbrella_blocking_in_hand"
+      "parent": "artifacts:item/umbrella_idle_in_hand"
     },
     "third_person_right_hand": {
-      "parent": "artifacts:item/umbrella_blocking_in_hand"
+      "parent": "artifacts:item/umbrella_idle_in_hand"
     },
     "third_person_left_hand": {
-      "parent": "artifacts:item/umbrella_blocking_in_hand"
+      "parent": "artifacts:item/umbrella_idle_in_hand"
+    },
+    "head": {
+      "parent": "artifacts:item/umbrella_idle_in_hand"
     }
   }
 }

@@ -1,5 +1,6 @@
 {
-  "parent": "artifacts:item/umbrella_default",
+  "parent": "artifacts:item/umbrella_idle",
+  "gui_light": "front",
   "overrides": [
     {
       "predicate": {

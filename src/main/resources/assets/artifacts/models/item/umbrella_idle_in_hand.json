@@ -5,7 +5,7 @@
   ],
   "textures": {
     "particle": "block/oak_log",
-    "umbrella": "artifacts:item/umbrella"
+    "umbrella": "artifacts:item/umbrella_in_hand"
   },
   "elements": [
     {
@@ -290,62 +290,11 @@
         0
       ]
     },
-    "ground": {
-      "rotation": [
-        28,
-        0,
-        0
-      ],
-      "translation": [
-        0,
-        1.25,
-        0
-      ],
-      "scale": [
-        0.3,
-        0.3,
-        0.3
-      ]
-    },
-    "gui": {
-      "rotation": [
-        0,
-        -45,
-        -36
-      ],
-      "translation": [
-        -1.75,
-        -2,
-        0
-      ],
-      "scale": [
-        0.4,
-        0.4,
-        0.4
-      ]
-    },
     "head": {
       "translation": [
         0,
         2.5,
         0
-      ]
-    },
-    "fixed": {
-      "rotation": [
-        -45,
-        0,
-        0
-      ],
-      "translation": [
-        0,
-        0,
-        -2
-      ],
-      "scale": [
-        0.5,
-        0.5,
-        0.5
       ]
     }
   }
