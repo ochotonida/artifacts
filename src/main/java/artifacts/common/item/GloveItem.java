@@ -6,10 +6,12 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.HandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -54,13 +56,35 @@ public abstract class GloveItem extends CurioItem {
     }
 
     @Override
-    public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, ItemStack stack) {
+    public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, ItemStack stack) {
         boolean smallArms = hasSmallArms(entity);
         GloveModel model = getModel(smallArms);
         model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
         ICurio.RenderHelper.followBodyRotations(entity, model);
-        IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture(smallArms)), false, false);
+        IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(buffer, model.getRenderType(getTexture(smallArms)), false, stack.hasEffect());
         model.renderHand(index % 2 == 0, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void renderArm(MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, AbstractClientPlayerEntity player, HandSide side, boolean hasGlint) {
+        if (!player.isSpectator()) {
+            boolean smallArms = hasSmallArms(player);
+            GloveModel model = getModel(smallArms);
+
+            ModelRenderer arm = side == HandSide.LEFT ? model.bipedLeftArm : model.bipedRightArm;
+            ModelRenderer armWear = side == HandSide.LEFT ? model.bipedLeftArmwear : model.bipedRightArmwear;
+
+            model.setVisible(false);
+            arm.showModel = armWear.showModel = true;
+
+            model.isSneak = false;
+            model.swingProgress = model.swimAnimation = 0;
+            model.setRotationAngles(player, 0, 0, 0, 0, 0);
+            arm.rotateAngleX = armWear.rotateAngleX = 0;
+
+            arm.render(matrixStack, ItemRenderer.getBuffer(buffer, model.getRenderType(getTexture(smallArms)), false, hasGlint), combinedLight, OverlayTexture.NO_OVERLAY);
+            armWear.render(matrixStack, ItemRenderer.getBuffer(buffer, model.getRenderType(getTexture(smallArms)), false, hasGlint), combinedLight, OverlayTexture.NO_OVERLAY);
+        }
     }
 }

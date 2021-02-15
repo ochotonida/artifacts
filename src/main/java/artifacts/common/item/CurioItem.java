@@ -51,7 +51,7 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
         model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
         ICurio.RenderHelper.followBodyRotations(entity, model);
-        IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture()), false, false);
+        IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture()), false, stack.hasEffect());
         model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 

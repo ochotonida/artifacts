@@ -15,16 +15,14 @@ public class GloveModel extends PlayerModel<LivingEntity> {
         setVisible(false);
     }
 
-    public void renderHand(boolean mainHand, MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        if (Minecraft.getInstance().gameSettings.mainHand == HandSide.LEFT) {
-            mainHand = !mainHand;
-        }
+    public void renderHand(boolean mainHand, MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        boolean isRightHand = (Minecraft.getInstance().gameSettings.mainHand == HandSide.LEFT) != mainHand;
         bipedRightArmwear.copyModelAngles(bipedRightArm);
         bipedLeftArmwear.copyModelAngles(bipedLeftArm);
-        bipedLeftArm.showModel = !mainHand;
-        bipedLeftArmwear.showModel = !mainHand;
-        bipedRightArm.showModel = mainHand;
-        bipedRightArmwear.showModel = mainHand;
-        render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        bipedLeftArm.showModel = !isRightHand;
+        bipedLeftArmwear.showModel = !isRightHand;
+        bipedRightArm.showModel = isRightHand;
+        bipedRightArmwear.showModel = isRightHand;
+        render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }
