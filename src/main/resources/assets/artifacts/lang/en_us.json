@@ -41,6 +41,7 @@
   "item.artifacts.cloud_in_a_bottle": "Cloud in a Bottle",
   "item.artifacts.whoopee_cushion": "Whoopee Cushion",
   "item.artifacts.vampiric_glove": "Vampiric Glove",
+  "item.artifacts.helium_flamingo": "Helium Flamingo",
   "item.artifacts.snorkel.tooltip": "Allows the wearer to breathe underwater",
   "item.artifacts.plastic_drinking_hat.tooltip": "Decreases the time it takes to drink drinkable items",
   "item.artifacts.novelty_drinking_hat.tooltip": "'Hey! I'm #1, and I let gravity do my drinking!'\nDecreases the time it takes to drink drinkable items",
@@ -73,5 +74,6 @@
   "item.artifacts.villager_hat.tooltip": "Decreases trading prices and villagers occasionally give gifts to the wearer",
   "item.artifacts.cloud_in_a_bottle.tooltip": "Allows the wearer to double jump",
   "item.artifacts.whoopee_cushion.tooltip": "Increases the wearer's flatulence",
-  "item.artifacts.vampiric_glove.tooltip": "Causes the wearer's melee attacks to absorb health"
+  "item.artifacts.vampiric_glove.tooltip": "Causes the wearer's melee attacks to absorb health",
+  "item.artifacts.helium_flamingo.tooltip": "Allows the wearer to swim in the air for a limited period of time"
 }
