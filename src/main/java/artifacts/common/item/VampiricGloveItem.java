@@ -9,6 +9,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 
 public class VampiricGloveItem extends GloveItem {
 
@@ -16,15 +17,16 @@ public class VampiricGloveItem extends GloveItem {
     private static final ResourceLocation TEXTURE_SLIM = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/vampiric_glove_slim.png");
 
     public VampiricGloveItem() {
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingDamage);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, this::onLivingDamage);
     }
 
     public void onLivingDamage(LivingDamageEvent event) {
         if (event.getSource().getTrueSource() instanceof LivingEntity) {
             Entity source = event.getSource().getImmediateSource();
             LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-            if (source == attacker && event.getAmount() > 4 && isEquippedBy(attacker)) {
-                attacker.heal(Math.min(2, event.getAmount() / 4));
+            float damageDealt = Math.min(event.getAmount(), event.getEntityLiving().getHealth());
+            if (source == attacker && damageDealt > 4 && isEquippedBy(attacker)) {
+                attacker.heal(Math.min(2, damageDealt / 4));
             }
         }
     }
