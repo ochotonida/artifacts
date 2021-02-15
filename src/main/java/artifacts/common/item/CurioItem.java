@@ -36,11 +36,6 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
     }
 
     @Override
-    public boolean canEquip(String identifier, LivingEntity entity, ItemStack stack) {
-        return !isEquippedBy(entity);
-    }
-
-    @Override
     public boolean canRender(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
         return true;
     }
