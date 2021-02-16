@@ -39,6 +39,8 @@ public class ItemTags extends ItemTagsProvider {
                 .collect(Collectors.toList()).toArray(new Item[]{})
         );
 
+        getOrCreateBuilder(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_HOOK.get());
+
         getOrCreateBuilder(CURIO).add(ModItems.WHOOPEE_CUSHION.get());
 
         getOrCreateBuilder(BELT).add(
@@ -64,7 +66,8 @@ public class ItemTags extends ItemTagsProvider {
                 ModItems.FIRE_GAUNTLET.get(),
                 ModItems.POCKET_PISTON.get(),
                 ModItems.POWER_GLOVE.get(),
-                ModItems.VAMPIRIC_GLOVE.get()
+                ModItems.VAMPIRIC_GLOVE.get(),
+                ModItems.GOLDEN_HOOK.get()
         );
 
         getOrCreateBuilder(HEAD).add(

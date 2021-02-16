@@ -1,6 +1,7 @@
 package artifacts;
 
 import artifacts.client.render.MimicRenderer;
+import artifacts.common.capability.EntityKillTrackerCapability;
 import artifacts.common.config.Config;
 import artifacts.common.init.ModEntities;
 import artifacts.common.init.ModFeatures;
@@ -60,6 +61,7 @@ public class Artifacts {
             event.enqueueWork(() -> {
                 ModFeatures.registerConfiguredFeatures();
                 NetworkHandler.register();
+                EntityKillTrackerCapability.register();
             });
         }
 
