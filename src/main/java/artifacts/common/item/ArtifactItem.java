@@ -17,11 +17,11 @@ import java.util.List;
 public abstract class ArtifactItem extends Item {
 
     public ArtifactItem(Properties properties) {
-        super(properties);
+        super(properties.maxStackSize(1).group(ModItems.CREATIVE_TAB).rarity(Rarity.RARE).isImmuneToFire());
     }
 
     public ArtifactItem() {
-        super(new Properties().maxStackSize(1).group(ModItems.CREATIVE_TAB).rarity(Rarity.RARE));
+        super(new Properties());
     }
 
     @Override

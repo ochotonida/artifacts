@@ -3,13 +3,15 @@ package artifacts.common.item;
 import artifacts.common.config.Config;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Food;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EverlastingFoodItem extends ArtifactItem {
 
-    public EverlastingFoodItem(Properties properties) {
-        super(properties);
+    public EverlastingFoodItem(Food food) {
+        super(new Item.Properties().food(food));
     }
 
     @Override

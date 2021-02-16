@@ -26,8 +26,8 @@ public class ModItems {
     public static final RegistryObject<Item>
             MIMIC_SPAWN_EGG = REGISTRY.register("mimic_spawn_egg", () -> new SpawnEggItem(ModEntities.MIMIC, 0x805113, 0x212121, new Item.Properties().group(ItemGroup.MISC))),
             UMBRELLA = REGISTRY.register("umbrella", UmbrellaItem::new),
-            EVERLASTING_BEEF = REGISTRY.register("everlasting_beef", () -> new EverlastingFoodItem(new Item.Properties().maxStackSize(1).group(CREATIVE_TAB).rarity(Rarity.RARE).food(new Food.Builder().hunger(3).saturation(0.3F).build()))),
-            ETERNAL_STEAK = REGISTRY.register("eternal_steak", () -> new EverlastingFoodItem(new Item.Properties().maxStackSize(1).group(CREATIVE_TAB).rarity(Rarity.RARE).food(new Food.Builder().hunger(8).saturation(0.8F).build())));
+            EVERLASTING_BEEF = REGISTRY.register("everlasting_beef", () -> new EverlastingFoodItem(new Food.Builder().hunger(3).saturation(0.3F).build())),
+            ETERNAL_STEAK = REGISTRY.register("eternal_steak", () -> new EverlastingFoodItem(new Food.Builder().hunger(8).saturation(0.8F).build()));
 
     // head
     public static final RegistryObject<Item>
