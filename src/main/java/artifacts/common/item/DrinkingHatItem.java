@@ -10,7 +10,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -21,14 +20,12 @@ public class DrinkingHatItem extends CurioItem {
 
     public DrinkingHatItem(ResourceLocation texture) {
         this.texture = texture;
-        MinecraftForge.EVENT_BUS.addListener(this::onItemUseStart);
+        addListener(LivingEntityUseItemEvent.Start.class, this::onItemUseStart);
     }
 
     public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-        if (isEquippedBy(event.getEntityLiving())) {
-            if (event.getItem().getUseAction() == UseAction.DRINK) {
-                event.setDuration(event.getDuration() / 4);
-            }
+        if (event.getItem().getUseAction() == UseAction.DRINK) {
+            event.setDuration(event.getDuration() / 4);
         }
     }
 

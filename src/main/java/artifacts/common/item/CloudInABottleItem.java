@@ -35,7 +35,7 @@ public class CloudInABottleItem extends CurioItem {
 
     public CloudInABottleItem() {
         MinecraftForge.EVENT_BUS.register(new DoubleJumpHandler());
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, this::onLivingFall);
+        addListener(EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
     }
 
     public static void jump(PlayerEntity player) {
@@ -75,9 +75,7 @@ public class CloudInABottleItem extends CurioItem {
     }
 
     public void onLivingFall(LivingFallEvent event) {
-        if (isEquippedBy(event.getEntityLiving())) {
-            event.setDistance(Math.max(0, event.getDistance() - 3));
-        }
+        event.setDistance(Math.max(0, event.getDistance() - 3));
     }
 
     @Override

@@ -13,7 +13,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -23,7 +22,7 @@ public class ObsidianSkullItem extends CurioItem {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/obsidian_skull.png");
 
     public ObsidianSkullItem() {
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingHurt);
+        addListener(LivingHurtEvent.class, this::onLivingHurt);
     }
 
     public void onLivingHurt(LivingHurtEvent event) {
@@ -32,7 +31,7 @@ public class ObsidianSkullItem extends CurioItem {
                 && (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA)
                 && event.getEntity() instanceof PlayerEntity) {
 
-            if (isEquippedBy(event.getEntityLiving()) && !((PlayerEntity) event.getEntity()).getCooldownTracker().hasCooldown(this)) {
+            if (!((PlayerEntity) event.getEntity()).getCooldownTracker().hasCooldown(this)) {
                 event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 600, 0, false, true));
                 ((PlayerEntity) event.getEntity()).getCooldownTracker().setCooldown(this, 1200);
             }

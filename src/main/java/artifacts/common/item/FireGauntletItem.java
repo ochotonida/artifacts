@@ -3,6 +3,7 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.RenderTypes;
 import artifacts.client.render.model.curio.GloveModel;
+import artifacts.common.util.DamageSourceHelper;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
@@ -12,10 +13,11 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.HandSide;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -28,15 +30,12 @@ public class FireGauntletItem extends GloveItem {
     private static final ResourceLocation TEXTURE_SLIM_GLOW = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/fire_gauntlet_slim_glow.png");
 
     public FireGauntletItem() {
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingHurt);
+        addListener(LivingHurtEvent.class, this::onLivingHurt, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
     public void onLivingHurt(LivingHurtEvent event) {
-        if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof IndirectEntityDamageSource) && !((EntityDamageSource) event.getSource()).getIsThornsDamage() && event.getSource().getTrueSource() instanceof LivingEntity) {
-            LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-            if (isEquippedBy(attacker) && !event.getEntity().isImmuneToFire()) {
-                event.getEntity().setFire(8);
-            }
+        if (DamageSourceHelper.isMeleeAttack(event.getSource()) && !event.getEntity().isImmuneToFire()) {
+            event.getEntity().setFire(8);
         }
     }
 

@@ -27,30 +27,26 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
 
     public KittySlippersItem() {
         super(SoundEvents.ENTITY_CAT_HURT);
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingSetAttackTarget);
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJoinWorld);
-    }
-
-    public void onLivingSetAttackTarget(LivingSetAttackTargetEvent event) {
-        if (event.getEntityLiving() instanceof CreeperEntity && event.getTarget() != null) {
-            if (isEquippedBy(event.getTarget())) {
-                ((MobEntity) event.getEntityLiving()).setAttackTarget(null);
-            }
-        }
-    }
-
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        if (event.getEntityLiving() instanceof CreeperEntity && event.getEntityLiving().getRevengeTarget() != null) {
-            if (isEquippedBy(event.getEntityLiving().getRevengeTarget())) {
-                event.getEntityLiving().setRevengeTarget(null);
-            }
-        }
+        addListener(LivingSetAttackTargetEvent.class, this::onLivingSetAttackTarget, LivingSetAttackTargetEvent::getTarget);
+        addListener(LivingEvent.LivingUpdateEvent.class, this::onLivingUpdate, event -> event.getEntityLiving().getRevengeTarget());
     }
 
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
         if (event.getEntity() instanceof CreeperEntity) {
             ((CreeperEntity) event.getEntity()).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreeperEntity) event.getEntity(), PlayerEntity.class, (entity) -> entity != null && isEquippedBy(entity), 6, 1, 1.3, EntityPredicates.CAN_AI_TARGET::test));
+        }
+    }
+
+    public void onLivingSetAttackTarget(LivingSetAttackTargetEvent event) {
+        if (event.getEntityLiving() instanceof CreeperEntity) {
+            ((MobEntity) event.getEntityLiving()).setAttackTarget(null);
+        }
+    }
+
+    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+        if (event.getEntityLiving() instanceof CreeperEntity) {
+            event.getEntityLiving().setRevengeTarget(null);
         }
     }
 

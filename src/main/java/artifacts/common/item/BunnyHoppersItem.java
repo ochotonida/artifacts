@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 
@@ -21,13 +20,11 @@ public class BunnyHoppersItem extends HurtSoundModifyingItem {
 
     public BunnyHoppersItem() {
         super(SoundEvents.ENTITY_RABBIT_HURT);
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, this::onLivingFall);
+        addListener(EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
     }
 
     public void onLivingFall(LivingFallEvent event) {
-        if (isEquippedBy(event.getEntityLiving())) {
-            event.setDamageMultiplier(0);
-        }
+        event.setDamageMultiplier(0);
     }
 
     @Override

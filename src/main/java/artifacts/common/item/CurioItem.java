@@ -12,17 +12,45 @@ import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
+import javax.annotation.Nullable;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 public abstract class CurioItem extends ArtifactItem implements ICurioItem {
 
     private Object model;
 
-    protected boolean isEquippedBy(LivingEntity entity) {
-        return CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
+    protected boolean isEquippedBy(@Nullable LivingEntity entity) {
+        return entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
+    }
+
+    protected <T extends Event> void addListener(EventPriority priority, Class<T> eventClass, Consumer<T> listener, Function<T, LivingEntity> livingEntitySupplier) {
+        MinecraftForge.EVENT_BUS.addListener(priority, true, eventClass, event -> {
+            if (isEquippedBy(livingEntitySupplier.apply(event))) {
+                listener.accept(event);
+            }
+        });
+    }
+
+    protected <T extends Event> void addListener(Class<T> eventClass, Consumer<T> listener, Function<T, LivingEntity> livingEntitySupplier) {
+        addListener(EventPriority.NORMAL, eventClass, listener, livingEntitySupplier);
+    }
+
+    protected <T extends LivingEvent> void addListener(EventPriority priority, Class<T> eventClass, Consumer<T> listener) {
+        addListener(priority, eventClass, listener, LivingEvent::getEntityLiving);
+    }
+
+    protected <T extends LivingEvent> void addListener(Class<T> eventClass, Consumer<T> listener) {
+        addListener(EventPriority.NORMAL, eventClass, listener);
     }
 
     @Override

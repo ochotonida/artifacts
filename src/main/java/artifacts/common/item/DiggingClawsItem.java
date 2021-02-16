@@ -8,7 +8,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -19,18 +18,16 @@ public class DiggingClawsItem extends GloveItem {
     private static final ResourceLocation TEXTURE_SLIM = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/digging_claws_slim.png");
 
     public DiggingClawsItem() {
-        MinecraftForge.EVENT_BUS.addListener(this::onBreakSpeed);
-        MinecraftForge.EVENT_BUS.addListener(this::onHarvestCheck);
+        addListener(PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
+        addListener(PlayerEvent.HarvestCheck.class, this::onHarvestCheck);
     }
 
     public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
-        if (isEquippedBy(event.getPlayer())) {
-            event.setNewSpeed(event.getNewSpeed() + 3.2F);
-        }
+        event.setNewSpeed(event.getNewSpeed() + 3.2F);
     }
 
     public void onHarvestCheck(PlayerEvent.HarvestCheck event) {
-        if (!event.canHarvest() && isEquippedBy(event.getPlayer())) {
+        if (!event.canHarvest()) {
             event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= 1);
         }
     }

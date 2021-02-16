@@ -17,7 +17,9 @@ public class ShockPendantItem extends PendantItem {
 
     @Override
     public void onLivingHurt(LivingHurtEvent event) {
-        if (!event.getEntity().world.isRemote && event.getAmount() >= 1 && event.getSource() == DamageSource.LIGHTNING_BOLT && isEquippedBy(event.getEntityLiving())) {
+        if (!event.getEntity().world.isRemote
+                && event.getAmount() >= 1
+                && event.getSource() == DamageSource.LIGHTNING_BOLT) {
             event.setCanceled(true);
         }
         super.onLivingHurt(event);

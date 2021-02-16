@@ -1,12 +1,12 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
+import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -17,14 +17,13 @@ public class PocketPistonItem extends GloveItem {
     private static final ResourceLocation TEXTURE_SLIM = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/pocket_piston_slim.png");
 
     public PocketPistonItem() {
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingAttack);
+        addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
     public void onLivingAttack(LivingAttackEvent event) {
-        if (event.getSource().getTrueSource() instanceof LivingEntity && isEquippedBy((LivingEntity) event.getSource().getTrueSource())) {
-            LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-            event.getEntityLiving().applyKnockback(1.5F, MathHelper.sin((float) (attacker.rotationYaw * (Math.PI / 180))), -MathHelper.cos((float) (attacker.rotationYaw * (Math.PI / 180))));
-        }
+        LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
+        // noinspection ConstantConditions
+        event.getEntityLiving().applyKnockback(1.5F, MathHelper.sin((float) (attacker.rotationYaw * (Math.PI / 180))), -MathHelper.cos((float) (attacker.rotationYaw * (Math.PI / 180))));
     }
 
     @Override

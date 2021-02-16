@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.PendantModel;
+import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -9,7 +10,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -20,15 +20,15 @@ public abstract class PendantItem extends CurioItem {
 
     public PendantItem(String name) {
         texture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/%s.png", name));
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingHurt);
+        addListener(LivingHurtEvent.class, this::onLivingHurt);
     }
 
     public void onLivingHurt(LivingHurtEvent event) {
-        if (isEquippedBy(event.getEntityLiving())
-                && !event.getEntity().world.isRemote()
+        LivingEntity attacker = DamageSourceHelper.getAttacker(event.getSource());
+        if (!event.getEntity().world.isRemote()
                 && event.getAmount() >= 1
-                && event.getSource().getTrueSource() instanceof LivingEntity) {
-            applyEffect(event.getEntityLiving(), (LivingEntity) event.getSource().getTrueSource());
+                && attacker != null) {
+            applyEffect(event.getEntityLiving(), attacker);
         }
     }
 

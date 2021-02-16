@@ -21,7 +21,7 @@ public abstract class ArtifactItem extends Item {
     }
 
     public ArtifactItem() {
-        super(new Properties());
+        this(new Properties());
     }
 
     @Override

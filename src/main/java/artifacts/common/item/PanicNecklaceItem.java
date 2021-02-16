@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -21,14 +20,12 @@ public class PanicNecklaceItem extends CurioItem {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/panic_necklace.png");
 
     public PanicNecklaceItem() {
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingHurt);
+        addListener(LivingHurtEvent.class, this::onLivingHurt);
     }
 
     public void onLivingHurt(LivingHurtEvent event) {
         if (!event.getEntity().world.isRemote && event.getAmount() >= 1) {
-            if (isEquippedBy(event.getEntityLiving())) {
-                event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, 160, 0, false, false));
-            }
+            event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, 160, 0, false, false));
         }
     }
 
