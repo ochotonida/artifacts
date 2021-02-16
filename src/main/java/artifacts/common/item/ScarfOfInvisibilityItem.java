@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.ScarfModel;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,7 @@ public class ScarfOfInvisibilityItem extends CurioItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     protected BipedModel<LivingEntity> createModel() {
-        return new ScarfModel();
+        return new ScarfModel(RenderType::getEntityTranslucent);
     }
 
     @Override
