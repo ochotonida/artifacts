@@ -13,13 +13,13 @@
   "item.artifacts.novelty_drinking_hat": "Gorro para Beber de Tela ",
   "item.artifacts.night_vision_goggles": "Gafas de Visión Nocturna",
   "item.artifacts.panic_necklace": "Collar del Pánico",
-  "item.artifacts.shock_pendant": "Pendiende del Shock",
+  "item.artifacts.shock_pendant": "Pendiente de Rayp",
   "item.artifacts.flame_pendant": "Pendiente de Fuego",
   "item.artifacts.thorn_pendant": "Pendiente de Espinas",
   "item.artifacts.flippers": "Aletas",
   "item.artifacts.obsidian_skull": "Calavera de Obsidiana",
   "item.artifacts.umbrella": "Sombrilla",
-  "item.artifacts.everlasting_beef": "Bistec sin Fin",
+  "item.artifacts.everlasting_beef": "Bistec Eterno",
   "item.artifacts.eternal_steak": "Bistec Eterno",
   "item.artifacts.fire_gauntlet": "Guante de Fuego",
   "item.artifacts.feral_claws": "Garras ",
@@ -38,6 +38,8 @@
   "item.artifacts.bunny_hoppers": "Pantuflas de Conejito",
   "item.artifacts.crystal_heart": "Corazón de Cristal",
   "item.artifacts.villager_hat": "Sombrero de Aldeano",
+  "item.artifacts.cloud_in_a_bottle": "Nube Enbotellada",
+  "item.artifacts.whoopee_cushion": "Cojín Pedorro",
   "item.artifacts.snorkel.tooltip": "Permite al portador respirar bajo el agua",
   "item.artifacts.plastic_drinking_hat.tooltip": "Disminuye el tiempo necesario para beber items",
   "item.artifacts.novelty_drinking_hat.tooltip": "'Hey! Soy el #1 y dejo que la gravedad me haga beber!'\nDisminuye el tiempo necesario para beber items",
@@ -67,5 +69,7 @@
   "item.artifacts.running_shoes.tooltip": "Aumenta el movimiento y altura de pisadas en el portador",
   "item.artifacts.bunny_hoppers.tooltip": "Aumenta el nivel de salto y otorga inmunidad al daño por caida en el portador",
   "item.artifacts.crystal_heart.tooltip": "Aumenta la vida máxima del portador",
-  "item.artifacts.villager_hat.tooltip": "Disminuye los precios de los aldeanos y ocasionalmente le otorgan regalos al portador"
+  "item.artifacts.villager_hat.tooltip": "Disminuye los precios de los aldeanos y ocasionalmente le otorgan regalos al portador",
+  "item.artifacts.cloud_in_a_bottle.tooltip": "Permite al portador dar doble saltos",
+  "item.artifacts.whoopee_cushion.tooltip": "Aumenta las flatulencias del portador, wacala"
 }
