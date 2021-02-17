@@ -1,0 +1,24 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "name": "artifacts:digging_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 6,
+          "name": "artifacts:pocket_piston"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 90
+        }
+      ]
+    }
+  ]
+}

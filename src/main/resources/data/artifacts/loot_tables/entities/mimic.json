@@ -6,8 +6,7 @@
       "entries": [
         {
           "type": "loot_table",
-          "name": "artifacts:artifact",
-          "weight": 10
+          "name": "artifacts:artifact"
         }
       ]
     }

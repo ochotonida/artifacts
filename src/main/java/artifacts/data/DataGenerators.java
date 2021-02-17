@@ -17,6 +17,7 @@ public class DataGenerators {
         ExistingFileHelper helper = event.getExistingFileHelper();
         if (event.includeServer()) {
             generator.addProvider(new ItemTags(generator, helper));
+            generator.addProvider(new LootTables(generator));
         }
         if (event.includeClient()) {
             generator.addProvider(new ItemModels(generator, helper));

@@ -5,9 +5,8 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "item",
-          "name": "artifacts:whoopee_cushion",
-          "weight": 1
+          "type": "minecraft:item",
+          "name": "artifacts:whoopee_cushion"
         }
       ]
     }

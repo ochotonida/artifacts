@@ -5,12 +5,12 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "item",
-          "name": "artifacts:feral_claws",
-          "weight": 6
+          "type": "minecraft:item",
+          "weight": 6,
+          "name": "artifacts:feral_claws"
         },
         {
-          "type": "empty",
+          "type": "minecraft:empty",
           "weight": 94
         }
       ]

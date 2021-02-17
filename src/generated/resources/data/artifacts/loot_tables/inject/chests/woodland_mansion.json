@@ -5,12 +5,12 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "loot_table",
-          "name": "artifacts:artifact",
-          "weight": 25
+          "type": "minecraft:loot_table",
+          "weight": 25,
+          "name": "artifacts:artifact"
         },
         {
-          "type": "empty",
+          "type": "minecraft:empty",
           "weight": 75
         }
       ]

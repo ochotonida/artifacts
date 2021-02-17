@@ -1,0 +1,24 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:cross_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:antidote_vessel"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 84
+        }
+      ]
+    }
+  ]
+}

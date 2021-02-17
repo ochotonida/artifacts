@@ -26,6 +26,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
 
@@ -34,6 +36,9 @@ import top.theillusivec4.curios.api.SlotTypePreset;
 public class Artifacts {
 
     public static final String MODID = "artifacts";
+
+    public static final Logger LOGGER = LogManager.getLogger();
+
 
     public Artifacts() {
         Config.register();

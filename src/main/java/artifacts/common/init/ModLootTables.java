@@ -17,6 +17,7 @@ public class ModLootTables {
     public static final ResourceLocation MIMIC = new ResourceLocation(Artifacts.MODID, "entities/mimic");
     public static final ResourceLocation CAMPSITE_CHEST = new ResourceLocation(Artifacts.MODID, "chests/campsite_chest");
 
+    @SuppressWarnings("unused")
     @Mod.EventBusSubscriber(modid = Artifacts.MODID)
     public static class LootTableEvents {
 
@@ -57,6 +58,7 @@ public class ModLootTables {
             if (name.startsWith(prefix)) {
                 String location = name.substring(name.indexOf(prefix) + prefix.length());
                 if (LOOT_TABLE_LOCATIONS.contains(location)) {
+                    Artifacts.LOGGER.debug("Adding loot to " + name);
                     event.getTable().addPool(getInjectPool(location));
                 }
             }

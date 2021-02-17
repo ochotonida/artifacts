@@ -5,12 +5,12 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "item",
-          "name": "artifacts:villager_hat",
-          "weight": 2
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "artifacts:villager_hat"
         },
         {
-          "type": "empty",
+          "type": "minecraft:empty",
           "weight": 98
         }
       ]
