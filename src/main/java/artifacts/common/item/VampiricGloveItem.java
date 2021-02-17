@@ -1,11 +1,8 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.GloveModel;
 import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 
@@ -36,11 +33,5 @@ public class VampiricGloveItem extends GloveItem {
     @Override
     protected ResourceLocation getSlimTexture() {
         return TEXTURE_SLIM;
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    protected GloveModel createModel(boolean smallArms) {
-        return super.createModel(smallArms);
     }
 }
