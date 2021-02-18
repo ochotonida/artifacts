@@ -6,12 +6,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 3,
           "name": "artifacts:snorkel"
         },
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 3,
           "name": "artifacts:flippers"
         },
         {
@@ -41,13 +41,18 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 2,
           "name": "artifacts:obsidian_skull"
         },
         {
           "type": "minecraft:item",
           "weight": 2,
           "name": "artifacts:running_shoes"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "artifacts:golden_hook"
         },
         {
           "type": "minecraft:empty",

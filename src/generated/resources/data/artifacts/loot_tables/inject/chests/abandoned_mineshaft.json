@@ -21,7 +21,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 2,
           "name": "artifacts:plastic_drinking_hat"
         },
         {
@@ -44,8 +44,13 @@
           "name": "artifacts:cloud_in_a_bottle"
         },
         {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "artifacts:vampiric_glove"
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 84
+          "weight": 83
         }
       ]
     }

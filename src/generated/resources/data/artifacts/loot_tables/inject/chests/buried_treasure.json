@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 3,
           "name": "artifacts:snorkel"
         },
         {
@@ -26,7 +26,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 2,
           "name": "artifacts:plastic_drinking_hat"
         },
         {
@@ -54,8 +54,13 @@
           "name": "artifacts:lucky_scarf"
         },
         {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "artifacts:golden_hook"
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 75
+          "weight": 74
         }
       ]
     }

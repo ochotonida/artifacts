@@ -16,12 +16,12 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
+          "weight": 4,
           "name": "artifacts:shock_pendant"
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
+          "weight": 4,
           "name": "artifacts:umbrella"
         },
         {
@@ -31,13 +31,18 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
+          "weight": 4,
           "name": "artifacts:universal_attractor"
         },
         {
           "type": "minecraft:item",
-          "weight": 7,
+          "weight": 6,
           "name": "artifacts:whoopee_cushion"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "name": "artifacts:vampiric_glove"
         },
         {
           "type": "minecraft:empty",
