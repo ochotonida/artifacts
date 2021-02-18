@@ -56,6 +56,9 @@ public class FirstPersonGloveRenderHandler {
         // noinspection ConstantConditions
         ICuriosItemHandler handler = optionalHandler.orElse(null);
         ICurioStacksHandler stacksHandler = handler.getCurios().get("hands");
+        if (stacksHandler == null) {
+            return ItemStack.EMPTY;
+        }
         IDynamicStackHandler stacks = stacksHandler.getStacks();
         IDynamicStackHandler cosmeticStacks = stacksHandler.getCosmeticStacks();
 
