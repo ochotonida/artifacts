@@ -78,12 +78,18 @@ repositories {
     }
 
     maven {
+        url "https://www.cursemaven.com"
+    }
+
+    maven {
         url "https://maven.tterrag.com/"
     }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.0.14'
+
+    runtimeOnly fg.deobf("curse.maven:curious-armor-stands-398784:3107245")
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.4.0:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.4.0")
