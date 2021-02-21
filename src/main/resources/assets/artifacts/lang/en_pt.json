@@ -41,6 +41,7 @@
   "item.artifacts.cloud_in_a_bottle": "Bottl'd Air",
   "item.artifacts.whoopee_cushion": "Pillow o' Farts",
   "item.artifacts.vampiric_glove": "Bloodsuckin' Hook",
+  "item.artifacts.helium_flamingo": "Seagull o' Floatin'",
   "item.artifacts.golden_hook": "Hook o' Wisdom",
   "item.artifacts.snorkel.tooltip": "Allows ye to breathe when overboard",
   "item.artifacts.plastic_drinking_hat.tooltip": "Allows ye to drink yer grog faster",
@@ -75,5 +76,6 @@
   "item.artifacts.cloud_in_a_bottle.tooltip": "Allows ye to leap while in the air",
   "item.artifacts.whoopee_cushion.tooltip": "Increases yer flatulence",
   "item.artifacts.vampiric_glove.tooltip": "Allows ye to absorb the life force of creatures ye punch",
+  "item.artifacts.helium_flamingo.tooltip": "Allows ye to swim in th' skies for as long as ye can hold yer breath",
   "item.artifacts.golden_hook.tooltip": "Gives ye more balls o' wisdom from creatures ye send to Davy Jones' Locker"
 }
