@@ -54,8 +54,7 @@ public class ModItems {
             ANTIDOTE_VESSEL = REGISTRY.register("antidote_vessel", AntidoteVesselItem::new),
             UNIVERSAL_ATTRACTOR = REGISTRY.register("universal_attractor", UniversalAttractorItem::new),
             CRYSTAL_HEART = REGISTRY.register("crystal_heart", CrystalHeartItem::new),
-            CLOUD_IN_A_BOTTLE = REGISTRY.register("cloud_in_a_bottle", CloudInABottleItem::new),
-            HELIUM_FLAMINGO = REGISTRY.register("helium_flamingo", HeliumFlamingoItem::new);
+            CLOUD_IN_A_BOTTLE = REGISTRY.register("cloud_in_a_bottle", CloudInABottleItem::new);
 
     // hands
     public static final RegistryObject<Item>

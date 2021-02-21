@@ -48,8 +48,7 @@ public class ItemTags extends ItemTagsProvider {
                 ModItems.CLOUD_IN_A_BOTTLE.get(),
                 ModItems.CRYSTAL_HEART.get(),
                 ModItems.OBSIDIAN_SKULL.get(),
-                ModItems.UNIVERSAL_ATTRACTOR.get(),
-                ModItems.HELIUM_FLAMINGO.get()
+                ModItems.UNIVERSAL_ATTRACTOR.get()
         );
 
         getOrCreateBuilder(FEET).add(

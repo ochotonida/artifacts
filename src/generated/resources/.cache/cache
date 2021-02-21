@@ -11,7 +11,6 @@ d6cbbec24d0d40948d843d432c4b2669ea9b9097 assets/artifacts/models/item/feral_claw
 025a961d4396e7571637bfe137292b7dc1f3513f assets/artifacts/models/item/flame_pendant.json
 09faf71b05b93e4e678a6d485dad9c0211489162 assets/artifacts/models/item/flippers.json
 f040adf144420f6e300aa8c1b526307e41807673 assets/artifacts/models/item/golden_hook.json
-aa67ae14103df295ff1450385e8377d8a576a8b2 assets/artifacts/models/item/helium_flamingo.json
 0fb2192806adc49be03affc0130d24c898530185 assets/artifacts/models/item/kitty_slippers.json
 17390c5beeeec0aae68aa67e6b265b74b1e72b35 assets/artifacts/models/item/lucky_scarf.json
 6c93dd9f82b80f1c800c82eaa55677deca934458 assets/artifacts/models/item/night_vision_goggles.json
@@ -32,6 +31,7 @@ cb15a92a5fe3e33fea7a475c2c611985e84d9c50 assets/artifacts/models/item/shock_pend
 802096403b56927e6b35b1adc77f0edb3041fe5e assets/artifacts/models/item/vampiric_glove.json
 6a8cac6712ea1e7f1871ac2196cc6b63a36c497a assets/artifacts/models/item/villager_hat.json
 728e0514a50338a0c61b913219c760c99429fc88 assets/artifacts/models/item/whoopee_cushion.json
+55f0e0c834e5075d409116965e8056c32e712751 data/artifacts/tags/items/artifacts.json
 3cf9186cd0eb9ee4876850d87203ad68bbd01156 data/artifacts/loot_tables/artifact.json
 936276a5536d76475578e2c06207fc111af17143 data/artifacts/loot_tables/inject/chests/abandoned_mineshaft.json
 05913a0432449f85697003b8b676ef00059bb037 data/artifacts/loot_tables/inject/chests/bastion_hoglin_stable.json
@@ -60,7 +60,6 @@ cb27dfac3569f0219d40450a9168ab11713aabb9 data/artifacts/loot_tables/inject/chest
 df0e0648fae8d068f04c66e360847c4036d69997 data/artifacts/loot_tables/inject/chests/village/village_weaponsmith.json
 b8125924d1e36822636617e3227228b1b4b093e1 data/artifacts/loot_tables/inject/chests/woodland_mansion.json
 262d1b22ee073816df4acbd6021c9aefe3af9f1b data/artifacts/loot_tables/inject/entities/cow.json
-b647ab6dbca065ae16f4ec9258bf27bbd3a13718 data/artifacts/tags/items/artifacts.json
 94446c2219223bb54ee99e45bbdfb769f69c2c27 data/curios/tags/items/belt.json
 780e1301f1d02678c169e3f3f7bb363a8355a0af data/curios/tags/items/curio.json
 7e68f0e6d19b5c905ae9a3ca9b4d22aec0bb299a data/curios/tags/items/feet.json
