@@ -9,8 +9,8 @@
   "entity.artifacts.mimic": "Mímico",
   "item.artifacts.mimic_spawn_egg": "Ovo Gerador de Mímico",
   "item.artifacts.snorkel": "Snorkel",
-  "item.artifacts.plastic_drinking_hat": "Chapeu de Bebida Feito de Plastico",
-  "item.artifacts.novelty_drinking_hat": "Chapeu de Bebida Inovador",
+  "item.artifacts.plastic_drinking_hat": "Chapéu de Beber de Plastico",
+  "item.artifacts.novelty_drinking_hat": "Chapéu de Beber Inovador",
   "item.artifacts.night_vision_goggles": "Óculos de Visão Noturna",
   "item.artifacts.panic_necklace": "Colar do Pânico",
   "item.artifacts.shock_pendant": "Pingente de Choque",
@@ -40,6 +40,8 @@
   "item.artifacts.villager_hat": "Chapéu de Aldeão",
   "item.artifacts.cloud_in_a_bottle": "Nuvem na Garrafa",
   "item.artifacts.whoopee_cushion": "Almofada Engraçadinha",
+  "item.artifacts.vampiric_glove": "Luva Vampírica",
+  "item.artifacts.golden_hook": "Gancho Fourado",
   "item.artifacts.snorkel.tooltip": "Permite que o usuário respire debaixo d'água",
   "item.artifacts.plastic_drinking_hat.tooltip": "Diminui o tempo necessário para beber itens potáveis",
   "item.artifacts.novelty_drinking_hat.tooltip": "'Ei! Sou o número 1# e deixo a gravidade beber! '\nDiminui o tempo necessário para beber itens potáveis",
@@ -71,5 +73,7 @@
   "item.artifacts.crystal_heart.tooltip": "Aumenta a saúde máxima do usuário",
   "item.artifacts.villager_hat.tooltip": "Diminui os preços de negociação e os aldeões ocasionalmente dão presentes ao usuárior",
   "item.artifacts.cloud_in_a_bottle.tooltip": "Permite que o usuário dê um salto duplo",
-  "item.artifacts.whoopee_cushion.tooltip": "Aumenta a flatulência do usuário"
+  "item.artifacts.whoopee_cushion.tooltip": "Aumenta a flatulência do usuário",
+  "item.artifacts.vampiric_glove.tooltip": "Faz com que os ataques corpo a corpo do usuário absorvam saúde",
+  "item.artifacts.golden_hook.tooltip": "Aumenta a experiência derrubada por criaturas. Rende mais experiência ao matar criaturas que não foram mortas recentemente"
 }
