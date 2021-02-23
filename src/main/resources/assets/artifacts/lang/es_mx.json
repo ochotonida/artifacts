@@ -41,6 +41,7 @@
   "item.artifacts.cloud_in_a_bottle": "Nube Enbotellada",
   "item.artifacts.whoopee_cushion": "Cojín Pedorro",
   "item.artifacts.vampiric_glove": "Guante Vampírico",
+  "item.artifacts.helium_flamingo": "Flamenco de Helio",
   "item.artifacts.golden_hook": "Garfio Dorado",
   "item.artifacts.snorkel.tooltip": "Permite al portador respirar bajo el agua",
   "item.artifacts.plastic_drinking_hat.tooltip": "Disminuye el tiempo necesario para beber items",
@@ -75,5 +76,6 @@
   "item.artifacts.cloud_in_a_bottle.tooltip": "Permite al portador dar doble saltos",
   "item.artifacts.whoopee_cushion.tooltip": "Aumenta las flatulencias del portador, wacala",
   "item.artifacts.vampiric_glove.tooltip": "Los ataques del portador absorben vida",
+  "item.artifacts.helium_flamingo.tooltip": "Permite al portador volar en el aire por un corto periodo de tiempo",
   "item.artifacts.golden_hook.tooltip": "Aumenta la experiencia obtenida al asesinar criaturas. Otorga más experiencia al asesinar criaturas no asesinadas recientemente"
 }
