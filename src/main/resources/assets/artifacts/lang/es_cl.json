@@ -40,6 +40,8 @@
   "item.artifacts.villager_hat": "Sombrero de Aldeano",
   "item.artifacts.cloud_in_a_bottle": "Nube Enbotellada",
   "item.artifacts.whoopee_cushion": "Cojín Pedorro",
+  "item.artifacts.vampiric_glove": "Guante Vampírico",
+  "item.artifacts.golden_hook": "Garfio Dorado",
   "item.artifacts.snorkel.tooltip": "Permite al portador respirar bajo el agua",
   "item.artifacts.plastic_drinking_hat.tooltip": "Disminuye el tiempo necesario para beber items",
   "item.artifacts.novelty_drinking_hat.tooltip": "'Hey! Soy el #1 y dejo que la gravedad me haga beber!'\nDisminuye el tiempo necesario para beber items",
@@ -71,5 +73,7 @@
   "item.artifacts.crystal_heart.tooltip": "Aumenta la vida máxima del portador",
   "item.artifacts.villager_hat.tooltip": "Disminuye los precios de los aldeanos y ocasionalmente le otorgan regalos al portador",
   "item.artifacts.cloud_in_a_bottle.tooltip": "Permite al portador dar doble saltos",
-  "item.artifacts.whoopee_cushion.tooltip": "Aumenta las flatulencias del portador, wacala"
+  "item.artifacts.whoopee_cushion.tooltip": "Aumenta las flatulencias del portador, wacala",
+  "item.artifacts.vampiric_glove.tooltip": "Los ataques del portador absorben vida",
+  "item.artifacts.golden_hook.tooltip": "Aumenta la experiencia obtenida al asesinar criaturas. Otorga más experiencia al asesinar criaturas no asesinadas recientemente"
 }

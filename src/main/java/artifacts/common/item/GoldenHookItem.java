@@ -36,8 +36,6 @@ public class GoldenHookItem extends GloveItem {
         double multiplier = 4 * Math.max(0, 3 * ((1 - killRatio) - 2 / 3D));
         int experienceBonus = (int) (multiplier * Math.min(10, event.getOriginalExperience()));
         event.setDroppedExperience(event.getDroppedExperience() + experienceBonus);
-
-        System.out.println("event.getDroppedExperience() = " + event.getDroppedExperience());
     }
 
     @Override
