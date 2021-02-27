@@ -6,17 +6,17 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 8,
           "name": "artifacts:cross_necklace"
         },
         {
           "type": "minecraft:item",
-          "weight": 8,
           "name": "artifacts:antidote_vessel"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 84
+          "condition": "minecraft:random_chance",
+          "chance": 0.16
         }
       ]
     }

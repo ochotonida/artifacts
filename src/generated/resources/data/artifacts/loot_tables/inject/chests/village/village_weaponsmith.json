@@ -6,12 +6,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 6,
           "name": "artifacts:feral_claws"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 94
+          "condition": "minecraft:random_chance",
+          "chance": 0.06
         }
       ]
     }

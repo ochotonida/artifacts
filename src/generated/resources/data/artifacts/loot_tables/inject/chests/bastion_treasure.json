@@ -43,10 +43,12 @@
           "type": "minecraft:loot_table",
           "weight": 6,
           "name": "artifacts:artifact"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 50
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
         }
       ]
     }

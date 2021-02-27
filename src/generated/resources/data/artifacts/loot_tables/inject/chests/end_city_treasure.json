@@ -6,17 +6,18 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "weight": 40,
+          "weight": 4,
           "name": "artifacts:artifact"
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
           "name": "artifacts:crystal_heart"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 50
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
         }
       ]
     }

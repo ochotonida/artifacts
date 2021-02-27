@@ -38,10 +38,12 @@
           "type": "minecraft:item",
           "weight": 2,
           "name": "artifacts:lucky_scarf"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 80
+          "condition": "minecraft:random_chance",
+          "chance": 0.2
         }
       ]
     }

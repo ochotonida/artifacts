@@ -43,10 +43,12 @@
           "type": "minecraft:item",
           "weight": 8,
           "name": "artifacts:cloud_in_a_bottle"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 59
+          "condition": "minecraft:random_chance",
+          "chance": 0.41
         }
       ]
     }

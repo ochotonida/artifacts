@@ -57,10 +57,12 @@
           "type": "minecraft:item",
           "weight": 3,
           "name": "artifacts:golden_hook"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 74
+          "condition": "minecraft:random_chance",
+          "chance": 0.26
         }
       ]
     }

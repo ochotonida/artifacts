@@ -6,12 +6,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:villager_hat"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 98
+          "condition": "minecraft:random_chance",
+          "chance": 0.02
         }
       ]
     }

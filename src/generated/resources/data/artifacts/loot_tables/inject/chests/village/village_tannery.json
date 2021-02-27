@@ -28,10 +28,12 @@
           "type": "minecraft:item",
           "weight": 4,
           "name": "artifacts:whoopee_cushion"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 80
+          "condition": "minecraft:random_chance",
+          "chance": 0.2
         }
       ]
     }

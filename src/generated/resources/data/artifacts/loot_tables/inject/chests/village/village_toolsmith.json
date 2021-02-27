@@ -6,17 +6,19 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 2,
           "name": "artifacts:digging_claws"
         },
         {
           "type": "minecraft:item",
-          "weight": 6,
+          "weight": 3,
           "name": "artifacts:pocket_piston"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 90
+          "condition": "minecraft:random_chance",
+          "chance": 0.1
         }
       ]
     }
