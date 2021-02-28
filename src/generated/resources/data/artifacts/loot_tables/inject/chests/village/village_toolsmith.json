@@ -6,12 +6,10 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:digging_claws"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:pocket_piston"
         }
       ],

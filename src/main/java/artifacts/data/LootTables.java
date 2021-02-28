@@ -2,6 +2,7 @@ package artifacts.data;
 
 import artifacts.Artifacts;
 import artifacts.common.init.ModItems;
+import com.google.common.base.Preconditions;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.criterion.EntityFlagsPredicate;
 import net.minecraft.advancements.criterion.EntityPredicate;
@@ -12,7 +13,9 @@ import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.EntityHasProperty;
 import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.functions.Smelt;
+import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,8 +29,11 @@ public class LootTables extends LootTableProvider {
 
     private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> tables = new ArrayList<>();
 
-    public LootTables(DataGenerator dataGenerator) {
+    private final ExistingFileHelper existingFileHelper;
+
+    public LootTables(DataGenerator dataGenerator, ExistingFileHelper existingFileHelper) {
         super(dataGenerator);
+        this.existingFileHelper = existingFileHelper;
     }
 
     @Override
@@ -38,7 +44,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/entities/cow", LootTable.builder().addLootPool(
                 LootPool.builder()
                         .name("main")
-                        .acceptCondition(RandomChance.builder(0.001F))
+                        .acceptCondition(RandomChance.builder(0.002F))
                         .addEntry(itemEntry(ModItems.EVERLASTING_BEEF.get(), 1)
                                 .acceptFunction(
                                         Smelt.func_215953_b().acceptCondition(
@@ -66,8 +72,6 @@ public class LootTables extends LootTableProvider {
                         LootPool.builder()
                                 .name("main")
                                 .rolls(ConstantRange.of(1))
-                                .addEntry(itemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 5))
-                                .addEntry(itemEntry(ModItems.NOVELTY_DRINKING_HAT.get(), 3))
                                 .addEntry(itemEntry(ModItems.SNORKEL.get(), 8))
                                 .addEntry(itemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 8))
                                 .addEntry(itemEntry(ModItems.PANIC_NECKLACE.get(), 8))
@@ -76,8 +80,6 @@ public class LootTables extends LootTableProvider {
                                 .addEntry(itemEntry(ModItems.THORN_PENDANT.get(), 8))
                                 .addEntry(itemEntry(ModItems.FLIPPERS.get(), 8))
                                 .addEntry(itemEntry(ModItems.OBSIDIAN_SKULL.get(), 8))
-                                .addEntry(itemEntry(ModItems.UMBRELLA.get(), 5))
-                                .addEntry(itemEntry(ModItems.EVERLASTING_BEEF.get(), 2))
                                 .addEntry(itemEntry(ModItems.FIRE_GAUNTLET.get(), 8))
                                 .addEntry(itemEntry(ModItems.FERAL_CLAWS.get(), 8))
                                 .addEntry(itemEntry(ModItems.POCKET_PISTON.get(), 8))
@@ -96,10 +98,15 @@ public class LootTables extends LootTableProvider {
                                 .addEntry(itemEntry(ModItems.CRYSTAL_HEART.get(), 8))
                                 .addEntry(itemEntry(ModItems.VILLAGER_HAT.get(), 8))
                                 .addEntry(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 8))
-                                .addEntry(itemEntry(ModItems.WHOOPEE_CUSHION.get(), 5))
                                 .addEntry(itemEntry(ModItems.VAMPIRIC_GLOVE.get(), 8))
                                 .addEntry(itemEntry(ModItems.GOLDEN_HOOK.get(), 8))
-                ));
+                                .addEntry(itemEntry(ModItems.UMBRELLA.get(), 5))
+                                .addEntry(itemEntry(ModItems.WHOOPEE_CUSHION.get(), 5))
+                                .addEntry(itemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 5))
+                                .addEntry(itemEntry(ModItems.NOVELTY_DRINKING_HAT.get(), 3))
+                                .addEntry(itemEntry(ModItems.EVERLASTING_BEEF.get(), 2))
+                )
+        );
     }
 
     private void addChestLootTables() {
@@ -127,10 +134,10 @@ public class LootTables extends LootTableProvider {
                         .name("main")
                         .rolls(ConstantRange.of(1))
                         .acceptCondition(RandomChance.builder(0.1F))
-                        .addEntry(itemEntry(ModItems.STEADFAST_SPIKES.get(), 3))
-                        .addEntry(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 2))
-                        .addEntry(itemEntry(ModItems.RUNNING_SHOES.get(), 3))
-                        .addEntry(itemEntry(ModItems.VAMPIRIC_GLOVE.get(), 2))
+                        .addEntry(itemEntry(ModItems.STEADFAST_SPIKES.get(), 1))
+                        .addEntry(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 1))
+                        .addEntry(itemEntry(ModItems.RUNNING_SHOES.get(), 1))
+                        .addEntry(itemEntry(ModItems.VAMPIRIC_GLOVE.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/village/village_butcher", LootTable.builder().addLootPool(
@@ -146,11 +153,11 @@ public class LootTables extends LootTableProvider {
                         .name("main")
                         .rolls(ConstantRange.of(1))
                         .acceptCondition(RandomChance.builder(0.2F))
-                        .addEntry(itemEntry(ModItems.UMBRELLA.get(), 9))
-                        .addEntry(itemEntry(ModItems.KITTY_SLIPPERS.get(), 2))
-                        .addEntry(itemEntry(ModItems.BUNNY_HOPPERS.get(), 3))
-                        .addEntry(itemEntry(ModItems.SCARF_OF_INVISIBILITY.get(), 2))
-                        .addEntry(itemEntry(ModItems.WHOOPEE_CUSHION.get(), 4))
+                        .addEntry(itemEntry(ModItems.UMBRELLA.get(), 3))
+                        .addEntry(itemEntry(ModItems.WHOOPEE_CUSHION.get(), 2))
+                        .addEntry(itemEntry(ModItems.KITTY_SLIPPERS.get(), 1))
+                        .addEntry(itemEntry(ModItems.BUNNY_HOPPERS.get(), 1))
+                        .addEntry(itemEntry(ModItems.SCARF_OF_INVISIBILITY.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/village/village_temple", LootTable.builder().addLootPool(
@@ -167,8 +174,8 @@ public class LootTables extends LootTableProvider {
                         .name("main")
                         .rolls(ConstantRange.of(1))
                         .acceptCondition(RandomChance.builder(0.1F))
-                        .addEntry(itemEntry(ModItems.DIGGING_CLAWS.get(), 2))
-                        .addEntry(itemEntry(ModItems.POCKET_PISTON.get(), 3))
+                        .addEntry(itemEntry(ModItems.DIGGING_CLAWS.get(), 1))
+                        .addEntry(itemEntry(ModItems.POCKET_PISTON.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/village/village_weaponsmith", LootTable.builder().addLootPool(
@@ -183,92 +190,92 @@ public class LootTables extends LootTableProvider {
                 LootPool.builder()
                         .name("main")
                         .rolls(ConstantRange.of(1))
-                        .acceptCondition(RandomChance.builder(0.17F))
+                        .acceptCondition(RandomChance.builder(0.35F))
                         .addEntry(itemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 2))
                         .addEntry(itemEntry(ModItems.PANIC_NECKLACE.get(), 2))
                         .addEntry(itemEntry(ModItems.OBSIDIAN_SKULL.get(), 2))
-                        .addEntry(itemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 2))
-                        .addEntry(itemEntry(ModItems.NOVELTY_DRINKING_HAT.get(), 1))
                         .addEntry(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 2))
                         .addEntry(itemEntry(ModItems.DIGGING_CLAWS.get(), 2))
                         .addEntry(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 2))
                         .addEntry(itemEntry(ModItems.VAMPIRIC_GLOVE.get(), 2))
-                )
+                        .addEntry(itemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 2))
+                        .addEntry(itemEntry(ModItems.NOVELTY_DRINKING_HAT.get(), 1)))
         );
         addChestLootTable("inject/chests/bastion_hoglin_stable", LootTable.builder().addLootPool(
                 LootPool.builder()
                         .name("main")
                         .rolls(ConstantRange.of(1))
                         .acceptCondition(RandomChance.builder(0.25F))
-                        .addEntry(itemEntry(ModItems.EVERLASTING_BEEF.get(), 3))
-                        .addEntry(itemEntry(ModItems.BUNNY_HOPPERS.get(), 7))
-                        .addEntry(itemEntry(ModItems.FLAME_PENDANT.get(), 8))
-                        .addEntry(artifactEntry(7))
+                        .addEntry(artifactEntry(5))
+                        .addEntry(itemEntry(ModItems.BUNNY_HOPPERS.get(), 3))
+                        .addEntry(itemEntry(ModItems.FLAME_PENDANT.get(), 3))
+                        .addEntry(itemEntry(ModItems.EVERLASTING_BEEF.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/bastion_treasure", LootTable.builder().addLootPool(
                 LootPool.builder()
                         .name("main")
                         .rolls(ConstantRange.of(1))
-                        .acceptCondition(RandomChance.builder(0.5F))
-                        .addEntry(itemEntry(ModItems.FIRE_GAUNTLET.get(), 7))
-                        .addEntry(itemEntry(ModItems.CROSS_NECKLACE.get(), 7))
-                        .addEntry(itemEntry(ModItems.STEADFAST_SPIKES.get(), 4))
-                        .addEntry(itemEntry(ModItems.PANIC_NECKLACE.get(), 6))
-                        .addEntry(itemEntry(ModItems.CRYSTAL_HEART.get(), 8))
-                        .addEntry(itemEntry(ModItems.ANTIDOTE_VESSEL.get(), 6))
-                        .addEntry(itemEntry(ModItems.GOLDEN_HOOK.get(), 6))
+                        .acceptCondition(RandomChance.builder(0.75F))
                         .addEntry(artifactEntry(6))
+                        .addEntry(itemEntry(ModItems.GOLDEN_HOOK.get(), 3))
+                        .addEntry(itemEntry(ModItems.CROSS_NECKLACE.get(), 3))
+                        .addEntry(itemEntry(ModItems.FIRE_GAUNTLET.get(), 2))
+                        .addEntry(itemEntry(ModItems.STEADFAST_SPIKES.get(), 1))
+                        .addEntry(itemEntry(ModItems.PANIC_NECKLACE.get(), 1))
+                        .addEntry(itemEntry(ModItems.CRYSTAL_HEART.get(), 1))
+                        .addEntry(itemEntry(ModItems.ANTIDOTE_VESSEL.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/buried_treasure", LootTable.builder().addLootPool(
                 LootPool.builder()
                         .name("main")
                         .rolls(ConstantRange.of(1))
-                        .acceptCondition(RandomChance.builder(0.26F))
-                        .addEntry(itemEntry(ModItems.SNORKEL.get(), 3))
-                        .addEntry(itemEntry(ModItems.FLIPPERS.get(), 3))
-                        .addEntry(itemEntry(ModItems.FERAL_CLAWS.get(), 2))
-                        .addEntry(itemEntry(ModItems.DIGGING_CLAWS.get(), 2))
+                        .acceptCondition(RandomChance.builder(0.35F))
+                        .addEntry(itemEntry(ModItems.SNORKEL.get(), 5))
+                        .addEntry(itemEntry(ModItems.FLIPPERS.get(), 5))
+                        .addEntry(itemEntry(ModItems.UMBRELLA.get(), 5))
+                        .addEntry(itemEntry(ModItems.GOLDEN_HOOK.get(), 5))
+                        .addEntry(itemEntry(ModItems.FERAL_CLAWS.get(), 3))
+                        .addEntry(itemEntry(ModItems.DIGGING_CLAWS.get(), 3))
+                        .addEntry(itemEntry(ModItems.KITTY_SLIPPERS.get(), 3))
+                        .addEntry(itemEntry(ModItems.BUNNY_HOPPERS.get(), 3))
+                        .addEntry(itemEntry(ModItems.LUCKY_SCARF.get(), 3))
                         .addEntry(itemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 2))
                         .addEntry(itemEntry(ModItems.NOVELTY_DRINKING_HAT.get(), 1))
-                        .addEntry(itemEntry(ModItems.UMBRELLA.get(), 3))
-                        .addEntry(itemEntry(ModItems.KITTY_SLIPPERS.get(), 2))
-                        .addEntry(itemEntry(ModItems.BUNNY_HOPPERS.get(), 3))
-                        .addEntry(itemEntry(ModItems.LUCKY_SCARF.get(), 2))
-                        .addEntry(itemEntry(ModItems.GOLDEN_HOOK.get(), 3))
                 )
         );
         addChestLootTable("inject/chests/desert_pyramid", LootTable.builder().addLootPool(
                 LootPool.builder()
                         .name("main")
                         .rolls(ConstantRange.of(1))
-                        .acceptCondition(RandomChance.builder(0.40F))
-                        .addEntry(itemEntry(ModItems.FLAME_PENDANT.get(), 4))
-                        .addEntry(itemEntry(ModItems.THORN_PENDANT.get(), 4))
-                        .addEntry(itemEntry(ModItems.SHOCK_PENDANT.get(), 2))
-                        .addEntry(itemEntry(ModItems.UMBRELLA.get(), 2))
+                        .acceptCondition(RandomChance.builder(0.4F))
+                        .addEntry(itemEntry(ModItems.FLAME_PENDANT.get(), 2))
+                        .addEntry(itemEntry(ModItems.THORN_PENDANT.get(), 2))
+                        .addEntry(itemEntry(ModItems.WHOOPEE_CUSHION.get(), 2))
+                        .addEntry(itemEntry(ModItems.SHOCK_PENDANT.get(), 1))
+                        .addEntry(itemEntry(ModItems.UMBRELLA.get(), 1))
                         .addEntry(itemEntry(ModItems.SCARF_OF_INVISIBILITY.get(), 1))
-                        .addEntry(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 2))
-                        .addEntry(itemEntry(ModItems.WHOOPEE_CUSHION.get(), 3))
-                        .addEntry(itemEntry(ModItems.VAMPIRIC_GLOVE.get(), 2))
+                        .addEntry(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 1))
+                        .addEntry(itemEntry(ModItems.VAMPIRIC_GLOVE.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/end_city_treasure", LootTable.builder().addLootPool(
                 LootPool.builder()
                         .name("main")
                         .rolls(ConstantRange.of(1))
-                        .acceptCondition(RandomChance.builder(0.5F))
-                        .addEntry(artifactEntry(4))
+                        .acceptCondition(RandomChance.builder(0.4F))
+                        .addEntry(artifactEntry(6))
                         .addEntry(itemEntry(ModItems.CRYSTAL_HEART.get(), 1))
+                        .addEntry(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/jungle_temple", LootTable.builder().addLootPool(
                 LootPool.builder()
                         .name("main")
                         .rolls(ConstantRange.of(1))
-                        .acceptCondition(RandomChance.builder(0.20F))
-                        .addEntry(itemEntry(ModItems.KITTY_SLIPPERS.get(), 3))
+                        .acceptCondition(RandomChance.builder(0.35F))
+                        .addEntry(itemEntry(ModItems.KITTY_SLIPPERS.get(), 2))
                         .addEntry(itemEntry(ModItems.BUNNY_HOPPERS.get(), 1))
                 )
         );
@@ -276,42 +283,43 @@ public class LootTables extends LootTableProvider {
                 LootPool.builder()
                         .name("main")
                         .rolls(ConstantRange.of(1))
-                        .acceptCondition(RandomChance.builder(0.15F))
-                        .addEntry(itemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 3))
-                        .addEntry(itemEntry(ModItems.NOVELTY_DRINKING_HAT.get(), 1))
+                        .acceptCondition(RandomChance.builder(0.20F))
                         .addEntry(itemEntry(ModItems.CROSS_NECKLACE.get(), 3))
-                        .addEntry(itemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 2))
+                        .addEntry(itemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 3))
                         .addEntry(itemEntry(ModItems.POCKET_PISTON.get(), 3))
                         .addEntry(itemEntry(ModItems.RUNNING_SHOES.get(), 3))
+                        .addEntry(itemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 2))
+                        .addEntry(itemEntry(ModItems.NOVELTY_DRINKING_HAT.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/pillager_outpost", LootTable.builder().addLootPool(
                 LootPool.builder()
                         .name("main")
                         .rolls(ConstantRange.of(1))
-                        .acceptCondition(RandomChance.builder(0.41F))
-                        .addEntry(itemEntry(ModItems.PANIC_NECKLACE.get(), 5))
-                        .addEntry(itemEntry(ModItems.POCKET_PISTON.get(), 5))
-                        .addEntry(itemEntry(ModItems.STEADFAST_SPIKES.get(), 5))
-                        .addEntry(itemEntry(ModItems.POWER_GLOVE.get(), 5))
-                        .addEntry(itemEntry(ModItems.CROSS_NECKLACE.get(), 5))
-                        .addEntry(itemEntry(ModItems.SCARF_OF_INVISIBILITY.get(), 4))
-                        .addEntry(itemEntry(ModItems.CRYSTAL_HEART.get(), 4))
-                        .addEntry(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 8))
+                        .acceptCondition(RandomChance.builder(0.4F))
+                        .addEntry(itemEntry(ModItems.PANIC_NECKLACE.get(), 1))
+                        .addEntry(itemEntry(ModItems.POCKET_PISTON.get(), 1))
+                        .addEntry(itemEntry(ModItems.STEADFAST_SPIKES.get(), 1))
+                        .addEntry(itemEntry(ModItems.POWER_GLOVE.get(), 1))
+                        .addEntry(itemEntry(ModItems.CROSS_NECKLACE.get(), 1))
+                        .addEntry(itemEntry(ModItems.SCARF_OF_INVISIBILITY.get(), 1))
+                        .addEntry(itemEntry(ModItems.CRYSTAL_HEART.get(), 1))
+                        .addEntry(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 1))
+                        .addEntry(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/ruined_portal", LootTable.builder().addLootPool(
                 LootPool.builder()
                         .name("main")
                         .rolls(ConstantRange.of(1))
-                        .acceptCondition(RandomChance.builder(0.20F))
-                        .addEntry(itemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 2))
-                        .addEntry(itemEntry(ModItems.THORN_PENDANT.get(), 4))
-                        .addEntry(itemEntry(ModItems.FIRE_GAUNTLET.get(), 3))
-                        .addEntry(itemEntry(ModItems.POWER_GLOVE.get(), 3))
-                        .addEntry(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 3))
-                        .addEntry(itemEntry(ModItems.OBSIDIAN_SKULL.get(), 3))
-                        .addEntry(itemEntry(ModItems.LUCKY_SCARF.get(), 2))
+                        .acceptCondition(RandomChance.builder(0.25F))
+                        .addEntry(itemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 1))
+                        .addEntry(itemEntry(ModItems.THORN_PENDANT.get(), 1))
+                        .addEntry(itemEntry(ModItems.FIRE_GAUNTLET.get(), 1))
+                        .addEntry(itemEntry(ModItems.POWER_GLOVE.get(), 1))
+                        .addEntry(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 1))
+                        .addEntry(itemEntry(ModItems.OBSIDIAN_SKULL.get(), 1))
+                        .addEntry(itemEntry(ModItems.LUCKY_SCARF.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/shipwreck_treasure", LootTable.builder().addLootPool(
@@ -319,16 +327,16 @@ public class LootTables extends LootTableProvider {
                         .name("main")
                         .rolls(ConstantRange.of(1))
                         .acceptCondition(RandomChance.builder(0.25F))
-                        .addEntry(itemEntry(ModItems.SNORKEL.get(), 3))
-                        .addEntry(itemEntry(ModItems.FLIPPERS.get(), 3))
-                        .addEntry(itemEntry(ModItems.SCARF_OF_INVISIBILITY.get(), 2))
-                        .addEntry(itemEntry(ModItems.STEADFAST_SPIKES.get(), 3))
-                        .addEntry(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 2))
-                        .addEntry(itemEntry(ModItems.FERAL_CLAWS.get(), 3))
-                        .addEntry(itemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 2))
-                        .addEntry(itemEntry(ModItems.OBSIDIAN_SKULL.get(), 2))
-                        .addEntry(itemEntry(ModItems.RUNNING_SHOES.get(), 2))
                         .addEntry(itemEntry(ModItems.GOLDEN_HOOK.get(), 3))
+                        .addEntry(itemEntry(ModItems.SNORKEL.get(), 1))
+                        .addEntry(itemEntry(ModItems.FLIPPERS.get(), 1))
+                        .addEntry(itemEntry(ModItems.SCARF_OF_INVISIBILITY.get(), 1))
+                        .addEntry(itemEntry(ModItems.STEADFAST_SPIKES.get(), 1))
+                        .addEntry(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 1))
+                        .addEntry(itemEntry(ModItems.FERAL_CLAWS.get(), 1))
+                        .addEntry(itemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 1))
+                        .addEntry(itemEntry(ModItems.OBSIDIAN_SKULL.get(), 1))
+                        .addEntry(itemEntry(ModItems.RUNNING_SHOES.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/stronghold_corridor", LootTable.builder().addLootPool(
@@ -336,27 +344,27 @@ public class LootTables extends LootTableProvider {
                         .name("main")
                         .rolls(ConstantRange.of(1))
                         .acceptCondition(RandomChance.builder(0.35F))
-                        .addEntry(itemEntry(ModItems.POWER_GLOVE.get(), 4))
-                        .addEntry(itemEntry(ModItems.ANTIDOTE_VESSEL.get(), 4))
-                        .addEntry(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 7))
-                        .addEntry(itemEntry(ModItems.LUCKY_SCARF.get(), 6))
-                        .addEntry(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 4))
-                        .addEntry(artifactEntry(10))
+                        .addEntry(artifactEntry(5))
+                        .addEntry(itemEntry(ModItems.POWER_GLOVE.get(), 1))
+                        .addEntry(itemEntry(ModItems.ANTIDOTE_VESSEL.get(), 1))
+                        .addEntry(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 1))
+                        .addEntry(itemEntry(ModItems.LUCKY_SCARF.get(), 1))
+                        .addEntry(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/underwater_ruin_big", LootTable.builder().addLootPool(
                 LootPool.builder()
                         .name("main")
                         .rolls(ConstantRange.of(1))
-                        .acceptCondition(RandomChance.builder(0.40F))
-                        .addEntry(itemEntry(ModItems.SNORKEL.get(), 7))
-                        .addEntry(itemEntry(ModItems.FLIPPERS.get(), 7))
-                        .addEntry(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 3))
-                        .addEntry(itemEntry(ModItems.LUCKY_SCARF.get(), 3))
-                        .addEntry(itemEntry(ModItems.FIRE_GAUNTLET.get(), 5))
-                        .addEntry(itemEntry(ModItems.CROSS_NECKLACE.get(), 5))
-                        .addEntry(itemEntry(ModItems.POWER_GLOVE.get(), 5))
-                        .addEntry(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 5))
+                        .acceptCondition(RandomChance.builder(0.65F))
+                        .addEntry(itemEntry(ModItems.SNORKEL.get(), 3))
+                        .addEntry(itemEntry(ModItems.FLIPPERS.get(), 3))
+                        .addEntry(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 1))
+                        .addEntry(itemEntry(ModItems.LUCKY_SCARF.get(), 1))
+                        .addEntry(itemEntry(ModItems.FIRE_GAUNTLET.get(), 1))
+                        .addEntry(itemEntry(ModItems.CROSS_NECKLACE.get(), 1))
+                        .addEntry(itemEntry(ModItems.POWER_GLOVE.get(), 1))
+                        .addEntry(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/woodland_mansion", LootTable.builder().addLootPool(
@@ -373,15 +381,15 @@ public class LootTables extends LootTableProvider {
         return ItemLootEntry.builder(item).weight(weight);
     }
 
-    private static LootEntry.Builder<?> emptyEntry(int weight) {
-        return EmptyLootEntry.func_216167_a().weight(weight);
-    }
-
     private static LootEntry.Builder<?> artifactEntry(int weight) {
         return TableLootEntry.builder(new ResourceLocation(Artifacts.MODID, "artifact")).weight(weight);
     }
 
     private void addLootTable(String location, LootTable.Builder lootTable, LootParameterSet lootParameterSet) {
+        if (location.startsWith("inject")) {
+            ResourceLocation lootTableLocation = new ResourceLocation(location.replaceFirst("inject", "loot_tables") + ".json");
+            Preconditions.checkArgument(existingFileHelper.exists(lootTableLocation, ResourcePackType.SERVER_DATA), "Loot table %s does not exist in any known data pack", lootTableLocation);
+        }
         tables.add(Pair.of(() -> lootBuilder -> lootBuilder.accept(new ResourceLocation(Artifacts.MODID, location), lootTable), lootParameterSet));
     }
 

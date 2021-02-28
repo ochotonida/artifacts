@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 2,
           "name": "artifacts:kitty_slippers"
         },
         {
@@ -17,7 +17,7 @@
       "conditions": [
         {
           "condition": "minecraft:random_chance",
-          "chance": 0.2
+          "chance": 0.35
         }
       ]
     }

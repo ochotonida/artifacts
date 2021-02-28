@@ -7,20 +7,11 @@
         {
           "type": "minecraft:item",
           "weight": 3,
-          "name": "artifacts:plastic_drinking_hat"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "artifacts:novelty_drinking_hat"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:cross_necklace"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
+          "weight": 3,
           "name": "artifacts:night_vision_goggles"
         },
         {
@@ -32,12 +23,21 @@
           "type": "minecraft:item",
           "weight": 3,
           "name": "artifacts:running_shoes"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "artifacts:plastic_drinking_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:novelty_drinking_hat"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:random_chance",
-          "chance": 0.15
+          "chance": 0.2
         }
       ]
     }

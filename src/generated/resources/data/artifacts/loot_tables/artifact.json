@@ -6,16 +6,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 5,
-          "name": "artifacts:plastic_drinking_hat"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:novelty_drinking_hat"
-        },
-        {
-          "type": "minecraft:item",
           "weight": 8,
           "name": "artifacts:snorkel"
         },
@@ -53,16 +43,6 @@
           "type": "minecraft:item",
           "weight": 8,
           "name": "artifacts:obsidian_skull"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 5,
-          "name": "artifacts:umbrella"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 2,
-          "name": "artifacts:everlasting_beef"
         },
         {
           "type": "minecraft:item",
@@ -156,11 +136,6 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
-          "name": "artifacts:whoopee_cushion"
-        },
-        {
-          "type": "minecraft:item",
           "weight": 8,
           "name": "artifacts:vampiric_glove"
         },
@@ -168,6 +143,31 @@
           "type": "minecraft:item",
           "weight": 8,
           "name": "artifacts:golden_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "artifacts:umbrella"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "artifacts:whoopee_cushion"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "artifacts:plastic_drinking_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "artifacts:novelty_drinking_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "artifacts:everlasting_beef"
         }
       ]
     }
