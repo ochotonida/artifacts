@@ -23,6 +23,7 @@ public class Config {
     private static final ClientConfig CLIENT;
     public static boolean modifyHurtSounds;
     public static boolean showFirstPersonGloves;
+    public static boolean showTooltips;
 
     static {
         final Pair<CommonConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
@@ -75,6 +76,7 @@ public class Config {
     public static void bakeClient() {
         Config.modifyHurtSounds = CLIENT.modifyHurtSounds.get();
         Config.showFirstPersonGloves = CLIENT.showFirstPersonGloves.get();
+        Config.showTooltips = CLIENT.showTooltips.get();
     }
 
     public static void register() {

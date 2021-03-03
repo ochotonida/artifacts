@@ -1,6 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.client.render.model.curio.DrinkingHatModel;
+import artifacts.common.config.Config;
 import artifacts.common.init.ModItems;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
@@ -34,8 +35,10 @@ public class DrinkingHatItem extends CurioItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        if (this != ModItems.PLASTIC_DRINKING_HAT.get()) {
-            tooltip.add(new TranslationTextComponent(ModItems.PLASTIC_DRINKING_HAT.get().getTranslationKey() + ".tooltip").mergeStyle(TextFormatting.GRAY));
+        if (Config.showTooltips) {
+            if (this != ModItems.PLASTIC_DRINKING_HAT.get()) {
+                tooltip.add(new TranslationTextComponent(ModItems.PLASTIC_DRINKING_HAT.get().getTranslationKey() + ".tooltip").mergeStyle(TextFormatting.GRAY));
+            }
         }
         super.addInformation(stack, world, tooltip, flags);
     }

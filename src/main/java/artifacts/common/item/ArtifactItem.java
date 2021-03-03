@@ -1,5 +1,6 @@
 package artifacts.common.item;
 
+import artifacts.common.config.Config;
 import artifacts.common.init.ModItems;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
@@ -27,6 +28,8 @@ public abstract class ArtifactItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        tooltip.add(new TranslationTextComponent(getTranslationKey() + ".tooltip").mergeStyle(TextFormatting.GRAY));
+        if (Config.showTooltips) {
+            tooltip.add(new TranslationTextComponent(getTranslationKey() + ".tooltip").mergeStyle(TextFormatting.GRAY));
+        }
     }
 }

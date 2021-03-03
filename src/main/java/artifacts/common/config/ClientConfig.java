@@ -7,6 +7,7 @@ public class ClientConfig {
 
     final ForgeConfigSpec.BooleanValue modifyHurtSounds;
     final ForgeConfigSpec.BooleanValue showFirstPersonGloves;
+    final ForgeConfigSpec.BooleanValue showTooltips;
 
     ClientConfig(ForgeConfigSpec.Builder builder) {
         builder.push("items");
@@ -19,5 +20,9 @@ public class ClientConfig {
                 .comment("Whether models for gloves should display on the player's hand in in first person")
                 .translation(Artifacts.MODID + ".config.showFirstPersonGloves")
                 .define("show_first_person_glove", true);
+        showTooltips = builder
+                .comment("Whether artifacts should have a tooltip explaining their effect. These can still be found in JEI when disabled")
+                .translation(Artifacts.MODID + ".config.showTooltips")
+                .define("show_tooltips", true);
     }
 }
