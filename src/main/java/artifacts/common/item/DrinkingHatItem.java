@@ -1,18 +1,26 @@
 package artifacts.common.item;
 
 import artifacts.client.render.model.curio.DrinkingHatModel;
+import artifacts.common.init.ModItems;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
+
+import java.util.List;
 
 public class DrinkingHatItem extends CurioItem {
 
@@ -21,6 +29,15 @@ public class DrinkingHatItem extends CurioItem {
     public DrinkingHatItem(ResourceLocation texture) {
         this.texture = texture;
         addListener(LivingEntityUseItemEvent.Start.class, this::onItemUseStart);
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
+        if (this != ModItems.PLASTIC_DRINKING_HAT.get()) {
+            tooltip.add(new TranslationTextComponent(ModItems.PLASTIC_DRINKING_HAT.get().getTranslationKey() + ".tooltip").mergeStyle(TextFormatting.GRAY));
+        }
+        super.addInformation(stack, world, tooltip, flags);
     }
 
     public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
