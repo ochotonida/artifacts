@@ -58,7 +58,7 @@ a3365deb88eee52c6badbe290e2aded8c6f9720a data/artifacts/loot_tables/inject/chest
 f1e87761bd2faf4a0bb4827a897d0ca55b5bee89 data/artifacts/loot_tables/inject/chests/village/village_toolsmith.json
 0316e829c9b7a3e3750ebb5a85d3d7889c48f3d1 data/artifacts/loot_tables/inject/chests/village/village_weaponsmith.json
 7673e280ba99f34e71eb94c7c2e3573f19d92097 data/artifacts/loot_tables/inject/chests/woodland_mansion.json
-e3d7261b56b38639e50ee94a4ebcd5f54507ac62 data/artifacts/loot_tables/inject/entities/cow.json
+e41c1388162849db82fdd11c81e8c218500258ba data/artifacts/loot_tables/inject/entities/cow.json
 c92bf222b53c211c39be9e7f3233a200fac4236c data/artifacts/tags/items/artifacts.json
 d3247c9cf9ab8deabe7e5513cde72c97a5ab8002 data/curios/tags/items/belt.json
 780e1301f1d02678c169e3f3f7bb363a8355a0af data/curios/tags/items/curio.json

@@ -44,7 +44,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/entities/cow", LootTable.builder().addLootPool(
                 LootPool.builder()
                         .name("main")
-                        .acceptCondition(RandomChance.builder(0.002F))
+                        .acceptCondition(RandomChance.builder(0.0025F))
                         .addEntry(itemEntry(ModItems.EVERLASTING_BEEF.get(), 1)
                                 .acceptFunction(
                                         Smelt.func_215953_b().acceptCondition(

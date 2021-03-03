@@ -49,7 +49,7 @@ public class CloudInABottleItem extends CurioItem {
         upwardsMotion *= player.isSprinting() ? 1.5 : 1;
 
         Vector3d motion = player.getMotion();
-        double motionMultiplier = player.isSprinting() ? 0.65 : 0;
+        double motionMultiplier = player.isSprinting() ? 0.5 : 0;
         float direction = (float) (player.rotationYaw * Math.PI / 180);
         player.setMotion(player.getMotion().add(
                 -MathHelper.sin(direction) * motionMultiplier,
