@@ -17,7 +17,7 @@ public class ClientConfig {
                 .translation(Artifacts.MODID + ".config.modify_hurt_sounds")
                 .define("modify_hurt_sounds", true);
         showFirstPersonGloves = builder
-                .comment("Whether models for gloves should display on the player's hand in in first person")
+                .comment("Whether models for gloves should display on the player's hand in first person")
                 .translation(Artifacts.MODID + ".config.showFirstPersonGloves")
                 .define("show_first_person_glove", true);
         showTooltips = builder
