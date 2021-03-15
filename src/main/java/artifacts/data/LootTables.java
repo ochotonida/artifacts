@@ -2,6 +2,7 @@ package artifacts.data;
 
 import artifacts.Artifacts;
 import artifacts.common.init.ModItems;
+import artifacts.common.init.ModLootTables;
 import com.google.common.base.Preconditions;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.criterion.EntityFlagsPredicate;
@@ -386,9 +387,10 @@ public class LootTables extends LootTableProvider {
     }
 
     private void addLootTable(String location, LootTable.Builder lootTable, LootParameterSet lootParameterSet) {
-        if (location.startsWith("inject")) {
-            ResourceLocation lootTableLocation = new ResourceLocation(location.replaceFirst("inject", "loot_tables") + ".json");
-            Preconditions.checkArgument(existingFileHelper.exists(lootTableLocation, ResourcePackType.SERVER_DATA), "Loot table %s does not exist in any known data pack", lootTableLocation);
+        if (location.startsWith("inject/")) {
+            String actualLocation = location.replace("inject/", "");
+            Preconditions.checkArgument(existingFileHelper.exists(new ResourceLocation("loot_tables/" + actualLocation + ".json"), ResourcePackType.SERVER_DATA), "Loot table %s does not exist in any known data pack", actualLocation);
+            Preconditions.checkArgument(ModLootTables.LootTableEvents.LOOT_TABLE_LOCATIONS.contains(actualLocation), "Loot table %s does not exist in list of injected loot tables", actualLocation);
         }
         tables.add(Pair.of(() -> lootBuilder -> lootBuilder.accept(new ResourceLocation(Artifacts.MODID, location), lootTable), lootParameterSet));
     }
