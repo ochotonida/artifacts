@@ -43,7 +43,10 @@ public class EntityKillTrackerCapability {
         public void readNBT(Capability<IEntityKillTracker> capability, IEntityKillTracker instance, Direction side, INBT nbt) {
             instance.clear();
             for (INBT type : (ListNBT) nbt) {
-                instance.addEntityTypes(ForgeRegistries.ENTITIES.getValue(new ResourceLocation(type.getString())));
+                ResourceLocation entityType = new ResourceLocation(type.getString());
+                if (ForgeRegistries.ENTITIES.containsKey(entityType)) {
+                    instance.addEntityType(ForgeRegistries.ENTITIES.getValue(entityType));
+                }
             }
         }
     }
