@@ -68,7 +68,7 @@ public class EntityKillTrackerCapability {
             if (event.getSource().getTrueSource() instanceof PlayerEntity) {
                 PlayerEntity player = ((PlayerEntity) event.getSource().getTrueSource());
                 player.getCapability(INSTANCE).ifPresent(
-                        tracker -> tracker.addEntityTypes(event.getEntityLiving().getType())
+                        tracker -> tracker.addEntityType(event.getEntityLiving().getType())
                 );
             }
         }
