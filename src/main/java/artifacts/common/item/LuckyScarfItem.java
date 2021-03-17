@@ -68,7 +68,7 @@ public class LuckyScarfItem extends ArtifactItem {
         protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
             ItemStack tool = context.get(LootParameters.TOOL);
 
-            if (tool == null || tool.getOrCreateTag().getBoolean("HasAppliedFortuneBonus")) {
+            if (tool == null || (tool.hasTag() && tool.getTag().getBoolean("HasAppliedFortuneBonus"))) {
                 return generatedLoot;
             }
 
