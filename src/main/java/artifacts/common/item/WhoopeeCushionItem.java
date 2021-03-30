@@ -20,14 +20,14 @@ public class WhoopeeCushionItem extends CurioItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (!entity.world.isRemote()) {
+        if (!entity.level.isClientSide()) {
             CompoundNBT tag = stack.getOrCreateTag();
-            if (tag.getBoolean("HasFarted") && !entity.isSneaking()) {
+            if (tag.getBoolean("HasFarted") && !entity.isShiftKeyDown()) {
                 tag.putBoolean("HasFarted", false);
-            } else if (!tag.getBoolean("HasFarted") && entity.isSneaking()) {
+            } else if (!tag.getBoolean("HasFarted") && entity.isShiftKeyDown()) {
                 tag.putBoolean("HasFarted", true);
-                if (entity.getRNG().nextInt(8) == 0) {
-                    entity.world.playSound(null, entity.getPosX(), entity.getPosY(), entity.getPosZ(), ModSoundEvents.FART.get(), SoundCategory.PLAYERS, 1, 0.9F + entity.getRNG().nextFloat() * 0.2F);
+                if (entity.getRandom().nextInt(8) == 0) {
+                    entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), ModSoundEvents.FART.get(), SoundCategory.PLAYERS, 1, 0.9F + entity.getRandom().nextFloat() * 0.2F);
                 }
             }
         }

@@ -15,11 +15,11 @@ public class EverlastingFoodItem extends ArtifactItem {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity entity) {
-        if (isFood()) {
-            entity.onFoodEaten(world, stack.copy());
-            if (!world.isRemote && entity instanceof PlayerEntity) {
-                ((PlayerEntity) entity).getCooldownTracker().setCooldown(this, Config.everlastingFoodCooldown);
+    public ItemStack finishUsingItem(ItemStack stack, World world, LivingEntity entity) {
+        if (isEdible()) {
+            entity.eat(world, stack.copy());
+            if (!world.isClientSide && entity instanceof PlayerEntity) {
+                ((PlayerEntity) entity).getCooldowns().addCooldown(this, Config.everlastingFoodCooldown);
             }
         }
         return stack;

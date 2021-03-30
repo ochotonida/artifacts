@@ -26,21 +26,21 @@ public class ObsidianSkullItem extends CurioItem {
     }
 
     public void onLivingHurt(LivingHurtEvent event) {
-        if (!event.getEntity().world.isRemote
+        if (!event.getEntity().level.isClientSide
                 && event.getAmount() >= 1
                 && (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA)
                 && event.getEntity() instanceof PlayerEntity) {
 
-            if (!((PlayerEntity) event.getEntity()).getCooldownTracker().hasCooldown(this)) {
-                event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 600, 0, false, true));
-                ((PlayerEntity) event.getEntity()).getCooldownTracker().setCooldown(this, 1200);
+            if (!((PlayerEntity) event.getEntity()).getCooldowns().isOnCooldown(this)) {
+                event.getEntityLiving().addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 600, 0, false, true));
+                ((PlayerEntity) event.getEntity()).getCooldowns().addCooldown(this, 1200);
             }
         }
     }
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1, 1);
+        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_IRON, 1, 1);
     }
 
     @Override

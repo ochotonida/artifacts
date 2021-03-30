@@ -6,6 +6,9 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.renderer.RenderState.TextureState;
+import net.minecraft.client.renderer.RenderType.State;
+
 public abstract class RenderTypes extends RenderType {
 
     private RenderTypes(String name, VertexFormat fmt, int glMode, int size, boolean doCrumbling, boolean depthSorting, Runnable onEnable, Runnable onDisable) {
@@ -14,14 +17,14 @@ public abstract class RenderTypes extends RenderType {
     }
 
     public static RenderType unlit(ResourceLocation textureLocation) {
-        State renderState = State.getBuilder()
-                .texture(new TextureState(textureLocation, false, false))
-                .transparency(NO_TRANSPARENCY)
-                .alpha(DEFAULT_ALPHA)
-                .cull(CULL_DISABLED)
-                .lightmap(LIGHTMAP_ENABLED)
-                .overlay(OVERLAY_ENABLED)
-                .build(true);
-        return makeType("artifacts_entity_unlit", DefaultVertexFormats.ENTITY, GL11.GL_QUADS, 256, true, false, renderState);
+        State renderState = State.builder()
+                .setTextureState(new TextureState(textureLocation, false, false))
+                .setTransparencyState(NO_TRANSPARENCY)
+                .setAlphaState(DEFAULT_ALPHA)
+                .setCullState(NO_CULL)
+                .setLightmapState(LIGHTMAP)
+                .setOverlayState(OVERLAY)
+                .createCompositeState(true);
+        return create("artifacts_entity_unlit", DefaultVertexFormats.NEW_ENTITY, GL11.GL_QUADS, 256, true, false, renderState);
     }
 }

@@ -32,15 +32,15 @@ public abstract class HurtSoundModifyingItem extends CurioItem {
                     && isHurtSound(event.getSound())
                     && event.getEntity() instanceof LivingEntity
                     && isEquippedBy((LivingEntity) event.getEntity())) {
-                event.getEntity().getEntityWorld().playSound(event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), hurtSound, event.getCategory(), 1, (((LivingEntity) event.getEntity()).getRNG().nextFloat() - ((LivingEntity) event.getEntity()).getRNG().nextFloat()) * 0.2F + 1, false);
+                event.getEntity().getCommandSenderWorld().playLocalSound(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), hurtSound, event.getCategory(), 1, (((LivingEntity) event.getEntity()).getRandom().nextFloat() - ((LivingEntity) event.getEntity()).getRandom().nextFloat()) * 0.2F + 1, false);
             }
         }
 
         private boolean isHurtSound(SoundEvent event) {
-            return event == SoundEvents.ENTITY_PLAYER_HURT
-                    || event == SoundEvents.ENTITY_PLAYER_HURT_DROWN
-                    || event == SoundEvents.ENTITY_PLAYER_HURT_ON_FIRE
-                    || event == SoundEvents.ENTITY_PLAYER_HURT_SWEET_BERRY_BUSH;
+            return event == SoundEvents.PLAYER_HURT
+                    || event == SoundEvents.PLAYER_HURT_DROWN
+                    || event == SoundEvents.PLAYER_HURT_ON_FIRE
+                    || event == SoundEvents.PLAYER_HURT_SWEET_BERRY_BUSH;
         }
     }
 }

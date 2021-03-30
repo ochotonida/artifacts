@@ -25,22 +25,22 @@ public class CrystalHeartItem extends CurioItem {
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1, 1);
+        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_DIAMOND, 1, 1);
     }
 
     @Override
     public void onEquip(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (!entity.world.isRemote()) {
+        if (!entity.level.isClientSide()) {
             ModifiableAttributeInstance health = entity.getAttribute(Attributes.MAX_HEALTH);
             if (health != null && !health.hasModifier(HEALTH_BONUS)) {
-                health.applyPersistentModifier(HEALTH_BONUS);
+                health.addPermanentModifier(HEALTH_BONUS);
             }
         }
     }
 
     @Override
     public void onUnequip(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (!entity.world.isRemote()) {
+        if (!entity.level.isClientSide()) {
             ModifiableAttributeInstance health = entity.getAttribute(Attributes.MAX_HEALTH);
             if (health != null && health.hasModifier(HEALTH_BONUS)) {
                 health.removeModifier(HEALTH_BONUS);

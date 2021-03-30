@@ -38,14 +38,14 @@ public class RunningShoesItem extends CurioItem {
         ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
         if (livingEntity.isSprinting()) {
             if (!movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
-                movementSpeed.applyNonPersistentModifier(RUNNING_SHOES_SPEED_BOOST);
+                movementSpeed.addTransientModifier(RUNNING_SHOES_SPEED_BOOST);
             }
             if (livingEntity instanceof PlayerEntity) {
-                livingEntity.stepHeight = Math.max(livingEntity.stepHeight, 1.1F);
+                livingEntity.maxUpStep = Math.max(livingEntity.maxUpStep, 1.1F);
             }
         } else if (movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
             movementSpeed.removeModifier(RUNNING_SHOES_SPEED_BOOST);
-            livingEntity.stepHeight = 0.6F;
+            livingEntity.maxUpStep = 0.6F;
         }
     }
 
@@ -55,7 +55,7 @@ public class RunningShoesItem extends CurioItem {
         ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
         if (movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
             movementSpeed.removeModifier(RUNNING_SHOES_SPEED_BOOST);
-            livingEntity.stepHeight = 0.6F;
+            livingEntity.maxUpStep = 0.6F;
         }
     }
 }

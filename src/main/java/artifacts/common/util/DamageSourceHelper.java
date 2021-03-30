@@ -11,8 +11,8 @@ public class DamageSourceHelper {
 
     @Nullable
     public static LivingEntity getAttacker(DamageSource source) {
-        if (source.getTrueSource() instanceof LivingEntity) {
-            return (LivingEntity) source.getTrueSource();
+        if (source.getEntity() instanceof LivingEntity) {
+            return (LivingEntity) source.getEntity();
         }
         return null;
     }
@@ -20,6 +20,6 @@ public class DamageSourceHelper {
     public static boolean isMeleeAttack(DamageSource source) {
         return source instanceof EntityDamageSource
                 && !(source instanceof IndirectEntityDamageSource)
-                && !((EntityDamageSource) source).getIsThornsDamage();
+                && !((EntityDamageSource) source).isThorns();
     }
 }

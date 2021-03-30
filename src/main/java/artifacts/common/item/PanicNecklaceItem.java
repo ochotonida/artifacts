@@ -24,14 +24,14 @@ public class PanicNecklaceItem extends CurioItem {
     }
 
     public void onLivingHurt(LivingHurtEvent event) {
-        if (!event.getEntity().world.isRemote && event.getAmount() >= 1) {
-            event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, 160, 0, false, false));
+        if (!event.getEntity().level.isClientSide && event.getAmount() >= 1) {
+            event.getEntityLiving().addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 160, 0, false, false));
         }
     }
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1, 1);
+        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_DIAMOND, 1, 1);
     }
 
     @Override

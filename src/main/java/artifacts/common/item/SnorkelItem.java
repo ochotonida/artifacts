@@ -17,8 +17,8 @@ public class SnorkelItem extends CurioItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
-            livingEntity.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 39, 0, true, false));
+        if (!livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
+            livingEntity.addEffect(new EffectInstance(Effects.WATER_BREATHING, 39, 0, true, false));
         }
     }
 

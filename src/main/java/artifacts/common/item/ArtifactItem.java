@@ -15,10 +15,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
+import net.minecraft.item.Item.Properties;
+
 public abstract class ArtifactItem extends Item {
 
     public ArtifactItem(Properties properties) {
-        super(properties.maxStackSize(1).group(ModItems.CREATIVE_TAB).rarity(Rarity.RARE).isImmuneToFire());
+        super(properties.stacksTo(1).tab(ModItems.CREATIVE_TAB).rarity(Rarity.RARE).fireResistant());
     }
 
     public ArtifactItem() {
@@ -27,9 +29,9 @@ public abstract class ArtifactItem extends Item {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
         if (Config.showTooltips) {
-            tooltip.add(new TranslationTextComponent(getTranslationKey() + ".tooltip").mergeStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip").withStyle(TextFormatting.GRAY));
         }
     }
 }

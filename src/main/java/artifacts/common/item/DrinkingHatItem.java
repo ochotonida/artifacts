@@ -34,28 +34,28 @@ public class DrinkingHatItem extends CurioItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
         if (Config.showTooltips) {
             if (this != ModItems.PLASTIC_DRINKING_HAT.get()) {
-                tooltip.add(new TranslationTextComponent(ModItems.PLASTIC_DRINKING_HAT.get().getTranslationKey() + ".tooltip").mergeStyle(TextFormatting.GRAY));
+                tooltip.add(new TranslationTextComponent(ModItems.PLASTIC_DRINKING_HAT.get().getDescriptionId() + ".tooltip").withStyle(TextFormatting.GRAY));
             }
         }
-        super.addInformation(stack, world, tooltip, flags);
+        super.appendHoverText(stack, world, tooltip, flags);
     }
 
     public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-        if (event.getItem().getUseAction() == UseAction.DRINK) {
+        if (event.getItem().getUseAnimation() == UseAction.DRINK) {
             event.setDuration(event.getDuration() / 4);
         }
     }
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
+        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_LEATHER, 1, 1);
     }
 
     protected SoundEvent getEquipSound() {
-        return SoundEvents.ITEM_BOTTLE_FILL;
+        return SoundEvents.BOTTLE_FILL;
     }
 
     @Override

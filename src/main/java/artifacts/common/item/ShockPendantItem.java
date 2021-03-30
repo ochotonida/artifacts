@@ -17,7 +17,7 @@ public class ShockPendantItem extends PendantItem {
 
     @Override
     public void onLivingHurt(LivingHurtEvent event) {
-        if (!event.getEntity().world.isRemote
+        if (!event.getEntity().level.isClientSide
                 && event.getAmount() >= 1
                 && event.getSource() == DamageSource.LIGHTNING_BOLT) {
             event.setCanceled(true);
@@ -27,12 +27,12 @@ public class ShockPendantItem extends PendantItem {
 
     @Override
     public void applyEffect(LivingEntity target, LivingEntity attacker) {
-        if (attacker.world.canSeeSky(new BlockPos(attacker.getPositionVec())) && target.getRNG().nextFloat() < 0.25F) {
-            LightningBoltEntity lightningBolt = EntityType.LIGHTNING_BOLT.create(attacker.world);
+        if (attacker.level.canSeeSky(new BlockPos(attacker.position())) && target.getRandom().nextFloat() < 0.25F) {
+            LightningBoltEntity lightningBolt = EntityType.LIGHTNING_BOLT.create(attacker.level);
             if (lightningBolt != null) {
-                lightningBolt.moveForced(Vector3d.copyCenteredHorizontally(attacker.getPosition()));
-                lightningBolt.setCaster(attacker instanceof ServerPlayerEntity ? (ServerPlayerEntity) attacker : null);
-                attacker.world.addEntity(lightningBolt);
+                lightningBolt.moveTo(Vector3d.atBottomCenterOf(attacker.blockPosition()));
+                lightningBolt.setCause(attacker instanceof ServerPlayerEntity ? (ServerPlayerEntity) attacker : null);
+                attacker.level.addFreshEntity(lightningBolt);
             }
         }
     }

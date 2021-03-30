@@ -21,14 +21,14 @@ public class PocketPistonItem extends GloveItem {
     }
 
     public void onLivingAttack(LivingAttackEvent event) {
-        LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
+        LivingEntity attacker = (LivingEntity) event.getSource().getEntity();
         // noinspection ConstantConditions
-        event.getEntityLiving().applyKnockback(1.5F, MathHelper.sin((float) (attacker.rotationYaw * (Math.PI / 180))), -MathHelper.cos((float) (attacker.rotationYaw * (Math.PI / 180))));
+        event.getEntityLiving().knockback(1.5F, MathHelper.sin((float) (attacker.yRot * (Math.PI / 180))), -MathHelper.cos((float) (attacker.yRot * (Math.PI / 180))));
     }
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.BLOCK_PISTON_EXTEND, 1, 1);
+        return new ICurio.SoundInfo(SoundEvents.PISTON_EXTEND, 1, 1);
     }
 
     @Override

@@ -23,22 +23,22 @@ public class AntidoteVesselItem extends CurioItem {
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_BOTTLE_FILL, 1, 1);
+        return new ICurio.SoundInfo(SoundEvents.BOTTLE_FILL, 1, 1);
     }
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
         Map<Effect, EffectInstance> effects = new HashMap<>();
 
-        entity.getActivePotionMap().forEach((effect, instance) -> {
-            if (!effect.isInstant() && !effect.isBeneficial() && instance.getDuration() > 80) {
+        entity.getActiveEffectsMap().forEach((effect, instance) -> {
+            if (!effect.isInstantenous() && !effect.isBeneficial() && instance.getDuration() > 80) {
                 effects.put(effect, instance);
             }
         });
 
         effects.forEach((effect, instance) -> {
-            entity.removeActivePotionEffect(effect);
-            entity.addPotionEffect(new EffectInstance(effect, 80, instance.getAmplifier(), instance.isAmbient(), instance.doesShowParticles(), instance.isShowIcon()));
+            entity.removeEffectNoUpdate(effect);
+            entity.addEffect(new EffectInstance(effect, 80, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
         });
     }
 

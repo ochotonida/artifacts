@@ -24,7 +24,7 @@ public class MimicRenderer extends MobRenderer<MimicEntity, MimicModel> {
     }
 
     @Override
-    public ResourceLocation getEntityTexture(MimicEntity entity) {
+    public ResourceLocation getTextureLocation(MimicEntity entity) {
         return TEXTURE;
     }
 }
