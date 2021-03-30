@@ -8,10 +8,10 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class MimicModel extends EntityModel<MimicEntity> {
 
-    protected ModelRenderer upperTeeth;
-    protected ModelRenderer lowerTeeth;
-    protected ModelRenderer upperMouthOverlay;
-    protected ModelRenderer lowerMouthOverlay;
+    protected final ModelRenderer upperTeeth;
+    protected final ModelRenderer lowerTeeth;
+    protected final ModelRenderer upperMouthOverlay;
+    protected final ModelRenderer lowerMouthOverlay;
 
     public MimicModel() {
         texWidth = 64;

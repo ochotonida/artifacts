@@ -15,8 +15,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-import net.minecraft.item.Item.Properties;
-
 public abstract class ArtifactItem extends Item {
 
     public ArtifactItem(Properties properties) {

@@ -9,7 +9,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -51,11 +50,7 @@ public class DrinkingHatItem extends CurioItem {
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_LEATHER, 1, 1);
-    }
-
-    protected SoundEvent getEquipSound() {
-        return SoundEvents.BOTTLE_FILL;
+        return new ICurio.SoundInfo(SoundEvents.BOTTLE_FILL, 1, 1);
     }
 
     @Override

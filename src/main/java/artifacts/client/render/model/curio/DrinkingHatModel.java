@@ -6,7 +6,7 @@ import net.minecraft.entity.LivingEntity;
 
 public class DrinkingHatModel extends BipedModel<LivingEntity> {
 
-    protected ModelRenderer hatShade;
+    protected final ModelRenderer hatShade;
 
     public DrinkingHatModel() {
         super(0.5F, 0, 64, 64);

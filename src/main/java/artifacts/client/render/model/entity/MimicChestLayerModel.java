@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class MimicChestLayerModel extends EntityModel<MimicEntity> {
 
-    protected ModelRenderer bottom;
-    protected ModelRenderer lid;
-    protected ModelRenderer latch;
+    protected final ModelRenderer bottom;
+    protected final ModelRenderer lid;
+    protected final ModelRenderer latch;
 
     public MimicChestLayerModel() {
         bottom = new ModelRenderer(64, 64, 0, 19);

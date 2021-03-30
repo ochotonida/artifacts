@@ -24,8 +24,6 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-import net.minecraft.entity.ai.controller.MovementController.Action;
-
 public class MimicEntity extends MobEntity implements IMob {
 
     public int ticksInAir;
