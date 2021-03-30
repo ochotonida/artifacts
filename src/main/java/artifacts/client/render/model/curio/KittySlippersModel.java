@@ -30,18 +30,18 @@ public class KittySlippersModel extends BipedModel<LivingEntity> {
         bipedLeftLegwear.addBox(-2, 0, -2, 4, 12, 4, 0.75F);
         bipedRightLegwear.addBox(-2, 0, -2, 4, 12, 4, 0.75F);
 
-        bipedLeftLeg.addChild(head1);
-        bipedRightLeg.addChild(head2);
-        bipedLeftLeg.addChild(nose1);
-        bipedRightLeg.addChild(nose2);
-        bipedLeftLeg.addChild(earLeft1);
-        bipedLeftLeg.addChild(earRight1);
-        bipedRightLeg.addChild(earLeft2);
-        bipedRightLeg.addChild(earRight2);
-        bipedLeftLeg.addChild(bipedLeftLegwear);
-        bipedRightLeg.addChild(bipedRightLegwear);
+        leftLeg.addChild(head1);
+        rightLeg.addChild(head2);
+        leftLeg.addChild(nose1);
+        rightLeg.addChild(nose2);
+        leftLeg.addChild(earLeft1);
+        leftLeg.addChild(earRight1);
+        rightLeg.addChild(earLeft2);
+        rightLeg.addChild(earRight2);
+        leftLeg.addChild(bipedLeftLegwear);
+        rightLeg.addChild(bipedRightLegwear);
 
-        setVisible(false);
-        bipedLeftLeg.showModel = bipedRightLeg.showModel = true;
+        setAllVisible(false);
+        leftLeg.visible = rightLeg.visible = true;
     }
 }

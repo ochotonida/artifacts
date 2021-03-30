@@ -28,10 +28,10 @@ public class DoubleJumpPacket {
                 CloudInABottleItem.jump(player);
 
                 for (int i = 0; i < 20; ++i) {
-                    double motionX = player.getRNG().nextGaussian() * 0.02;
-                    double motionY = player.getRNG().nextGaussian() * 0.02 + 0.20;
-                    double motionZ = player.getRNG().nextGaussian() * 0.02;
-                    player.getServerWorld().spawnParticle(ParticleTypes.POOF, player.getPosX(), player.getPosY(), player.getPosZ(), 1, motionX, motionY, motionZ, 0.15);
+                    double motionX = player.getRandom().nextGaussian() * 0.02;
+                    double motionY = player.getRandom().nextGaussian() * 0.02 + 0.20;
+                    double motionZ = player.getRandom().nextGaussian() * 0.02;
+                    player.getLevel().sendParticles(ParticleTypes.POOF, player.getX(), player.getY(), player.getZ(), 1, motionX, motionY, motionZ, 0.15);
                 }
             });
         }

@@ -12,7 +12,7 @@ public class ThornPendantItem extends PendantItem {
     @Override
     public void applyEffect(LivingEntity target, LivingEntity attacker) {
         if (attacker.attackable() && random.nextFloat() < 0.5F) {
-            attacker.attackEntityFrom(DamageSource.causeThornsDamage(target), 2 + target.getRNG().nextInt(5));
+            attacker.hurt(DamageSource.thorns(target), 2 + target.getRandom().nextInt(5));
         }
     }
 }

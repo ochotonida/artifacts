@@ -28,8 +28,8 @@ public class VillagerHatItem extends CurioItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
-            livingEntity.addPotionEffect(new EffectInstance(Effects.HERO_OF_THE_VILLAGE, 39, 1, true, false));
+        if (!livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
+            livingEntity.addEffect(new EffectInstance(Effects.HERO_OF_THE_VILLAGE, 39, 1, true, false));
         }
     }
 }

@@ -12,17 +12,17 @@ public class GloveModel extends PlayerModel<LivingEntity> {
     public GloveModel(boolean smallArms) {
         super(0.5F, smallArms);
 
-        setVisible(false);
+        setAllVisible(false);
     }
 
     public void renderHand(boolean mainHand, MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        boolean isRightHand = (Minecraft.getInstance().gameSettings.mainHand == HandSide.LEFT) != mainHand;
-        bipedRightArmwear.copyModelAngles(bipedRightArm);
-        bipedLeftArmwear.copyModelAngles(bipedLeftArm);
-        bipedLeftArm.showModel = !isRightHand;
-        bipedLeftArmwear.showModel = !isRightHand;
-        bipedRightArm.showModel = isRightHand;
-        bipedRightArmwear.showModel = isRightHand;
-        render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+        boolean isRightHand = (Minecraft.getInstance().options.mainHand == HandSide.LEFT) != mainHand;
+        rightSleeve.copyFrom(rightArm);
+        leftSleeve.copyFrom(leftArm);
+        leftArm.visible = !isRightHand;
+        leftSleeve.visible = !isRightHand;
+        rightArm.visible = isRightHand;
+        rightSleeve.visible = isRightHand;
+        renderToBuffer(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

@@ -26,16 +26,16 @@ public class CrossNecklaceItem extends CurioItem {
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1, 1);
+        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_DIAMOND, 1, 1);
     }
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (entity.hurtResistantTime <= 10) {
+        if (entity.invulnerableTime <= 10) {
             setCanApplyBonus(stack, true);
         } else {
             if (canApplyBonus(stack)) {
-                entity.hurtResistantTime += 20;
+                entity.invulnerableTime += 20;
                 setCanApplyBonus(stack, false);
             }
         }

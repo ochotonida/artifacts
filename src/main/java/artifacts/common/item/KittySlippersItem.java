@@ -26,33 +26,33 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/kitty_slippers.png");
 
     public KittySlippersItem() {
-        super(SoundEvents.ENTITY_CAT_HURT);
+        super(SoundEvents.CAT_HURT);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJoinWorld);
         addListener(LivingSetAttackTargetEvent.class, this::onLivingSetAttackTarget, LivingSetAttackTargetEvent::getTarget);
-        addListener(LivingEvent.LivingUpdateEvent.class, this::onLivingUpdate, event -> event.getEntityLiving().getRevengeTarget());
+        addListener(LivingEvent.LivingUpdateEvent.class, this::onLivingUpdate, event -> event.getEntityLiving().getLastHurtByMob());
     }
 
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
         if (event.getEntity() instanceof CreeperEntity) {
-            ((CreeperEntity) event.getEntity()).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreeperEntity) event.getEntity(), PlayerEntity.class, (entity) -> entity != null && isEquippedBy(entity), 6, 1, 1.3, EntityPredicates.CAN_AI_TARGET::test));
+            ((CreeperEntity) event.getEntity()).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreeperEntity) event.getEntity(), PlayerEntity.class, (entity) -> entity != null && isEquippedBy(entity), 6, 1, 1.3, EntityPredicates.NO_CREATIVE_OR_SPECTATOR::test));
         }
     }
 
     public void onLivingSetAttackTarget(LivingSetAttackTargetEvent event) {
         if (event.getEntityLiving() instanceof CreeperEntity) {
-            ((MobEntity) event.getEntityLiving()).setAttackTarget(null);
+            ((MobEntity) event.getEntityLiving()).setTarget(null);
         }
     }
 
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntityLiving() instanceof CreeperEntity) {
-            event.getEntityLiving().setRevengeTarget(null);
+            event.getEntityLiving().setLastHurtByMob(null);
         }
     }
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ENTITY_CAT_AMBIENT, 1, 1);
+        return new ICurio.SoundInfo(SoundEvents.CAT_AMBIENT, 1, 1);
     }
 
     @Override

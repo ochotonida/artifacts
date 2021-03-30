@@ -34,14 +34,14 @@ public class FireGauntletItem extends GloveItem {
     }
 
     public void onLivingHurt(LivingHurtEvent event) {
-        if (DamageSourceHelper.isMeleeAttack(event.getSource()) && !event.getEntity().isImmuneToFire()) {
-            event.getEntity().setFire(8);
+        if (DamageSourceHelper.isMeleeAttack(event.getSource()) && !event.getEntity().fireImmune()) {
+            event.getEntity().setSecondsOnFire(8);
         }
     }
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1, 1);
+        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_IRON, 1, 1);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class FireGauntletItem extends GloveItem {
         super.render(identifier, index, matrixStack, buffer, light, entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, stack);
         boolean smallArms = hasSmallArms(entity);
         GloveModel model = getModel(smallArms);
-        IVertexBuilder builder = ItemRenderer.getBuffer(buffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
+        IVertexBuilder builder = ItemRenderer.getFoilBuffer(buffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
         model.renderHand(index % 2 == 0, matrixStack, builder, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 
@@ -62,10 +62,10 @@ public class FireGauntletItem extends GloveItem {
             boolean smallArms = hasSmallArms(player);
             GloveModel model = getModel(smallArms);
 
-            ModelRenderer arm = side == HandSide.LEFT ? model.bipedLeftArm : model.bipedRightArm;
-            ModelRenderer armWear = side == HandSide.LEFT ? model.bipedLeftArmwear : model.bipedRightArmwear;
+            ModelRenderer arm = side == HandSide.LEFT ? model.leftArm : model.rightArm;
+            ModelRenderer armWear = side == HandSide.LEFT ? model.leftSleeve : model.rightSleeve;
 
-            IVertexBuilder builder = ItemRenderer.getBuffer(buffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
+            IVertexBuilder builder = ItemRenderer.getFoilBuffer(buffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
             arm.render(matrixStack, builder, 0xF000F0, OverlayTexture.NO_OVERLAY);
             armWear.render(matrixStack, builder, 0xF000F0, OverlayTexture.NO_OVERLAY);
         }
