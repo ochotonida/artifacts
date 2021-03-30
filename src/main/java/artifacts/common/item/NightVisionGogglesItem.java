@@ -24,8 +24,8 @@ public class NightVisionGogglesItem extends CurioItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
-            livingEntity.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 319, 0, true, false));
+        if (!livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
+            livingEntity.addEffect(new EffectInstance(Effects.NIGHT_VISION, 319, 0, true, false));
         }
     }
 
@@ -43,7 +43,7 @@ public class NightVisionGogglesItem extends CurioItem {
     @Override
     public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, ItemStack stack) {
         super.render(identifier, index, matrixStack, renderTypeBuffer, light, entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, stack);
-        IVertexBuilder buffer = ItemRenderer.getBuffer(renderTypeBuffer, RenderTypes.unlit(TEXTURE_GLOW), false, stack.hasEffect());
-        getModel().render(matrixStack, buffer, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        IVertexBuilder buffer = ItemRenderer.getFoilBuffer(renderTypeBuffer, RenderTypes.unlit(TEXTURE_GLOW), false, stack.hasFoil());
+        getModel().renderToBuffer(matrixStack, buffer, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 }

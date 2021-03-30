@@ -31,7 +31,7 @@ public class UmbrellaItem extends ArtifactItem {
     private static final AttributeModifier UMBRELLA_SLOW_FALLING = new AttributeModifier(UUID.fromString("a7a25453-2065-4a96-bc83-df600e13f390"), "artifacts:umbrella_slow_falling", -0.875, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
     public UmbrellaItem() {
-        DispenserBlock.registerDispenseBehavior(this, ArmorItem.DISPENSER_BEHAVIOR);
+        DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
         MinecraftForge.EVENT_BUS.addListener(this::onLivingUpdate);
     }
 
@@ -39,11 +39,11 @@ public class UmbrellaItem extends ArtifactItem {
         LivingEntity entity = event.getEntityLiving();
         ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
         if (gravity != null) {
-            if (!entity.isOnGround() && !entity.isInWater() && event.getEntity().getMotion().y < 0 && !entity.isPotionActive(Effects.SLOW_FALLING)
-                    && (entity.getHeldItemOffhand().getItem() == this
-                    || entity.getHeldItemMainhand().getItem() == this) && !(entity.isHandActive() && !entity.getActiveItemStack().isEmpty() && entity.getActiveItemStack().getItem().getUseAction(entity.getActiveItemStack()) == UseAction.BLOCK)) {
+            if (!entity.isOnGround() && !entity.isInWater() && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(Effects.SLOW_FALLING)
+                    && (entity.getOffhandItem().getItem() == this
+                    || entity.getMainHandItem().getItem() == this) && !(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAction.BLOCK)) {
                 if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                    gravity.applyNonPersistentModifier(UMBRELLA_SLOW_FALLING);
+                    gravity.addTransientModifier(UMBRELLA_SLOW_FALLING);
                 }
                 entity.fallDistance = 0;
             } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
@@ -57,7 +57,7 @@ public class UmbrellaItem extends ArtifactItem {
         return true;
     }
 
-    public UseAction getUseAction(ItemStack stack) {
+    public UseAction getUseAnimation(ItemStack stack) {
         return UseAction.BLOCK;
     }
 
@@ -65,10 +65,10 @@ public class UmbrellaItem extends ArtifactItem {
         return 72000;
     }
 
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
-        player.setActiveHand(hand);
-        return ActionResult.resultConsume(itemstack);
+    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        player.startUsingItem(hand);
+        return ActionResult.consume(itemstack);
     }
 
     @SuppressWarnings("unused")
@@ -77,18 +77,18 @@ public class UmbrellaItem extends ArtifactItem {
 
         @SubscribeEvent
         public static void onLivingRender(RenderLivingEvent.Pre<?, ?> event) {
-            if (!(event.getRenderer().getEntityModel() instanceof BipedModel)) {
+            if (!(event.getRenderer().getModel() instanceof BipedModel)) {
                 return;
             }
             LivingEntity entity = event.getEntity();
-            BipedModel<?> model = (BipedModel<?>) event.getRenderer().getEntityModel();
-            if (!(entity.isHandActive() && !entity.getActiveItemStack().isEmpty() && entity.getActiveItemStack().getItem().getUseAction(entity.getActiveItemStack()) == UseAction.BLOCK)) {
-                boolean isHoldingOffHand = entity.getHeldItemOffhand().getItem() instanceof UmbrellaItem;
-                boolean isHoldingMainHand = entity.getHeldItemMainhand().getItem() instanceof UmbrellaItem;
-                if ((isHoldingMainHand && Minecraft.getInstance().gameSettings.mainHand == HandSide.RIGHT) || (isHoldingOffHand && Minecraft.getInstance().gameSettings.mainHand == HandSide.LEFT)) {
+            BipedModel<?> model = (BipedModel<?>) event.getRenderer().getModel();
+            if (!(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAction.BLOCK)) {
+                boolean isHoldingOffHand = entity.getOffhandItem().getItem() instanceof UmbrellaItem;
+                boolean isHoldingMainHand = entity.getMainHandItem().getItem() instanceof UmbrellaItem;
+                if ((isHoldingMainHand && Minecraft.getInstance().options.mainHand == HandSide.RIGHT) || (isHoldingOffHand && Minecraft.getInstance().options.mainHand == HandSide.LEFT)) {
                     model.rightArmPose = BipedModel.ArmPose.THROW_SPEAR;
                 }
-                if ((isHoldingMainHand && Minecraft.getInstance().gameSettings.mainHand == HandSide.LEFT) || (isHoldingOffHand && Minecraft.getInstance().gameSettings.mainHand == HandSide.RIGHT)) {
+                if ((isHoldingMainHand && Minecraft.getInstance().options.mainHand == HandSide.LEFT) || (isHoldingOffHand && Minecraft.getInstance().options.mainHand == HandSide.RIGHT)) {
                     model.leftArmPose = BipedModel.ArmPose.THROW_SPEAR;
                 }
             }

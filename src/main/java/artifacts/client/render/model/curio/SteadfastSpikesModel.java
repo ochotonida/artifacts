@@ -18,15 +18,15 @@ public class SteadfastSpikesModel extends PlayerModel<LivingEntity> {
         clawRight1.addBox(-1.5F, 9, -7, 1, 3, 5);
         clawLeft2.addBox(0.5F, 9, -7, 1, 3, 5);
         clawRight2.addBox(0.5F, 9, -7, 1, 3, 5);
-        bipedLeftLeg.addChild(clawLeft1);
-        bipedRightLeg.addChild(clawRight1);
-        bipedLeftLeg.addChild(clawLeft2);
-        bipedRightLeg.addChild(clawRight2);
+        leftLeg.addChild(clawLeft1);
+        rightLeg.addChild(clawRight1);
+        leftLeg.addChild(clawLeft2);
+        rightLeg.addChild(clawRight2);
 
-        setVisible(false);
-        bipedLeftLeg.showModel = true;
-        bipedRightLeg.showModel = true;
-        bipedLeftLegwear.showModel = true;
-        bipedRightLegwear.showModel = true;
+        setAllVisible(false);
+        leftLeg.visible = true;
+        rightLeg.visible = true;
+        leftPants.visible = true;
+        rightPants.visible = true;
     }
 }

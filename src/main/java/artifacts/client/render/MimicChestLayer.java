@@ -32,29 +32,29 @@ public class MimicChestLayer extends LayerRenderer<MimicEntity, MimicModel> {
         model = new MimicChestLayerModel();
 
         if (ModList.get().isLoaded("lootr")) {
-            material = new RenderMaterial(AtlasTexture.LOCATION_BLOCKS_TEXTURE, new ResourceLocation("lootr", "chest"));
+            material = new RenderMaterial(AtlasTexture.LOCATION_BLOCKS, new ResourceLocation("lootr", "chest"));
         } else {
             Calendar calendar = Calendar.getInstance();
             boolean isChristmas = calendar.get(Calendar.MONTH) + 1 == 12 && calendar.get(Calendar.DATE) >= 24 && calendar.get(Calendar.DATE) <= 26;
-            material = Atlases.getChestMaterial(null, ChestType.SINGLE, isChristmas);
+            material = Atlases.chooseMaterial(null, ChestType.SINGLE, isChristmas);
         }
     }
 
     @Override
     public void render(MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLight, MimicEntity mimic, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         if (!mimic.isInvisible()) {
-            matrixStack.push();
+            matrixStack.pushPose();
 
-            matrixStack.rotate(Vector3f.XP.rotationDegrees(180));
+            matrixStack.mulPose(Vector3f.XP.rotationDegrees(180));
             matrixStack.translate(-0.5, -1.5, -0.5);
 
-            getEntityModel().copyModelAttributesTo(model);
-            model.setLivingAnimations(mimic, limbSwing, limbSwingAmount, partialTicks);
-            model.setRotationAngles(mimic, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-            IVertexBuilder builder = material.getBuffer(buffer, RenderType::getEntityCutout);
-            model.render(matrixStack, builder, packedLight, LivingRenderer.getPackedOverlay(mimic, 0), 1, 1, 1, 1);
+            getParentModel().copyPropertiesTo(model);
+            model.prepareMobModel(mimic, limbSwing, limbSwingAmount, partialTicks);
+            model.setupAnim(mimic, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+            IVertexBuilder builder = material.buffer(buffer, RenderType::entityCutout);
+            model.renderToBuffer(matrixStack, builder, packedLight, LivingRenderer.getOverlayCoords(mimic, 0), 1, 1, 1, 1);
 
-            matrixStack.pop();
+            matrixStack.popPose();
         }
     }
 }

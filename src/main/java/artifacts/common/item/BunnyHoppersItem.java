@@ -19,7 +19,7 @@ public class BunnyHoppersItem extends HurtSoundModifyingItem {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/bunny_hoppers.png");
 
     public BunnyHoppersItem() {
-        super(SoundEvents.ENTITY_RABBIT_HURT);
+        super(SoundEvents.RABBIT_HURT);
         addListener(EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
     }
 
@@ -29,8 +29,8 @@ public class BunnyHoppersItem extends HurtSoundModifyingItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!livingEntity.world.isRemote && livingEntity.ticksExisted % 15 == 0) {
-            livingEntity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 39, 1, true, false));
+        if (!livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
+            livingEntity.addEffect(new EffectInstance(Effects.JUMP, 39, 1, true, false));
         }
     }
 

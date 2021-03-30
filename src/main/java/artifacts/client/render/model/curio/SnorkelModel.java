@@ -8,11 +8,11 @@ import net.minecraft.entity.LivingEntity;
 public class SnorkelModel extends BipedModel<LivingEntity> {
 
     public SnorkelModel() {
-        super(RenderType::getEntityTranslucent, 0.5F, 0, 64, 64);
+        super(RenderType::entityTranslucent, 0.5F, 0, 64, 64);
 
-        setVisible(false);
-        bipedHead.showModel = true;
-        bipedHeadwear.showModel = true;
+        setAllVisible(false);
+        head.visible = true;
+        hat.visible = true;
 
         ModelRenderer snorkelMouthPiece = new ModelRenderer(this, 0, 46);
         ModelRenderer snorkelTube = new ModelRenderer(this, 0, 32);
@@ -20,9 +20,9 @@ public class SnorkelModel extends BipedModel<LivingEntity> {
         snorkelMouthPiece.addBox(-2, -1.5F, -6, 8, 2, 2);
         snorkelTube.addBox(4.01F, -5, -3, 2, 2, 12);
 
-        bipedHead.addChild(snorkelMouthPiece);
-        bipedHead.addChild(snorkelTube);
+        head.addChild(snorkelMouthPiece);
+        head.addChild(snorkelTube);
 
-        snorkelTube.rotateAngleX = 0.7853F;
+        snorkelTube.xRot = 0.7853F;
     }
 }

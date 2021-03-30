@@ -71,11 +71,11 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
     @Override
     public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, ItemStack stack) {
         BipedModel<LivingEntity> model = getModel();
-        model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
+        model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
         ICurio.RenderHelper.followBodyRotations(entity, model);
-        IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, model.getRenderType(getTexture()), false, stack.hasEffect());
-        model.render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        IVertexBuilder vertexBuilder = ItemRenderer.getFoilBuffer(renderTypeBuffer, model.renderType(getTexture()), false, stack.hasFoil());
+        model.renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 
     @OnlyIn(Dist.CLIENT)

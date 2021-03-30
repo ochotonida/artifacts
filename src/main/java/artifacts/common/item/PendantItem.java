@@ -25,7 +25,7 @@ public abstract class PendantItem extends CurioItem {
 
     public void onLivingHurt(LivingHurtEvent event) {
         LivingEntity attacker = DamageSourceHelper.getAttacker(event.getSource());
-        if (!event.getEntity().world.isRemote()
+        if (!event.getEntity().level.isClientSide()
                 && event.getAmount() >= 1
                 && attacker != null) {
             applyEffect(event.getEntityLiving(), attacker);
@@ -36,7 +36,7 @@ public abstract class PendantItem extends CurioItem {
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1, 1);
+        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_DIAMOND, 1, 1);
     }
 
     @Override

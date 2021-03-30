@@ -47,22 +47,22 @@ public class UniversalAttractorItem extends CurioItem {
 
         int cooldown = getCooldown(stack);
         if (cooldown <= 0) {
-            Vector3d playerPos = entity.getPositionVec().add(0, 0.75, 0);
+            Vector3d playerPos = entity.position().add(0, 0.75, 0);
 
             int range = 5;
-            List<ItemEntity> items = entity.world.getEntitiesWithinAABB(ItemEntity.class, new AxisAlignedBB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
+            List<ItemEntity> items = entity.level.getEntitiesOfClass(ItemEntity.class, new AxisAlignedBB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
             int pulled = 0;
             for (ItemEntity item : items) {
-                if (item.isAlive() && !item.cannotPickup() && !item.getPersistentData().getBoolean("PreventRemoteMovement")) {
+                if (item.isAlive() && !item.hasPickUpDelay() && !item.getPersistentData().getBoolean("PreventRemoteMovement")) {
                     if (pulled++ > 200) {
                         break;
                     }
 
-                    Vector3d motion = playerPos.subtract(item.getPositionVec().add(0, item.getHeight() / 2, 0));
+                    Vector3d motion = playerPos.subtract(item.position().add(0, item.getBbHeight() / 2, 0));
                     if (Math.sqrt(motion.x * motion.x + motion.y * motion.y + motion.z * motion.z) > 1) {
                         motion = motion.normalize();
                     }
-                    item.setMotion(motion.scale(0.6));
+                    item.setDeltaMovement(motion.scale(0.6));
                 }
             }
         } else {

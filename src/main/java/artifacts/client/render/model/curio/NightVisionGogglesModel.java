@@ -9,9 +9,9 @@ public class NightVisionGogglesModel extends BipedModel<LivingEntity> {
     public NightVisionGogglesModel() {
         super(0.5F, 0, 64, 64);
 
-        setVisible(false);
-        bipedHead.showModel = true;
-        bipedHeadwear.showModel = true;
+        setAllVisible(false);
+        head.visible = true;
+        hat.visible = true;
 
         ModelRenderer goggles = new ModelRenderer(this, 0, 37);
         ModelRenderer eyeLeft = new ModelRenderer(this, 0, 32);
@@ -21,8 +21,8 @@ public class NightVisionGogglesModel extends BipedModel<LivingEntity> {
         eyeLeft.addBox(1.5F, -5, -8 + 0.05F, 2, 2, 3);
         eyeRight.addBox(-3.5F, -5, -8 + 0.05F, 2, 2, 3);
 
-        bipedHead.addChild(goggles);
-        bipedHead.addChild(eyeLeft);
-        bipedHead.addChild(eyeRight);
+        head.addChild(goggles);
+        head.addChild(eyeLeft);
+        head.addChild(eyeRight);
     }
 }
