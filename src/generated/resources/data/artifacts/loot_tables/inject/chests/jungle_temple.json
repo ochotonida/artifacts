@@ -6,17 +6,18 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 15,
+          "weight": 2,
           "name": "artifacts:kitty_slippers"
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
           "name": "artifacts:bunny_hoppers"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 80
+          "condition": "minecraft:random_chance",
+          "chance": 0.35
         }
       ]
     }

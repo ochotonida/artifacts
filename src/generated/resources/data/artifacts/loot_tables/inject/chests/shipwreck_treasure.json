@@ -7,56 +7,49 @@
         {
           "type": "minecraft:item",
           "weight": 3,
+          "name": "artifacts:golden_hook"
+        },
+        {
+          "type": "minecraft:item",
           "name": "artifacts:snorkel"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:flippers"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:scarf_of_invisibility"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:steadfast_spikes"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:universal_attractor"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:feral_claws"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:night_vision_goggles"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:obsidian_skull"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:running_shoes"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:golden_hook"
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 75
+          "condition": "minecraft:random_chance",
+          "chance": 0.25
         }
       ]
     }

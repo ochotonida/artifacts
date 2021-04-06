@@ -14,13 +14,13 @@ public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
-        ExistingFileHelper helper = event.getExistingFileHelper();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         if (event.includeServer()) {
-            generator.addProvider(new ItemTags(generator, helper));
-            generator.addProvider(new LootTables(generator));
+            generator.addProvider(new ItemTags(generator, existingFileHelper));
+            generator.addProvider(new LootTables(generator, existingFileHelper));
         }
         if (event.includeClient()) {
-            generator.addProvider(new ItemModels(generator, helper));
+            generator.addProvider(new ItemModels(generator, existingFileHelper));
         }
     }
 }

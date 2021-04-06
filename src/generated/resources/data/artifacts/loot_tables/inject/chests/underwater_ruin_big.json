@@ -6,47 +6,43 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 7,
+          "weight": 3,
           "name": "artifacts:snorkel"
         },
         {
           "type": "minecraft:item",
-          "weight": 7,
+          "weight": 3,
           "name": "artifacts:flippers"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:superstitious_hat"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:lucky_scarf"
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
           "name": "artifacts:fire_gauntlet"
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
           "name": "artifacts:cross_necklace"
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
           "name": "artifacts:power_glove"
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
           "name": "artifacts:cloud_in_a_bottle"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 60
+          "condition": "minecraft:random_chance",
+          "chance": 0.65
         }
       ]
     }

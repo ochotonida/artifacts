@@ -6,42 +6,37 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:night_vision_goggles"
         },
         {
           "type": "minecraft:item",
-          "weight": 4,
           "name": "artifacts:thorn_pendant"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:fire_gauntlet"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:power_glove"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:universal_attractor"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:obsidian_skull"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:lucky_scarf"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 80
+          "condition": "minecraft:random_chance",
+          "chance": 0.25
         }
       ]
     }

@@ -1,5 +1,6 @@
 package artifacts.common.item;
 
+import artifacts.common.config.Config;
 import artifacts.common.init.ModItems;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
@@ -17,7 +18,7 @@ import java.util.List;
 public abstract class ArtifactItem extends Item {
 
     public ArtifactItem(Properties properties) {
-        super(properties.maxStackSize(1).group(ModItems.CREATIVE_TAB).rarity(Rarity.RARE).isImmuneToFire());
+        super(properties.stacksTo(1).tab(ModItems.CREATIVE_TAB).rarity(Rarity.RARE).fireResistant());
     }
 
     public ArtifactItem() {
@@ -26,7 +27,9 @@ public abstract class ArtifactItem extends Item {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        tooltip.add(new TranslationTextComponent(getTranslationKey() + ".tooltip").mergeStyle(TextFormatting.GRAY));
+    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
+        if (Config.showTooltips) {
+            tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip").withStyle(TextFormatting.GRAY));
+        }
     }
 }

@@ -30,21 +30,21 @@ public class FirstPersonGloveRenderHandler {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onRenderHand(RenderHandEvent event) {
         if (!event.isCanceled() && Minecraft.getInstance().player != null && Config.showFirstPersonGloves) {
-            event.getMatrixStack().push();
+            event.getMatrixStack().pushPose();
             ClientPlayerEntity player = Minecraft.getInstance().player;
-            HandSide handside = event.getHand() == Hand.MAIN_HAND ? player.getPrimaryHand() : player.getPrimaryHand().opposite();
+            HandSide handside = event.getHand() == Hand.MAIN_HAND ? player.getMainArm() : player.getMainArm().getOpposite();
             if (event.getItemStack().isEmpty()) {
                 if (event.getHand() == Hand.MAIN_HAND) {
                     renderGloveOnHand(event.getMatrixStack(), event.getBuffers(), event.getLight(), event.getEquipProgress(), event.getSwingProgress(), player, handside, event.getHand());
                 }
             } else if (event.getItemStack().getItem() == Items.FILLED_MAP) {
-                if (event.getHand() == Hand.MAIN_HAND && player.getHeldItemOffhand().isEmpty()) {
+                if (event.getHand() == Hand.MAIN_HAND && player.getOffhandItem().isEmpty()) {
                     renderTwoHandedMapGloves(event.getMatrixStack(), event.getBuffers(), event.getLight(), event.getInterpolatedPitch(), event.getEquipProgress(), event.getSwingProgress(), player, handside);
                 } else {
                     renderSingleHandedMapGlove(event.getMatrixStack(), event.getBuffers(), event.getLight(), event.getEquipProgress(), event.getSwingProgress(), player, handside, event.getHand());
                 }
             }
-            event.getMatrixStack().pop();
+            event.getMatrixStack().popPose();
         }
     }
 
@@ -92,27 +92,27 @@ public class FirstPersonGloveRenderHandler {
         float yOffset = 0.4F * MathHelper.sin(swingProgressRoot * ((float) Math.PI * 2F));
         float zOffset = -0.4F * MathHelper.sin(swingProgress * (float) Math.PI);
         matrixStack.translate(side * (xOffset + 0.64), yOffset - 0.6 + equipProgress * -0.6, zOffset - 0.72);
-        matrixStack.rotate(Vector3f.YP.rotationDegrees(side * 45));
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(side * 45));
         float zRotation = MathHelper.sin(swingProgress * swingProgress * (float) Math.PI);
         float yRotation = MathHelper.sin(swingProgressRoot * (float) Math.PI);
-        matrixStack.rotate(Vector3f.YP.rotationDegrees(side * yRotation * 70));
-        matrixStack.rotate(Vector3f.ZP.rotationDegrees(side * zRotation * -20));
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(side * yRotation * 70));
+        matrixStack.mulPose(Vector3f.ZP.rotationDegrees(side * zRotation * -20));
         matrixStack.translate(side * -1, 3.6, 3.5);
-        matrixStack.rotate(Vector3f.ZP.rotationDegrees(side * 120));
-        matrixStack.rotate(Vector3f.XP.rotationDegrees(200));
-        matrixStack.rotate(Vector3f.YP.rotationDegrees(side * -135));
+        matrixStack.mulPose(Vector3f.ZP.rotationDegrees(side * 120));
+        matrixStack.mulPose(Vector3f.XP.rotationDegrees(200));
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(side * -135));
         matrixStack.translate(side * 5.6, 0, 0);
 
-        ((GloveItem) glove.getItem()).renderArm(matrixStack, buffer, combinedLight, player, handSide, glove.hasEffect());
+        ((GloveItem) glove.getItem()).renderArm(matrixStack, buffer, combinedLight, player, handSide, glove.hasFoil());
     }
 
     private static void renderSingleHandedMapGlove(MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, float equippedProgress, float swingProgress, ClientPlayerEntity player, HandSide handSide, Hand hand) {
         float side = handSide == HandSide.RIGHT ? 1 : -1;
         matrixStack.translate(side * 0.125, -0.125, 0);
-        matrixStack.push();
-        matrixStack.rotate(Vector3f.ZP.rotationDegrees(side * 10));
+        matrixStack.pushPose();
+        matrixStack.mulPose(Vector3f.ZP.rotationDegrees(side * 10));
         renderGloveOnHand(matrixStack, buffer, combinedLight, equippedProgress, swingProgress, player, handSide, hand);
-        matrixStack.pop();
+        matrixStack.popPose();
     }
 
     private static void renderTwoHandedMapGloves(MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, float pitch, float equippedProgress, float swingProgress, ClientPlayerEntity player, HandSide mainHandSide) {
@@ -122,11 +122,11 @@ public class FirstPersonGloveRenderHandler {
         matrixStack.translate(0, -yOffset / 2, zOffset);
         float mapAngle = getMapAngle(pitch);
         matrixStack.translate(0, 0.04 + equippedProgress * -1.2 + mapAngle * -0.5, -0.72);
-        matrixStack.rotate(Vector3f.XP.rotationDegrees(mapAngle * -85));
-        matrixStack.rotate(Vector3f.YP.rotationDegrees(90));
+        matrixStack.mulPose(Vector3f.XP.rotationDegrees(mapAngle * -85));
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(90));
 
         renderTwoHandedMapGlove(matrixStack, buffer, combinedLight, player, mainHandSide, Hand.MAIN_HAND);
-        renderTwoHandedMapGlove(matrixStack, buffer, combinedLight, player, mainHandSide.opposite(), Hand.OFF_HAND);
+        renderTwoHandedMapGlove(matrixStack, buffer, combinedLight, player, mainHandSide.getOpposite(), Hand.OFF_HAND);
     }
 
     private static float getMapAngle(float pitch) {
@@ -144,14 +144,14 @@ public class FirstPersonGloveRenderHandler {
             return;
         }
 
-        matrixStack.push();
+        matrixStack.pushPose();
         float side = handSide == HandSide.RIGHT ? 1 : -1;
-        matrixStack.rotate(Vector3f.YP.rotationDegrees(92));
-        matrixStack.rotate(Vector3f.XP.rotationDegrees(45));
-        matrixStack.rotate(Vector3f.ZP.rotationDegrees(side * -41));
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(92));
+        matrixStack.mulPose(Vector3f.XP.rotationDegrees(45));
+        matrixStack.mulPose(Vector3f.ZP.rotationDegrees(side * -41));
         matrixStack.translate(side * 0.3, -1.1, 0.45);
 
-        ((GloveItem) glove.getItem()).renderArm(matrixStack, buffer, combinedLight, player, handSide, glove.hasEffect());
-        matrixStack.pop();
+        ((GloveItem) glove.getItem()).renderArm(matrixStack, buffer, combinedLight, player, handSide, glove.hasFoil());
+        matrixStack.popPose();
     }
 }

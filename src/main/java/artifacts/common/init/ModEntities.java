@@ -13,14 +13,14 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModEntities {
 
     @SuppressWarnings("unchecked")
-    public static final EntityType<MimicEntity> MIMIC = (EntityType<MimicEntity>) EntityType.Builder.create(MimicEntity::new, EntityClassification.MONSTER)
-            .size(14 / 16F, 14 / 16F)
+    public static final EntityType<MimicEntity> MIMIC = (EntityType<MimicEntity>) EntityType.Builder.of(MimicEntity::new, EntityClassification.MONSTER)
+            .sized(14 / 16F, 14 / 16F)
             .setTrackingRange(64)
             .build(new ResourceLocation(Artifacts.MODID, "mimic").toString())
             .setRegistryName(new ResourceLocation(Artifacts.MODID, "mimic"));
 
     public static void register(IForgeRegistry<EntityType<?>> registry) {
-        GlobalEntityTypeAttributes.put(MIMIC, MimicEntity.getAttributes().create());
+        GlobalEntityTypeAttributes.put(MIMIC, MimicEntity.createMobAttributes().build());
         registry.register(MIMIC);
     }
 }

@@ -38,6 +38,10 @@
   "item.artifacts.bunny_hoppers": "Обувь прыгуна",
   "item.artifacts.crystal_heart": "Хрустальное сердце",
   "item.artifacts.villager_hat": "Шляпа деревенского жителя",
+  "item.artifacts.cloud_in_a_bottle": "Облако в банке",
+  "item.artifacts.whoopee_cushion": "Подушка пердушка",
+  "item.artifacts.vampiric_glove": "Вампирская перчатка",
+  "item.artifacts.golden_hook": "Золотой крюк",
   "item.artifacts.snorkel.tooltip": "Владелец может дышать под водой",
   "item.artifacts.plastic_drinking_hat.tooltip": "Уменьшается время, необходимое для питья",
   "item.artifacts.novelty_drinking_hat.tooltip": "'Хей! Я #1, и я позволил гравитации делать для меня напитки!'",
@@ -67,5 +71,9 @@
   "item.artifacts.running_shoes.tooltip": "Увеличивает скорость передвижения во время бега",
   "item.artifacts.bunny_hoppers.tooltip": "Увеличивает высоту прыжка и дает иммунитет к урону от падения",
   "item.artifacts.crystal_heart.tooltip": "Увеличивает максимальное количество жизней владельца",
-  "item.artifacts.villager_hat.tooltip": "Снижает цены при торговле, а также жители иногда дарят владельцу подарки"
+  "item.artifacts.villager_hat.tooltip": "Снижает цены при торговле, а также жители иногда дарят владельцу подарки",
+  "item.artifacts.cloud_in_a_bottle.tooltip": "Позволяет владельцу совершать двойной прыжок",
+  "item.artifacts.whoopee_cushion.tooltip": "Увеличивает метеоризм у владельца",
+  "item.artifacts.vampiric_glove.tooltip": "Рукопашные атаки восполняют здоровье владельца",
+  "item.artifacts.golden_hook.tooltip": "Увеличивает опыт, брошенный существами, особенно теми, которых вы недавно не убивали."
 }

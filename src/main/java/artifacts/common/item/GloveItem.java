@@ -22,7 +22,7 @@ public abstract class GloveItem extends CurioItem {
     private Object modelSlim;
 
     protected static boolean hasSmallArms(Entity entity) {
-        return entity instanceof AbstractClientPlayerEntity && ((AbstractClientPlayerEntity) entity).getSkinType().equals("slim");
+        return entity instanceof AbstractClientPlayerEntity && ((AbstractClientPlayerEntity) entity).getModelName().equals("slim");
     }
 
     protected ResourceLocation getTexture(boolean smallArms) {
@@ -59,10 +59,10 @@ public abstract class GloveItem extends CurioItem {
     public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, ItemStack stack) {
         boolean smallArms = hasSmallArms(entity);
         GloveModel model = getModel(smallArms);
-        model.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        model.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
+        model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
         ICurio.RenderHelper.followBodyRotations(entity, model);
-        IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(buffer, model.getRenderType(getTexture(smallArms)), false, stack.hasEffect());
+        IVertexBuilder vertexBuilder = ItemRenderer.getFoilBuffer(buffer, model.renderType(getTexture(smallArms)), false, stack.hasFoil());
         model.renderHand(index % 2 == 0, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 
@@ -72,19 +72,19 @@ public abstract class GloveItem extends CurioItem {
             boolean smallArms = hasSmallArms(player);
             GloveModel model = getModel(smallArms);
 
-            ModelRenderer arm = side == HandSide.LEFT ? model.bipedLeftArm : model.bipedRightArm;
-            ModelRenderer armWear = side == HandSide.LEFT ? model.bipedLeftArmwear : model.bipedRightArmwear;
+            ModelRenderer arm = side == HandSide.LEFT ? model.leftArm : model.rightArm;
+            ModelRenderer armWear = side == HandSide.LEFT ? model.leftSleeve : model.rightSleeve;
 
-            model.setVisible(false);
-            arm.showModel = armWear.showModel = true;
+            model.setAllVisible(false);
+            arm.visible = armWear.visible = true;
 
-            model.isSneak = false;
-            model.swingProgress = model.swimAnimation = 0;
-            model.setRotationAngles(player, 0, 0, 0, 0, 0);
-            arm.rotateAngleX = armWear.rotateAngleX = 0;
+            model.crouching = false;
+            model.attackTime = model.swimAmount = 0;
+            model.setupAnim(player, 0, 0, 0, 0, 0);
+            arm.xRot = armWear.xRot = 0;
 
-            arm.render(matrixStack, ItemRenderer.getBuffer(buffer, model.getRenderType(getTexture(smallArms)), false, hasGlint), combinedLight, OverlayTexture.NO_OVERLAY);
-            armWear.render(matrixStack, ItemRenderer.getBuffer(buffer, model.getRenderType(getTexture(smallArms)), false, hasGlint), combinedLight, OverlayTexture.NO_OVERLAY);
+            arm.render(matrixStack, ItemRenderer.getFoilBuffer(buffer, model.renderType(getTexture(smallArms)), false, hasGlint), combinedLight, OverlayTexture.NO_OVERLAY);
+            armWear.render(matrixStack, ItemRenderer.getFoilBuffer(buffer, model.renderType(getTexture(smallArms)), false, hasGlint), combinedLight, OverlayTexture.NO_OVERLAY);
         }
     }
 }

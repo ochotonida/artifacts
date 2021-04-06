@@ -6,41 +6,37 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 5,
           "name": "artifacts:snorkel"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 5,
           "name": "artifacts:flippers"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
-          "name": "artifacts:feral_claws"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 2,
-          "name": "artifacts:digging_claws"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 2,
-          "name": "artifacts:plastic_drinking_hat"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "artifacts:novelty_drinking_hat"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
+          "weight": 5,
           "name": "artifacts:umbrella"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
+          "weight": 5,
+          "name": "artifacts:golden_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "artifacts:feral_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "artifacts:digging_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
           "name": "artifacts:kitty_slippers"
         },
         {
@@ -50,17 +46,23 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
+          "weight": 3,
           "name": "artifacts:lucky_scarf"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:golden_hook"
+          "weight": 2,
+          "name": "artifacts:plastic_drinking_hat"
         },
         {
-          "type": "minecraft:empty",
-          "weight": 74
+          "type": "minecraft:item",
+          "name": "artifacts:novelty_drinking_hat"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.35
         }
       ]
     }

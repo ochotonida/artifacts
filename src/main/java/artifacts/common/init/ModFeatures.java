@@ -29,8 +29,8 @@ public class ModFeatures {
 
     public static void registerConfiguredFeatures() {
         UNDERGROUND_CAMPSITE = CAMPSITE.get()
-                .withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)
-                .withPlacement(IN_CAVE_WITH_CHANCE.get().configure(new ChanceConfig(Config.campsiteChance)));
+                .configured(IFeatureConfig.NONE)
+                .decorated(IN_CAVE_WITH_CHANCE.get().configured(new ChanceConfig(Config.campsiteChance)));
         Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Artifacts.MODID, "underground_campsite"), UNDERGROUND_CAMPSITE);
     }
 }

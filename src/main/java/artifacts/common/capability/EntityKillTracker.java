@@ -1,26 +1,33 @@
 package artifacts.common.capability;
 
+import com.google.common.collect.EvictingQueue;
 import net.minecraft.entity.EntityType;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class EntityKillTracker implements IEntityKillTracker {
 
-    private final List<EntityType<?>> entityTypes = new ArrayList<>();
+    private static final int MAX_SIZE = 25;
 
+    private final EvictingQueue<EntityType<?>> entityTypes = EvictingQueue.create(MAX_SIZE);
+
+    @Override
+    public int getMaxSize() {
+        return entityTypes.size() + entityTypes.remainingCapacity();
+    }
+
+    @Override
     public void clear() {
         entityTypes.clear();
     }
 
-    public void addEntityTypes(EntityType<?> type) {
+    @Override
+    public void addEntityType(EntityType<?> type) {
         entityTypes.add(type);
-        if (entityTypes.size() > MAX_SIZE) {
-            entityTypes.remove(0);
-        }
     }
 
-    public List<EntityType<?>> getEntityTypes() {
+    @Override
+    public Collection<EntityType<?>> getEntityTypes() {
         return entityTypes;
     }
 }

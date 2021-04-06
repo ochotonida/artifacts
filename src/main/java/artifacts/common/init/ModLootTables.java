@@ -31,6 +31,8 @@ public class ModLootTables {
                 "chests/village/village_desert_house",
                 "chests/village/village_plains_house",
                 "chests/village/village_savanna_house",
+                "chests/village/village_snowy_house",
+                "chests/village/village_taiga_house",
                 "chests/abandoned_mineshaft",
                 "chests/bastion_hoglin_stable",
                 "chests/bastion_treasure",
@@ -65,15 +67,15 @@ public class ModLootTables {
         }
 
         public static LootPool getInjectPool(String entryName) {
-            return LootPool.builder()
-                    .addEntry(getInjectEntry(entryName))
+            return LootPool.lootPool()
+                    .add(getInjectEntry(entryName))
                     .name("artifacts_inject")
                     .build();
         }
 
         private static LootEntry.Builder<?> getInjectEntry(String name) {
             ResourceLocation table = new ResourceLocation(Artifacts.MODID, "inject/" + name);
-            return TableLootEntry.builder(table).weight(1);
+            return TableLootEntry.lootTableReference(table).setWeight(1);
         }
     }
 }

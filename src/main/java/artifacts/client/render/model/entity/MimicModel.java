@@ -8,14 +8,14 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class MimicModel extends EntityModel<MimicEntity> {
 
-    protected ModelRenderer upperTeeth;
-    protected ModelRenderer lowerTeeth;
-    protected ModelRenderer upperMouthOverlay;
-    protected ModelRenderer lowerMouthOverlay;
+    protected final ModelRenderer upperTeeth;
+    protected final ModelRenderer lowerTeeth;
+    protected final ModelRenderer upperMouthOverlay;
+    protected final ModelRenderer lowerMouthOverlay;
 
     public MimicModel() {
-        textureWidth = 64;
-        textureHeight = 32;
+        texWidth = 64;
+        texHeight = 32;
 
         upperTeeth = new ModelRenderer(this, 0, 0);
         lowerTeeth = new ModelRenderer(this, 0, 15);
@@ -27,30 +27,30 @@ public class MimicModel extends EntityModel<MimicEntity> {
         upperMouthOverlay.addBox(-6, 0, -13, 12, 0, 12, 0.02F);
         lowerMouthOverlay.addBox(-6, -1, -13, 12, 0, 12, 0.02F);
 
-        upperTeeth.setRotationPoint(0, 15, 7);
-        lowerTeeth.setRotationPoint(0, 15, 7);
-        upperMouthOverlay.setRotationPoint(0, 15, 7);
-        lowerMouthOverlay.setRotationPoint(0, 15, 7);
+        upperTeeth.setPos(0, 15, 7);
+        lowerTeeth.setPos(0, 15, 7);
+        upperMouthOverlay.setPos(0, 15, 7);
+        lowerMouthOverlay.setPos(0, 15, 7);
     }
 
     @Override
-    public void setRotationAngles(MimicEntity mimic, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(MimicEntity mimic, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
     }
 
     @Override
-    public void setLivingAnimations(MimicEntity mimic, float limbSwing, float limbSwingAmount, float partialTicks) {
+    public void prepareMobModel(MimicEntity mimic, float limbSwing, float limbSwingAmount, float partialTicks) {
         if (mimic.ticksInAir > 0) {
-            upperTeeth.rotateAngleX = upperMouthOverlay.rotateAngleX = Math.max(-60, (mimic.ticksInAir - 1 + partialTicks) * -6) * 0.0174533F;
-            lowerTeeth.rotateAngleX = lowerMouthOverlay.rotateAngleX = Math.min(30, (mimic.ticksInAir - 1 + partialTicks) * 3) * 0.0174533F;
+            upperTeeth.xRot = upperMouthOverlay.xRot = Math.max(-60, (mimic.ticksInAir - 1 + partialTicks) * -6) * 0.0174533F;
+            lowerTeeth.xRot = lowerMouthOverlay.xRot = Math.min(30, (mimic.ticksInAir - 1 + partialTicks) * 3) * 0.0174533F;
         } else {
-            upperTeeth.rotateAngleX = upperMouthOverlay.rotateAngleX = 0;
-            lowerTeeth.rotateAngleX = lowerMouthOverlay.rotateAngleX = 0;
+            upperTeeth.xRot = upperMouthOverlay.xRot = 0;
+            lowerTeeth.xRot = lowerMouthOverlay.xRot = 0;
         }
     }
 
     @Override
-    public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         upperTeeth.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         lowerTeeth.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         upperMouthOverlay.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);

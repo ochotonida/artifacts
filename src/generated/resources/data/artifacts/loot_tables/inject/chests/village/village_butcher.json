@@ -7,10 +7,12 @@
         {
           "type": "minecraft:item",
           "name": "artifacts:everlasting_beef"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 99
+          "condition": "minecraft:random_chance",
+          "chance": 0.01
         }
       ]
     }

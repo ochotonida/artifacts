@@ -42,35 +42,35 @@ public class CloudInABottleItem extends CurioItem {
         player.fallDistance = 0;
 
         double upwardsMotion = 0.5;
-        if (player.isPotionActive(Effects.JUMP_BOOST)) {
+        if (player.hasEffect(Effects.JUMP)) {
             // noinspection ConstantConditions
-            upwardsMotion += 0.1 * (player.getActivePotionEffect(Effects.JUMP_BOOST).getAmplifier() + 1);
+            upwardsMotion += 0.1 * (player.getEffect(Effects.JUMP).getAmplifier() + 1);
         }
         upwardsMotion *= player.isSprinting() ? 1.5 : 1;
 
-        Vector3d motion = player.getMotion();
-        double motionMultiplier = player.isSprinting() ? 0.65 : 0;
-        float direction = (float) (player.rotationYaw * Math.PI / 180);
-        player.setMotion(player.getMotion().add(
+        Vector3d motion = player.getDeltaMovement();
+        double motionMultiplier = player.isSprinting() ? 0.5 : 0;
+        float direction = (float) (player.yRot * Math.PI / 180);
+        player.setDeltaMovement(player.getDeltaMovement().add(
                 -MathHelper.sin(direction) * motionMultiplier,
                 upwardsMotion - motion.y,
                 MathHelper.cos(direction) * motionMultiplier)
         );
 
-        player.isAirBorne = true;
+        player.hasImpulse = true;
         net.minecraftforge.common.ForgeHooks.onLivingJump(player);
 
-        player.addStat(Stats.JUMP);
+        player.awardStat(Stats.JUMP);
         if (player.isSprinting()) {
-            player.addExhaustion(0.2F);
+            player.causeFoodExhaustion(0.2F);
         } else {
-            player.addExhaustion(0.05F);
+            player.causeFoodExhaustion(0.05F);
         }
 
         if (CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.WHOOPEE_CUSHION.get(), player).isPresent()) {
-            player.playSound(ModSoundEvents.FART.get(), 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
+            player.playSound(ModSoundEvents.FART.get(), 1, 0.9F + player.getRandom().nextFloat() * 0.2F);
         } else {
-            player.playSound(SoundEvents.BLOCK_WOOL_FALL, 1, 0.9F + player.getRNG().nextFloat() * 0.2F);
+            player.playSound(SoundEvents.WOOL_FALL, 1, 0.9F + player.getRandom().nextFloat() * 0.2F);
         }
     }
 
@@ -80,7 +80,7 @@ public class CloudInABottleItem extends CurioItem {
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, 1, 1);
+        return new ICurio.SoundInfo(SoundEvents.BOTTLE_FILL_DRAGONBREATH, 1, 1);
     }
 
     @Override
@@ -108,13 +108,13 @@ public class CloudInABottleItem extends CurioItem {
         public void onClientTick(TickEvent.ClientTickEvent event) {
             ClientPlayerEntity player = Minecraft.getInstance().player;
 
-            if (event.phase == TickEvent.Phase.END && player != null && player.movementInput != null) {
-                if ((player.isOnGround() || player.isOnLadder()) && !player.isInWater()) {
+            if (event.phase == TickEvent.Phase.END && player != null && player.input != null) {
+                if ((player.isOnGround() || player.onClimbable()) && !player.isInWater()) {
                     hasReleasedJumpKey = false;
                     canDoubleJump = true;
-                } else if (!player.movementInput.jump) {
+                } else if (!player.input.jumping) {
                     hasReleasedJumpKey = true;
-                } else if (!player.abilities.isFlying && canDoubleJump && hasReleasedJumpKey) {
+                } else if (!player.abilities.flying && canDoubleJump && hasReleasedJumpKey) {
                     canDoubleJump = false;
 
                     CuriosApi.getCuriosHelper().findEquippedCurio(CloudInABottleItem.this, player).ifPresent(stack -> {

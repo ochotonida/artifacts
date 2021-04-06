@@ -43,7 +43,10 @@ public class EntityKillTrackerCapability {
         public void readNBT(Capability<IEntityKillTracker> capability, IEntityKillTracker instance, Direction side, INBT nbt) {
             instance.clear();
             for (INBT type : (ListNBT) nbt) {
-                instance.addEntityTypes(ForgeRegistries.ENTITIES.getValue(new ResourceLocation(type.getString())));
+                ResourceLocation entityType = new ResourceLocation(type.getAsString());
+                if (ForgeRegistries.ENTITIES.containsKey(entityType)) {
+                    instance.addEntityType(ForgeRegistries.ENTITIES.getValue(entityType));
+                }
             }
         }
     }
@@ -62,10 +65,10 @@ public class EntityKillTrackerCapability {
 
         @SubscribeEvent
         public static void onLivingDeath(LivingDeathEvent event) {
-            if (event.getSource().getTrueSource() instanceof PlayerEntity) {
-                PlayerEntity player = ((PlayerEntity) event.getSource().getTrueSource());
+            if (event.getSource().getEntity() instanceof PlayerEntity) {
+                PlayerEntity player = ((PlayerEntity) event.getSource().getEntity());
                 player.getCapability(INSTANCE).ifPresent(
-                        tracker -> tracker.addEntityTypes(event.getEntityLiving().getType())
+                        tracker -> tracker.addEntityType(event.getEntityLiving().getType())
                 );
             }
         }

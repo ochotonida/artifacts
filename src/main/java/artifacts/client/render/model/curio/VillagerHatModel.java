@@ -10,8 +10,8 @@ public class VillagerHatModel extends BipedModel<LivingEntity> {
         super(0.5F, 0, 32, 32);
         ModelRenderer brim = new ModelRenderer(this, 0, 16);
         brim.addBox(-8, -5.125F, -8, 16, 0, 16);
-        bipedHead.addChild(brim);
-        setVisible(false);
-        bipedHead.showModel = true;
+        head.addChild(brim);
+        setAllVisible(false);
+        head.visible = true;
     }
 }

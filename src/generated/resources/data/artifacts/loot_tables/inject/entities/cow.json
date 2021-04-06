@@ -24,10 +24,12 @@
             }
           ],
           "name": "artifacts:everlasting_beef"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 999
+          "condition": "minecraft:random_chance",
+          "chance": 0.0025
         }
       ]
     }

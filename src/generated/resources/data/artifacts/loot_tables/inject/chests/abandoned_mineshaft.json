@@ -22,15 +22,6 @@
         {
           "type": "minecraft:item",
           "weight": 2,
-          "name": "artifacts:plastic_drinking_hat"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "artifacts:novelty_drinking_hat"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:superstitious_hat"
         },
         {
@@ -49,8 +40,19 @@
           "name": "artifacts:vampiric_glove"
         },
         {
-          "type": "minecraft:empty",
-          "weight": 83
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "artifacts:plastic_drinking_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:novelty_drinking_hat"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.35
         }
       ]
     }

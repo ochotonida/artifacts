@@ -17,9 +17,9 @@ public class GoldenHookModel extends GloveModel {
         hookBaseRight.addBox(smallArms ? -1 : -1.5F, 10, -0.5F, 1, 2, 1);
         hookBaseLeft.addBox(smallArms ? 0 : 0.5F, 10, -0.5F, 1, 2, 1);
 
-        bipedRightArm.addChild(hookRight);
-        bipedLeftArm.addChild(hookLeft);
-        bipedRightArm.addChild(hookBaseRight);
-        bipedLeftArm.addChild(hookBaseLeft);
+        rightArm.addChild(hookRight);
+        leftArm.addChild(hookLeft);
+        rightArm.addChild(hookBaseRight);
+        leftArm.addChild(hookBaseLeft);
     }
 }

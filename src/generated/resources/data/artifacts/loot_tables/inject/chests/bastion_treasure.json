@@ -5,48 +5,46 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:item",
-          "weight": 7,
-          "name": "artifacts:fire_gauntlet"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 7,
-          "name": "artifacts:cross_necklace"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 4,
-          "name": "artifacts:steadfast_spikes"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 6,
-          "name": "artifacts:panic_necklace"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "artifacts:crystal_heart"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 6,
-          "name": "artifacts:antidote_vessel"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 6,
-          "name": "artifacts:golden_hook"
-        },
-        {
           "type": "minecraft:loot_table",
           "weight": 6,
           "name": "artifacts:artifact"
         },
         {
-          "type": "minecraft:empty",
-          "weight": 50
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "artifacts:golden_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "artifacts:cross_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "artifacts:fire_gauntlet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:steadfast_spikes"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:panic_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:crystal_heart"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:antidote_vessel"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.75
         }
       ]
     }

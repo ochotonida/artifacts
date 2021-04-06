@@ -6,32 +6,31 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 9,
+          "weight": 3,
           "name": "artifacts:umbrella"
         },
         {
           "type": "minecraft:item",
           "weight": 2,
+          "name": "artifacts:whoopee_cushion"
+        },
+        {
+          "type": "minecraft:item",
           "name": "artifacts:kitty_slippers"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:bunny_hoppers"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:scarf_of_invisibility"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:item",
-          "weight": 4,
-          "name": "artifacts:whoopee_cushion"
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 80
+          "condition": "minecraft:random_chance",
+          "chance": 0.2
         }
       ]
     }

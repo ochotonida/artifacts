@@ -1,18 +1,26 @@
 package artifacts.common.item;
 
 import artifacts.client.render.model.curio.DrinkingHatModel;
+import artifacts.common.config.Config;
+import artifacts.common.init.ModItems;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
+
+import java.util.List;
 
 public class DrinkingHatItem extends CurioItem {
 
@@ -23,19 +31,26 @@ public class DrinkingHatItem extends CurioItem {
         addListener(LivingEntityUseItemEvent.Start.class, this::onItemUseStart);
     }
 
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
+        if (Config.showTooltips) {
+            if (this != ModItems.PLASTIC_DRINKING_HAT.get()) {
+                tooltip.add(new TranslationTextComponent(ModItems.PLASTIC_DRINKING_HAT.get().getDescriptionId() + ".tooltip").withStyle(TextFormatting.GRAY));
+            }
+        }
+        super.appendHoverText(stack, world, tooltip, flags);
+    }
+
     public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-        if (event.getItem().getUseAction() == UseAction.DRINK) {
+        if (event.getItem().getUseAnimation() == UseAction.DRINK) {
             event.setDuration(event.getDuration() / 4);
         }
     }
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 1, 1);
-    }
-
-    protected SoundEvent getEquipSound() {
-        return SoundEvents.ITEM_BOTTLE_FILL;
+        return new ICurio.SoundInfo(SoundEvents.BOTTLE_FILL, 1, 1);
     }
 
     @Override

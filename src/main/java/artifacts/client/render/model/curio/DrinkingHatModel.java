@@ -6,14 +6,14 @@ import net.minecraft.entity.LivingEntity;
 
 public class DrinkingHatModel extends BipedModel<LivingEntity> {
 
-    protected ModelRenderer hatShade;
+    protected final ModelRenderer hatShade;
 
     public DrinkingHatModel() {
         super(0.5F, 0, 64, 64);
 
-        setVisible(false);
-        bipedHead.showModel = true;
-        bipedHeadwear.showModel = true;
+        setAllVisible(false);
+        head.visible = true;
+        hat.visible = true;
 
         hatShade = new ModelRenderer(this, 0, 52);
         ModelRenderer straw = new ModelRenderer(this, 0, 50);
@@ -29,14 +29,14 @@ public class DrinkingHatModel extends BipedModel<LivingEntity> {
         strawLeft.addBox(5, -4, -3, 1, 1, 8);
         strawRight.addBox(-6, -4, -3, 1, 1, 8);
 
-        bipedHead.addChild(hatShade);
-        bipedHead.addChild(straw);
-        bipedHead.addChild(canLeft);
-        bipedHead.addChild(canRight);
-        bipedHead.addChild(strawLeft);
-        bipedHead.addChild(strawRight);
+        head.addChild(hatShade);
+        head.addChild(straw);
+        head.addChild(canLeft);
+        head.addChild(canRight);
+        head.addChild(strawLeft);
+        head.addChild(strawRight);
 
-        strawLeft.rotateAngleX = 0.7853F;
-        strawRight.rotateAngleX = 0.7853F;
+        strawLeft.xRot = 0.7853F;
+        strawRight.xRot = 0.7853F;
     }
 }

@@ -25,13 +25,13 @@ public class ClawsModel extends GloveModel {
         clawRightLower1.addBox(-3 + smallArmsOffset, 10, -1.5F, 3, 5, 1);
         clawLeftLower2.addBox(-smallArmsOffset, 10, 0.5F, 3, 5, 1);
         clawRightLower2.addBox(-3 + smallArmsOffset, 10, 0.5F, 3, 5, 1);
-        bipedLeftArm.addChild(clawLeftUpper1);
-        bipedRightArm.addChild(clawRightUpper1);
-        bipedLeftArm.addChild(clawLeftUpper2);
-        bipedRightArm.addChild(clawRightUpper2);
-        bipedLeftArm.addChild(clawLeftLower1);
-        bipedRightArm.addChild(clawRightLower1);
-        bipedLeftArm.addChild(clawLeftLower2);
-        bipedRightArm.addChild(clawRightLower2);
+        leftArm.addChild(clawLeftUpper1);
+        rightArm.addChild(clawRightUpper1);
+        leftArm.addChild(clawLeftUpper2);
+        rightArm.addChild(clawRightUpper2);
+        leftArm.addChild(clawLeftLower1);
+        rightArm.addChild(clawRightLower1);
+        leftArm.addChild(clawLeftLower2);
+        rightArm.addChild(clawRightLower2);
     }
 }

@@ -6,47 +6,44 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 8,
+          "weight": 2,
           "name": "artifacts:flame_pendant"
         },
         {
           "type": "minecraft:item",
-          "weight": 8,
+          "weight": 2,
           "name": "artifacts:thorn_pendant"
         },
         {
           "type": "minecraft:item",
-          "weight": 4,
-          "name": "artifacts:shock_pendant"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 4,
-          "name": "artifacts:umbrella"
-        },
-        {
-          "type": "minecraft:item",
           "weight": 2,
-          "name": "artifacts:scarf_of_invisibility"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 4,
-          "name": "artifacts:universal_attractor"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 6,
           "name": "artifacts:whoopee_cushion"
         },
         {
           "type": "minecraft:item",
-          "weight": 4,
-          "name": "artifacts:vampiric_glove"
+          "name": "artifacts:shock_pendant"
         },
         {
-          "type": "minecraft:empty",
-          "weight": 60
+          "type": "minecraft:item",
+          "name": "artifacts:umbrella"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:scarf_of_invisibility"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:universal_attractor"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:vampiric_glove"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.4
         }
       ]
     }

@@ -6,27 +6,25 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:steadfast_spikes"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:superstitious_hat"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:running_shoes"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:vampiric_glove"
-        },
+        }
+      ],
+      "conditions": [
         {
-          "type": "minecraft:empty",
-          "weight": 90
+          "condition": "minecraft:random_chance",
+          "chance": 0.1
         }
       ]
     }
