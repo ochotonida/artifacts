@@ -3,7 +3,7 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.GloveModel;
 import artifacts.client.render.model.curio.GoldenHookModel;
-import artifacts.common.capability.EntityKillTrackerCapability;
+import artifacts.common.capability.killtracker.EntityKillTrackerCapability;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;

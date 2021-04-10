@@ -1,4 +1,4 @@
-package artifacts.common.capability;
+package artifacts.common.capability.killtracker;
 
 import com.google.common.collect.EvictingQueue;
 import net.minecraft.entity.EntityType;

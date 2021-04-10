@@ -1,7 +1,8 @@
 package artifacts;
 
 import artifacts.client.render.MimicRenderer;
-import artifacts.common.capability.EntityKillTrackerCapability;
+import artifacts.common.capability.killtracker.EntityKillTrackerCapability;
+import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.Config;
 import artifacts.common.init.ModEntities;
 import artifacts.common.init.ModFeatures;
@@ -67,6 +68,7 @@ public class Artifacts {
                 ModFeatures.registerConfiguredFeatures();
                 NetworkHandler.register();
                 EntityKillTrackerCapability.register();
+                SwimHandlerCapability.register();
             });
         }
 

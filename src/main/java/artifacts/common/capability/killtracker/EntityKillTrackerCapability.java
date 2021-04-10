@@ -1,4 +1,4 @@
-package artifacts.common.capability;
+package artifacts.common.capability.killtracker;
 
 import artifacts.Artifacts;
 import net.minecraft.entity.Entity;

@@ -8,20 +8,20 @@ public class HeliumFlamingoModel extends BipedModel<LivingEntity> {
 
     public HeliumFlamingoModel() {
         super(0, 0, 64, 64);
-        bipedBody = new ModelRenderer(this);
+        body = new ModelRenderer(this);
 
         ModelRenderer bone = new ModelRenderer(this);
-        bone.setRotationPoint(0, 0, 0);
-        bone.setTextureOffset(16, 36).addBox(-1, 1, -14, 2, 3, 5);
-        bone.setTextureOffset(0, 18).addBox(4, 9, -7, 4, 4, 14);
-        bone.setTextureOffset(0, 0).addBox(-8, 9, -7, 4, 4, 14);
-        bone.setTextureOffset(36, 0).addBox(-4, 9, 3, 8, 4, 4);
-        bone.setTextureOffset(36, 8).addBox(-4, 9, -7, 8, 4, 4);
-        bone.setTextureOffset(0, 36).addBox(-2, 1, -9, 4, 11, 4);
+        bone.setPos(0, 0, 0);
+        bone.texOffs(16, 36).addBox(-1, 1, -14, 2, 3, 5);
+        bone.texOffs(0, 18).addBox(4, 9, -7, 4, 4, 14);
+        bone.texOffs(0, 0).addBox(-8, 9, -7, 4, 4, 14);
+        bone.texOffs(36, 0).addBox(-4, 9, 3, 8, 4, 4);
+        bone.texOffs(36, 8).addBox(-4, 9, -7, 8, 4, 4);
+        bone.texOffs(0, 36).addBox(-2, 1, -9, 4, 11, 4);
 
-        bipedBody.addChild(bone);
+        body.addChild(bone);
 
-        setVisible(false);
-        bipedBody.showModel = true;
+        setAllVisible(false);
+        body.visible = true;
     }
 }
