@@ -147,6 +147,11 @@
         {
           "type": "minecraft:item",
           "weight": 5,
+          "name": "artifacts:helium_flamingo"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
           "name": "artifacts:umbrella"
         },
         {

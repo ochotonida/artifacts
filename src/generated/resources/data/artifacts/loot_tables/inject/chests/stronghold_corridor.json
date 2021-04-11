@@ -28,6 +28,10 @@
         {
           "type": "minecraft:item",
           "name": "artifacts:universal_attractor"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:helium_flamingo"
         }
       ],
       "conditions": [

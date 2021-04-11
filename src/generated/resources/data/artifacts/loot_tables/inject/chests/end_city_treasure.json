@@ -16,6 +16,11 @@
         {
           "type": "minecraft:item",
           "name": "artifacts:cloud_in_a_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "artifacts:helium_flamingo"
         }
       ],
       "conditions": [

@@ -45,7 +45,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/entities/cow", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .when(RandomChance.randomChance(0.0025F))
+                        .when(RandomChance.randomChance(1 / 500F))
                         .add(itemEntry(ModItems.EVERLASTING_BEEF.get(), 1)
                                 .apply(
                                         Smelt.smelted().when(
@@ -101,6 +101,7 @@ public class LootTables extends LootTableProvider {
                                 .add(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 8))
                                 .add(itemEntry(ModItems.VAMPIRIC_GLOVE.get(), 8))
                                 .add(itemEntry(ModItems.GOLDEN_HOOK.get(), 8))
+                                .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 5))
                                 .add(itemEntry(ModItems.UMBRELLA.get(), 5))
                                 .add(itemEntry(ModItems.WHOOPEE_CUSHION.get(), 5))
                                 .add(itemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 5))
@@ -226,6 +227,7 @@ public class LootTables extends LootTableProvider {
                         .add(itemEntry(ModItems.PANIC_NECKLACE.get(), 1))
                         .add(itemEntry(ModItems.CRYSTAL_HEART.get(), 1))
                         .add(itemEntry(ModItems.ANTIDOTE_VESSEL.get(), 1))
+                        .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/buried_treasure", LootTable.lootTable().withPool(
@@ -269,6 +271,7 @@ public class LootTables extends LootTableProvider {
                         .add(artifactEntry(6))
                         .add(itemEntry(ModItems.CRYSTAL_HEART.get(), 1))
                         .add(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 1))
+                        .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 3))
                 )
         );
         addChestLootTable("inject/chests/jungle_temple", LootTable.lootTable().withPool(
@@ -351,6 +354,7 @@ public class LootTables extends LootTableProvider {
                         .add(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 1))
                         .add(itemEntry(ModItems.LUCKY_SCARF.get(), 1))
                         .add(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 1))
+                        .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/underwater_ruin_big", LootTable.lootTable().withPool(
