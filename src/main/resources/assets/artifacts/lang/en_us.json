@@ -77,6 +77,6 @@
   "item.artifacts.whoopee_cushion.tooltip": "Increases the wearer's flatulence",
   "item.artifacts.vampiric_glove.tooltip": "Causes the wearer's melee attacks to absorb health",
   "item.artifacts.golden_hook.tooltip": "Increases experience dropped by creatures, especially those you have not recently killed",
-  "item.artifacts.helium_flamingo.tooltip.0": "Allows the wearer to swim in the air for a limited period of time",
+  "item.artifacts.helium_flamingo.tooltip.0": "Allows the wearer to swim in the air for a limited period of time.",
   "item.artifacts.helium_flamingo.tooltip.1": "Press %s while in the air to start swimming"
 }

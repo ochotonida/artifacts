@@ -34,9 +34,9 @@ public class JEIPlugin implements IModPlugin {
             if (item instanceof ArtifactItem && item != ModItems.NOVELTY_DRINKING_HAT.get()) {
                 List<ITextComponent> textComponents = new ArrayList<>();
                 item.appendHoverText(new ItemStack(item), null, textComponents, ITooltipFlag.TooltipFlags.NORMAL);
-                registration.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM, textComponents.stream().map(Object::toString).toArray(String[]::new));
+                registration.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM, textComponents.stream().map(ITextComponent::getString).toArray(String[]::new));
             }
         }
-        registration.addIngredientInfo(new ItemStack(ModItems.NOVELTY_DRINKING_HAT.get()), VanillaTypes.ITEM, "item.artifacts.novelty_drinking_hat.tooltip");
+        registration.addIngredientInfo(new ItemStack(ModItems.NOVELTY_DRINKING_HAT.get()), VanillaTypes.ITEM, "item.artifacts.plastic_drinking_hat.tooltip");
     }
 }

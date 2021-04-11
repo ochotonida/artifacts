@@ -54,7 +54,7 @@ public class HeliumFlamingoItem extends CurioItem {
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
         if (Config.showTooltips) {
             tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.0").withStyle(TextFormatting.GRAY));
-            tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.1", "TODO").withStyle(TextFormatting.GRAY)); // TODO
+            tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.1", Minecraft.getInstance().options.keySprint.getTranslatedKeyMessage()).withStyle(TextFormatting.GRAY));
         }
     }
 
