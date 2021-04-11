@@ -3,9 +3,11 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.HeliumFlamingoModel;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
+import artifacts.common.config.Config;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -13,6 +15,10 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputUpdateEvent;
@@ -26,6 +32,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public class HeliumFlamingoItem extends CurioItem {
 
@@ -34,7 +41,6 @@ public class HeliumFlamingoItem extends CurioItem {
     public HeliumFlamingoItem() {
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
-        MinecraftForge.EVENT_BUS.addListener(this::onInputUpdate);
     }
 
     @Nonnull
@@ -43,50 +49,12 @@ public class HeliumFlamingoItem extends CurioItem {
         return new ICurio.SoundInfo(SoundEvents.ITEM_PICKUP, 1, 0.7F);
     }
 
-    private boolean wasSprintKeyDown;
-    private boolean wasSprintingOnGround;
-    private boolean hasTouchedGround;
-
-    public void onInputUpdate(InputUpdateEvent event) {
-
-        PlayerEntity player = event.getPlayer();
-        boolean isSprintKeyDown = Minecraft.getInstance().options.keySprint.isDown();
-
-        player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
-                handler -> {
-                    if (!handler.isSwimming()) {
-                        if (player.isOnGround()) {
-                            hasTouchedGround = true;
-                        } else if (!handler.isSwimming()
-                                && player.getAirSupply() > 0
-                                && isEquippedBy(player)
-                                && (player.isSwimming()
-                                || isSprintKeyDown
-                                && !wasSprintKeyDown
-                                && !wasSprintingOnGround
-                                && hasTouchedGround
-                                && !player.isOnGround()
-                                && !player.isInWater()
-                                && !player.isFallFlying()
-                                && !player.abilities.flying
-                                && !player.isPassenger())) {
-                            handler.setSwimming(true);
-                            handler.syncSwimming();
-                            hasTouchedGround = false;
-                        }
-                    } else if (player.abilities.flying) {
-                        handler.setSwimming(false);
-                        handler.syncSwimming();
-                        hasTouchedGround = true;
-                    }
-                }
-        );
-
-        wasSprintKeyDown = isSprintKeyDown;
-        if (!isSprintKeyDown) {
-            wasSprintingOnGround = false;
-        } else if (player.isOnGround()) {
-            wasSprintingOnGround = true;
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
+        if (Config.showTooltips) {
+            tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.0").withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.1", "TODO").withStyle(TextFormatting.GRAY)); // TODO
         }
     }
 
@@ -103,6 +71,9 @@ public class HeliumFlamingoItem extends CurioItem {
                                 || event.player.isInWater() && !event.player.isSwimming()
                                 || !event.player.isInWater() && event.player.isOnGround()) {
                             handler.setSwimming(false);
+                            if (!event.player.isOnGround() && !event.player.isInWater()) {
+                                event.player.playSound(SoundEvents.ITEM_PICKUP, 0.5F, 0.75F);
+                            }
                         }
 
                         if (isEquippedBy(event.player) && !event.player.isEyeInFluid(FluidTags.WATER) && !event.player.abilities.invulnerable) {
@@ -129,6 +100,55 @@ public class HeliumFlamingoItem extends CurioItem {
     public class ClientEventHandler {
 
         private final ResourceLocation location = new ResourceLocation(Artifacts.MODID, "textures/gui/icons.png");
+
+        private boolean wasSprintKeyDown;
+        private boolean wasSprintingOnGround;
+        private boolean hasTouchedGround;
+
+        @OnlyIn(Dist.CLIENT)
+        @SubscribeEvent
+        public void onInputUpdate(InputUpdateEvent event) {
+
+            PlayerEntity player = event.getPlayer();
+            boolean isSprintKeyDown = Minecraft.getInstance().options.keySprint.isDown();
+
+            player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
+                    handler -> {
+                        if (!handler.isSwimming()) {
+                            if (player.isOnGround()) {
+                                hasTouchedGround = true;
+                            } else if (!handler.isSwimming()
+                                    && player.getAirSupply() > 0
+                                    && isEquippedBy(player)
+                                    && (player.isSwimming()
+                                    || isSprintKeyDown
+                                    && !wasSprintKeyDown
+                                    && !wasSprintingOnGround
+                                    && hasTouchedGround
+                                    && !player.isOnGround()
+                                    && !player.isInWater()
+                                    && !player.isFallFlying()
+                                    && !player.abilities.flying
+                                    && !player.isPassenger())) {
+                                handler.setSwimming(true);
+                                handler.syncSwimming();
+                                hasTouchedGround = false;
+                            }
+                        } else if (player.abilities.flying) {
+                            handler.setSwimming(false);
+                            handler.syncSwimming();
+                            hasTouchedGround = true;
+                        }
+                    }
+            );
+
+            wasSprintKeyDown = isSprintKeyDown;
+            if (!isSprintKeyDown) {
+                wasSprintingOnGround = false;
+            } else if (player.isOnGround()) {
+                wasSprintingOnGround = true;
+            }
+        }
 
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent(priority = EventPriority.LOW)
