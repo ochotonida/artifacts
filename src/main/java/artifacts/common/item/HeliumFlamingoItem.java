@@ -45,29 +45,39 @@ public class HeliumFlamingoItem extends CurioItem {
 
     private boolean wasSprintKeyDown;
     private boolean wasSprintingOnGround;
+    private boolean hasTouchedGround;
 
     public void onInputUpdate(InputUpdateEvent event) {
-        // TODO prevent swimming while still in air
-        // TODO maybe not swim cancelling
 
         PlayerEntity player = event.getPlayer();
         boolean isSprintKeyDown = Minecraft.getInstance().options.keySprint.isDown();
 
         player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
                 handler -> {
-                    if (!handler.isSwimming()
-                            && player.getAirSupply() > 0
-                            && isEquippedBy(player)
-                            && (player.isSwimming()
-                            || isSprintKeyDown
-                            && !wasSprintKeyDown
-                            && !wasSprintingOnGround
-                            && !player.isOnGround()
-                            && !player.isInWater()
-                            && !player.isFallFlying()
-                            && !player.isPassenger())) {
-                        handler.setSwimming(true);
+                    if (!handler.isSwimming()) {
+                        if (player.isOnGround()) {
+                            hasTouchedGround = true;
+                        } else if (!handler.isSwimming()
+                                && player.getAirSupply() > 0
+                                && isEquippedBy(player)
+                                && (player.isSwimming()
+                                || isSprintKeyDown
+                                && !wasSprintKeyDown
+                                && !wasSprintingOnGround
+                                && hasTouchedGround
+                                && !player.isOnGround()
+                                && !player.isInWater()
+                                && !player.isFallFlying()
+                                && !player.abilities.flying
+                                && !player.isPassenger())) {
+                            handler.setSwimming(true);
+                            handler.syncSwimming();
+                            hasTouchedGround = false;
+                        }
+                    } else if (player.abilities.flying) {
+                        handler.setSwimming(false);
                         handler.syncSwimming();
+                        hasTouchedGround = true;
                     }
                 }
         );
