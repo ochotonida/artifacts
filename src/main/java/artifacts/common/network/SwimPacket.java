@@ -28,7 +28,7 @@ public class SwimPacket {
     }
 
     void handle(Supplier<NetworkEvent.Context> context) {
-        PlayerEntity player = context.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT ? Minecraft.getInstance().player : context.get().getSender();
+        PlayerEntity player = context.get().getSender();
         if (player != null) {
             context.get().enqueueWork(() -> player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(handler -> handler.setSwimming(shouldSwim)));
         }
