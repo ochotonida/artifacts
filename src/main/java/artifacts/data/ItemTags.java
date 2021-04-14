@@ -57,7 +57,8 @@ public class ItemTags extends ItemTagsProvider {
                 ModItems.FLIPPERS.get(),
                 ModItems.KITTY_SLIPPERS.get(),
                 ModItems.RUNNING_SHOES.get(),
-                ModItems.STEADFAST_SPIKES.get()
+                ModItems.STEADFAST_SPIKES.get(),
+                ModItems.AQUA_DASHERS.get()
         );
 
         tag(HANDS).add(

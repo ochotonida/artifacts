@@ -4,14 +4,15 @@ import artifacts.Artifacts;
 import be.florens.expandability.api.forge.PlayerSwimEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,8 +30,7 @@ public class SwimHandlerCapability {
 
         @Override
         public INBT writeNBT(Capability<ISwimHandler> capability, ISwimHandler instance, Direction side) {
-
-            return new ListNBT();
+            return new CompoundNBT();
         }
 
         @Override
@@ -61,6 +61,21 @@ public class SwimHandlerCapability {
                             } else if (handler.isSinking()) {
                                 event.setResult(Event.Result.DENY);
                             }
+                        }
+                    }
+            );
+        }
+
+        @SubscribeEvent
+        public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+            event.player.getCapability(INSTANCE).ifPresent(
+                    handler -> {
+                        if (event.player.isInWater()) {
+                            if (!handler.isWet()) {
+                                handler.setWet(true);
+                            }
+                        } else if (event.player.isOnGround()) {
+                            handler.setWet(false);
                         }
                     }
             );

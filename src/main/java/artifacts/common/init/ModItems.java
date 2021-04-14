@@ -73,7 +73,8 @@ public class ModItems {
             KITTY_SLIPPERS = REGISTRY.register("kitty_slippers", KittySlippersItem::new),
             RUNNING_SHOES = REGISTRY.register("running_shoes", RunningShoesItem::new),
             STEADFAST_SPIKES = REGISTRY.register("steadfast_spikes", SteadfastSpikesItem::new),
-            FLIPPERS = REGISTRY.register("flippers", FlippersItem::new);
+            FLIPPERS = REGISTRY.register("flippers", FlippersItem::new),
+            AQUA_DASHERS = REGISTRY.register("aqua_dashers", AquaDashersItem::new);
 
     // curio
     public static final RegistryObject<Item>

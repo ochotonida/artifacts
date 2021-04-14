@@ -43,6 +43,7 @@
   "item.artifacts.vampiric_glove": "Bloodsuckin' Hook",
   "item.artifacts.helium_flamingo": "Seagull o' Floatin'",
   "item.artifacts.golden_hook": "Hook o' Wisdom",
+  "item.artifacts.aqua_dashers": "Sealubbers",
   "item.artifacts.snorkel.tooltip": "Allows ye to breathe when overboard",
   "item.artifacts.plastic_drinking_hat.tooltip": "Allows ye to drink yer grog faster",
   "item.artifacts.novelty_drinking_hat.tooltip": "'Hey! I'm #1, and I let gravity do my drinking!'",
@@ -76,6 +77,8 @@
   "item.artifacts.cloud_in_a_bottle.tooltip": "Allows ye to leap while in the air",
   "item.artifacts.whoopee_cushion.tooltip": "Increases yer flatulence",
   "item.artifacts.vampiric_glove.tooltip": "Allows ye to absorb the life force of creatures ye punch",
-  "item.artifacts.helium_flamingo.tooltip": "Allows ye to swim in th' skies for as long as ye can hold yer breath",
-  "item.artifacts.golden_hook.tooltip": "Gives ye more balls o' wisdom from creatures ye send to Davy Jones' Locker"
+  "item.artifacts.helium_flamingo.tooltip.0": "Allows ye to swim in th' skies for as long as ye can hold yer breath",
+  "item.artifacts.helium_flamingo.tooltip.1": "Press %s while in th' skies to start swimmin'",
+  "item.artifacts.golden_hook.tooltip": "Gives ye more balls o' wisdom from creatures ye send to Davy Jones' Locker",
+  "item.artifacts.aqua_dashers.tooltip": "Allows ye to walk over the seas"
 }

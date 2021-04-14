@@ -6,9 +6,13 @@ public interface ISwimHandler {
 
     boolean isSinking();
 
+    boolean isWet();
+
     void setSwimming(boolean shouldSwim);
 
     void setSinking(boolean shouldSink);
+
+    void setWet(boolean hasTouchedWater);
 
     void syncSwimming();
 }

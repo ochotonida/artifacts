@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.RunningShoesModel;
+import artifacts.client.render.model.curio.ShoesModel;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -24,7 +24,7 @@ public class RunningShoesItem extends CurioItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     protected BipedModel<LivingEntity> createModel() {
-        return new RunningShoesModel();
+        return new ShoesModel(0.5F);
     }
 
     @Override
