@@ -17,7 +17,7 @@ public class ServerConfig {
                 .worldRestart()
                 .comment("List of cosmetic-only items\nTo blacklist all items, use \"artifacts:*\"\nNote: blacklisting an item while it is equipped may have unintended side effects")
                 .translation(Artifacts.MODID + ".config.server.cosmetics")
-                .define("biome_blacklist", Lists.newArrayList(""));
+                .define("cosmetics", Lists.newArrayList(""));
         everlastingFoodCooldown = builder
                 .comment("Cooldown in ticks for the Everlasting Beef and Eternal Steak items")
                 .translation(Artifacts.MODID + ".config.server.eternal_food_cooldown")
