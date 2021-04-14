@@ -3,6 +3,8 @@ package artifacts.common.capability.swimhandler;
 import artifacts.common.network.NetworkHandler;
 import artifacts.common.network.SinkPacket;
 import artifacts.common.network.SwimPacket;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class SwimHandler implements ISwimHandler {
 
@@ -43,5 +45,10 @@ public class SwimHandler implements ISwimHandler {
     @Override
     public void syncSwimming() {
         NetworkHandler.INSTANCE.sendToServer(new SwimPacket(shouldSwim));
+    }
+
+    @Override
+    public void syncSinking(ServerPlayerEntity player) {
+        NetworkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SinkPacket(shouldSink));
     }
 }

@@ -126,7 +126,7 @@ public class HeliumFlamingoItem extends CurioItem {
                                     && !wasSprintingOnGround
                                     && hasTouchedGround
                                     && !player.isOnGround()
-                                    && !player.isInWater()
+                                    && (!player.isInWater() || handler.isSinking())
                                     && !player.isFallFlying()
                                     && !player.abilities.flying
                                     && !player.isPassenger())) {

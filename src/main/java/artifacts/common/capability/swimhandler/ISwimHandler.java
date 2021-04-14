@@ -1,5 +1,7 @@
 package artifacts.common.capability.swimhandler;
 
+import net.minecraft.entity.player.ServerPlayerEntity;
+
 public interface ISwimHandler {
 
     boolean isSwimming();
@@ -15,4 +17,6 @@ public interface ISwimHandler {
     void setWet(boolean hasTouchedWater);
 
     void syncSwimming();
+
+    void syncSinking(ServerPlayerEntity player);
 }

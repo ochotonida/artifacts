@@ -46,7 +46,8 @@ public class ModItems {
             PANIC_NECKLACE = REGISTRY.register("panic_necklace", PanicNecklaceItem::new),
             SHOCK_PENDANT = REGISTRY.register("shock_pendant", ShockPendantItem::new),
             FLAME_PENDANT = REGISTRY.register("flame_pendant", FlamePendantItem::new),
-            THORN_PENDANT = REGISTRY.register("thorn_pendant", ThornPendantItem::new);
+            THORN_PENDANT = REGISTRY.register("thorn_pendant", ThornPendantItem::new),
+            CHARM_OF_SINKING = REGISTRY.register("charm_of_sinking", CharmOfSinkingItem::new);
 
     // belt
     public static final RegistryObject<Item>

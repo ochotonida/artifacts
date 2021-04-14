@@ -87,7 +87,8 @@ public class ItemTags extends ItemTagsProvider {
                 ModItems.PANIC_NECKLACE.get(),
                 ModItems.SCARF_OF_INVISIBILITY.get(),
                 ModItems.SHOCK_PENDANT.get(),
-                ModItems.THORN_PENDANT.get()
+                ModItems.THORN_PENDANT.get(),
+                ModItems.CHARM_OF_SINKING.get()
         );
     }
 

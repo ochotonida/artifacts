@@ -11,16 +11,16 @@ import javax.annotation.Nullable;
 
 public class SwimHandlerProvider implements ICapabilitySerializable<INBT> {
 
-    private final ISwimHandler tracker = new SwimHandler();
-    private final LazyOptional<ISwimHandler> optionalTracker = LazyOptional.of(() -> tracker);
+    private final ISwimHandler handler = new SwimHandler();
+    private final LazyOptional<ISwimHandler> optionalHandler = LazyOptional.of(() -> handler);
 
     public void invalidate() {
-        optionalTracker.invalidate();
+        optionalHandler.invalidate();
     }
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction side) {
-        return SwimHandlerCapability.INSTANCE.orEmpty(capability, optionalTracker);
+        return SwimHandlerCapability.INSTANCE.orEmpty(capability, optionalHandler);
     }
 
     @Override
@@ -28,13 +28,13 @@ public class SwimHandlerProvider implements ICapabilitySerializable<INBT> {
         if (SwimHandlerCapability.INSTANCE == null) {
             return new ListNBT();
         }
-        return SwimHandlerCapability.INSTANCE.writeNBT(tracker, null);
+        return SwimHandlerCapability.INSTANCE.writeNBT(handler, null);
     }
 
     @Override
     public void deserializeNBT(INBT nbt) {
         if (SwimHandlerCapability.INSTANCE != null) {
-            SwimHandlerCapability.INSTANCE.readNBT(tracker, null, nbt);
+            SwimHandlerCapability.INSTANCE.readNBT(handler, null, nbt);
         }
     }
 }
