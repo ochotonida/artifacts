@@ -1,6 +1,8 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
+import artifacts.common.capability.swimhandler.ISwimHandler;
+import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
@@ -39,7 +41,8 @@ public class UmbrellaItem extends ArtifactItem {
         LivingEntity entity = event.getEntityLiving();
         ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
         if (gravity != null) {
-            if (!entity.isOnGround() && !entity.isInWater() && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(Effects.SLOW_FALLING)
+            boolean isInWater = entity.isInWater() && !entity.getCapability(SwimHandlerCapability.INSTANCE).map(ISwimHandler::isSinking).orElse(false);
+            if (!entity.isOnGround() && !isInWater && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(Effects.SLOW_FALLING)
                     && (entity.getOffhandItem().getItem() == this
                     || entity.getMainHandItem().getItem() == this) && !(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAction.BLOCK)) {
                 if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {

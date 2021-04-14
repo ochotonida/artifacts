@@ -29,13 +29,22 @@ public class SwimHandlerCapability {
     public static class Storage implements Capability.IStorage<ISwimHandler> {
 
         @Override
-        public INBT writeNBT(Capability<ISwimHandler> capability, ISwimHandler instance, Direction side) {
-            return new CompoundNBT();
+        public INBT writeNBT(Capability<ISwimHandler> capability, ISwimHandler handler, Direction side) {
+            CompoundNBT compoundNBT = new CompoundNBT();
+            compoundNBT.putBoolean("ShouldSwim", handler.isSwimming());
+            compoundNBT.putBoolean("ShouldSink", handler.isSinking());
+            compoundNBT.putBoolean("IsWet", handler.isWet());
+            return compoundNBT;
         }
 
         @Override
-        public void readNBT(Capability<ISwimHandler> capability, ISwimHandler instance, Direction side, INBT nbt) {
-
+        public void readNBT(Capability<ISwimHandler> capability, ISwimHandler handler, Direction side, INBT nbt) {
+            if (nbt instanceof CompoundNBT) {
+                CompoundNBT compoundNBT = (CompoundNBT) nbt;
+                handler.setSwimming(compoundNBT.getBoolean("ShouldSwim"));
+                handler.setSinking(compoundNBT.getBoolean("ShouldSink"));
+                handler.setWet(compoundNBT.getBoolean("IsWet"));
+            }
         }
     }
 

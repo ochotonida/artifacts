@@ -68,8 +68,8 @@ public class HeliumFlamingoItem extends CurioItem {
                     if (handler.isSwimming()) {
                         if (!isEquippedBy(event.player)
                                 || event.player.getAirSupply() <= 0
-                                || event.player.isInWater() && !event.player.isSwimming()
-                                || !event.player.isInWater() && event.player.isOnGround()) {
+                                || event.player.isInWater() && !event.player.isSwimming() && !handler.isSinking()
+                                || (!event.player.isInWater() || handler.isSinking()) && event.player.isOnGround()) {
                             handler.setSwimming(false);
                             if (!event.player.isOnGround() && !event.player.isInWater()) {
                                 event.player.playSound(SoundEvents.ITEM_PICKUP, 0.5F, 0.75F);
@@ -108,7 +108,6 @@ public class HeliumFlamingoItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public void onInputUpdate(InputUpdateEvent event) {
-
             PlayerEntity player = event.getPlayer();
             boolean isSprintKeyDown = Minecraft.getInstance().options.keySprint.isDown();
 

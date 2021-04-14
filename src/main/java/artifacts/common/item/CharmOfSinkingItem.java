@@ -1,17 +1,32 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.ShoesModel;
+import artifacts.client.render.model.curio.CharmOfSinkingModel;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 
 public class CharmOfSinkingItem extends CurioItem {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/helium_flamingo.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/charm_of_sinking.png");
+
+    // TODO step sounds
+    public CharmOfSinkingItem() {
+        addListener(EventPriority.HIGH, PlayerEvent.BreakSpeed.class, this::onBreakSpeed, PlayerEvent::getPlayer);
+    }
+
+    public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+        if (event.getPlayer().isEyeInFluid(FluidTags.WATER) && !EnchantmentHelper.hasAquaAffinity(event.getPlayer())) {
+            event.setNewSpeed(event.getNewSpeed() * 5);
+        }
+    }
 
     @Override
     public void onEquip(String identifier, int index, LivingEntity entity, ItemStack stack) {
@@ -39,7 +54,7 @@ public class CharmOfSinkingItem extends CurioItem {
 
     @Override
     protected BipedModel<LivingEntity> createModel() {
-        return new ShoesModel(1);
+        return new CharmOfSinkingModel();
     }
 
     @Override

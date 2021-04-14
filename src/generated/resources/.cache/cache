@@ -1,6 +1,7 @@
 7cb1c9f133480c4e83e3cfaa0f943d66f62a4ca8 assets/artifacts/models/item/antidote_vessel.json
 3b0f523183c0ca679c548e5e633ff5b498df6d7f assets/artifacts/models/item/aqua_dashers.json
 8041b12b6034073f09bc13a4b01fe0a7bdf97b4b assets/artifacts/models/item/bunny_hoppers.json
+846e8a89c5f4151ae7353660441d492564965ff2 assets/artifacts/models/item/charm_of_sinking.json
 202cee7d4fa9dec7b5c14b06f689b5b2ac5cf4c6 assets/artifacts/models/item/cloud_in_a_bottle.json
 fb5707b40b9588fa265ce7eb53d4ea7bef406162 assets/artifacts/models/item/cross_necklace.json
 bb2dcbb601c09b6349797972136c7f5e5a516bf6 assets/artifacts/models/item/crystal_heart.json
@@ -61,11 +62,11 @@ f1e87761bd2faf4a0bb4827a897d0ca55b5bee89 data/artifacts/loot_tables/inject/chest
 0316e829c9b7a3e3750ebb5a85d3d7889c48f3d1 data/artifacts/loot_tables/inject/chests/village/village_weaponsmith.json
 7673e280ba99f34e71eb94c7c2e3573f19d92097 data/artifacts/loot_tables/inject/chests/woodland_mansion.json
 e3d7261b56b38639e50ee94a4ebcd5f54507ac62 data/artifacts/loot_tables/inject/entities/cow.json
-26d2428c385a1383a28a1513ed0d5fe030097846 data/artifacts/tags/items/artifacts.json
+cf79bb3dc197202552e85c5f2c4235b8e1c8e694 data/artifacts/tags/items/artifacts.json
 94446c2219223bb54ee99e45bbdfb769f69c2c27 data/curios/tags/items/belt.json
 780e1301f1d02678c169e3f3f7bb363a8355a0af data/curios/tags/items/curio.json
 1ad799ef52e39345fa72d6d8b59e07727945a7db data/curios/tags/items/feet.json
 47a1c22c3039433f273a9c36d8ee699296f8e7b5 data/curios/tags/items/hands.json
 f258857d0bda1b92bfe2fe46bb0a9babc7aa3ae1 data/curios/tags/items/head.json
-5d8f6d286ceb387e0aeb6a47f53ee45d44664425 data/curios/tags/items/necklace.json
+511cbb5a685b04712a26f35f0230a46d0670d39f data/curios/tags/items/necklace.json
 f0b4442b3680f235a7d60241fa09812017f95c79 data/minecraft/tags/items/piglin_loved.json
