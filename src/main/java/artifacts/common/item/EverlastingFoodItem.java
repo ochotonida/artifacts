@@ -27,6 +27,6 @@ public class EverlastingFoodItem extends ArtifactItem {
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return 24;
+        return Config.isCosmetic(this) ? 72000 : 24;
     }
 }

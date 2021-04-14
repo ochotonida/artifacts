@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.ShoesModel;
+import artifacts.common.config.Config;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -35,17 +36,19 @@ public class RunningShoesItem extends CurioItem {
     @Override
     @SuppressWarnings("ConstantConditions")
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
-        if (livingEntity.isSprinting()) {
-            if (!movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
-                movementSpeed.addTransientModifier(RUNNING_SHOES_SPEED_BOOST);
+        if (!Config.isCosmetic(this)) {
+            ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
+            if (livingEntity.isSprinting()) {
+                if (!movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
+                    movementSpeed.addTransientModifier(RUNNING_SHOES_SPEED_BOOST);
+                }
+                if (livingEntity instanceof PlayerEntity) {
+                    livingEntity.maxUpStep = Math.max(livingEntity.maxUpStep, 1.1F);
+                }
+            } else if (movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
+                movementSpeed.removeModifier(RUNNING_SHOES_SPEED_BOOST);
+                livingEntity.maxUpStep = 0.6F;
             }
-            if (livingEntity instanceof PlayerEntity) {
-                livingEntity.maxUpStep = Math.max(livingEntity.maxUpStep, 1.1F);
-            }
-        } else if (movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
-            movementSpeed.removeModifier(RUNNING_SHOES_SPEED_BOOST);
-            livingEntity.maxUpStep = 0.6F;
         }
     }
 

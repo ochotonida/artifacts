@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.VillagerHatModel;
+import artifacts.common.config.Config;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -28,7 +29,7 @@ public class VillagerHatItem extends CurioItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
+        if (!Config.isCosmetic(this) && !livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
             livingEntity.addEffect(new EffectInstance(Effects.HERO_OF_THE_VILLAGE, 39, 1, true, false));
         }
     }

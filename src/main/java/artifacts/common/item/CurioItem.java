@@ -1,5 +1,6 @@
 package artifacts.common.item;
 
+import artifacts.common.config.Config;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -30,7 +31,7 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
     private Object model;
 
     protected boolean isEquippedBy(@Nullable LivingEntity entity) {
-        return entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
+        return !Config.isCosmetic(this) && entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
     }
 
     protected <T extends Event> void addListener(EventPriority priority, Class<T> eventClass, Consumer<T> listener, Function<T, LivingEntity> livingEntitySupplier) {

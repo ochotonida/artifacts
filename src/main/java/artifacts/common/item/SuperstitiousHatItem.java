@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.SuperstitiousHatModel;
+import artifacts.common.config.Config;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -26,6 +27,6 @@ public class SuperstitiousHatItem extends CurioItem {
 
     @Override
     public int getLootingBonus(String identifier, LivingEntity livingEntity, ItemStack curio, int index) {
-        return 1;
+        return Config.isCosmetic(this) ? 0 : 1;
     }
 }

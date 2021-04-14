@@ -3,6 +3,7 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.CharmOfSinkingModel;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
+import artifacts.common.config.Config;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
@@ -30,7 +31,7 @@ public class CharmOfSinkingItem extends CurioItem {
 
     @Override
     public void onEquip(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (entity instanceof ServerPlayerEntity) {
+        if (!Config.isCosmetic(this) && entity instanceof ServerPlayerEntity) {
             entity.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
                     handler -> {
                         handler.setSinking(true);
@@ -42,7 +43,7 @@ public class CharmOfSinkingItem extends CurioItem {
 
     @Override
     public void onUnequip(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (entity instanceof ServerPlayerEntity) {
+        if (!Config.isCosmetic(this) && entity instanceof ServerPlayerEntity) {
             entity.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
                     handler -> {
                         handler.setSinking(false);

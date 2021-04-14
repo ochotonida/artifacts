@@ -52,7 +52,9 @@ public class HeliumFlamingoItem extends CurioItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        if (Config.showTooltips) {
+        if (Config.isCosmetic(this)) {
+            super.appendHoverText(stack, world, tooltip, flags);
+        } else if (Config.showTooltips) {
             tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.0").withStyle(TextFormatting.GRAY));
             tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.1", Minecraft.getInstance().options.keySprint.getTranslatedKeyMessage()).withStyle(TextFormatting.GRAY));
         }
@@ -108,6 +110,10 @@ public class HeliumFlamingoItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public void onInputUpdate(InputUpdateEvent event) {
+            if (Config.isCosmetic(HeliumFlamingoItem.this)) {
+                return;
+            }
+
             PlayerEntity player = event.getPlayer();
             boolean isSprintKeyDown = Minecraft.getInstance().options.keySprint.isDown();
 
@@ -152,6 +158,10 @@ public class HeliumFlamingoItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent(priority = EventPriority.LOW)
         public void render(RenderGameOverlayEvent.Pre event) {
+            if (Config.isCosmetic(HeliumFlamingoItem.this)) {
+                return;
+            }
+
             Minecraft minecraft = Minecraft.getInstance();
             PlayerEntity player = (PlayerEntity) minecraft.getCameraEntity();
             if (event.getType() == RenderGameOverlayEvent.ElementType.AIR && !event.isCanceled() && isEquippedBy(player)) {

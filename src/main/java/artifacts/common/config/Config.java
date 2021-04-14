@@ -1,15 +1,18 @@
 package artifacts.common.config;
 
 import artifacts.Artifacts;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,16 +22,22 @@ public class Config {
     public static final ForgeConfigSpec COMMON_SPEC;
     private static final CommonConfig COMMON;
 
+    public static final ForgeConfigSpec SERVER_SPEC;
+    public static final ServerConfig SERVER;
+
     public static final ForgeConfigSpec CLIENT_SPEC;
     private static final ClientConfig CLIENT;
-    public static boolean modifyHurtSounds;
-    public static boolean showFirstPersonGloves;
-    public static boolean showTooltips;
 
     static {
-        final Pair<CommonConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
-        COMMON = specPair.getLeft();
-        COMMON_SPEC = specPair.getRight();
+        Pair<CommonConfig, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
+        COMMON = commonSpecPair.getLeft();
+        COMMON_SPEC = commonSpecPair.getRight();
+        Pair<ServerConfig, ForgeConfigSpec> serverSpecPair = new ForgeConfigSpec.Builder().configure(ServerConfig::new);
+        SERVER = serverSpecPair.getLeft();
+        SERVER_SPEC = serverSpecPair.getRight();
+        Pair<ClientConfig, ForgeConfigSpec> clientSpecPair = new ForgeConfigSpec.Builder().configure(ClientConfig::new);
+        CLIENT_SPEC = clientSpecPair.getRight();
+        CLIENT = clientSpecPair.getLeft();
     }
 
     private static Set<ResourceLocation> worldGenBiomeBlacklist;
@@ -40,56 +49,77 @@ public class Config {
     public static double campsiteOreChance;
     public static boolean useModdedChests;
 
+    public static Set<Item> cosmetics = Collections.emptySet();
     public static int everlastingFoodCooldown;
 
-    static {
-        final Pair<ClientConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(ClientConfig::new);
-        CLIENT_SPEC = specPair.getRight();
-        CLIENT = specPair.getLeft();
-    }
+    public static boolean modifyHurtSounds;
+    public static boolean showFirstPersonGloves;
+    public static boolean showTooltips;
 
     public static boolean isBlacklisted(@Nullable ResourceLocation biome) {
         return biome != null && (worldGenBiomeBlacklist.contains(biome) || worldGenModIdBlacklist.contains(biome.getNamespace()));
     }
 
+    public static boolean isCosmetic(Item item) {
+        return cosmetics.contains(item);
+    }
+
     public static void bakeCommon() {
-        Config.worldGenBiomeBlacklist = COMMON.biomeBlacklist.get()
+        worldGenBiomeBlacklist = COMMON.biomeBlacklist.get()
                 .stream()
                 .filter(string -> !string.endsWith(":*"))
                 .map(ResourceLocation::new)
                 .collect(Collectors.toSet());
-        Config.worldGenModIdBlacklist = COMMON.biomeBlacklist.get()
+        worldGenModIdBlacklist = COMMON.biomeBlacklist.get()
                 .stream()
                 .filter(string -> string.endsWith(":*"))
                 .map(string -> string.substring(0, string.length() - 2))
                 .collect(Collectors.toSet());
-        Config.campsiteChance = COMMON.campsiteChance.get();
-        Config.campsiteMimicChance = COMMON.campsiteMimicChance.get() / 100D;
-        Config.campsiteOreChance = COMMON.campsiteOreChance.get() / 100D;
-        Config.campsiteMinY = COMMON.campsiteMinY.get();
-        Config.campsiteMaxY = COMMON.campsiteMaxY.get();
-        Config.useModdedChests = COMMON.useModdedChests.get();
+        campsiteChance = COMMON.campsiteChance.get();
+        campsiteMimicChance = COMMON.campsiteMimicChance.get() / 100D;
+        campsiteOreChance = COMMON.campsiteOreChance.get() / 100D;
+        campsiteMinY = COMMON.campsiteMinY.get();
+        campsiteMaxY = COMMON.campsiteMaxY.get();
+        useModdedChests = COMMON.useModdedChests.get();
+    }
 
-        Config.everlastingFoodCooldown = COMMON.everlastingFoodCooldown.get();
+    public static void bakeServer() {
+        if (SERVER.cosmetics.get().contains("artifacts:*")) {
+            // noinspection ConstantConditions
+            cosmetics = ForgeRegistries.ITEMS.getValues()
+                    .stream()
+                    .filter(item -> item.getRegistryName().getNamespace().equals(Artifacts.MODID))
+                    .collect(Collectors.toSet());
+        } else {
+            cosmetics = SERVER.cosmetics.get()
+                    .stream()
+                    .map(ResourceLocation::new)
+                    .filter(registryName -> registryName.getNamespace().equals(Artifacts.MODID))
+                    .map(ForgeRegistries.ITEMS::getValue)
+                    .collect(Collectors.toSet());
+        }
+        everlastingFoodCooldown = SERVER.everlastingFoodCooldown.get();
     }
 
     public static void bakeClient() {
-        Config.modifyHurtSounds = CLIENT.modifyHurtSounds.get();
-        Config.showFirstPersonGloves = CLIENT.showFirstPersonGloves.get();
-        Config.showTooltips = CLIENT.showTooltips.get();
+        modifyHurtSounds = CLIENT.modifyHurtSounds.get();
+        showFirstPersonGloves = CLIENT.showFirstPersonGloves.get();
+        showTooltips = CLIENT.showTooltips.get();
     }
 
     public static void register() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, SERVER_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_SPEC);
     }
 
     @SubscribeEvent
-    @SuppressWarnings("unused")
     public static void onModConfigEvent(ModConfig.ModConfigEvent configEvent) {
-        if (configEvent.getConfig().getSpec() == Config.COMMON_SPEC) {
+        if (configEvent.getConfig().getSpec() == COMMON_SPEC) {
             bakeCommon();
-        } else if (configEvent.getConfig().getSpec() == Config.CLIENT_SPEC) {
+        } else if (configEvent.getConfig().getSpec() == SERVER_SPEC) {
+            bakeServer();
+        } else if (configEvent.getConfig().getSpec() == CLIENT_SPEC) {
             bakeClient();
         }
     }

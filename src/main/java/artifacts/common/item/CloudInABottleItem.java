@@ -116,11 +116,10 @@ public class CloudInABottleItem extends CurioItem {
                     hasReleasedJumpKey = true;
                 } else if (!player.abilities.flying && canDoubleJump && hasReleasedJumpKey) {
                     canDoubleJump = false;
-
-                    CuriosApi.getCuriosHelper().findEquippedCurio(CloudInABottleItem.this, player).ifPresent(stack -> {
+                    if (isEquippedBy(player)) {
                         NetworkHandler.INSTANCE.sendToServer(new DoubleJumpPacket());
                         jump(player);
-                    });
+                    }
                 }
             }
         }

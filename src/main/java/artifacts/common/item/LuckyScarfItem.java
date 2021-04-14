@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.ScarfModel;
+import artifacts.common.config.Config;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -26,6 +27,6 @@ public class LuckyScarfItem extends CurioItem {
 
     @Override
     public int getFortuneBonus(String identifier, LivingEntity livingEntity, ItemStack curio, int index) {
-        return 1;
+        return Config.isCosmetic(this) ? 0 : 1;
     }
 }

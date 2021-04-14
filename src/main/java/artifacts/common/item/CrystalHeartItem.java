@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.CrystalHeartModel;
+import artifacts.common.config.Config;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -30,7 +31,7 @@ public class CrystalHeartItem extends CurioItem {
 
     @Override
     public void onEquip(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (!entity.level.isClientSide()) {
+        if (!Config.isCosmetic(this) && !entity.level.isClientSide()) {
             ModifiableAttributeInstance health = entity.getAttribute(Attributes.MAX_HEALTH);
             if (health != null && !health.hasModifier(HEALTH_BONUS)) {
                 health.addPermanentModifier(HEALTH_BONUS);
@@ -40,7 +41,7 @@ public class CrystalHeartItem extends CurioItem {
 
     @Override
     public void onUnequip(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (!entity.level.isClientSide()) {
+        if (!Config.isCosmetic(this) && !entity.level.isClientSide()) {
             ModifiableAttributeInstance health = entity.getAttribute(Attributes.MAX_HEALTH);
             if (health != null && health.hasModifier(HEALTH_BONUS)) {
                 health.removeModifier(HEALTH_BONUS);

@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.ScarfModel;
+import artifacts.common.config.Config;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +19,7 @@ public class ScarfOfInvisibilityItem extends CurioItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
+        if (!Config.isCosmetic(this) && !livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
             livingEntity.addEffect(new EffectInstance(Effects.INVISIBILITY, 39, 0, true, false));
         }
     }

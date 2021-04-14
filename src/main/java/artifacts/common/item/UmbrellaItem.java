@@ -3,6 +3,7 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.common.capability.swimhandler.ISwimHandler;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
+import artifacts.common.config.Config;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
@@ -57,7 +58,7 @@ public class UmbrellaItem extends ArtifactItem {
 
     @Override
     public boolean isShield(ItemStack stack, LivingEntity entity) {
-        return true;
+        return !Config.isCosmetic(this);
     }
 
     public UseAction getUseAnimation(ItemStack stack) {
@@ -69,6 +70,9 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+        if (Config.isCosmetic(this)) {
+            return super.use(world, player, hand);
+        }
         ItemStack itemstack = player.getItemInHand(hand);
         player.startUsingItem(hand);
         return ActionResult.consume(itemstack);

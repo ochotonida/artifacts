@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.FlippersModel;
+import artifacts.common.config.Config;
 import com.google.common.collect.Multimap;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
@@ -23,7 +24,9 @@ public class FlippersItem extends CurioItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
-        result.put(ForgeMod.SWIM_SPEED.get(), new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "flipper_swim_speed").toString(), 1, AttributeModifier.Operation.ADDITION));
+        if (!Config.isCosmetic(this)) {
+            result.put(ForgeMod.SWIM_SPEED.get(), new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "flipper_swim_speed").toString(), 1, AttributeModifier.Operation.ADDITION));
+        }
         return result;
     }
 

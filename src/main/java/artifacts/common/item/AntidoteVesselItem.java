@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.AntidoteVesselModel;
+import artifacts.common.config.Config;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -28,18 +29,20 @@ public class AntidoteVesselItem extends CurioItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        Map<Effect, EffectInstance> effects = new HashMap<>();
+        if (!Config.isCosmetic(this)) {
+            Map<Effect, EffectInstance> effects = new HashMap<>();
 
-        entity.getActiveEffectsMap().forEach((effect, instance) -> {
-            if (!effect.isInstantenous() && !effect.isBeneficial() && instance.getDuration() > 80) {
-                effects.put(effect, instance);
-            }
-        });
+            entity.getActiveEffectsMap().forEach((effect, instance) -> {
+                if (!effect.isInstantenous() && !effect.isBeneficial() && instance.getDuration() > 80) {
+                    effects.put(effect, instance);
+                }
+            });
 
-        effects.forEach((effect, instance) -> {
-            entity.removeEffectNoUpdate(effect);
-            entity.addEffect(new EffectInstance(effect, 80, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
-        });
+            effects.forEach((effect, instance) -> {
+                entity.removeEffectNoUpdate(effect);
+                entity.addEffect(new EffectInstance(effect, 80, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
+            });
+        }
     }
 
     @Override

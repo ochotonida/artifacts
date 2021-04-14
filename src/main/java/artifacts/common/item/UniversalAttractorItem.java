@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.UniversalAttractorModel;
+import artifacts.common.config.Config;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -41,7 +42,7 @@ public class UniversalAttractorItem extends CurioItem {
     // magnet logic from Botania, see https://github.com/Vazkii/Botania
     @Override
     public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (entity.isSpectator() || !(entity instanceof PlayerEntity)) {
+        if (Config.isCosmetic(this) || entity.isSpectator() || !(entity instanceof PlayerEntity)) {
             return;
         }
 

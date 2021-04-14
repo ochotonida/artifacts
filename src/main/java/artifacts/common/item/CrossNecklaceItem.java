@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.CrossNecklaceModel;
+import artifacts.common.config.Config;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -16,8 +17,8 @@ public class CrossNecklaceItem extends CurioItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/cross_necklace.png");
 
-    private static boolean canApplyBonus(ItemStack stack) {
-        return stack.getOrCreateTag().getBoolean("CanApplyBonus");
+    private boolean canApplyBonus(ItemStack stack) {
+        return !Config.isCosmetic(this) && stack.getOrCreateTag().getBoolean("CanApplyBonus");
     }
 
     private static void setCanApplyBonus(ItemStack stack, boolean canApplyBonus) {

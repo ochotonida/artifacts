@@ -34,7 +34,7 @@ public class DrinkingHatItem extends CurioItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        if (Config.showTooltips) {
+        if (Config.showTooltips && !Config.isCosmetic(this)) {
             if (this != ModItems.PLASTIC_DRINKING_HAT.get()) {
                 tooltip.add(new TranslationTextComponent(ModItems.PLASTIC_DRINKING_HAT.get().getDescriptionId() + ".tooltip").withStyle(TextFormatting.GRAY));
             }
