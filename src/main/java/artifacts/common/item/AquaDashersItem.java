@@ -21,9 +21,9 @@ public class AquaDashersItem extends CurioItem {
 
     public void onFluidCollision(LivingFluidCollisionEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        if (entity.isSprinting() && entity.fallDistance < 4) {
+        if (entity.isSprinting() && entity.fallDistance < 4 && !entity.isUsingItem()) {
             event.getEntityLiving().getCapability(SwimHandlerCapability.INSTANCE).ifPresent(handler -> {
-                if (!handler.isWet()) {
+                if (!handler.isWet() && !handler.isSwimming()) {
                     event.setResult(Event.Result.ALLOW);
                 }
             });
