@@ -17,8 +17,6 @@ public class CommonConfig {
     final ForgeConfigSpec.BooleanValue useModdedChests;
 
     CommonConfig(ForgeConfigSpec.Builder builder) {
-        builder.comment("To disable items or to change the frequency at which artifacts appear, override the loot tables from this mod with a data pack\nCosmetic slots are disabled by default, they can be enabled using the Curios config, see https://github.com/TheIllusiveC4/Curios/wiki/How-to-Use:-Users#creating-a-new-slot-type");
-
         builder.push("campsite");
         biomeBlacklist = builder
                 .worldRestart()
