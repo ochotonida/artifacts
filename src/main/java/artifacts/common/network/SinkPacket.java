@@ -1,16 +1,16 @@
 package artifacts.common.network;
 
-import artifacts.common.capability.swimhandler.SwimHandlerCapability;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
+import artifacts.client.network.ClientPacketHandler;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
 public class SinkPacket {
 
-    private final boolean shouldSink;
+    public final boolean shouldSink;
 
     @SuppressWarnings("unused")
     public SinkPacket(PacketBuffer buffer) {
@@ -27,10 +27,7 @@ public class SinkPacket {
     }
 
     void handle(Supplier<NetworkEvent.Context> context) {
-        PlayerEntity player = Minecraft.getInstance().player;
-        if (player != null) {
-            context.get().enqueueWork(() -> player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(handler -> handler.setSinking(shouldSink)));
-        }
+        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientPacketHandler.handleSinkPacket(this)));
         context.get().setPacketHandled(true);
     }
 }

@@ -11,6 +11,8 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 
@@ -54,6 +56,7 @@ public class CharmOfSinkingItem extends CurioItem {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     protected BipedModel<LivingEntity> createModel() {
         return new CharmOfSinkingModel();
     }
