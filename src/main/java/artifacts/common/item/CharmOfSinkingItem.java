@@ -20,7 +20,6 @@ public class CharmOfSinkingItem extends CurioItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/charm_of_sinking.png");
 
-    // TODO step sounds
     public CharmOfSinkingItem() {
         addListener(EventPriority.HIGH, PlayerEvent.BreakSpeed.class, this::onBreakSpeed, PlayerEvent::getPlayer);
     }

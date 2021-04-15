@@ -90,7 +90,7 @@ public abstract class EntityMixin {
         return (Object) this instanceof LivingEntity
                 && ((CurioItem) ModItems.AQUA_DASHERS.get()).isEquippedBy((LivingEntity) (Object) this)
                 && isSprinting()
-                && fallDistance < 4
+                && fallDistance < 6
                 && !((LivingEntity) (Object) this).getCapability(SwimHandlerCapability.INSTANCE).map(ISwimHandler::isWet).orElse(true);
     }
 }

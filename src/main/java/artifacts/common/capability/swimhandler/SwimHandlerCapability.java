@@ -79,7 +79,7 @@ public class SwimHandlerCapability {
         public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
             event.player.getCapability(INSTANCE).ifPresent(
                     handler -> {
-                        if (event.player.isInWater()) {
+                        if (event.player.isInWater() || event.player.isInLava()) {
                             if (!handler.isWet()) {
                                 handler.setWet(true);
                             }
