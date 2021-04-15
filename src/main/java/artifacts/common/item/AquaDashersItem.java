@@ -5,7 +5,10 @@ import artifacts.client.render.model.curio.AquaDashersModel;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import be.florens.expandability.api.forge.LivingFluidCollisionEvent;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -21,10 +24,15 @@ public class AquaDashersItem extends CurioItem {
 
     public void onFluidCollision(LivingFluidCollisionEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        if (entity.isSprinting() && entity.fallDistance < 6 && !entity.isUsingItem()) {
+        if (entity.isSprinting() && entity.fallDistance < 6 && !entity.isUsingItem() && !entity.isCrouching()) {
             event.getEntityLiving().getCapability(SwimHandlerCapability.INSTANCE).ifPresent(handler -> {
                 if (!handler.isWet() && !handler.isSwimming()) {
                     event.setResult(Event.Result.ALLOW);
+                    if (event.getFluidState().is(FluidTags.LAVA)) {
+                        if (!event.getEntityLiving().fireImmune() && !EnchantmentHelper.hasFrostWalker(event.getEntityLiving())) {
+                            event.getEntityLiving().hurt(DamageSource.HOT_FLOOR, 1);
+                        }
+                    }
                 }
             });
         }
