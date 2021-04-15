@@ -1,6 +1,7 @@
 package artifacts.client.jei;
 
 import artifacts.Artifacts;
+import artifacts.common.config.Config;
 import artifacts.common.init.ModItems;
 import artifacts.common.item.ArtifactItem;
 import mezz.jei.api.IModPlugin;
@@ -31,10 +32,14 @@ public class JEIPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         for (Item item : ForgeRegistries.ITEMS.getValues()) {
-            if (item instanceof ArtifactItem && item != ModItems.NOVELTY_DRINKING_HAT.get()) {
-                List<ITextComponent> textComponents = new ArrayList<>();
-                item.appendHoverText(new ItemStack(item), null, textComponents, ITooltipFlag.TooltipFlags.NORMAL);
-                registration.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM, textComponents.stream().map(ITextComponent::getString).toArray(String[]::new));
+            if (item instanceof ArtifactItem) {
+                if (Config.isCosmetic(item)) {
+                    registration.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM, "artifacts.cosmetic.jei");
+                } else if (item != ModItems.NOVELTY_DRINKING_HAT.get()) {
+                    List<ITextComponent> textComponents = new ArrayList<>();
+                    item.appendHoverText(new ItemStack(item), null, textComponents, ITooltipFlag.TooltipFlags.NORMAL);
+                    registration.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM, textComponents.stream().map(ITextComponent::getString).toArray(String[]::new));
+                }
             }
         }
         registration.addIngredientInfo(new ItemStack(ModItems.NOVELTY_DRINKING_HAT.get()), VanillaTypes.ITEM, "item.artifacts.plastic_drinking_hat.tooltip");

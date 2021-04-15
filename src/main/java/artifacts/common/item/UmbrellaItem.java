@@ -39,19 +39,21 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
-        ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
-        if (gravity != null) {
-            boolean isInWater = entity.isInWater() && !entity.getCapability(SwimHandlerCapability.INSTANCE).map(ISwimHandler::isSinking).orElse(false);
-            if (!entity.isOnGround() && !isInWater && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(Effects.SLOW_FALLING)
-                    && (entity.getOffhandItem().getItem() == this
-                    || entity.getMainHandItem().getItem() == this) && !(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAction.BLOCK)) {
-                if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                    gravity.addTransientModifier(UMBRELLA_SLOW_FALLING);
+        if (!Config.isCosmetic(this)) {
+            LivingEntity entity = event.getEntityLiving();
+            ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
+            if (gravity != null) {
+                boolean isInWater = entity.isInWater() && !entity.getCapability(SwimHandlerCapability.INSTANCE).map(ISwimHandler::isSinking).orElse(false);
+                if (!entity.isOnGround() && !isInWater && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(Effects.SLOW_FALLING)
+                        && (entity.getOffhandItem().getItem() == this
+                        || entity.getMainHandItem().getItem() == this) && !(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAction.BLOCK)) {
+                    if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
+                        gravity.addTransientModifier(UMBRELLA_SLOW_FALLING);
+                    }
+                    entity.fallDistance = 0;
+                } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
+                    gravity.removeModifier(UMBRELLA_SLOW_FALLING);
                 }
-                entity.fallDistance = 0;
-            } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                gravity.removeModifier(UMBRELLA_SLOW_FALLING);
             }
         }
     }

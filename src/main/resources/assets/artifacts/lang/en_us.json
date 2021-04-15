@@ -7,6 +7,8 @@
   "artifacts.advancements.chest_slayer.title": "Chest Slayer",
   "artifacts.advancements.chest_slayer.description": "Kill a Mimic",
   "entity.artifacts.mimic": "Mimic",
+  "artifacts.cosmetic.tooltip": "Cosmetic",
+  "artifacts.cosmetic.jei": "This item has been marked as cosmetic-only in the server config",
   "item.artifacts.mimic_spawn_egg": "Mimic Spawn Egg",
   "item.artifacts.snorkel": "Snorkel",
   "item.artifacts.plastic_drinking_hat": "Plastic Drinking Hat",
