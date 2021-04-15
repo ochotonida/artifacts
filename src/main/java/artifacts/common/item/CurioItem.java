@@ -30,7 +30,7 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
 
     private Object model;
 
-    protected boolean isEquippedBy(@Nullable LivingEntity entity) {
+    public boolean isEquippedBy(@Nullable LivingEntity entity) {
         return !Config.isCosmetic(this) && entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
     }
 

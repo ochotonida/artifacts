@@ -4,6 +4,7 @@ import artifacts.Artifacts;
 import artifacts.client.render.model.curio.HeliumFlamingoModel;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.Config;
+import artifacts.common.init.ModSoundEvents;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
@@ -13,7 +14,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -46,7 +46,7 @@ public class HeliumFlamingoItem extends CurioItem {
     @Nonnull
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_PICKUP, 1, 0.7F);
+        return new ICurio.SoundInfo(ModSoundEvents.POP.get(), 1, 0.7F);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class HeliumFlamingoItem extends CurioItem {
                                 || (!event.player.isInWater() || handler.isSinking()) && event.player.isOnGround()) {
                             handler.setSwimming(false);
                             if (!event.player.isOnGround() && !event.player.isInWater()) {
-                                event.player.playSound(SoundEvents.ITEM_PICKUP, 0.5F, 0.75F);
+                                event.player.playSound(ModSoundEvents.POP.get(), 0.5F, 0.75F);
                             }
                         }
 
