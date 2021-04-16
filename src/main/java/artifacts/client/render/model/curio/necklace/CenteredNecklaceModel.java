@@ -10,7 +10,7 @@ import net.minecraft.entity.LivingEntity;
 public abstract class CenteredNecklaceModel extends BipedModel<LivingEntity> {
 
     public CenteredNecklaceModel() {
-        super(RenderType::entityTranslucent, 0, 0, 64, 64);
+        super(RenderType::entityTranslucent, 0, 0, 64, 48);
         setAllVisible(false);
 
         body = new ModelRenderer(this);
