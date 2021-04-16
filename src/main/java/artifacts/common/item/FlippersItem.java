@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.FlippersModel;
+import artifacts.client.render.model.curio.feet.FlippersModel;
 import artifacts.common.config.Config;
 import com.google.common.collect.Multimap;
 import net.minecraft.client.renderer.entity.model.BipedModel;

@@ -1,6 +1,6 @@
 package artifacts.common.item;
 
-import artifacts.client.render.model.curio.DrinkingHatModel;
+import artifacts.client.render.model.curio.head.DrinkingHatModel;
 import artifacts.common.config.Config;
 import artifacts.common.init.ModItems;
 import net.minecraft.client.renderer.entity.model.BipedModel;

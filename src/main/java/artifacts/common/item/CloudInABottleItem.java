@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.CloudInABottleModel;
+import artifacts.client.render.model.curio.belt.CloudInABottleModel;
 import artifacts.common.init.ModItems;
 import artifacts.common.init.ModSoundEvents;
 import artifacts.common.network.DoubleJumpPacket;

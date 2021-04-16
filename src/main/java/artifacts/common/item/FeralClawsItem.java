@@ -1,8 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.ClawsModel;
-import artifacts.client.render.model.curio.GloveModel;
+import artifacts.client.render.model.curio.hands.ClawsModel;
 import artifacts.common.config.Config;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -20,8 +19,7 @@ import java.util.UUID;
 
 public class FeralClawsItem extends GloveItem {
 
-    private static final ResourceLocation TEXTURE_DEFAULT = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/feral_claws_default.png");
-    private static final ResourceLocation TEXTURE_SLIM = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/feral_claws_slim.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/feral_claws.png");
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
@@ -39,17 +37,17 @@ public class FeralClawsItem extends GloveItem {
 
     @Override
     protected ResourceLocation getTexture() {
-        return TEXTURE_DEFAULT;
+        return TEXTURE;
     }
 
     @Override
     protected ResourceLocation getSlimTexture() {
-        return TEXTURE_SLIM;
+        return getTexture();
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    protected GloveModel createModel(boolean smallArms) {
+    protected ClawsModel createModel(boolean smallArms) {
         return new ClawsModel(smallArms);
     }
 }

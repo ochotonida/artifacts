@@ -1,8 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.ClawsModel;
-import artifacts.client.render.model.curio.GloveModel;
+import artifacts.client.render.model.curio.hands.ClawsModel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
@@ -15,8 +14,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class DiggingClawsItem extends GloveItem {
 
-    private static final ResourceLocation TEXTURE_DEFAULT = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/digging_claws_default.png");
-    private static final ResourceLocation TEXTURE_SLIM = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/digging_claws_slim.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/digging_claws.png");
 
     public DiggingClawsItem() {
         addListener(EventPriority.LOW, PlayerEvent.BreakSpeed.class, this::onBreakSpeed, PlayerEvent::getPlayer);
@@ -40,17 +38,17 @@ public class DiggingClawsItem extends GloveItem {
 
     @Override
     protected ResourceLocation getTexture() {
-        return TEXTURE_DEFAULT;
+        return TEXTURE;
     }
 
     @Override
     protected ResourceLocation getSlimTexture() {
-        return TEXTURE_SLIM;
+        return getTexture();
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    protected GloveModel createModel(boolean smallArms) {
+    protected ClawsModel createModel(boolean smallArms) {
         return new ClawsModel(smallArms);
     }
 }

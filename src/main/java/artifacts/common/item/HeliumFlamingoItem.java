@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.HeliumFlamingoModel;
+import artifacts.client.render.model.curio.belt.HeliumFlamingoModel;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.Config;
 import artifacts.common.init.ModSoundEvents;

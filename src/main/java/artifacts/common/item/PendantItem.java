@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.PendantModel;
+import artifacts.client.render.model.curio.necklace.PendantModel;
 import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;

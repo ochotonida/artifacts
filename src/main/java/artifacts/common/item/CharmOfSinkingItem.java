@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.CharmOfSinkingModel;
+import artifacts.client.render.model.curio.necklace.CharmOfSinkingModel;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.Config;
 import net.minecraft.client.renderer.entity.model.BipedModel;

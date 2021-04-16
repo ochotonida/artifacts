@@ -2,7 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.RenderTypes;
-import artifacts.client.render.model.curio.GloveModel;
+import artifacts.client.render.model.curio.hands.HandsModel;
 import artifacts.common.util.DamageSourceHelper;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -48,26 +48,24 @@ public class FireGauntletItem extends GloveItem {
     public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, ItemStack stack) {
         super.render(identifier, index, matrixStack, buffer, light, entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, stack);
         boolean smallArms = hasSmallArms(entity);
-        GloveModel model = getModel(smallArms);
+        HandsModel model = getModel(smallArms);
         IVertexBuilder builder = ItemRenderer.getFoilBuffer(buffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
         model.renderHand(index % 2 == 0, matrixStack, builder, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderArm(MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, AbstractClientPlayerEntity player, HandSide side, boolean hasGlint) {
+    public void renderArm(MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, AbstractClientPlayerEntity player, HandSide side, boolean hasFoil) {
         if (!player.isSpectator()) {
-            super.renderArm(matrixStack, buffer, combinedLight, player, side, hasGlint);
+            super.renderArm(matrixStack, buffer, combinedLight, player, side, hasFoil);
 
             boolean smallArms = hasSmallArms(player);
-            GloveModel model = getModel(smallArms);
+            HandsModel model = getModel(smallArms);
 
             ModelRenderer arm = side == HandSide.LEFT ? model.leftArm : model.rightArm;
-            ModelRenderer armWear = side == HandSide.LEFT ? model.leftSleeve : model.rightSleeve;
 
             IVertexBuilder builder = ItemRenderer.getFoilBuffer(buffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
             arm.render(matrixStack, builder, 0xF000F0, OverlayTexture.NO_OVERLAY);
-            armWear.render(matrixStack, builder, 0xF000F0, OverlayTexture.NO_OVERLAY);
         }
     }
 

@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.AquaDashersModel;
+import artifacts.client.render.model.curio.feet.AquaDashersModel;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import be.florens.expandability.api.forge.LivingFluidCollisionEvent;
 import net.minecraft.client.renderer.entity.model.BipedModel;
