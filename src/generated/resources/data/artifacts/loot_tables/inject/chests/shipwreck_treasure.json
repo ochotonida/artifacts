@@ -44,6 +44,10 @@
         {
           "type": "minecraft:item",
           "name": "artifacts:running_shoes"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:charm_of_sinking"
         }
       ],
       "conditions": [
