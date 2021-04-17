@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "weight": 6,
+          "weight": 4,
           "name": "artifacts:artifact"
         },
         {
@@ -19,7 +19,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 4,
           "name": "artifacts:helium_flamingo"
         }
       ],

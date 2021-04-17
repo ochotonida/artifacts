@@ -231,7 +231,6 @@ public class LootTables extends LootTableProvider {
                         .add(itemEntry(ModItems.PANIC_NECKLACE.get(), 1))
                         .add(itemEntry(ModItems.CRYSTAL_HEART.get(), 1))
                         .add(itemEntry(ModItems.ANTIDOTE_VESSEL.get(), 1))
-                        .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/buried_treasure", LootTable.lootTable().withPool(
@@ -274,10 +273,10 @@ public class LootTables extends LootTableProvider {
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
                         .when(RandomChance.randomChance(0.4F))
-                        .add(artifactEntry(6))
+                        .add(artifactEntry(4))
                         .add(itemEntry(ModItems.CRYSTAL_HEART.get(), 1))
                         .add(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 1))
-                        .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 3))
+                        .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 4))
                 )
         );
         addChestLootTable("inject/chests/jungle_temple", LootTable.lootTable().withPool(
@@ -361,7 +360,6 @@ public class LootTables extends LootTableProvider {
                         .add(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 1))
                         .add(itemEntry(ModItems.LUCKY_SCARF.get(), 1))
                         .add(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 1))
-                        .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 1))
                         .add(itemEntry(ModItems.AQUA_DASHERS.get(), 1))
                 )
         );
