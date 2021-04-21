@@ -28,7 +28,7 @@ side = "BOTH"
 [[dependencies.artifacts]]
 modId = "curios"
 mandatory = true
-versionRange = "[1.16.5-4.0.4.0,)"
+versionRange = "[1.16.5-4.0.5.1,)"
 ordering = "NONE"
 side = "BOTH"
 

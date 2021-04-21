@@ -15,6 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
+import top.theillusivec4.curios.api.SlotContext;
 
 public class CharmOfSinkingItem extends CurioItem {
 
@@ -31,24 +32,24 @@ public class CharmOfSinkingItem extends CurioItem {
     }
 
     @Override
-    public void onEquip(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (!Config.isCosmetic(this) && entity instanceof ServerPlayerEntity) {
-            entity.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
+    public void onEquip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
+        if (!Config.isCosmetic(this) && slotContext.getWearer() instanceof ServerPlayerEntity) {
+            slotContext.getWearer().getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
                     handler -> {
                         handler.setSinking(true);
-                        handler.syncSinking((ServerPlayerEntity) entity);
+                        handler.syncSinking((ServerPlayerEntity) slotContext.getWearer());
                     }
             );
         }
     }
 
     @Override
-    public void onUnequip(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (!Config.isCosmetic(this) && entity instanceof ServerPlayerEntity) {
-            entity.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
+    public void onUnequip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
+        if (!Config.isCosmetic(this) && slotContext.getWearer() instanceof ServerPlayerEntity) {
+            slotContext.getWearer().getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
                     handler -> {
                         handler.setSinking(false);
-                        handler.syncSinking((ServerPlayerEntity) entity);
+                        handler.syncSinking((ServerPlayerEntity) slotContext.getWearer());
                     }
             );
         }

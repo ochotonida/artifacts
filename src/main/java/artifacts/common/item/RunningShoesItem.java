@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
@@ -53,12 +54,11 @@ public class RunningShoesItem extends CurioItem {
     }
 
     @Override
-    @SuppressWarnings("ConstantConditions")
-    public void onUnequip(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
-        if (movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
+    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        ModifiableAttributeInstance movementSpeed = slotContext.getWearer().getAttribute(Attributes.MOVEMENT_SPEED);
+        if (movementSpeed != null && movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
             movementSpeed.removeModifier(RUNNING_SHOES_SPEED_BOOST);
-            livingEntity.maxUpStep = 0.6F;
+            slotContext.getWearer().maxUpStep = 0.6F;
         }
     }
 }
