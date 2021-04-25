@@ -102,7 +102,7 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.0.14'
 
-    runtimeOnly fg.deobf("curse.maven:curious-armor-stands-398784:3107245")
+    runtimeOnly fg.deobf("curse.maven:curious-armor-stands-398784:3288589")
     runtimeOnly fg.deobf("curse.maven:configured-457570:3266880")
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.1:api")
