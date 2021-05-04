@@ -2,6 +2,7 @@ package artifacts.common.config;
 
 import artifacts.Artifacts;
 import artifacts.common.config.item.EverlastingFoodConfig;
+import artifacts.common.config.item.FeralClawsConfig;
 import com.google.common.collect.Lists;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -18,6 +19,7 @@ public class ServerConfig {
     public Set<Item> cosmetics = Collections.emptySet();
 
     public final EverlastingFoodConfig everlastingFood;
+    public final FeralClawsConfig feralClaws;
 
     private final ForgeConfigSpec.ConfigValue<List<String>> cosmeticsValue;
 
@@ -34,6 +36,7 @@ public class ServerConfig {
                 .translation(Artifacts.MODID + ".config.server.cosmetics")
                 .define("cosmetics", Lists.newArrayList(""));
         everlastingFood = new EverlastingFoodConfig(builder);
+        feralClaws = new FeralClawsConfig(builder);
         builder.pop();
     }
 
@@ -53,6 +56,7 @@ public class ServerConfig {
                     .collect(Collectors.toSet());
         }
         everlastingFood.bake();
+        feralClaws.bake();
     }
 
     public boolean isCosmetic(Item item) {
