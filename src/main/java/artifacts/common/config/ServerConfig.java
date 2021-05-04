@@ -2,6 +2,7 @@ package artifacts.common.config;
 
 import artifacts.Artifacts;
 import artifacts.common.config.item.AntidoteVesselConfig;
+import artifacts.common.config.item.BunnyHoppersConfig;
 import artifacts.common.config.item.EverlastingFoodConfig;
 import artifacts.common.config.item.FeralClawsConfig;
 import com.google.common.collect.Lists;
@@ -20,6 +21,7 @@ public class ServerConfig {
     public Set<Item> cosmetics = Collections.emptySet();
 
     public final AntidoteVesselConfig antidoteVessel;
+    public final BunnyHoppersConfig bunnyHoppers;
     public final EverlastingFoodConfig everlastingFood;
     public final FeralClawsConfig feralClaws;
 
@@ -39,6 +41,7 @@ public class ServerConfig {
                 .define("cosmetics", Lists.newArrayList(""));
 
         antidoteVessel = new AntidoteVesselConfig(builder);
+        bunnyHoppers = new BunnyHoppersConfig(builder);
         everlastingFood = new EverlastingFoodConfig(builder);
         feralClaws = new FeralClawsConfig(builder);
 
@@ -62,6 +65,7 @@ public class ServerConfig {
         }
 
         antidoteVessel.bake();
+        bunnyHoppers.bake();
         everlastingFood.bake();
         feralClaws.bake();
     }

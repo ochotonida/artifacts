@@ -25,13 +25,15 @@ public class BunnyHoppersItem extends HurtSoundModifyingItem {
     }
 
     public void onLivingFall(LivingFallEvent event) {
-        event.setDamageMultiplier(0);
+        if (Config.SERVER.bunnyHoppers.shouldCancelFallDamage) {
+            event.setDamageMultiplier(0);
+        }
     }
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!Config.SERVER.isCosmetic(this) && !livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
-            livingEntity.addEffect(new EffectInstance(Effects.JUMP, 39, 1, true, false));
+        if (!Config.SERVER.isCosmetic(this) && !livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0 && Config.SERVER.bunnyHoppers.jumpBoostLevel >= 0) {
+            livingEntity.addEffect(new EffectInstance(Effects.JUMP, 39, Config.SERVER.bunnyHoppers.jumpBoostLevel, true, false));
         }
     }
 

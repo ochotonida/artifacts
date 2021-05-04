@@ -103,6 +103,8 @@
   "artifacts.config.server.cosmetics": "Cosmetic-only items list",
   "artifacts.config.server.antidote_vessel.negative_effects": "Negative Effects",
   "artifacts.config.server.antidote_vessel.max_effect_duration": "Maximum negative effect duration",
+  "artifacts.config.server.bunny_hoppers.should_cancel_fall_damage": "Should cancel fall damage",
+  "artifacts.config.server.bunny_hoppers.jump_boost_level": "Jump boost level",
   "artifacts.config.server.everlasting_food.cooldown": "Cooldown",
   "artifacts.config.server.feral_claws.attack_speed_bonus": "Attack Speed bonus"
 }
