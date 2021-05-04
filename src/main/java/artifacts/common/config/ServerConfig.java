@@ -1,6 +1,7 @@
 package artifacts.common.config;
 
 import artifacts.Artifacts;
+import artifacts.common.config.item.AntidoteVesselConfig;
 import artifacts.common.config.item.EverlastingFoodConfig;
 import artifacts.common.config.item.FeralClawsConfig;
 import com.google.common.collect.Lists;
@@ -18,6 +19,7 @@ public class ServerConfig {
 
     public Set<Item> cosmetics = Collections.emptySet();
 
+    public final AntidoteVesselConfig antidoteVessel;
     public final EverlastingFoodConfig everlastingFood;
     public final FeralClawsConfig feralClaws;
 
@@ -35,8 +37,11 @@ public class ServerConfig {
                 )
                 .translation(Artifacts.MODID + ".config.server.cosmetics")
                 .define("cosmetics", Lists.newArrayList(""));
+
+        antidoteVessel = new AntidoteVesselConfig(builder);
         everlastingFood = new EverlastingFoodConfig(builder);
         feralClaws = new FeralClawsConfig(builder);
+
         builder.pop();
     }
 
@@ -55,6 +60,8 @@ public class ServerConfig {
                     .map(ForgeRegistries.ITEMS::getValue)
                     .collect(Collectors.toSet());
         }
+
+        antidoteVessel.bake();
         everlastingFood.bake();
         feralClaws.bake();
     }

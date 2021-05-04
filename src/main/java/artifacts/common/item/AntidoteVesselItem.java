@@ -33,14 +33,16 @@ public class AntidoteVesselItem extends CurioItem {
             Map<Effect, EffectInstance> effects = new HashMap<>();
 
             entity.getActiveEffectsMap().forEach((effect, instance) -> {
-                if (!effect.isInstantenous() && !effect.isBeneficial() && instance.getDuration() > 80) {
+                if (Config.SERVER.antidoteVessel.negativeEffects.contains(effect) && instance.getDuration() > Config.SERVER.antidoteVessel.maxEffectDuration) {
                     effects.put(effect, instance);
                 }
             });
 
             effects.forEach((effect, instance) -> {
                 entity.removeEffectNoUpdate(effect);
-                entity.addEffect(new EffectInstance(effect, 80, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
+                if (Config.SERVER.antidoteVessel.maxEffectDuration > 0) {
+                    entity.addEffect(new EffectInstance(effect, Config.SERVER.antidoteVessel.maxEffectDuration, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
+                }
             });
         }
     }
