@@ -1,24 +1,27 @@
 package artifacts.common.config.item;
 
-import artifacts.Artifacts;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class CrystalHeartConfig {
+public class CrystalHeartConfig extends ItemConfig {
 
     public int healthBonus;
 
-    private final ForgeConfigSpec.IntValue healthBonusValue;
+    private ForgeConfigSpec.IntValue healthBonusValue;
 
     public CrystalHeartConfig(ForgeConfigSpec.Builder builder) {
-        builder.push("crystal_heart");
+        super(builder, "crystal_heart");
+    }
+
+    @Override
+    public void addConfigs(ForgeConfigSpec.Builder builder) {
         healthBonusValue = builder
                 .worldRestart()
                 .comment("The amount additional health applied to the wearer")
-                .translation(Artifacts.MODID + ".config.server.crystal_heart.health_bonus")
+                .translation(translate("health_bonus"))
                 .defineInRange("health_bonus", 10, 1, Integer.MAX_VALUE);
-        builder.pop();
     }
 
+    @Override
     public void bake() {
         healthBonus = healthBonusValue.get();
     }

@@ -43,8 +43,9 @@ public class DrinkingHatItem extends CurioItem {
     }
 
     public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-        if (event.getItem().getUseAnimation() == UseAction.DRINK) {
-            event.setDuration(event.getDuration() / 4);
+        UseAction action = event.getItem().getUseAnimation();
+        if (action == UseAction.DRINK || action == UseAction.EAT && Config.SERVER.drinkingHatConfig.enableFastEating) {
+            event.setDuration((int) (event.getDuration() * Config.SERVER.drinkingHatConfig.drinkingDurationMultiplier));
         }
     }
 

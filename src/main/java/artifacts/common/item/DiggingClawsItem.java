@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.hands.ClawsModel;
+import artifacts.common.config.Config;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
@@ -22,12 +23,12 @@ public class DiggingClawsItem extends GloveItem {
     }
 
     public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
-        event.setNewSpeed(event.getNewSpeed() + 3.2F);
+        event.setNewSpeed(event.getNewSpeed() + Config.SERVER.diggingClaws.miningSpeedBonus);
     }
 
     public void onHarvestCheck(PlayerEvent.HarvestCheck event) {
         if (!event.canHarvest()) {
-            event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= 1);
+            event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= Config.SERVER.diggingClaws.harvestLevel);
         }
     }
 

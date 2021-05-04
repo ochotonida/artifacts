@@ -109,6 +109,13 @@
   "artifacts.config.server.cloud_in_a_bottle.sprint_jump_distance_multiplier": "Sprint double jump distance multiplier",
   "artifacts.config.server.cross_necklace.invincibility_bonus": "Bonus invincibility time",
   "artifacts.config.server.crystal_heart.health_bonus": "Health bonus",
+  "artifacts.config.server.digging_claws.mining_speed_bonus": "Mining Speed bonus",
+  "artifacts.config.server.digging_claws.harvest_level": "Base harvest level",
+  "artifacts.config.server.drinking_hat.drinking_duration_multiplier": "Drinking duration multiplier",
+  "artifacts.config.server.drinking_hat.enable_fast_eating": "Enable fast eating",
+  "artifacts.config.server.fire_gauntlet.fire_duration": "Fire duration",
+  "artifacts.config.server.pendant.strike_chance": "Strike chance",
+  "artifacts.config.server.flame_pendant.fire_duration": "Fire duration",
   "artifacts.config.server.everlasting_food.cooldown": "Cooldown",
   "artifacts.config.server.feral_claws.attack_speed_bonus": "Attack Speed bonus"
 }

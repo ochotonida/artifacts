@@ -1,23 +1,26 @@
 package artifacts.common.config.item;
 
-import artifacts.Artifacts;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class EverlastingFoodConfig {
+public class EverlastingFoodConfig extends ItemConfig {
 
     public int cooldown;
 
-    private final ForgeConfigSpec.IntValue cooldownValue;
+    private ForgeConfigSpec.IntValue cooldownValue;
 
     public EverlastingFoodConfig(ForgeConfigSpec.Builder builder) {
-        builder.push("everlasting_food");
-        cooldownValue = builder
-                .comment("Cooldown in ticks for the Everlasting Beef and Eternal Steak items")
-                .translation(Artifacts.MODID + ".config.server.everlasting_food.cooldown")
-                .defineInRange("cooldown", 300, 0, Integer.MAX_VALUE);
-        builder.pop();
+        super(builder, "everlasting_food");
     }
 
+    @Override
+    public void addConfigs(ForgeConfigSpec.Builder builder) {
+        cooldownValue = builder
+                .comment("Cooldown in ticks for the Everlasting Beef and Eternal Steak items")
+                .translation(translate("cooldown"))
+                .defineInRange("cooldown", 300, 0, Integer.MAX_VALUE);
+    }
+
+    @Override
     public void bake() {
         cooldown = cooldownValue.get();
     }

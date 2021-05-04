@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
+import artifacts.common.config.Config;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.EntityDamageSource;
 
 public class FlamePendantItem extends PendantItem {
 
@@ -11,9 +11,8 @@ public class FlamePendantItem extends PendantItem {
 
     @Override
     public void applyEffect(LivingEntity target, LivingEntity attacker) {
-        if (!attacker.fireImmune() && attacker.attackable() && target.getRandom().nextFloat() < 0.40F) {
-            attacker.setSecondsOnFire(8);
-            attacker.hurt(new EntityDamageSource("onFire", target).setIsFire(), 2);
+        if (!attacker.fireImmune() && attacker.attackable() && target.getRandom().nextDouble() < Config.SERVER.flamePendantConfig.strikeChance) {
+            attacker.setSecondsOnFire(Config.SERVER.flamePendantConfig.fireDuration);
         }
     }
 }

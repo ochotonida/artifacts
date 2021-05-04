@@ -22,8 +22,12 @@ public class ServerConfig {
     public final CloudInABottleConfig cloudInABottle;
     public final CrossNecklaceConfig crossNecklace;
     public final CrystalHeartConfig crystalHeart;
+    public final DiggingClawsConfig diggingClaws;
+    public final DrinkingHatConfig drinkingHatConfig;
     public final EverlastingFoodConfig everlastingFood;
     public final FeralClawsConfig feralClaws;
+    public final FireGauntletConfig fireGauntlet;
+    public final FlamePendantConfig flamePendantConfig;
 
     private final ForgeConfigSpec.ConfigValue<List<String>> cosmeticsValue;
 
@@ -45,8 +49,12 @@ public class ServerConfig {
         cloudInABottle = new CloudInABottleConfig(builder);
         crossNecklace = new CrossNecklaceConfig(builder);
         crystalHeart = new CrystalHeartConfig(builder);
+        diggingClaws = new DiggingClawsConfig(builder);
+        drinkingHatConfig = new DrinkingHatConfig(builder);
         everlastingFood = new EverlastingFoodConfig(builder);
         feralClaws = new FeralClawsConfig(builder);
+        fireGauntlet = new FireGauntletConfig(builder);
+        flamePendantConfig = new FlamePendantConfig(builder);
 
         builder.pop();
     }
@@ -72,8 +80,12 @@ public class ServerConfig {
         cloudInABottle.bake();
         crossNecklace.bake();
         crystalHeart.bake();
+        diggingClaws.bake();
+        drinkingHatConfig.bake();
         everlastingFood.bake();
         feralClaws.bake();
+        fireGauntlet.bake();
+        flamePendantConfig.bake();
     }
 
     public boolean isCosmetic(Item item) {

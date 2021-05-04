@@ -3,6 +3,7 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.RenderTypes;
 import artifacts.client.render.model.curio.hands.HandsModel;
+import artifacts.common.config.Config;
 import artifacts.common.util.DamageSourceHelper;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -35,7 +36,7 @@ public class FireGauntletItem extends GloveItem {
 
     public void onLivingHurt(LivingHurtEvent event) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource()) && !event.getEntity().fireImmune()) {
-            event.getEntity().setSecondsOnFire(8);
+            event.getEntity().setSecondsOnFire(Config.SERVER.fireGauntlet.fireDuration);
         }
     }
 

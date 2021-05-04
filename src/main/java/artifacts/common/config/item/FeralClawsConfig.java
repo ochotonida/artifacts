@@ -1,24 +1,27 @@
 package artifacts.common.config.item;
 
-import artifacts.Artifacts;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class FeralClawsConfig {
+public class FeralClawsConfig extends ItemConfig {
 
     public double attackSpeedBonus;
 
-    private final ForgeConfigSpec.DoubleValue attackSpeedBonusValue;
+    private ForgeConfigSpec.DoubleValue attackSpeedBonusValue;
 
     public FeralClawsConfig(ForgeConfigSpec.Builder builder) {
-        builder.push("feral_claws");
+        super(builder, "feral_claws");
+    }
+
+    @Override
+    public void addConfigs(ForgeConfigSpec.Builder builder) {
         attackSpeedBonusValue = builder
                 .worldRestart()
                 .comment("Attack speed bonus applied by feral claws")
-                .translation(Artifacts.MODID + ".config.server.feral_claws.attack_speed_bonus")
-                .defineInRange("attack_speed_bonus", 0.6, 0, Double.POSITIVE_INFINITY);
-        builder.pop();
+                .translation(translate("attack_speed_bonus"))
+                .defineInRange("attack_speed_bonus", 0.6, 0, Double.MAX_VALUE);
     }
 
+    @Override
     public void bake() {
         attackSpeedBonus = attackSpeedBonusValue.get();
     }
