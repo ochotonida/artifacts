@@ -1,27 +1,61 @@
 package artifacts.common.config;
 
 import artifacts.Artifacts;
+import artifacts.common.config.item.EverlastingFoodConfig;
 import com.google.common.collect.Lists;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ServerConfig {
 
-    final ForgeConfigSpec.ConfigValue<List<String>> cosmetics;
-    final ForgeConfigSpec.IntValue everlastingFoodCooldown;
+    public Set<Item> cosmetics = Collections.emptySet();
+
+    public final EverlastingFoodConfig everlastingFood;
+
+    private final ForgeConfigSpec.ConfigValue<List<String>> cosmeticsValue;
 
     ServerConfig(ForgeConfigSpec.Builder builder) {
         builder.push("items");
-        cosmetics = builder
+        cosmeticsValue = builder
                 .worldRestart()
-                .comment("List of cosmetic-only items. All items in this list will have their effects disabled\nTo blacklist all items, use \"artifacts:*\"\nNote: blacklisting an item while it is equipped may have unintended side effects\nTo completely prevent items from appearing, use a datapack")
+                .comment(
+                        "List of cosmetic-only items. All items in this list will have their effects disabled",
+                        "To blacklist all items, use \"artifacts:*\"",
+                        "Note: blacklisting an item while it is equipped may have unintended side effects",
+                        "To completely prevent items from appearing, use a data pack"
+                )
                 .translation(Artifacts.MODID + ".config.server.cosmetics")
                 .define("cosmetics", Lists.newArrayList(""));
-        everlastingFoodCooldown = builder
-                .comment("Cooldown in ticks for the Everlasting Beef and Eternal Steak items")
-                .translation(Artifacts.MODID + ".config.server.eternal_food_cooldown")
-                .defineInRange("eternal_food_cooldown", 300, 0, Integer.MAX_VALUE);
+        everlastingFood = new EverlastingFoodConfig(builder);
         builder.pop();
+    }
+
+    public void bake() {
+        if (cosmeticsValue.get().contains("artifacts:*")) {
+            // noinspection ConstantConditions
+            cosmetics = ForgeRegistries.ITEMS.getValues()
+                    .stream()
+                    .filter(item -> item.getRegistryName().getNamespace().equals(Artifacts.MODID))
+                    .collect(Collectors.toSet());
+        } else {
+            cosmetics = cosmeticsValue.get()
+                    .stream()
+                    .map(ResourceLocation::new)
+                    .filter(registryName -> registryName.getNamespace().equals(Artifacts.MODID))
+                    .map(ForgeRegistries.ITEMS::getValue)
+                    .collect(Collectors.toSet());
+        }
+        everlastingFood.bake();
+    }
+
+    public boolean isCosmetic(Item item) {
+        return cosmetics.contains(item);
     }
 }

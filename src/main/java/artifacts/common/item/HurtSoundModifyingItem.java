@@ -29,7 +29,7 @@ public abstract class HurtSoundModifyingItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SuppressWarnings("unused")
         public void onPlaySoundAtEntity(PlaySoundAtEntityEvent event) {
-            if (Config.modifyHurtSounds
+            if (Config.CLIENT.modifyHurtSounds
                     && isHurtSound(event.getSound())
                     && event.getEntity() instanceof LivingEntity
                     && CuriosApi.getCuriosHelper().findEquippedCurio(HurtSoundModifyingItem.this, ((LivingEntity) event.getEntity())).isPresent()) {

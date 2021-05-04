@@ -37,7 +37,7 @@ public class RunningShoesItem extends CurioItem {
     @Override
     @SuppressWarnings("ConstantConditions")
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!Config.isCosmetic(this)) {
+        if (!Config.SERVER.isCosmetic(this)) {
             ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
             if (livingEntity.isSprinting()) {
                 if (!movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {

@@ -31,7 +31,7 @@ public class CrystalHeartItem extends CurioItem {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
-        if (!Config.isCosmetic(this) && !slotContext.getWearer().level.isClientSide()) {
+        if (!Config.SERVER.isCosmetic(this) && !slotContext.getWearer().level.isClientSide()) {
             ModifiableAttributeInstance health = slotContext.getWearer().getAttribute(Attributes.MAX_HEALTH);
             if (health != null && !health.hasModifier(HEALTH_BONUS)) {
                 health.addPermanentModifier(HEALTH_BONUS);
@@ -41,7 +41,7 @@ public class CrystalHeartItem extends CurioItem {
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
-        if (!Config.isCosmetic(this) && !slotContext.getWearer().level.isClientSide()) {
+        if (!Config.SERVER.isCosmetic(this) && !slotContext.getWearer().level.isClientSide()) {
             ModifiableAttributeInstance health = slotContext.getWearer().getAttribute(Attributes.MAX_HEALTH);
             if (health != null && health.hasModifier(HEALTH_BONUS)) {
                 health.removeModifier(HEALTH_BONUS);

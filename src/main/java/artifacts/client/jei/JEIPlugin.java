@@ -33,7 +33,7 @@ public class JEIPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         for (Item item : ForgeRegistries.ITEMS.getValues()) {
             if (item instanceof ArtifactItem) {
-                if (Config.isCosmetic(item)) {
+                if (Config.SERVER.isCosmetic(item)) {
                     registration.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM, "artifacts.cosmetic.jei");
                 } else if (item != ModItems.NOVELTY_DRINKING_HAT.get()) {
                     List<ITextComponent> textComponents = new ArrayList<>();

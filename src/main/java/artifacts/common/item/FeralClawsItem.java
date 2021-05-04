@@ -29,8 +29,8 @@ public class FeralClawsItem extends GloveItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
-        if (!Config.isCosmetic(this)) {
-            result.put(Attributes.ATTACK_SPEED, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "feral_claws_attack_speed").toString(), 1, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        if (!Config.SERVER.isCosmetic(this)) {
+            result.put(Attributes.ATTACK_SPEED, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "feral_claws_attack_speed").toString(), 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL));
         }
         return result;
     }

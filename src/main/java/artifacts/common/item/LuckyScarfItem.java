@@ -27,6 +27,6 @@ public class LuckyScarfItem extends CurioItem {
 
     @Override
     public int getFortuneBonus(String identifier, LivingEntity livingEntity, ItemStack curio, int index) {
-        return Config.isCosmetic(this) ? 0 : 1;
+        return Config.SERVER.isCosmetic(this) ? 0 : 1;
     }
 }

@@ -34,7 +34,7 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
     }
 
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if (!Config.isCosmetic(this) && event.getEntity() instanceof CreeperEntity) {
+        if (!Config.SERVER.isCosmetic(this) && event.getEntity() instanceof CreeperEntity) {
             ((CreeperEntity) event.getEntity()).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreeperEntity) event.getEntity(), PlayerEntity.class, (entity) -> entity != null && isEquippedBy(entity), 6, 1, 1.3, EntityPredicates.NO_CREATIVE_OR_SPECTATOR::test));
         }
     }

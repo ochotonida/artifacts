@@ -29,7 +29,7 @@ public class AntidoteVesselItem extends CurioItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (!Config.isCosmetic(this)) {
+        if (!Config.SERVER.isCosmetic(this)) {
             Map<Effect, EffectInstance> effects = new HashMap<>();
 
             entity.getActiveEffectsMap().forEach((effect, instance) -> {

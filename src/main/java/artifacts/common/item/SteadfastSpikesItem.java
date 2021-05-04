@@ -24,7 +24,7 @@ public class SteadfastSpikesItem extends CurioItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
-        if (!Config.isCosmetic(this)) {
+        if (!Config.SERVER.isCosmetic(this)) {
             result.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "steadfast_spikes_knockback_resistance").toString(), 1, AttributeModifier.Operation.ADDITION));
         }
         return result;

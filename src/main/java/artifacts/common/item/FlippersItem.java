@@ -24,7 +24,7 @@ public class FlippersItem extends CurioItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
-        if (!Config.isCosmetic(this)) {
+        if (!Config.SERVER.isCosmetic(this)) {
             result.put(ForgeMod.SWIM_SPEED.get(), new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "flipper_swim_speed").toString(), 1, AttributeModifier.Operation.ADDITION));
         }
         return result;

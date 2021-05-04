@@ -52,9 +52,9 @@ public class HeliumFlamingoItem extends CurioItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        if (Config.isCosmetic(this)) {
+        if (Config.SERVER.isCosmetic(this)) {
             super.appendHoverText(stack, world, tooltip, flags);
-        } else if (Config.showTooltips) {
+        } else if (Config.CLIENT.showTooltips) {
             tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.0").withStyle(TextFormatting.GRAY));
             tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.1", Minecraft.getInstance().options.keySprint.getTranslatedKeyMessage()).withStyle(TextFormatting.GRAY));
         }
@@ -110,7 +110,7 @@ public class HeliumFlamingoItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public void onInputUpdate(InputUpdateEvent event) {
-            if (Config.isCosmetic(HeliumFlamingoItem.this)) {
+            if (Config.SERVER.isCosmetic(HeliumFlamingoItem.this)) {
                 return;
             }
 
@@ -158,7 +158,7 @@ public class HeliumFlamingoItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent(priority = EventPriority.LOW)
         public void render(RenderGameOverlayEvent.Pre event) {
-            if (Config.isCosmetic(HeliumFlamingoItem.this)) {
+            if (Config.SERVER.isCosmetic(HeliumFlamingoItem.this)) {
                 return;
             }
 

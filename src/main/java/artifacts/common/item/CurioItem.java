@@ -31,7 +31,7 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
     private Object model;
 
     public boolean isEquippedBy(@Nullable LivingEntity entity) {
-        return !Config.isCosmetic(this) && entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
+        return !Config.SERVER.isCosmetic(this) && entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
     }
 
     protected <T extends Event> void addListener(EventPriority priority, Class<T> eventClass, Consumer<T> listener, Function<T, LivingEntity> livingEntitySupplier) {

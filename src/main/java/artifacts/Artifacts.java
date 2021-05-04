@@ -54,7 +54,7 @@ public class Artifacts {
     }
 
     public void addFeatures(BiomeLoadingEvent event) {
-        if (event.getCategory() != Biome.Category.NETHER && event.getCategory() != Biome.Category.THEEND && !Config.isBlacklisted(event.getName())) {
+        if (event.getCategory() != Biome.Category.NETHER && event.getCategory() != Biome.Category.THEEND && !Config.COMMON.isBlacklisted(event.getName())) {
             event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_STRUCTURES).add(() -> ModFeatures.UNDERGROUND_CAMPSITE);
         }
     }

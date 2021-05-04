@@ -18,11 +18,11 @@ public class InCaveWithChance extends Placement<ChanceConfig> {
 
     @Override
     public Stream<BlockPos> getPositions(WorldDecoratingHelper helper, Random random, ChanceConfig config, BlockPos pos) {
-        if (random.nextInt(100) < config.chance) {
+        if (config.chance < 10000 && random.nextFloat() < 1F / config.chance) {
             int x = random.nextInt(16);
             int z = random.nextInt(16);
-            pos = new BlockPos(pos.getX() + x, Config.campsiteMinY, pos.getZ() + z);
-            while (pos.getY() <= Config.campsiteMaxY) {
+            pos = new BlockPos(pos.getX() + x, Config.COMMON.campsiteMinY, pos.getZ() + z);
+            while (pos.getY() <= Config.COMMON.campsiteMaxY) {
                 // noinspection deprecation
                 if (helper.getBlockState(pos).isAir() && helper.getBlockState(pos.below()).getMaterial().blocksMotion()) {
                     return Stream.of(pos);

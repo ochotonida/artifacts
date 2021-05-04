@@ -28,9 +28,9 @@ public abstract class ArtifactItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        if (Config.isCosmetic(this)) {
+        if (Config.SERVER.isCosmetic(this)) {
             tooltip.add(new TranslationTextComponent("artifacts.cosmetic.tooltip").withStyle(TextFormatting.GRAY).withStyle(TextFormatting.ITALIC));
-        } else if (Config.showTooltips) {
+        } else if (Config.CLIENT.showTooltips) {
             tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip").withStyle(TextFormatting.GRAY));
         }
     }

@@ -39,7 +39,7 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        if (!Config.isCosmetic(this)) {
+        if (!Config.SERVER.isCosmetic(this)) {
             LivingEntity entity = event.getEntityLiving();
             ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
             if (gravity != null) {
@@ -60,7 +60,7 @@ public class UmbrellaItem extends ArtifactItem {
 
     @Override
     public boolean isShield(ItemStack stack, LivingEntity entity) {
-        return !Config.isCosmetic(this);
+        return !Config.SERVER.isCosmetic(this);
     }
 
     public UseAction getUseAnimation(ItemStack stack) {
@@ -72,7 +72,7 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        if (Config.isCosmetic(this)) {
+        if (Config.SERVER.isCosmetic(this)) {
             return super.use(world, player, hand);
         }
         ItemStack itemstack = player.getItemInHand(hand);

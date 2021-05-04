@@ -42,7 +42,7 @@ public class UniversalAttractorItem extends CurioItem {
     // magnet logic from Botania, see https://github.com/Vazkii/Botania
     @Override
     public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (Config.isCosmetic(this) || entity.isSpectator() || !(entity instanceof PlayerEntity)) {
+        if (Config.SERVER.isCosmetic(this) || entity.isSpectator() || !(entity instanceof PlayerEntity)) {
             return;
         }
 

@@ -29,7 +29,7 @@ public class FirstPersonGloveRenderHandler {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onRenderHand(RenderHandEvent event) {
-        if (!event.isCanceled() && Minecraft.getInstance().player != null && Config.showFirstPersonGloves) {
+        if (!event.isCanceled() && Minecraft.getInstance().player != null && Config.CLIENT.showFirstPersonGloves) {
             event.getMatrixStack().pushPose();
             ClientPlayerEntity player = Minecraft.getInstance().player;
             HandSide handside = event.getHand() == Hand.MAIN_HAND ? player.getMainArm() : player.getMainArm().getOpposite();
