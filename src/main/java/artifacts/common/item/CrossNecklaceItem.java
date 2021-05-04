@@ -36,7 +36,7 @@ public class CrossNecklaceItem extends CurioItem {
             setCanApplyBonus(stack, true);
         } else {
             if (canApplyBonus(stack)) {
-                entity.invulnerableTime += 20;
+                entity.invulnerableTime += Config.SERVER.crossNecklace.invincibilityBonus;
                 setCanApplyBonus(stack, false);
             }
         }

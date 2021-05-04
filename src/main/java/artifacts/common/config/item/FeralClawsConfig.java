@@ -15,7 +15,7 @@ public class FeralClawsConfig {
                 .worldRestart()
                 .comment("Attack speed bonus applied by feral claws")
                 .translation(Artifacts.MODID + ".config.server.feral_claws.attack_speed_bonus")
-                .defineInRange("attack_speed_bonus", 0.6, -1, Double.POSITIVE_INFINITY);
+                .defineInRange("attack_speed_bonus", 0.6, 0, Double.POSITIVE_INFINITY);
         builder.pop();
     }
 

@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.belt.CloudInABottleModel;
+import artifacts.common.config.Config;
 import artifacts.common.init.ModItems;
 import artifacts.common.init.ModSoundEvents;
 import artifacts.common.network.DoubleJumpPacket;
@@ -46,10 +47,10 @@ public class CloudInABottleItem extends CurioItem {
             // noinspection ConstantConditions
             upwardsMotion += 0.1 * (player.getEffect(Effects.JUMP).getAmplifier() + 1);
         }
-        upwardsMotion *= player.isSprinting() ? 1.5 : 1;
+        upwardsMotion *= player.isSprinting() ? Config.SERVER.cloudInABottle.sprintJumpHeightMultiplier : 1;
 
         Vector3d motion = player.getDeltaMovement();
-        double motionMultiplier = player.isSprinting() ? 0.5 : 0;
+        double motionMultiplier = player.isSprinting() ? Config.SERVER.cloudInABottle.sprintJumpDistanceMultiplier : 0;
         float direction = (float) (player.yRot * Math.PI / 180);
         player.setDeltaMovement(player.getDeltaMovement().add(
                 -MathHelper.sin(direction) * motionMultiplier,

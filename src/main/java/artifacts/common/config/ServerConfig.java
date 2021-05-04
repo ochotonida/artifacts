@@ -1,10 +1,7 @@
 package artifacts.common.config;
 
 import artifacts.Artifacts;
-import artifacts.common.config.item.AntidoteVesselConfig;
-import artifacts.common.config.item.BunnyHoppersConfig;
-import artifacts.common.config.item.EverlastingFoodConfig;
-import artifacts.common.config.item.FeralClawsConfig;
+import artifacts.common.config.item.*;
 import com.google.common.collect.Lists;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -22,6 +19,9 @@ public class ServerConfig {
 
     public final AntidoteVesselConfig antidoteVessel;
     public final BunnyHoppersConfig bunnyHoppers;
+    public final CloudInABottleConfig cloudInABottle;
+    public final CrossNecklaceConfig crossNecklace;
+    public final CrystalHeartConfig crystalHeart;
     public final EverlastingFoodConfig everlastingFood;
     public final FeralClawsConfig feralClaws;
 
@@ -42,6 +42,9 @@ public class ServerConfig {
 
         antidoteVessel = new AntidoteVesselConfig(builder);
         bunnyHoppers = new BunnyHoppersConfig(builder);
+        cloudInABottle = new CloudInABottleConfig(builder);
+        crossNecklace = new CrossNecklaceConfig(builder);
+        crystalHeart = new CrystalHeartConfig(builder);
         everlastingFood = new EverlastingFoodConfig(builder);
         feralClaws = new FeralClawsConfig(builder);
 
@@ -66,6 +69,9 @@ public class ServerConfig {
 
         antidoteVessel.bake();
         bunnyHoppers.bake();
+        cloudInABottle.bake();
+        crossNecklace.bake();
+        crystalHeart.bake();
         everlastingFood.bake();
         feralClaws.bake();
     }

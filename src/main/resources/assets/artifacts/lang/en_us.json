@@ -105,6 +105,10 @@
   "artifacts.config.server.antidote_vessel.max_effect_duration": "Maximum negative effect duration",
   "artifacts.config.server.bunny_hoppers.should_cancel_fall_damage": "Should cancel fall damage",
   "artifacts.config.server.bunny_hoppers.jump_boost_level": "Jump boost level",
+  "artifacts.config.server.cloud_in_a_bottle.sprint_jump_height_multiplier": "Sprint double jump height multiplier",
+  "artifacts.config.server.cloud_in_a_bottle.sprint_jump_distance_multiplier": "Sprint double jump distance multiplier",
+  "artifacts.config.server.cross_necklace.invincibility_bonus": "Bonus invincibility time",
+  "artifacts.config.server.crystal_heart.health_bonus": "Health bonus",
   "artifacts.config.server.everlasting_food.cooldown": "Cooldown",
   "artifacts.config.server.feral_claws.attack_speed_bonus": "Attack Speed bonus"
 }
