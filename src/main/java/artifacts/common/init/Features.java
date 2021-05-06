@@ -27,7 +27,7 @@ public class Features {
         Placement<ChanceConfig> placement = new InCaveWithChance(ChanceConfig::deserialize);
 
         for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
-            if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {
+            if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND && !Config.isBlacklisted(biome.getRegistryName())) {
                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, CAMPSITE_FEATURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(placement.configure(new ChanceConfig((int) (1 / Config.campsiteChance)))));
             }
         }

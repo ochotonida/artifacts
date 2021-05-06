@@ -1,10 +1,14 @@
 package artifacts.common.config;
 
 import artifacts.Artifacts;
+import com.google.common.collect.Lists;
 import net.minecraftforge.common.ForgeConfigSpec;
+
+import java.util.List;
 
 public class CommonConfig {
 
+    final ForgeConfigSpec.ConfigValue<List<String>> biomeBlacklist;
     final ForgeConfigSpec.DoubleValue campsiteChance;
     final ForgeConfigSpec.DoubleValue campsiteMimicChance;
     final ForgeConfigSpec.DoubleValue campsiteOreChance;
@@ -15,6 +19,12 @@ public class CommonConfig {
 
     CommonConfig(ForgeConfigSpec.Builder builder) {
         builder.push("campsite");
+
+        biomeBlacklist = builder
+                .worldRestart()
+                .comment("List of biome IDs in which campsites are not allowed to generate. End and nether biomes are excluded by default.\n To blacklist all biomes from a single mod, use 'modid:*'")
+                .translation(Artifacts.MODID + ".config.biome_blacklist")
+                .define("biome_blacklist", Lists.newArrayList("minecraft:void", "undergarden:*", "the_bumblezone:*"));
 
         campsiteChance = builder
                 .comment("Per-chunk chance a campsite is attempted to be generated. Not every attempt succeeds, this also depends on the density and shape of caves")

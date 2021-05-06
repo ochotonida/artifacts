@@ -3,9 +3,9 @@ loaderVersion="[31,)"
 issueTrackerURL="https://github.com/ochotonida/artifacts/issues"
 
 [[mods]]
-modId="artifacts"
-version="1.15.2-2.5.2"
-displayName="Artifacts"
+modId = "artifacts"
+version = "1.15.2-2.5.3"
+displayName = "Artifacts"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/artifacts"
 logoFile="logo.png"
 description='''Adds various new powerful uncraftable items to make exploration a bit more interesting'''
