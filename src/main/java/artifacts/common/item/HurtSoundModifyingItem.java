@@ -1,6 +1,6 @@
 package artifacts.common.item;
 
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -29,7 +29,7 @@ public abstract class HurtSoundModifyingItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SuppressWarnings("unused")
         public void onPlaySoundAtEntity(PlaySoundAtEntityEvent event) {
-            if (Config.CLIENT.modifyHurtSounds
+            if (ModConfig.client.modifyHurtSounds.get()
                     && isHurtSound(event.getSound())
                     && event.getEntity() instanceof LivingEntity
                     && CuriosApi.getCuriosHelper().findEquippedCurio(HurtSoundModifyingItem.this, ((LivingEntity) event.getEntity())).isPresent()) {

@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.necklace.PanicNecklaceModel;
+import artifacts.common.config.ModConfig;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,12 @@ public class PanicNecklaceItem extends CurioItem {
 
     public void onLivingHurt(LivingHurtEvent event) {
         if (!event.getEntity().level.isClientSide && event.getAmount() >= 1) {
-            event.getEntityLiving().addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 160, 0, false, false));
+            int duration = ModConfig.server.panicNecklace.speedDuration.get();
+            int level = ModConfig.server.panicNecklace.speedLevel.get() - 1;
+
+            if (duration > 0 && level >= 0) {
+                event.getEntityLiving().addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, duration, level, false, false));
+            }
         }
     }
 

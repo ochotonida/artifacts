@@ -2,7 +2,8 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.hands.ClawsModel;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
@@ -13,6 +14,8 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
+import java.util.List;
+
 public class DiggingClawsItem extends GloveItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/digging_claws.png");
@@ -22,13 +25,23 @@ public class DiggingClawsItem extends GloveItem {
         addListener(PlayerEvent.HarvestCheck.class, this::onHarvestCheck);
     }
 
+    private boolean canHarvest(BlockState state) {
+        List<String> toolTypes = ModConfig.server.diggingClaws.toolTypes.get();
+        int diggingClawsHarvestLevel = ModConfig.server.diggingClaws.harvestLevel.get() - 1;
+        return state.getHarvestLevel() <= diggingClawsHarvestLevel &&
+                (toolTypes.contains(state.getHarvestTool().getName()) || toolTypes.contains("*"));
+    }
+
     public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
-        event.setNewSpeed(event.getNewSpeed() + Config.SERVER.diggingClaws.miningSpeedBonus);
+        if (canHarvest(event.getState())) {
+            event.setNewSpeed((float) (event.getNewSpeed() + ModConfig.server.diggingClaws.miningSpeedBonus.get()));
+        }
     }
 
     public void onHarvestCheck(PlayerEvent.HarvestCheck event) {
         if (!event.canHarvest()) {
-            event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= Config.SERVER.diggingClaws.harvestLevel);
+            int diggingClawsHarvestLevel = ModConfig.server.diggingClaws.harvestLevel.get() - 1;
+            event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= diggingClawsHarvestLevel);
         }
     }
 

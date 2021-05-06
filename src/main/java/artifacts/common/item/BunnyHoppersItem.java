@@ -2,7 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.feet.BunnyHoppersModel;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -25,15 +25,16 @@ public class BunnyHoppersItem extends HurtSoundModifyingItem {
     }
 
     public void onLivingFall(LivingFallEvent event) {
-        if (Config.SERVER.bunnyHoppers.shouldCancelFallDamage) {
+        if (ModConfig.server.bunnyHoppers.shouldCancelFallDamage.get()) {
             event.setDamageMultiplier(0);
         }
     }
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!Config.SERVER.isCosmetic(this) && !livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0 && Config.SERVER.bunnyHoppers.jumpBoostLevel >= 0) {
-            livingEntity.addEffect(new EffectInstance(Effects.JUMP, 39, Config.SERVER.bunnyHoppers.jumpBoostLevel, true, false));
+        int jumpBoostLevel = ModConfig.server.bunnyHoppers.jumpBoostLevel.get() - 1;
+        if (!ModConfig.server.isCosmetic(this) && !livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0 && jumpBoostLevel >= 0) {
+            livingEntity.addEffect(new EffectInstance(Effects.JUMP, 39, jumpBoostLevel, true, false));
         }
     }
 

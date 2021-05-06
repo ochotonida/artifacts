@@ -2,7 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.belt.AntidoteVesselModel;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -17,6 +17,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class AntidoteVesselItem extends CurioItem {
 
@@ -29,19 +30,22 @@ public class AntidoteVesselItem extends CurioItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (!Config.SERVER.isCosmetic(this)) {
+        if (!ModConfig.server.isCosmetic(this)) {
             Map<Effect, EffectInstance> effects = new HashMap<>();
 
+            int maxEffectDuration = ModConfig.server.antidoteVessel.maxEffectDuration.get();
+
             entity.getActiveEffectsMap().forEach((effect, instance) -> {
-                if (Config.SERVER.antidoteVessel.negativeEffects.contains(effect) && instance.getDuration() > Config.SERVER.antidoteVessel.maxEffectDuration) {
+                Set<Effect> negativeEffects = ModConfig.server.antidoteVessel.negativeEffects;
+                if (negativeEffects.contains(effect) && instance.getDuration() > maxEffectDuration) {
                     effects.put(effect, instance);
                 }
             });
 
             effects.forEach((effect, instance) -> {
                 entity.removeEffectNoUpdate(effect);
-                if (Config.SERVER.antidoteVessel.maxEffectDuration > 0) {
-                    entity.addEffect(new EffectInstance(effect, Config.SERVER.antidoteVessel.maxEffectDuration, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
+                if (maxEffectDuration > 0) {
+                    entity.addEffect(new EffectInstance(effect, maxEffectDuration, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
                 }
             });
         }

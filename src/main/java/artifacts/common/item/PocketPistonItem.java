@@ -1,6 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
+import artifacts.common.config.ModConfig;
 import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -22,8 +23,9 @@ public class PocketPistonItem extends GloveItem {
 
     public void onLivingAttack(LivingAttackEvent event) {
         LivingEntity attacker = (LivingEntity) event.getSource().getEntity();
+        float knockbackBonus = (float) (double) ModConfig.server.pocketPiston.knockbackBonus.get();
         // noinspection ConstantConditions
-        event.getEntityLiving().knockback(1.5F, MathHelper.sin((float) (attacker.yRot * (Math.PI / 180))), -MathHelper.cos((float) (attacker.yRot * (Math.PI / 180))));
+        event.getEntityLiving().knockback(knockbackBonus, MathHelper.sin((float) (attacker.yRot * (Math.PI / 180))), -MathHelper.cos((float) (attacker.yRot * (Math.PI / 180))));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
+import artifacts.common.config.ModConfig;
 import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -17,10 +18,14 @@ public class VampiricGloveItem extends GloveItem {
 
     public void onLivingDamage(LivingDamageEvent event) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource())) {
+            int maxHealthAbsorbed = ModConfig.server.vampiricGlove.maxHealthAbsorbed.get();
+            float absorptionRatio = (float) (double) ModConfig.server.vampiricGlove.absorptionRatio.get();
+
             float damageDealt = Math.min(event.getAmount(), event.getEntityLiving().getHealth());
-            if (damageDealt > 4) {
+            float damageAbsorbed = Math.min(maxHealthAbsorbed, absorptionRatio * damageDealt);
+            if (damageAbsorbed >= 1) {
                 // noinspection ConstantConditions
-                DamageSourceHelper.getAttacker(event.getSource()).heal(Math.min(2, damageDealt / 4));
+                DamageSourceHelper.getAttacker(event.getSource()).heal(damageAbsorbed);
             }
         }
     }

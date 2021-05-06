@@ -3,7 +3,7 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.common.capability.swimhandler.ISwimHandler;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
@@ -27,6 +27,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class UmbrellaItem extends ArtifactItem {
@@ -39,7 +40,7 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        if (!Config.SERVER.isCosmetic(this)) {
+        if (!ModConfig.server.isCosmetic(this)) {
             LivingEntity entity = event.getEntityLiving();
             ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
             if (gravity != null) {
@@ -59,8 +60,8 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     @Override
-    public boolean isShield(ItemStack stack, LivingEntity entity) {
-        return !Config.SERVER.isCosmetic(this);
+    public boolean isShield(@Nullable ItemStack stack, @Nullable LivingEntity entity) {
+        return !ModConfig.server.isCosmetic(this) && ModConfig.server.umbrella.isShield.get();
     }
 
     public UseAction getUseAnimation(ItemStack stack) {
@@ -72,7 +73,7 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        if (Config.SERVER.isCosmetic(this)) {
+        if (!isShield(null, null)) {
             return super.use(world, player, hand);
         }
         ItemStack itemstack = player.getItemInHand(hand);

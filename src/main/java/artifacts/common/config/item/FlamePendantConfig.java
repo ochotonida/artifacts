@@ -1,35 +1,27 @@
 package artifacts.common.config.item;
 
-import artifacts.Artifacts;
+import artifacts.common.init.ModItems;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class FlamePendantConfig extends ItemConfig {
+public class FlamePendantConfig extends PendantConfig {
 
-    public double strikeChance;
-    public int fireDuration;
-
-    private ForgeConfigSpec.DoubleValue strikeChanceValue;
-    private ForgeConfigSpec.IntValue fireDurationValue;
+    public ForgeConfigSpec.IntValue fireDuration;
 
     public FlamePendantConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, "flame_pendant");
+        super(builder, ModItems.FLAME_PENDANT.get());
     }
 
     @Override
     public void addConfigs(ForgeConfigSpec.Builder builder) {
-        strikeChanceValue = builder
-                .comment("Chance for the pendant to strike an attacker when the wearer is attacked")
-                .translation(Artifacts.MODID + ".config.server.pendant.strike_chance")
-                .defineInRange("strike_chance", 0.4, 0, 1);
-        fireDurationValue = builder
+        super.addConfigs(builder);
+        fireDuration = builder
                 .comment("Duration (equal to total fire damage) for which entities are set on fire")
                 .translation(translate("fire_duration"))
-                .defineInRange("fire_duration", 10, 1, Integer.MAX_VALUE);
+                .defineInRange("fire_duration", 10, 0, Integer.MAX_VALUE);
     }
 
     @Override
-    public void bake() {
-        strikeChance = strikeChanceValue.get();
-        fireDuration = fireDurationValue.get();
+    protected double getDefaultStrikeChance() {
+        return 0.4;
     }
 }

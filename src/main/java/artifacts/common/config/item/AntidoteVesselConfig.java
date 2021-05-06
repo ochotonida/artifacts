@@ -1,5 +1,6 @@
 package artifacts.common.config.item;
 
+import artifacts.common.init.ModItems;
 import com.google.common.collect.Lists;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
@@ -14,19 +15,18 @@ import java.util.stream.Collectors;
 public class AntidoteVesselConfig extends ItemConfig {
 
     public Set<Effect> negativeEffects = Collections.emptySet();
-    public int maxEffectDuration;
 
     private ForgeConfigSpec.ConfigValue<List<String>> negativeEffectsValue;
-    private ForgeConfigSpec.IntValue maxEffectDurationValue;
+    public ForgeConfigSpec.IntValue maxEffectDuration;
 
     public AntidoteVesselConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, "antidote_vessel");
+        super(builder, ModItems.ANTIDOTE_VESSEL.get());
     }
 
     @Override
     public void addConfigs(ForgeConfigSpec.Builder builder) {
         negativeEffectsValue = builder
-                .comment("List of negative effects that can be cancelled by the Antidote Vessel")
+                .comment("List of negative effects that can be cancelled by the antidote vessel")
                 .translation(translate("negative_effects"))
                 .define("negative_effects", Lists.newArrayList(
                         "minecraft:slowness",
@@ -39,9 +39,9 @@ public class AntidoteVesselConfig extends ItemConfig {
                         "minecraft:wither",
                         "minecraft:levitation"
                 ));
-        maxEffectDurationValue = builder
+        maxEffectDuration = builder
                 .worldRestart()
-                .comment("The maximum duration (in ticks) a negative effect can last with the Antidote Vessel equipped")
+                .comment("The maximum duration (in ticks) a negative effect can last with the antidote vessel equipped")
                 .translation(translate("max_effect_duration"))
                 .defineInRange("max_effect_duration", 120, 0, Integer.MAX_VALUE);
     }
@@ -53,6 +53,5 @@ public class AntidoteVesselConfig extends ItemConfig {
                 .map(ResourceLocation::new)
                 .map(ForgeRegistries.POTIONS::getValue)
                 .collect(Collectors.toSet());
-        maxEffectDuration = maxEffectDurationValue.get();
     }
 }

@@ -1,5 +1,6 @@
 package artifacts.common.capability.killtracker;
 
+import artifacts.common.config.ModConfig;
 import com.google.common.collect.EvictingQueue;
 import net.minecraft.entity.EntityType;
 
@@ -7,9 +8,7 @@ import java.util.Collection;
 
 public class EntityKillTracker implements IEntityKillTracker {
 
-    private static final int MAX_SIZE = 25;
-
-    private final EvictingQueue<EntityType<?>> entityTypes = EvictingQueue.create(MAX_SIZE);
+    private final EvictingQueue<EntityType<?>> entityTypes = EvictingQueue.create(ModConfig.server.goldenHook.trackedEntities.get());
 
     @Override
     public int getMaxSize() {

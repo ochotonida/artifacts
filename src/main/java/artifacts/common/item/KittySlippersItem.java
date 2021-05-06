@@ -2,7 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.feet.KittySlippersModel;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -34,7 +34,7 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
     }
 
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if (!Config.SERVER.isCosmetic(this) && event.getEntity() instanceof CreeperEntity) {
+        if (!ModConfig.server.isCosmetic(this) && event.getEntity() instanceof CreeperEntity) {
             ((CreeperEntity) event.getEntity()).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreeperEntity) event.getEntity(), PlayerEntity.class, (entity) -> entity != null && isEquippedBy(entity), 6, 1, 1.3, EntityPredicates.NO_CREATIVE_OR_SPECTATOR::test));
         }
     }

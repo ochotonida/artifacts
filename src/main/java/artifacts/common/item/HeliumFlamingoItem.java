@@ -3,7 +3,7 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.belt.HeliumFlamingoModel;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModSoundEvents;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -52,9 +52,9 @@ public class HeliumFlamingoItem extends CurioItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        if (Config.SERVER.isCosmetic(this)) {
+        if (ModConfig.server != null && ModConfig.server.isCosmetic(this)) {
             super.appendHoverText(stack, world, tooltip, flags);
-        } else if (Config.CLIENT.showTooltips) {
+        } else if (ModConfig.client.showTooltips.get()) {
             tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.0").withStyle(TextFormatting.GRAY));
             tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.1", Minecraft.getInstance().options.keySprint.getTranslatedKeyMessage()).withStyle(TextFormatting.GRAY));
         }
@@ -110,7 +110,7 @@ public class HeliumFlamingoItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public void onInputUpdate(InputUpdateEvent event) {
-            if (Config.SERVER.isCosmetic(HeliumFlamingoItem.this)) {
+            if (ModConfig.server.isCosmetic(HeliumFlamingoItem.this)) {
                 return;
             }
 
@@ -158,7 +158,7 @@ public class HeliumFlamingoItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent(priority = EventPriority.LOW)
         public void render(RenderGameOverlayEvent.Pre event) {
-            if (Config.SERVER.isCosmetic(HeliumFlamingoItem.this)) {
+            if (ModConfig.server.isCosmetic(HeliumFlamingoItem.this)) {
                 return;
             }
 

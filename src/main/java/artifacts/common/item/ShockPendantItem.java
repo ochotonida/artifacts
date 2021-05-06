@@ -1,5 +1,6 @@
 package artifacts.common.item;
 
+import artifacts.common.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
@@ -27,7 +28,7 @@ public class ShockPendantItem extends PendantItem {
 
     @Override
     public void applyEffect(LivingEntity target, LivingEntity attacker) {
-        if (attacker.level.canSeeSky(new BlockPos(attacker.position())) && target.getRandom().nextFloat() < 0.25F) {
+        if (attacker.level.canSeeSky(new BlockPos(attacker.position())) && target.getRandom().nextFloat() < ModConfig.server.shockPendant.strikeChance.get()) {
             LightningBoltEntity lightningBolt = EntityType.LIGHTNING_BOLT.create(attacker.level);
             if (lightningBolt != null) {
                 lightningBolt.moveTo(Vector3d.atBottomCenterOf(attacker.blockPosition()));

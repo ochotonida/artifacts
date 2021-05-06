@@ -1,0 +1,21 @@
+package artifacts.common.config.item;
+
+import artifacts.common.init.ModItems;
+import net.minecraftforge.common.ForgeConfigSpec;
+
+public class LuckyScarfConfig extends ItemConfig {
+
+    public ForgeConfigSpec.IntValue fortuneBonus;
+
+    public LuckyScarfConfig(ForgeConfigSpec.Builder builder) {
+        super(builder, ModItems.LUCKY_SCARF.get());
+    }
+
+    @Override
+    public void addConfigs(ForgeConfigSpec.Builder builder) {
+        fortuneBonus = builder
+                .comment("Fortune bonus applied by the lucky scarf")
+                .translation(translate("fortune_bonus"))
+                .defineInRange("fortune_bonus", 1, 0, Integer.MAX_VALUE);
+    }
+}

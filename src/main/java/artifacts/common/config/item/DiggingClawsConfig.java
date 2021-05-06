@@ -1,38 +1,43 @@
 package artifacts.common.config.item;
 
+import artifacts.common.init.ModItems;
+import com.google.common.collect.Lists;
 import net.minecraftforge.common.ForgeConfigSpec;
+
+import java.util.List;
 
 public class DiggingClawsConfig extends ItemConfig {
 
-    public float miningSpeedBonus;
-    public int harvestLevel;
-
-    private ForgeConfigSpec.DoubleValue miningSpeedBonusValue;
-    private ForgeConfigSpec.IntValue harvestLevelValue;
+    public ForgeConfigSpec.DoubleValue miningSpeedBonus;
+    public ForgeConfigSpec.IntValue harvestLevel;
+    public ForgeConfigSpec.ConfigValue<List<String>> toolTypes;
 
     public DiggingClawsConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, "digging_claws");
+        super(builder, ModItems.DIGGING_CLAWS.get());
     }
 
     @Override
     public void addConfigs(ForgeConfigSpec.Builder builder) {
-        miningSpeedBonusValue = builder
+        miningSpeedBonus = builder
                 .worldRestart()
                 .comment("Mining speed bonus applied by digging claws")
                 .translation(translate("mining_speed_bonus"))
-                .defineInRange("mining_speed_bonus", 3.2, 0, Double.MAX_VALUE);
-        harvestLevelValue = builder
+                .defineInRange("mining_speed_bonus", 3.2, 0, Double.POSITIVE_INFINITY);
+        harvestLevel = builder
                 .comment(
                         "The player's base harvest level when wearing digging claws",
-                        "0 for no harvest level increase"
+                        "The player's harvest level is equal to max(<digging claws harvest level>, <tool harvest level>)",
+                        "Harvest level 0 is no tool, 1 for a wooden tool, 2 stone etc."
                 )
                 .translation(translate("harvest_level"))
-                .defineInRange("harvest_level", 1, 0, Integer.MAX_VALUE);
-    }
-
-    @Override
-    public void bake() {
-        miningSpeedBonus = (float) (double) miningSpeedBonusValue.get();
-        harvestLevel = harvestLevelValue.get();
+                .defineInRange("harvest_level", 2, 0, Integer.MAX_VALUE);
+        toolTypes = builder
+                .comment(
+                        "The tool types of the digging claws",
+                        "Blocks that do not have these tool types are not affected by the digging claws",
+                        "Use \"*\" to give digging claws all tool types"
+                )
+                .translation(translate("tool_types"))
+                .define("tool_types", Lists.newArrayList("*"));
     }
 }

@@ -2,7 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.hands.ClawsModel;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -29,8 +29,9 @@ public class FeralClawsItem extends GloveItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
-        if (!Config.SERVER.isCosmetic(this)) {
-            result.put(Attributes.ATTACK_SPEED, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "feral_claws_attack_speed").toString(), Config.SERVER.feralClaws.attackSpeedBonus, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        if (!ModConfig.server.isCosmetic(this)) {
+            double attackSpeedBonus = ModConfig.server.feralClaws.attackSpeedBonus.get();
+            result.put(Attributes.ATTACK_SPEED, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "feral_claws_attack_speed").toString(), attackSpeedBonus, AttributeModifier.Operation.ADDITION));
         }
         return result;
     }

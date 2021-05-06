@@ -1,40 +1,32 @@
 package artifacts.common.config.item;
 
+import artifacts.common.init.ModItems;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class CloudInABottleConfig extends ItemConfig {
 
-    public double sprintJumpHeightMultiplier;
-    public double sprintJumpDistanceMultiplier;
-
-    private ForgeConfigSpec.DoubleValue sprintJumpHeightMultiplierValue;
-    private ForgeConfigSpec.DoubleValue sprintJumpDistanceMultiplierValue;
+    public ForgeConfigSpec.DoubleValue sprintJumpHeightMultiplier;
+    public ForgeConfigSpec.DoubleValue sprintJumpDistanceMultiplier;
 
     public CloudInABottleConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, "cloud_in_a_bottle");
+        super(builder, ModItems.CLOUD_IN_A_BOTTLE.get());
     }
 
     @Override
     public void addConfigs(ForgeConfigSpec.Builder builder) {
-        sprintJumpHeightMultiplierValue = builder
+        sprintJumpHeightMultiplier = builder
                 .comment(
                         "Affects double jump height while sprinting",
                         "1 for no height bonus"
                 )
                 .translation(translate("sprint_jump_height_multiplier"))
-                .defineInRange("sprint_jump_height_multiplier", 1.5D, 0, Double.MAX_VALUE);
-        sprintJumpDistanceMultiplierValue = builder
+                .defineInRange("sprint_jump_height_multiplier", 1.5D, 0, Double.POSITIVE_INFINITY);
+        sprintJumpDistanceMultiplier = builder
                 .comment(
                         "Affects double jump distance while sprinting",
                         "0 for no distance bonus"
                 )
                 .translation(translate("sprint_jump_distance_multiplier"))
-                .defineInRange("sprint_jump_distance_multiplier", 0.5D, 0, Double.MAX_VALUE);
-    }
-
-    @Override
-    public void bake() {
-        sprintJumpHeightMultiplier = sprintJumpHeightMultiplierValue.get();
-        sprintJumpDistanceMultiplier = sprintJumpDistanceMultiplierValue.get();
+                .defineInRange("sprint_jump_distance_multiplier", 0.5D, 0, Double.POSITIVE_INFINITY);
     }
 }

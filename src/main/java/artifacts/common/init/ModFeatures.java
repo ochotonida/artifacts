@@ -1,7 +1,7 @@
 package artifacts.common.init;
 
 import artifacts.Artifacts;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import artifacts.common.world.CampsiteFeature;
 import artifacts.common.world.InCaveWithChance;
 import net.minecraft.util.ResourceLocation;
@@ -30,7 +30,7 @@ public class ModFeatures {
     public static void registerConfiguredFeatures() {
         UNDERGROUND_CAMPSITE = CAMPSITE.get()
                 .configured(IFeatureConfig.NONE)
-                .decorated(IN_CAVE_WITH_CHANCE.get().configured(new ChanceConfig(Config.COMMON.campsiteRarity)));
+                .decorated(IN_CAVE_WITH_CHANCE.get().configured(new ChanceConfig(ModConfig.common.campsiteRarity.get())));
         Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Artifacts.MODID, "underground_campsite"), UNDERGROUND_CAMPSITE);
     }
 }

@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.client.render.model.curio.head.DrinkingHatModel;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModItems;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
@@ -34,7 +34,7 @@ public class DrinkingHatItem extends CurioItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        if (Config.CLIENT.showTooltips && !Config.SERVER.isCosmetic(this)) {
+        if (ModConfig.client.showTooltips.get() && ModConfig.server != null && !ModConfig.server.isCosmetic(this)) {
             if (this != ModItems.PLASTIC_DRINKING_HAT.get()) {
                 tooltip.add(new TranslationTextComponent(ModItems.PLASTIC_DRINKING_HAT.get().getDescriptionId() + ".tooltip").withStyle(TextFormatting.GRAY));
             }
@@ -44,8 +44,9 @@ public class DrinkingHatItem extends CurioItem {
 
     public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
         UseAction action = event.getItem().getUseAnimation();
-        if (action == UseAction.DRINK || action == UseAction.EAT && Config.SERVER.drinkingHatConfig.enableFastEating) {
-            event.setDuration((int) (event.getDuration() * Config.SERVER.drinkingHatConfig.drinkingDurationMultiplier));
+        if (action == UseAction.DRINK || action == UseAction.EAT && ModConfig.server.drinkingHats.get(this).enableFastEating.get()) {
+            double drinkingDurationMultiplier = ModConfig.server.drinkingHats.get(this).drinkingDurationMultiplier.get();
+            event.setDuration((int) (event.getDuration() * drinkingDurationMultiplier));
         }
     }
 

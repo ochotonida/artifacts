@@ -3,7 +3,7 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.necklace.CharmOfSinkingModel;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
@@ -33,7 +33,7 @@ public class CharmOfSinkingItem extends CurioItem {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
-        if (!Config.SERVER.isCosmetic(this) && slotContext.getWearer() instanceof ServerPlayerEntity) {
+        if (!ModConfig.server.isCosmetic(this) && slotContext.getWearer() instanceof ServerPlayerEntity) {
             slotContext.getWearer().getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
                     handler -> {
                         handler.setSinking(true);
@@ -45,7 +45,7 @@ public class CharmOfSinkingItem extends CurioItem {
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
-        if (!Config.SERVER.isCosmetic(this) && slotContext.getWearer() instanceof ServerPlayerEntity) {
+        if (!ModConfig.server.isCosmetic(this) && slotContext.getWearer() instanceof ServerPlayerEntity) {
             slotContext.getWearer().getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
                     handler -> {
                         handler.setSinking(false);

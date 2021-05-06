@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.belt.ObsidianSkullModel;
+import artifacts.common.config.ModConfig;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,8 +33,11 @@ public class ObsidianSkullItem extends CurioItem {
                 && event.getEntity() instanceof PlayerEntity) {
 
             if (!((PlayerEntity) event.getEntity()).getCooldowns().isOnCooldown(this)) {
-                event.getEntityLiving().addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 600, 0, false, true));
-                ((PlayerEntity) event.getEntity()).getCooldowns().addCooldown(this, 1200);
+                int cooldown = ModConfig.server.obsidianSkull.cooldown.get();
+                int fireResistanceDuration = ModConfig.server.obsidianSkull.fireResistanceDuration.get();
+
+                event.getEntityLiving().addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, fireResistanceDuration, 0, false, true));
+                ((PlayerEntity) event.getEntity()).getCooldowns().addCooldown(this, cooldown);
             }
         }
     }

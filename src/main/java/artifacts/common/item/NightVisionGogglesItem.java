@@ -3,7 +3,7 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.RenderTypes;
 import artifacts.client.render.model.curio.head.NightVisionGogglesModel;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -25,7 +25,7 @@ public class NightVisionGogglesItem extends CurioItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!Config.SERVER.isCosmetic(this) && !livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
+        if (!ModConfig.server.isCosmetic(this) && !livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
             livingEntity.addEffect(new EffectInstance(Effects.NIGHT_VISION, 319, 0, true, false));
         }
     }

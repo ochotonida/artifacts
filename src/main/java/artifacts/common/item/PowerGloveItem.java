@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -20,8 +20,9 @@ public class PowerGloveItem extends GloveItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
-        if (!Config.SERVER.isCosmetic(this)) {
-            result.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "power_glove_attack_damage").toString(), 4, AttributeModifier.Operation.ADDITION));
+        if (!ModConfig.server.isCosmetic(this)) {
+            int attackDamageBonus = ModConfig.server.powerGlove.attackDamageBonus.get();
+            result.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "power_glove_attack_damage").toString(), attackDamageBonus, AttributeModifier.Operation.ADDITION));
         }
         return result;
     }

@@ -1,27 +1,21 @@
 package artifacts.common.config.item;
 
+import artifacts.common.init.ModItems;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class FireGauntletConfig extends ItemConfig {
 
-    public int fireDuration;
-
-    private ForgeConfigSpec.IntValue fireDurationValue;
+    public ForgeConfigSpec.IntValue fireDuration;
 
     public FireGauntletConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, "fire_gauntlet");
+        super(builder, ModItems.FIRE_GAUNTLET.get());
     }
 
     @Override
     public void addConfigs(ForgeConfigSpec.Builder builder) {
-        fireDurationValue = builder
+        fireDuration = builder
                 .comment("Duration (equal to total fire damage) for which entities are set on fire")
                 .translation(translate("fire_duration"))
-                .defineInRange("fire_duration", 8, 1, Integer.MAX_VALUE);
-    }
-
-    @Override
-    public void bake() {
-        fireDuration = fireDurationValue.get();
+                .defineInRange("fire_duration", 8, 0, Integer.MAX_VALUE);
     }
 }
