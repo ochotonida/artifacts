@@ -29,7 +29,7 @@ public class ObsidianSkullItem extends CurioItem {
     public void onLivingHurt(LivingHurtEvent event) {
         if (!event.getEntity().level.isClientSide
                 && event.getAmount() >= 1
-                && (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA)
+                && (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA || event.getSource() == DamageSource.HOT_FLOOR)
                 && event.getEntity() instanceof PlayerEntity) {
 
             if (!((PlayerEntity) event.getEntity()).getCooldowns().isOnCooldown(this)) {
