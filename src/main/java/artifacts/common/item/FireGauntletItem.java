@@ -19,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -31,12 +31,13 @@ public class FireGauntletItem extends GloveItem {
     private static final ResourceLocation TEXTURE_SLIM_GLOW = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/fire_gauntlet_slim_glow.png");
 
     public FireGauntletItem() {
-        addListener(LivingHurtEvent.class, this::onLivingHurt, event -> DamageSourceHelper.getAttacker(event.getSource()));
+        addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
-    public void onLivingHurt(LivingHurtEvent event) {
+    public void onLivingAttack(LivingAttackEvent event) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource()) && !event.getEntity().fireImmune()) {
             event.getEntity().setSecondsOnFire(ModConfig.server.fireGauntlet.fireDuration.get());
+            damageEquippedStacks(DamageSourceHelper.getAttacker(event.getSource()));
         }
     }
 

@@ -25,6 +25,13 @@ public class CharmOfSinkingItem extends CurioItem {
         addListener(EventPriority.HIGH, PlayerEvent.BreakSpeed.class, this::onBreakSpeed, PlayerEvent::getPlayer);
     }
 
+    @Override
+    public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
+        if (livingEntity.tickCount % 20 == 0 && livingEntity.isEyeInFluid(FluidTags.WATER)) {
+            damageStack(identifier, index, livingEntity, stack);
+        }
+    }
+
     public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
         if (event.getPlayer().isEyeInFluid(FluidTags.WATER) && !EnchantmentHelper.hasAquaAffinity(event.getPlayer())) {
             event.setNewSpeed(event.getNewSpeed() * 5);

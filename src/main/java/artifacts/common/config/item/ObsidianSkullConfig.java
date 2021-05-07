@@ -10,7 +10,7 @@ public class ObsidianSkullConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue fireResistanceDuration;
 
     public ObsidianSkullConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.OBSIDIAN_SKULL.get());
+        super(builder, ModItems.OBSIDIAN_SKULL.get(), "Affects how many times the fire resistance effect can be applied before breaking");
     }
 
     @Override

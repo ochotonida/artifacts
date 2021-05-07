@@ -42,6 +42,7 @@ public class DiggingClawsItem extends GloveItem {
         if (!event.canHarvest()) {
             int diggingClawsHarvestLevel = ModConfig.server.diggingClaws.harvestLevel.get() - 1;
             event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= diggingClawsHarvestLevel);
+            damageEquippedStacks(event.getPlayer());
         }
     }
 

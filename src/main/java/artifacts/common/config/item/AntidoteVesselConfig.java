@@ -20,7 +20,7 @@ public class AntidoteVesselConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue maxEffectDuration;
 
     public AntidoteVesselConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.ANTIDOTE_VESSEL.get());
+        super(builder, ModItems.ANTIDOTE_VESSEL.get(), "Affects how many times a negative effect can be shortened before breaking");
     }
 
     @Override

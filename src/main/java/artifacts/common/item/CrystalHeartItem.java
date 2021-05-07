@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -22,14 +23,19 @@ public class CrystalHeartItem extends CurioItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/crystal_heart.png");
 
-    @Override
-    public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_DIAMOND, 1, 1);
+    public CrystalHeartItem() {
+        addListener(LivingDamageEvent.class, this::onLivingDamage);
     }
 
     private static AttributeModifier getHealthBonus() {
         int healthBonus = ModConfig.server.crystalHeart.healthBonus.get();
         return new AttributeModifier(UUID.fromString("99fa0537-90b9-481a-bc76-4650987faba3"), "artifacts:crystal_heart_health_bonus", healthBonus, AttributeModifier.Operation.ADDITION);
+    }
+
+    private void onLivingDamage(LivingDamageEvent event) {
+        if (!event.isCanceled() && event.getAmount() >= 1) {
+            damageEquippedStacks(event.getEntityLiving(), (int) event.getAmount());
+        }
     }
 
     @Override
@@ -55,6 +61,11 @@ public class CrystalHeartItem extends CurioItem {
                 }
             }
         }
+    }
+
+    @Override
+    public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
+        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_DIAMOND, 1, 1);
     }
 
     @Override

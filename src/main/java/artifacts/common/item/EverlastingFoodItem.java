@@ -23,6 +23,10 @@ public class EverlastingFoodItem extends ArtifactItem {
                 ((PlayerEntity) entity).getCooldowns().addCooldown(this, cooldown);
             }
         }
+
+        stack.hurtAndBreak(1, entity, damager -> {
+        });
+
         return stack;
     }
 

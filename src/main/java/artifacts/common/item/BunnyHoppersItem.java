@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 
@@ -21,13 +22,18 @@ public class BunnyHoppersItem extends HurtSoundModifyingItem {
 
     public BunnyHoppersItem() {
         super(SoundEvents.RABBIT_HURT);
-        addListener(EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
+        addListener(EventPriority.HIGH, LivingFallEvent.class, this::onLivingFall);
+        addListener(LivingEvent.LivingJumpEvent.class, this::onLivingJump);
     }
 
     public void onLivingFall(LivingFallEvent event) {
         if (ModConfig.server.bunnyHoppers.shouldCancelFallDamage.get()) {
             event.setDamageMultiplier(0);
         }
+    }
+
+    public void onLivingJump(LivingEvent.LivingJumpEvent event) {
+        damageEquippedStacks(event.getEntityLiving());
     }
 
     @Override

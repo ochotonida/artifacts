@@ -9,7 +9,7 @@ public class CloudInABottleConfig extends ItemConfig {
     public ForgeConfigSpec.DoubleValue sprintJumpDistanceMultiplier;
 
     public CloudInABottleConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.CLOUD_IN_A_BOTTLE.get());
+        super(builder, ModItems.CLOUD_IN_A_BOTTLE.get(), "Affects how many times the player can double jump before breaking");
     }
 
     @Override

@@ -12,7 +12,7 @@ public class GoldenHookConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue maxExperience;
 
     public GoldenHookConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.GOLDEN_HOOK.get());
+        super(builder, ModItems.GOLDEN_HOOK.get(), "Affects how many enemies can be killed using the golden hook");
     }
 
     @Override

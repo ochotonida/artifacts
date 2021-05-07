@@ -2,6 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.necklace.PendantModel;
+import artifacts.common.config.ModConfig;
 import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
@@ -10,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -20,15 +21,17 @@ public abstract class PendantItem extends CurioItem {
 
     public PendantItem(String name) {
         texture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/%s.png", name));
-        addListener(LivingHurtEvent.class, this::onLivingHurt);
+        addListener(LivingAttackEvent.class, this::onLivingAttack);
     }
 
-    public void onLivingHurt(LivingHurtEvent event) {
+    public void onLivingAttack(LivingAttackEvent event) {
         LivingEntity attacker = DamageSourceHelper.getAttacker(event.getSource());
         if (!event.getEntity().level.isClientSide()
                 && event.getAmount() >= 1
-                && attacker != null) {
+                && attacker != null
+                && random.nextDouble() < ModConfig.server.pendants.get(this).strikeChance.get()) {
             applyEffect(event.getEntityLiving(), attacker);
+            damageEquippedStacks(event.getEntityLiving());
         }
     }
 

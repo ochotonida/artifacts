@@ -26,6 +26,19 @@ public abstract class ArtifactItem extends Item {
     }
 
     @Override
+    public int getMaxDamage(ItemStack stack) {
+        if (ModConfig.server != null && ModConfig.server.items.containsKey(this)) {
+            return ModConfig.server.items.get(this).durability.get();
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean canBeDepleted() {
+        return getMaxDamage(ItemStack.EMPTY) > 0;
+    }
+
+    @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
         if (ModConfig.server != null && ModConfig.server.isCosmetic(this)) {

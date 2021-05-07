@@ -1,6 +1,6 @@
 package artifacts.common.network;
 
-import artifacts.common.item.CloudInABottleItem;
+import artifacts.common.init.ModItems;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleTypes;
@@ -25,7 +25,7 @@ public class DoubleJumpPacket {
         ServerPlayerEntity player = context.get().getSender();
         if (player != null) {
             context.get().enqueueWork(() -> {
-                CloudInABottleItem.jump(player);
+                ModItems.CLOUD_IN_A_BOTTLE.get().jump(player);
 
                 for (int i = 0; i < 20; ++i) {
                     double motionX = player.getRandom().nextGaussian() * 0.02;

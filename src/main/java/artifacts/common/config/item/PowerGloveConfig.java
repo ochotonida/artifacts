@@ -8,7 +8,7 @@ public class PowerGloveConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue attackDamageBonus;
 
     public PowerGloveConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.POWER_GLOVE.get());
+        super(builder, ModItems.POWER_GLOVE.get(), "Affects how many enemies can be hit using the power glove");
     }
 
     @Override

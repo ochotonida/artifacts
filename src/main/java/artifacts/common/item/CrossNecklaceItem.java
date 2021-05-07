@@ -38,6 +38,7 @@ public class CrossNecklaceItem extends CurioItem {
             if (canApplyBonus(stack)) {
                 entity.invulnerableTime += ModConfig.server.crossNecklace.invincibilityBonus.get();
                 setCanApplyBonus(stack, false);
+                damageStack(identifier, index, entity, stack);
             }
         }
     }

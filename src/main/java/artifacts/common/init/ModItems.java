@@ -30,7 +30,7 @@ public class ModItems {
             ETERNAL_STEAK = REGISTRY.register("eternal_steak", () -> new EverlastingFoodItem(new Food.Builder().nutrition(8).saturationMod(0.8F).build()));
 
     // head
-    public static final RegistryObject<Item>
+    public static final RegistryObject<CurioItem>
             PLASTIC_DRINKING_HAT = REGISTRY.register("plastic_drinking_hat", () -> new DrinkingHatItem(new ResourceLocation(Artifacts.MODID, "textures/entity/curio/plastic_drinking_hat.png"))),
             NOVELTY_DRINKING_HAT = REGISTRY.register("novelty_drinking_hat", () -> new DrinkingHatItem(new ResourceLocation(Artifacts.MODID, "textures/entity/curio/novelty_drinking_hat.png"))),
             SNORKEL = REGISTRY.register("snorkel", SnorkelItem::new),
@@ -39,7 +39,7 @@ public class ModItems {
             SUPERSTITIOUS_HAT = REGISTRY.register("superstitious_hat", SuperstitiousHatItem::new);
 
     // necklace
-    public static final RegistryObject<Item>
+    public static final RegistryObject<CurioItem>
             LUCKY_SCARF = REGISTRY.register("lucky_scarf", LuckyScarfItem::new),
             SCARF_OF_INVISIBILITY = REGISTRY.register("scarf_of_invisibility", ScarfOfInvisibilityItem::new),
             CROSS_NECKLACE = REGISTRY.register("cross_necklace", CrossNecklaceItem::new),
@@ -50,16 +50,17 @@ public class ModItems {
             CHARM_OF_SINKING = REGISTRY.register("charm_of_sinking", CharmOfSinkingItem::new);
 
     // belt
-    public static final RegistryObject<Item>
+    public static final RegistryObject<CloudInABottleItem> CLOUD_IN_A_BOTTLE =
+            REGISTRY.register("cloud_in_a_bottle", CloudInABottleItem::new);
+    public static final RegistryObject<CurioItem>
             OBSIDIAN_SKULL = REGISTRY.register("obsidian_skull", ObsidianSkullItem::new),
             ANTIDOTE_VESSEL = REGISTRY.register("antidote_vessel", AntidoteVesselItem::new),
             UNIVERSAL_ATTRACTOR = REGISTRY.register("universal_attractor", UniversalAttractorItem::new),
             CRYSTAL_HEART = REGISTRY.register("crystal_heart", CrystalHeartItem::new),
-            CLOUD_IN_A_BOTTLE = REGISTRY.register("cloud_in_a_bottle", CloudInABottleItem::new),
             HELIUM_FLAMINGO = REGISTRY.register("helium_flamingo", HeliumFlamingoItem::new);
 
     // hands
-    public static final RegistryObject<Item>
+    public static final RegistryObject<CurioItem>
             DIGGING_CLAWS = REGISTRY.register("digging_claws", DiggingClawsItem::new),
             FERAL_CLAWS = REGISTRY.register("feral_claws", FeralClawsItem::new),
             POWER_GLOVE = REGISTRY.register("power_glove", PowerGloveItem::new),
@@ -69,15 +70,16 @@ public class ModItems {
             GOLDEN_HOOK = REGISTRY.register("golden_hook", GoldenHookItem::new);
 
     // feet
-    public static final RegistryObject<Item>
+    public static final RegistryObject<AquaDashersItem>
+            AQUA_DASHERS = REGISTRY.register("aqua_dashers", AquaDashersItem::new);
+    public static final RegistryObject<CurioItem>
             BUNNY_HOPPERS = REGISTRY.register("bunny_hoppers", BunnyHoppersItem::new),
             KITTY_SLIPPERS = REGISTRY.register("kitty_slippers", KittySlippersItem::new),
             RUNNING_SHOES = REGISTRY.register("running_shoes", RunningShoesItem::new),
             STEADFAST_SPIKES = REGISTRY.register("steadfast_spikes", SteadfastSpikesItem::new),
-            FLIPPERS = REGISTRY.register("flippers", FlippersItem::new),
-            AQUA_DASHERS = REGISTRY.register("aqua_dashers", AquaDashersItem::new);
+            FLIPPERS = REGISTRY.register("flippers", FlippersItem::new);
 
     // curio
-    public static final RegistryObject<Item>
+    public static final RegistryObject<CurioItem>
             WHOOPEE_CUSHION = REGISTRY.register("whoopee_cushion", WhoopeeCushionItem::new);
 }

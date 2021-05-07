@@ -1,10 +1,7 @@
 package artifacts.mixin.aquadashers;
 
-import artifacts.common.capability.swimhandler.ISwimHandler;
-import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.init.ModItems;
 import artifacts.common.init.ModSoundEvents;
-import artifacts.common.item.CurioItem;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -31,8 +28,6 @@ public abstract class EntityMixin {
 
     @Shadow public World level;
 
-    @Shadow public float fallDistance;
-
     @Shadow @Final protected Random random;
 
     @Shadow private EntitySize dimensions;
@@ -42,8 +37,6 @@ public abstract class EntityMixin {
     @Shadow public abstract double getY();
 
     @Shadow public abstract double getZ();
-
-    @Shadow public abstract boolean isSprinting();
 
     @Shadow public abstract Vector3d getDeltaMovement();
 
@@ -87,10 +80,6 @@ public abstract class EntityMixin {
 
     private boolean isRunningWithAquaDashers() {
         // noinspection ConstantConditions
-        return (Object) this instanceof LivingEntity
-                && ((CurioItem) ModItems.AQUA_DASHERS.get()).isEquippedBy((LivingEntity) (Object) this)
-                && isSprinting()
-                && fallDistance < 6
-                && !((LivingEntity) (Object) this).getCapability(SwimHandlerCapability.INSTANCE).map(ISwimHandler::isWet).orElse(true);
+        return (Object) this instanceof LivingEntity && ModItems.AQUA_DASHERS.get().isSprinting((LivingEntity) (Object) this);
     }
 }

@@ -15,6 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.List;
@@ -24,7 +25,12 @@ public class UniversalAttractorItem extends CurioItem {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/universal_attractor.png");
 
     public UniversalAttractorItem() {
+        addListener(PlayerEvent.ItemPickupEvent.class, this::onItemPickup);
         MinecraftForge.EVENT_BUS.addListener(this::onItemToss);
+    }
+
+    public void onItemPickup(PlayerEvent.ItemPickupEvent event) {
+        damageEquippedStacks(event.getEntityLiving());
     }
 
     public static int getCooldown(ItemStack stack) {

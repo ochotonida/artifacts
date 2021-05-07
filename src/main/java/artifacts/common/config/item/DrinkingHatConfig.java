@@ -10,7 +10,7 @@ public class DrinkingHatConfig extends ItemConfig {
     public ForgeConfigSpec.BooleanValue enableFastEating;
 
     public DrinkingHatConfig(ForgeConfigSpec.Builder builder, Item item) {
-        super(builder, item);
+        super(builder, item, "Affects how many items the player can drink using the drinking hat before breaking");
     }
 
     @Override

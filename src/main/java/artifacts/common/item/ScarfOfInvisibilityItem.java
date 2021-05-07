@@ -18,9 +18,12 @@ public class ScarfOfInvisibilityItem extends CurioItem {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/scarf_of_invisibility.png");
 
     @Override
-    public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!ModConfig.server.isCosmetic(this) && !livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
-            livingEntity.addEffect(new EffectInstance(Effects.INVISIBILITY, 39, 0, true, false));
+    public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
+        if (!ModConfig.server.isCosmetic(this) && !entity.level.isClientSide && entity.tickCount % 15 == 0) {
+            entity.addEffect(new EffectInstance(Effects.INVISIBILITY, 39, 0, true, false));
+        }
+        if (entity.tickCount % 20 == 0) {
+            damageStack(identifier, index, entity, stack);
         }
     }
 

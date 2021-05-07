@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "artifacts.refmap.json",
   "mixins": [
-    "aquadashers.EntityMixin"
+    "aquadashers.EntityMixin",
+    "villagerhat.AbstractVillagerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

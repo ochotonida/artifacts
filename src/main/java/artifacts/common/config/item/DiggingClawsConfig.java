@@ -13,7 +13,7 @@ public class DiggingClawsConfig extends ItemConfig {
     public ForgeConfigSpec.ConfigValue<List<String>> toolTypes;
 
     public DiggingClawsConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.DIGGING_CLAWS.get());
+        super(builder, ModItems.DIGGING_CLAWS.get(), "Affects how many blocks the player can break using the digging claws before breaking");
     }
 
     @Override
@@ -26,7 +26,7 @@ public class DiggingClawsConfig extends ItemConfig {
         harvestLevel = builder
                 .comment(
                         "The player's base harvest level when wearing digging claws",
-                        "The player's harvest level is equal to max(<digging claws harvest level>, <tool harvest level>)",
+                        "The player's harvest level is equal to MAX(<digging claws harvest level>, <tool harvest level>)",
                         "Harvest level 0 is no tool, 1 for a wooden tool, 2 stone etc."
                 )
                 .translation(translate("harvest_level"))

@@ -1,6 +1,5 @@
 package artifacts.common.item;
 
-import artifacts.common.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
@@ -8,7 +7,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public class ShockPendantItem extends PendantItem {
 
@@ -17,18 +16,18 @@ public class ShockPendantItem extends PendantItem {
     }
 
     @Override
-    public void onLivingHurt(LivingHurtEvent event) {
+    public void onLivingAttack(LivingAttackEvent event) {
         if (!event.getEntity().level.isClientSide
                 && event.getAmount() >= 1
                 && event.getSource() == DamageSource.LIGHTNING_BOLT) {
             event.setCanceled(true);
         }
-        super.onLivingHurt(event);
+        super.onLivingAttack(event);
     }
 
     @Override
     public void applyEffect(LivingEntity target, LivingEntity attacker) {
-        if (attacker.level.canSeeSky(new BlockPos(attacker.position())) && target.getRandom().nextFloat() < ModConfig.server.shockPendant.strikeChance.get()) {
+        if (attacker.level.canSeeSky(new BlockPos(attacker.position()))) {
             LightningBoltEntity lightningBolt = EntityType.LIGHTNING_BOLT.create(attacker.level);
             if (lightningBolt != null) {
                 lightningBolt.moveTo(Vector3d.atBottomCenterOf(attacker.blockPosition()));

@@ -38,6 +38,8 @@ public class ObsidianSkullItem extends CurioItem {
 
                 event.getEntityLiving().addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, fireResistanceDuration, 0, false, true));
                 ((PlayerEntity) event.getEntity()).getCooldowns().addCooldown(this, cooldown);
+
+                damageEquippedStacks(event.getEntityLiving());
             }
         }
     }

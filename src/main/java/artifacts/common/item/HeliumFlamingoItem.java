@@ -78,10 +78,16 @@ public class HeliumFlamingoItem extends CurioItem {
                             }
                         }
 
-                        if (isEquippedBy(event.player) && !event.player.isEyeInFluid(FluidTags.WATER) && !event.player.abilities.invulnerable) {
-                            // compensate for bonus air
-                            int airSupply = event.player.getAirSupply() - 4;
-                            event.player.setAirSupply(airSupply - 2);
+                        if (isEquippedBy(event.player) && !event.player.isEyeInFluid(FluidTags.WATER)) {
+                            if (event.player.tickCount % 20 == 0) {
+                                damageEquippedStacks(event.player);
+                            }
+
+                            if (!event.player.abilities.invulnerable) {
+                                // compensate for bonus air
+                                int airSupply = event.player.getAirSupply() - 4;
+                                event.player.setAirSupply(airSupply - 2);
+                            }
                         }
                     }
                 }

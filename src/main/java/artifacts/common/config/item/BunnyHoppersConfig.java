@@ -9,7 +9,7 @@ public class BunnyHoppersConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue jumpBoostLevel;
 
     public BunnyHoppersConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.BUNNY_HOPPERS.get());
+        super(builder, ModItems.BUNNY_HOPPERS.get(), "Affects how many times the player can jump with the bunny hoppers before breaking");
     }
 
     @Override

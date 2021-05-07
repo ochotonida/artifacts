@@ -8,7 +8,7 @@ public class WhoopeeCushionConfig extends ItemConfig {
     public ForgeConfigSpec.DoubleValue flatulence;
 
     public WhoopeeCushionConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.WHOOPEE_CUSHION.get());
+        super(builder, ModItems.WHOOPEE_CUSHION.get(), "Affects how many farts can be farted using the whoopee cushion");
     }
 
     @Override

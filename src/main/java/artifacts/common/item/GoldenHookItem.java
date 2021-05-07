@@ -42,6 +42,8 @@ public class GoldenHookItem extends GloveItem {
         double multiplier = MathHelper.lerp(Math.max(0, (maxKillRatio - killRatio) / maxKillRatio), minMultiplier, maxMultiplier);
         int experienceBonus = (int) Math.min(maxExperience, multiplier * event.getOriginalExperience());
         event.setDroppedExperience(event.getDroppedExperience() + experienceBonus);
+
+        damageEquippedStacks(event.getAttackingPlayer());
     }
 
     @Override

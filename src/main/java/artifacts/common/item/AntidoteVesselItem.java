@@ -43,6 +43,7 @@ public class AntidoteVesselItem extends CurioItem {
             });
 
             effects.forEach((effect, instance) -> {
+                damageStack(identifier, index, entity, stack);
                 entity.removeEffectNoUpdate(effect);
                 if (maxEffectDuration > 0) {
                     entity.addEffect(new EffectInstance(effect, maxEffectDuration, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));

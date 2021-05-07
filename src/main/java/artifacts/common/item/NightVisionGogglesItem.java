@@ -28,6 +28,9 @@ public class NightVisionGogglesItem extends CurioItem {
         if (!ModConfig.server.isCosmetic(this) && !livingEntity.level.isClientSide && livingEntity.tickCount % 15 == 0) {
             livingEntity.addEffect(new EffectInstance(Effects.NIGHT_VISION, 319, 0, true, false));
         }
+        if (livingEntity.tickCount % 20 == 0) {
+            damageStack(identifier, index, livingEntity, stack);
+        }
     }
 
     @Override

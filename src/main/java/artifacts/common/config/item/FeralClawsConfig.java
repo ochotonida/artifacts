@@ -8,7 +8,7 @@ public class FeralClawsConfig extends ItemConfig {
     public ForgeConfigSpec.DoubleValue attackSpeedBonus;
 
     public FeralClawsConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.FERAL_CLAWS.get());
+        super(builder, ModItems.FERAL_CLAWS.get(), "Affects how many enemies can be hit using the feral claws before breaking");
     }
 
     @Override

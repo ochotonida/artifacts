@@ -22,6 +22,13 @@ public class FlippersItem extends CurioItem {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/flippers.png");
 
     @Override
+    public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
+        if (livingEntity.tickCount % 20 == 0 && livingEntity.isSwimming()) {
+            damageStack(identifier, index, livingEntity, stack);
+        }
+    }
+
+    @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
         if (!ModConfig.server.isCosmetic(this)) {

@@ -39,7 +39,7 @@ public class CloudInABottleItem extends CurioItem {
         addListener(EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
     }
 
-    public static void jump(PlayerEntity player) {
+    public void jump(PlayerEntity player) {
         player.fallDistance = 0;
 
         double upwardsMotion = 0.5;
@@ -73,6 +73,8 @@ public class CloudInABottleItem extends CurioItem {
         } else {
             player.playSound(SoundEvents.WOOL_FALL, 1, 0.9F + player.getRandom().nextFloat() * 0.2F);
         }
+
+        damageEquippedStacks(player);
     }
 
     public void onLivingFall(LivingFallEvent event) {

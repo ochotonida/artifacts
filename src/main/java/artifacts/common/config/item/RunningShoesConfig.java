@@ -8,7 +8,7 @@ public class RunningShoesConfig extends ItemConfig {
     public ForgeConfigSpec.DoubleValue speedMultiplier;
 
     public RunningShoesConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.RUNNING_SHOES.get());
+        super(builder, ModItems.RUNNING_SHOES.get(), "Affects how many seconds the player can sprint using the running shoes");
     }
 
     @Override

@@ -3,6 +3,7 @@ package artifacts.common.item;
 import artifacts.Artifacts;
 import artifacts.client.render.model.curio.feet.KittySlippersModel;
 import artifacts.common.config.ModConfig;
+import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -17,6 +18,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import top.theillusivec4.curios.api.SlotContext;
@@ -31,6 +33,13 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJoinWorld);
         addListener(LivingSetAttackTargetEvent.class, this::onLivingSetAttackTarget, LivingSetAttackTargetEvent::getTarget);
         addListener(LivingEvent.LivingUpdateEvent.class, this::onLivingUpdate, event -> event.getEntityLiving().getLastHurtByMob());
+        addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
+    }
+
+    public void onLivingAttack(LivingAttackEvent event) {
+        if (event.getEntityLiving() instanceof CreeperEntity) {
+            damageEquippedStacks(DamageSourceHelper.getAttacker(event.getSource()));
+        }
     }
 
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {

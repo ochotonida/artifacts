@@ -13,13 +13,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.theillusivec4.curios.api.SlotContext;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 
 import java.util.UUID;
 
 public class RunningShoesItem extends CurioItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/running_shoes.png");
+
+    public RunningShoesItem() {
+        MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
+    }
 
     private static AttributeModifier getSpeedBonus() {
         double speedMultiplier = ModConfig.server.runningShoes.speedMultiplier.get();
@@ -37,33 +42,41 @@ public class RunningShoesItem extends CurioItem {
         return TEXTURE;
     }
 
-    @Override
-    @SuppressWarnings("ConstantConditions")
-    public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (!ModConfig.server.isCosmetic(this)) {
-            ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
+    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        // onUnequip does not get called on the client
+        if (!isEquippedBy(event.player)) {
+            ModifiableAttributeInstance movementSpeed = event.player.getAttribute(Attributes.MOVEMENT_SPEED);
             AttributeModifier speedBonus = getSpeedBonus();
-            if (livingEntity.isSprinting()) {
-                if (!movementSpeed.hasModifier(speedBonus)) {
-                    movementSpeed.addTransientModifier(speedBonus);
-                }
-                if (livingEntity instanceof PlayerEntity) {
-                    livingEntity.maxUpStep = Math.max(livingEntity.maxUpStep, 1.1F);
-                }
-            } else if (movementSpeed.hasModifier(speedBonus)) {
+            if (movementSpeed != null && movementSpeed.hasModifier(speedBonus)) {
                 movementSpeed.removeModifier(speedBonus);
-                livingEntity.maxUpStep = 0.6F;
+                event.player.maxUpStep = 0.6F;
             }
         }
     }
 
     @Override
-    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        ModifiableAttributeInstance movementSpeed = slotContext.getWearer().getAttribute(Attributes.MOVEMENT_SPEED);
-        AttributeModifier speedBonus = getSpeedBonus();
-        if (movementSpeed != null && movementSpeed.hasModifier(speedBonus)) {
-            movementSpeed.removeModifier(speedBonus);
-            slotContext.getWearer().maxUpStep = 0.6F;
+    @SuppressWarnings("ConstantConditions")
+    public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
+        if (!ModConfig.server.isCosmetic(this)) {
+            ModifiableAttributeInstance movementSpeed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
+            AttributeModifier speedBonus = getSpeedBonus();
+            if (entity.isSprinting()) {
+                if (!movementSpeed.hasModifier(speedBonus)) {
+                    movementSpeed.addTransientModifier(speedBonus);
+                }
+                if (entity instanceof PlayerEntity) {
+                    entity.maxUpStep = Math.max(entity.maxUpStep, 1.1F);
+                }
+
+                if (entity.tickCount % 20 == 0) {
+                    damageStack(identifier, index, entity, stack);
+                }
+            } else {
+                if (movementSpeed.hasModifier(speedBonus)) {
+                    movementSpeed.removeModifier(speedBonus);
+                }
+                entity.maxUpStep = 0.6F;
+            }
         }
     }
 }

@@ -31,6 +31,7 @@ public class PanicNecklaceItem extends CurioItem {
 
             if (duration > 0 && level >= 0) {
                 event.getEntityLiving().addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, duration, level, false, false));
+                damageEquippedStacks(event.getEntityLiving());
             }
         }
     }

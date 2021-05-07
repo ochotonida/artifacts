@@ -29,6 +29,7 @@ public class DrinkingHatItem extends CurioItem {
     public DrinkingHatItem(ResourceLocation texture) {
         this.texture = texture;
         addListener(LivingEntityUseItemEvent.Start.class, this::onItemUseStart);
+        addListener(LivingEntityUseItemEvent.Finish.class, this::onItemUseFinish);
     }
 
     @Override
@@ -43,11 +44,21 @@ public class DrinkingHatItem extends CurioItem {
     }
 
     public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-        UseAction action = event.getItem().getUseAnimation();
-        if (action == UseAction.DRINK || action == UseAction.EAT && ModConfig.server.drinkingHats.get(this).enableFastEating.get()) {
+        if (canApplyEffect(event)) {
             double drinkingDurationMultiplier = ModConfig.server.drinkingHats.get(this).drinkingDurationMultiplier.get();
             event.setDuration((int) (event.getDuration() * drinkingDurationMultiplier));
         }
+    }
+
+    public void onItemUseFinish(LivingEntityUseItemEvent.Finish event) {
+        if (canApplyEffect(event)) {
+            damageEquippedStacks(event.getEntityLiving());
+        }
+    }
+
+    private boolean canApplyEffect(LivingEntityUseItemEvent event) {
+        UseAction action = event.getItem().getUseAnimation();
+        return action == UseAction.DRINK || action == UseAction.EAT && ModConfig.server.drinkingHats.get(this).enableFastEating.get();
     }
 
     @Override

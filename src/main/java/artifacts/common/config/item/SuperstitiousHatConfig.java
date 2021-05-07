@@ -8,7 +8,7 @@ public class SuperstitiousHatConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue lootingBonus;
 
     public SuperstitiousHatConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.SUPERSTITIOUS_HAT.get());
+        super(builder, ModItems.SUPERSTITIOUS_HAT.get(), "Affects how many enemies can be killed using the superstitious hat");
     }
 
     @Override
