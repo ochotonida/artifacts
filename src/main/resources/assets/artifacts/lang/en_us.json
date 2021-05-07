@@ -114,6 +114,7 @@
   "artifacts.config.server.digging_claws.harvest_level": "Base harvest level",
   "artifacts.config.server.drinking_hat.drinking_duration_multiplier": "Drinking duration multiplier",
   "artifacts.config.server.drinking_hat.enable_fast_eating": "Enable fast eating",
+  "artifacts.server.everlasting_foods.use_duration": "Use duration",
   "artifacts.config.server.feral_claws.attack_speed_bonus": "Attack Speed bonus",
   "artifacts.config.server.fire_gauntlet.fire_duration": "Fire duration",
   "artifacts.config.server.flame_pendant.fire_duration": "Fire duration",

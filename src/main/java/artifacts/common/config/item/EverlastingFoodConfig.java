@@ -7,6 +7,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class EverlastingFoodConfig extends ItemConfig {
 
     public ForgeConfigSpec.IntValue cooldown;
+    public ForgeConfigSpec.IntValue useDuration;
 
     public EverlastingFoodConfig(ForgeConfigSpec.Builder builder, Item item) {
         super(builder, item);
@@ -18,5 +19,9 @@ public class EverlastingFoodConfig extends ItemConfig {
                 .comment("Cooldown (in ticks) before the item can be eaten again")
                 .translation(Artifacts.MODID + ".server.items.cooldown")
                 .defineInRange("cooldown", 300, 0, Integer.MAX_VALUE);
+        useDuration = builder
+                .comment("Time (in ticks) it takes to eat this item")
+                .translation(Artifacts.MODID + ".server.everlasting_foods.use_duration")
+                .defineInRange("use_duration", 24, 0, Integer.MAX_VALUE);
     }
 }

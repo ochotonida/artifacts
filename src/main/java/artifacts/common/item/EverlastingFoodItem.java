@@ -28,6 +28,6 @@ public class EverlastingFoodItem extends ArtifactItem {
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return ModConfig.server.isCosmetic(this) ? 72000 : 24;
+        return ModConfig.server.isCosmetic(this) ? 72000 : ModConfig.server.everlastingFoods.get(this).useDuration.get();
     }
 }
