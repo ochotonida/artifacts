@@ -20,8 +20,8 @@ public class SuperstitiousHatItem extends CurioItem {
         addListener(LivingDeathEvent.class, this::onLivingDeath, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
-    public void onLivingDeath(LivingDeathEvent event) {
-        damageEquippedStacks(DamageSourceHelper.getAttacker(event.getSource()));
+    private void onLivingDeath(LivingDeathEvent event, LivingEntity wearer) {
+        damageEquippedStacks(wearer);
     }
 
     @Override

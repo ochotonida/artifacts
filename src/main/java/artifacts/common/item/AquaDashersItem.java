@@ -26,15 +26,14 @@ public class AquaDashersItem extends CurioItem {
         addListener(LivingFluidCollisionEvent.class, this::onFluidCollision);
     }
 
-    public void onFluidCollision(LivingFluidCollisionEvent event) {
-        LivingEntity entity = event.getEntityLiving();
-        if (entity.isSprinting() && entity.fallDistance < 6 && !entity.isUsingItem() && !entity.isCrouching()) {
-            event.getEntityLiving().getCapability(SwimHandlerCapability.INSTANCE).ifPresent(handler -> {
+    private void onFluidCollision(LivingFluidCollisionEvent event, LivingEntity wearer) {
+        if (wearer.isSprinting() && wearer.fallDistance < 6 && !wearer.isUsingItem() && !wearer.isCrouching()) {
+            wearer.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(handler -> {
                 if (!handler.isWet() && !handler.isSwimming()) {
                     event.setResult(Event.Result.ALLOW);
                     if (event.getFluidState().is(FluidTags.LAVA)) {
-                        if (!event.getEntityLiving().fireImmune() && !EnchantmentHelper.hasFrostWalker(event.getEntityLiving())) {
-                            event.getEntityLiving().hurt(DamageSource.HOT_FLOOR, 1);
+                        if (!wearer.fireImmune() && !EnchantmentHelper.hasFrostWalker(wearer)) {
+                            wearer.hurt(DamageSource.HOT_FLOOR, 1);
                         }
                     }
                 }

@@ -22,7 +22,7 @@ public class CharmOfSinkingItem extends CurioItem {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/charm_of_sinking.png");
 
     public CharmOfSinkingItem() {
-        addListener(EventPriority.HIGH, PlayerEvent.BreakSpeed.class, this::onBreakSpeed, PlayerEvent::getPlayer);
+        addListener(EventPriority.HIGH, PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
     }
 
     @Override
@@ -32,8 +32,8 @@ public class CharmOfSinkingItem extends CurioItem {
         }
     }
 
-    public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
-        if (event.getPlayer().isEyeInFluid(FluidTags.WATER) && !EnchantmentHelper.hasAquaAffinity(event.getPlayer())) {
+    public void onBreakSpeed(PlayerEvent.BreakSpeed event, LivingEntity wearer) {
+        if (wearer.isEyeInFluid(FluidTags.WATER) && !EnchantmentHelper.hasAquaAffinity(wearer)) {
             event.setNewSpeed(event.getNewSpeed() * 5);
         }
     }

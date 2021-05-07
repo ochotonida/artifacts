@@ -42,7 +42,7 @@ public class RunningShoesItem extends CurioItem {
         return TEXTURE;
     }
 
-    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+    private void onPlayerTick(TickEvent.PlayerTickEvent event) {
         // onUnequip does not get called on the client
         if (!isEquippedBy(event.player)) {
             ModifiableAttributeInstance movementSpeed = event.player.getAttribute(Attributes.MOVEMENT_SPEED);

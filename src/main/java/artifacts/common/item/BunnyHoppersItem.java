@@ -26,14 +26,14 @@ public class BunnyHoppersItem extends HurtSoundModifyingItem {
         addListener(LivingEvent.LivingJumpEvent.class, this::onLivingJump);
     }
 
-    public void onLivingFall(LivingFallEvent event) {
+    private void onLivingFall(LivingFallEvent event, LivingEntity wearer) {
         if (ModConfig.server.bunnyHoppers.shouldCancelFallDamage.get()) {
             event.setDamageMultiplier(0);
         }
     }
 
-    public void onLivingJump(LivingEvent.LivingJumpEvent event) {
-        damageEquippedStacks(event.getEntityLiving());
+    private void onLivingJump(LivingEvent.LivingJumpEvent event, LivingEntity wearer) {
+        damageEquippedStacks(wearer);
     }
 
     @Override

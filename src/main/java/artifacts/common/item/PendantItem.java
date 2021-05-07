@@ -24,18 +24,18 @@ public abstract class PendantItem extends CurioItem {
         addListener(LivingAttackEvent.class, this::onLivingAttack);
     }
 
-    public void onLivingAttack(LivingAttackEvent event) {
+    private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         LivingEntity attacker = DamageSourceHelper.getAttacker(event.getSource());
-        if (!event.getEntity().level.isClientSide()
+        if (!wearer.level.isClientSide()
                 && event.getAmount() >= 1
                 && attacker != null
                 && random.nextDouble() < ModConfig.server.pendants.get(this).strikeChance.get()) {
-            applyEffect(event.getEntityLiving(), attacker);
-            damageEquippedStacks(event.getEntityLiving());
+            applyEffect(wearer, attacker);
+            damageEquippedStacks(wearer);
         }
     }
 
-    public abstract void applyEffect(LivingEntity target, LivingEntity attacker);
+    protected abstract void applyEffect(LivingEntity target, LivingEntity attacker);
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {

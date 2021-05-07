@@ -24,7 +24,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import javax.annotation.Nullable;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public abstract class CurioItem extends ArtifactItem implements ICurioItem {
@@ -35,23 +35,24 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
         return !ModConfig.server.isCosmetic(this) && entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
     }
 
-    protected <T extends Event> void addListener(EventPriority priority, Class<T> eventClass, Consumer<T> listener, Function<T, LivingEntity> livingEntitySupplier) {
+    protected <T extends Event, S extends LivingEntity> void addListener(EventPriority priority, Class<T> eventClass, BiConsumer<T, S> listener, Function<T, S> wearerSupplier) {
         MinecraftForge.EVENT_BUS.addListener(priority, true, eventClass, event -> {
-            if (isEquippedBy(livingEntitySupplier.apply(event))) {
-                listener.accept(event);
+            S wearer = wearerSupplier.apply(event);
+            if (isEquippedBy(wearer)) {
+                listener.accept(event, wearer);
             }
         });
     }
 
-    protected <T extends Event> void addListener(Class<T> eventClass, Consumer<T> listener, Function<T, LivingEntity> livingEntitySupplier) {
-        addListener(EventPriority.NORMAL, eventClass, listener, livingEntitySupplier);
+    protected <T extends Event, S extends LivingEntity> void addListener(Class<T> eventClass, BiConsumer<T, S> listener, Function<T, S> wearerSupplier) {
+        addListener(EventPriority.NORMAL, eventClass, listener, wearerSupplier);
     }
 
-    protected <T extends LivingEvent> void addListener(EventPriority priority, Class<T> eventClass, Consumer<T> listener) {
+    protected <T extends LivingEvent> void addListener(EventPriority priority, Class<T> eventClass, BiConsumer<T, LivingEntity> listener) {
         addListener(priority, eventClass, listener, LivingEvent::getEntityLiving);
     }
 
-    protected <T extends LivingEvent> void addListener(Class<T> eventClass, Consumer<T> listener) {
+    protected <T extends LivingEvent> void addListener(Class<T> eventClass, BiConsumer<T, LivingEntity> listener) {
         addListener(EventPriority.NORMAL, eventClass, listener);
     }
 

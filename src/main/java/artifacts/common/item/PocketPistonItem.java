@@ -21,12 +21,10 @@ public class PocketPistonItem extends GloveItem {
         addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
-    public void onLivingAttack(LivingAttackEvent event) {
-        LivingEntity attacker = DamageSourceHelper.getAttacker(event.getSource());
+    private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         float knockbackBonus = (float) (double) ModConfig.server.pocketPiston.knockbackBonus.get();
-        // noinspection ConstantConditions
-        event.getEntityLiving().knockback(knockbackBonus, MathHelper.sin((float) (attacker.yRot * (Math.PI / 180))), -MathHelper.cos((float) (attacker.yRot * (Math.PI / 180))));
-        damageEquippedStacks(attacker);
+        event.getEntityLiving().knockback(knockbackBonus, MathHelper.sin((float) (wearer.yRot * (Math.PI / 180))), -MathHelper.cos((float) (wearer.yRot * (Math.PI / 180))));
+        damageEquippedStacks(wearer);
     }
 
     @Override

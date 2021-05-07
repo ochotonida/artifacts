@@ -32,9 +32,9 @@ public class CrystalHeartItem extends CurioItem {
         return new AttributeModifier(UUID.fromString("99fa0537-90b9-481a-bc76-4650987faba3"), "artifacts:crystal_heart_health_bonus", healthBonus, AttributeModifier.Operation.ADDITION);
     }
 
-    private void onLivingDamage(LivingDamageEvent event) {
+    private void onLivingDamage(LivingDamageEvent event, LivingEntity wearer) {
         if (!event.isCanceled() && event.getAmount() >= 1) {
-            damageEquippedStacks(event.getEntityLiving(), (int) event.getAmount());
+            damageEquippedStacks(wearer, (int) event.getAmount());
         }
     }
 

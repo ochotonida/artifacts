@@ -29,8 +29,8 @@ public class UniversalAttractorItem extends CurioItem {
         MinecraftForge.EVENT_BUS.addListener(this::onItemToss);
     }
 
-    public void onItemPickup(PlayerEvent.ItemPickupEvent event) {
-        damageEquippedStacks(event.getEntityLiving());
+    private void onItemPickup(PlayerEvent.ItemPickupEvent event, LivingEntity wearer) {
+        damageEquippedStacks(wearer);
     }
 
     public static int getCooldown(ItemStack stack) {
@@ -41,7 +41,7 @@ public class UniversalAttractorItem extends CurioItem {
         stack.getOrCreateTag().putInt("Cooldown", cooldown);
     }
 
-    public void onItemToss(ItemTossEvent event) {
+    private void onItemToss(ItemTossEvent event) {
         int cooldown = ModConfig.server.universalAttractor.cooldown.get();
         if (cooldown > 0) {
             CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, cooldown));

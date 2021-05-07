@@ -4,6 +4,7 @@ import artifacts.Artifacts;
 import artifacts.common.config.ModConfig;
 import artifacts.common.util.DamageSourceHelper;
 import com.google.common.collect.Multimap;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -23,9 +24,9 @@ public class PowerGloveItem extends GloveItem {
         addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
-    public void onLivingAttack(LivingAttackEvent event) {
+    private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource())) {
-            damageEquippedStacks(DamageSourceHelper.getAttacker(event.getSource()));
+            damageEquippedStacks(wearer);
         }
     }
 

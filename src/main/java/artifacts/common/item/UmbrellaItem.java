@@ -39,7 +39,7 @@ public class UmbrellaItem extends ArtifactItem {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingUpdate);
     }
 
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+    private void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         if (!ModConfig.server.isCosmetic(this)) {
             LivingEntity entity = event.getEntityLiving();
             ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());

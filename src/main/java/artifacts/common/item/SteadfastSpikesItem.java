@@ -27,9 +27,9 @@ public class SteadfastSpikesItem extends CurioItem {
         addListener(LivingAttackEvent.class, this::onLivingAttack);
     }
 
-    public void onLivingAttack(LivingAttackEvent event) {
+    private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource())) {
-            damageEquippedStacks(event.getEntityLiving());
+            damageEquippedStacks(wearer);
         }
     }
 

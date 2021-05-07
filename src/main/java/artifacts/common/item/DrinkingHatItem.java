@@ -43,16 +43,16 @@ public class DrinkingHatItem extends CurioItem {
         super.appendHoverText(stack, world, tooltip, flags);
     }
 
-    public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
+    private void onItemUseStart(LivingEntityUseItemEvent.Start event, LivingEntity wearer) {
         if (canApplyEffect(event)) {
             double drinkingDurationMultiplier = ModConfig.server.drinkingHats.get(this).drinkingDurationMultiplier.get();
             event.setDuration((int) (event.getDuration() * drinkingDurationMultiplier));
         }
     }
 
-    public void onItemUseFinish(LivingEntityUseItemEvent.Finish event) {
+    private void onItemUseFinish(LivingEntityUseItemEvent.Finish event, LivingEntity wearer) {
         if (canApplyEffect(event)) {
-            damageEquippedStacks(event.getEntityLiving());
+            damageEquippedStacks(wearer);
         }
     }
 

@@ -5,6 +5,7 @@ import artifacts.client.render.model.curio.hands.GloveModel;
 import artifacts.client.render.model.curio.hands.GoldenHookModel;
 import artifacts.common.capability.killtracker.EntityKillTrackerCapability;
 import artifacts.common.config.ModConfig;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -21,12 +22,12 @@ public class GoldenHookItem extends GloveItem {
         addListener(LivingExperienceDropEvent.class, this::onLivingExperienceDrop, LivingExperienceDropEvent::getAttackingPlayer);
     }
 
-    private void onLivingExperienceDrop(LivingExperienceDropEvent event) {
+    private void onLivingExperienceDrop(LivingExperienceDropEvent event, LivingEntity wearer) {
         if (event.getEntityLiving() instanceof PlayerEntity) {
             return; // players shouldn't drop extra XP
         }
 
-        double killRatio = event.getAttackingPlayer()
+        double killRatio = wearer
                 .getCapability(EntityKillTrackerCapability.INSTANCE)
                 .map(tracker -> tracker.getKillRatio(event.getEntityLiving().getType()))
                 .orElse(0D);
@@ -43,7 +44,7 @@ public class GoldenHookItem extends GloveItem {
         int experienceBonus = (int) Math.min(maxExperience, multiplier * event.getOriginalExperience());
         event.setDroppedExperience(event.getDroppedExperience() + experienceBonus);
 
-        damageEquippedStacks(event.getAttackingPlayer());
+        damageEquippedStacks(wearer);
     }
 
     @Override

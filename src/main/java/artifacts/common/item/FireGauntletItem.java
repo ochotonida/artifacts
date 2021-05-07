@@ -34,10 +34,10 @@ public class FireGauntletItem extends GloveItem {
         addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
-    public void onLivingAttack(LivingAttackEvent event) {
+    private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource()) && !event.getEntity().fireImmune()) {
             event.getEntity().setSecondsOnFire(ModConfig.server.fireGauntlet.fireDuration.get());
-            damageEquippedStacks(DamageSourceHelper.getAttacker(event.getSource()));
+            damageEquippedStacks(wearer);
         }
     }
 

@@ -11,7 +11,7 @@ public class ThornPendantItem extends PendantItem {
     }
 
     @Override
-    public void applyEffect(LivingEntity target, LivingEntity attacker) {
+    protected void applyEffect(LivingEntity target, LivingEntity attacker) {
         if (attacker.attackable()) {
             int minDamage = ModConfig.server.thornPendant.minDamage.get();
             int maxDamage = ModConfig.server.thornPendant.maxDamage.get();

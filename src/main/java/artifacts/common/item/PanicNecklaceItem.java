@@ -24,14 +24,14 @@ public class PanicNecklaceItem extends CurioItem {
         addListener(LivingHurtEvent.class, this::onLivingHurt);
     }
 
-    public void onLivingHurt(LivingHurtEvent event) {
-        if (!event.getEntity().level.isClientSide && event.getAmount() >= 1) {
+    private void onLivingHurt(LivingHurtEvent event, LivingEntity wearer) {
+        if (!wearer.level.isClientSide && event.getAmount() >= 1) {
             int duration = ModConfig.server.panicNecklace.speedDuration.get();
             int level = ModConfig.server.panicNecklace.speedLevel.get() - 1;
 
             if (duration > 0 && level >= 0) {
-                event.getEntityLiving().addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, duration, level, false, false));
-                damageEquippedStacks(event.getEntityLiving());
+                wearer.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, duration, level, false, false));
+                damageEquippedStacks(wearer);
             }
         }
     }

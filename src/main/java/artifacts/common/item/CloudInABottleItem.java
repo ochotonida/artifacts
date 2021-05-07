@@ -77,7 +77,7 @@ public class CloudInABottleItem extends CurioItem {
         damageEquippedStacks(player);
     }
 
-    public void onLivingFall(LivingFallEvent event) {
+    private void onLivingFall(LivingFallEvent event, LivingEntity wearer) {
         event.setDistance(Math.max(0, event.getDistance() - 3));
     }
 

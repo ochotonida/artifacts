@@ -10,7 +10,7 @@ public class FlamePendantItem extends PendantItem {
     }
 
     @Override
-    public void applyEffect(LivingEntity target, LivingEntity attacker) {
+    protected void applyEffect(LivingEntity target, LivingEntity attacker) {
         if (!attacker.fireImmune() && attacker.attackable()) {
             attacker.setSecondsOnFire(ModConfig.server.flamePendant.fireDuration.get());
         }

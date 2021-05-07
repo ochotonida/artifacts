@@ -60,7 +60,7 @@ public class HeliumFlamingoItem extends CurioItem {
         }
     }
 
-    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+    private void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.START) {
             return;
         }
@@ -105,7 +105,7 @@ public class HeliumFlamingoItem extends CurioItem {
         return TEXTURE;
     }
 
-    public class ClientEventHandler {
+    private class ClientEventHandler {
 
         private final ResourceLocation location = new ResourceLocation(Artifacts.MODID, "textures/gui/icons.png");
 

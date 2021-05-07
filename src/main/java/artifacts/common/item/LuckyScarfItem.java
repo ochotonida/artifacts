@@ -19,8 +19,8 @@ public class LuckyScarfItem extends CurioItem {
         addListener(BlockEvent.BreakEvent.class, this::onBreakBlock, BlockEvent.BreakEvent::getPlayer);
     }
 
-    public void onBreakBlock(BlockEvent.BreakEvent event) {
-        damageEquippedStacks(event.getPlayer());
+    private void onBreakBlock(BlockEvent.BreakEvent event, LivingEntity wearer) {
+        damageEquippedStacks(wearer);
     }
 
     @Override

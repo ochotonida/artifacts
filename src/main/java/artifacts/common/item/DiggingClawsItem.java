@@ -4,6 +4,7 @@ import artifacts.Artifacts;
 import artifacts.client.render.model.curio.hands.ClawsModel;
 import artifacts.common.config.ModConfig;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
@@ -21,7 +22,7 @@ public class DiggingClawsItem extends GloveItem {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/digging_claws.png");
 
     public DiggingClawsItem() {
-        addListener(EventPriority.LOW, PlayerEvent.BreakSpeed.class, this::onBreakSpeed, PlayerEvent::getPlayer);
+        addListener(EventPriority.LOW, PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
         addListener(PlayerEvent.HarvestCheck.class, this::onHarvestCheck);
     }
 
@@ -32,17 +33,17 @@ public class DiggingClawsItem extends GloveItem {
                 (toolTypes.contains(state.getHarvestTool().getName()) || toolTypes.contains("*"));
     }
 
-    public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+    private void onBreakSpeed(PlayerEvent.BreakSpeed event, LivingEntity wearer) {
         if (canHarvest(event.getState())) {
             event.setNewSpeed((float) (event.getNewSpeed() + ModConfig.server.diggingClaws.miningSpeedBonus.get()));
         }
     }
 
-    public void onHarvestCheck(PlayerEvent.HarvestCheck event) {
+    private void onHarvestCheck(PlayerEvent.HarvestCheck event, LivingEntity wearer) {
         if (!event.canHarvest()) {
             int diggingClawsHarvestLevel = ModConfig.server.diggingClaws.harvestLevel.get() - 1;
             event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= diggingClawsHarvestLevel);
-            damageEquippedStacks(event.getPlayer());
+            damageEquippedStacks(wearer);
         }
     }
 

@@ -17,21 +17,18 @@ public class VampiricGloveItem extends GloveItem {
         addListener(EventPriority.LOWEST, LivingDamageEvent.class, this::onLivingDamage, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
-    public void onLivingDamage(LivingDamageEvent event) {
+    private void onLivingDamage(LivingDamageEvent event, LivingEntity wearer) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource())) {
-            LivingEntity attacker = DamageSourceHelper.getAttacker(event.getSource());
-
             int maxHealthAbsorbed = ModConfig.server.vampiricGlove.maxHealthAbsorbed.get();
             float absorptionRatio = (float) (double) ModConfig.server.vampiricGlove.absorptionRatio.get();
 
             float damageDealt = Math.min(event.getAmount(), event.getEntityLiving().getHealth());
             float damageAbsorbed = Math.min(maxHealthAbsorbed, absorptionRatio * damageDealt);
             if (damageAbsorbed >= 1) {
-                // noinspection ConstantConditions
-                attacker.heal(damageAbsorbed);
+                wearer.heal(damageAbsorbed);
             }
 
-            damageEquippedStacks(attacker);
+            damageEquippedStacks(wearer);
         }
     }
 
