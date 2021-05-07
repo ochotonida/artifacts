@@ -33,7 +33,7 @@ public class CommonConfig {
                         "To blacklist all biomes from a single mod, use \"modid:*\""
                 )
                 .translation(Artifacts.MODID + ".config.common.campsite.biome_blacklist")
-                .define("biome_blacklist", Lists.newArrayList("minecraft:void", "undergarden:*", "the_bumblezone:*"));
+                .define("biome_blacklist", Lists.newArrayList("minecraft:void", "undergarden:*", "the_bumblezone:*", "twilightforest:*"));
         campsiteRarity = builder
                 .worldRestart()
                 .comment(
