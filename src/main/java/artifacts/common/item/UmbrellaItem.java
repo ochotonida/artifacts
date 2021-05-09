@@ -81,6 +81,10 @@ public class UmbrellaItem extends ArtifactItem {
         return ActionResult.consume(itemstack);
     }
 
+    public static boolean isHoldingUmbrellaUpright(LivingEntity entity, Hand hand) {
+        return entity.getItemInHand(hand).getItem() instanceof UmbrellaItem && (!entity.isUsingItem() || entity.getUsedItemHand() != hand);
+    }
+
     @SuppressWarnings("unused")
     @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Artifacts.MODID)
     public static class ClientEvents {
@@ -90,17 +94,19 @@ public class UmbrellaItem extends ArtifactItem {
             if (!(event.getRenderer().getModel() instanceof BipedModel)) {
                 return;
             }
+
             LivingEntity entity = event.getEntity();
             BipedModel<?> model = (BipedModel<?>) event.getRenderer().getModel();
-            if (!(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAction.BLOCK)) {
-                boolean isHoldingOffHand = entity.getOffhandItem().getItem() instanceof UmbrellaItem;
-                boolean isHoldingMainHand = entity.getMainHandItem().getItem() instanceof UmbrellaItem;
-                if ((isHoldingMainHand && Minecraft.getInstance().options.mainHand == HandSide.RIGHT) || (isHoldingOffHand && Minecraft.getInstance().options.mainHand == HandSide.LEFT)) {
-                    model.rightArmPose = BipedModel.ArmPose.THROW_SPEAR;
-                }
-                if ((isHoldingMainHand && Minecraft.getInstance().options.mainHand == HandSide.LEFT) || (isHoldingOffHand && Minecraft.getInstance().options.mainHand == HandSide.RIGHT)) {
-                    model.leftArmPose = BipedModel.ArmPose.THROW_SPEAR;
-                }
+
+            boolean isHoldingOffHand = isHoldingUmbrellaUpright(entity, Hand.OFF_HAND);
+            boolean isHoldingMainHand = isHoldingUmbrellaUpright(entity, Hand.MAIN_HAND);
+            boolean isRightHanded = Minecraft.getInstance().options.mainHand == HandSide.RIGHT;
+
+            if ((isHoldingMainHand && isRightHanded) || (isHoldingOffHand && !isRightHanded)) {
+                model.rightArmPose = BipedModel.ArmPose.THROW_SPEAR;
+            }
+            if ((isHoldingMainHand && !isRightHanded) || (isHoldingOffHand && isRightHanded)) {
+                model.leftArmPose = BipedModel.ArmPose.THROW_SPEAR;
             }
         }
     }

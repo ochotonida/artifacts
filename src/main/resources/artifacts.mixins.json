@@ -5,6 +5,7 @@
   "refmap": "artifacts.refmap.json",
   "mixins": [
     "aquadashers.EntityMixin",
+    "umbrella.BipedModelMixin",
     "villagerhat.AbstractVillagerEntityMixin"
   ],
   "injectors": {
