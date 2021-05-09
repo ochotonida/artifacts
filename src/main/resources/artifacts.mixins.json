@@ -5,6 +5,7 @@
   "refmap": "artifacts.refmap.json",
   "mixins": [
     "aquadashers.EntityMixin",
+    "umbrella.EntityMixin",
     "villagerhat.AbstractVillagerEntityMixin"
   ],
   "client": [

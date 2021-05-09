@@ -85,6 +85,10 @@ public class UmbrellaItem extends ArtifactItem {
         return entity.getItemInHand(hand).getItem() instanceof UmbrellaItem && (!entity.isUsingItem() || entity.getUsedItemHand() != hand);
     }
 
+    public static boolean isHoldingUmbrellaUpright(LivingEntity entity) {
+        return isHoldingUmbrellaUpright(entity, Hand.MAIN_HAND) || isHoldingUmbrellaUpright(entity, Hand.OFF_HAND);
+    }
+
     @SuppressWarnings("unused")
     @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Artifacts.MODID)
     public static class ClientEvents {
