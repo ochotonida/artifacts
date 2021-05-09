@@ -5,8 +5,10 @@
   "refmap": "artifacts.refmap.json",
   "mixins": [
     "aquadashers.EntityMixin",
-    "umbrella.BipedModelMixin",
     "villagerhat.AbstractVillagerEntityMixin"
+  ],
+  "client": [
+    "umbrella.BipedModelMixin"
   ],
   "injectors": {
     "defaultRequire": 1
