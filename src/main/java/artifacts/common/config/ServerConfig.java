@@ -31,6 +31,7 @@ public class ServerConfig {
     public final FlamePendantConfig flamePendant;
     public final FlippersConfig flippers;
     public final GoldenHookConfig goldenHook;
+    public final HeliumFlamingoConfig heliumFlamingo;
     public final LuckyScarfConfig luckyScarf;
     public final ObsidianSkullConfig obsidianSkull;
     public final PanicNecklaceConfig panicNecklace;
@@ -87,7 +88,7 @@ public class ServerConfig {
         pendants.put(ModItems.FLAME_PENDANT.get(), flamePendant);
         flippers = addItemConfig(new FlippersConfig(builder));
         goldenHook = addItemConfig(new GoldenHookConfig(builder));
-        addItemConfig(new ItemConfig(builder, ModItems.HELIUM_FLAMINGO.get(), "Affects how many seconds the player can fly using the helium flamingo before breaking"));
+        heliumFlamingo = addItemConfig(new HeliumFlamingoConfig(builder));
         addItemConfig(new ItemConfig(builder, ModItems.KITTY_SLIPPERS.get(), "Affects how many creepers the player can attack using the kitty slippers before breaking"));
         luckyScarf = addItemConfig(new LuckyScarfConfig(builder));
         addItemConfig(new ItemConfig(builder, ModItems.NIGHT_VISION_GOGGLES.get(), "Affects how many seconds the night vision effect should apply before breaking"));

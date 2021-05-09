@@ -83,10 +83,10 @@ public class HeliumFlamingoItem extends CurioItem {
                                 damageEquippedStacks(event.player);
                             }
 
-                            if (!event.player.abilities.invulnerable) {
+                            if (!event.player.abilities.invulnerable && ModConfig.server.heliumFlamingo.airSupplyDrainRate.get() > 0) {
                                 // compensate for bonus air
                                 int airSupply = event.player.getAirSupply() - 4;
-                                event.player.setAirSupply(airSupply - 2);
+                                event.player.setAirSupply(airSupply - ModConfig.server.heliumFlamingo.airSupplyDrainRate.get());
                             }
                         }
                     }
