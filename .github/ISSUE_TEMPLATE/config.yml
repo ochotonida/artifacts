@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Artifacts Fabric
+    url: https://github.com/florensie/artifacts-fabric/issues
+    about: For issues related to the Fabric version of Artifacts
