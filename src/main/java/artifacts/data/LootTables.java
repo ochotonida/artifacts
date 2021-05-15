@@ -353,14 +353,14 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.35F))
-                        .add(artifactEntry(5))
+                        .when(RandomChance.randomChance(0.40F))
+                        .add(artifactEntry(3))
                         .add(itemEntry(ModItems.POWER_GLOVE.get(), 1))
                         .add(itemEntry(ModItems.ANTIDOTE_VESSEL.get(), 1))
                         .add(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 1))
                         .add(itemEntry(ModItems.LUCKY_SCARF.get(), 1))
-                        .add(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 1))
                         .add(itemEntry(ModItems.AQUA_DASHERS.get(), 1))
+                        .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/underwater_ruin_big", LootTable.lootTable().withPool(

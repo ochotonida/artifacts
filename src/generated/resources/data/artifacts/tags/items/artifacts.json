@@ -18,11 +18,11 @@
     "artifacts:flame_pendant",
     "artifacts:thorn_pendant",
     "artifacts:charm_of_sinking",
+    "artifacts:cloud_in_a_bottle",
     "artifacts:obsidian_skull",
     "artifacts:antidote_vessel",
     "artifacts:universal_attractor",
     "artifacts:crystal_heart",
-    "artifacts:cloud_in_a_bottle",
     "artifacts:helium_flamingo",
     "artifacts:digging_claws",
     "artifacts:feral_claws",
@@ -31,12 +31,12 @@
     "artifacts:pocket_piston",
     "artifacts:vampiric_glove",
     "artifacts:golden_hook",
+    "artifacts:aqua_dashers",
     "artifacts:bunny_hoppers",
     "artifacts:kitty_slippers",
     "artifacts:running_shoes",
     "artifacts:steadfast_spikes",
     "artifacts:flippers",
-    "artifacts:aqua_dashers",
     "artifacts:whoopee_cushion"
   ]
 }

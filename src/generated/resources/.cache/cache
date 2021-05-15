@@ -47,7 +47,7 @@ b065496b6f28bd55486a5daf4d7c452a6482301b data/artifacts/loot_tables/inject/chest
 27945ef5fc8e1cf1e09416453f703aed553f4c8e data/artifacts/loot_tables/inject/chests/ruined_portal.json
 b0b78f473343644f2fa6c23fe8119586328ab19b data/artifacts/loot_tables/inject/chests/shipwreck_treasure.json
 634b589f5544107ddd6dde5d83f912b7397b389c data/artifacts/loot_tables/inject/chests/spawn_bonus_chest.json
-6f8ecc464e874873c417e58f7cfed6c1f57bbfb6 data/artifacts/loot_tables/inject/chests/stronghold_corridor.json
+7ac27db55369a71190a11a61542f0c4014c0bc7f data/artifacts/loot_tables/inject/chests/stronghold_corridor.json
 6c1f3f543c7daf458ff2f12506699af90fbca91f data/artifacts/loot_tables/inject/chests/underwater_ruin_big.json
 6fa3af46f6de4fd57e33cf0a7cd29c68a610c007 data/artifacts/loot_tables/inject/chests/village/village_armorer.json
 6998db59794f7829e50475102453546c4dec5393 data/artifacts/loot_tables/inject/chests/village/village_butcher.json
@@ -62,7 +62,7 @@ f1e87761bd2faf4a0bb4827a897d0ca55b5bee89 data/artifacts/loot_tables/inject/chest
 0316e829c9b7a3e3750ebb5a85d3d7889c48f3d1 data/artifacts/loot_tables/inject/chests/village/village_weaponsmith.json
 7673e280ba99f34e71eb94c7c2e3573f19d92097 data/artifacts/loot_tables/inject/chests/woodland_mansion.json
 e3d7261b56b38639e50ee94a4ebcd5f54507ac62 data/artifacts/loot_tables/inject/entities/cow.json
-cf79bb3dc197202552e85c5f2c4235b8e1c8e694 data/artifacts/tags/items/artifacts.json
+dabba677a10bb1e12f0ddac823bffe094499445c data/artifacts/tags/items/artifacts.json
 94446c2219223bb54ee99e45bbdfb769f69c2c27 data/curios/tags/items/belt.json
 780e1301f1d02678c169e3f3f7bb363a8355a0af data/curios/tags/items/curio.json
 1ad799ef52e39345fa72d6d8b59e07727945a7db data/curios/tags/items/feet.json
