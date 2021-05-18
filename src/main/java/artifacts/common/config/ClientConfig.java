@@ -29,8 +29,8 @@ public class ClientConfig {
         builder.push("Mimics");
 
         useModdedMimicTextures = builder
-                .comment("Whether mimics should use chest textures from Lootr or Quark if these are installed")
-                .translation(Artifacts.MODID + ".config.client.mimics.use_modded_textures")
+                .comment("Whether mimics should use chest textures from Lootr or Quark if either of these mods is installed")
+                .translation(Artifacts.MODID + ".config.client.mimic.use_modded_textures")
                 .define("use_modded_textures", true);
         builder.pop();
     }

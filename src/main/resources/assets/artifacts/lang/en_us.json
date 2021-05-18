@@ -100,7 +100,7 @@
   "artifacts.config.client.items.modify_hurt_sounds": "Modify player hurt sounds",
   "artifacts.config.client.items.show_first_person_gloves": "Show first person gloves",
   "artifacts.config.client.items.show_tooltips": "Show item tooltips",
-  "artifacts.config.client.mimics.use_modded_textures": "Use modded chest textures",
+  "artifacts.config.client.mimic.use_modded_textures": "Use modded chest textures",
   "artifacts.config.server.cosmetics": "Cosmetic-only items list",
   "artifacts.config.server.items.cooldown": "Cooldown",
   "artifacts.config.server.antidote_vessel.negative_effects": "Negative effects",

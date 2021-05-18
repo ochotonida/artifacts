@@ -100,7 +100,7 @@
   "artifacts.config.client.items.modify_hurt_sounds": "Modificar los sonidos de daño en el jugador",
   "artifacts.config.client.items.show_first_person_gloves": "Mostrar los guantes en primera persona",
   "artifacts.config.client.items.show_tooltips": "Mostrar las descripciones",
-  "artifacts.config.client.mimics.use_modded_textures": "Usar texturas de cofres de otros mods",
+  "artifacts.config.client.mimic.use_modded_textures": "Usar texturas de cofres de otros mods",
   "artifacts.config.server.cosmetics": "Lista de items meramente cosméticos",
   "artifacts.config.server.items.cooldown": "Cooldown",
   "artifacts.config.server.antidote_vessel.negative_effects": "Efectos negativos",
