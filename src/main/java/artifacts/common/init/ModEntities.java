@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModEntities {
 
     @SuppressWarnings("unchecked")
-    public static final EntityType<MimicEntity> MIMIC = (EntityType<MimicEntity>) EntityType.Builder.of(MimicEntity::new, EntityClassification.MONSTER)
+    public static final EntityType<MimicEntity> MIMIC = (EntityType<MimicEntity>) EntityType.Builder.of(MimicEntity::new, EntityClassification.MISC)
             .sized(14 / 16F, 14 / 16F)
             .setTrackingRange(64)
             .build(new ResourceLocation(Artifacts.MODID, "mimic").toString())
