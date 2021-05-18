@@ -30,7 +30,9 @@ public class DiggingClawsItem extends GloveItem {
         List<String> toolTypes = ModConfig.server.diggingClaws.toolTypes.get();
         int diggingClawsHarvestLevel = ModConfig.server.diggingClaws.harvestLevel.get() - 1;
         return state.getHarvestLevel() <= diggingClawsHarvestLevel &&
-                (toolTypes.contains(state.getHarvestTool().getName()) || toolTypes.contains("*"));
+                (state.getHarvestTool() == null
+                        || toolTypes.contains(state.getHarvestTool().getName())
+                        || toolTypes.contains("*"));
     }
 
     private void onBreakSpeed(PlayerEvent.BreakSpeed event, LivingEntity wearer) {
