@@ -1,7 +1,8 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.CloudInABottleModel;
+import artifacts.client.render.model.curio.belt.CloudInABottleModel;
+import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModItems;
 import artifacts.common.init.ModSoundEvents;
 import artifacts.common.network.DoubleJumpPacket;
@@ -38,7 +39,7 @@ public class CloudInABottleItem extends CurioItem {
         addListener(EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
     }
 
-    public static void jump(PlayerEntity player) {
+    public void jump(PlayerEntity player) {
         player.fallDistance = 0;
 
         double upwardsMotion = 0.5;
@@ -46,10 +47,10 @@ public class CloudInABottleItem extends CurioItem {
             // noinspection ConstantConditions
             upwardsMotion += 0.1 * (player.getEffect(Effects.JUMP).getAmplifier() + 1);
         }
-        upwardsMotion *= player.isSprinting() ? 1.5 : 1;
+        upwardsMotion *= player.isSprinting() ? ModConfig.server.cloudInABottle.sprintJumpHeightMultiplier.get() : 1;
 
         Vector3d motion = player.getDeltaMovement();
-        double motionMultiplier = player.isSprinting() ? 0.5 : 0;
+        double motionMultiplier = player.isSprinting() ? ModConfig.server.cloudInABottle.sprintJumpDistanceMultiplier.get() : 0;
         float direction = (float) (player.yRot * Math.PI / 180);
         player.setDeltaMovement(player.getDeltaMovement().add(
                 -MathHelper.sin(direction) * motionMultiplier,
@@ -72,9 +73,11 @@ public class CloudInABottleItem extends CurioItem {
         } else {
             player.playSound(SoundEvents.WOOL_FALL, 1, 0.9F + player.getRandom().nextFloat() * 0.2F);
         }
+
+        damageEquippedStacks(player);
     }
 
-    public void onLivingFall(LivingFallEvent event) {
+    private void onLivingFall(LivingFallEvent event, LivingEntity wearer) {
         event.setDistance(Math.max(0, event.getDistance() - 3));
     }
 
@@ -116,11 +119,10 @@ public class CloudInABottleItem extends CurioItem {
                     hasReleasedJumpKey = true;
                 } else if (!player.abilities.flying && canDoubleJump && hasReleasedJumpKey) {
                     canDoubleJump = false;
-
-                    CuriosApi.getCuriosHelper().findEquippedCurio(CloudInABottleItem.this, player).ifPresent(stack -> {
+                    if (isEquippedBy(player)) {
                         NetworkHandler.INSTANCE.sendToServer(new DoubleJumpPacket());
                         jump(player);
-                    });
+                    }
                 }
             }
         }

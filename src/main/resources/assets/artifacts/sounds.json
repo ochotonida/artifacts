@@ -1,33 +1,52 @@
 {
-  "mimic.close": {
+  "generic.pop": {
+    "sounds": [
+      "random/pop"
+    ]
+  },
+  "entity.mimic.close": {
     "sounds": [
       "block/chest/close",
       "block/chest/close2",
       "block/chest/close3"
-    ]
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.close"
   },
-  "mimic.open": {
+  "entity.mimic.open": {
     "sounds": [
       "block/chest/open"
-    ]
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.open"
   },
-  "mimic.hurt": {
+  "entity.mimic.hurt": {
     "sounds": [
       "artifacts:mimic/hurt1",
       "artifacts:mimic/hurt2",
       "artifacts:mimic/hurt3"
-    ]
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.hurt"
   },
-  "mimic.death": {
+  "entity.mimic.death": {
     "sounds": [
       "artifacts:mimic/death1",
       "artifacts:mimic/death2"
-    ]
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.death"
   },
-  "fart": {
+  "item.whoopee_cushion.fart": {
     "sounds": [
       "artifacts:fart1",
       "artifacts:fart2"
-    ]
+    ],
+    "subtitle": "artifacts.subtitles.item.whoopee_cushion.fart"
+  },
+  "block.water.step": {
+    "sounds": [
+      "entity/fish/flop1",
+      "entity/fish/flop2",
+      "entity/fish/flop3",
+      "entity/fish/flop4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
   }
 }

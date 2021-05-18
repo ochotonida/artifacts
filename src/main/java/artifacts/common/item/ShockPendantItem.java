@@ -13,21 +13,20 @@ public class ShockPendantItem extends PendantItem {
 
     public ShockPendantItem() {
         super("shock_pendant");
+        addListener(LivingHurtEvent.class, this::onLivingHurt);
     }
 
-    @Override
-    public void onLivingHurt(LivingHurtEvent event) {
+    private void onLivingHurt(LivingHurtEvent event, LivingEntity wearer) {
         if (!event.getEntity().level.isClientSide
                 && event.getAmount() >= 1
                 && event.getSource() == DamageSource.LIGHTNING_BOLT) {
             event.setCanceled(true);
         }
-        super.onLivingHurt(event);
     }
 
     @Override
-    public void applyEffect(LivingEntity target, LivingEntity attacker) {
-        if (attacker.level.canSeeSky(new BlockPos(attacker.position())) && target.getRandom().nextFloat() < 0.25F) {
+    protected void applyEffect(LivingEntity target, LivingEntity attacker) {
+        if (attacker.level.canSeeSky(new BlockPos(attacker.position()))) {
             LightningBoltEntity lightningBolt = EntityType.LIGHTNING_BOLT.create(attacker.level);
             if (lightningBolt != null) {
                 lightningBolt.moveTo(Vector3d.atBottomCenterOf(attacker.blockPosition()));

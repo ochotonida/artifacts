@@ -48,7 +48,8 @@ public class ItemTags extends ItemTagsProvider {
                 ModItems.CLOUD_IN_A_BOTTLE.get(),
                 ModItems.CRYSTAL_HEART.get(),
                 ModItems.OBSIDIAN_SKULL.get(),
-                ModItems.UNIVERSAL_ATTRACTOR.get()
+                ModItems.UNIVERSAL_ATTRACTOR.get(),
+                ModItems.HELIUM_FLAMINGO.get()
         );
 
         tag(FEET).add(
@@ -56,7 +57,8 @@ public class ItemTags extends ItemTagsProvider {
                 ModItems.FLIPPERS.get(),
                 ModItems.KITTY_SLIPPERS.get(),
                 ModItems.RUNNING_SHOES.get(),
-                ModItems.STEADFAST_SPIKES.get()
+                ModItems.STEADFAST_SPIKES.get(),
+                ModItems.AQUA_DASHERS.get()
         );
 
         tag(HANDS).add(
@@ -85,7 +87,8 @@ public class ItemTags extends ItemTagsProvider {
                 ModItems.PANIC_NECKLACE.get(),
                 ModItems.SCARF_OF_INVISIBILITY.get(),
                 ModItems.SHOCK_PENDANT.get(),
-                ModItems.THORN_PENDANT.get()
+                ModItems.THORN_PENDANT.get(),
+                ModItems.CHARM_OF_SINKING.get()
         );
     }
 

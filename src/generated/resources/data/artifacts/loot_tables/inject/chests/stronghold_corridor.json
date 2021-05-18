@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "weight": 5,
+          "weight": 3,
           "name": "artifacts:artifact"
         },
         {
@@ -27,13 +27,17 @@
         },
         {
           "type": "minecraft:item",
-          "name": "artifacts:universal_attractor"
+          "name": "artifacts:aqua_dashers"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:helium_flamingo"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:random_chance",
-          "chance": 0.35
+          "chance": 0.4
         }
       ]
     }

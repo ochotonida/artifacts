@@ -1,5 +1,6 @@
 package artifacts.common.item;
 
+import artifacts.common.config.ModConfig;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -20,36 +21,38 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
+import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import javax.annotation.Nullable;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public abstract class CurioItem extends ArtifactItem implements ICurioItem {
 
     private Object model;
 
-    protected boolean isEquippedBy(@Nullable LivingEntity entity) {
-        return entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
+    public boolean isEquippedBy(@Nullable LivingEntity entity) {
+        return !ModConfig.server.isCosmetic(this) && entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
     }
 
-    protected <T extends Event> void addListener(EventPriority priority, Class<T> eventClass, Consumer<T> listener, Function<T, LivingEntity> livingEntitySupplier) {
+    protected <T extends Event, S extends LivingEntity> void addListener(EventPriority priority, Class<T> eventClass, BiConsumer<T, S> listener, Function<T, S> wearerSupplier) {
         MinecraftForge.EVENT_BUS.addListener(priority, true, eventClass, event -> {
-            if (isEquippedBy(livingEntitySupplier.apply(event))) {
-                listener.accept(event);
+            S wearer = wearerSupplier.apply(event);
+            if (isEquippedBy(wearer)) {
+                listener.accept(event, wearer);
             }
         });
     }
 
-    protected <T extends Event> void addListener(Class<T> eventClass, Consumer<T> listener, Function<T, LivingEntity> livingEntitySupplier) {
-        addListener(EventPriority.NORMAL, eventClass, listener, livingEntitySupplier);
+    protected <T extends Event, S extends LivingEntity> void addListener(Class<T> eventClass, BiConsumer<T, S> listener, Function<T, S> wearerSupplier) {
+        addListener(EventPriority.NORMAL, eventClass, listener, wearerSupplier);
     }
 
-    protected <T extends LivingEvent> void addListener(EventPriority priority, Class<T> eventClass, Consumer<T> listener) {
+    protected <T extends LivingEvent> void addListener(EventPriority priority, Class<T> eventClass, BiConsumer<T, LivingEntity> listener) {
         addListener(priority, eventClass, listener, LivingEvent::getEntityLiving);
     }
 
-    protected <T extends LivingEvent> void addListener(Class<T> eventClass, Consumer<T> listener) {
+    protected <T extends LivingEvent> void addListener(Class<T> eventClass, BiConsumer<T, LivingEntity> listener) {
         addListener(EventPriority.NORMAL, eventClass, listener);
     }
 
@@ -76,6 +79,34 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
         ICurio.RenderHelper.followBodyRotations(entity, model);
         IVertexBuilder vertexBuilder = ItemRenderer.getFoilBuffer(renderTypeBuffer, model.renderType(getTexture()), false, stack.hasFoil());
         model.renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+    }
+
+    protected void damageStack(String identifier, int index, LivingEntity entity, ItemStack stack) {
+        damageStack(identifier, index, entity, stack, 1);
+    }
+
+    protected void damageStack(String identifier, int index, LivingEntity entity, ItemStack stack, int damage) {
+        stack.hurtAndBreak(damage, entity, damager ->
+                CuriosApi.getCuriosHelper().onBrokenCurio(identifier, index, damager)
+        );
+    }
+
+    protected void damageEquippedStacks(LivingEntity entity, int damage) {
+        CuriosApi.getCuriosHelper().getCuriosHandler(entity).ifPresent(curiosHandler ->
+                curiosHandler.getCurios().forEach((identifier, stacksHandler) -> {
+                    IDynamicStackHandler stacks = stacksHandler.getStacks();
+                    for (int slot = 0; slot < stacks.getSlots(); slot++) {
+                        ItemStack stack = stacks.getStackInSlot(slot);
+                        if (!stack.isEmpty() && stack.getItem() == this) {
+                            damageStack(identifier, slot, entity, stack, damage);
+                        }
+                    }
+                })
+        );
+    }
+
+    public void damageEquippedStacks(LivingEntity entity) {
+        damageEquippedStacks(entity, 1);
     }
 
     @OnlyIn(Dist.CLIENT)

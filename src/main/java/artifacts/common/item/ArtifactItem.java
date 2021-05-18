@@ -1,6 +1,6 @@
 package artifacts.common.item;
 
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModItems;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
@@ -26,9 +26,24 @@ public abstract class ArtifactItem extends Item {
     }
 
     @Override
+    public int getMaxDamage(ItemStack stack) {
+        if (ModConfig.server != null && ModConfig.server.items.containsKey(this)) {
+            return ModConfig.server.items.get(this).durability.get();
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean canBeDepleted() {
+        return getMaxDamage(ItemStack.EMPTY) > 0;
+    }
+
+    @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        if (Config.showTooltips) {
+        if (ModConfig.server != null && ModConfig.server.isCosmetic(this)) {
+            tooltip.add(new TranslationTextComponent("artifacts.cosmetic.tooltip").withStyle(TextFormatting.GRAY).withStyle(TextFormatting.ITALIC));
+        } else if (ModConfig.client.showTooltips.get()) {
             tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip").withStyle(TextFormatting.GRAY));
         }
     }

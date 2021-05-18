@@ -21,6 +21,11 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 2,
+          "name": "artifacts:charm_of_sinking"
+        },
+        {
+          "type": "minecraft:item",
           "name": "artifacts:shock_pendant"
         },
         {

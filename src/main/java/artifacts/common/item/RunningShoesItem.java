@@ -1,7 +1,8 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.RunningShoesModel;
+import artifacts.client.render.model.curio.feet.ShoesModel;
+import artifacts.common.config.ModConfig;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -12,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 
 import java.util.UUID;
 
@@ -19,12 +22,19 @@ public class RunningShoesItem extends CurioItem {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/running_shoes.png");
 
-    private static final AttributeModifier RUNNING_SHOES_SPEED_BOOST = new AttributeModifier(UUID.fromString("ac7ab816-2b08-46b6-879d-e5dea34ff305"), "artifacts:running_shoes_movement_speed", 0.4, AttributeModifier.Operation.MULTIPLY_TOTAL);
+    public RunningShoesItem() {
+        MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
+    }
+
+    private static AttributeModifier getSpeedBonus() {
+        double speedMultiplier = ModConfig.server.runningShoes.speedMultiplier.get();
+        return new AttributeModifier(UUID.fromString("ac7ab816-2b08-46b6-879d-e5dea34ff305"), "artifacts:running_shoes_movement_speed", speedMultiplier, AttributeModifier.Operation.MULTIPLY_TOTAL);
+    }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     protected BipedModel<LivingEntity> createModel() {
-        return new RunningShoesModel();
+        return new ShoesModel(0.5F);
     }
 
     @Override
@@ -32,30 +42,41 @@ public class RunningShoesItem extends CurioItem {
         return TEXTURE;
     }
 
-    @Override
-    @SuppressWarnings("ConstantConditions")
-    public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
-        if (livingEntity.isSprinting()) {
-            if (!movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
-                movementSpeed.addTransientModifier(RUNNING_SHOES_SPEED_BOOST);
+    private void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        // onUnequip does not get called on the client
+        if (!isEquippedBy(event.player)) {
+            ModifiableAttributeInstance movementSpeed = event.player.getAttribute(Attributes.MOVEMENT_SPEED);
+            AttributeModifier speedBonus = getSpeedBonus();
+            if (movementSpeed != null && movementSpeed.hasModifier(speedBonus)) {
+                movementSpeed.removeModifier(speedBonus);
+                event.player.maxUpStep = 0.6F;
             }
-            if (livingEntity instanceof PlayerEntity) {
-                livingEntity.maxUpStep = Math.max(livingEntity.maxUpStep, 1.1F);
-            }
-        } else if (movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
-            movementSpeed.removeModifier(RUNNING_SHOES_SPEED_BOOST);
-            livingEntity.maxUpStep = 0.6F;
         }
     }
 
     @Override
     @SuppressWarnings("ConstantConditions")
-    public void onUnequip(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        ModifiableAttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
-        if (movementSpeed.hasModifier(RUNNING_SHOES_SPEED_BOOST)) {
-            movementSpeed.removeModifier(RUNNING_SHOES_SPEED_BOOST);
-            livingEntity.maxUpStep = 0.6F;
+    public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
+        if (!ModConfig.server.isCosmetic(this)) {
+            ModifiableAttributeInstance movementSpeed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
+            AttributeModifier speedBonus = getSpeedBonus();
+            if (entity.isSprinting()) {
+                if (!movementSpeed.hasModifier(speedBonus)) {
+                    movementSpeed.addTransientModifier(speedBonus);
+                }
+                if (entity instanceof PlayerEntity) {
+                    entity.maxUpStep = Math.max(entity.maxUpStep, 1.1F);
+                }
+
+                if (entity.tickCount % 20 == 0) {
+                    damageStack(identifier, index, entity, stack);
+                }
+            } else {
+                if (movementSpeed.hasModifier(speedBonus)) {
+                    movementSpeed.removeModifier(speedBonus);
+                }
+                entity.maxUpStep = 0.6F;
+            }
         }
     }
 }

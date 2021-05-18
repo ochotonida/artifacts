@@ -11,6 +11,10 @@
         {
           "type": "minecraft:item",
           "name": "artifacts:antidote_vessel"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:charm_of_sinking"
         }
       ],
       "conditions": [

@@ -146,6 +146,21 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:charm_of_sinking"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:aqua_dashers"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "artifacts:helium_flamingo"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 5,
           "name": "artifacts:umbrella"
         },

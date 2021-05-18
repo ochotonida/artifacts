@@ -1,7 +1,8 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.PendantModel;
+import artifacts.client.render.model.curio.necklace.PendantModel;
+import artifacts.common.config.ModConfig;
 import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
@@ -10,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -20,19 +21,21 @@ public abstract class PendantItem extends CurioItem {
 
     public PendantItem(String name) {
         texture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/%s.png", name));
-        addListener(LivingHurtEvent.class, this::onLivingHurt);
+        addListener(LivingAttackEvent.class, this::onLivingAttack);
     }
 
-    public void onLivingHurt(LivingHurtEvent event) {
+    private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         LivingEntity attacker = DamageSourceHelper.getAttacker(event.getSource());
-        if (!event.getEntity().level.isClientSide()
+        if (!wearer.level.isClientSide()
                 && event.getAmount() >= 1
-                && attacker != null) {
-            applyEffect(event.getEntityLiving(), attacker);
+                && attacker != null
+                && random.nextDouble() < ModConfig.server.pendants.get(this).strikeChance.get()) {
+            applyEffect(wearer, attacker);
+            damageEquippedStacks(wearer);
         }
     }
 
-    public abstract void applyEffect(LivingEntity target, LivingEntity attacker);
+    protected abstract void applyEffect(LivingEntity target, LivingEntity attacker);
 
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {

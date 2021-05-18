@@ -2,7 +2,8 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.client.RenderTypes;
-import artifacts.client.render.model.curio.GloveModel;
+import artifacts.client.render.model.curio.hands.HandsModel;
+import artifacts.common.config.ModConfig;
 import artifacts.common.util.DamageSourceHelper;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -18,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -30,12 +31,13 @@ public class FireGauntletItem extends GloveItem {
     private static final ResourceLocation TEXTURE_SLIM_GLOW = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/fire_gauntlet_slim_glow.png");
 
     public FireGauntletItem() {
-        addListener(LivingHurtEvent.class, this::onLivingHurt, event -> DamageSourceHelper.getAttacker(event.getSource()));
+        addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
-    public void onLivingHurt(LivingHurtEvent event) {
+    private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource()) && !event.getEntity().fireImmune()) {
-            event.getEntity().setSecondsOnFire(8);
+            event.getEntity().setSecondsOnFire(ModConfig.server.fireGauntlet.fireDuration.get());
+            damageEquippedStacks(wearer);
         }
     }
 
@@ -48,26 +50,24 @@ public class FireGauntletItem extends GloveItem {
     public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, ItemStack stack) {
         super.render(identifier, index, matrixStack, buffer, light, entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, stack);
         boolean smallArms = hasSmallArms(entity);
-        GloveModel model = getModel(smallArms);
+        HandsModel model = getModel(smallArms);
         IVertexBuilder builder = ItemRenderer.getFoilBuffer(buffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
         model.renderHand(index % 2 == 0, matrixStack, builder, 0xF000F0, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderArm(MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, AbstractClientPlayerEntity player, HandSide side, boolean hasGlint) {
+    public void renderArm(MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, AbstractClientPlayerEntity player, HandSide side, boolean hasFoil) {
         if (!player.isSpectator()) {
-            super.renderArm(matrixStack, buffer, combinedLight, player, side, hasGlint);
+            super.renderArm(matrixStack, buffer, combinedLight, player, side, hasFoil);
 
             boolean smallArms = hasSmallArms(player);
-            GloveModel model = getModel(smallArms);
+            HandsModel model = getModel(smallArms);
 
             ModelRenderer arm = side == HandSide.LEFT ? model.leftArm : model.rightArm;
-            ModelRenderer armWear = side == HandSide.LEFT ? model.leftSleeve : model.rightSleeve;
 
             IVertexBuilder builder = ItemRenderer.getFoilBuffer(buffer, RenderTypes.unlit(getGlowTexture(smallArms)), false, false);
             arm.render(matrixStack, builder, 0xF000F0, OverlayTexture.NO_OVERLAY);
-            armWear.render(matrixStack, builder, 0xF000F0, OverlayTexture.NO_OVERLAY);
         }
     }
 

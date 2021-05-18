@@ -1,7 +1,7 @@
 package artifacts.common.item;
 
-import artifacts.client.render.model.curio.DrinkingHatModel;
-import artifacts.common.config.Config;
+import artifacts.client.render.model.curio.head.DrinkingHatModel;
+import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModItems;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
@@ -29,12 +29,13 @@ public class DrinkingHatItem extends CurioItem {
     public DrinkingHatItem(ResourceLocation texture) {
         this.texture = texture;
         addListener(LivingEntityUseItemEvent.Start.class, this::onItemUseStart);
+        addListener(LivingEntityUseItemEvent.Finish.class, this::onItemUseFinish);
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
-        if (Config.showTooltips) {
+        if (ModConfig.client.showTooltips.get() && ModConfig.server != null && !ModConfig.server.isCosmetic(this)) {
             if (this != ModItems.PLASTIC_DRINKING_HAT.get()) {
                 tooltip.add(new TranslationTextComponent(ModItems.PLASTIC_DRINKING_HAT.get().getDescriptionId() + ".tooltip").withStyle(TextFormatting.GRAY));
             }
@@ -42,10 +43,22 @@ public class DrinkingHatItem extends CurioItem {
         super.appendHoverText(stack, world, tooltip, flags);
     }
 
-    public void onItemUseStart(LivingEntityUseItemEvent.Start event) {
-        if (event.getItem().getUseAnimation() == UseAction.DRINK) {
-            event.setDuration(event.getDuration() / 4);
+    private void onItemUseStart(LivingEntityUseItemEvent.Start event, LivingEntity wearer) {
+        if (canApplyEffect(event)) {
+            double drinkingDurationMultiplier = ModConfig.server.drinkingHats.get(this).drinkingDurationMultiplier.get();
+            event.setDuration((int) (event.getDuration() * drinkingDurationMultiplier));
         }
+    }
+
+    private void onItemUseFinish(LivingEntityUseItemEvent.Finish event, LivingEntity wearer) {
+        if (canApplyEffect(event)) {
+            damageEquippedStacks(wearer);
+        }
+    }
+
+    private boolean canApplyEffect(LivingEntityUseItemEvent event) {
+        UseAction action = event.getItem().getUseAnimation();
+        return action == UseAction.DRINK || action == UseAction.EAT && ModConfig.server.drinkingHats.get(this).enableFastEating.get();
     }
 
     @Override

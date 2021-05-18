@@ -1,6 +1,6 @@
 package artifacts.common.world;
 
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.ModEntities;
 import artifacts.common.init.ModLootTables;
@@ -79,7 +79,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
         }
         Collections.shuffle(positions);
 
-        if (random.nextFloat() < Config.campsiteOreChance) {
+        if (random.nextFloat() < ModConfig.common.campsiteOreChance.get()) {
             generateOreVein(world, pos.below(), random);
         }
 
@@ -113,7 +113,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
     }
 
     public void generateContainer(ISeedReader world, BlockPos pos, Random random) {
-        if (random.nextFloat() < Config.campsiteMimicChance) {
+        if (random.nextFloat() < ModConfig.common.campsiteMimicChance.get()) {
             MimicEntity mimic = ModEntities.MIMIC.create(world.getLevel());
             if (mimic != null) {
                 mimic.setDormant();
@@ -126,7 +126,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
                     setBlock(world, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
                     setBlock(world, pos.below(), Blocks.TNT.defaultBlockState());
                 } else {
-                    Block chestBlock = Config.useModdedChests ? Tags.Blocks.CHESTS_WOODEN.getRandomElement(random) : Blocks.CHEST;
+                    Block chestBlock = ModConfig.common.useModdedChests.get() ? Tags.Blocks.CHESTS_WOODEN.getRandomElement(random) : Blocks.CHEST;
                     setBlock(world, pos, chestBlock.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
                 }
             } else {

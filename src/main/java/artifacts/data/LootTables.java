@@ -45,7 +45,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/entities/cow", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .when(RandomChance.randomChance(0.0025F))
+                        .when(RandomChance.randomChance(1 / 500F))
                         .add(itemEntry(ModItems.EVERLASTING_BEEF.get(), 1)
                                 .apply(
                                         Smelt.smelted().when(
@@ -101,6 +101,9 @@ public class LootTables extends LootTableProvider {
                                 .add(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 8))
                                 .add(itemEntry(ModItems.VAMPIRIC_GLOVE.get(), 8))
                                 .add(itemEntry(ModItems.GOLDEN_HOOK.get(), 8))
+                                .add(itemEntry(ModItems.CHARM_OF_SINKING.get(), 8))
+                                .add(itemEntry(ModItems.AQUA_DASHERS.get(), 8))
+                                .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 5))
                                 .add(itemEntry(ModItems.UMBRELLA.get(), 5))
                                 .add(itemEntry(ModItems.WHOOPEE_CUSHION.get(), 5))
                                 .add(itemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 5))
@@ -168,6 +171,7 @@ public class LootTables extends LootTableProvider {
                         .when(RandomChance.randomChance(0.16F))
                         .add(itemEntry(ModItems.CROSS_NECKLACE.get(), 1))
                         .add(itemEntry(ModItems.ANTIDOTE_VESSEL.get(), 1))
+                        .add(itemEntry(ModItems.CHARM_OF_SINKING.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/village/village_toolsmith", LootTable.lootTable().withPool(
@@ -199,6 +203,7 @@ public class LootTables extends LootTableProvider {
                         .add(itemEntry(ModItems.DIGGING_CLAWS.get(), 2))
                         .add(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 2))
                         .add(itemEntry(ModItems.VAMPIRIC_GLOVE.get(), 2))
+                        .add(itemEntry(ModItems.AQUA_DASHERS.get(), 2))
                         .add(itemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 2))
                         .add(itemEntry(ModItems.NOVELTY_DRINKING_HAT.get(), 1)))
         );
@@ -242,6 +247,7 @@ public class LootTables extends LootTableProvider {
                         .add(itemEntry(ModItems.KITTY_SLIPPERS.get(), 3))
                         .add(itemEntry(ModItems.BUNNY_HOPPERS.get(), 3))
                         .add(itemEntry(ModItems.LUCKY_SCARF.get(), 3))
+                        .add(itemEntry(ModItems.AQUA_DASHERS.get(), 3))
                         .add(itemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 2))
                         .add(itemEntry(ModItems.NOVELTY_DRINKING_HAT.get(), 1))
                 )
@@ -254,6 +260,7 @@ public class LootTables extends LootTableProvider {
                         .add(itemEntry(ModItems.FLAME_PENDANT.get(), 2))
                         .add(itemEntry(ModItems.THORN_PENDANT.get(), 2))
                         .add(itemEntry(ModItems.WHOOPEE_CUSHION.get(), 2))
+                        .add(itemEntry(ModItems.CHARM_OF_SINKING.get(), 2))
                         .add(itemEntry(ModItems.SHOCK_PENDANT.get(), 1))
                         .add(itemEntry(ModItems.UMBRELLA.get(), 1))
                         .add(itemEntry(ModItems.SCARF_OF_INVISIBILITY.get(), 1))
@@ -266,9 +273,10 @@ public class LootTables extends LootTableProvider {
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
                         .when(RandomChance.randomChance(0.4F))
-                        .add(artifactEntry(6))
+                        .add(artifactEntry(4))
                         .add(itemEntry(ModItems.CRYSTAL_HEART.get(), 1))
                         .add(itemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 1))
+                        .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 4))
                 )
         );
         addChestLootTable("inject/chests/jungle_temple", LootTable.lootTable().withPool(
@@ -338,19 +346,21 @@ public class LootTables extends LootTableProvider {
                         .add(itemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 1))
                         .add(itemEntry(ModItems.OBSIDIAN_SKULL.get(), 1))
                         .add(itemEntry(ModItems.RUNNING_SHOES.get(), 1))
+                        .add(itemEntry(ModItems.CHARM_OF_SINKING.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/stronghold_corridor", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.35F))
-                        .add(artifactEntry(5))
+                        .when(RandomChance.randomChance(0.40F))
+                        .add(artifactEntry(3))
                         .add(itemEntry(ModItems.POWER_GLOVE.get(), 1))
                         .add(itemEntry(ModItems.ANTIDOTE_VESSEL.get(), 1))
                         .add(itemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 1))
                         .add(itemEntry(ModItems.LUCKY_SCARF.get(), 1))
-                        .add(itemEntry(ModItems.UNIVERSAL_ATTRACTOR.get(), 1))
+                        .add(itemEntry(ModItems.AQUA_DASHERS.get(), 1))
+                        .add(itemEntry(ModItems.HELIUM_FLAMINGO.get(), 1))
                 )
         );
         addChestLootTable("inject/chests/underwater_ruin_big", LootTable.lootTable().withPool(

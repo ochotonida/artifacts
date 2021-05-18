@@ -1,8 +1,9 @@
 package artifacts;
 
 import artifacts.client.render.MimicRenderer;
-import artifacts.common.capability.EntityKillTrackerCapability;
-import artifacts.common.config.Config;
+import artifacts.common.capability.killtracker.EntityKillTrackerCapability;
+import artifacts.common.capability.swimhandler.SwimHandlerCapability;
+import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModEntities;
 import artifacts.common.init.ModFeatures;
 import artifacts.common.init.ModItems;
@@ -41,7 +42,8 @@ public class Artifacts {
 
 
     public Artifacts() {
-        Config.register();
+        ModConfig.registerCommon();
+        ModConfig.registerClient();
 
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.REGISTRY.register(modEventBus);
@@ -53,7 +55,7 @@ public class Artifacts {
     }
 
     public void addFeatures(BiomeLoadingEvent event) {
-        if (event.getCategory() != Biome.Category.NETHER && event.getCategory() != Biome.Category.THEEND && !Config.isBlacklisted(event.getName())) {
+        if (event.getCategory() != Biome.Category.NETHER && event.getCategory() != Biome.Category.THEEND && !ModConfig.common.isBlacklisted(event.getName())) {
             event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_STRUCTURES).add(() -> ModFeatures.UNDERGROUND_CAMPSITE);
         }
     }
@@ -63,10 +65,12 @@ public class Artifacts {
 
         @SubscribeEvent
         public static void commonSetup(final FMLCommonSetupEvent event) {
+            ModConfig.registerServer();
             event.enqueueWork(() -> {
                 ModFeatures.registerConfiguredFeatures();
                 NetworkHandler.register();
                 EntityKillTrackerCapability.register();
+                SwimHandlerCapability.register();
             });
         }
 

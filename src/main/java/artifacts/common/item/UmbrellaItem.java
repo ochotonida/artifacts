@@ -1,6 +1,9 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
+import artifacts.common.capability.swimhandler.ISwimHandler;
+import artifacts.common.capability.swimhandler.SwimHandlerCapability;
+import artifacts.common.config.ModConfig;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
@@ -24,6 +27,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class UmbrellaItem extends ArtifactItem {
@@ -35,26 +39,29 @@ public class UmbrellaItem extends ArtifactItem {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingUpdate);
     }
 
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
-        ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
-        if (gravity != null) {
-            if (!entity.isOnGround() && !entity.isInWater() && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(Effects.SLOW_FALLING)
-                    && (entity.getOffhandItem().getItem() == this
-                    || entity.getMainHandItem().getItem() == this) && !(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAction.BLOCK)) {
-                if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                    gravity.addTransientModifier(UMBRELLA_SLOW_FALLING);
+    private void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+        if (!ModConfig.server.isCosmetic(this)) {
+            LivingEntity entity = event.getEntityLiving();
+            ModifiableAttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
+            if (gravity != null) {
+                boolean isInWater = entity.isInWater() && !entity.getCapability(SwimHandlerCapability.INSTANCE).map(ISwimHandler::isSinking).orElse(false);
+                if (!entity.isOnGround() && !isInWater && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(Effects.SLOW_FALLING)
+                        && (entity.getOffhandItem().getItem() == this
+                        || entity.getMainHandItem().getItem() == this) && !(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAction.BLOCK)) {
+                    if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
+                        gravity.addTransientModifier(UMBRELLA_SLOW_FALLING);
+                    }
+                    entity.fallDistance = 0;
+                } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
+                    gravity.removeModifier(UMBRELLA_SLOW_FALLING);
                 }
-                entity.fallDistance = 0;
-            } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                gravity.removeModifier(UMBRELLA_SLOW_FALLING);
             }
         }
     }
 
     @Override
-    public boolean isShield(ItemStack stack, LivingEntity entity) {
-        return true;
+    public boolean isShield(@Nullable ItemStack stack, @Nullable LivingEntity entity) {
+        return !ModConfig.server.isCosmetic(this) && ModConfig.server.umbrella.isShield.get();
     }
 
     public UseAction getUseAnimation(ItemStack stack) {
@@ -66,9 +73,20 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+        if (!isShield(null, null)) {
+            return super.use(world, player, hand);
+        }
         ItemStack itemstack = player.getItemInHand(hand);
         player.startUsingItem(hand);
         return ActionResult.consume(itemstack);
+    }
+
+    public static boolean isHoldingUmbrellaUpright(LivingEntity entity, Hand hand) {
+        return entity.getItemInHand(hand).getItem() instanceof UmbrellaItem && (!entity.isUsingItem() || entity.getUsedItemHand() != hand);
+    }
+
+    public static boolean isHoldingUmbrellaUpright(LivingEntity entity) {
+        return isHoldingUmbrellaUpright(entity, Hand.MAIN_HAND) || isHoldingUmbrellaUpright(entity, Hand.OFF_HAND);
     }
 
     @SuppressWarnings("unused")
@@ -80,17 +98,19 @@ public class UmbrellaItem extends ArtifactItem {
             if (!(event.getRenderer().getModel() instanceof BipedModel)) {
                 return;
             }
+
             LivingEntity entity = event.getEntity();
             BipedModel<?> model = (BipedModel<?>) event.getRenderer().getModel();
-            if (!(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAction.BLOCK)) {
-                boolean isHoldingOffHand = entity.getOffhandItem().getItem() instanceof UmbrellaItem;
-                boolean isHoldingMainHand = entity.getMainHandItem().getItem() instanceof UmbrellaItem;
-                if ((isHoldingMainHand && Minecraft.getInstance().options.mainHand == HandSide.RIGHT) || (isHoldingOffHand && Minecraft.getInstance().options.mainHand == HandSide.LEFT)) {
-                    model.rightArmPose = BipedModel.ArmPose.THROW_SPEAR;
-                }
-                if ((isHoldingMainHand && Minecraft.getInstance().options.mainHand == HandSide.LEFT) || (isHoldingOffHand && Minecraft.getInstance().options.mainHand == HandSide.RIGHT)) {
-                    model.leftArmPose = BipedModel.ArmPose.THROW_SPEAR;
-                }
+
+            boolean isHoldingOffHand = isHoldingUmbrellaUpright(entity, Hand.OFF_HAND);
+            boolean isHoldingMainHand = isHoldingUmbrellaUpright(entity, Hand.MAIN_HAND);
+            boolean isRightHanded = Minecraft.getInstance().options.mainHand == HandSide.RIGHT;
+
+            if ((isHoldingMainHand && isRightHanded) || (isHoldingOffHand && !isRightHanded)) {
+                model.rightArmPose = BipedModel.ArmPose.THROW_SPEAR;
+            }
+            if ((isHoldingMainHand && !isRightHanded) || (isHoldingOffHand && isRightHanded)) {
+                model.leftArmPose = BipedModel.ArmPose.THROW_SPEAR;
             }
         }
     }

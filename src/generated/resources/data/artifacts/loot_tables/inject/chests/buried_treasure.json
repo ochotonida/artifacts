@@ -51,6 +51,11 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 3,
+          "name": "artifacts:aqua_dashers"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 2,
           "name": "artifacts:plastic_drinking_hat"
         },

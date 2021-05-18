@@ -1,7 +1,8 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.ObsidianSkullModel;
+import artifacts.client.render.model.curio.belt.ObsidianSkullModel;
+import artifacts.common.config.ModConfig;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,15 +26,20 @@ public class ObsidianSkullItem extends CurioItem {
         addListener(LivingHurtEvent.class, this::onLivingHurt);
     }
 
-    public void onLivingHurt(LivingHurtEvent event) {
-        if (!event.getEntity().level.isClientSide
+    private void onLivingHurt(LivingHurtEvent event, LivingEntity wearer) {
+        if (!wearer.level.isClientSide
                 && event.getAmount() >= 1
-                && (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA)
-                && event.getEntity() instanceof PlayerEntity) {
+                && (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA || event.getSource() == DamageSource.HOT_FLOOR)
+                && wearer instanceof PlayerEntity) {
 
-            if (!((PlayerEntity) event.getEntity()).getCooldowns().isOnCooldown(this)) {
-                event.getEntityLiving().addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 600, 0, false, true));
-                ((PlayerEntity) event.getEntity()).getCooldowns().addCooldown(this, 1200);
+            if (!((PlayerEntity) wearer).getCooldowns().isOnCooldown(this)) {
+                int cooldown = ModConfig.server.obsidianSkull.cooldown.get();
+                int fireResistanceDuration = ModConfig.server.obsidianSkull.fireResistanceDuration.get();
+
+                wearer.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, fireResistanceDuration, 0, false, true));
+                ((PlayerEntity) wearer).getCooldowns().addCooldown(this, cooldown);
+
+                damageEquippedStacks(wearer);
             }
         }
     }

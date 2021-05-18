@@ -1,6 +1,6 @@
 package artifacts.common.world;
 
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldDecoratingHelper;
@@ -18,11 +18,11 @@ public class InCaveWithChance extends Placement<ChanceConfig> {
 
     @Override
     public Stream<BlockPos> getPositions(WorldDecoratingHelper helper, Random random, ChanceConfig config, BlockPos pos) {
-        if (random.nextInt(100) < config.chance) {
+        if (config.chance < 10000 && random.nextFloat() < 1F / config.chance) {
             int x = random.nextInt(16);
             int z = random.nextInt(16);
-            pos = new BlockPos(pos.getX() + x, Config.campsiteMinY, pos.getZ() + z);
-            while (pos.getY() <= Config.campsiteMaxY) {
+            pos = new BlockPos(pos.getX() + x, ModConfig.common.campsiteMinY.get(), pos.getZ() + z);
+            while (pos.getY() <= ModConfig.common.campsiteMaxY.get()) {
                 // noinspection deprecation
                 if (helper.getBlockState(pos).isAir() && helper.getBlockState(pos.below()).getMaterial().blocksMotion()) {
                     return Stream.of(pos);

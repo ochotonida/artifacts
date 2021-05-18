@@ -1,6 +1,6 @@
 package artifacts.common.item;
 
-import artifacts.common.config.Config;
+import artifacts.common.config.ModConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Food;
@@ -19,14 +19,19 @@ public class EverlastingFoodItem extends ArtifactItem {
         if (isEdible()) {
             entity.eat(world, stack.copy());
             if (!world.isClientSide && entity instanceof PlayerEntity) {
-                ((PlayerEntity) entity).getCooldowns().addCooldown(this, Config.everlastingFoodCooldown);
+                int cooldown = ModConfig.server.everlastingFoods.get(this).cooldown.get();
+                ((PlayerEntity) entity).getCooldowns().addCooldown(this, cooldown);
             }
         }
+
+        stack.hurtAndBreak(1, entity, damager -> {
+        });
+
         return stack;
     }
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return 24;
+        return ModConfig.server.isCosmetic(this) ? 72000 : ModConfig.server.everlastingFoods.get(this).useDuration.get();
     }
 }

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "weight": 6,
+          "weight": 4,
           "name": "artifacts:artifact"
         },
         {
@@ -16,6 +16,11 @@
         {
           "type": "minecraft:item",
           "name": "artifacts:cloud_in_a_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "name": "artifacts:helium_flamingo"
         }
       ],
       "conditions": [

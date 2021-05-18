@@ -1,5 +1,6 @@
 {
   "loader": "forge:separate-perspective",
+  "gui_light": "front",
   "base": {
     "parent": "artifacts:item/umbrella_in_inventory"
   },

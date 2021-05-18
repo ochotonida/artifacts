@@ -1,7 +1,8 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.UniversalAttractorModel;
+import artifacts.client.render.model.curio.belt.UniversalAttractorModel;
+import artifacts.common.config.ModConfig;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -14,6 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.List;
@@ -23,7 +25,12 @@ public class UniversalAttractorItem extends CurioItem {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/universal_attractor.png");
 
     public UniversalAttractorItem() {
+        addListener(PlayerEvent.ItemPickupEvent.class, this::onItemPickup);
         MinecraftForge.EVENT_BUS.addListener(this::onItemToss);
+    }
+
+    private void onItemPickup(PlayerEvent.ItemPickupEvent event, LivingEntity wearer) {
+        damageEquippedStacks(wearer);
     }
 
     public static int getCooldown(ItemStack stack) {
@@ -34,14 +41,17 @@ public class UniversalAttractorItem extends CurioItem {
         stack.getOrCreateTag().putInt("Cooldown", cooldown);
     }
 
-    public void onItemToss(ItemTossEvent event) {
-        CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, 100));
+    private void onItemToss(ItemTossEvent event) {
+        int cooldown = ModConfig.server.universalAttractor.cooldown.get();
+        if (cooldown > 0) {
+            CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, cooldown));
+        }
     }
 
     // magnet logic from Botania, see https://github.com/Vazkii/Botania
     @Override
     public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (entity.isSpectator() || !(entity instanceof PlayerEntity)) {
+        if (ModConfig.server.isCosmetic(this) || entity.isSpectator() || !(entity instanceof PlayerEntity)) {
             return;
         }
 
@@ -49,7 +59,7 @@ public class UniversalAttractorItem extends CurioItem {
         if (cooldown <= 0) {
             Vector3d playerPos = entity.position().add(0, 0.75, 0);
 
-            int range = 5;
+            int range = ModConfig.server.universalAttractor.range.get();
             List<ItemEntity> items = entity.level.getEntitiesOfClass(ItemEntity.class, new AxisAlignedBB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
             int pulled = 0;
             for (ItemEntity item : items) {
@@ -62,7 +72,7 @@ public class UniversalAttractorItem extends CurioItem {
                     if (Math.sqrt(motion.x * motion.x + motion.y * motion.y + motion.z * motion.z) > 1) {
                         motion = motion.normalize();
                     }
-                    item.setDeltaMovement(motion.scale(0.6));
+                    item.setDeltaMovement(motion.scale(ModConfig.server.universalAttractor.motionMultiplier.get()));
                 }
             }
         } else {

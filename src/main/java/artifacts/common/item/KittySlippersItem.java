@@ -1,7 +1,9 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.KittySlippersModel;
+import artifacts.client.render.model.curio.feet.KittySlippersModel;
+import artifacts.common.config.ModConfig;
+import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -16,6 +18,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import top.theillusivec4.curios.api.SlotContext;
@@ -30,21 +33,28 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJoinWorld);
         addListener(LivingSetAttackTargetEvent.class, this::onLivingSetAttackTarget, LivingSetAttackTargetEvent::getTarget);
         addListener(LivingEvent.LivingUpdateEvent.class, this::onLivingUpdate, event -> event.getEntityLiving().getLastHurtByMob());
+        addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
-    public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if (event.getEntity() instanceof CreeperEntity) {
+    private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
+        if (event.getEntityLiving() instanceof CreeperEntity) {
+            damageEquippedStacks(wearer);
+        }
+    }
+
+    private void onEntityJoinWorld(EntityJoinWorldEvent event) {
+        if (!ModConfig.server.isCosmetic(this) && event.getEntity() instanceof CreeperEntity) {
             ((CreeperEntity) event.getEntity()).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreeperEntity) event.getEntity(), PlayerEntity.class, (entity) -> entity != null && isEquippedBy(entity), 6, 1, 1.3, EntityPredicates.NO_CREATIVE_OR_SPECTATOR::test));
         }
     }
 
-    public void onLivingSetAttackTarget(LivingSetAttackTargetEvent event) {
+    private void onLivingSetAttackTarget(LivingSetAttackTargetEvent event, LivingEntity wearer) {
         if (event.getEntityLiving() instanceof CreeperEntity) {
             ((MobEntity) event.getEntityLiving()).setTarget(null);
         }
     }
 
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+    private void onLivingUpdate(LivingEvent.LivingUpdateEvent event, LivingEntity wearer) {
         if (event.getEntityLiving() instanceof CreeperEntity) {
             event.getEntityLiving().setLastHurtByMob(null);
         }

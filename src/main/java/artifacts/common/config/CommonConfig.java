@@ -2,65 +2,88 @@ package artifacts.common.config;
 
 import artifacts.Artifacts;
 import com.google.common.collect.Lists;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CommonConfig {
 
-    final ForgeConfigSpec.ConfigValue<List<String>> biomeBlacklist;
-    final ForgeConfigSpec.IntValue campsiteChance;
-    final ForgeConfigSpec.IntValue campsiteMimicChance;
-    final ForgeConfigSpec.IntValue campsiteOreChance;
-    final ForgeConfigSpec.IntValue campsiteMinY;
-    final ForgeConfigSpec.IntValue campsiteMaxY;
-    final ForgeConfigSpec.BooleanValue useModdedChests;
+    private Set<ResourceLocation> worldGenBiomeBlacklist;
+    private Set<String> worldGenModIdBlacklist;
 
-    final ForgeConfigSpec.IntValue everlastingFoodCooldown;
+    private final ForgeConfigSpec.ConfigValue<List<String>> biomeBlacklist;
+    public final ForgeConfigSpec.IntValue campsiteRarity;
+    public final ForgeConfigSpec.DoubleValue campsiteMimicChance;
+    public final ForgeConfigSpec.DoubleValue campsiteOreChance;
+    public final ForgeConfigSpec.IntValue campsiteMinY;
+    public final ForgeConfigSpec.IntValue campsiteMaxY;
+    public final ForgeConfigSpec.BooleanValue useModdedChests;
 
     CommonConfig(ForgeConfigSpec.Builder builder) {
-        builder.comment("To disable items or to change the frequency at which artifacts appear, override the loot tables from this mod with a data pack\nCosmetic slots are disabled by default, they can be enabled using the Curios config, see https://github.com/TheIllusiveC4/Curios/wiki/How-to-Use:-Users#creating-a-new-slot-type");
-
         builder.push("campsite");
-
         biomeBlacklist = builder
                 .worldRestart()
-                .comment("List of biome IDs in which campsites are not allowed to generate. End and nether biomes are excluded by default.\n To blacklist all biomes from a single mod, use 'modid:*'")
-                .translation(Artifacts.MODID + ".config.biome_blacklist")
-                .define("biome_blacklist", Lists.newArrayList("minecraft:void", "undergarden:*", "the_bumblezone:*"));
-        campsiteChance = builder
+                .comment(
+                        "List of biome IDs in which campsites are not allowed to generate",
+                        "End and nether biomes are excluded by default",
+                        "To blacklist all biomes from a single mod, use \"modid:*\""
+                )
+                .translation(Artifacts.MODID + ".config.common.campsite.biome_blacklist")
+                .define("biome_blacklist", Lists.newArrayList("minecraft:void", "undergarden:*", "the_bumblezone:*", "twilightforest:*"));
+        campsiteRarity = builder
                 .worldRestart()
-                .comment("Per-chunk probability (as a percentage) a campsite is attempted to be generated. Not every attempt succeeds, this also depends on the density and shape of caves")
-                .translation(Artifacts.MODID + ".config.campsite_chance")
-                .defineInRange("campsite_chance", 8, 0, 100);
+                .comment(
+                        "Rarity of campsites generating in the world",
+                        "The chance a campsite generates in a specific chunk is 1/rarity",
+                        "A rarity of 1 will generate a campsite in every chunk, while 10000 will generate no campsites",
+                        "Not every attempt at generating a campsite succeeds, this also depends on the density and shape of caves"
+                )
+                .translation(Artifacts.MODID + ".config.common.campsite.rarity")
+                .defineInRange("rarity", 12, 1, 10000);
         campsiteMinY = builder
                 .comment("The minimum y-level at which a campsite can generate")
-                .translation(Artifacts.MODID + ".config.campsite_min_y")
-                .defineInRange("campsite_min_y", 1, 1, 255);
+                .translation(Artifacts.MODID + ".config.common.campsite.min_y")
+                .defineInRange("min_y", 1, 1, 255);
         campsiteMaxY = builder
                 .comment("The maximum y-level at which a campsite can generate")
-                .translation(Artifacts.MODID + ".config.campsite_max_y")
-                .defineInRange("campsite_max_y", 45, 0, 255);
+                .translation(Artifacts.MODID + ".config.common.campsite.max_y")
+                .defineInRange("max_y", 45, 1, 255);
         campsiteMimicChance = builder
                 .comment("Probability for a container of a campsite to be replaced by a mimic")
-                .translation(Artifacts.MODID + ".config.campsite_mimic_chance")
-                .defineInRange("campsite_mimic_chance", 30, 0, 100);
+                .translation(Artifacts.MODID + ".config.common.campsite.mimic_chance")
+                .defineInRange("mimic_chance", 0.3, 0, 1);
         campsiteOreChance = builder
                 .comment("Probability for an ore vein to generate underneath a campsite")
-                .translation(Artifacts.MODID + ".config.campsite_ore_chance")
-                .defineInRange("campsite_ore_chance", 25, 0, 100);
+                .translation(Artifacts.MODID + ".config.common.campsite.ore_chance")
+                .defineInRange("ore_chance", 0.25, 0, 1);
         useModdedChests = builder
-                .comment("Whether to use wooden chests from other mods when generating campsites, may make it easier to distinguish them from mimics")
-                .translation(Artifacts.MODID + ".config.use_modded_chests")
+                .comment(
+                        "Whether to use wooden chests from other mods when generating campsites",
+                        "(keeping this enabled may make it easier to distinguish them from mimics)"
+                )
+                .translation(Artifacts.MODID + ".config.common.campsite.use_modded_chests")
                 .define("use_modded_chests", true);
-
-
         builder.pop();
-        builder.push("items");
-        everlastingFoodCooldown = builder
-                .comment("Cooldown in ticks for the Everlasting Beef and Eternal Steak items")
-                .translation(Artifacts.MODID + ".config.eternal_food_cooldown")
-                .defineInRange("eternal_food_cooldown", 300, 0, Integer.MAX_VALUE);
-        builder.pop();
+    }
+
+    public void bake() {
+        worldGenBiomeBlacklist = biomeBlacklist.get()
+                .stream()
+                .filter(string -> !string.endsWith(":*"))
+                .map(ResourceLocation::new)
+                .collect(Collectors.toSet());
+        worldGenModIdBlacklist = biomeBlacklist.get()
+                .stream()
+                .filter(string -> string.endsWith(":*"))
+                .map(string -> string.substring(0, string.length() - 2))
+                .collect(Collectors.toSet());
+    }
+
+    public boolean isBlacklisted(@Nullable ResourceLocation biome) {
+        return biome != null && (worldGenBiomeBlacklist.contains(biome) || worldGenModIdBlacklist.contains(biome.getNamespace()));
     }
 }

@@ -1,7 +1,8 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.AntidoteVesselModel;
+import artifacts.client.render.model.curio.belt.AntidoteVesselModel;
+import artifacts.common.config.ModConfig;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -16,6 +17,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class AntidoteVesselItem extends CurioItem {
 
@@ -28,18 +30,26 @@ public class AntidoteVesselItem extends CurioItem {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        Map<Effect, EffectInstance> effects = new HashMap<>();
+        if (!ModConfig.server.isCosmetic(this)) {
+            Map<Effect, EffectInstance> effects = new HashMap<>();
 
-        entity.getActiveEffectsMap().forEach((effect, instance) -> {
-            if (!effect.isInstantenous() && !effect.isBeneficial() && instance.getDuration() > 80) {
-                effects.put(effect, instance);
-            }
-        });
+            int maxEffectDuration = ModConfig.server.antidoteVessel.maxEffectDuration.get();
 
-        effects.forEach((effect, instance) -> {
-            entity.removeEffectNoUpdate(effect);
-            entity.addEffect(new EffectInstance(effect, 80, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
-        });
+            entity.getActiveEffectsMap().forEach((effect, instance) -> {
+                Set<Effect> negativeEffects = ModConfig.server.antidoteVessel.negativeEffects;
+                if (negativeEffects.contains(effect) && instance.getDuration() > maxEffectDuration) {
+                    effects.put(effect, instance);
+                }
+            });
+
+            effects.forEach((effect, instance) -> {
+                damageStack(identifier, index, entity, stack);
+                entity.removeEffectNoUpdate(effect);
+                if (maxEffectDuration > 0) {
+                    entity.addEffect(new EffectInstance(effect, maxEffectDuration, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
+                }
+            });
+        }
     }
 
     @Override
