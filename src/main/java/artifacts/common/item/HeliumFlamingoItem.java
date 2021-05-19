@@ -164,19 +164,19 @@ public class HeliumFlamingoItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent(priority = EventPriority.LOW)
         public void render(RenderGameOverlayEvent.Pre event) {
-            if (ModConfig.server.isCosmetic(HeliumFlamingoItem.this)) {
+            Minecraft minecraft = Minecraft.getInstance();
+
+            if (ModConfig.server.isCosmetic(HeliumFlamingoItem.this) || !(minecraft.getCameraEntity() instanceof LivingEntity)) {
                 return;
             }
 
-            Minecraft minecraft = Minecraft.getInstance();
-            PlayerEntity player = (PlayerEntity) minecraft.getCameraEntity();
+            LivingEntity player = (LivingEntity) minecraft.getCameraEntity();
             if (event.getType() == RenderGameOverlayEvent.ElementType.AIR && !event.isCanceled() && isEquippedBy(player)) {
                 event.setCanceled(true);
                 Minecraft.getInstance().getTextureManager().bind(location);
                 RenderSystem.enableBlend();
                 int left = minecraft.getWindow().getGuiScaledWidth() / 2 + 91;
                 int top = minecraft.getWindow().getGuiScaledHeight() - ForgeIngameGui.right_height;
-                // noinspection ConstantConditions
                 int air = player.getAirSupply();
                 if (player.isEyeInFluid(FluidTags.WATER) || air < 300) {
                     int full = MathHelper.ceil((air - 2) * 10 / 300D);
