@@ -76,7 +76,6 @@
   "item.artifacts.running_shoes.tooltip": "Aumenta el movimiento y altura de pisadas en el portador",
   "item.artifacts.bunny_hoppers.tooltip": "Aumenta el nivel de salto y otorga inmunidad al daño por caida en el portador",
   "item.artifacts.crystal_heart.tooltip": "Aumenta la vida máxima del portador",
-  "item.artifacts.villager_hat.tooltip": "Disminuye los precios de los aldeanos y ocasionalmente le otorgan regalos al portador",
   "item.artifacts.cloud_in_a_bottle.tooltip": "Permite al portador dar doble saltos",
   "item.artifacts.whoopee_cushion.tooltip": "Aumenta las flatulencias del portador, wacala",
   "item.artifacts.vampiric_glove.tooltip": "Los ataques del portador absorben vida",
@@ -141,6 +140,5 @@
   "artifacts.config.server.universal_attractor.motionMultiplier": "Multiplicador de atracción",
   "artifacts.config.server.vampiric_glove.absorption_ratio": "Radio de absorción",
   "artifacts.config.server.vampiric_glove.max_health_absorbed": "Máxima vida absorvida",
-  "artifacts.config.server.villager_hat.hero_of_the_village_level": "Nivel del 'Heroe de la Aldea'",
   "artifacts.config.server.whoopee_cushion.flatulence": "Flatulencias/Peos"
 }

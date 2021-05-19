@@ -6,7 +6,8 @@
   "mixins": [
     "aquadashers.EntityMixin",
     "umbrella.EntityMixin",
-    "villagerhat.AbstractVillagerEntityMixin"
+    "villagerhat.AbstractVillagerEntityMixin",
+    "villagerhat.VillagerEntityMixin"
   ],
   "client": [
     "umbrella.BipedModelMixin"

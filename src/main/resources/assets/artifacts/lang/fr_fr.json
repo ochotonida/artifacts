@@ -69,7 +69,6 @@
   "item.artifacts.running_shoes.tooltip": "Augmente la vitesse de déplacement et la hauteur des pas pendant le sprint",
   "item.artifacts.bunny_hoppers.tooltip": "Augmente la hauteur de saut du porteur et lui confère l'immunité aux dégâts de chute",
   "item.artifacts.crystal_heart.tooltip": "Augmente la santé maximale du porteur",
-  "item.artifacts.villager_hat.tooltip": "Diminution des prix de vente et cadeaux occasionnels offerts par les villageois à la personne qui les porte",
   "item.artifacts.cloud_in_a_bottle.tooltip": "Permet au porteur de faire un double saut",
   "item.artifacts.whoopee_cushion.tooltip": "Augmente la flatulence du porteur"
 }

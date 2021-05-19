@@ -76,7 +76,7 @@
   "item.artifacts.running_shoes.tooltip": "Increases movement speed and step height while sprinting",
   "item.artifacts.bunny_hoppers.tooltip": "Increases the wearer's jump height and grants immunity to fall damage",
   "item.artifacts.crystal_heart.tooltip": "Increases the wearer's maximum health",
-  "item.artifacts.villager_hat.tooltip": "Decreases trading prices and villagers occasionally give gifts to the wearer",
+  "item.artifacts.villager_hat.tooltip": "Decreases the trading prices of villagers",
   "item.artifacts.cloud_in_a_bottle.tooltip": "Allows the wearer to double jump",
   "item.artifacts.whoopee_cushion.tooltip": "Increases the wearer's flatulence",
   "item.artifacts.vampiric_glove.tooltip": "Causes the wearer's melee attacks to absorb health",
@@ -141,6 +141,6 @@
   "artifacts.config.server.universal_attractor.motionMultiplier": "Motion multiplier",
   "artifacts.config.server.vampiric_glove.absorption_ratio": "Absorption ratio",
   "artifacts.config.server.vampiric_glove.max_health_absorbed": "Maximum health absorbed",
-  "artifacts.config.server.villager_hat.hero_of_the_village_level": "Hero of the Village level",
+  "artifacts.config.server.villager_hat.reputation_bonus": "Reputation Bonus",
   "artifacts.config.server.whoopee_cushion.flatulence": "Flatulence"
 }
