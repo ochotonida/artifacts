@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(VillagerEntity.class)
-public class VillagerEntityMixin {
+public abstract class VillagerEntityMixin {
 
     @ModifyVariable(method = "updateSpecialPrices", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/entity/merchant/villager/VillagerEntity;getPlayerReputation(Lnet/minecraft/entity/player/PlayerEntity;)I"))
     private int increaseReputation(int i, PlayerEntity player) {
