@@ -1,7 +1,6 @@
 package artifacts.mixin.item.umbrella;
 
 import artifacts.common.item.UmbrellaItem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
@@ -28,7 +27,7 @@ public abstract class BipedModelMixin<T extends LivingEntity> {
     private void reduceHandSwing(T entity, float f, float g, float h, float i, float j, CallbackInfo info) {
         boolean isHoldingOffHand = UmbrellaItem.isHoldingUmbrellaUpright(entity, Hand.OFF_HAND);
         boolean isHoldingMainHand = UmbrellaItem.isHoldingUmbrellaUpright(entity, Hand.MAIN_HAND);
-        boolean isRightHanded = Minecraft.getInstance().options.mainHand == HandSide.RIGHT;
+        boolean isRightHanded = entity.getMainArm() == HandSide.RIGHT;
 
         if ((isHoldingMainHand && isRightHanded) || (isHoldingOffHand && !isRightHanded)) {
             this.rightArm.xRot /= 8;

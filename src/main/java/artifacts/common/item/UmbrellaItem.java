@@ -5,7 +5,6 @@ import artifacts.common.capability.swimhandler.ISwimHandler;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.ModConfig;
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -104,7 +103,7 @@ public class UmbrellaItem extends ArtifactItem {
 
             boolean isHoldingOffHand = isHoldingUmbrellaUpright(entity, Hand.OFF_HAND);
             boolean isHoldingMainHand = isHoldingUmbrellaUpright(entity, Hand.MAIN_HAND);
-            boolean isRightHanded = Minecraft.getInstance().options.mainHand == HandSide.RIGHT;
+            boolean isRightHanded = entity.getMainArm() == HandSide.RIGHT;
 
             if ((isHoldingMainHand && isRightHanded) || (isHoldingOffHand && !isRightHanded)) {
                 model.rightArmPose = BipedModel.ArmPose.THROW_SPEAR;

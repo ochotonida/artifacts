@@ -5,7 +5,6 @@ import artifacts.client.render.curio.model.hands.GloveModel;
 import artifacts.client.render.curio.model.hands.HandsModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -61,9 +60,7 @@ public class GloveCurioRenderer implements CurioRenderer {
         boolean hasSlimArms = hasSlimArms(entity);
         HandsModel model = getModel(hasSlimArms);
         Hand hand = index % 2 == 0 ? Hand.MAIN_HAND : Hand.OFF_HAND;
-        HandSide handSide = hand == Hand.MAIN_HAND ?
-                Minecraft.getInstance().options.mainHand :
-                Minecraft.getInstance().options.mainHand.getOpposite();
+        HandSide handSide = hand == Hand.MAIN_HAND ? entity.getMainArm() : entity.getMainArm().getOpposite();
 
         model.setupAnim(entity, limbSwing, limbSwingAmount, ticks, headYaw, headPitch);
         model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
