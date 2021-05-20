@@ -1,18 +1,12 @@
 package artifacts.common.item;
 
-import artifacts.Artifacts;
-import artifacts.client.render.model.curio.belt.CrystalHeartModel;
 import artifacts.common.config.ModConfig;
-import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -20,8 +14,6 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 import java.util.UUID;
 
 public class CrystalHeartItem extends CurioItem {
-
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/crystal_heart.png");
 
     public CrystalHeartItem() {
         addListener(LivingDamageEvent.class, this::onLivingDamage);
@@ -66,16 +58,5 @@ public class CrystalHeartItem extends CurioItem {
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
         return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_DIAMOND, 1, 1);
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    protected BipedModel<LivingEntity> createModel() {
-        return new CrystalHeartModel();
-    }
-
-    @Override
-    protected ResourceLocation getTexture() {
-        return TEXTURE;
     }
 }

@@ -1,25 +1,18 @@
 package artifacts.common.item;
 
+import artifacts.client.render.curio.CurioRenderers;
 import artifacts.common.config.ModConfig;
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
@@ -27,9 +20,7 @@ import javax.annotation.Nullable;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-public abstract class CurioItem extends ArtifactItem implements ICurioItem {
-
-    private Object model;
+public class CurioItem extends ArtifactItem implements ICurioItem {
 
     public boolean isEquippedBy(@Nullable LivingEntity entity) {
         return !ModConfig.server.isCosmetic(this) && entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
@@ -68,17 +59,12 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
 
     @Override
     public boolean canRender(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        return true;
+        return CurioRenderers.getRenderer(this) != null;
     }
 
     @Override
-    public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, ItemStack stack) {
-        BipedModel<LivingEntity> model = getModel();
-        model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-        ICurio.RenderHelper.followBodyRotations(entity, model);
-        IVertexBuilder vertexBuilder = ItemRenderer.getFoilBuffer(renderTypeBuffer, model.renderType(getTexture()), false, stack.hasFoil());
-        model.renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+    public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ticks, float headYaw, float headPitch, ItemStack stack) {
+        CurioRenderers.getRenderer(this).render(identifier, index, matrixStack, buffer, light, entity, limbSwing, limbSwingAmount, partialTicks, ticks, headYaw, headPitch, stack);
     }
 
     protected void damageStack(String identifier, int index, LivingEntity entity, ItemStack stack) {
@@ -108,19 +94,4 @@ public abstract class CurioItem extends ArtifactItem implements ICurioItem {
     public void damageEquippedStacks(LivingEntity entity) {
         damageEquippedStacks(entity, 1);
     }
-
-    @OnlyIn(Dist.CLIENT)
-    protected final BipedModel<LivingEntity> getModel() {
-        if (model == null) {
-            model = createModel();
-        }
-
-        //noinspection unchecked
-        return (BipedModel<LivingEntity>) model;
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    protected abstract BipedModel<LivingEntity> createModel();
-
-    protected abstract ResourceLocation getTexture();
 }

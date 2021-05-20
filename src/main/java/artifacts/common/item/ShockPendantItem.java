@@ -12,7 +12,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 public class ShockPendantItem extends PendantItem {
 
     public ShockPendantItem() {
-        super("shock_pendant");
         addListener(LivingHurtEvent.class, this::onLivingHurt);
     }
 

@@ -1,7 +1,6 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.hands.ClawsModel;
 import artifacts.common.config.ModConfig;
 import artifacts.common.util.DamageSourceHelper;
 import com.google.common.collect.Multimap;
@@ -12,17 +11,13 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.UUID;
 
-public class FeralClawsItem extends GloveItem {
-
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/feral_claws.png");
+public class FeralClawsItem extends CurioItem {
 
     public FeralClawsItem() {
         addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
@@ -47,21 +42,5 @@ public class FeralClawsItem extends GloveItem {
             result.put(Attributes.ATTACK_SPEED, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "feral_claws_attack_speed").toString(), attackSpeedBonus, AttributeModifier.Operation.ADDITION));
         }
         return result;
-    }
-
-    @Override
-    protected ResourceLocation getTexture() {
-        return TEXTURE;
-    }
-
-    @Override
-    protected ResourceLocation getSlimTexture() {
-        return getTexture();
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    protected ClawsModel createModel(boolean smallArms) {
-        return new ClawsModel(smallArms);
     }
 }

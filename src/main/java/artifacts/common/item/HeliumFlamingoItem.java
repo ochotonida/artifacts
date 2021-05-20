@@ -1,15 +1,12 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.client.render.model.curio.belt.HeliumFlamingoModel;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModSoundEvents;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.FluidTags;
@@ -35,8 +32,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 public class HeliumFlamingoItem extends CurioItem {
-
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/helium_flamingo.png");
 
     public HeliumFlamingoItem() {
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
@@ -92,17 +87,6 @@ public class HeliumFlamingoItem extends CurioItem {
                     }
                 }
         );
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    protected BipedModel<LivingEntity> createModel() {
-        return new HeliumFlamingoModel();
-    }
-
-    @Override
-    protected ResourceLocation getTexture() {
-        return TEXTURE;
     }
 
     private class ClientEventHandler {

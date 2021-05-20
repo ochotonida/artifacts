@@ -1,7 +1,5 @@
 package artifacts.common.item;
 
-import artifacts.Artifacts;
-import artifacts.client.render.model.curio.belt.CloudInABottleModel;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModItems;
 import artifacts.common.init.ModSoundEvents;
@@ -9,13 +7,11 @@ import artifacts.common.network.DoubleJumpPacket;
 import artifacts.common.network.NetworkHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
@@ -31,8 +27,6 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class CloudInABottleItem extends CurioItem {
-
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/cloud_in_a_bottle.png");
 
     public CloudInABottleItem() {
         MinecraftForge.EVENT_BUS.register(new DoubleJumpHandler());
@@ -84,17 +78,6 @@ public class CloudInABottleItem extends CurioItem {
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
         return new ICurio.SoundInfo(SoundEvents.BOTTLE_FILL_DRAGONBREATH, 1, 1);
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    protected BipedModel<LivingEntity> createModel() {
-        return new CloudInABottleModel();
-    }
-
-    @Override
-    protected ResourceLocation getTexture() {
-        return TEXTURE;
     }
 
     private class DoubleJumpHandler {

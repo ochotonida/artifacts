@@ -1,7 +1,8 @@
 package artifacts.client.render;
 
+import artifacts.client.render.curio.CurioRenderers;
+import artifacts.client.render.curio.renderer.GloveCurioRenderer;
 import artifacts.common.config.ModConfig;
-import artifacts.common.item.GloveItem;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -72,7 +73,7 @@ public class FirstPersonGloveRenderHandler {
                 }
             }
 
-            if (stack.getItem() instanceof GloveItem) {
+            if (CurioRenderers.getRenderer(stack.getItem()) instanceof GloveCurioRenderer) {
                 return stack;
             }
         }
@@ -103,7 +104,7 @@ public class FirstPersonGloveRenderHandler {
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(side * -135));
         matrixStack.translate(side * 5.6, 0, 0);
 
-        ((GloveItem) glove.getItem()).renderArm(matrixStack, buffer, combinedLight, player, handSide, glove.hasFoil());
+        ((GloveCurioRenderer) CurioRenderers.getRenderer(glove.getItem())).renderFirstPersonArm(matrixStack, buffer, combinedLight, player, handSide, glove.hasFoil());
     }
 
     private static void renderSingleHandedMapGlove(MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, float equippedProgress, float swingProgress, ClientPlayerEntity player, HandSide handSide, Hand hand) {
@@ -151,7 +152,7 @@ public class FirstPersonGloveRenderHandler {
         matrixStack.mulPose(Vector3f.ZP.rotationDegrees(side * -41));
         matrixStack.translate(side * 0.3, -1.1, 0.45);
 
-        ((GloveItem) glove.getItem()).renderArm(matrixStack, buffer, combinedLight, player, handSide, glove.hasFoil());
+        ((GloveCurioRenderer) CurioRenderers.getRenderer(glove.getItem())).renderFirstPersonArm(matrixStack, buffer, combinedLight, player, handSide, glove.hasFoil());
         matrixStack.popPose();
     }
 }

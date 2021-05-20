@@ -1,18 +1,12 @@
 package artifacts.common.item;
 
-import artifacts.Artifacts;
-import artifacts.client.render.model.curio.belt.UniversalAttractorModel;
 import artifacts.common.config.ModConfig;
-import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -21,8 +15,6 @@ import top.theillusivec4.curios.api.CuriosApi;
 import java.util.List;
 
 public class UniversalAttractorItem extends CurioItem {
-
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/universal_attractor.png");
 
     public UniversalAttractorItem() {
         addListener(PlayerEvent.ItemPickupEvent.class, this::onItemPickup);
@@ -78,16 +70,5 @@ public class UniversalAttractorItem extends CurioItem {
         } else {
             setCooldown(stack, cooldown - 1);
         }
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    protected BipedModel<LivingEntity> createModel() {
-        return new UniversalAttractorModel();
-    }
-
-    @Override
-    protected ResourceLocation getTexture() {
-        return TEXTURE;
     }
 }

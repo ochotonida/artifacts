@@ -1,10 +1,7 @@
 package artifacts.common.item;
 
-import artifacts.Artifacts;
-import artifacts.client.render.model.curio.feet.KittySlippersModel;
 import artifacts.common.config.ModConfig;
 import artifacts.common.util.DamageSourceHelper;
-import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
@@ -12,10 +9,7 @@ import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -25,8 +19,6 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class KittySlippersItem extends HurtSoundModifyingItem {
-
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/kitty_slippers.png");
 
     public KittySlippersItem() {
         super(SoundEvents.CAT_HURT);
@@ -63,16 +55,5 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
         return new ICurio.SoundInfo(SoundEvents.CAT_AMBIENT, 1, 1);
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    protected BipedModel<LivingEntity> createModel() {
-        return new KittySlippersModel();
-    }
-
-    @Override
-    protected ResourceLocation getTexture() {
-        return TEXTURE;
     }
 }

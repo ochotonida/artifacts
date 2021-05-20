@@ -3,7 +3,6 @@ package artifacts.common.init;
 import artifacts.Artifacts;
 import artifacts.common.item.*;
 import net.minecraft.item.*;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
@@ -31,11 +30,11 @@ public class ModItems {
 
     // head
     public static final RegistryObject<CurioItem>
-            PLASTIC_DRINKING_HAT = REGISTRY.register("plastic_drinking_hat", () -> new DrinkingHatItem(new ResourceLocation(Artifacts.MODID, "textures/entity/curio/plastic_drinking_hat.png"))),
-            NOVELTY_DRINKING_HAT = REGISTRY.register("novelty_drinking_hat", () -> new DrinkingHatItem(new ResourceLocation(Artifacts.MODID, "textures/entity/curio/novelty_drinking_hat.png"))),
+            PLASTIC_DRINKING_HAT = REGISTRY.register("plastic_drinking_hat", DrinkingHatItem::new),
+            NOVELTY_DRINKING_HAT = REGISTRY.register("novelty_drinking_hat", DrinkingHatItem::new),
             SNORKEL = REGISTRY.register("snorkel", SnorkelItem::new),
             NIGHT_VISION_GOGGLES = REGISTRY.register("night_vision_goggles", NightVisionGogglesItem::new),
-            VILLAGER_HAT = REGISTRY.register("villager_hat", VillagerHatItem::new),
+            VILLAGER_HAT = REGISTRY.register("villager_hat", CurioItem::new),
             SUPERSTITIOUS_HAT = REGISTRY.register("superstitious_hat", SuperstitiousHatItem::new);
 
     // necklace

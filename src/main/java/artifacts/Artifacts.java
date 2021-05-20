@@ -1,6 +1,7 @@
 package artifacts;
 
-import artifacts.client.render.MimicRenderer;
+import artifacts.client.render.curio.CurioRenderers;
+import artifacts.client.render.entity.MimicRenderer;
 import artifacts.common.capability.killtracker.EntityKillTrackerCapability;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.ModConfig;
@@ -78,6 +79,7 @@ public class Artifacts {
         public static void clientSetup(final FMLClientSetupEvent event) {
             RenderingRegistry.registerEntityRenderingHandler(ModEntities.MIMIC, MimicRenderer::new);
             ItemModelsProperties.register(ModItems.UMBRELLA.get(), new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
+            CurioRenderers.setupCurioRenderers();
         }
 
         @SubscribeEvent

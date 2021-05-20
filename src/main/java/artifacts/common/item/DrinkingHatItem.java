@@ -1,14 +1,11 @@
 package artifacts.common.item;
 
-import artifacts.client.render.model.curio.head.DrinkingHatModel;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModItems;
-import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -24,10 +21,7 @@ import java.util.List;
 
 public class DrinkingHatItem extends CurioItem {
 
-    private final ResourceLocation texture;
-
-    public DrinkingHatItem(ResourceLocation texture) {
-        this.texture = texture;
+    public DrinkingHatItem() {
         addListener(LivingEntityUseItemEvent.Start.class, this::onItemUseStart);
         addListener(LivingEntityUseItemEvent.Finish.class, this::onItemUseFinish);
     }
@@ -64,16 +58,5 @@ public class DrinkingHatItem extends CurioItem {
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
         return new ICurio.SoundInfo(SoundEvents.BOTTLE_FILL, 1, 1);
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    protected BipedModel<LivingEntity> createModel() {
-        return new DrinkingHatModel();
-    }
-
-    @Override
-    protected ResourceLocation getTexture() {
-        return texture;
     }
 }

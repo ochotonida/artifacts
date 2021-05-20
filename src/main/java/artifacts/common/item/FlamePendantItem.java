@@ -5,10 +5,6 @@ import net.minecraft.entity.LivingEntity;
 
 public class FlamePendantItem extends PendantItem {
 
-    public FlamePendantItem() {
-        super("flame_pendant");
-    }
-
     @Override
     protected void applyEffect(LivingEntity target, LivingEntity attacker) {
         if (!attacker.fireImmune() && attacker.attackable()) {

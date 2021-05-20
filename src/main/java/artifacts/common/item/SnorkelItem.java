@@ -1,21 +1,13 @@
 package artifacts.common.item;
 
-import artifacts.Artifacts;
-import artifacts.client.render.model.curio.head.SnorkelModel;
 import artifacts.common.config.ModConfig;
-import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class SnorkelItem extends CurioItem {
-
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/snorkel.png");
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
@@ -25,16 +17,5 @@ public class SnorkelItem extends CurioItem {
         if (entity.tickCount % 20 == 0 && entity.isEyeInFluid(FluidTags.WATER)) {
             damageStack(identifier, index, entity, stack);
         }
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    protected BipedModel<LivingEntity> createModel() {
-        return new SnorkelModel();
-    }
-
-    @Override
-    protected ResourceLocation getTexture() {
-        return TEXTURE;
     }
 }

@@ -6,10 +6,6 @@ import net.minecraft.util.DamageSource;
 
 public class ThornPendantItem extends PendantItem {
 
-    public ThornPendantItem() {
-        super("thorn_pendant");
-    }
-
     @Override
     protected void applyEffect(LivingEntity target, LivingEntity attacker) {
         if (attacker.attackable()) {

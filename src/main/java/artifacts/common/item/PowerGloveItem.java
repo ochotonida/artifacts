@@ -15,10 +15,7 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class PowerGloveItem extends GloveItem {
-
-    private static final ResourceLocation TEXTURE_DEFAULT = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/power_glove_default.png");
-    private static final ResourceLocation TEXTURE_SLIM = new ResourceLocation(Artifacts.MODID, "textures/entity/curio/power_glove_slim.png");
+public class PowerGloveItem extends CurioItem {
 
     public PowerGloveItem() {
         addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
@@ -38,15 +35,5 @@ public class PowerGloveItem extends GloveItem {
             result.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "power_glove_attack_damage").toString(), attackDamageBonus, AttributeModifier.Operation.ADDITION));
         }
         return result;
-    }
-
-    @Override
-    protected ResourceLocation getSlimTexture() {
-        return TEXTURE_SLIM;
-    }
-
-    @Override
-    protected ResourceLocation getTexture() {
-        return TEXTURE_DEFAULT;
     }
 }
