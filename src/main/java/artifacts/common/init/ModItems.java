@@ -1,7 +1,18 @@
 package artifacts.common.init;
 
 import artifacts.Artifacts;
-import artifacts.common.item.*;
+import artifacts.common.item.EverlastingFoodItem;
+import artifacts.common.item.UmbrellaItem;
+import artifacts.common.item.curio.CurioItem;
+import artifacts.common.item.curio.WhoopeeCushionItem;
+import artifacts.common.item.curio.belt.*;
+import artifacts.common.item.curio.feet.*;
+import artifacts.common.item.curio.hands.*;
+import artifacts.common.item.curio.head.DrinkingHatItem;
+import artifacts.common.item.curio.head.NightVisionGogglesItem;
+import artifacts.common.item.curio.head.SnorkelItem;
+import artifacts.common.item.curio.head.SuperstitiousHatItem;
+import artifacts.common.item.curio.necklace.*;
 import net.minecraft.item.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
