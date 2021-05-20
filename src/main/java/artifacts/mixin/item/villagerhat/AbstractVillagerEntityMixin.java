@@ -1,4 +1,4 @@
-package artifacts.mixin.villagerhat;
+package artifacts.mixin.item.villagerhat;
 
 import artifacts.common.init.ModItems;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;

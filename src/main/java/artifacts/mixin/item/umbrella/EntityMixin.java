@@ -1,4 +1,4 @@
-package artifacts.mixin.umbrella;
+package artifacts.mixin.item.umbrella;
 
 import artifacts.common.item.UmbrellaItem;
 import net.minecraft.entity.Entity;

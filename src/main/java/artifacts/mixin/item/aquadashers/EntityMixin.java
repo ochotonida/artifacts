@@ -1,4 +1,4 @@
-package artifacts.mixin.aquadashers;
+package artifacts.mixin.item.aquadashers;
 
 import artifacts.common.init.ModItems;
 import artifacts.common.init.ModSoundEvents;

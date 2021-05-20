@@ -4,13 +4,14 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "artifacts.refmap.json",
   "mixins": [
-    "aquadashers.EntityMixin",
-    "umbrella.EntityMixin",
-    "villagerhat.AbstractVillagerEntityMixin",
-    "villagerhat.VillagerEntityMixin"
+    "item.aquadashers.EntityMixin",
+    "item.umbrella.EntityMixin",
+    "item.villagerhat.AbstractVillagerEntityMixin",
+    "item.villagerhat.VillagerEntityMixin"
   ],
   "client": [
-    "umbrella.BipedModelMixin"
+    "item.umbrella.BipedModelMixin",
+    "render.PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

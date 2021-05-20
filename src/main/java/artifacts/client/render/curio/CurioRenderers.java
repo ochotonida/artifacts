@@ -11,6 +11,7 @@ import artifacts.client.render.curio.renderer.*;
 import artifacts.common.init.ModItems;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +22,16 @@ public class CurioRenderers {
 
     public static CurioRenderer getRenderer(Item curio) {
         return renderers.get(curio);
+    }
+
+    public static GloveCurioRenderer getGloveRenderer(ItemStack stack) {
+        if (!stack.isEmpty()) {
+            CurioRenderer renderer = getRenderer(stack.getItem());
+            if (renderer instanceof GloveCurioRenderer) {
+                return ((GloveCurioRenderer) renderer);
+            }
+        }
+        return null;
     }
 
     public static void setupCurioRenderers() {
