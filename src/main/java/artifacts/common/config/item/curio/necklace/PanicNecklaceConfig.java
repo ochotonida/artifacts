@@ -1,5 +1,6 @@
-package artifacts.common.config.item;
+package artifacts.common.config.item.curio.necklace;
 
+import artifacts.common.config.item.ItemConfig;
 import artifacts.common.init.ModItems;
 import net.minecraftforge.common.ForgeConfigSpec;
 

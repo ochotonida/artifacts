@@ -1,7 +1,19 @@
 package artifacts.common.config;
 
 import artifacts.Artifacts;
-import artifacts.common.config.item.*;
+import artifacts.common.config.item.EverlastingFoodConfig;
+import artifacts.common.config.item.ItemConfig;
+import artifacts.common.config.item.UmbrellaConfig;
+import artifacts.common.config.item.curio.WhoopeeCushionConfig;
+import artifacts.common.config.item.curio.belt.*;
+import artifacts.common.config.item.curio.feet.BunnyHoppersConfig;
+import artifacts.common.config.item.curio.feet.FlippersConfig;
+import artifacts.common.config.item.curio.feet.RunningShoesConfig;
+import artifacts.common.config.item.curio.hands.*;
+import artifacts.common.config.item.curio.head.DrinkingHatConfig;
+import artifacts.common.config.item.curio.head.SuperstitiousHatConfig;
+import artifacts.common.config.item.curio.head.VillagerHatConfig;
+import artifacts.common.config.item.curio.necklace.*;
 import artifacts.common.init.ModItems;
 import com.google.common.collect.Lists;
 import net.minecraft.item.Item;

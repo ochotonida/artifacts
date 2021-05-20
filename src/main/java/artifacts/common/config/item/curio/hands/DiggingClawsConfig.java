@@ -1,5 +1,6 @@
-package artifacts.common.config.item;
+package artifacts.common.config.item.curio.hands;
 
+import artifacts.common.config.item.ItemConfig;
 import artifacts.common.init.ModItems;
 import com.google.common.collect.Lists;
 import net.minecraftforge.common.ForgeConfigSpec;
