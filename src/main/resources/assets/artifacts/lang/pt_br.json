@@ -87,7 +87,7 @@
   "artifacts.subtitles.entity.mimic.close": "Mímico fechando",
   "artifacts.subtitles.entity.mimic.open": "Mímico saltando",
   "artifacts.subtitles.entity.mimic.hurt": "Mímico ferido",
-  "artifacts.subtitles.entity.mimic.dies": "Mímico morrendo",
+  "artifacts.subtitles.entity.mimic.death": "Mímico morrendo",
   "artifacts.subtitles.item.whoopee_cushion.fart": "Peido",
   "artifacts.config.common.campsite.biome_blacklist": "Biomas onde o acampamento não será gerado",
   "artifacts.config.common.campsite.rarity": "Raridade do acampamento",
@@ -140,6 +140,5 @@
   "artifacts.config.server.universal_attractor.motionMultiplier": "Multiplicador de movimento",
   "artifacts.config.server.vampiric_glove.absorption_ratio": "Taxa de absorção",
   "artifacts.config.server.vampiric_glove.max_health_absorbed": "Máxima saúde absorvida",
-  "artifacts.config.server.villager_hat.hero_of_the_village_level": "Nível de herói da vila",
   "artifacts.config.server.whoopee_cushion.flatulence": "Flatulência"
 }

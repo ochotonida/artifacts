@@ -88,7 +88,7 @@
   "artifacts.subtitles.entity.mimic.close": "Mimic closes",
   "artifacts.subtitles.entity.mimic.open": "Mimic hops",
   "artifacts.subtitles.entity.mimic.hurt": "Mimic hurts",
-  "artifacts.subtitles.entity.mimic.dies": "Mimic dies",
+  "artifacts.subtitles.entity.mimic.death": "Mimic dies",
   "artifacts.subtitles.item.whoopee_cushion.fart": "Fart",
   "artifacts.config.common.campsite.biome_blacklist": "Campsite Biome blacklist",
   "artifacts.config.common.campsite.rarity": "Campsite rarity",
