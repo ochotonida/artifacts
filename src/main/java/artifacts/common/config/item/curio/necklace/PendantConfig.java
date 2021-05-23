@@ -2,15 +2,14 @@ package artifacts.common.config.item.curio.necklace;
 
 import artifacts.Artifacts;
 import artifacts.common.config.item.ItemConfig;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public abstract class PendantConfig extends ItemConfig {
 
     public ForgeConfigSpec.DoubleValue strikeChance;
 
-    public PendantConfig(ForgeConfigSpec.Builder builder, Item item) {
-        super(builder, item, "Affects how many times the pendant's effect can be applied before breaking");
+    public PendantConfig(ForgeConfigSpec.Builder builder, String itemName) {
+        super(builder, itemName, "Affects how many times the pendant's effect can be applied before breaking");
     }
 
     @Override

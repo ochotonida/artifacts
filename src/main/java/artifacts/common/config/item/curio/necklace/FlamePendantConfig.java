@@ -8,7 +8,7 @@ public class FlamePendantConfig extends PendantConfig {
     public ForgeConfigSpec.IntValue fireDuration;
 
     public FlamePendantConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.FLAME_PENDANT.get());
+        super(builder, ModItems.FLAME_PENDANT.getId().getPath());
     }
 
     @Override

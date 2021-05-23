@@ -9,7 +9,7 @@ public class VillagerHatConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue reputationBonus;
 
     public VillagerHatConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.VILLAGER_HAT.get(), "Affects how many trades can be completed using the villager hat");
+        super(builder, ModItems.VILLAGER_HAT.getId().getPath(), "Affects how many trades can be completed using the villager hat");
     }
 
     @Override

@@ -1,30 +1,29 @@
 package artifacts.common.config.item;
 
 import artifacts.Artifacts;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.RegistryObject;
 
 public class ItemConfig {
 
-    private final Item item;
+    private final String itemName;
 
     public final ForgeConfigSpec.IntValue durability;
 
-    public ItemConfig(ForgeConfigSpec.Builder builder, Item item, String maxDamageComment) {
-        this.item = item;
-        // noinspection ConstantConditions
-        builder.push(item.getRegistryName().getPath());
+    public ItemConfig(ForgeConfigSpec.Builder builder, RegistryObject<?> item, String maxDamageDescription) {
+        this(builder, item.getId().getPath(), maxDamageDescription);
+    }
+
+    public ItemConfig(ForgeConfigSpec.Builder builder, String itemName, String maxDamageDescription) {
+        this.itemName = itemName;
+        builder.push(itemName);
         durability = builder
                 .worldRestart()
-                .comment(maxDamageComment, "Setting this to 0 will make this item unbreakable")
+                .comment(maxDamageDescription, "Setting this to 0 will make this item unbreakable")
                 .translation(Artifacts.MODID + ".config.server.items.durability")
                 .defineInRange("durability", 0, 0, Short.MAX_VALUE);
         addConfigs(builder);
         builder.pop();
-    }
-
-    public Item getItem() {
-        return item;
     }
 
     public void bake() {
@@ -36,7 +35,6 @@ public class ItemConfig {
     }
 
     protected String translate(String value) {
-        // noinspection ConstantConditions
-        return Artifacts.MODID + ".config.server." + item.getRegistryName().getPath() + "." + value;
+        return String.format("%s.config.server.%s.%s", Artifacts.MODID, itemName, value);
     }
 }

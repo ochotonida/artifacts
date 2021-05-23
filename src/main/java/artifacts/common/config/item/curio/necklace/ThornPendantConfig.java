@@ -9,7 +9,7 @@ public class ThornPendantConfig extends PendantConfig {
     public ForgeConfigSpec.IntValue maxDamage;
 
     public ThornPendantConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.THORN_PENDANT.get());
+        super(builder, ModItems.THORN_PENDANT.getId().getPath());
     }
 
     @Override

@@ -10,7 +10,7 @@ public class VampiricGloveConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue maxHealthAbsorbed;
 
     public VampiricGloveConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.VAMPIRIC_GLOVE.get(), "Affects how many enemies can be hit using the vampiric glove");
+        super(builder, ModItems.VAMPIRIC_GLOVE.getId().getPath(), "Affects how many enemies can be hit using the vampiric glove");
     }
 
     @Override

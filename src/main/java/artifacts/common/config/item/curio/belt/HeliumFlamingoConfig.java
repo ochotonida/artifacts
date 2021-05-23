@@ -9,7 +9,7 @@ public class HeliumFlamingoConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue airSupplyDrainRate;
 
     public HeliumFlamingoConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.HELIUM_FLAMINGO.get(), "Affects how many seconds the player can fly using the helium flamingo before breaking");
+        super(builder, ModItems.HELIUM_FLAMINGO.getId().getPath(), "Affects how many seconds the player can fly using the helium flamingo before breaking");
     }
 
     @Override

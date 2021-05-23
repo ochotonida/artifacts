@@ -14,7 +14,7 @@ public class DiggingClawsConfig extends ItemConfig {
     public ForgeConfigSpec.ConfigValue<List<String>> toolTypes;
 
     public DiggingClawsConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.DIGGING_CLAWS.get(), "Affects how many blocks the player can break using the digging claws before breaking");
+        super(builder, ModItems.DIGGING_CLAWS.getId().getPath(), "Affects how many blocks the player can break using the digging claws before breaking");
     }
 
     @Override

@@ -6,7 +6,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class ShockPendantConfig extends PendantConfig {
 
     public ShockPendantConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.SHOCK_PENDANT.get());
+        super(builder, ModItems.SHOCK_PENDANT.getId().getPath());
     }
 
     @Override

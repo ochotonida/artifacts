@@ -31,26 +31,33 @@ public class ServerConfig {
     public final Map<Item, ItemConfig> items;
 
     public final AntidoteVesselConfig antidoteVessel;
+    public final ItemConfig aquaDashers;
     public final BunnyHoppersConfig bunnyHoppers;
+    public final ItemConfig charmOfSinking;
     public final CloudInABottleConfig cloudInABottle;
     public final CrossNecklaceConfig crossNecklace;
     public final CrystalHeartConfig crystalHeart;
     public final DiggingClawsConfig diggingClaws;
-    public final Map<Item, DrinkingHatConfig> drinkingHats;
-    public final Map<Item, EverlastingFoodConfig> everlastingFoods;
+    public final DrinkingHatConfig drinkingHat;
+    public final EverlastingFoodConfig everlastingFood;
     public final FeralClawsConfig feralClaws;
     public final FireGauntletConfig fireGauntlet;
     public final FlamePendantConfig flamePendant;
     public final FlippersConfig flippers;
     public final GoldenHookConfig goldenHook;
     public final HeliumFlamingoConfig heliumFlamingo;
+    public final ItemConfig kittySlippers;
     public final LuckyScarfConfig luckyScarf;
+    public final ItemConfig nightVisionGoggles;
     public final ObsidianSkullConfig obsidianSkull;
     public final PanicNecklaceConfig panicNecklace;
-    public final Map<Item, PendantConfig> pendants;
     public final PocketPistonConfig pocketPiston;
     public final PowerGloveConfig powerGlove;
     public final RunningShoesConfig runningShoes;
+    public final ItemConfig scarfOfInvisibility;
+    public final ShockPendantConfig shockPendant;
+    public final ItemConfig snorkel;
+    public final ItemConfig steadfastSpikes;
     public final SuperstitiousHatConfig superstitiousHat;
     public final ThornPendantConfig thornPendant;
     public final UmbrellaConfig umbrella;
@@ -58,6 +65,8 @@ public class ServerConfig {
     public final VampiricGloveConfig vampiricGlove;
     public final VillagerHatConfig villagerHat;
     public final WhoopeeCushionConfig whoopeeCushion;
+
+    public final Map<Item, PendantConfig> pendants;
 
     private final ForgeConfigSpec.ConfigValue<List<String>> cosmeticsValue;
 
@@ -74,60 +83,99 @@ public class ServerConfig {
                 .translation(Artifacts.MODID + ".config.server.cosmetics")
                 .define("cosmetics", Lists.newArrayList(""));
 
-        items = new HashMap<>();
-        drinkingHats = new HashMap<>();
-        everlastingFoods = new HashMap<>();
+        antidoteVessel = new AntidoteVesselConfig(builder);
+        aquaDashers = new ItemConfig(builder, ModItems.AQUA_DASHERS.getId().getPath(), "Affects how many seconds the player can run on fluids using the aqua dashers before breaking");
+        bunnyHoppers = new BunnyHoppersConfig(builder);
+        charmOfSinking = new ItemConfig(builder, ModItems.CHARM_OF_SINKING.getId().getPath(), "Affects how many seconds the player can stay underwater using the charm of sinking before breaking");
+        cloudInABottle = new CloudInABottleConfig(builder);
+        crossNecklace = new CrossNecklaceConfig(builder);
+        crystalHeart = new CrystalHeartConfig(builder);
+        diggingClaws = new DiggingClawsConfig(builder);
+        drinkingHat = new DrinkingHatConfig(builder);
+        everlastingFood = new EverlastingFoodConfig(builder);
+        feralClaws = new FeralClawsConfig(builder);
+        fireGauntlet = new FireGauntletConfig(builder);
+        flamePendant = new FlamePendantConfig(builder);
+        flippers = new FlippersConfig(builder);
+        goldenHook = new GoldenHookConfig(builder);
+        heliumFlamingo = new HeliumFlamingoConfig(builder);
+        kittySlippers = new ItemConfig(builder, ModItems.KITTY_SLIPPERS, "Affects how many creepers the player can attack using the kitty slippers before breaking");
+        luckyScarf = new LuckyScarfConfig(builder);
+        nightVisionGoggles = new ItemConfig(builder, ModItems.NIGHT_VISION_GOGGLES, "Affects how many seconds the night vision effect should apply before breaking");
+        obsidianSkull = new ObsidianSkullConfig(builder);
+        panicNecklace = new PanicNecklaceConfig(builder);
+        pocketPiston = new PocketPistonConfig(builder);
+        powerGlove = new PowerGloveConfig(builder);
+        runningShoes = new RunningShoesConfig(builder);
+        scarfOfInvisibility = new ItemConfig(builder, ModItems.SCARF_OF_INVISIBILITY, "Affects how many seconds the invisibility effect should apply before breaking");
+        shockPendant = new ShockPendantConfig(builder);
+        snorkel = new ItemConfig(builder, ModItems.SNORKEL, "Affects how many seconds the player can stay underwater using the snorkel before breaking");
+        steadfastSpikes = new ItemConfig(builder, ModItems.STEADFAST_SPIKES, "Affects how many times the player can be hit while wearing steadfast spikes before breaking");
+        superstitiousHat = new SuperstitiousHatConfig(builder);
+        thornPendant = new ThornPendantConfig(builder);
+        umbrella = new UmbrellaConfig(builder);
+        universalAttractor = new UniversalAttractorConfig(builder);
+        vampiricGlove = new VampiricGloveConfig(builder);
+        villagerHat = new VillagerHatConfig(builder);
+        whoopeeCushion = new WhoopeeCushionConfig(builder);
+
         pendants = new HashMap<>();
-
-        antidoteVessel = addItemConfig(new AntidoteVesselConfig(builder));
-        addItemConfig(new ItemConfig(builder, ModItems.AQUA_DASHERS.get(), "Affects how many seconds the player can run on fluids using the aqua dashers before breaking"));
-        bunnyHoppers = addItemConfig(new BunnyHoppersConfig(builder));
-        addItemConfig(new ItemConfig(builder, ModItems.CHARM_OF_SINKING.get(), "Affects how many seconds the player can stay underwater using the charm of sinking before breaking"));
-        cloudInABottle = addItemConfig(new CloudInABottleConfig(builder));
-        crossNecklace = addItemConfig(new CrossNecklaceConfig(builder));
-        crystalHeart = addItemConfig(new CrystalHeartConfig(builder));
-        diggingClaws = addItemConfig(new DiggingClawsConfig(builder));
-
-        drinkingHats.put(ModItems.PLASTIC_DRINKING_HAT.get(), addItemConfig(new DrinkingHatConfig(builder, ModItems.PLASTIC_DRINKING_HAT.get())));
-        drinkingHats.put(ModItems.NOVELTY_DRINKING_HAT.get(), addItemConfig(new DrinkingHatConfig(builder, ModItems.NOVELTY_DRINKING_HAT.get())));
-
-        everlastingFoods.put(ModItems.EVERLASTING_BEEF.get(), addItemConfig(new EverlastingFoodConfig(builder, ModItems.EVERLASTING_BEEF.get())));
-        everlastingFoods.put(ModItems.ETERNAL_STEAK.get(), addItemConfig(new EverlastingFoodConfig(builder, ModItems.ETERNAL_STEAK.get())));
-
-        feralClaws = addItemConfig(new FeralClawsConfig(builder));
-        fireGauntlet = addItemConfig(new FireGauntletConfig(builder));
-        flamePendant = addItemConfig(new FlamePendantConfig(builder));
         pendants.put(ModItems.FLAME_PENDANT.get(), flamePendant);
-        flippers = addItemConfig(new FlippersConfig(builder));
-        goldenHook = addItemConfig(new GoldenHookConfig(builder));
-        heliumFlamingo = addItemConfig(new HeliumFlamingoConfig(builder));
-        addItemConfig(new ItemConfig(builder, ModItems.KITTY_SLIPPERS.get(), "Affects how many creepers the player can attack using the kitty slippers before breaking"));
-        luckyScarf = addItemConfig(new LuckyScarfConfig(builder));
-        addItemConfig(new ItemConfig(builder, ModItems.NIGHT_VISION_GOGGLES.get(), "Affects how many seconds the night vision effect should apply before breaking"));
-        obsidianSkull = addItemConfig(new ObsidianSkullConfig(builder));
-        panicNecklace = addItemConfig(new PanicNecklaceConfig(builder));
-        pocketPiston = addItemConfig(new PocketPistonConfig(builder));
-        powerGlove = addItemConfig(new PowerGloveConfig(builder));
-        runningShoes = addItemConfig(new RunningShoesConfig(builder));
-        addItemConfig(new ItemConfig(builder, ModItems.SCARF_OF_INVISIBILITY.get(), "Affects how many seconds the invisibility effect should apply before breaking"));
-        pendants.put(ModItems.SHOCK_PENDANT.get(), addItemConfig(new ShockPendantConfig(builder)));
-        addItemConfig(new ItemConfig(builder, ModItems.SNORKEL.get(), "Affects how many seconds the player can stay underwater using the snorkel before breaking"));
-        addItemConfig(new ItemConfig(builder, ModItems.STEADFAST_SPIKES.get(), "Affects how many times the player can be hit while wearing steadfast spikes before breaking"));
-        superstitiousHat = addItemConfig(new SuperstitiousHatConfig(builder));
-        thornPendant = addItemConfig(new ThornPendantConfig(builder));
+        pendants.put(ModItems.SHOCK_PENDANT.get(), shockPendant);
         pendants.put(ModItems.THORN_PENDANT.get(), thornPendant);
-        umbrella = addItemConfig(new UmbrellaConfig(builder));
-        universalAttractor = addItemConfig(new UniversalAttractorConfig(builder));
-        vampiricGlove = addItemConfig(new VampiricGloveConfig(builder));
-        villagerHat = addItemConfig(new VillagerHatConfig(builder));
-        whoopeeCushion = addItemConfig(new WhoopeeCushionConfig(builder));
+
+        items = new HashMap<>();
+        addItemConfigs();
 
         builder.pop();
     }
 
-    private <T extends ItemConfig> T addItemConfig(T config) {
-        items.put(config.getItem(), config);
-        return config;
+    private void addItemConfigs() {
+        items.put(ModItems.ANTIDOTE_VESSEL.get(), antidoteVessel);
+        items.put(ModItems.AQUA_DASHERS.get(), aquaDashers);
+        items.put(ModItems.BUNNY_HOPPERS.get(), bunnyHoppers);
+        items.put(ModItems.CHARM_OF_SINKING.get(), charmOfSinking);
+        items.put(ModItems.CLOUD_IN_A_BOTTLE.get(), cloudInABottle);
+        items.put(ModItems.CROSS_NECKLACE.get(), crossNecklace);
+        items.put(ModItems.CRYSTAL_HEART.get(), crystalHeart);
+        items.put(ModItems.DIGGING_CLAWS.get(), diggingClaws);
+        items.put(ModItems.FERAL_CLAWS.get(), feralClaws);
+        items.put(ModItems.FIRE_GAUNTLET.get(), fireGauntlet);
+        items.put(ModItems.FLAME_PENDANT.get(), flamePendant);
+        items.put(ModItems.FLIPPERS.get(), flippers);
+        items.put(ModItems.GOLDEN_HOOK.get(), goldenHook);
+        items.put(ModItems.HELIUM_FLAMINGO.get(), heliumFlamingo);
+        items.put(ModItems.KITTY_SLIPPERS.get(), kittySlippers);
+        items.put(ModItems.LUCKY_SCARF.get(), luckyScarf);
+        items.put(ModItems.NIGHT_VISION_GOGGLES.get(), nightVisionGoggles);
+        items.put(ModItems.OBSIDIAN_SKULL.get(), obsidianSkull);
+        items.put(ModItems.PANIC_NECKLACE.get(), panicNecklace);
+        items.put(ModItems.POCKET_PISTON.get(), pocketPiston);
+        items.put(ModItems.POWER_GLOVE.get(), powerGlove);
+        items.put(ModItems.RUNNING_SHOES.get(), runningShoes);
+        items.put(ModItems.SCARF_OF_INVISIBILITY.get(), scarfOfInvisibility);
+        items.put(ModItems.SHOCK_PENDANT.get(), shockPendant);
+        items.put(ModItems.SNORKEL.get(), snorkel);
+        items.put(ModItems.STEADFAST_SPIKES.get(), steadfastSpikes);
+        items.put(ModItems.SUPERSTITIOUS_HAT.get(), superstitiousHat);
+        items.put(ModItems.THORN_PENDANT.get(), thornPendant);
+        items.put(ModItems.UMBRELLA.get(), umbrella);
+        items.put(ModItems.UNIVERSAL_ATTRACTOR.get(), universalAttractor);
+        items.put(ModItems.VAMPIRIC_GLOVE.get(), vampiricGlove);
+        items.put(ModItems.VILLAGER_HAT.get(), villagerHat);
+        items.put(ModItems.WHOOPEE_CUSHION.get(), whoopeeCushion);
+
+        Arrays.asList(
+                ModItems.PLASTIC_DRINKING_HAT.get(),
+                ModItems.NOVELTY_DRINKING_HAT.get()
+        ).forEach(item -> items.put(item, drinkingHat));
+
+        Arrays.asList(
+                ModItems.EVERLASTING_BEEF.get(),
+                ModItems.ETERNAL_STEAK.get()
+        ).forEach(item -> items.put(item, everlastingFood));
+
+        pendants.forEach(items::put);
     }
 
     public void bake() {

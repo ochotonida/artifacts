@@ -40,7 +40,7 @@ public class DrinkingHatItem extends CurioItem {
 
     private void onItemUseStart(LivingEntityUseItemEvent.Start event, LivingEntity wearer) {
         if (canApplyEffect(event)) {
-            double drinkingDurationMultiplier = ModConfig.server.drinkingHats.get(this).drinkingDurationMultiplier.get();
+            double drinkingDurationMultiplier = ModConfig.server.drinkingHat.drinkingDurationMultiplier.get();
             event.setDuration((int) (event.getDuration() * drinkingDurationMultiplier));
         }
     }
@@ -53,7 +53,7 @@ public class DrinkingHatItem extends CurioItem {
 
     private boolean canApplyEffect(LivingEntityUseItemEvent event) {
         UseAction action = event.getItem().getUseAnimation();
-        return action == UseAction.DRINK || action == UseAction.EAT && ModConfig.server.drinkingHats.get(this).enableFastEating.get();
+        return action == UseAction.DRINK || action == UseAction.EAT && ModConfig.server.drinkingHat.enableFastEating.get();
     }
 
     @Override

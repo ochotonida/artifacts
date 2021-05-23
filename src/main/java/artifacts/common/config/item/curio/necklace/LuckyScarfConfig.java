@@ -9,7 +9,7 @@ public class LuckyScarfConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue fortuneBonus;
 
     public LuckyScarfConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.LUCKY_SCARF.get(), "Affects how many blocks can be broken using the lucky scarf");
+        super(builder, ModItems.LUCKY_SCARF.getId().getPath(), "Affects how many blocks can be broken using the lucky scarf");
     }
 
     @Override
