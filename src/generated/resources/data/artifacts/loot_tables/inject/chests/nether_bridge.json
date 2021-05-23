@@ -25,13 +25,9 @@
           "name": "artifacts:running_shoes"
         },
         {
-          "type": "minecraft:item",
-          "weight": 2,
-          "name": "artifacts:plastic_drinking_hat"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "artifacts:novelty_drinking_hat"
+          "type": "minecraft:loot_table",
+          "weight": 3,
+          "name": "artifacts:items/drinking_hat"
         }
       ],
       "conditions": [
