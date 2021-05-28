@@ -16,10 +16,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -40,16 +38,23 @@ public class Artifacts {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
-
     public Artifacts() {
         ModConfig.registerCommon();
         ModConfig.registerClient();
 
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        ModItems.REGISTRY.register(modEventBus);
-        ModSoundEvents.REGISTRY.register(modEventBus);
-        ModFeatures.FEATURE_REGISTRY.register(modEventBus);
-        ModFeatures.PLACEMENT_REGISTRY.register(modEventBus);
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.REGISTRY.register(modBus);
+        ModSoundEvents.REGISTRY.register(modBus);
+        ModFeatures.FEATURE_REGISTRY.register(modBus);
+        ModFeatures.PLACEMENT_REGISTRY.register(modBus);
+
+        modBus.addListener(this::commonSetup);
+        modBus.addListener(this::clientSetup);
+        modBus.addListener(this::enqueueIMC);
+
+        modBus.addGenericListener(EntityType.class, ModEntities::register);
+        modBus.addListener(ModEntities::registerAttributes);
 
         MinecraftForge.EVENT_BUS.addListener(this::addFeatures);
     }
@@ -60,39 +65,27 @@ public class Artifacts {
         }
     }
 
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ModEvents {
+    public void commonSetup(final FMLCommonSetupEvent event) {
+        ModConfig.registerServer();
+        event.enqueueWork(() -> {
+            ModFeatures.registerConfiguredFeatures();
+            NetworkHandler.register();
+            EntityKillTrackerCapability.register();
+            SwimHandlerCapability.register();
+        });
+    }
 
-        @SubscribeEvent
-        public static void commonSetup(final FMLCommonSetupEvent event) {
-            ModConfig.registerServer();
-            event.enqueueWork(() -> {
-                ModFeatures.registerConfiguredFeatures();
-                NetworkHandler.register();
-                EntityKillTrackerCapability.register();
-                SwimHandlerCapability.register();
-            });
-        }
+    public void clientSetup(final FMLClientSetupEvent event) {
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MIMIC, MimicRenderer::new);
+        ItemModelsProperties.register(ModItems.UMBRELLA.get(), new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
+    }
 
-        @SubscribeEvent
-        public static void clientSetup(final FMLClientSetupEvent event) {
-            RenderingRegistry.registerEntityRenderingHandler(ModEntities.MIMIC, MimicRenderer::new);
-            ItemModelsProperties.register(ModItems.UMBRELLA.get(), new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
+    public void enqueueIMC(final InterModEnqueueEvent event) {
+        SlotTypePreset[] types = {SlotTypePreset.HEAD, SlotTypePreset.NECKLACE, SlotTypePreset.BELT};
+        for (SlotTypePreset type : types) {
+            InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> type.getMessageBuilder().build());
         }
-
-        @SubscribeEvent
-        public static void enqueueIMC(final InterModEnqueueEvent event) {
-            SlotTypePreset[] types = {SlotTypePreset.HEAD, SlotTypePreset.NECKLACE, SlotTypePreset.BELT};
-            for (SlotTypePreset type : types) {
-                InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> type.getMessageBuilder().build());
-            }
-            InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HANDS.getMessageBuilder().size(2).build());
-            InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("feet").priority(220).icon(PlayerContainer.EMPTY_ARMOR_SLOT_BOOTS).build());
-        }
-
-        @SubscribeEvent
-        public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-            ModEntities.register(event.getRegistry());
-        }
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HANDS.getMessageBuilder().size(2).build());
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("feet").priority(220).icon(PlayerContainer.EMPTY_ARMOR_SLOT_BOOTS).build());
     }
 }

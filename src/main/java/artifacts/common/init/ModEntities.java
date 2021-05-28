@@ -4,9 +4,9 @@ import artifacts.Artifacts;
 import artifacts.common.entity.MimicEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.registries.ObjectHolder;
 
 @ObjectHolder(Artifacts.MODID)
@@ -19,8 +19,11 @@ public class ModEntities {
             .build(new ResourceLocation(Artifacts.MODID, "mimic").toString())
             .setRegistryName(new ResourceLocation(Artifacts.MODID, "mimic"));
 
-    public static void register(IForgeRegistry<EntityType<?>> registry) {
-        GlobalEntityTypeAttributes.put(MIMIC, MimicEntity.createMobAttributes().build());
-        registry.register(MIMIC);
+    public static void register(RegistryEvent.Register<EntityType<?>> event) {
+        event.getRegistry().register(MIMIC);
+    }
+
+    public static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(MIMIC, MimicEntity.createMobAttributes().build());
     }
 }
