@@ -74,8 +74,8 @@ public class RunningShoesItem extends CurioItem {
             } else {
                 if (movementSpeed.hasModifier(speedBonus)) {
                     movementSpeed.removeModifier(speedBonus);
+                    entity.maxUpStep = 0.6F;
                 }
-                entity.maxUpStep = 0.6F;
             }
         }
     }
