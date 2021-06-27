@@ -77,6 +77,10 @@ public class SwimHandlerCapability {
 
         @SubscribeEvent
         public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+            if (event.phase != TickEvent.Phase.START) {
+                return;
+            }
+
             event.player.getCapability(INSTANCE).ifPresent(
                     handler -> {
                         if (event.player.isInWater() || event.player.isInLava()) {

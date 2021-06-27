@@ -25,6 +25,10 @@ public class RunningShoesItem extends CurioItem {
     }
 
     private void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.START) {
+            return;
+        }
+
         // onUnequip does not get called on the client
         if (!isEquippedBy(event.player)) {
             ModifiableAttributeInstance movementSpeed = event.player.getAttribute(Attributes.MOVEMENT_SPEED);
@@ -56,8 +60,8 @@ public class RunningShoesItem extends CurioItem {
             } else {
                 if (movementSpeed.hasModifier(speedBonus)) {
                     movementSpeed.removeModifier(speedBonus);
+                    entity.maxUpStep = 0.6F;
                 }
-                entity.maxUpStep = 0.6F;
             }
         }
     }
