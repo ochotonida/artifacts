@@ -19,7 +19,7 @@ public class EverlastingFoodItem extends ArtifactItem {
         if (isEdible()) {
             entity.eat(world, stack.copy());
             if (!world.isClientSide && entity instanceof PlayerEntity) {
-                int cooldown = ModConfig.server.everlastingFood.cooldown.get();
+                int cooldown = ModConfig.server.everlastingBeef.cooldown.get();
                 ((PlayerEntity) entity).getCooldowns().addCooldown(this, cooldown);
             }
         }
@@ -32,6 +32,6 @@ public class EverlastingFoodItem extends ArtifactItem {
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return ModConfig.server.isCosmetic(this) ? 72000 : ModConfig.server.everlastingFood.useDuration.get();
+        return ModConfig.server.isCosmetic(this) ? 72000 : ModConfig.server.everlastingBeef.useDuration.get();
     }
 }

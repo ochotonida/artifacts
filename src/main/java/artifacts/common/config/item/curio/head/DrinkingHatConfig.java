@@ -3,14 +3,15 @@ package artifacts.common.config.item.curio.head;
 import artifacts.Artifacts;
 import artifacts.common.config.item.ItemConfig;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.RegistryObject;
 
 public class DrinkingHatConfig extends ItemConfig {
 
     public ForgeConfigSpec.DoubleValue drinkingDurationMultiplier;
     public ForgeConfigSpec.BooleanValue enableFastEating;
 
-    public DrinkingHatConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, "drinking_hat", "Affects how many items the player can drink using the drinking hat before breaking");
+    public DrinkingHatConfig(ForgeConfigSpec.Builder builder, RegistryObject<?> item) {
+        super(builder, item, "Affects how many items the player can drink using the drinking hat before breaking");
     }
 
     @Override

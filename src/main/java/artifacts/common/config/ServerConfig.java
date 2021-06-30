@@ -28,7 +28,7 @@ public class ServerConfig {
 
     public Set<Item> cosmetics = Collections.emptySet();
 
-    public final Map<Item, ItemConfig> items;
+    public final Map<Item, ItemConfig> items = new HashMap<>();
 
     public final AntidoteVesselConfig antidoteVessel;
     public final ItemConfig aquaDashers;
@@ -38,8 +38,8 @@ public class ServerConfig {
     public final CrossNecklaceConfig crossNecklace;
     public final CrystalHeartConfig crystalHeart;
     public final DiggingClawsConfig diggingClaws;
-    public final DrinkingHatConfig drinkingHat;
-    public final EverlastingFoodConfig everlastingFood;
+    public final EverlastingFoodConfig eternalSteak;
+    public final EverlastingFoodConfig everlastingBeef;
     public final FeralClawsConfig feralClaws;
     public final FireGauntletConfig fireGauntlet;
     public final FlamePendantConfig flamePendant;
@@ -49,8 +49,10 @@ public class ServerConfig {
     public final ItemConfig kittySlippers;
     public final LuckyScarfConfig luckyScarf;
     public final ItemConfig nightVisionGoggles;
+    public final DrinkingHatConfig noveltyDrinkingHat;
     public final ObsidianSkullConfig obsidianSkull;
     public final PanicNecklaceConfig panicNecklace;
+    public final DrinkingHatConfig plasticDrinkingHat;
     public final PocketPistonConfig pocketPiston;
     public final PowerGloveConfig powerGlove;
     public final RunningShoesConfig runningShoes;
@@ -66,7 +68,9 @@ public class ServerConfig {
     public final VillagerHatConfig villagerHat;
     public final WhoopeeCushionConfig whoopeeCushion;
 
-    public final Map<Item, PendantConfig> pendants;
+    public final Map<Item, EverlastingFoodConfig> everlastingFoods = new HashMap<>();
+    public final Map<Item, DrinkingHatConfig> drinkingHats = new HashMap<>();
+    public final Map<Item, PendantConfig> pendants = new HashMap<>();
 
     private final ForgeConfigSpec.ConfigValue<List<String>> cosmeticsValue;
 
@@ -84,15 +88,15 @@ public class ServerConfig {
                 .define("cosmetics", Lists.newArrayList(""));
 
         antidoteVessel = new AntidoteVesselConfig(builder);
-        aquaDashers = new ItemConfig(builder, ModItems.AQUA_DASHERS.getId().getPath(), "Affects how many seconds the player can run on fluids using the aqua dashers before breaking");
+        aquaDashers = new ItemConfig(builder, ModItems.AQUA_DASHERS, "Affects how many seconds the player can run on fluids using the aqua dashers before breaking");
         bunnyHoppers = new BunnyHoppersConfig(builder);
-        charmOfSinking = new ItemConfig(builder, ModItems.CHARM_OF_SINKING.getId().getPath(), "Affects how many seconds the player can stay underwater using the charm of sinking before breaking");
+        charmOfSinking = new ItemConfig(builder, ModItems.CHARM_OF_SINKING, "Affects how many seconds the player can stay underwater using the charm of sinking before breaking");
         cloudInABottle = new CloudInABottleConfig(builder);
         crossNecklace = new CrossNecklaceConfig(builder);
         crystalHeart = new CrystalHeartConfig(builder);
         diggingClaws = new DiggingClawsConfig(builder);
-        drinkingHat = new DrinkingHatConfig(builder);
-        everlastingFood = new EverlastingFoodConfig(builder);
+        eternalSteak = new EverlastingFoodConfig(builder, ModItems.ETERNAL_STEAK);
+        everlastingBeef = new EverlastingFoodConfig(builder, ModItems.EVERLASTING_BEEF);
         feralClaws = new FeralClawsConfig(builder);
         fireGauntlet = new FireGauntletConfig(builder);
         flamePendant = new FlamePendantConfig(builder);
@@ -102,8 +106,10 @@ public class ServerConfig {
         kittySlippers = new ItemConfig(builder, ModItems.KITTY_SLIPPERS, "Affects how many creepers the player can attack using the kitty slippers before breaking");
         luckyScarf = new LuckyScarfConfig(builder);
         nightVisionGoggles = new ItemConfig(builder, ModItems.NIGHT_VISION_GOGGLES, "Affects how many seconds the night vision effect should apply before breaking");
+        noveltyDrinkingHat = new DrinkingHatConfig(builder, ModItems.NOVELTY_DRINKING_HAT);
         obsidianSkull = new ObsidianSkullConfig(builder);
         panicNecklace = new PanicNecklaceConfig(builder);
+        plasticDrinkingHat = new DrinkingHatConfig(builder, ModItems.PLASTIC_DRINKING_HAT);
         pocketPiston = new PocketPistonConfig(builder);
         powerGlove = new PowerGloveConfig(builder);
         runningShoes = new RunningShoesConfig(builder);
@@ -119,12 +125,14 @@ public class ServerConfig {
         villagerHat = new VillagerHatConfig(builder);
         whoopeeCushion = new WhoopeeCushionConfig(builder);
 
-        pendants = new HashMap<>();
+        drinkingHats.put(ModItems.NOVELTY_DRINKING_HAT.get(), noveltyDrinkingHat);
+        drinkingHats.put(ModItems.PLASTIC_DRINKING_HAT.get(), plasticDrinkingHat);
+        everlastingFoods.put(ModItems.ETERNAL_STEAK.get(), eternalSteak);
+        everlastingFoods.put(ModItems.EVERLASTING_BEEF.get(), everlastingBeef);
         pendants.put(ModItems.FLAME_PENDANT.get(), flamePendant);
         pendants.put(ModItems.SHOCK_PENDANT.get(), shockPendant);
         pendants.put(ModItems.THORN_PENDANT.get(), thornPendant);
 
-        items = new HashMap<>();
         addItemConfigs();
 
         builder.pop();
@@ -165,16 +173,8 @@ public class ServerConfig {
         items.put(ModItems.VILLAGER_HAT.get(), villagerHat);
         items.put(ModItems.WHOOPEE_CUSHION.get(), whoopeeCushion);
 
-        Arrays.asList(
-                ModItems.PLASTIC_DRINKING_HAT.get(),
-                ModItems.NOVELTY_DRINKING_HAT.get()
-        ).forEach(item -> items.put(item, drinkingHat));
-
-        Arrays.asList(
-                ModItems.EVERLASTING_BEEF.get(),
-                ModItems.ETERNAL_STEAK.get()
-        ).forEach(item -> items.put(item, everlastingFood));
-
+        drinkingHats.forEach(items::put);
+        everlastingFoods.forEach(items::put);
         pendants.forEach(items::put);
     }
 

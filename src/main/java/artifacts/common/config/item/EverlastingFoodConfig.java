@@ -2,14 +2,15 @@ package artifacts.common.config.item;
 
 import artifacts.Artifacts;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.RegistryObject;
 
 public class EverlastingFoodConfig extends ItemConfig {
 
     public ForgeConfigSpec.IntValue cooldown;
     public ForgeConfigSpec.IntValue useDuration;
 
-    public EverlastingFoodConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, "everlasting_food", "Affects how many times everlasting beef/steak can be eaten before breaking");
+    public EverlastingFoodConfig(ForgeConfigSpec.Builder builder, RegistryObject<?> item) {
+        super(builder, item, "Affects how many times this item can be eaten before breaking");
     }
 
     @Override
