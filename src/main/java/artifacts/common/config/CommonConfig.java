@@ -22,8 +22,21 @@ public class CommonConfig {
     public final ForgeConfigSpec.IntValue campsiteMinY;
     public final ForgeConfigSpec.IntValue campsiteMaxY;
     public final ForgeConfigSpec.BooleanValue useModdedChests;
+    public final ForgeConfigSpec.DoubleValue artifactRarity;
 
     CommonConfig(ForgeConfigSpec.Builder builder) {
+        artifactRarity = builder
+                .comment(
+                        "Affects how common artifacts are (does not affect mimics)",
+                        "When this is 1, the default artifact spawn rates will be used",
+                        "Values higher that 1 will decrease spawn rates while values lower than 1 will increase spawn rates",
+                        "Doubling this value will (roughly) halve the chance a container contains an artifact",
+                        "Setting this to 10000 will completely prevent artifacts from spawning",
+                        "When set to 0, every container that can contain artifacts will contain an artifact"
+                )
+                .translation(Artifacts.MODID + ".config.common.artifact_rarity")
+                .defineInRange("artifact_rarity", 1, 0, 10000D);
+
         builder.push("campsite");
         biomeBlacklist = builder
                 .worldRestart()

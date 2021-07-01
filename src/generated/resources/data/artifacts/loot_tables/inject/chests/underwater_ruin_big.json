@@ -41,8 +41,8 @@
       ],
       "conditions": [
         {
-          "condition": "minecraft:random_chance",
-          "chance": 0.65
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.65
         }
       ]
     }

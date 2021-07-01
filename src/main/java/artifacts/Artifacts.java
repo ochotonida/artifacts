@@ -5,10 +5,7 @@ import artifacts.client.render.entity.MimicRenderer;
 import artifacts.common.capability.killtracker.EntityKillTrackerCapability;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.ModConfig;
-import artifacts.common.init.ModEntities;
-import artifacts.common.init.ModFeatures;
-import artifacts.common.init.ModItems;
-import artifacts.common.init.ModSoundEvents;
+import artifacts.common.init.*;
 import artifacts.common.network.NetworkHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.PlayerContainer;
@@ -17,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
@@ -55,6 +53,7 @@ public class Artifacts {
         modBus.addListener(this::enqueueIMC);
 
         modBus.addGenericListener(EntityType.class, ModEntities::register);
+        modBus.addGenericListener(GlobalLootModifierSerializer.class, ModLootConditions::register);
         modBus.addListener(ModEntities::registerAttributes);
 
         MinecraftForge.EVENT_BUS.addListener(this::addFeatures);

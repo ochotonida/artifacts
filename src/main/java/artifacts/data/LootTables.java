@@ -3,6 +3,7 @@ package artifacts.data;
 import artifacts.Artifacts;
 import artifacts.common.init.ModItems;
 import artifacts.common.init.ModLootTables;
+import artifacts.common.loot.ConfigurableRandomChance;
 import com.google.common.base.Preconditions;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.criterion.EntityFlagsPredicate;
@@ -12,7 +13,6 @@ import net.minecraft.data.LootTableProvider;
 import net.minecraft.item.Item;
 import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.EntityHasProperty;
-import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.functions.Smelt;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
@@ -46,7 +46,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/entities/cow", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .when(RandomChance.randomChance(1 / 500F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(1 / 500F))
                         .add(createItemEntry(ModItems.EVERLASTING_BEEF.get(), 1)
                                 .apply(
                                         Smelt.smelted().when(
@@ -133,7 +133,7 @@ public class LootTables extends LootTableProvider {
                             LootPool.lootPool()
                                     .name("main")
                                     .setRolls(ConstantRange.exactly(1))
-                                    .when(RandomChance.randomChance(0.02F))
+                                    .when(ConfigurableRandomChance.configurableRandomChance(0.02F))
                                     .add(createItemEntry(ModItems.VILLAGER_HAT.get(), 1))
                     )
             );
@@ -141,6 +141,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/spawn_bonus_chest", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
+                        .when(ConfigurableRandomChance.configurableRandomChance(1))
                         .setRolls(ConstantRange.exactly(1))
                         .add(createItemEntry(ModItems.WHOOPEE_CUSHION.get(), 1))
                 )
@@ -149,7 +150,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.1F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.1F))
                         .add(createItemEntry(ModItems.STEADFAST_SPIKES.get(), 1))
                         .add(createItemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 1))
                         .add(createItemEntry(ModItems.RUNNING_SHOES.get(), 1))
@@ -160,7 +161,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.01F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.01F))
                         .add(createItemEntry(ModItems.EVERLASTING_BEEF.get(), 1))
                 )
         );
@@ -168,7 +169,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.2F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.2F))
                         .add(createItemEntry(ModItems.UMBRELLA.get(), 3))
                         .add(createItemEntry(ModItems.WHOOPEE_CUSHION.get(), 2))
                         .add(createItemEntry(ModItems.KITTY_SLIPPERS.get(), 1))
@@ -180,7 +181,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.16F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.16F))
                         .add(createItemEntry(ModItems.CROSS_NECKLACE.get(), 1))
                         .add(createItemEntry(ModItems.ANTIDOTE_VESSEL.get(), 1))
                         .add(createItemEntry(ModItems.CHARM_OF_SINKING.get(), 1))
@@ -190,7 +191,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.1F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.1F))
                         .add(createItemEntry(ModItems.DIGGING_CLAWS.get(), 1))
                         .add(createItemEntry(ModItems.POCKET_PISTON.get(), 1))
                 )
@@ -199,7 +200,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.06F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.06F))
                         .add(createItemEntry(ModItems.FERAL_CLAWS.get(), 1))
                 )
         );
@@ -207,7 +208,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.35F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.35F))
                         .add(createItemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 2))
                         .add(createItemEntry(ModItems.PANIC_NECKLACE.get(), 2))
                         .add(createItemEntry(ModItems.OBSIDIAN_SKULL.get(), 2))
@@ -223,7 +224,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.25F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.25F))
                         .add(createArtifactEntry(5))
                         .add(createItemEntry(ModItems.BUNNY_HOPPERS.get(), 3))
                         .add(createItemEntry(ModItems.FLAME_PENDANT.get(), 3))
@@ -234,7 +235,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.75F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.75F))
                         .add(createArtifactEntry(6))
                         .add(createItemEntry(ModItems.GOLDEN_HOOK.get(), 3))
                         .add(createItemEntry(ModItems.CROSS_NECKLACE.get(), 3))
@@ -249,7 +250,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.35F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.35F))
                         .add(createItemEntry(ModItems.SNORKEL.get(), 5))
                         .add(createItemEntry(ModItems.FLIPPERS.get(), 5))
                         .add(createItemEntry(ModItems.UMBRELLA.get(), 5))
@@ -267,7 +268,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.4F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.4F))
                         .add(createItemEntry(ModItems.FLAME_PENDANT.get(), 2))
                         .add(createItemEntry(ModItems.THORN_PENDANT.get(), 2))
                         .add(createItemEntry(ModItems.WHOOPEE_CUSHION.get(), 2))
@@ -283,7 +284,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.4F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.4F))
                         .add(createArtifactEntry(4))
                         .add(createItemEntry(ModItems.CRYSTAL_HEART.get(), 1))
                         .add(createItemEntry(ModItems.CLOUD_IN_A_BOTTLE.get(), 1))
@@ -294,7 +295,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.35F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.35F))
                         .add(createItemEntry(ModItems.KITTY_SLIPPERS.get(), 2))
                         .add(createItemEntry(ModItems.BUNNY_HOPPERS.get(), 1))
                 )
@@ -303,7 +304,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.20F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.20F))
                         .add(createItemEntry(ModItems.CROSS_NECKLACE.get(), 3))
                         .add(createItemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 3))
                         .add(createItemEntry(ModItems.POCKET_PISTON.get(), 3))
@@ -315,7 +316,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.4F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.4F))
                         .add(createItemEntry(ModItems.PANIC_NECKLACE.get(), 1))
                         .add(createItemEntry(ModItems.POCKET_PISTON.get(), 1))
                         .add(createItemEntry(ModItems.STEADFAST_SPIKES.get(), 1))
@@ -331,7 +332,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.25F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.25F))
                         .add(createItemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 1))
                         .add(createItemEntry(ModItems.THORN_PENDANT.get(), 1))
                         .add(createItemEntry(ModItems.FIRE_GAUNTLET.get(), 1))
@@ -345,7 +346,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.25F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.25F))
                         .add(createItemEntry(ModItems.GOLDEN_HOOK.get(), 3))
                         .add(createItemEntry(ModItems.SNORKEL.get(), 1))
                         .add(createItemEntry(ModItems.FLIPPERS.get(), 1))
@@ -363,7 +364,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.40F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.40F))
                         .add(createArtifactEntry(3))
                         .add(createItemEntry(ModItems.POWER_GLOVE.get(), 1))
                         .add(createItemEntry(ModItems.ANTIDOTE_VESSEL.get(), 1))
@@ -377,7 +378,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.65F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.65F))
                         .add(createItemEntry(ModItems.SNORKEL.get(), 3))
                         .add(createItemEntry(ModItems.FLIPPERS.get(), 3))
                         .add(createItemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 1))
@@ -392,7 +393,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .setRolls(ConstantRange.exactly(1))
-                        .when(RandomChance.randomChance(0.25F))
+                        .when(ConfigurableRandomChance.configurableRandomChance(0.25F))
                         .add(createArtifactEntry(1))
                 )
         );
