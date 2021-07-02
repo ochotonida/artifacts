@@ -1,7 +1,6 @@
 package artifacts.client.render.curio.renderer;
 
 import artifacts.Artifacts;
-import artifacts.client.RenderTypes;
 import artifacts.client.render.curio.model.HandsModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -13,6 +12,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.ForgeRenderTypes;
 
 public class GlowingGloveCurioRenderer extends GloveCurioRenderer {
 
@@ -32,7 +32,7 @@ public class GlowingGloveCurioRenderer extends GloveCurioRenderer {
     @Override
     protected void renderArm(HandsModel model, MatrixStack matrixStack, IRenderTypeBuffer buffer, HandSide handSide, int light, boolean hasSlimArms, boolean hasFoil) {
         super.renderArm(model, matrixStack, buffer, handSide, light, hasSlimArms, hasFoil);
-        RenderType renderType = RenderTypes.unlit(getGlowTexture(hasSlimArms));
+        RenderType renderType = ForgeRenderTypes.getUnlitTranslucent(getGlowTexture(hasSlimArms));
         IVertexBuilder builder = ItemRenderer.getFoilBuffer(buffer, renderType, false, hasFoil);
         model.renderHand(handSide, matrixStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
@@ -40,7 +40,7 @@ public class GlowingGloveCurioRenderer extends GloveCurioRenderer {
     @Override
     protected void renderFirstPersonArm(HandsModel model, ModelRenderer arm, MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, boolean hasSlimArms, boolean hasFoil) {
         super.renderFirstPersonArm(model, arm, matrixStack, buffer, light, hasSlimArms, hasFoil);
-        IVertexBuilder builder = ItemRenderer.getFoilBuffer(buffer, RenderTypes.unlit(getGlowTexture(hasSlimArms)), false, hasFoil);
+        IVertexBuilder builder = ItemRenderer.getFoilBuffer(buffer, ForgeRenderTypes.getUnlitTranslucent(getGlowTexture(hasSlimArms)), false, hasFoil);
         arm.render(matrixStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY);
     }
 }
