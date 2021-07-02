@@ -42,7 +42,7 @@
       "conditions": [
         {
           "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.65
+          "default_probability": 0.45
         }
       ]
     }

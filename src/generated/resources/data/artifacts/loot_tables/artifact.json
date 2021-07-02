@@ -162,17 +162,17 @@
         {
           "type": "minecraft:item",
           "weight": 5,
-          "name": "artifacts:helium_flamingo"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 5,
           "name": "artifacts:umbrella"
         },
         {
           "type": "minecraft:item",
           "weight": 5,
           "name": "artifacts:whoopee_cushion"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "name": "artifacts:helium_flamingo"
         },
         {
           "type": "minecraft:item",
