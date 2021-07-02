@@ -1,4 +1,4 @@
-package artifacts.client.render.curio.model.necklace;
+package artifacts.client.render.curio.model;
 
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.RenderType;
@@ -14,11 +14,7 @@ public class ScarfModel extends BipedModel<LivingEntity> {
 
     private final ModelRenderer cloak;
 
-    public ScarfModel() {
-        this(RenderType::entityCutoutNoCull);
-    }
-
-    public ScarfModel(Function<ResourceLocation, RenderType> renderType) {
+    protected ScarfModel(Function<ResourceLocation, RenderType> renderType) {
         super(renderType, 0.5F, 0, 64, 32);
         setAllVisible(false);
 
@@ -60,5 +56,9 @@ public class ScarfModel extends BipedModel<LivingEntity> {
 
             cloak.xRot = body.xRot + (6 + f2 / 2 + f1) / 180 * (float) Math.PI;
         }
+    }
+
+    public static ScarfModel scarf(Function<ResourceLocation, RenderType> renderType) {
+        return new ScarfModel(renderType);
     }
 }

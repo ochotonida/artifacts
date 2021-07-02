@@ -1,7 +1,7 @@
 package artifacts.client.render.curio.renderer;
 
 import artifacts.Artifacts;
-import artifacts.client.render.curio.model.belt.BeltModel;
+import artifacts.client.render.curio.model.BeltModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

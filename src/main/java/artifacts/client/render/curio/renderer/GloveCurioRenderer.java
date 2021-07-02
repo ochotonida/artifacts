@@ -1,8 +1,7 @@
 package artifacts.client.render.curio.renderer;
 
 import artifacts.Artifacts;
-import artifacts.client.render.curio.model.hands.GloveModel;
-import artifacts.client.render.curio.model.hands.HandsModel;
+import artifacts.client.render.curio.model.HandsModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
@@ -29,7 +28,7 @@ public class GloveCurioRenderer implements CurioRenderer {
     private final HandsModel slimModel;
 
     public GloveCurioRenderer(String name) {
-        this(String.format("glove/%s/%s_default", name, name), String.format("glove/%s/%s_slim", name, name), GloveModel::new);
+        this(String.format("glove/%s/%s_default", name, name), String.format("glove/%s/%s_slim", name, name), HandsModel::glove);
     }
 
     public GloveCurioRenderer(String name, Function<Boolean, HandsModel> modelFactory) {

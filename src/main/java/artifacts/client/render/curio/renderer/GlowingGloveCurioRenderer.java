@@ -2,7 +2,7 @@ package artifacts.client.render.curio.renderer;
 
 import artifacts.Artifacts;
 import artifacts.client.RenderTypes;
-import artifacts.client.render.curio.model.hands.HandsModel;
+import artifacts.client.render.curio.model.HandsModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

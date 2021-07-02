@@ -1,4 +1,4 @@
-package artifacts.client.render.curio.model.belt;
+package artifacts.client.render.curio.model;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.ModelRenderer;
@@ -9,7 +9,7 @@ public class CloudInABottleModel extends BeltModel {
 
     protected final ModelRenderer cloud;
 
-    public CloudInABottleModel() {
+    protected CloudInABottleModel() {
         super(RenderType::entityTranslucent, 4, -3, -0.5F);
 
         // jar
@@ -31,5 +31,9 @@ public class CloudInABottleModel extends BeltModel {
         super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         cloud.yRot = (ageInTicks) / 50;
         cloud.y = MathHelper.cos((ageInTicks) / 30) / 2;
+    }
+
+    public static CloudInABottleModel cloudInABottle() {
+        return new CloudInABottleModel();
     }
 }
