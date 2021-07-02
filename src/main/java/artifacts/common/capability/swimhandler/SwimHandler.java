@@ -1,5 +1,6 @@
 package artifacts.common.capability.swimhandler;
 
+import artifacts.common.config.ModConfig;
 import artifacts.common.network.NetworkHandler;
 import artifacts.common.network.SinkPacket;
 import artifacts.common.network.SwimPacket;
@@ -11,6 +12,7 @@ public class SwimHandler implements ISwimHandler {
     private boolean shouldSwim;
     private boolean shouldSink;
     private boolean hasTouchedWater;
+    private int swimTime;
 
     @Override
     public boolean isSwimming() {
@@ -28,7 +30,19 @@ public class SwimHandler implements ISwimHandler {
     }
 
     @Override
+    public int getSwimTime() {
+        return swimTime;
+    }
+
+    @Override
     public void setSwimming(boolean shouldSwim) {
+        if (this.shouldSwim && !shouldSwim) {
+            int rechargeTime = ModConfig.server.heliumFlamingo.rechargeTime.get();
+            int maxFlightTime = ModConfig.server.heliumFlamingo.maxFlightTime.get();
+
+            setSwimTime((int) (-rechargeTime * getSwimTime() / (float) maxFlightTime));
+        }
+
         this.shouldSwim = shouldSwim;
     }
 
@@ -40,6 +54,11 @@ public class SwimHandler implements ISwimHandler {
     @Override
     public void setWet(boolean hasTouchedWater) {
         this.hasTouchedWater = hasTouchedWater;
+    }
+
+    @Override
+    public void setSwimTime(int swimTime) {
+        this.swimTime = swimTime;
     }
 
     @Override

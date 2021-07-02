@@ -6,7 +6,8 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class HeliumFlamingoConfig extends ItemConfig {
 
-    public ForgeConfigSpec.IntValue airSupplyDrainRate;
+    public ForgeConfigSpec.IntValue maxFlightTime;
+    public ForgeConfigSpec.IntValue rechargeTime;
 
     public HeliumFlamingoConfig(ForgeConfigSpec.Builder builder) {
         super(builder, ModItems.HELIUM_FLAMINGO.getId().getPath(), "Affects how many seconds the player can fly using the helium flamingo before breaking");
@@ -14,13 +15,18 @@ public class HeliumFlamingoConfig extends ItemConfig {
 
     @Override
     public void addConfigs(ForgeConfigSpec.Builder builder) {
-        airSupplyDrainRate = builder
-                .worldRestart()
+        maxFlightTime = builder
                 .comment(
-                        "The rate at which the player's air supply drains each tick while swimming outside of water (players have an air supply of 300)",
-                        "Set to 0 to allow swimming indefinitely, or 1 for vanilla drain rate"
+                        "The maximum amount of time (in ticks) a player can fly using the helium flamingo",
+                        "Set to 0 to allow swimming indefinitely"
                 )
-                .translation(translate("air_supply_drain_rate"))
-                .defineInRange("air_supply_drain_rate", 2, 0, Integer.MAX_VALUE);
+                .translation(translate("max_flight_time"))
+                .defineInRange("max_flight_time", 150, 0, Integer.MAX_VALUE);
+        rechargeTime = builder
+                .comment(
+                        "The amount of time (in ticks) it takes for the helium flamingo to recharge"
+                )
+                .translation(translate("recharge_time"))
+                .defineInRange("recharge_time", 300, 0, Integer.MAX_VALUE);
     }
 }

@@ -34,6 +34,7 @@ public class SwimHandlerCapability {
             compoundNBT.putBoolean("ShouldSwim", handler.isSwimming());
             compoundNBT.putBoolean("ShouldSink", handler.isSinking());
             compoundNBT.putBoolean("IsWet", handler.isWet());
+            compoundNBT.putInt("SwimTime", handler.getSwimTime());
             return compoundNBT;
         }
 
@@ -44,6 +45,7 @@ public class SwimHandlerCapability {
                 handler.setSwimming(compoundNBT.getBoolean("ShouldSwim"));
                 handler.setSinking(compoundNBT.getBoolean("ShouldSink"));
                 handler.setWet(compoundNBT.getBoolean("IsWet"));
+                handler.setSwimTime(compoundNBT.getInt("SwimTime"));
             }
         }
     }

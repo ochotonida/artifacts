@@ -64,9 +64,13 @@ public class HeliumFlamingoItem extends CurioItem {
 
         event.player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
                 handler -> {
+                    int maxFlightTime = ModConfig.server.heliumFlamingo.maxFlightTime.get();
+                    int rechargeTime = ModConfig.server.heliumFlamingo.rechargeTime.get();
+
                     if (handler.isSwimming()) {
+
                         if (!isEquippedBy(event.player)
-                                || event.player.getAirSupply() <= 0
+                                || handler.getSwimTime() > maxFlightTime
                                 || event.player.isInWater() && !event.player.isSwimming() && !handler.isSinking()
                                 || (!event.player.isInWater() || handler.isSinking()) && event.player.isOnGround()) {
                             handler.setSwimming(false);
@@ -79,11 +83,17 @@ public class HeliumFlamingoItem extends CurioItem {
                             if (event.player.tickCount % 20 == 0) {
                                 damageEquippedStacks(event.player);
                             }
+                            if (!event.player.abilities.invulnerable && maxFlightTime > 0) {
+                                handler.setSwimTime(handler.getSwimTime() + 1);
+                            }
+                        }
+                    } else {
+                        if (handler.getSwimTime() < 0) {
 
-                            if (!event.player.abilities.invulnerable && ModConfig.server.heliumFlamingo.airSupplyDrainRate.get() > 0) {
-                                // compensate for bonus air
-                                int airSupply = event.player.getAirSupply() - 4;
-                                event.player.setAirSupply(airSupply - ModConfig.server.heliumFlamingo.airSupplyDrainRate.get());
+                            if (handler.getSwimTime() < -rechargeTime) {
+                                handler.setSwimTime(-rechargeTime);
+                            } else {
+                                handler.setSwimTime(handler.getSwimTime() + 1);
                             }
                         }
                     }
@@ -115,7 +125,7 @@ public class HeliumFlamingoItem extends CurioItem {
                             if (player.isOnGround()) {
                                 hasTouchedGround = true;
                             } else if (!handler.isSwimming()
-                                    && player.getAirSupply() > 0
+                                    && handler.getSwimTime() >= 0
                                     && isEquippedBy(player)
                                     && (player.isSwimming()
                                     || isSprintKeyDown
@@ -149,7 +159,7 @@ public class HeliumFlamingoItem extends CurioItem {
 
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent(priority = EventPriority.LOW)
-        public void render(RenderGameOverlayEvent.Pre event) {
+        public void render(RenderGameOverlayEvent.Post event) {
             Minecraft minecraft = Minecraft.getInstance();
 
             if (ModConfig.server.isCosmetic(HeliumFlamingoItem.this) || !(minecraft.getCameraEntity() instanceof LivingEntity)) {
@@ -157,24 +167,43 @@ public class HeliumFlamingoItem extends CurioItem {
             }
 
             LivingEntity player = (LivingEntity) minecraft.getCameraEntity();
-            if (event.getType() == RenderGameOverlayEvent.ElementType.AIR && !event.isCanceled() && isEquippedBy(player)) {
-                event.setCanceled(true);
-                Minecraft.getInstance().getTextureManager().bind(location);
-                RenderSystem.enableBlend();
-                int left = minecraft.getWindow().getGuiScaledWidth() / 2 + 91;
-                int top = minecraft.getWindow().getGuiScaledHeight() - ForgeIngameGui.right_height;
-                int air = player.getAirSupply();
-                if (player.isEyeInFluid(FluidTags.WATER) || air < 300) {
-                    int full = MathHelper.ceil((air - 2) * 10 / 300D);
-                    int partial = MathHelper.ceil(air * 10 / 300D) - full;
 
-                    for (int i = 0; i < full + partial; ++i) {
-                        ForgeIngameGui.blit(event.getMatrixStack(), left - i * 8 - 9, top, -90, (i < full ? 0 : 9), 0, 9, 9, 16, 32);
-                    }
-                    ForgeIngameGui.right_height += 10;
-                }
-                RenderSystem.disableBlend();
+            if (event.getType() != RenderGameOverlayEvent.ElementType.AIR || event.isCanceled() || !isEquippedBy(player)) {
+                return;
             }
+
+            player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
+                    handler -> {
+                        int left = minecraft.getWindow().getGuiScaledWidth() / 2 + 91;
+                        int top = minecraft.getWindow().getGuiScaledHeight() - ForgeIngameGui.right_height;
+
+                        int swimTime = Math.abs(handler.getSwimTime());
+                        int maxProgressTime;
+
+                        if (swimTime == 0) {
+                            return;
+                        } else if (handler.getSwimTime() > 0) {
+                            maxProgressTime = ModConfig.server.heliumFlamingo.maxFlightTime.get();
+                        } else {
+                            maxProgressTime = ModConfig.server.heliumFlamingo.rechargeTime.get();
+                        }
+
+                        float progress = 1 - swimTime / (float) maxProgressTime;
+
+                        Minecraft.getInstance().getTextureManager().bind(location);
+                        RenderSystem.enableBlend();
+
+                        int full = MathHelper.ceil((progress - 2D / maxProgressTime) * 10);
+                        int partial = MathHelper.ceil(progress * 10) - full;
+
+                        for (int i = 0; i < full + partial; ++i) {
+                            ForgeIngameGui.blit(event.getMatrixStack(), left - i * 8 - 9, top, -90, (i < full ? 0 : 9), 0, 9, 9, 16, 32);
+                        }
+                        ForgeIngameGui.right_height += 10;
+
+                        RenderSystem.disableBlend();
+                    }
+            );
         }
     }
 }

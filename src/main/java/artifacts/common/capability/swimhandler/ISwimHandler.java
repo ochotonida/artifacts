@@ -10,11 +10,15 @@ public interface ISwimHandler {
 
     boolean isWet();
 
+    int getSwimTime();
+
     void setSwimming(boolean shouldSwim);
 
     void setSinking(boolean shouldSink);
 
     void setWet(boolean hasTouchedWater);
+
+    void setSwimTime(int swimTime);
 
     void syncSwimming();
 

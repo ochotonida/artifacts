@@ -126,6 +126,8 @@
   "artifacts.config.server.golden_hook.max_experience_multiplier": "Maximum experience multiplier",
   "artifacts.config.server.golden_hook.min_experience_multiplier": "Minimum experience multiplier",
   "artifacts.config.server.golden_hook.max_experience": "Maximum experience",
+  "artifacts.config.server.helium_flamingo.max_flight_time": "Maximum flight time",
+  "artifacts.config.server.helium_flamingo.recharge_time": "Recharge time",
   "artifacts.config.server.lucky_scarf.fortune_bonus": "Fortune bonus",
   "artifacts.config.server.obsidian_skull.fire_resistance_duration": "Fire Resistance duration",
   "artifacts.config.server.panic_necklace.speed_duration": "Speed effect duration",
