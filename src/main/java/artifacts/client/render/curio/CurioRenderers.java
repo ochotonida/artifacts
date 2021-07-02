@@ -54,11 +54,11 @@ public class CurioRenderers {
         renderers.put(ModItems.CHARM_OF_SINKING.get(), new SimpleCurioRenderer("charm_of_sinking", new CharmOfSinkingModel()));
 
         // belt
-        renderers.put(ModItems.CLOUD_IN_A_BOTTLE.get(), new SimpleCurioRenderer("cloud_in_a_bottle", new CloudInABottleModel()));
-        renderers.put(ModItems.OBSIDIAN_SKULL.get(), new SimpleCurioRenderer("obsidian_skull", new ObsidianSkullModel()));
-        renderers.put(ModItems.ANTIDOTE_VESSEL.get(), new SimpleCurioRenderer("antidote_vessel", new AntidoteVesselModel()));
-        renderers.put(ModItems.UNIVERSAL_ATTRACTOR.get(), new SimpleCurioRenderer("universal_attractor", new UniversalAttractorModel()));
-        renderers.put(ModItems.CRYSTAL_HEART.get(), new SimpleCurioRenderer("crystal_heart", new CrystalHeartModel()));
+        renderers.put(ModItems.CLOUD_IN_A_BOTTLE.get(), new BeltCurioRenderer("cloud_in_a_bottle", new CloudInABottleModel()));
+        renderers.put(ModItems.OBSIDIAN_SKULL.get(), new BeltCurioRenderer("obsidian_skull", new ObsidianSkullModel()));
+        renderers.put(ModItems.ANTIDOTE_VESSEL.get(), new BeltCurioRenderer("antidote_vessel", new AntidoteVesselModel()));
+        renderers.put(ModItems.UNIVERSAL_ATTRACTOR.get(), new BeltCurioRenderer("universal_attractor", new UniversalAttractorModel()));
+        renderers.put(ModItems.CRYSTAL_HEART.get(), new BeltCurioRenderer("crystal_heart", new CrystalHeartModel()));
         renderers.put(ModItems.HELIUM_FLAMINGO.get(), new SimpleCurioRenderer("helium_flamingo", new HeliumFlamingoModel()));
 
         // hands

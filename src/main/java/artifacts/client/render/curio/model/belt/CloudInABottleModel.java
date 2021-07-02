@@ -10,25 +10,20 @@ public class CloudInABottleModel extends BeltModel {
     protected final ModelRenderer cloud;
 
     public CloudInABottleModel() {
-        super(RenderType::entityTranslucent);
-
-        ModelRenderer jar = new ModelRenderer(this);
-        jar.setPos(4, 9, -3);
-        jar.yRot = -0.5F;
-        body.addChild(jar);
+        super(RenderType::entityTranslucent, 4, -3, -0.5F);
 
         // jar
-        jar.texOffs(0, 16);
-        jar.addBox(-2, 0, -2, 4, 5, 4);
+        charm.texOffs(0, 16);
+        charm.addBox(-2, 0, -2, 4, 5, 4);
 
         // lid
-        jar.texOffs(0, 25);
-        jar.addBox(-1, -1, -1, 2, 1, 2);
+        charm.texOffs(0, 25);
+        charm.addBox(-1, -1, -1, 2, 1, 2);
 
         // cloud
         cloud = new ModelRenderer(this).texOffs(8, 25);
         cloud.addBox(-1, 1.5F, -1, 2, 2, 2);
-        jar.addChild(cloud);
+        charm.addChild(cloud);
     }
 
     @Override
