@@ -81,8 +81,7 @@ public class ServerConfig {
                 .comment(
                         "List of cosmetic-only items. All items in this list will have their effects disabled",
                         "To blacklist all items, use \"artifacts:*\"",
-                        "Note: blacklisting an item while it is equipped may have unintended side effects",
-                        "To completely prevent items from appearing, use a data pack"
+                        "Note: blacklisting an item while it is equipped may have unintended side effects"
                 )
                 .translation(Artifacts.MODID + ".config.server.cosmetics")
                 .define("cosmetics", Lists.newArrayList(""));
