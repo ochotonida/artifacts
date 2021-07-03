@@ -76,6 +76,7 @@
   "item.artifacts.running_shoes.tooltip": "Aumenta a velocidade de movimento e a altura do passo enquanto corre",
   "item.artifacts.bunny_hoppers.tooltip": "Aumenta a altura do pulo do usuário e concede imunidade a dano por queda",
   "item.artifacts.crystal_heart.tooltip": "Aumenta a saúde máxima do usuário",
+  "item.artifacts.villager_hat.tooltip": "Diminui os preços de negociação dos aldeões",
   "item.artifacts.cloud_in_a_bottle.tooltip": "Permite que o usuário dê um salto duplo",
   "item.artifacts.whoopee_cushion.tooltip": "Aumenta a flatulência do usuário",
   "item.artifacts.vampiric_glove.tooltip": "Faz com que os ataques corpo a corpo do usuário absorvam saúde",
@@ -89,6 +90,7 @@
   "artifacts.subtitles.entity.mimic.hurt": "Mímico ferido",
   "artifacts.subtitles.entity.mimic.death": "Mímico morrendo",
   "artifacts.subtitles.item.whoopee_cushion.fart": "Peido",
+  "artifacts.config.common.artifact_rarity": "Raridade do artefato",
   "artifacts.config.common.campsite.biome_blacklist": "Biomas onde o acampamento não será gerado",
   "artifacts.config.common.campsite.rarity": "Raridade do acampamento",
   "artifacts.config.common.campsite.min_y": "Altura mínima do acampamento",
@@ -124,7 +126,9 @@
   "artifacts.config.server.golden_hook.max_experience_multiplier": "Multiplicador de experiência máxima",
   "artifacts.config.server.golden_hook.min_experience_multiplier": "Multiplicador de experiência mínima",
   "artifacts.config.server.golden_hook.max_experience": "Experiência máxima",
-  "artifacts.config.server.lucky_scarf.fortune_bonus": "Bônus dE fortuna",
+  "artifacts.config.server.helium_flamingo.max_flight_time": "Tempo máximo de vôo",
+  "artifacts.config.server.helium_flamingo.recharge_time": "Tempo de recarga",
+  "artifacts.config.server.lucky_scarf.fortune_bonus": "Bônus de fortuna",
   "artifacts.config.server.obsidian_skull.fire_resistance_duration": "Duração da resistência ao fogo",
   "artifacts.config.server.panic_necklace.speed_duration": "Duração do efeito de velocidade",
   "artifacts.config.server.panic_necklace.speed_level": "Nível de efeito de velocidade",
@@ -140,5 +144,6 @@
   "artifacts.config.server.universal_attractor.motionMultiplier": "Multiplicador de movimento",
   "artifacts.config.server.vampiric_glove.absorption_ratio": "Taxa de absorção",
   "artifacts.config.server.vampiric_glove.max_health_absorbed": "Máxima saúde absorvida",
+  "artifacts.config.server.villager_hat.reputation_bonus": "Bônus de reputação",
   "artifacts.config.server.whoopee_cushion.flatulence": "Flatulência"
 }
