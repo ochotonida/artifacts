@@ -2,6 +2,7 @@ package artifacts.mixin.render;
 
 import artifacts.client.render.curio.CurioRenderers;
 import artifacts.client.render.curio.renderer.GloveCurioRenderer;
+import artifacts.common.config.ModConfig;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -34,6 +35,10 @@ public abstract class PlayerRendererMixin {
 
     @Unique
     private static void renderArm(MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, AbstractClientPlayerEntity player, HandSide handSide) {
+        if (!ModConfig.client.showFirstPersonGloves.get()) {
+            return;
+        }
+
         Hand hand = handSide == player.getMainArm() ? Hand.MAIN_HAND : Hand.OFF_HAND;
 
         CuriosApi.getCuriosHelper().getCuriosHandler(player).ifPresent(handler -> {
