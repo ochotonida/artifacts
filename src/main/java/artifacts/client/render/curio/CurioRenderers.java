@@ -48,7 +48,7 @@ public class CurioRenderers {
         renderers.put(ModItems.CHARM_OF_SINKING.get(), new SimpleCurioRenderer("charm_of_sinking", NecklaceModel.charmOfSinking()));
 
         // belt
-        renderers.put(ModItems.CLOUD_IN_A_BOTTLE.get(), new BeltCurioRenderer("cloud_in_a_bottle", CloudInABottleModel.cloudInABottle()));
+        renderers.put(ModItems.CLOUD_IN_A_BOTTLE.get(), new BeltCurioRenderer("cloud_in_a_bottle", BeltModel.cloudInABottle()));
         renderers.put(ModItems.OBSIDIAN_SKULL.get(), new BeltCurioRenderer("obsidian_skull", BeltModel.obsidianSkull()));
         renderers.put(ModItems.ANTIDOTE_VESSEL.get(), new BeltCurioRenderer("antidote_vessel", BeltModel.antidoteVessel()));
         renderers.put(ModItems.UNIVERSAL_ATTRACTOR.get(), new BeltCurioRenderer("universal_attractor", BeltModel.universalAttractor()));
