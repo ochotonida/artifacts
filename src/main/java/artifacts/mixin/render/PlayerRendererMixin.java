@@ -2,13 +2,11 @@ package artifacts.mixin.render;
 
 import artifacts.client.render.curio.CurioRenderers;
 import artifacts.client.render.curio.renderer.GloveCurioRenderer;
+import artifacts.common.config.ModConfig;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
-import net.minecraft.client.renderer.entity.model.PlayerModel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
@@ -23,11 +21,7 @@ import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 @Mixin(PlayerRenderer.class)
-public abstract class PlayerRendererMixin extends LivingRenderer<AbstractClientPlayerEntity, PlayerModel<AbstractClientPlayerEntity>> {
-
-    public PlayerRendererMixin(EntityRendererManager manager, PlayerModel<AbstractClientPlayerEntity> model, float shadowRadius) {
-        super(manager, model, shadowRadius);
-    }
+public abstract class PlayerRendererMixin {
 
     @Inject(method = "renderLeftHand", at = @At("TAIL"))
     private void renderLeftGlove(MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, AbstractClientPlayerEntity player, CallbackInfo callbackInfo) {
@@ -41,6 +35,10 @@ public abstract class PlayerRendererMixin extends LivingRenderer<AbstractClientP
 
     @Unique
     private static void renderArm(MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, AbstractClientPlayerEntity player, HandSide handSide) {
+        if (!ModConfig.client.showFirstPersonGloves.get()) {
+            return;
+        }
+
         Hand hand = handSide == player.getMainArm() ? Hand.MAIN_HAND : Hand.OFF_HAND;
 
         CuriosApi.getCuriosHelper().getCuriosHandler(player).ifPresent(handler -> {
@@ -51,10 +49,8 @@ public abstract class PlayerRendererMixin extends LivingRenderer<AbstractClientP
 
                 for (int slot = hand == Hand.MAIN_HAND ? 0 : 1; slot < stacks.getSlots(); slot += 2) {
                     ItemStack stack = cosmeticStacks.getStackInSlot(slot);
-                    if (stack.isEmpty()) {
-                        if (stacksHandler.getRenders().get(slot)) {
-                            stack = stacks.getStackInSlot(slot);
-                        }
+                    if (stack.isEmpty() && stacksHandler.getRenders().get(slot)) {
+                        stack = stacks.getStackInSlot(slot);
                     }
 
                     GloveCurioRenderer renderer = CurioRenderers.getGloveRenderer(stack);
