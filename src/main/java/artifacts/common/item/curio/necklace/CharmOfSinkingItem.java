@@ -45,7 +45,7 @@ public class CharmOfSinkingItem extends CurioItem {
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
-        if (!ModConfig.server.isCosmetic(this) && slotContext.getWearer() instanceof ServerPlayerEntity) {
+        if (slotContext.getWearer() instanceof ServerPlayerEntity) {
             slotContext.getWearer().getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
                     handler -> {
                         handler.setSinking(false);

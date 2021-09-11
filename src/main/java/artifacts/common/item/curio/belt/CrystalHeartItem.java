@@ -44,7 +44,7 @@ public class CrystalHeartItem extends CurioItem {
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
-        if (!ModConfig.server.isCosmetic(this) && !slotContext.getWearer().level.isClientSide()) {
+        if (!slotContext.getWearer().level.isClientSide()) {
             ModifiableAttributeInstance health = slotContext.getWearer().getAttribute(Attributes.MAX_HEALTH);
             AttributeModifier healthBonus = getHealthBonus();
             if (health != null && health.hasModifier(healthBonus)) {
