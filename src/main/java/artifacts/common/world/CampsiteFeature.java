@@ -5,7 +5,6 @@ import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.ModEntities;
 import artifacts.common.init.ModLootTables;
 import net.minecraft.block.*;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -17,10 +16,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.common.Tags;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class CampsiteFeature extends Feature<NoFeatureConfig> {
 
@@ -62,6 +58,46 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
             .add(Blocks.END_ROD.defaultBlockState().setValue(EndRodBlock.FACING, Direction.DOWN), 1)
             .add(Blocks.SHROOMLIGHT.defaultBlockState(), 1)
             .add(Blocks.GLOWSTONE.defaultBlockState(), 1);
+
+    public static final BlockStateProvider FLOWER_POT_PROVIDER;
+
+    static {
+        List<Block> flowerPots = Arrays.asList(
+                Blocks.POTTED_OAK_SAPLING,
+                Blocks.POTTED_SPRUCE_SAPLING,
+                Blocks.POTTED_BIRCH_SAPLING,
+                Blocks.POTTED_JUNGLE_SAPLING,
+                Blocks.POTTED_ACACIA_SAPLING,
+                Blocks.POTTED_DARK_OAK_SAPLING,
+                Blocks.POTTED_FERN,
+                Blocks.POTTED_DANDELION,
+                Blocks.POTTED_POPPY,
+                Blocks.POTTED_BLUE_ORCHID,
+                Blocks.POTTED_ALLIUM,
+                Blocks.POTTED_AZURE_BLUET,
+                Blocks.POTTED_RED_TULIP,
+                Blocks.POTTED_ORANGE_TULIP,
+                Blocks.POTTED_WHITE_TULIP,
+                Blocks.POTTED_PINK_TULIP,
+                Blocks.POTTED_OXEYE_DAISY,
+                Blocks.POTTED_CORNFLOWER,
+                Blocks.POTTED_LILY_OF_THE_VALLEY,
+                Blocks.POTTED_RED_MUSHROOM,
+                Blocks.POTTED_BROWN_MUSHROOM,
+                Blocks.POTTED_DEAD_BUSH,
+                Blocks.POTTED_CACTUS,
+                Blocks.POTTED_BAMBOO,
+                Blocks.POTTED_CRIMSON_FUNGUS,
+                Blocks.POTTED_WARPED_FUNGUS,
+                Blocks.POTTED_CRIMSON_ROOTS,
+                Blocks.POTTED_WARPED_ROOTS
+        );
+
+        FLOWER_POT_PROVIDER = new WeightedBlockStateProvider();
+        for (Block flowerPot : flowerPots) {
+            ((WeightedBlockStateProvider) FLOWER_POT_PROVIDER).add(flowerPot.defaultBlockState(), 1);
+        }
+    }
 
     public CampsiteFeature() {
         super(NoFeatureConfig.CODEC);
@@ -149,7 +185,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
         if (random.nextInt(3) == 0) {
             setBlock(world, pos, DECORATION_PROVIDER.getState(random, pos));
         } else {
-            setBlock(world, pos, BlockTags.FLOWER_POTS.getRandomElement(random).defaultBlockState());
+            setBlock(world, pos, FLOWER_POT_PROVIDER.getState(random, pos));
         }
     }
 
