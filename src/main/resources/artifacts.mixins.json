@@ -13,6 +13,9 @@
     "item.umbrella.BipedModelMixin",
     "render.PlayerRendererMixin"
   ],
+  "server": [
+    "item.umbrella.ServerPlayNetHandlerMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },
