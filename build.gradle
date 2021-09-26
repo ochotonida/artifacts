@@ -2,15 +2,15 @@ buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-        jcenter()
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
+
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
@@ -22,6 +22,8 @@ mixin {
 version = '1.16.5-2.10.0'
 group = 'artifacts'
 archivesBaseName = 'Artifacts'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
 minecraft {
     mappings channel: 'official', version: '1.16.5'
@@ -84,7 +86,7 @@ repositories {
     }
     maven {
         name "blamejared"
-        url "http://maven.blamejared.com/"
+        url "https://maven.blamejared.com/"
     }
     maven {
         url "https://www.cursemaven.com"
