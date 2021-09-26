@@ -68,7 +68,6 @@ public class HeliumFlamingoItem extends CurioItem {
                     int rechargeTime = ModConfig.server.heliumFlamingo.rechargeTime.get();
 
                     if (handler.isSwimming()) {
-
                         if (!isEquippedBy(event.player)
                                 || handler.getSwimTime() > maxFlightTime
                                 || event.player.isInWater() && !event.player.isSwimming() && !handler.isSinking()
@@ -87,15 +86,12 @@ public class HeliumFlamingoItem extends CurioItem {
                                 handler.setSwimTime(handler.getSwimTime() + 1);
                             }
                         }
-                    } else {
-                        if (handler.getSwimTime() < 0) {
-
-                            if (handler.getSwimTime() < -rechargeTime) {
-                                handler.setSwimTime(-rechargeTime);
-                            } else {
-                                handler.setSwimTime(handler.getSwimTime() + 1);
-                            }
-                        }
+                    } else if (handler.getSwimTime() < 0) {
+                        handler.setSwimTime(
+                                handler.getSwimTime() < -rechargeTime
+                                        ? -rechargeTime
+                                        : handler.getSwimTime() + 1
+                        );
                     }
                 }
         );
