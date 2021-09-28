@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ public class CurioRenderers {
         return renderers.get(curio);
     }
 
+    @Nullable
     public static GloveCurioRenderer getGloveRenderer(ItemStack stack) {
         if (!stack.isEmpty()) {
             CurioRenderer renderer = getRenderer(stack.getItem());
