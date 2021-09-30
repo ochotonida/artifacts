@@ -13,6 +13,7 @@ import net.minecraft.data.LootTableProvider;
 import net.minecraft.item.Item;
 import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.EntityHasProperty;
+import net.minecraft.loot.conditions.KilledByPlayer;
 import net.minecraft.loot.functions.Smelt;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
@@ -47,6 +48,7 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .when(ConfigurableRandomChance.configurableRandomChance(1 / 500F))
+                        .when(KilledByPlayer.killedByPlayer())
                         .add(createItemEntry(ModItems.EVERLASTING_BEEF.get(), 1)
                                 .apply(
                                         Smelt.smelted().when(
