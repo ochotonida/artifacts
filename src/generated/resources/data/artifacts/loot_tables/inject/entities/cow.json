@@ -30,6 +30,9 @@
         {
           "condition": "artifacts:configurable_random_chance",
           "default_probability": 0.002
+        },
+        {
+          "condition": "minecraft:killed_by_player"
         }
       ]
     }
