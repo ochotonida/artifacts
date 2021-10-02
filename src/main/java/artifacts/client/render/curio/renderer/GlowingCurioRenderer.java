@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.ForgeRenderTypes;
 
-public class GlowingCurioRenderer extends SimpleCurioRenderer {
+public class GlowingCurioRenderer extends CurioRenderer {
 
     private final ResourceLocation glowTexture;
 

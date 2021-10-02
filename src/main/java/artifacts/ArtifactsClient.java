@@ -24,6 +24,6 @@ public class ArtifactsClient {
     public void clientSetup(final FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MIMIC, MimicRenderer::new);
         ItemProperties.register(ModItems.UMBRELLA.get(), new ResourceLocation("blocking"), (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
-        CurioRenderers.setupCurioRenderers();
+        CurioRenderers.register();
     }
 }

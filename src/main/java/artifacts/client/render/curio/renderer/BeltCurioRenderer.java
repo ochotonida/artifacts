@@ -4,16 +4,19 @@ import artifacts.Artifacts;
 import artifacts.client.render.curio.model.BeltModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
-public class BeltCurioRenderer implements CurioRenderer {
+public class BeltCurioRenderer implements ICurioRenderer {
 
     private final ResourceLocation texture;
     private final BeltModel model;
@@ -36,14 +39,27 @@ public class BeltCurioRenderer implements CurioRenderer {
     }
 
     @Override
-    public final void render(String identifier, int index, PoseStack matrixStack, MultiBufferSource buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ticks, float headYaw, float headPitch, ItemStack stack) {
+    public <T extends LivingEntity, M extends EntityModel<T>> void render(
+            ItemStack stack,
+            SlotContext slotContext,
+            PoseStack matrixStack,
+            RenderLayerParent<T, M> renderLayerParent,
+            MultiBufferSource renderTypeBuffer,
+            int light,
+            float limbSwing,
+            float limbSwingAmount,
+            float partialTicks,
+            float ageInTicks,
+            float netHeadYaw,
+            float headPitch
+    ) {
         BeltModel model = getModel();
 
-        model.setupAnim(entity, limbSwing, limbSwingAmount, ticks, headYaw, headPitch);
-        model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-        model.setCharmPosition(index);
-        ICurioRenderer.followBodyRotations(entity, model);
-        render(matrixStack, buffer, light, stack.hasFoil());
+        model.setupAnim(slotContext.entity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        model.prepareMobModel(slotContext.entity(), limbSwing, limbSwingAmount, partialTicks);
+        model.setCharmPosition(slotContext.index());
+        ICurioRenderer.followBodyRotations(slotContext.entity(), model);
+        render(matrixStack, renderTypeBuffer, light, stack.hasFoil());
     }
 
     protected void render(PoseStack matrixStack, MultiBufferSource buffer, int light, boolean hasFoil) {

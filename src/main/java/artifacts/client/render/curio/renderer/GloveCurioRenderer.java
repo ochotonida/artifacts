@@ -4,11 +4,13 @@ import artifacts.Artifacts;
 import artifacts.client.render.curio.model.HandsModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -16,11 +18,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
+import javax.annotation.Nullable;
 import java.util.function.Function;
 
-public class GloveCurioRenderer implements CurioRenderer {
+public class GloveCurioRenderer implements ICurioRenderer {
 
     private final ResourceLocation defaultTexture;
     private final ResourceLocation slimTexture;
@@ -42,6 +47,16 @@ public class GloveCurioRenderer implements CurioRenderer {
         this.slimModel = modelFactory.apply(true);
     }
 
+    @Nullable
+    public static GloveCurioRenderer getGloveRenderer(ItemStack stack) {
+        if (!stack.isEmpty()) {
+            return (GloveCurioRenderer) CuriosRendererRegistry.getRenderer(stack.getItem())
+                    .filter(renderer -> renderer instanceof GloveCurioRenderer)
+                    .orElse(null);
+        }
+        return null;
+    }
+
     protected ResourceLocation getTexture(boolean hasSlimArms) {
         return hasSlimArms ? slimTexture : defaultTexture;
     }
@@ -53,19 +68,31 @@ public class GloveCurioRenderer implements CurioRenderer {
     protected static boolean hasSlimArms(Entity entity) {
         return entity instanceof AbstractClientPlayer && ((AbstractClientPlayer) entity).getModelName().equals("slim");
     }
-
     @Override
-    public final void render(String identifier, int index, PoseStack matrixStack, MultiBufferSource buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ticks, float headYaw, float headPitch, ItemStack stack) {
-        boolean hasSlimArms = hasSlimArms(entity);
+    public <T extends LivingEntity, M extends EntityModel<T>> void render(
+            ItemStack stack,
+            SlotContext slotContext,
+            PoseStack matrixStack,
+            RenderLayerParent<T, M> renderLayerParent,
+            MultiBufferSource renderTypeBuffer,
+            int light,
+            float limbSwing,
+            float limbSwingAmount,
+            float partialTicks,
+            float ageInTicks,
+            float netHeadYaw,
+            float headPitch
+    ) {
+        boolean hasSlimArms = hasSlimArms(slotContext.entity());
         HandsModel model = getModel(hasSlimArms);
-        InteractionHand hand = index % 2 == 0 ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
-        HumanoidArm handSide = hand == InteractionHand.MAIN_HAND ? entity.getMainArm() : entity.getMainArm().getOpposite();
+        InteractionHand hand = slotContext.index() % 2 == 0 ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+        HumanoidArm handSide = hand == InteractionHand.MAIN_HAND ? slotContext.entity().getMainArm() : slotContext.entity().getMainArm().getOpposite();
 
-        model.setupAnim(entity, limbSwing, limbSwingAmount, ticks, headYaw, headPitch);
-        model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-        ICurioRenderer.followBodyRotations(entity, model);
+        model.setupAnim(slotContext.entity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        model.prepareMobModel(slotContext.entity(), limbSwing, limbSwingAmount, partialTicks);
+        ICurioRenderer.followBodyRotations(slotContext.entity(), model);
 
-        renderArm(model, matrixStack, buffer, handSide, light, hasSlimArms, stack.hasFoil());
+        renderArm(model, matrixStack, renderTypeBuffer, handSide, light, hasSlimArms, stack.hasFoil());
     }
 
     protected void renderArm(HandsModel model, PoseStack matrixStack, MultiBufferSource buffer, HumanoidArm handSide, int light, boolean hasSlimArms, boolean hasFoil) {

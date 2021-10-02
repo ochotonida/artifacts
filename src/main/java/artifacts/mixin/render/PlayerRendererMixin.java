@@ -1,6 +1,5 @@
 package artifacts.mixin.render;
 
-import artifacts.client.render.curio.CurioRenderers;
 import artifacts.client.render.curio.renderer.GloveCurioRenderer;
 import artifacts.common.config.ModConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -53,7 +52,7 @@ public abstract class PlayerRendererMixin {
                         stack = stacks.getStackInSlot(slot);
                     }
 
-                    GloveCurioRenderer renderer = CurioRenderers.getGloveRenderer(stack);
+                    GloveCurioRenderer renderer = GloveCurioRenderer.getGloveRenderer(stack);
                     if (renderer != null) {
                         renderer.renderFirstPersonArm(matrixStack, buffer, light, player, handSide, stack.hasFoil());
                     }
