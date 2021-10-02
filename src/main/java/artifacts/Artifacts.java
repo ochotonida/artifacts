@@ -1,25 +1,22 @@
 package artifacts;
 
-import artifacts.client.render.curio.CurioRenderers;
-import artifacts.client.render.entity.MimicRenderer;
 import artifacts.common.capability.killtracker.EntityKillTrackerCapability;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.*;
 import artifacts.common.network.NetworkHandler;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -37,8 +34,9 @@ public class Artifacts {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public Artifacts() {
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ArtifactsClient::new);
+
         ModConfig.registerCommon();
-        ModConfig.registerClient();
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -48,7 +46,6 @@ public class Artifacts {
         ModFeatures.PLACEMENT_REGISTRY.register(modBus);
 
         modBus.addListener(this::commonSetup);
-        modBus.addListener(this::clientSetup);
         modBus.addListener(this::enqueueIMC);
 
         modBus.addGenericListener(EntityType.class, ModEntities::register);
@@ -72,12 +69,6 @@ public class Artifacts {
             EntityKillTrackerCapability.register();
             SwimHandlerCapability.register();
         });
-    }
-
-    public void clientSetup(final FMLClientSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MIMIC, MimicRenderer::new);
-        ItemProperties.register(ModItems.UMBRELLA.get(), new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
-        CurioRenderers.setupCurioRenderers();
     }
 
     public void enqueueIMC(final InterModEnqueueEvent event) {
