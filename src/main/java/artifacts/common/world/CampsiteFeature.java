@@ -6,6 +6,7 @@ import artifacts.common.init.ModEntities;
 import artifacts.common.init.ModLootTables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
@@ -21,7 +22,7 @@ import java.util.*;
 
 public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
 
-    public static final BlockStateProvider CRAFTING_STATION_PROVIDER = new WeightedStateProvider()
+    public static final BlockStateProvider CRAFTING_STATION_PROVIDER = new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
             .add(Blocks.CRAFTING_TABLE.defaultBlockState(), 5)
             .add(Blocks.FURNACE.defaultBlockState().setValue(FurnaceBlock.LIT, false), 5)
             .add(Blocks.BLAST_FURNACE.defaultBlockState().setValue(BlastFurnaceBlock.LIT, false), 5)
@@ -31,34 +32,39 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
             .add(Blocks.CARTOGRAPHY_TABLE.defaultBlockState(), 5)
             .add(Blocks.ANVIL.defaultBlockState(), 2)
             .add(Blocks.CHIPPED_ANVIL.defaultBlockState(), 2)
-            .add(Blocks.DAMAGED_ANVIL.defaultBlockState(), 1);
+            .add(Blocks.DAMAGED_ANVIL.defaultBlockState(), 1)
+    );
 
-    public static final BlockStateProvider DECORATION_PROVIDER = new WeightedStateProvider()
+    public static final BlockStateProvider DECORATION_PROVIDER = new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
             .add(Blocks.LANTERN.defaultBlockState(), 5)
             .add(Blocks.TORCH.defaultBlockState(), 3)
             .add(Blocks.REDSTONE_TORCH.defaultBlockState(), 3)
             .add(Blocks.CAKE.defaultBlockState(), 1)
-            .add(Blocks.BREWING_STAND.defaultBlockState(), 4);
+            .add(Blocks.BREWING_STAND.defaultBlockState(), 4)
+    );
 
-    public static final BlockStateProvider ORE_PROVIDER = new WeightedStateProvider()
+    public static final BlockStateProvider ORE_PROVIDER = new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
             .add(Blocks.IRON_ORE.defaultBlockState(), 6)
             .add(Blocks.REDSTONE_ORE.defaultBlockState(), 6)
             .add(Blocks.LAPIS_ORE.defaultBlockState(), 6)
             .add(Blocks.GOLD_ORE.defaultBlockState(), 4)
             .add(Blocks.DIAMOND_ORE.defaultBlockState(), 2)
-            .add(Blocks.EMERALD_ORE.defaultBlockState(), 1);
+            .add(Blocks.EMERALD_ORE.defaultBlockState(), 1)
+    );
 
-    public static final BlockStateProvider CAMPFIRE_PROVIDER = new WeightedStateProvider()
+    public static final BlockStateProvider CAMPFIRE_PROVIDER = new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
             .add(Blocks.CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, false), 12)
             .add(Blocks.CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, true), 3)
-            .add(Blocks.SOUL_CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, true), 1);
+            .add(Blocks.SOUL_CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, true), 1)
+    );
 
-    public static final BlockStateProvider LANTERN_PROVIDER = new WeightedStateProvider()
+    public static final BlockStateProvider LANTERN_PROVIDER = new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
             .add(Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true), 6)
             .add(Blocks.SOUL_LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true), 2)
             .add(Blocks.END_ROD.defaultBlockState().setValue(EndRodBlock.FACING, Direction.DOWN), 1)
             .add(Blocks.SHROOMLIGHT.defaultBlockState(), 1)
-            .add(Blocks.GLOWSTONE.defaultBlockState(), 1);
+            .add(Blocks.GLOWSTONE.defaultBlockState(), 1)
+    );
 
     public static final BlockStateProvider FLOWER_POT_PROVIDER;
 
@@ -94,10 +100,13 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
                 Blocks.POTTED_WARPED_ROOTS
         );
 
-        FLOWER_POT_PROVIDER = new WeightedStateProvider();
+        SimpleWeightedRandomList.Builder<BlockState> builder = SimpleWeightedRandomList.builder();
+
         for (Block flowerPot : flowerPots) {
-            ((WeightedStateProvider) FLOWER_POT_PROVIDER).add(flowerPot.defaultBlockState(), 1);
+            builder.add(flowerPot.defaultBlockState(), 1);
         }
+
+        FLOWER_POT_PROVIDER = new WeightedStateProvider(builder);
     }
 
     public CampsiteFeature() {
@@ -105,31 +114,35 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+        WorldGenLevel level = context.level();
+        BlockPos pos = context.origin();
+        Random random = context.random();
+
         List<BlockPos> positions = new ArrayList<>();
         BlockPos.betweenClosedStream(pos.offset(-3, 0, -3), pos.offset(3, 0, 3)).forEach((blockPos -> positions.add(blockPos.immutable())));
         positions.remove(pos);
-        positions.removeIf(currentPos -> !world.isEmptyBlock(currentPos));
-        positions.removeIf(currentPos -> !world.getBlockState(currentPos.below()).getMaterial().blocksMotion());
+        positions.removeIf(currentPos -> !level.isEmptyBlock(currentPos));
+        positions.removeIf(currentPos -> !level.getBlockState(currentPos.below()).getMaterial().blocksMotion());
         if (positions.size() < 12) {
             return false;
         }
         Collections.shuffle(positions);
 
         if (random.nextFloat() < ModConfig.common.campsiteOreChance.get()) {
-            generateOreVein(world, pos.below(), random);
+            generateOreVein(level, pos.below(), random);
         }
 
-        generateLightSource(world, pos, random);
+        generateLightSource(level, pos, random);
 
-        generateContainer(world, positions.remove(0), random);
+        generateContainer(level, positions.remove(0), random);
         if (random.nextBoolean()) {
-            generateContainer(world, positions.remove(0), random);
+            generateContainer(level, positions.remove(0), random);
         }
 
-        generateCraftingStation(world, positions.remove(0), random);
+        generateCraftingStation(level, positions.remove(0), random);
         if (random.nextBoolean()) {
-            generateCraftingStation(world, positions.remove(0), random);
+            generateCraftingStation(level, positions.remove(0), random);
         }
 
         return true;

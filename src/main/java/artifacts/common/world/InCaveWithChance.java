@@ -23,7 +23,6 @@ public class InCaveWithChance extends FeatureDecorator<ChanceDecoratorConfigurat
             int z = random.nextInt(16);
             pos = new BlockPos(pos.getX() + x, ModConfig.common.campsiteMinY.get(), pos.getZ() + z);
             while (pos.getY() <= ModConfig.common.campsiteMaxY.get()) {
-                // noinspection deprecation
                 if (helper.getBlockState(pos).isAir() && helper.getBlockState(pos.below()).getMaterial().blocksMotion()) {
                     return Stream.of(pos);
                 }
