@@ -10,13 +10,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
-public class ConfigurableRandomChance implements LootItemCondition {
-
-    private final float defaultProbability;
-
-    private ConfigurableRandomChance(float defaultProbability) {
-        this.defaultProbability = defaultProbability;
-    }
+public record ConfigurableRandomChance(float defaultProbability) implements LootItemCondition {
 
     public LootItemConditionType getType() {
         return ModLootConditions.CONFIGURABLE_ARTIFACT_CHANCE;
@@ -35,7 +29,7 @@ public class ConfigurableRandomChance implements LootItemCondition {
         return () -> new ConfigurableRandomChance(probability);
     }
 
-    public static class Serializer implements Serializer<ConfigurableRandomChance> {
+    public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<ConfigurableRandomChance> {
 
         public void serialize(JsonObject object, ConfigurableRandomChance condition, JsonSerializationContext context) {
             object.addProperty("default_probability", condition.defaultProbability);
