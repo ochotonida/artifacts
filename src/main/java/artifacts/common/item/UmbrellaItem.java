@@ -22,11 +22,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class UmbrellaItem extends ArtifactItem {
@@ -59,8 +60,10 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     @Override
-    public boolean isShield(@Nullable ItemStack stack, @Nullable LivingEntity entity) {
-        return !ModConfig.server.isCosmetic(this) && ModConfig.server.umbrella.isShield.get();
+    public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
+        return ToolActions.DEFAULT_SHIELD_ACTIONS.contains(toolAction)
+                && !ModConfig.server.isCosmetic(this)
+                && ModConfig.server.umbrella.isShield.get();
     }
 
     public UseAnim getUseAnimation(ItemStack stack) {
@@ -71,13 +74,13 @@ public class UmbrellaItem extends ArtifactItem {
         return 72000;
     }
 
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
-        if (!isShield(null, null)) {
-            return super.use(world, player, hand);
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (!canPerformAction(stack, ToolActions.SHIELD_BLOCK)) {
+            return super.use(level, player, hand);
         }
-        ItemStack itemstack = player.getItemInHand(hand);
         player.startUsingItem(hand);
-        return InteractionResultHolder.consume(itemstack);
+        return InteractionResultHolder.consume(stack);
     }
 
     public static boolean isHoldingUmbrellaUpright(LivingEntity entity, InteractionHand hand) {
