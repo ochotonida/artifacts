@@ -1,159 +1,214 @@
 package artifacts.client.render.curio.model;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.LivingEntity;
 
-public class LegsModel {
+public class LegsModel extends HumanoidModel<LivingEntity> {
 
-    private static HumanoidModel<LivingEntity> legs(float delta, int textureWidth, int textureHeight) {
-        HumanoidModel<LivingEntity> model = new HumanoidModel<>(RenderType::entityCutoutNoCull, 0, 0, textureWidth, textureHeight);
-        model.setAllVisible(false);
-
-        model.leftLeg = new ModelPart(model);
-        model.rightLeg = new ModelPart(model);
-
-        // legs
-        model.leftLeg.texOffs(0, 0);
-        model.leftLeg.addBox(-2, 0, -2, 4, 12, 4, delta);
-        model.rightLeg.texOffs(16, 0);
-        model.rightLeg.addBox(-2, 0, -2, 4, 12, 4, delta);
-
-        return model;
+    public LegsModel(ModelPart part) {
+        super(part, RenderType::entityCutoutNoCull);
     }
 
-    private static HumanoidModel<LivingEntity> sleevedLegs(float delta, int textureWidth, int textureHeight) {
-        HumanoidModel<LivingEntity> model = legs(delta, textureWidth, textureHeight);
-
-        // pants sleeves
-        model.leftLeg.texOffs(0, 16);
-        model.leftLeg.addBox(-2, 0, -2, 4, 12, 4, delta + 0.25F);
-        model.rightLeg.texOffs(16, 16);
-        model.rightLeg.addBox(-2, 0, -2, 4, 12, 4, delta + 0.25F);
-
-        return model;
+    @Override
+    protected Iterable<ModelPart> headParts() {
+        return ImmutableList.of();
     }
 
-    public static HumanoidModel<LivingEntity> shoes(float delta) {
-        HumanoidModel<LivingEntity> model = legs(delta, 32, 32);
-
-        // shoe tip
-        model.leftLeg.texOffs(0, 16);
-        model.leftLeg.addBox(-2, 12 - 3 + delta * 3 / 4, -3F - delta * 5 / 4, 4, 3, 1, delta, delta / 4, delta / 4);
-        model.rightLeg.texOffs(16, 16);
-        model.rightLeg.addBox(-2, 12 - 3 + delta * 3 / 4, -3F - delta * 5 / 4, 4, 3, 1, delta, delta / 4, delta / 4);
-
-        return model;
+    @Override
+    protected Iterable<ModelPart> bodyParts() {
+        return ImmutableList.of(leftLeg, rightLeg);
     }
 
-    private static HumanoidModel<LivingEntity> slippers() {
-        HumanoidModel<LivingEntity> model = sleevedLegs(0.51F, 64, 32);
+    public static MeshDefinition createLegs(float delta, CubeListBuilder leftLeg, CubeListBuilder rightLeg) {
+        CubeDeformation deformation = new CubeDeformation(delta);
+        MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
+
+        mesh.getRoot().addOrReplaceChild(
+                "left_leg",
+                leftLeg.texOffs(0, 0)
+                        .addBox(-2, 0, -2, 4, 12, 4, deformation),
+                PartPose.offset(1.9F, 12, 0)
+        );
+        mesh.getRoot().addOrReplaceChild(
+                "right_leg",
+                rightLeg.texOffs(16, 0)
+                        .addBox(-2, 0, -2, 4, 12, 4, deformation),
+                PartPose.offset(-1.9F, 12, 0)
+        );
+
+        return mesh;
+    }
+
+    public static MeshDefinition createSleevedLegs(float delta, CubeListBuilder leftLeg, CubeListBuilder rightLeg) {
+        CubeDeformation deformation = new CubeDeformation(delta + 0.25F);
+        MeshDefinition mesh = createLegs(delta, leftLeg, rightLeg);
+
+        // sleeves
+        leftLeg.texOffs(0, 16);
+        leftLeg.addBox(-2, 0, -2, 4, 12, 4, deformation);
+        rightLeg.texOffs(16, 16);
+        rightLeg.addBox(-2, 0, -2, 4, 12, 4, deformation);
+
+        return mesh;
+    }
+
+    public static MeshDefinition createShoes(float delta, CubeListBuilder leftLeg, CubeListBuilder rightLeg) {
+        CubeDeformation deformation = new CubeDeformation(delta, delta / 4, delta / 4);
+
+        MeshDefinition mesh = createLegs(delta, leftLeg, rightLeg);
+
+        // shoe tips
+        leftLeg.texOffs(0, 16);
+        leftLeg.addBox(-2, 12 - 3 + delta * 3 / 4, -3F - delta * 5 / 4, 4, 3, 1, deformation);
+        rightLeg.texOffs(16, 16);
+        rightLeg.addBox(-2, 12 - 3 + delta * 3 / 4, -3F - delta * 5 / 4, 4, 3, 1, deformation);
+
+        return mesh;
+    }
+
+    public static MeshDefinition createSlippers(CubeListBuilder leftLeg, CubeListBuilder rightLeg) {
+        MeshDefinition mesh = createSleevedLegs(0.51F, leftLeg, rightLeg);
 
         // heads
-        model.leftLeg.texOffs(32, 0);
-        model.leftLeg.addBox(-2.5F, 8.51F, -7.01F, 5, 4, 5);
-        model.rightLeg.texOffs(32, 16);
-        model.rightLeg.addBox(-2.5F, 8.51F, -7, 5, 4, 5);
+        leftLeg.texOffs(32, 0);
+        leftLeg.addBox(-2.5F, 8.51F, -7.01F, 5, 4, 5);
+        rightLeg.texOffs(32, 16);
+        rightLeg.addBox(-2.5F, 8.51F, -7, 5, 4, 5);
 
-        return model;
+        return mesh;
     }
 
-    public static HumanoidModel<LivingEntity> aquaDashers(float delta) {
-        HumanoidModel<LivingEntity> model = shoes(delta);
+    public static MeshDefinition createAquaDashers() {
+        CubeListBuilder leftLeg = CubeListBuilder.create();
+        CubeListBuilder rightLeg = CubeListBuilder.create();
+
+        float delta = 1.25F;
+
+        MeshDefinition mesh = createShoes(delta, leftLeg, rightLeg);
+
+        CubeDeformation deformation = new CubeDeformation(0, delta, delta);
 
         // wings
-        model.leftLeg.texOffs(0, 16);
-        model.leftLeg.addBox(2 + delta, 0, -2 + 3 + delta * 3 / 2, 0, 12, 4, 0, delta, delta);
-        model.rightLeg.texOffs(16, 16);
-        model.rightLeg.addBox(-2 - delta, 0, -2 + 3 + delta * 3 / 2, 0, 12, 4, 0, delta, delta);
+        leftLeg.texOffs(0, 16);
+        leftLeg.addBox(2 + delta, 0, -2 + 3 + delta * 3 / 2, 0, 12, 4, deformation);
+        rightLeg.texOffs(16, 16);
+        rightLeg.addBox(-2 - delta, 0, -2 + 3 + delta * 3 / 2, 0, 12, 4, deformation);
 
-        return model;
+        return mesh;
     }
 
-    public static HumanoidModel<LivingEntity> bunnyHoppers() {
-        HumanoidModel<LivingEntity> model = slippers();
+    public static MeshDefinition createBunnyHoppers() {
+        CubeListBuilder leftLeg = CubeListBuilder.create();
+        CubeListBuilder rightLeg = CubeListBuilder.create();
 
-        ModelPart ear1Left = new ModelPart(model, 52, 0);
-        ModelPart ear1Right = new ModelPart(model, 52, 16);
-        ModelPart ear2Left = new ModelPart(model, 58, 0);
-        ModelPart ear2Right = new ModelPart(model, 58, 16);
-        ear1Left.yRot = -0.2617994F;
-        ear1Right.yRot = -0.2617994F;
-        ear2Left.yRot = 0.2617994F;
-        ear2Right.yRot = 0.2617994F;
-        model.leftLeg.addChild(ear1Left);
-        model.rightLeg.addChild(ear1Right);
-        model.leftLeg.addChild(ear2Left);
-        model.rightLeg.addChild(ear2Right);
+        MeshDefinition mesh = createSlippers(leftLeg, rightLeg);
 
-        ear1Left.addBox(-3.15F, 3.51F, -3.01F, 2, 5, 1);
-        ear1Right.addBox(-3.15F, 3.51F, -3, 2, 5, 1);
-        ear2Left.addBox(1.15F, 3.51F, -3.01F, 2, 5, 1);
-        ear2Right.addBox(1.15F, 3.51F, -3, 2, 5, 1);
+        // noses
+        leftLeg.texOffs(32, 9);
+        leftLeg.addBox(-0.5F, 10, -7.5F, 1, 1, 1);
+        rightLeg.texOffs(32, 25);
+        rightLeg.addBox(-0.5F, 10, -7.5F, 1, 1, 1);
 
-        // nose
-        model.leftLeg.texOffs(32, 9);
-        model.leftLeg.addBox(-0.5F, 10, -7.5F, 1, 1, 1);
-        model.rightLeg.texOffs(32, 25);
-        model.rightLeg.addBox(-0.5F, 10, -7.5F, 1, 1, 1);
+        // tails
+        leftLeg.texOffs(52, 6);
+        leftLeg.addBox(-1, 9, 2, 2, 2, 2);
+        rightLeg.texOffs(52, 22);
+        rightLeg.addBox(-1, 9, 2, 2, 2, 2);
 
-        // tail
-        model.leftLeg.texOffs(52, 6);
-        model.leftLeg.addBox(-1, 9, 2, 2, 2, 2);
-        model.rightLeg.texOffs(52, 22);
-        model.rightLeg.addBox(-1, 9, 2, 2, 2, 2);
+        mesh.getRoot().getChild("left_leg").addOrReplaceChild(
+                "left_ear",
+                CubeListBuilder.create()
+                        .texOffs(52, 0)
+                        .addBox(-3.15F, 3.51F, -3.01F, 2, 5, 1),
+                PartPose.rotation(0, -0.2617994F, 0)
+        );
+        mesh.getRoot().getChild("right_leg").addOrReplaceChild(
+                "left_ear",
+                CubeListBuilder.create()
+                        .texOffs(52, 16)
+                        .addBox(-3.15F, 3.51F, -3, 2, 5, 1),
+                PartPose.rotation(0, -0.2617994F, 0)
+        );
+        mesh.getRoot().getChild("left_leg").addOrReplaceChild(
+                "right_ear",
+                CubeListBuilder.create()
+                        .texOffs(58, 0)
+                        .addBox(1.15F, 3.51F, -3.01F, 2, 5, 1),
+                PartPose.rotation(0, 0.2617994F, 0)
+        );
+        mesh.getRoot().getChild("left_leg").addOrReplaceChild(
+                "right_ear",
+                CubeListBuilder.create()
+                        .texOffs(58, 16)
+                        .addBox(1.15F, 3.51F, -3, 2, 5, 1),
+                PartPose.rotation(0, 0.2617994F, 0)
+        );
 
-        return model;
+        return mesh;
     }
 
-    public static HumanoidModel<LivingEntity> flippers() {
-        HumanoidModel<LivingEntity> model = legs(0.5F, 64, 64);
+    public static MeshDefinition createFlippers() {
+        CubeListBuilder leftLeg = CubeListBuilder.create();
+        CubeListBuilder rightLeg = CubeListBuilder.create();
 
-        // flippers
-        model.leftLeg.texOffs(0, 16);
-        model.leftLeg.addBox(-2, 11.5F, -16, 9, 0, 20);
-        model.rightLeg.texOffs(0, 36);
-        model.rightLeg.addBox(-7, 11.5F, -16, 9, 0, 20);
+        MeshDefinition mesh = createLegs(0.5F, leftLeg, rightLeg);
 
-        return model;
+        leftLeg.texOffs(0, 16);
+        leftLeg.addBox(-2, 11.5F, -16, 9, 0, 20);
+        rightLeg.texOffs(0, 36);
+        rightLeg.addBox(-7, 11.5F, -16, 9, 0, 20);
+
+        return mesh;
     }
 
-    public static HumanoidModel<LivingEntity> kittySlippers() {
-        HumanoidModel<LivingEntity> model = slippers();
+    public static MeshDefinition createKittySlippers() {
+        CubeListBuilder leftLeg = CubeListBuilder.create();
+        CubeListBuilder rightLeg = CubeListBuilder.create();
+
+        MeshDefinition mesh = createSlippers(leftLeg, rightLeg);
 
         // ears
-        model.leftLeg.texOffs(32, 9);
-        model.leftLeg.addBox(-2, 7.51F, -4, 1, 1, 2);
-        model.rightLeg.texOffs(32, 25);
-        model.rightLeg.addBox(-2, 7.51F, -4, 1, 1, 2);
-        model.leftLeg.texOffs(38, 9);
-        model.leftLeg.addBox(1, 7.51F, -4, 1, 1, 2);
-        model.rightLeg.texOffs(38, 25);
-        model.rightLeg.addBox(1, 7.51F, -4, 1, 1, 2);
+        leftLeg.texOffs(32, 9);
+        leftLeg.addBox(-2, 7.51F, -4, 1, 1, 2);
+        rightLeg.texOffs(32, 25);
+        rightLeg.addBox(-2, 7.51F, -4, 1, 1, 2);
+        leftLeg.texOffs(38, 9);
+        leftLeg.addBox(1, 7.51F, -4, 1, 1, 2);
+        rightLeg.texOffs(38, 25);
+        rightLeg.addBox(1, 7.51F, -4, 1, 1, 2);
 
-        // nose
-        model.leftLeg.texOffs(44, 9);
-        model.leftLeg.addBox(-1.5F, 10.51F, -8, 3, 2, 1);
-        model.rightLeg.texOffs(44, 25);
-        model.rightLeg.addBox(-1.5F, 10.51F, -8, 3, 2, 1);
+        // noses
+        leftLeg.texOffs(44, 9);
+        leftLeg.addBox(-1.5F, 10.51F, -8, 3, 2, 1);
+        rightLeg.texOffs(44, 25);
+        rightLeg.addBox(-1.5F, 10.51F, -8, 3, 2, 1);
 
-        return model;
+        return mesh;
     }
 
-    public static HumanoidModel<LivingEntity> steadfastSpikes() {
-        HumanoidModel<LivingEntity> model = sleevedLegs(0.5F, 64, 32);
+    public static MeshDefinition createSteadfastSpikes() {
+        CubeListBuilder leftLeg = CubeListBuilder.create();
+        CubeListBuilder rightLeg = CubeListBuilder.create();
+
+        MeshDefinition mesh = createSleevedLegs(0.5F, leftLeg, rightLeg);
 
         // claws
-        model.leftLeg.texOffs(32, 0);
-        model.leftLeg.addBox(-1.5F, 9, -7, 1, 3, 5);
-        model.rightLeg.texOffs(43, 0);
-        model.rightLeg.addBox(-1.5F, 9, -7, 1, 3, 5);
-        model.leftLeg.texOffs(32, 8);
-        model.leftLeg.addBox(0.5F, 9, -7, 1, 3, 5);
-        model.rightLeg.texOffs(43, 8);
-        model.rightLeg.addBox(0.5F, 9, -7, 1, 3, 5);
+        leftLeg.texOffs(32, 0);
+        leftLeg.addBox(-1.5F, 9, -7, 1, 3, 5);
+        rightLeg.texOffs(43, 0);
+        rightLeg.addBox(-1.5F, 9, -7, 1, 3, 5);
+        leftLeg.texOffs(32, 8);
+        leftLeg.addBox(0.5F, 9, -7, 1, 3, 5);
+        rightLeg.texOffs(43, 8);
+        rightLeg.addBox(0.5F, 9, -7, 1, 3, 5);
 
-        return model;
+        return mesh;
     }
 }

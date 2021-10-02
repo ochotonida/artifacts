@@ -1,7 +1,12 @@
 package artifacts.client.render.curio.model;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -12,31 +17,25 @@ import java.util.function.Function;
 
 public class ScarfModel extends HumanoidModel<LivingEntity> {
 
-    private final ModelPart cloak;
+    private final ModelPart cloak = body.getChild("cloak");
 
-    protected ScarfModel(Function<ResourceLocation, RenderType> renderType) {
-        super(renderType, 0.5F, 0, 64, 32);
-        setAllVisible(false);
+    public ScarfModel(ModelPart part, Function<ResourceLocation, RenderType> renderType) {
+        super(part, renderType);
+    }
 
-        head.visible = true;
-        body = new ModelPart(this);
-        cloak = new ModelPart(this);
-        cloak.setPos(0, 0, 1.99F);
-        body.addChild(cloak);
+    @Override
+    protected Iterable<ModelPart> headParts() {
+        return ImmutableList.of(head);
+    }
 
-        // scarf
-        body.texOffs(0, 16);
-        body.addBox(-6.01F, -2, -4, 12, 6, 8);
-
-        // dangly bit
-        cloak.texOffs(32, 0);
-        cloak.addBox(-5, 0, 0, 5, 12, 2);
+    @Override
+    protected Iterable<ModelPart> bodyParts() {
+        return ImmutableList.of(body);
     }
 
     @Override
     public void prepareMobModel(LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks) {
-        if (entity instanceof AbstractClientPlayer) {
-            AbstractClientPlayer player = (AbstractClientPlayer) entity;
+        if (entity instanceof AbstractClientPlayer player) {
             double x = Mth.lerp(partialTicks, player.xCloakO, player.xCloak) - Mth.lerp(partialTicks, player.xo, player.getX());
             double y = Mth.lerp(partialTicks, player.yCloakO, player.yCloak) - Mth.lerp(partialTicks, player.yo, player.getY());
             double z = Mth.lerp(partialTicks, player.zCloakO, player.zCloak) - Mth.lerp(partialTicks, player.zo, player.getZ());
@@ -58,7 +57,25 @@ public class ScarfModel extends HumanoidModel<LivingEntity> {
         }
     }
 
-    public static ScarfModel scarf(Function<ResourceLocation, RenderType> renderType) {
-        return new ScarfModel(renderType);
+    public static MeshDefinition createScarf() {
+        MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
+
+        mesh.getRoot().addOrReplaceChild(
+                "body",
+                CubeListBuilder.create()
+                        .texOffs(0, 16)
+                        .addBox(-6.01F, -2, -4, 12, 6, 8),
+                PartPose.ZERO
+        );
+
+        mesh.getRoot().getChild("body").addOrReplaceChild(
+                "cloak",
+                CubeListBuilder.create()
+                        .texOffs(32, 0)
+                        .addBox(-5, 0, 0, 5, 12, 2),
+                PartPose.offset(0, 0, 1.99F)
+        );
+
+        return mesh;
     }
 }

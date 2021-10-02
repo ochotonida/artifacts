@@ -1,137 +1,162 @@
 package artifacts.client.render.curio.model;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.function.Function;
 
-public class HeadModel {
+public class HeadModel extends HumanoidModel<LivingEntity> {
 
-    private static HumanoidModel<LivingEntity> head() {
-        return head(RenderType::entityCutoutNoCull, 32, 32);
+    public HeadModel(ModelPart part, Function<ResourceLocation, RenderType> renderType) {
+        super(part, renderType);
     }
 
-    private static HumanoidModel<LivingEntity> head(Function<ResourceLocation, RenderType> renderType, int textureWidth, int textureHeight) {
-        HumanoidModel<LivingEntity> model = new HumanoidModel<>(renderType, 0, 0, textureWidth, textureHeight);
-        model.setAllVisible(false);
-
-        model.head = new ModelPart(model);
-
-        // hat
-        model.head.texOffs(0, 0);
-        model.head.addBox(-4, -8, -4, 8, 8, 8, 0.5F);
-
-        return model;
+    public HeadModel(ModelPart part) {
+        this(part, RenderType::entityCutoutNoCull);
     }
 
-    public static HumanoidModel<LivingEntity> drinkingHat() {
-        HumanoidModel<LivingEntity> model = head(RenderType::entityTranslucent, 64, 32);
+    public static MeshDefinition createEmptyHat(CubeListBuilder head) {
+        MeshDefinition mesh = new MeshDefinition();
 
-        ModelPart straws = new ModelPart(model);
-        straws.xRot = 45 * (float) Math.PI / 180;
-        model.head.addChild(straws);
+        mesh.getRoot().addOrReplaceChild(
+                "head",
+                head,
+                PartPose.ZERO
+        );
+
+        return mesh;
+    }
+
+    @Override
+    protected Iterable<ModelPart> bodyParts() {
+        return ImmutableList.of();
+    }
+
+    public static MeshDefinition createHat(CubeListBuilder head) {
+        CubeDeformation deformation = new CubeDeformation(0.5F);
+        MeshDefinition mesh = createEmptyHat(head);
+
+        head.texOffs(0, 0);
+        head.addBox(-4, -8, -4, 8, 8, 8, deformation);
+
+        return mesh;
+    }
+
+    public static MeshDefinition createDiagonalHat(CubeListBuilder head, CubeListBuilder diagonalParts, String partName) {
+        MeshDefinition mesh = createHat(head);
+
+        mesh.getRoot().getChild("head").addOrReplaceChild(
+                partName,
+                diagonalParts,
+                PartPose.rotation(45 * (float) Math.PI / 180, 0, 0)
+        );
+
+        return mesh;
+    }
+
+    public static MeshDefinition createDrinkingHat() {
+        CubeListBuilder head = CubeListBuilder.create();
+        CubeListBuilder straws = CubeListBuilder.create();
+        MeshDefinition mesh = createDiagonalHat(head, straws, "straws");
 
         // hat shade
-        model.head.texOffs(32, 11);
-        model.head.addBox(-4, -6, -8, 8, 1, 4);
+        head.texOffs(32, 11);
+        head.addBox(-4, -6, -8, 8, 1, 4);
 
         // cans
-        model.head.texOffs(32, 0);
-        model.head.addBox(4, -11, -1, 3, 6, 3);
-        model.head.texOffs(44, 0);
-        model.head.addBox(-7, -11, -1, 3, 6, 3);
+        head.texOffs(32, 0);
+        head.addBox(4, -11, -1, 3, 6, 3);
+        head.texOffs(44, 0);
+        head.addBox(-7, -11, -1, 3, 6, 3);
 
-        // straws
+        // middle straw
+        head.texOffs(32, 9);
+        head.addBox(-6, -1, -5, 12, 1, 1);
+
+        // side straws
         straws.texOffs(0, 16);
         straws.addBox(5, -4, -3, 1, 1, 8);
         straws.texOffs(18, 16);
         straws.addBox(-6, -4, -3, 1, 1, 8);
 
-        // straw middle
-        model.head.texOffs(32, 9);
-        model.head.addBox(-6, -1, -5, 12, 1, 1);
-
-        return model;
+        return mesh;
     }
 
-    public static HumanoidModel<LivingEntity> nightVisionGoggles() {
-        HumanoidModel<LivingEntity> model = head();
+    public static MeshDefinition createNightVisionGoggles() {
+        CubeListBuilder head = CubeListBuilder.create();
+        MeshDefinition mesh = createHat(head);
 
         // plate
-        model.head.texOffs(0, 21);
-        model.head.addBox(-4, -6, -5 + 0.05F, 8, 4, 1);
+        head.texOffs(0, 21);
+        head.addBox(-4, -6, -5 + 0.05F, 8, 4, 1);
 
         // eyeholes
-        model.head.texOffs(0, 16);
-        model.head.addBox(1.5F, -5, -8 + 0.05F, 2, 2, 3);
-        model.head.texOffs(10, 16);
-        model.head.addBox(-3.5F, -5, -8 + 0.05F, 2, 2, 3);
+        head.texOffs(0, 16);
+        head.addBox(1.5F, -5, -8 + 0.05F, 2, 2, 3);
+        head.texOffs(10, 16);
+        head.addBox(-3.5F, -5, -8 + 0.05F, 2, 2, 3);
 
-        return model;
+        return mesh;
     }
 
-    public static HumanoidModel<LivingEntity> snorkel() {
-        HumanoidModel<LivingEntity> model = head(RenderType::entityTranslucent, 64, 32);
+    public static MeshDefinition createSnorkel() {
+        CubeListBuilder head = CubeListBuilder.create();
+        CubeListBuilder tube = CubeListBuilder.create();
+        MeshDefinition mesh = createDiagonalHat(head, tube, "tube");
 
-        ModelPart tube = new ModelPart(model);
-        tube.xRot = 45 * (float) Math.PI / 180;
-        model.head.addChild(tube);
+        // mouth thingy
+        head.texOffs(32, 0);
+        head.addBox(-2, -1.5F, -6, 8, 2, 2);
 
-        // horizontal tube
-        model.head.texOffs(32, 0);
-        model.head.addBox(-2, -1.5F, -6, 8, 2, 2);
-
-        // diagonal tube
+        // tube
         tube.texOffs(0, 16);
         tube.addBox(4.01F, -5, -3, 2, 2, 12);
 
-        return model;
+        return mesh;
     }
 
-    public static HumanoidModel<LivingEntity> superstitiousHat() {
-        HumanoidModel<LivingEntity> model = new HumanoidModel<>(RenderType::entityCutoutNoCull, 0, 0, 64, 32);
-        model.setAllVisible(false);
+    public static MeshDefinition createSuperstitiousHat() {
+        CubeListBuilder head = CubeListBuilder.create();
+        MeshDefinition mesh = createEmptyHat(head);
 
-        model.head = new ModelPart(model);
+        head.texOffs(0, 0);
+        head.addBox(-4, -16, -4, 8, 8, 8);
+        head.texOffs(0, 16);
+        head.addBox(-5, -9, -5, 10, 1, 10);
 
-        // hat
-        model.head.texOffs(0, 0);
-        model.head.addBox(-4, -16, -4, 8, 8, 8);
-
-        // brim
-        model.head.texOffs(0, 16);
-        model.head.addBox(-5, -9, -5, 10, 1, 10);
-
-        return model;
+        return mesh;
     }
 
-    public static HumanoidModel<LivingEntity> villagerHat() {
-        HumanoidModel<LivingEntity> model = head();
+    public static MeshDefinition createVillagerHat() {
+        CubeListBuilder head = CubeListBuilder.create();
+        MeshDefinition mesh = createHat(head);
 
-        // brim
-        model.head.texOffs(0, 16);
-        model.head.addBox(-8, -5.125F, -8, 16, 0, 16);
+        head.texOffs(0, 16);
+        head.addBox(-8, -5.125F, -8, 16, 0, 16);
 
-        return model;
+        return mesh;
     }
 
-    public static HumanoidModel<LivingEntity> whoopeeCushion() {
-        HumanoidModel<LivingEntity> model = new HumanoidModel<>(RenderType::entityCutoutNoCull, 0, 0, 32, 16);
-        model.setAllVisible(false);
-
-        model.head = new ModelPart(model);
+    public static MeshDefinition createWhoopeeCushion() {
+        CubeListBuilder head = CubeListBuilder.create();
+        MeshDefinition mesh = createEmptyHat(head);
 
         // cushion
-        model.head.texOffs(0, 0);
-        model.head.addBox(-3, -10, -3, 6, 2, 6);
+        head.texOffs(0, 0);
+        head.addBox(-3, -10, -3, 6, 2, 6);
 
         // flap
-        model.head.texOffs(0, 8);
-        model.head.addBox(-2, -9.25F, 3, 4, 0, 4);
+        head.texOffs(0, 8);
+        head.addBox(-2, -9.25F, 3, 4, 0, 4);
 
-        return model;
+        return mesh;
     }
 }
