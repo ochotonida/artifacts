@@ -23,10 +23,11 @@ public class DiggingClawsItem extends CurioItem {
     private boolean canHarvest(BlockState state) {
         List<String> toolTypes = ModConfig.server.diggingClaws.toolTypes.get();
         int diggingClawsHarvestLevel = ModConfig.server.diggingClaws.harvestLevel.get() - 1;
-        return state.getHarvestLevel() <= diggingClawsHarvestLevel &&
-                (state.getHarvestTool() == null
-                        || toolTypes.contains(state.getHarvestTool().getName())
-                        || toolTypes.contains("*"));
+        return false;
+        //return state.getHarvestLevel() <= diggingClawsHarvestLevel &&
+        //        (state.getHarvestTool() == null
+        //                || toolTypes.contains(state.getHarvestTool().getName())
+        //                || toolTypes.contains("*"));
     }
 
     private void onBreakSpeed(PlayerEvent.BreakSpeed event, LivingEntity wearer) {
@@ -38,7 +39,7 @@ public class DiggingClawsItem extends CurioItem {
     private void onHarvestCheck(PlayerEvent.HarvestCheck event, LivingEntity wearer) {
         if (!event.canHarvest()) {
             int diggingClawsHarvestLevel = ModConfig.server.diggingClaws.harvestLevel.get() - 1;
-            event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= diggingClawsHarvestLevel);
+            // event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= diggingClawsHarvestLevel);
             damageEquippedStacks(wearer);
         }
     }

@@ -2,15 +2,11 @@ package artifacts.common.capability.swimhandler;
 
 import artifacts.Artifacts;
 import be.florens.expandability.api.forge.PlayerSwimEvent;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -23,9 +19,10 @@ public class SwimHandlerCapability {
     public static Capability<ISwimHandler> INSTANCE = null;
 
     public static void register() {
-        CapabilityManager.INSTANCE.register(ISwimHandler.class, new Storage(), SwimHandler::new);
+        // TODO CapabilityManager.INSTANCE.register(ISwimHandler.class, new Storage(), SwimHandler::new);
     }
 
+    /*
     public static class Storage implements Capability.IStorage<ISwimHandler> {
 
         @Override
@@ -48,7 +45,7 @@ public class SwimHandlerCapability {
                 handler.setSwimTime(compoundNBT.getInt("SwimTime"));
             }
         }
-    }
+    } */
 
     @Mod.EventBusSubscriber(modid = Artifacts.MODID)
     public static class CapabilityEventHandler {

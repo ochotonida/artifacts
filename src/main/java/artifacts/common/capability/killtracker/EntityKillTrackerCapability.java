@@ -1,22 +1,15 @@
 package artifacts.common.capability.killtracker;
 
 import artifacts.Artifacts;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityKillTrackerCapability {
 
@@ -24,9 +17,10 @@ public class EntityKillTrackerCapability {
     public static Capability<IEntityKillTracker> INSTANCE = null;
 
     public static void register() {
-        CapabilityManager.INSTANCE.register(IEntityKillTracker.class, new Storage(), EntityKillTracker::new);
+        // TODO CapabilityManager.INSTANCE.register(IEntityKillTracker.class, new Storage(), EntityKillTracker::new);
     }
 
+    /* TODO
     public static class Storage implements Capability.IStorage<IEntityKillTracker> {
 
         @Override
@@ -49,7 +43,7 @@ public class EntityKillTrackerCapability {
                 }
             }
         }
-    }
+    } */
 
     @Mod.EventBusSubscriber(modid = Artifacts.MODID)
     public static class CapabilityEventHandler {

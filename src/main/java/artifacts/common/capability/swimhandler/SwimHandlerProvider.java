@@ -1,6 +1,7 @@
 package artifacts.common.capability.swimhandler;
 
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraftforge.common.capabilities.Capability;
@@ -28,13 +29,13 @@ public class SwimHandlerProvider implements ICapabilitySerializable<Tag> {
         if (SwimHandlerCapability.INSTANCE == null) {
             return new ListTag();
         }
-        return SwimHandlerCapability.INSTANCE.writeNBT(handler, null);
+        return new CompoundTag(); // TODO SwimHandlerCapability.INSTANCE.writeNBT(handler, null);
     }
 
     @Override
     public void deserializeNBT(Tag nbt) {
         if (SwimHandlerCapability.INSTANCE != null) {
-            SwimHandlerCapability.INSTANCE.readNBT(handler, null, nbt);
+            // TODO SwimHandlerCapability.INSTANCE.readNBT(handler, null, nbt);
         }
     }
 }

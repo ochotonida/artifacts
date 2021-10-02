@@ -1,32 +1,21 @@
 package artifacts.common.item.curio.belt;
 
-import artifacts.Artifacts;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModSoundEvents;
 import artifacts.common.item.curio.CurioItem;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.InputUpdateEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -36,7 +25,7 @@ import java.util.List;
 public class HeliumFlamingoItem extends CurioItem {
 
     public HeliumFlamingoItem() {
-        MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
+        // TODO MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
     }
 
@@ -96,7 +85,7 @@ public class HeliumFlamingoItem extends CurioItem {
                 }
         );
     }
-
+/*
     private class ClientEventHandler {
 
         private final ResourceLocation location = new ResourceLocation(Artifacts.MODID, "textures/gui/icons.png");
@@ -202,4 +191,5 @@ public class HeliumFlamingoItem extends CurioItem {
             );
         }
     }
+ */
 }

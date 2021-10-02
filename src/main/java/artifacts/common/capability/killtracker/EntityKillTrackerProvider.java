@@ -1,6 +1,7 @@
 package artifacts.common.capability.killtracker;
 
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraftforge.common.capabilities.Capability;
@@ -28,13 +29,13 @@ public class EntityKillTrackerProvider implements ICapabilitySerializable<Tag> {
         if (EntityKillTrackerCapability.INSTANCE == null) {
             return new ListTag();
         }
-        return EntityKillTrackerCapability.INSTANCE.writeNBT(tracker, null);
+        return new CompoundTag(); // TODO return EntityKillTrackerCapability.INSTANCE.writeNBT(tracker, null);
     }
 
     @Override
     public void deserializeNBT(Tag nbt) {
         if (EntityKillTrackerCapability.INSTANCE != null) {
-            EntityKillTrackerCapability.INSTANCE.readNBT(tracker, null, nbt);
+            // TODO EntityKillTrackerCapability.INSTANCE.readNBT(tracker, null, nbt);
         }
     }
 }
