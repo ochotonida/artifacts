@@ -1,10 +1,7 @@
 package artifacts.common.item.curio;
 
-import artifacts.client.render.curio.CurioRenderers;
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.ArtifactItem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -56,16 +53,6 @@ public class CurioItem extends ArtifactItem implements ICurioItem {
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
         return true;
-    }
-
-    @Override
-    public boolean canRender(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        return CurioRenderers.getRenderer(this) != null;
-    }
-
-    @Override
-    public void render(String identifier, int index, PoseStack matrixStack, MultiBufferSource buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ticks, float headYaw, float headPitch, ItemStack stack) {
-        CurioRenderers.getRenderer(this).render(identifier, index, matrixStack, buffer, light, entity, limbSwing, limbSwingAmount, partialTicks, ticks, headYaw, headPitch, stack);
     }
 
     protected void damageStack(SlotContext slotContext, ItemStack stack) {
