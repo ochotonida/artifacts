@@ -1,23 +1,23 @@
 package artifacts.client.render.curio.model;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.entity.LivingEntity;
 
-public class NecklaceModel extends BipedModel<LivingEntity> {
+public class NecklaceModel extends HumanoidModel<LivingEntity> {
 
     protected NecklaceModel() {
         super(RenderType::entityTranslucent, 0, 0, 64, 48);
         setAllVisible(false);
 
-        body = new ModelRenderer(this);
+        body = new ModelPart(this);
     }
 
     @Override
-    public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int light, int overlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha) {
         matrixStack.scale(0.5F, 0.5F, 0.5F);
         body.render(matrixStack, buffer, light, overlay, red, green, blue, alpha);
     }

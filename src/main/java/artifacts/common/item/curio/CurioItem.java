@@ -3,11 +3,11 @@ package artifacts.common.item.curio;
 import artifacts.client.render.curio.CurioRenderers;
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.ArtifactItem;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -64,17 +64,17 @@ public class CurioItem extends ArtifactItem implements ICurioItem {
     }
 
     @Override
-    public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ticks, float headYaw, float headPitch, ItemStack stack) {
+    public void render(String identifier, int index, PoseStack matrixStack, MultiBufferSource buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ticks, float headYaw, float headPitch, ItemStack stack) {
         CurioRenderers.getRenderer(this).render(identifier, index, matrixStack, buffer, light, entity, limbSwing, limbSwingAmount, partialTicks, ticks, headYaw, headPitch, stack);
     }
 
-    protected void damageStack(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        damageStack(identifier, index, entity, stack, 1);
+    protected void damageStack(SlotContext slotContext, ItemStack stack) {
+        damageStack(slotContext, stack, 1);
     }
 
-    protected void damageStack(String identifier, int index, LivingEntity entity, ItemStack stack, int damage) {
-        stack.hurtAndBreak(damage, entity, damager ->
-                CuriosApi.getCuriosHelper().onBrokenCurio(identifier, index, damager)
+    protected void damageStack(SlotContext slotContext, ItemStack stack, int damage) {
+        stack.hurtAndBreak(damage, slotContext.entity(), entity ->
+                CuriosApi.getCuriosHelper().onBrokenCurio(slotContext)
         );
     }
 
@@ -85,7 +85,8 @@ public class CurioItem extends ArtifactItem implements ICurioItem {
                     for (int slot = 0; slot < stacks.getSlots(); slot++) {
                         ItemStack stack = stacks.getStackInSlot(slot);
                         if (!stack.isEmpty() && stack.getItem() == this) {
-                            damageStack(identifier, slot, entity, stack, damage);
+                            SlotContext slotContext = new SlotContext(identifier, entity, slot, false, true);
+                            damageStack(slotContext, stack, damage);
                         }
                     }
                 })

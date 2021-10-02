@@ -1,9 +1,9 @@
 package artifacts.common.network;
 
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -12,7 +12,7 @@ public class SwimPacket {
     private final boolean shouldSwim;
 
     @SuppressWarnings("unused")
-    public SwimPacket(PacketBuffer buffer) {
+    public SwimPacket(FriendlyByteBuf buffer) {
         shouldSwim = buffer.readBoolean();
     }
 
@@ -21,12 +21,12 @@ public class SwimPacket {
     }
 
     @SuppressWarnings("unused")
-    void encode(PacketBuffer buffer) {
+    void encode(FriendlyByteBuf buffer) {
         buffer.writeBoolean(shouldSwim);
     }
 
     void handle(Supplier<NetworkEvent.Context> context) {
-        PlayerEntity player = context.get().getSender();
+        Player player = context.get().getSender();
         if (player != null) {
             context.get().enqueueWork(() -> player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(handler -> handler.setSwimming(shouldSwim)));
         }

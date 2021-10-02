@@ -1,15 +1,15 @@
 package artifacts.common.capability.killtracker;
 
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nullable;
 
-public class EntityKillTrackerProvider implements ICapabilitySerializable<INBT> {
+public class EntityKillTrackerProvider implements ICapabilitySerializable<Tag> {
 
     private final IEntityKillTracker tracker = new EntityKillTracker();
     private final LazyOptional<IEntityKillTracker> optionalTracker = LazyOptional.of(() -> tracker);
@@ -24,15 +24,15 @@ public class EntityKillTrackerProvider implements ICapabilitySerializable<INBT> 
     }
 
     @Override
-    public INBT serializeNBT() {
+    public Tag serializeNBT() {
         if (EntityKillTrackerCapability.INSTANCE == null) {
-            return new ListNBT();
+            return new ListTag();
         }
         return EntityKillTrackerCapability.INSTANCE.writeNBT(tracker, null);
     }
 
     @Override
-    public void deserializeNBT(INBT nbt) {
+    public void deserializeNBT(Tag nbt) {
         if (EntityKillTrackerCapability.INSTANCE != null) {
             EntityKillTrackerCapability.INSTANCE.readNBT(tracker, null, nbt);
         }

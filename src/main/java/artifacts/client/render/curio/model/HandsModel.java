@@ -1,24 +1,24 @@
 package artifacts.client.render.curio.model;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.HandSide;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
 
-public class HandsModel extends BipedModel<LivingEntity> {
+public class HandsModel extends HumanoidModel<LivingEntity> {
 
     protected HandsModel(int textureWidth, int textureHeight) {
         super(0, 0, textureWidth, textureHeight);
         setAllVisible(false);
 
-        leftArm = new ModelRenderer(this);
-        rightArm = new ModelRenderer(this);
+        leftArm = new ModelPart(this);
+        rightArm = new ModelPart(this);
     }
 
-    public void renderHand(HandSide handSide, MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        leftArm.visible = handSide == HandSide.LEFT;
+    public void renderHand(HumanoidArm handSide, PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        leftArm.visible = handSide == HumanoidArm.LEFT;
         rightArm.visible = !leftArm.visible;
         renderToBuffer(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }

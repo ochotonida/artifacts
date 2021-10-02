@@ -1,6 +1,6 @@
 package artifacts.common.capability.killtracker;
 
-import net.minecraft.entity.EntityType;
+import net.minecraft.world.entity.EntityType;
 
 import java.util.Collection;
 

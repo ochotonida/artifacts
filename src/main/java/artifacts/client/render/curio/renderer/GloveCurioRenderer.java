@@ -2,21 +2,21 @@ package artifacts.client.render.curio.renderer;
 
 import artifacts.Artifacts;
 import artifacts.client.render.curio.model.HandsModel;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraft.util.HandSide;
-import net.minecraft.util.ResourceLocation;
-import top.theillusivec4.curios.api.type.capability.ICurio;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import top.theillusivec4.curios.api.client.ICurioRenderer;
 
 import java.util.function.Function;
 
@@ -51,35 +51,35 @@ public class GloveCurioRenderer implements CurioRenderer {
     }
 
     protected static boolean hasSlimArms(Entity entity) {
-        return entity instanceof AbstractClientPlayerEntity && ((AbstractClientPlayerEntity) entity).getModelName().equals("slim");
+        return entity instanceof AbstractClientPlayer && ((AbstractClientPlayer) entity).getModelName().equals("slim");
     }
 
     @Override
-    public final void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ticks, float headYaw, float headPitch, ItemStack stack) {
+    public final void render(String identifier, int index, PoseStack matrixStack, MultiBufferSource buffer, int light, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ticks, float headYaw, float headPitch, ItemStack stack) {
         boolean hasSlimArms = hasSlimArms(entity);
         HandsModel model = getModel(hasSlimArms);
-        Hand hand = index % 2 == 0 ? Hand.MAIN_HAND : Hand.OFF_HAND;
-        HandSide handSide = hand == Hand.MAIN_HAND ? entity.getMainArm() : entity.getMainArm().getOpposite();
+        InteractionHand hand = index % 2 == 0 ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+        HumanoidArm handSide = hand == InteractionHand.MAIN_HAND ? entity.getMainArm() : entity.getMainArm().getOpposite();
 
         model.setupAnim(entity, limbSwing, limbSwingAmount, ticks, headYaw, headPitch);
         model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-        ICurio.RenderHelper.followBodyRotations(entity, model);
+        ICurioRenderer.followBodyRotations(entity, model);
 
         renderArm(model, matrixStack, buffer, handSide, light, hasSlimArms, stack.hasFoil());
     }
 
-    protected void renderArm(HandsModel model, MatrixStack matrixStack, IRenderTypeBuffer buffer, HandSide handSide, int light, boolean hasSlimArms, boolean hasFoil) {
+    protected void renderArm(HandsModel model, PoseStack matrixStack, MultiBufferSource buffer, HumanoidArm handSide, int light, boolean hasSlimArms, boolean hasFoil) {
         RenderType renderType = model.renderType(getTexture(hasSlimArms));
-        IVertexBuilder vertexBuilder = ItemRenderer.getFoilBuffer(buffer, renderType, false, hasFoil);
+        VertexConsumer vertexBuilder = ItemRenderer.getFoilBuffer(buffer, renderType, false, hasFoil);
         model.renderHand(handSide, matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 
-    public final void renderFirstPersonArm(MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, AbstractClientPlayerEntity player, HandSide side, boolean hasFoil) {
+    public final void renderFirstPersonArm(PoseStack matrixStack, MultiBufferSource buffer, int light, AbstractClientPlayer player, HumanoidArm side, boolean hasFoil) {
         if (!player.isSpectator()) {
             boolean hasSlimArms = hasSlimArms(player);
             HandsModel model = getModel(hasSlimArms);
 
-            ModelRenderer arm = side == HandSide.LEFT ? model.leftArm : model.rightArm;
+            ModelPart arm = side == HumanoidArm.LEFT ? model.leftArm : model.rightArm;
 
             model.setAllVisible(false);
             arm.visible = true;
@@ -93,9 +93,9 @@ public class GloveCurioRenderer implements CurioRenderer {
         }
     }
 
-    protected void renderFirstPersonArm(HandsModel model, ModelRenderer arm, MatrixStack matrixStack, IRenderTypeBuffer buffer, int light, boolean hasSlimArms, boolean hasFoil) {
+    protected void renderFirstPersonArm(HandsModel model, ModelPart arm, PoseStack matrixStack, MultiBufferSource buffer, int light, boolean hasSlimArms, boolean hasFoil) {
         RenderType renderType = model.renderType(getTexture(hasSlimArms));
-        IVertexBuilder builder = ItemRenderer.getFoilBuffer(buffer, renderType, false, hasFoil);
+        VertexConsumer builder = ItemRenderer.getFoilBuffer(buffer, renderType, false, hasFoil);
         arm.render(matrixStack, builder, light, OverlayTexture.NO_OVERLAY);
     }
 }

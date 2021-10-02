@@ -2,11 +2,10 @@ package artifacts.common.item.curio.belt;
 
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -22,24 +21,24 @@ public class AntidoteVesselItem extends CurioItem {
     }
 
     @Override
-    public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
         if (!ModConfig.server.isCosmetic(this)) {
-            Map<Effect, EffectInstance> effects = new HashMap<>();
+            Map<MobEffect, MobEffectInstance> effects = new HashMap<>();
 
             int maxEffectDuration = ModConfig.server.antidoteVessel.maxEffectDuration.get();
 
-            entity.getActiveEffectsMap().forEach((effect, instance) -> {
-                Set<Effect> negativeEffects = ModConfig.server.antidoteVessel.negativeEffects;
+            slotContext.entity().getActiveEffectsMap().forEach((effect, instance) -> {
+                Set<MobEffect> negativeEffects = ModConfig.server.antidoteVessel.negativeEffects;
                 if (negativeEffects.contains(effect) && instance.getDuration() > maxEffectDuration) {
                     effects.put(effect, instance);
                 }
             });
 
             effects.forEach((effect, instance) -> {
-                damageStack(identifier, index, entity, stack);
-                entity.removeEffectNoUpdate(effect);
+                damageStack(slotContext, stack);
+                slotContext.entity().removeEffectNoUpdate(effect);
                 if (maxEffectDuration > 0) {
-                    entity.addEffect(new EffectInstance(effect, maxEffectDuration, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
+                    slotContext.entity().addEffect(new MobEffectInstance(effect, maxEffectDuration, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
                 }
             });
         }

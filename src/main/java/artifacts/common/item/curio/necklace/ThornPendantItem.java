@@ -1,8 +1,8 @@
 package artifacts.common.item.curio.necklace;
 
 import artifacts.common.config.ModConfig;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 
 public class ThornPendantItem extends PendantItem {
 

@@ -1,18 +1,18 @@
 package artifacts.client.render.curio.model;
 
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.entity.LivingEntity;
 
 public class LegsModel {
 
-    private static BipedModel<LivingEntity> legs(float delta, int textureWidth, int textureHeight) {
-        BipedModel<LivingEntity> model = new BipedModel<>(RenderType::entityCutoutNoCull, 0, 0, textureWidth, textureHeight);
+    private static HumanoidModel<LivingEntity> legs(float delta, int textureWidth, int textureHeight) {
+        HumanoidModel<LivingEntity> model = new HumanoidModel<>(RenderType::entityCutoutNoCull, 0, 0, textureWidth, textureHeight);
         model.setAllVisible(false);
 
-        model.leftLeg = new ModelRenderer(model);
-        model.rightLeg = new ModelRenderer(model);
+        model.leftLeg = new ModelPart(model);
+        model.rightLeg = new ModelPart(model);
 
         // legs
         model.leftLeg.texOffs(0, 0);
@@ -23,8 +23,8 @@ public class LegsModel {
         return model;
     }
 
-    private static BipedModel<LivingEntity> sleevedLegs(float delta, int textureWidth, int textureHeight) {
-        BipedModel<LivingEntity> model = legs(delta, textureWidth, textureHeight);
+    private static HumanoidModel<LivingEntity> sleevedLegs(float delta, int textureWidth, int textureHeight) {
+        HumanoidModel<LivingEntity> model = legs(delta, textureWidth, textureHeight);
 
         // pants sleeves
         model.leftLeg.texOffs(0, 16);
@@ -35,8 +35,8 @@ public class LegsModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> shoes(float delta) {
-        BipedModel<LivingEntity> model = legs(delta, 32, 32);
+    public static HumanoidModel<LivingEntity> shoes(float delta) {
+        HumanoidModel<LivingEntity> model = legs(delta, 32, 32);
 
         // shoe tip
         model.leftLeg.texOffs(0, 16);
@@ -47,8 +47,8 @@ public class LegsModel {
         return model;
     }
 
-    private static BipedModel<LivingEntity> slippers() {
-        BipedModel<LivingEntity> model = sleevedLegs(0.51F, 64, 32);
+    private static HumanoidModel<LivingEntity> slippers() {
+        HumanoidModel<LivingEntity> model = sleevedLegs(0.51F, 64, 32);
 
         // heads
         model.leftLeg.texOffs(32, 0);
@@ -59,8 +59,8 @@ public class LegsModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> aquaDashers(float delta) {
-        BipedModel<LivingEntity> model = shoes(delta);
+    public static HumanoidModel<LivingEntity> aquaDashers(float delta) {
+        HumanoidModel<LivingEntity> model = shoes(delta);
 
         // wings
         model.leftLeg.texOffs(0, 16);
@@ -71,13 +71,13 @@ public class LegsModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> bunnyHoppers() {
-        BipedModel<LivingEntity> model = slippers();
+    public static HumanoidModel<LivingEntity> bunnyHoppers() {
+        HumanoidModel<LivingEntity> model = slippers();
 
-        ModelRenderer ear1Left = new ModelRenderer(model, 52, 0);
-        ModelRenderer ear1Right = new ModelRenderer(model, 52, 16);
-        ModelRenderer ear2Left = new ModelRenderer(model, 58, 0);
-        ModelRenderer ear2Right = new ModelRenderer(model, 58, 16);
+        ModelPart ear1Left = new ModelPart(model, 52, 0);
+        ModelPart ear1Right = new ModelPart(model, 52, 16);
+        ModelPart ear2Left = new ModelPart(model, 58, 0);
+        ModelPart ear2Right = new ModelPart(model, 58, 16);
         ear1Left.yRot = -0.2617994F;
         ear1Right.yRot = -0.2617994F;
         ear2Left.yRot = 0.2617994F;
@@ -107,8 +107,8 @@ public class LegsModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> flippers() {
-        BipedModel<LivingEntity> model = legs(0.5F, 64, 64);
+    public static HumanoidModel<LivingEntity> flippers() {
+        HumanoidModel<LivingEntity> model = legs(0.5F, 64, 64);
 
         // flippers
         model.leftLeg.texOffs(0, 16);
@@ -119,8 +119,8 @@ public class LegsModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> kittySlippers() {
-        BipedModel<LivingEntity> model = slippers();
+    public static HumanoidModel<LivingEntity> kittySlippers() {
+        HumanoidModel<LivingEntity> model = slippers();
 
         // ears
         model.leftLeg.texOffs(32, 9);
@@ -141,8 +141,8 @@ public class LegsModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> steadfastSpikes() {
-        BipedModel<LivingEntity> model = sleevedLegs(0.5F, 64, 32);
+    public static HumanoidModel<LivingEntity> steadfastSpikes() {
+        HumanoidModel<LivingEntity> model = sleevedLegs(0.5F, 64, 32);
 
         // claws
         model.leftLeg.texOffs(32, 0);

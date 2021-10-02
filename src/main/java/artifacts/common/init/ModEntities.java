@@ -2,9 +2,9 @@ package artifacts.common.init;
 
 import artifacts.Artifacts;
 import artifacts.common.entity.MimicEntity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.registries.ObjectHolder;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModEntities {
 
     @SuppressWarnings("unchecked")
-    public static final EntityType<MimicEntity> MIMIC = (EntityType<MimicEntity>) EntityType.Builder.of(MimicEntity::new, EntityClassification.MISC)
+    public static final EntityType<MimicEntity> MIMIC = (EntityType<MimicEntity>) EntityType.Builder.of(MimicEntity::new, MobCategory.MISC)
             .sized(14 / 16F, 14 / 16F)
             .setTrackingRange(64)
             .build(new ResourceLocation(Artifacts.MODID, "mimic").toString())

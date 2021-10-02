@@ -2,12 +2,12 @@ package artifacts.common.capability.swimhandler;
 
 import artifacts.Artifacts;
 import be.florens.expandability.api.forge.PlayerSwimEvent;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -29,8 +29,8 @@ public class SwimHandlerCapability {
     public static class Storage implements Capability.IStorage<ISwimHandler> {
 
         @Override
-        public INBT writeNBT(Capability<ISwimHandler> capability, ISwimHandler handler, Direction side) {
-            CompoundNBT compoundNBT = new CompoundNBT();
+        public Tag writeNBT(Capability<ISwimHandler> capability, ISwimHandler handler, Direction side) {
+            CompoundTag compoundNBT = new CompoundTag();
             compoundNBT.putBoolean("ShouldSwim", handler.isSwimming());
             compoundNBT.putBoolean("ShouldSink", handler.isSinking());
             compoundNBT.putBoolean("IsWet", handler.isWet());
@@ -39,9 +39,9 @@ public class SwimHandlerCapability {
         }
 
         @Override
-        public void readNBT(Capability<ISwimHandler> capability, ISwimHandler handler, Direction side, INBT nbt) {
-            if (nbt instanceof CompoundNBT) {
-                CompoundNBT compoundNBT = (CompoundNBT) nbt;
+        public void readNBT(Capability<ISwimHandler> capability, ISwimHandler handler, Direction side, Tag nbt) {
+            if (nbt instanceof CompoundTag) {
+                CompoundTag compoundNBT = (CompoundTag) nbt;
                 handler.setSwimming(compoundNBT.getBoolean("ShouldSwim"));
                 handler.setSinking(compoundNBT.getBoolean("ShouldSink"));
                 handler.setWet(compoundNBT.getBoolean("IsWet"));
@@ -55,7 +55,7 @@ public class SwimHandlerCapability {
 
         @SubscribeEvent
         public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
-            if (event.getObject() instanceof PlayerEntity) {
+            if (event.getObject() instanceof Player) {
                 SwimHandlerProvider provider = new SwimHandlerProvider();
                 event.addCapability(new ResourceLocation(Artifacts.MODID, "swim_handler"), provider);
                 event.addListener(provider::invalidate);
@@ -89,7 +89,7 @@ public class SwimHandlerCapability {
                             if (!handler.isWet()) {
                                 handler.setWet(true);
                             }
-                        } else if (event.player.isOnGround() || event.player.abilities.flying) {
+                        } else if (event.player.isOnGround() || event.player.getAbilities().flying) {
                             handler.setWet(false);
                         }
                     }

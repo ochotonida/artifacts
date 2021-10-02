@@ -2,10 +2,10 @@ package artifacts.common.item.curio.hands;
 
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.SlotContext;

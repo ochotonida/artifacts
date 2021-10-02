@@ -1,10 +1,10 @@
 package artifacts.common.network;
 
 import artifacts.client.network.ClientPacketHandler;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -13,7 +13,7 @@ public class SinkPacket {
     public final boolean shouldSink;
 
     @SuppressWarnings("unused")
-    public SinkPacket(PacketBuffer buffer) {
+    public SinkPacket(FriendlyByteBuf buffer) {
         shouldSink = buffer.readBoolean();
     }
 
@@ -22,7 +22,7 @@ public class SinkPacket {
     }
 
     @SuppressWarnings("unused")
-    void encode(PacketBuffer buffer) {
+    void encode(FriendlyByteBuf buffer) {
         buffer.writeBoolean(shouldSink);
     }
 

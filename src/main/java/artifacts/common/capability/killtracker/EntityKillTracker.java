@@ -2,7 +2,7 @@ package artifacts.common.capability.killtracker;
 
 import artifacts.common.config.ModConfig;
 import com.google.common.collect.EvictingQueue;
-import net.minecraft.entity.EntityType;
+import net.minecraft.world.entity.EntityType;
 
 import java.util.Collection;
 

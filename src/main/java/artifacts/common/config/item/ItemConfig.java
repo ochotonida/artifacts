@@ -2,7 +2,7 @@ package artifacts.common.config.item;
 
 import artifacts.Artifacts;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 
 public class ItemConfig {
 

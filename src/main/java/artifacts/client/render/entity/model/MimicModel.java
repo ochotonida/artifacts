@@ -1,26 +1,26 @@
 package artifacts.client.render.entity.model;
 
 import artifacts.common.entity.MimicEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
 
 public class MimicModel extends EntityModel<MimicEntity> {
 
-    protected final ModelRenderer upperTeeth;
-    protected final ModelRenderer lowerTeeth;
-    protected final ModelRenderer upperMouthOverlay;
-    protected final ModelRenderer lowerMouthOverlay;
+    protected final ModelPart upperTeeth;
+    protected final ModelPart lowerTeeth;
+    protected final ModelPart upperMouthOverlay;
+    protected final ModelPart lowerMouthOverlay;
 
     public MimicModel() {
         texWidth = 64;
         texHeight = 32;
 
-        upperTeeth = new ModelRenderer(this, 0, 0);
-        lowerTeeth = new ModelRenderer(this, 0, 15);
-        upperMouthOverlay = new ModelRenderer(this, 24, 0);
-        lowerMouthOverlay = new ModelRenderer(this, 36, 15);
+        upperTeeth = new ModelPart(this, 0, 0);
+        lowerTeeth = new ModelPart(this, 0, 15);
+        upperMouthOverlay = new ModelPart(this, 24, 0);
+        lowerMouthOverlay = new ModelPart(this, 36, 15);
 
         upperTeeth.addBox(-6, 0, -13, 12, 3, 12);
         lowerTeeth.addBox(-6, -4, -13, 12, 3, 12);
@@ -50,7 +50,7 @@ public class MimicModel extends EntityModel<MimicEntity> {
     }
 
     @Override
-    public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         upperTeeth.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         lowerTeeth.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         upperMouthOverlay.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);

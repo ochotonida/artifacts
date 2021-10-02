@@ -6,17 +6,27 @@ import artifacts.common.init.ModLootTables;
 import artifacts.common.loot.ConfigurableRandomChance;
 import com.google.common.base.Preconditions;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.advancements.criterion.EntityFlagsPredicate;
-import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.critereon.EntityFlagsPredicate;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.LootTableProvider;
-import net.minecraft.item.Item;
-import net.minecraft.loot.*;
-import net.minecraft.loot.conditions.EntityHasProperty;
-import net.minecraft.loot.conditions.KilledByPlayer;
-import net.minecraft.loot.functions.Smelt;
-import net.minecraft.resources.ResourcePackType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.ArrayList;
@@ -29,7 +39,7 @@ import java.util.function.Supplier;
 
 public class LootTables extends LootTableProvider {
 
-    private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> tables = new ArrayList<>();
+    private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> tables = new ArrayList<>();
 
     private final ExistingFileHelper existingFileHelper;
 
@@ -39,7 +49,7 @@ public class LootTables extends LootTableProvider {
     }
 
     @Override
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> getTables() {
+    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
         tables.clear();
         addDrinkingHatsLootTable();
         addArtifactsLootTable();
@@ -48,11 +58,11 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .when(ConfigurableRandomChance.configurableRandomChance(1 / 500F))
-                        .when(KilledByPlayer.killedByPlayer())
+                        .when(LootItemKilledByPlayerCondition.killedByPlayer())
                         .add(createItemEntry(ModItems.EVERLASTING_BEEF.get(), 1)
                                 .apply(
-                                        Smelt.smelted().when(
-                                                EntityHasProperty.hasProperties(
+                                        SmeltItemFunction.smelted().when(
+                                                LootItemEntityPropertyCondition.hasProperties(
                                                         LootContext.EntityTarget.THIS,
                                                         EntityPredicate.Builder.entity().flags(
                                                                 EntityFlagsPredicate.Builder.flags()
@@ -64,7 +74,7 @@ public class LootTables extends LootTableProvider {
                                 )
                         )
                 ),
-                LootParameterSets.ENTITY
+                LootContextParamSets.ENTITY
         );
 
         return tables;
@@ -75,7 +85,7 @@ public class LootTables extends LootTableProvider {
                 .withPool(
                         LootPool.lootPool()
                                 .name("main")
-                                .setRolls(ConstantRange.exactly(1))
+                                .setRolls(ConstantValue.exactly(1))
                                 .add(createItemEntry(ModItems.SNORKEL.get(), 8))
                                 .add(createItemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 8))
                                 .add(createItemEntry(ModItems.PANIC_NECKLACE.get(), 8))
@@ -120,7 +130,7 @@ public class LootTables extends LootTableProvider {
                 .withPool(
                         LootPool.lootPool()
                                 .name("main")
-                                .setRolls(ConstantRange.exactly(1))
+                                .setRolls(ConstantValue.exactly(1))
                                 .add(createItemEntry(ModItems.PLASTIC_DRINKING_HAT.get(), 3))
                                 .add(createItemEntry(ModItems.NOVELTY_DRINKING_HAT.get(), 1))
                 )
@@ -134,7 +144,7 @@ public class LootTables extends LootTableProvider {
                     LootTable.lootTable().withPool(
                             LootPool.lootPool()
                                     .name("main")
-                                    .setRolls(ConstantRange.exactly(1))
+                                    .setRolls(ConstantValue.exactly(1))
                                     .when(ConfigurableRandomChance.configurableRandomChance(0.02F))
                                     .add(createItemEntry(ModItems.VILLAGER_HAT.get(), 1))
                     )
@@ -144,14 +154,14 @@ public class LootTables extends LootTableProvider {
                 LootPool.lootPool()
                         .name("main")
                         .when(ConfigurableRandomChance.configurableRandomChance(1))
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .add(createItemEntry(ModItems.WHOOPEE_CUSHION.get(), 1))
                 )
         );
         addLootTable("inject/chests/village/village_armorer", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.1F))
                         .add(createItemEntry(ModItems.STEADFAST_SPIKES.get(), 1))
                         .add(createItemEntry(ModItems.SUPERSTITIOUS_HAT.get(), 1))
@@ -162,7 +172,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/village/village_butcher", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.02F))
                         .add(createItemEntry(ModItems.EVERLASTING_BEEF.get(), 1))
                 )
@@ -170,7 +180,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/village/village_tannery", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.2F))
                         .add(createItemEntry(ModItems.UMBRELLA.get(), 3))
                         .add(createItemEntry(ModItems.WHOOPEE_CUSHION.get(), 2))
@@ -182,7 +192,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/village/village_temple", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.2F))
                         .add(createItemEntry(ModItems.CROSS_NECKLACE.get(), 1))
                         .add(createItemEntry(ModItems.ANTIDOTE_VESSEL.get(), 1))
@@ -192,7 +202,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/village/village_toolsmith", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.15F))
                         .add(createItemEntry(ModItems.DIGGING_CLAWS.get(), 1))
                         .add(createItemEntry(ModItems.POCKET_PISTON.get(), 1))
@@ -201,7 +211,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/village/village_weaponsmith", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.1F))
                         .add(createItemEntry(ModItems.FERAL_CLAWS.get(), 1))
                 )
@@ -209,7 +219,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/abandoned_mineshaft", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.30F))
                         .add(createItemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 2))
                         .add(createItemEntry(ModItems.PANIC_NECKLACE.get(), 2))
@@ -225,7 +235,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/bastion_hoglin_stable", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.20F))
                         .add(createArtifactEntry(5))
                         .add(createItemEntry(ModItems.BUNNY_HOPPERS.get(), 3))
@@ -236,7 +246,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/bastion_treasure", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.65F))
                         .add(createArtifactEntry(6))
                         .add(createItemEntry(ModItems.GOLDEN_HOOK.get(), 3))
@@ -251,7 +261,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/buried_treasure", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.25F))
                         .add(createItemEntry(ModItems.SNORKEL.get(), 5))
                         .add(createItemEntry(ModItems.FLIPPERS.get(), 5))
@@ -269,7 +279,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/desert_pyramid", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.2F))
                         .add(createItemEntry(ModItems.FLAME_PENDANT.get(), 2))
                         .add(createItemEntry(ModItems.THORN_PENDANT.get(), 2))
@@ -285,7 +295,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/end_city_treasure", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.3F))
                         .add(createArtifactEntry(3))
                         .add(createItemEntry(ModItems.CRYSTAL_HEART.get(), 1))
@@ -296,7 +306,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/jungle_temple", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.3F))
                         .add(createItemEntry(ModItems.KITTY_SLIPPERS.get(), 2))
                         .add(createItemEntry(ModItems.BUNNY_HOPPERS.get(), 1))
@@ -305,7 +315,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/nether_bridge", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.15F))
                         .add(createItemEntry(ModItems.CROSS_NECKLACE.get(), 3))
                         .add(createItemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 3))
@@ -317,7 +327,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/pillager_outpost", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.25F))
                         .add(createItemEntry(ModItems.PANIC_NECKLACE.get(), 1))
                         .add(createItemEntry(ModItems.POCKET_PISTON.get(), 1))
@@ -333,7 +343,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/ruined_portal", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.15F))
                         .add(createItemEntry(ModItems.NIGHT_VISION_GOGGLES.get(), 1))
                         .add(createItemEntry(ModItems.THORN_PENDANT.get(), 1))
@@ -347,7 +357,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/shipwreck_treasure", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.15F))
                         .add(createItemEntry(ModItems.GOLDEN_HOOK.get(), 3))
                         .add(createItemEntry(ModItems.SNORKEL.get(), 1))
@@ -365,7 +375,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/stronghold_corridor", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.3F))
                         .add(createArtifactEntry(3))
                         .add(createItemEntry(ModItems.POWER_GLOVE.get(), 1))
@@ -379,7 +389,7 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/underwater_ruin_big", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.45F))
                         .add(createItemEntry(ModItems.SNORKEL.get(), 3))
                         .add(createItemEntry(ModItems.FLIPPERS.get(), 3))
@@ -394,44 +404,43 @@ public class LootTables extends LootTableProvider {
         addLootTable("inject/chests/woodland_mansion", LootTable.lootTable().withPool(
                 LootPool.lootPool()
                         .name("main")
-                        .setRolls(ConstantRange.exactly(1))
+                        .setRolls(ConstantValue.exactly(1))
                         .when(ConfigurableRandomChance.configurableRandomChance(0.25F))
                         .add(createArtifactEntry(1))
                 )
         );
     }
 
-    private static StandaloneLootEntry.Builder<?> createItemEntry(Item item, int weight) {
-        return ItemLootEntry.lootTableItem(item).setWeight(weight);
+    private static LootPoolSingletonContainer.Builder<?> createItemEntry(Item item, int weight) {
+        return LootItem.lootTableItem(item).setWeight(weight);
     }
 
-    private static LootEntry.Builder<?> createArtifactEntry(int weight) {
+    private static LootPoolEntryContainer.Builder<?> createArtifactEntry(int weight) {
         return createLootTableEntry("artifact", weight);
     }
 
-    private static LootEntry.Builder<?> createDrinkingHatEntry(int weight) {
+    private static LootPoolEntryContainer.Builder<?> createDrinkingHatEntry(int weight) {
         return createLootTableEntry("items/drinking_hat", weight);
     }
 
-    private static LootEntry.Builder<?> createLootTableEntry(String lootTable, int weight) {
-        return TableLootEntry.lootTableReference(new ResourceLocation(Artifacts.MODID, lootTable)).setWeight(weight);
+    private static LootPoolEntryContainer.Builder<?> createLootTableEntry(String lootTable, int weight) {
+        return LootTableReference.lootTableReference(new ResourceLocation(Artifacts.MODID, lootTable)).setWeight(weight);
     }
 
-    private void addLootTable(String location, LootTable.Builder lootTable, LootParameterSet lootParameterSet) {
+    private void addLootTable(String location, LootTable.Builder lootTable, LootContextParamSet lootParameterSet) {
         if (location.startsWith("inject/")) {
             String actualLocation = location.replace("inject/", "");
-            Preconditions.checkArgument(existingFileHelper.exists(new ResourceLocation("loot_tables/" + actualLocation + ".json"), ResourcePackType.SERVER_DATA), "Loot table %s does not exist in any known data pack", actualLocation);
+            Preconditions.checkArgument(existingFileHelper.exists(new ResourceLocation("loot_tables/" + actualLocation + ".json"), PackType.SERVER_DATA), "Loot table %s does not exist in any known data pack", actualLocation);
             Preconditions.checkArgument(ModLootTables.LootTableEvents.LOOT_TABLE_LOCATIONS.contains(actualLocation), "Loot table %s does not exist in list of injected loot tables", actualLocation);
         }
         tables.add(Pair.of(() -> lootBuilder -> lootBuilder.accept(new ResourceLocation(Artifacts.MODID, location), lootTable), lootParameterSet));
     }
 
     private void addLootTable(String location, LootTable.Builder lootTable) {
-        addLootTable(location, lootTable, LootParameterSets.ALL_PARAMS);
+        addLootTable(location, lootTable, LootContextParamSets.ALL_PARAMS);
     }
 
     @Override
-    protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationtracker) {
-        map.forEach((loc, table) -> LootTableManager.validate(validationtracker, loc, table));
-    }
+    protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationTracker) {
+        map.forEach((location, lootTable) -> net.minecraft.world.level.storage.loot.LootTables.validate(validationTracker, location, lootTable));    }
 }

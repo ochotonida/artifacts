@@ -2,12 +2,12 @@ package artifacts.common.item.curio.belt;
 
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -23,14 +23,14 @@ public class ObsidianSkullItem extends CurioItem {
                 !wearer.level.isClientSide
                 && event.getAmount() >= 1
                 && event.getSource().isFire()
-                && wearer instanceof PlayerEntity
-                && !((PlayerEntity) wearer).getCooldowns().isOnCooldown(this)
+                && wearer instanceof Player player
+                && !player.getCooldowns().isOnCooldown(this)
         ) {
             int cooldown = ModConfig.server.obsidianSkull.cooldown.get();
             int fireResistanceDuration = ModConfig.server.obsidianSkull.fireResistanceDuration.get();
 
-            wearer.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, fireResistanceDuration, 0, false, true));
-            ((PlayerEntity) wearer).getCooldowns().addCooldown(this, cooldown);
+            wearer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceDuration, 0, false, true));
+            player.getCooldowns().addCooldown(this, cooldown);
 
             damageEquippedStacks(wearer);
         }

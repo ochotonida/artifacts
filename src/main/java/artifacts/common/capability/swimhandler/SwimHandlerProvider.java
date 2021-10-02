@@ -1,15 +1,15 @@
 package artifacts.common.capability.swimhandler;
 
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nullable;
 
-public class SwimHandlerProvider implements ICapabilitySerializable<INBT> {
+public class SwimHandlerProvider implements ICapabilitySerializable<Tag> {
 
     private final ISwimHandler handler = new SwimHandler();
     private final LazyOptional<ISwimHandler> optionalHandler = LazyOptional.of(() -> handler);
@@ -24,15 +24,15 @@ public class SwimHandlerProvider implements ICapabilitySerializable<INBT> {
     }
 
     @Override
-    public INBT serializeNBT() {
+    public Tag serializeNBT() {
         if (SwimHandlerCapability.INSTANCE == null) {
-            return new ListNBT();
+            return new ListTag();
         }
         return SwimHandlerCapability.INSTANCE.writeNBT(handler, null);
     }
 
     @Override
-    public void deserializeNBT(INBT nbt) {
+    public void deserializeNBT(Tag nbt) {
         if (SwimHandlerCapability.INSTANCE != null) {
             SwimHandlerCapability.INSTANCE.readNBT(handler, null, nbt);
         }

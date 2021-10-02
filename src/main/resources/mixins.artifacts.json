@@ -6,15 +6,15 @@
   "mixins": [
     "item.aquadashers.EntityMixin",
     "item.umbrella.EntityMixin",
-    "item.villagerhat.AbstractVillagerEntityMixin",
-    "item.villagerhat.VillagerEntityMixin"
+    "item.villagerhat.AbstractVillagerMixin",
+    "item.villagerhat.VillagerMixin"
   ],
   "client": [
-    "item.umbrella.BipedModelMixin",
+    "item.umbrella.HumanoidModelMixin",
     "render.PlayerRendererMixin"
   ],
   "server": [
-    "item.umbrella.ServerPlayNetHandlerMixin"
+    "item.umbrella.ServerGamePacketListenerImplMixin"
   ],
   "injectors": {
     "defaultRequire": 1

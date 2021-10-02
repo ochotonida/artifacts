@@ -1,8 +1,8 @@
 package artifacts.mixin.item.umbrella;
 
 import artifacts.common.item.UmbrellaItem;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,7 +15,6 @@ public abstract class EntityMixin {
     private void blockRain(CallbackInfoReturnable<Boolean> info) {
         Entity self = (Entity) (Object) this;
 
-        // noinspection ConstantConditions
         if (info.getReturnValueZ() && self instanceof LivingEntity && UmbrellaItem.isHoldingUmbrellaUpright((LivingEntity) self)) {
             info.setReturnValue(false);
         }

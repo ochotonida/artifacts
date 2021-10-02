@@ -1,6 +1,6 @@
 package artifacts.common.capability.swimhandler;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 
 public interface ISwimHandler {
 
@@ -22,5 +22,5 @@ public interface ISwimHandler {
 
     void syncSwimming();
 
-    void syncSinking(ServerPlayerEntity player);
+    void syncSinking(ServerPlayer player);
 }

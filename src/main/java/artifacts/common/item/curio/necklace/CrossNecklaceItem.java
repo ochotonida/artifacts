@@ -2,9 +2,8 @@ package artifacts.common.item.curio.necklace;
 
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -24,14 +23,14 @@ public class CrossNecklaceItem extends CurioItem {
     }
 
     @Override
-    public void curioTick(String identifier, int index, LivingEntity entity, ItemStack stack) {
-        if (entity.invulnerableTime <= 10) {
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+        if (slotContext.entity().invulnerableTime <= 10) {
             setCanApplyBonus(stack, true);
         } else {
             if (canApplyBonus(stack)) {
-                entity.invulnerableTime += ModConfig.server.crossNecklace.invincibilityBonus.get();
+                slotContext.entity().invulnerableTime += ModConfig.server.crossNecklace.invincibilityBonus.get();
                 setCanApplyBonus(stack, false);
-                damageStack(identifier, index, entity, stack);
+                damageStack(slotContext, stack);
             }
         }
     }

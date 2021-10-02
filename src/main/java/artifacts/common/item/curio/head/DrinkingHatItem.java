@@ -3,15 +3,15 @@ package artifacts.common.item.curio.head;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModItems;
 import artifacts.common.item.curio.CurioItem;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -29,10 +29,10 @@ public class DrinkingHatItem extends CurioItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
         if (ModConfig.client.showTooltips.get() && ModConfig.server != null && !ModConfig.server.isCosmetic(this)) {
             if (this != ModItems.PLASTIC_DRINKING_HAT.get()) {
-                tooltip.add(new TranslationTextComponent(ModItems.PLASTIC_DRINKING_HAT.get().getDescriptionId() + ".tooltip").withStyle(TextFormatting.GRAY));
+                tooltip.add(new TranslatableComponent(ModItems.PLASTIC_DRINKING_HAT.get().getDescriptionId() + ".tooltip").withStyle(ChatFormatting.GRAY));
             }
         }
         super.appendHoverText(stack, world, tooltip, flags);
@@ -52,8 +52,8 @@ public class DrinkingHatItem extends CurioItem {
     }
 
     private boolean canApplyEffect(LivingEntityUseItemEvent event) {
-        UseAction action = event.getItem().getUseAnimation();
-        return action == UseAction.DRINK || action == UseAction.EAT && ModConfig.server.plasticDrinkingHat.enableFastEating.get();
+        UseAnim action = event.getItem().getUseAnimation();
+        return action == UseAnim.DRINK || action == UseAnim.EAT && ModConfig.server.plasticDrinkingHat.enableFastEating.get();
     }
 
     @Override

@@ -1,21 +1,21 @@
 package artifacts.client.render.entity.model;
 
 import artifacts.common.entity.MimicEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
 
 public class MimicChestLayerModel extends EntityModel<MimicEntity> {
 
-    protected final ModelRenderer bottom;
-    protected final ModelRenderer lid;
-    protected final ModelRenderer latch;
+    protected final ModelPart bottom;
+    protected final ModelPart lid;
+    protected final ModelPart latch;
 
     public MimicChestLayerModel() {
-        bottom = new ModelRenderer(64, 64, 0, 19);
-        lid = new ModelRenderer(64, 64, 0, 0);
-        latch = new ModelRenderer(64, 64, 0, 0);
+        bottom = new ModelPart(64, 64, 0, 19);
+        lid = new ModelPart(64, 64, 0, 0);
+        latch = new ModelPart(64, 64, 0, 0);
 
         bottom.addBox(1, -9, 0, 14, 10, 14);
         lid.addBox(1, 0, 0, 14, 5, 14);
@@ -43,7 +43,7 @@ public class MimicChestLayerModel extends EntityModel<MimicEntity> {
     }
 
     @Override
-    public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         bottom.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         lid.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         latch.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);

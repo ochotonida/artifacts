@@ -1,9 +1,9 @@
 package artifacts.common.util;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.IndirectEntityDamageSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.damagesource.IndirectEntityDamageSource;
+import net.minecraft.world.entity.LivingEntity;
 
 import javax.annotation.Nullable;
 

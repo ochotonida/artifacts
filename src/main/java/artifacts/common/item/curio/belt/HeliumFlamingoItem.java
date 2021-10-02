@@ -6,18 +6,18 @@ import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModSoundEvents;
 import artifacts.common.item.curio.CurioItem;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputUpdateEvent;
@@ -48,12 +48,12 @@ public class HeliumFlamingoItem extends CurioItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
         if (ModConfig.server != null && ModConfig.server.isCosmetic(this)) {
             super.appendHoverText(stack, world, tooltip, flags);
         } else if (ModConfig.client.showTooltips.get()) {
-            tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.0").withStyle(TextFormatting.GRAY));
-            tooltip.add(new TranslationTextComponent(getDescriptionId() + ".tooltip.1", Minecraft.getInstance().options.keySprint.getTranslatedKeyMessage()).withStyle(TextFormatting.GRAY));
+            tooltip.add(new TranslatableComponent(getDescriptionId() + ".tooltip.0").withStyle(ChatFormatting.GRAY));
+            tooltip.add(new TranslatableComponent(getDescriptionId() + ".tooltip.1", Minecraft.getInstance().options.keySprint.getTranslatedKeyMessage()).withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -82,7 +82,7 @@ public class HeliumFlamingoItem extends CurioItem {
                             if (event.player.tickCount % 20 == 0) {
                                 damageEquippedStacks(event.player);
                             }
-                            if (!event.player.abilities.invulnerable && maxFlightTime > 0) {
+                            if (!event.player.getAbilities().invulnerable && maxFlightTime > 0) {
                                 handler.setSwimTime(handler.getSwimTime() + 1);
                             }
                         }
@@ -112,7 +112,7 @@ public class HeliumFlamingoItem extends CurioItem {
                 return;
             }
 
-            PlayerEntity player = event.getPlayer();
+            Player player = event.getPlayer();
             boolean isSprintKeyDown = Minecraft.getInstance().options.keySprint.isDown();
 
             player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
@@ -131,13 +131,13 @@ public class HeliumFlamingoItem extends CurioItem {
                                     && !player.isOnGround()
                                     && (!player.isInWater() || handler.isSinking())
                                     && !player.isFallFlying()
-                                    && !player.abilities.flying
+                                    && !player.getAbilities().flying
                                     && !player.isPassenger())) {
                                 handler.setSwimming(true);
                                 handler.syncSwimming();
                                 hasTouchedGround = false;
                             }
-                        } else if (player.abilities.flying) {
+                        } else if (player.getAbilities().flying) {
                             handler.setSwimming(false);
                             handler.syncSwimming();
                             hasTouchedGround = true;
@@ -189,8 +189,8 @@ public class HeliumFlamingoItem extends CurioItem {
                         Minecraft.getInstance().getTextureManager().bind(location);
                         RenderSystem.enableBlend();
 
-                        int full = MathHelper.ceil((progress - 2D / maxProgressTime) * 10);
-                        int partial = MathHelper.ceil(progress * 10) - full;
+                        int full = Mth.ceil((progress - 2D / maxProgressTime) * 10);
+                        int partial = Mth.ceil(progress * 10) - full;
 
                         for (int i = 0; i < full + partial; ++i) {
                             ForgeIngameGui.blit(event.getMatrixStack(), left - i * 8 - 9, top, -90, (i < full ? 0 : 9), 0, 9, 9, 16, 32);

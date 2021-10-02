@@ -1,26 +1,26 @@
 package artifacts.common.item;
 
 import artifacts.common.config.ModConfig;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class EverlastingFoodItem extends ArtifactItem {
 
-    public EverlastingFoodItem(Food food) {
+    public EverlastingFoodItem(FoodProperties food) {
         super(new Item.Properties().food(food));
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, World world, LivingEntity entity) {
+    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entity) {
         if (isEdible()) {
             entity.eat(world, stack.copy());
-            if (!world.isClientSide && entity instanceof PlayerEntity) {
+            if (!world.isClientSide && entity instanceof Player) {
                 int cooldown = ModConfig.server.everlastingBeef.cooldown.get();
-                ((PlayerEntity) entity).getCooldowns().addCooldown(this, cooldown);
+                ((Player) entity).getCooldowns().addCooldown(this, cooldown);
             }
         }
 

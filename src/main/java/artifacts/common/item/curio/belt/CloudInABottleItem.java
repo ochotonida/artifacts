@@ -7,15 +7,15 @@ import artifacts.common.item.curio.CurioItem;
 import artifacts.common.network.DoubleJumpPacket;
 import artifacts.common.network.NetworkHandler;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effects;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,23 +34,23 @@ public class CloudInABottleItem extends CurioItem {
         addListener(EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
     }
 
-    public void jump(PlayerEntity player) {
+    public void jump(Player player) {
         player.fallDistance = 0;
 
         double upwardsMotion = 0.5;
-        if (player.hasEffect(Effects.JUMP)) {
+        if (player.hasEffect(MobEffects.JUMP)) {
             // noinspection ConstantConditions
-            upwardsMotion += 0.1 * (player.getEffect(Effects.JUMP).getAmplifier() + 1);
+            upwardsMotion += 0.1 * (player.getEffect(MobEffects.JUMP).getAmplifier() + 1);
         }
         upwardsMotion *= player.isSprinting() ? ModConfig.server.cloudInABottle.sprintJumpHeightMultiplier.get() : 1;
 
-        Vector3d motion = player.getDeltaMovement();
+        Vec3 motion = player.getDeltaMovement();
         double motionMultiplier = player.isSprinting() ? ModConfig.server.cloudInABottle.sprintJumpDistanceMultiplier.get() : 0;
-        float direction = (float) (player.yRot * Math.PI / 180);
+        float direction = (float) (player.getYRot() * Math.PI / 180);
         player.setDeltaMovement(player.getDeltaMovement().add(
-                -MathHelper.sin(direction) * motionMultiplier,
+                -Mth.sin(direction) * motionMultiplier,
                 upwardsMotion - motion.y,
-                MathHelper.cos(direction) * motionMultiplier)
+                Mth.cos(direction) * motionMultiplier)
         );
 
         player.hasImpulse = true;
@@ -93,7 +93,7 @@ public class CloudInABottleItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SuppressWarnings("unused")
         public void onClientTick(TickEvent.ClientTickEvent event) {
-            ClientPlayerEntity player = Minecraft.getInstance().player;
+            LocalPlayer player = Minecraft.getInstance().player;
 
             if (event.phase == TickEvent.Phase.END && player != null && player.input != null) {
                 if ((player.isOnGround() || player.onClimbable()) && !player.isInWater()) {
@@ -101,7 +101,7 @@ public class CloudInABottleItem extends CurioItem {
                     canDoubleJump = true;
                 } else if (!player.input.jumping) {
                     hasReleasedJumpKey = true;
-                } else if (!player.abilities.flying && canDoubleJump && hasReleasedJumpKey) {
+                } else if (!player.getAbilities().flying && canDoubleJump && hasReleasedJumpKey) {
                     canDoubleJump = false;
                     if (isEquippedBy(player)) {
                         NetworkHandler.INSTANCE.sendToServer(new DoubleJumpPacket());

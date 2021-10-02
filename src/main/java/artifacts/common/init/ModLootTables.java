@@ -1,10 +1,10 @@
 package artifacts.common.init;
 
 import artifacts.Artifacts;
-import net.minecraft.loot.LootEntry;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.TableLootEntry;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -73,9 +73,9 @@ public class ModLootTables {
                     .build();
         }
 
-        private static LootEntry.Builder<?> getInjectEntry(String name) {
+        private static LootPoolEntryContainer.Builder<?> getInjectEntry(String name) {
             ResourceLocation table = new ResourceLocation(Artifacts.MODID, "inject/" + name);
-            return TableLootEntry.lootTableReference(table).setWeight(1);
+            return LootTableReference.lootTableReference(table).setWeight(1);
         }
     }
 }

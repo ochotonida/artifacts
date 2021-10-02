@@ -1,24 +1,24 @@
 package artifacts.client.render.curio.model;
 
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.function.Function;
 
 public class HeadModel {
 
-    private static BipedModel<LivingEntity> head() {
+    private static HumanoidModel<LivingEntity> head() {
         return head(RenderType::entityCutoutNoCull, 32, 32);
     }
 
-    private static BipedModel<LivingEntity> head(Function<ResourceLocation, RenderType> renderType, int textureWidth, int textureHeight) {
-        BipedModel<LivingEntity> model = new BipedModel<>(renderType, 0, 0, textureWidth, textureHeight);
+    private static HumanoidModel<LivingEntity> head(Function<ResourceLocation, RenderType> renderType, int textureWidth, int textureHeight) {
+        HumanoidModel<LivingEntity> model = new HumanoidModel<>(renderType, 0, 0, textureWidth, textureHeight);
         model.setAllVisible(false);
 
-        model.head = new ModelRenderer(model);
+        model.head = new ModelPart(model);
 
         // hat
         model.head.texOffs(0, 0);
@@ -27,10 +27,10 @@ public class HeadModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> drinkingHat() {
-        BipedModel<LivingEntity> model = head(RenderType::entityTranslucent, 64, 32);
+    public static HumanoidModel<LivingEntity> drinkingHat() {
+        HumanoidModel<LivingEntity> model = head(RenderType::entityTranslucent, 64, 32);
 
-        ModelRenderer straws = new ModelRenderer(model);
+        ModelPart straws = new ModelPart(model);
         straws.xRot = 45 * (float) Math.PI / 180;
         model.head.addChild(straws);
 
@@ -57,8 +57,8 @@ public class HeadModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> nightVisionGoggles() {
-        BipedModel<LivingEntity> model = head();
+    public static HumanoidModel<LivingEntity> nightVisionGoggles() {
+        HumanoidModel<LivingEntity> model = head();
 
         // plate
         model.head.texOffs(0, 21);
@@ -73,10 +73,10 @@ public class HeadModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> snorkel() {
-        BipedModel<LivingEntity> model = head(RenderType::entityTranslucent, 64, 32);
+    public static HumanoidModel<LivingEntity> snorkel() {
+        HumanoidModel<LivingEntity> model = head(RenderType::entityTranslucent, 64, 32);
 
-        ModelRenderer tube = new ModelRenderer(model);
+        ModelPart tube = new ModelPart(model);
         tube.xRot = 45 * (float) Math.PI / 180;
         model.head.addChild(tube);
 
@@ -91,11 +91,11 @@ public class HeadModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> superstitiousHat() {
-        BipedModel<LivingEntity> model = new BipedModel<>(RenderType::entityCutoutNoCull, 0, 0, 64, 32);
+    public static HumanoidModel<LivingEntity> superstitiousHat() {
+        HumanoidModel<LivingEntity> model = new HumanoidModel<>(RenderType::entityCutoutNoCull, 0, 0, 64, 32);
         model.setAllVisible(false);
 
-        model.head = new ModelRenderer(model);
+        model.head = new ModelPart(model);
 
         // hat
         model.head.texOffs(0, 0);
@@ -108,8 +108,8 @@ public class HeadModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> villagerHat() {
-        BipedModel<LivingEntity> model = head();
+    public static HumanoidModel<LivingEntity> villagerHat() {
+        HumanoidModel<LivingEntity> model = head();
 
         // brim
         model.head.texOffs(0, 16);
@@ -118,11 +118,11 @@ public class HeadModel {
         return model;
     }
 
-    public static BipedModel<LivingEntity> whoopeeCushion() {
-        BipedModel<LivingEntity> model = new BipedModel<>(RenderType::entityCutoutNoCull, 0, 0, 32, 16);
+    public static HumanoidModel<LivingEntity> whoopeeCushion() {
+        HumanoidModel<LivingEntity> model = new HumanoidModel<>(RenderType::entityCutoutNoCull, 0, 0, 32, 16);
         model.setAllVisible(false);
 
-        model.head = new ModelRenderer(model);
+        model.head = new ModelPart(model);
 
         // cushion
         model.head.texOffs(0, 0);

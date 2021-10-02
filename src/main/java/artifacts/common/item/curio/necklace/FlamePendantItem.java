@@ -1,7 +1,7 @@
 package artifacts.common.item.curio.necklace;
 
 import artifacts.common.config.ModConfig;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.entity.LivingEntity;
 
 public class FlamePendantItem extends PendantItem {
 

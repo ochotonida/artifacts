@@ -4,23 +4,24 @@ import artifacts.common.config.ModConfig;
 import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.ModEntities;
 import artifacts.common.init.ModLootTables;
-import net.minecraft.block.*;
-import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.blockstateprovider.BlockStateProvider;
-import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraftforge.common.Tags;
 
 import java.util.*;
 
-public class CampsiteFeature extends Feature<NoFeatureConfig> {
+public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
 
-    public static final BlockStateProvider CRAFTING_STATION_PROVIDER = new WeightedBlockStateProvider()
+    public static final BlockStateProvider CRAFTING_STATION_PROVIDER = new WeightedStateProvider()
             .add(Blocks.CRAFTING_TABLE.defaultBlockState(), 5)
             .add(Blocks.FURNACE.defaultBlockState().setValue(FurnaceBlock.LIT, false), 5)
             .add(Blocks.BLAST_FURNACE.defaultBlockState().setValue(BlastFurnaceBlock.LIT, false), 5)
@@ -32,14 +33,14 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
             .add(Blocks.CHIPPED_ANVIL.defaultBlockState(), 2)
             .add(Blocks.DAMAGED_ANVIL.defaultBlockState(), 1);
 
-    public static final BlockStateProvider DECORATION_PROVIDER = new WeightedBlockStateProvider()
+    public static final BlockStateProvider DECORATION_PROVIDER = new WeightedStateProvider()
             .add(Blocks.LANTERN.defaultBlockState(), 5)
             .add(Blocks.TORCH.defaultBlockState(), 3)
             .add(Blocks.REDSTONE_TORCH.defaultBlockState(), 3)
             .add(Blocks.CAKE.defaultBlockState(), 1)
             .add(Blocks.BREWING_STAND.defaultBlockState(), 4);
 
-    public static final BlockStateProvider ORE_PROVIDER = new WeightedBlockStateProvider()
+    public static final BlockStateProvider ORE_PROVIDER = new WeightedStateProvider()
             .add(Blocks.IRON_ORE.defaultBlockState(), 6)
             .add(Blocks.REDSTONE_ORE.defaultBlockState(), 6)
             .add(Blocks.LAPIS_ORE.defaultBlockState(), 6)
@@ -47,12 +48,12 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
             .add(Blocks.DIAMOND_ORE.defaultBlockState(), 2)
             .add(Blocks.EMERALD_ORE.defaultBlockState(), 1);
 
-    public static final BlockStateProvider CAMPFIRE_PROVIDER = new WeightedBlockStateProvider()
+    public static final BlockStateProvider CAMPFIRE_PROVIDER = new WeightedStateProvider()
             .add(Blocks.CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, false), 12)
             .add(Blocks.CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, true), 3)
             .add(Blocks.SOUL_CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, true), 1);
 
-    public static final BlockStateProvider LANTERN_PROVIDER = new WeightedBlockStateProvider()
+    public static final BlockStateProvider LANTERN_PROVIDER = new WeightedStateProvider()
             .add(Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true), 6)
             .add(Blocks.SOUL_LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true), 2)
             .add(Blocks.END_ROD.defaultBlockState().setValue(EndRodBlock.FACING, Direction.DOWN), 1)
@@ -93,18 +94,18 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
                 Blocks.POTTED_WARPED_ROOTS
         );
 
-        FLOWER_POT_PROVIDER = new WeightedBlockStateProvider();
+        FLOWER_POT_PROVIDER = new WeightedStateProvider();
         for (Block flowerPot : flowerPots) {
-            ((WeightedBlockStateProvider) FLOWER_POT_PROVIDER).add(flowerPot.defaultBlockState(), 1);
+            ((WeightedStateProvider) FLOWER_POT_PROVIDER).add(flowerPot.defaultBlockState(), 1);
         }
     }
 
     public CampsiteFeature() {
-        super(NoFeatureConfig.CODEC);
+        super(NoneFeatureConfiguration.CODEC);
     }
 
     @Override
-    public boolean place(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, NoFeatureConfig featureConfig) {
+    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
         List<BlockPos> positions = new ArrayList<>();
         BlockPos.betweenClosedStream(pos.offset(-3, 0, -3), pos.offset(3, 0, 3)).forEach((blockPos -> positions.add(blockPos.immutable())));
         positions.remove(pos);
@@ -134,7 +135,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
         return true;
     }
 
-    public void generateLightSource(ISeedReader world, BlockPos pos, Random random) {
+    public void generateLightSource(WorldGenLevel world, BlockPos pos, Random random) {
         if (random.nextInt(4) != 0) {
             BlockPos currentPos = pos;
             while (currentPos.getY() - pos.getY() < 8 && world.isEmptyBlock(currentPos.above())) {
@@ -148,7 +149,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
         setBlock(world, pos, CAMPFIRE_PROVIDER.getState(random, pos));
     }
 
-    public void generateContainer(ISeedReader world, BlockPos pos, Random random) {
+    public void generateContainer(WorldGenLevel world, BlockPos pos, Random random) {
         if (random.nextFloat() < ModConfig.common.campsiteMimicChance.get()) {
             MimicEntity mimic = ModEntities.MIMIC.create(world.getLevel());
             if (mimic != null) {
@@ -168,11 +169,11 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
             } else {
                 setBlock(world, pos, Blocks.BARREL.defaultBlockState().setValue(BarrelBlock.FACING, Direction.getRandom(random)));
             }
-            LockableLootTileEntity.setLootTable(world, random, pos, ModLootTables.CAMPSITE_CHEST);
+            RandomizableContainerBlockEntity.setLootTable(world, random, pos, ModLootTables.CAMPSITE_CHEST);
         }
     }
 
-    public void generateCraftingStation(ISeedReader world, BlockPos pos, Random random) {
+    public void generateCraftingStation(WorldGenLevel world, BlockPos pos, Random random) {
         BlockState state = CRAFTING_STATION_PROVIDER.getState(random, pos);
         setBlock(world, pos, state);
         if (random.nextBoolean() && world.isEmptyBlock(pos.above())) {
@@ -181,7 +182,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
 
     }
 
-    public void generateDecoration(ISeedReader world, BlockPos pos, Random random) {
+    public void generateDecoration(WorldGenLevel world, BlockPos pos, Random random) {
         if (random.nextInt(3) == 0) {
             setBlock(world, pos, DECORATION_PROVIDER.getState(random, pos));
         } else {
@@ -189,7 +190,7 @@ public class CampsiteFeature extends Feature<NoFeatureConfig> {
         }
     }
 
-    public void generateOreVein(ISeedReader world, BlockPos pos, Random random) {
+    public void generateOreVein(WorldGenLevel world, BlockPos pos, Random random) {
         BlockState ore = ORE_PROVIDER.getState(random, pos);
         List<BlockPos> positions = new ArrayList<>();
         positions.add(pos);

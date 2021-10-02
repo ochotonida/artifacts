@@ -4,8 +4,8 @@ import artifacts.client.render.curio.model.*;
 import artifacts.client.render.curio.renderer.*;
 import artifacts.common.init.ModItems;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

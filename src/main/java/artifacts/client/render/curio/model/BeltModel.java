@@ -1,17 +1,17 @@
 package artifacts.client.render.curio.model;
 
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.function.Function;
 
-public class BeltModel extends BipedModel<LivingEntity> {
+public class BeltModel extends HumanoidModel<LivingEntity> {
 
-    protected final ModelRenderer charm = new ModelRenderer(this);
+    protected final ModelPart charm = new ModelPart(this);
 
     private final float xOffset;
     private final float zOffset;
@@ -25,7 +25,7 @@ public class BeltModel extends BipedModel<LivingEntity> {
 
         setAllVisible(false);
 
-        body = new ModelRenderer(this);
+        body = new ModelPart(this);
 
         // belt
         body.texOffs(0, 0);
@@ -69,7 +69,7 @@ public class BeltModel extends BipedModel<LivingEntity> {
 
     public static BeltModel cloudInABottle() {
         return new BeltModel(RenderType::entityTranslucent, 3, -3, -0.5F) {
-            private final ModelRenderer cloud;
+            private final ModelPart cloud;
 
             {
                 // jar
@@ -81,7 +81,7 @@ public class BeltModel extends BipedModel<LivingEntity> {
                 charm.addBox(-1, -1, -1, 2, 1, 2);
 
                 // cloud
-                cloud = new ModelRenderer(this).texOffs(8, 25);
+                cloud = new ModelPart(this).texOffs(8, 25);
                 cloud.addBox(-1, 1.5F, -1, 2, 2, 2);
                 charm.addChild(cloud);
             }
@@ -90,7 +90,7 @@ public class BeltModel extends BipedModel<LivingEntity> {
             public void setupAnim(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
                 super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                 cloud.yRot = (ageInTicks) / 50;
-                cloud.y = MathHelper.cos((ageInTicks) / 30) / 2;
+                cloud.y = Mth.cos((ageInTicks) / 30) / 2;
             }
         };
     }
@@ -113,11 +113,11 @@ public class BeltModel extends BipedModel<LivingEntity> {
         return model;
     }
 
-    public static BipedModel<LivingEntity> heliumFlamingo() {
-        BipedModel<LivingEntity> model = new BipedModel<>(RenderType::entityCutoutNoCull, 0, 0, 64, 64);
+    public static HumanoidModel<LivingEntity> heliumFlamingo() {
+        HumanoidModel<LivingEntity> model = new HumanoidModel<>(RenderType::entityCutoutNoCull, 0, 0, 64, 64);
         model.setAllVisible(false);
 
-        model.body = new ModelRenderer(model);
+        model.body = new ModelPart(model);
         model.body.texOffs(16, 36).addBox(-1, 1, -14, 2, 3, 5);
         model.body.texOffs(0, 18).addBox(4, 9, -7, 4, 4, 14);
         model.body.texOffs(0, 0).addBox(-8, 9, -7, 4, 4, 14);

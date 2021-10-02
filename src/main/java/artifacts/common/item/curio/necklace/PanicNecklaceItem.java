@@ -2,11 +2,11 @@ package artifacts.common.item.curio.necklace;
 
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -23,7 +23,7 @@ public class PanicNecklaceItem extends CurioItem {
             int level = ModConfig.server.panicNecklace.speedLevel.get() - 1;
 
             if (duration > 0 && level >= 0) {
-                wearer.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, duration, level, false, false));
+                wearer.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, duration, level, false, false));
                 damageEquippedStacks(wearer);
             }
         }

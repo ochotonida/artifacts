@@ -1,28 +1,28 @@
 package artifacts.common.network;
 
 import artifacts.common.init.ModItems;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
 public class DoubleJumpPacket {
 
     @SuppressWarnings("unused")
-    public DoubleJumpPacket(PacketBuffer buffer) {
+    public DoubleJumpPacket(FriendlyByteBuf buffer) {
     }
 
     public DoubleJumpPacket() {
     }
 
     @SuppressWarnings("unused")
-    void encode(PacketBuffer buffer) {
+    void encode(FriendlyByteBuf buffer) {
     }
 
     void handle(Supplier<NetworkEvent.Context> context) {
-        ServerPlayerEntity player = context.get().getSender();
+        ServerPlayer player = context.get().getSender();
         if (player != null) {
             context.get().enqueueWork(() -> {
                 ModItems.CLOUD_IN_A_BOTTLE.get().jump(player);

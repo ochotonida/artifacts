@@ -1,14 +1,14 @@
 package artifacts.common.capability.killtracker;
 
 import artifacts.Artifacts;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.nbt.StringNBT;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -30,19 +30,19 @@ public class EntityKillTrackerCapability {
     public static class Storage implements Capability.IStorage<IEntityKillTracker> {
 
         @Override
-        public INBT writeNBT(Capability<IEntityKillTracker> capability, IEntityKillTracker instance, Direction side) {
-            ListNBT list = new ListNBT();
+        public Tag writeNBT(Capability<IEntityKillTracker> capability, IEntityKillTracker instance, Direction side) {
+            ListTag list = new ListTag();
             for (EntityType<?> type : instance.getEntityTypes()) {
                 // noinspection ConstantConditions
-                list.add(StringNBT.valueOf(type.getRegistryName().toString()));
+                list.add(StringTag.valueOf(type.getRegistryName().toString()));
             }
             return list;
         }
 
         @Override
-        public void readNBT(Capability<IEntityKillTracker> capability, IEntityKillTracker instance, Direction side, INBT nbt) {
+        public void readNBT(Capability<IEntityKillTracker> capability, IEntityKillTracker instance, Direction side, Tag nbt) {
             instance.clear();
-            for (INBT type : (ListNBT) nbt) {
+            for (Tag type : (ListTag) nbt) {
                 ResourceLocation entityType = new ResourceLocation(type.getAsString());
                 if (ForgeRegistries.ENTITIES.containsKey(entityType)) {
                     instance.addEntityType(ForgeRegistries.ENTITIES.getValue(entityType));
@@ -56,7 +56,7 @@ public class EntityKillTrackerCapability {
 
         @SubscribeEvent
         public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
-            if (event.getObject() instanceof PlayerEntity) {
+            if (event.getObject() instanceof Player) {
                 EntityKillTrackerProvider provider = new EntityKillTrackerProvider();
                 event.addCapability(new ResourceLocation(Artifacts.MODID, "entity_kill_tracker"), provider);
                 event.addListener(provider::invalidate);
@@ -65,8 +65,8 @@ public class EntityKillTrackerCapability {
 
         @SubscribeEvent
         public static void onLivingDeath(LivingDeathEvent event) {
-            if (event.getSource().getEntity() instanceof PlayerEntity) {
-                PlayerEntity player = ((PlayerEntity) event.getSource().getEntity());
+            if (event.getSource().getEntity() instanceof Player) {
+                Player player = ((Player) event.getSource().getEntity());
                 player.getCapability(INSTANCE).ifPresent(
                         tracker -> tracker.addEntityType(event.getEntityLiving().getType())
                 );

@@ -3,7 +3,7 @@ package artifacts.common.item.curio.hands;
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
 import artifacts.common.util.DamageSourceHelper;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 

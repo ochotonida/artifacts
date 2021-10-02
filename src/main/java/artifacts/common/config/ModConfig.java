@@ -5,6 +5,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 @Mod.EventBusSubscriber(modid = Artifacts.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -39,7 +40,7 @@ public class ModConfig {
     }
 
     @SubscribeEvent
-    public static void onModConfigEvent(net.minecraftforge.fml.config.ModConfig.ModConfigEvent configEvent) {
+    public static void onModConfigEvent(ModConfigEvent configEvent) {
         if (configEvent.getConfig().getSpec() == commonSpec) {
             common.bake();
         } else if (configEvent.getConfig().getSpec() == serverSpec) {

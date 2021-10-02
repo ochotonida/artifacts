@@ -20,18 +20,19 @@ mixin {
 
 version = '1.16.5-2.10.2'
 group = 'artifacts'
-archivesBaseName = 'Artifacts'
+archivesBaseName = 'artifacts'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 minecraft {
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: 'official', version: '1.17.1'
 
     runs {
         client {
             workingDirectory project.file('run')
             property 'forge.logging.markers', ''
             property 'forge.logging.console.level', 'debug'
+
             mods {
                 artifacts {
                     source sourceSets.main
@@ -43,6 +44,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', ''
             property 'forge.logging.console.level', 'debug'
+
             mods {
                 artifacts {
                     source sourceSets.main
@@ -56,6 +58,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             args '--mod', 'artifacts', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             environment 'target', 'fmluserdevdata'
+
             mods {
                 artifacts {
                     source sourceSets.main
@@ -75,10 +78,6 @@ repositories {
         url "https://maven.theillusivec4.top/"
     }
     maven {
-        name "blamejared"
-        url "https://maven.blamejared.com/"
-    }
-    maven {
         url "https://www.cursemaven.com"
     }
     maven {
@@ -92,20 +91,19 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.24'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.73'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 
-    runtimeOnly fg.deobf("curse.maven:curious-armor-stands-398784:3288589")
-    runtimeOnly fg.deobf("curse.maven:configured-457570:3266880")
+    runtimeOnly fg.deobf("curse.maven:curious-armor-stands-398784:3468429")
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.1:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.1")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.17.1-5.0.1.0:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.17.1-5.0.1.0")
 
-    compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62")
+    compileOnly fg.deobf("mezz.jei:jei-1.17.1:8.1.0.19:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.17.1:8.1.0.19")
 
-    implementation fg.deobf("be.florens:expandability-forge:2.0.1")
+    implementation fg.deobf("be.florens:expandability-forge:3.0.1")
 }
 
 mixin {

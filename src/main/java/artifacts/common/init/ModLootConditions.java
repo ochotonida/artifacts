@@ -2,15 +2,15 @@ package artifacts.common.init;
 
 import artifacts.Artifacts;
 import artifacts.common.loot.ConfigurableRandomChance;
-import net.minecraft.loot.LootConditionType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 
 public class ModLootConditions {
 
-    public static final LootConditionType CONFIGURABLE_ARTIFACT_CHANCE = new LootConditionType(new ConfigurableRandomChance.Serializer());
+    public static final LootItemConditionType CONFIGURABLE_ARTIFACT_CHANCE = new LootItemConditionType(new ConfigurableRandomChance.Serializer());
 
     public static void register(RegistryEvent<GlobalLootModifierSerializer<?>> event) {
         Registry.register(

@@ -2,9 +2,11 @@ package artifacts.common.item.curio.necklace;
 
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraftforge.event.world.BlockEvent;
+import top.theillusivec4.curios.api.SlotContext;
 
 public class LuckyScarfItem extends CurioItem {
 
@@ -17,7 +19,7 @@ public class LuckyScarfItem extends CurioItem {
     }
 
     @Override
-    public int getFortuneBonus(String identifier, LivingEntity livingEntity, ItemStack curio, int index) {
+    public int getFortuneLevel(SlotContext slotContext, LootContext lootContext, ItemStack stack) {
         return ModConfig.server.isCosmetic(this) ? 0 : ModConfig.server.luckyScarf.fortuneBonus.get();
     }
 }

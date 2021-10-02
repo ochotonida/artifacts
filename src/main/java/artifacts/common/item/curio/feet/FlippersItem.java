@@ -4,11 +4,10 @@ import artifacts.Artifacts;
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
 import com.google.common.collect.Multimap;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -17,9 +16,9 @@ import java.util.UUID;
 public class FlippersItem extends CurioItem {
 
     @Override
-    public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (livingEntity.tickCount % 20 == 0 && livingEntity.isSwimming()) {
-            damageStack(identifier, index, livingEntity, stack);
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+        if (slotContext.entity().tickCount % 20 == 0 && slotContext.entity().isSwimming()) {
+            damageStack(slotContext, stack);
         }
     }
 

@@ -2,12 +2,12 @@ package artifacts.data;
 
 import artifacts.Artifacts;
 import artifacts.common.init.ModItems;
-import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.ItemTagsProvider;
-import net.minecraft.item.Item;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -17,14 +17,14 @@ import java.util.stream.Collectors;
 
 public class ItemTags extends ItemTagsProvider {
 
-    private static final ITag.INamedTag<Item> ARTIFACTS = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(Artifacts.MODID, "artifacts"));
+    private static final Tag.Named<Item> ARTIFACTS = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(Artifacts.MODID, "artifacts"));
 
-    private static final ITag.INamedTag<Item> BELT = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "belt"));
-    private static final ITag.INamedTag<Item> CURIO = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "curio"));
-    private static final ITag.INamedTag<Item> FEET = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "feet"));
-    private static final ITag.INamedTag<Item> HANDS = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "hands"));
-    private static final ITag.INamedTag<Item> HEAD = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "head"));
-    private static final ITag.INamedTag<Item> NECKLACE = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "necklace"));
+    private static final Tag.Named<Item> BELT = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "belt"));
+    private static final Tag.Named<Item> CURIO = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "curio"));
+    private static final Tag.Named<Item> FEET = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "feet"));
+    private static final Tag.Named<Item> HANDS = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "hands"));
+    private static final Tag.Named<Item> HEAD = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "head"));
+    private static final Tag.Named<Item> NECKLACE = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "necklace"));
 
     public ItemTags(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
         super(generator, new BlockTags(generator, existingFileHelper), Artifacts.MODID, existingFileHelper);

@@ -2,7 +2,7 @@ package artifacts.common.config;
 
 import artifacts.Artifacts;
 import com.google.common.collect.Lists;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nullable;

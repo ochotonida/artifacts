@@ -7,18 +7,17 @@ import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.*;
 import artifacts.common.network.NetworkHandler;
-import net.minecraft.entity.EntityType;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -60,8 +59,8 @@ public class Artifacts {
     }
 
     public void addFeatures(BiomeLoadingEvent event) {
-        if (event.getCategory() != Biome.Category.NETHER && event.getCategory() != Biome.Category.THEEND && !ModConfig.common.isBlacklisted(event.getName())) {
-            event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_STRUCTURES).add(() -> ModFeatures.UNDERGROUND_CAMPSITE);
+        if (event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND && !ModConfig.common.isBlacklisted(event.getName())) {
+            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_STRUCTURES).add(() -> ModFeatures.UNDERGROUND_CAMPSITE);
         }
     }
 
@@ -77,7 +76,7 @@ public class Artifacts {
 
     public void clientSetup(final FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MIMIC, MimicRenderer::new);
-        ItemModelsProperties.register(ModItems.UMBRELLA.get(), new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
+        ItemProperties.register(ModItems.UMBRELLA.get(), new ResourceLocation("blocking"), (stack, world, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
         CurioRenderers.setupCurioRenderers();
     }
 
@@ -87,6 +86,6 @@ public class Artifacts {
             InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> type.getMessageBuilder().build());
         }
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HANDS.getMessageBuilder().size(2).build());
-        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("feet").priority(220).icon(PlayerContainer.EMPTY_ARMOR_SLOT_BOOTS).build());
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("feet").priority(220).icon(InventoryMenu.EMPTY_ARMOR_SLOT_BOOTS).build());
     }
 }

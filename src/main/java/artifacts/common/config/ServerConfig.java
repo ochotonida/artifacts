@@ -16,8 +16,8 @@ import artifacts.common.config.item.curio.head.VillagerHatConfig;
 import artifacts.common.config.item.curio.necklace.*;
 import artifacts.common.init.ModItems;
 import com.google.common.collect.Lists;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -172,9 +172,9 @@ public class ServerConfig {
         items.put(ModItems.VILLAGER_HAT.get(), villagerHat);
         items.put(ModItems.WHOOPEE_CUSHION.get(), whoopeeCushion);
 
-        drinkingHats.forEach(items::put);
-        everlastingFoods.forEach(items::put);
-        pendants.forEach(items::put);
+        items.putAll(drinkingHats);
+        items.putAll(everlastingFoods);
+        items.putAll(pendants);
     }
 
     public void bake() {
