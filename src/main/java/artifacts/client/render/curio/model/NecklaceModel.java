@@ -1,10 +1,12 @@
 package artifacts.client.render.curio.model;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.renderer.RenderType;
@@ -17,13 +19,23 @@ public class NecklaceModel extends HumanoidModel<LivingEntity> {
     }
 
     @Override
+    protected Iterable<ModelPart> headParts() {
+        return ImmutableList.of();
+    }
+
+    @Override
+    protected Iterable<ModelPart> bodyParts() {
+        return ImmutableList.of(body);
+    }
+
+    @Override
     public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha) {
         matrixStack.scale(0.5F, 0.5F, 0.5F);
         body.render(matrixStack, buffer, light, overlay, red, green, blue, alpha);
     }
 
     public static MeshDefinition createNecklace(CubeListBuilder body) {
-        MeshDefinition mesh = new MeshDefinition();
+        MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
 
         mesh.getRoot().addOrReplaceChild(
                 "body",
@@ -36,7 +48,7 @@ public class NecklaceModel extends HumanoidModel<LivingEntity> {
     }
 
     public static MeshDefinition createCenteredNecklace(CubeListBuilder body) {
-        MeshDefinition mesh = new MeshDefinition();
+        MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
 
         mesh.getRoot().addOrReplaceChild(
                 "body",

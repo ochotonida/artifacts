@@ -85,7 +85,7 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
 
     private static MeshDefinition createBelt(CubeListBuilder charm) {
         CubeDeformation deformation = new CubeDeformation(0.5F);
-        MeshDefinition mesh = createMesh(deformation, 0);
+        MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
 
         mesh.getRoot().addOrReplaceChild(
                 "body",
@@ -161,7 +161,7 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
     }
 
     public static MeshDefinition createHeliumFlamingo() {
-        MeshDefinition mesh = new MeshDefinition();
+        MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
 
         mesh.getRoot().addOrReplaceChild(
                 "body",

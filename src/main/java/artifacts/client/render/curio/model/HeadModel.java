@@ -23,8 +23,18 @@ public class HeadModel extends HumanoidModel<LivingEntity> {
         this(part, RenderType::entityCutoutNoCull);
     }
 
+    @Override
+    protected Iterable<ModelPart> headParts() {
+        return ImmutableList.of(head);
+    }
+
+    @Override
+    protected Iterable<ModelPart> bodyParts() {
+        return ImmutableList.of();
+    }
+
     public static MeshDefinition createEmptyHat(CubeListBuilder head) {
-        MeshDefinition mesh = new MeshDefinition();
+        MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
 
         mesh.getRoot().addOrReplaceChild(
                 "head",
@@ -33,11 +43,6 @@ public class HeadModel extends HumanoidModel<LivingEntity> {
         );
 
         return mesh;
-    }
-
-    @Override
-    protected Iterable<ModelPart> bodyParts() {
-        return ImmutableList.of();
     }
 
     public static MeshDefinition createHat(CubeListBuilder head) {

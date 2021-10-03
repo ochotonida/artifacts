@@ -43,7 +43,7 @@ public class ArmsModel extends HumanoidModel<LivingEntity> {
     }
 
     public static MeshDefinition createEmptyArms(CubeListBuilder leftArm, CubeListBuilder rightArm, boolean smallArms) {
-        MeshDefinition mesh = new MeshDefinition();
+        MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
 
         mesh.getRoot().addOrReplaceChild(
                 "left_arm",
