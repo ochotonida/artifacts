@@ -1,8 +1,7 @@
 package artifacts.common.item;
 
 import artifacts.Artifacts;
-import artifacts.common.capability.swimhandler.ISwimHandler;
-import artifacts.common.capability.swimhandler.SwimHandlerCapability;
+import artifacts.common.capability.SwimHandler;
 import artifacts.common.config.ModConfig;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.InteractionHand;
@@ -44,7 +43,7 @@ public class UmbrellaItem extends ArtifactItem {
             LivingEntity entity = event.getEntityLiving();
             AttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
             if (gravity != null) {
-                boolean isInWater = entity.isInWater() && !entity.getCapability(SwimHandlerCapability.INSTANCE).map(ISwimHandler::isSinking).orElse(false);
+                boolean isInWater = entity.isInWater() && !entity.getCapability(SwimHandler.CAPABILITY).map(SwimHandler::isSinking).orElse(false);
                 if (!entity.isOnGround() && !isInWater && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(MobEffects.SLOW_FALLING)
                         && (entity.getOffhandItem().getItem() == this
                         || entity.getMainHandItem().getItem() == this) && !(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAnim.BLOCK)) {

@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.belt;
 
-import artifacts.common.capability.swimhandler.SwimHandlerCapability;
+import artifacts.common.capability.SwimHandler;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModSoundEvents;
 import artifacts.common.item.curio.CurioItem;
@@ -9,13 +9,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -25,7 +28,7 @@ import java.util.List;
 public class HeliumFlamingoItem extends CurioItem {
 
     public HeliumFlamingoItem() {
-        // TODO MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
+        MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
     }
 
@@ -51,7 +54,7 @@ public class HeliumFlamingoItem extends CurioItem {
             return;
         }
 
-        event.player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
+        event.player.getCapability(SwimHandler.CAPABILITY).ifPresent(
                 handler -> {
                     int maxFlightTime = ModConfig.server.heliumFlamingo.maxFlightTime.get();
                     int rechargeTime = ModConfig.server.heliumFlamingo.rechargeTime.get();
@@ -85,10 +88,10 @@ public class HeliumFlamingoItem extends CurioItem {
                 }
         );
     }
-/*
+
     private class ClientEventHandler {
 
-        private final ResourceLocation location = new ResourceLocation(Artifacts.MODID, "textures/gui/icons.png");
+        // TODO private final ResourceLocation location = new ResourceLocation(Artifacts.MODID, "textures/gui/icons.png");
 
         private boolean wasSprintKeyDown;
         private boolean wasSprintingOnGround;
@@ -104,7 +107,7 @@ public class HeliumFlamingoItem extends CurioItem {
             Player player = event.getPlayer();
             boolean isSprintKeyDown = Minecraft.getInstance().options.keySprint.isDown();
 
-            player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
+            player.getCapability(SwimHandler.CAPABILITY).ifPresent(
                     handler -> {
                         if (!handler.isSwimming()) {
                             if (player.isOnGround()) {
@@ -142,6 +145,7 @@ public class HeliumFlamingoItem extends CurioItem {
             }
         }
 
+        /* TODO
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent(priority = EventPriority.LOW)
         public void render(RenderGameOverlayEvent.Post event) {
@@ -189,7 +193,6 @@ public class HeliumFlamingoItem extends CurioItem {
                         RenderSystem.disableBlend();
                     }
             );
-        }
+        } */
     }
- */
 }

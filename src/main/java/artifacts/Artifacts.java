@@ -1,6 +1,6 @@
 package artifacts;
 
-import artifacts.common.capability.swimhandler.SwimHandlerCapability;
+import artifacts.common.capability.SwimHandler;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.*;
 import artifacts.common.network.NetworkHandler;
@@ -36,6 +36,7 @@ public class Artifacts {
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ArtifactsClient::new);
 
         ModConfig.registerCommon();
+        SwimHandler.init();
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -65,7 +66,6 @@ public class Artifacts {
         event.enqueueWork(() -> {
             ModFeatures.registerConfiguredFeatures();
             NetworkHandler.register();
-            SwimHandlerCapability.register();
         });
     }
 

@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.necklace;
 
-import artifacts.common.capability.swimhandler.SwimHandlerCapability;
+import artifacts.common.capability.SwimHandler;
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,7 +34,7 @@ public class CharmOfSinkingItem extends CurioItem {
     @Override
     public void onEquip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
         if (!ModConfig.server.isCosmetic(this) && slotContext.entity() instanceof ServerPlayer) {
-            slotContext.entity().getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
+            slotContext.entity().getCapability(SwimHandler.CAPABILITY).ifPresent(
                     handler -> {
                         handler.setSinking(true);
                         handler.syncSinking((ServerPlayer) slotContext.entity());
@@ -46,7 +46,7 @@ public class CharmOfSinkingItem extends CurioItem {
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
         if (slotContext.entity() instanceof ServerPlayer) {
-            slotContext.entity().getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
+            slotContext.entity().getCapability(SwimHandler.CAPABILITY).ifPresent(
                     handler -> {
                         handler.setSinking(false);
                         handler.syncSinking((ServerPlayer) slotContext.entity());

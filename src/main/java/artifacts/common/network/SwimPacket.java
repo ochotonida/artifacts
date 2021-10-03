@@ -1,6 +1,6 @@
 package artifacts.common.network;
 
-import artifacts.common.capability.swimhandler.SwimHandlerCapability;
+import artifacts.common.capability.SwimHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.fmllegacy.network.NetworkEvent;
@@ -28,7 +28,7 @@ public class SwimPacket {
     void handle(Supplier<NetworkEvent.Context> context) {
         Player player = context.get().getSender();
         if (player != null) {
-            context.get().enqueueWork(() -> player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(handler -> handler.setSwimming(shouldSwim)));
+            context.get().enqueueWork(() -> player.getCapability(SwimHandler.CAPABILITY).ifPresent(handler -> handler.setSwimming(shouldSwim)));
         }
         context.get().setPacketHandled(true);
     }

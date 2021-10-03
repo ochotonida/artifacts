@@ -1,7 +1,6 @@
 package artifacts.common.item.curio.feet;
 
-import artifacts.common.capability.swimhandler.ISwimHandler;
-import artifacts.common.capability.swimhandler.SwimHandlerCapability;
+import artifacts.common.capability.SwimHandler;
 import artifacts.common.item.curio.CurioItem;
 import be.florens.expandability.api.forge.LivingFluidCollisionEvent;
 import net.minecraft.core.BlockPos;
@@ -22,7 +21,7 @@ public class AquaDashersItem extends CurioItem {
 
     private void onFluidCollision(LivingFluidCollisionEvent event, LivingEntity wearer) {
         if (wearer.isSprinting() && wearer.fallDistance < 6 && !wearer.isUsingItem() && !wearer.isCrouching()) {
-            wearer.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(handler -> {
+            wearer.getCapability(SwimHandler.CAPABILITY).ifPresent(handler -> {
                 if (!handler.isWet() && !handler.isSwimming()) {
                     event.setResult(Event.Result.ALLOW);
                     if (event.getFluidState().is(FluidTags.LAVA)) {
@@ -46,7 +45,7 @@ public class AquaDashersItem extends CurioItem {
         return isEquippedBy(entity)
                 && entity.isSprinting()
                 && entity.fallDistance < 6
-                && !entity.getCapability(SwimHandlerCapability.INSTANCE).map(ISwimHandler::isWet).orElse(true);
+                && !entity.getCapability(SwimHandler.CAPABILITY).map(SwimHandler::isWet).orElse(true);
     }
 
     private boolean isSprintingOnFluid(LivingEntity entity) {
