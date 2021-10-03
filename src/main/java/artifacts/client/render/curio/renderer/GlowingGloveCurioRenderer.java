@@ -32,17 +32,17 @@ public class GlowingGloveCurioRenderer extends GloveCurioRenderer {
     }
 
     @Override
-    protected void renderArm(ArmsModel model, PoseStack matrixStack, MultiBufferSource buffer, HumanoidArm handSide, int light, boolean hasSlimArms, boolean hasFoil) {
-        super.renderArm(model, matrixStack, buffer, handSide, light, hasSlimArms, hasFoil);
+    protected void renderArm(ArmsModel model, PoseStack poseStack, MultiBufferSource multiBufferSource, HumanoidArm armSide, int light, boolean hasSlimArms, boolean hasFoil) {
+        super.renderArm(model, poseStack, multiBufferSource, armSide, light, hasSlimArms, hasFoil);
         RenderType renderType = ForgeRenderTypes.getUnlitTranslucent(getGlowTexture(hasSlimArms));
-        VertexConsumer builder = ItemRenderer.getFoilBuffer(buffer, renderType, false, hasFoil);
-        model.renderArm(handSide, matrixStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        VertexConsumer builder = ItemRenderer.getFoilBuffer(multiBufferSource, renderType, false, hasFoil);
+        model.renderArm(armSide, poseStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 
     @Override
-    protected void renderFirstPersonArm(ArmsModel model, ModelPart arm, PoseStack matrixStack, MultiBufferSource buffer, int light, boolean hasSlimArms, boolean hasFoil) {
-        super.renderFirstPersonArm(model, arm, matrixStack, buffer, light, hasSlimArms, hasFoil);
-        VertexConsumer builder = ItemRenderer.getFoilBuffer(buffer, ForgeRenderTypes.getUnlitTranslucent(getGlowTexture(hasSlimArms)), false, hasFoil);
-        arm.render(matrixStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY);
+    protected void renderFirstPersonArm(ArmsModel model, ModelPart arm, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, boolean hasSlimArms, boolean hasFoil) {
+        super.renderFirstPersonArm(model, arm, poseStack, multiBufferSource, light, hasSlimArms, hasFoil);
+        VertexConsumer builder = ItemRenderer.getFoilBuffer(multiBufferSource, ForgeRenderTypes.getUnlitTranslucent(getGlowTexture(hasSlimArms)), false, hasFoil);
+        arm.render(poseStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY);
     }
 }

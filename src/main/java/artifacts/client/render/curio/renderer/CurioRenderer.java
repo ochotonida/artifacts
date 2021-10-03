@@ -42,9 +42,9 @@ public class CurioRenderer implements ICurioRenderer {
     public <T extends LivingEntity, M extends EntityModel<T>> void render(
             ItemStack stack,
             SlotContext slotContext,
-            PoseStack matrixStack,
+            PoseStack poseStack,
             RenderLayerParent<T, M> renderLayerParent,
-            MultiBufferSource renderTypeBuffer,
+            MultiBufferSource multiBufferSource,
             int light,
             float limbSwing,
             float limbSwingAmount,
@@ -58,7 +58,7 @@ public class CurioRenderer implements ICurioRenderer {
         model.setupAnim(slotContext.entity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         model.prepareMobModel(slotContext.entity(), limbSwing, limbSwingAmount, partialTicks);
         ICurioRenderer.followBodyRotations(slotContext.entity(), model);
-        render(matrixStack, renderTypeBuffer, light, stack.hasFoil());
+        render(poseStack, multiBufferSource, light, stack.hasFoil());
     }
 
     protected void render(PoseStack matrixStack, MultiBufferSource buffer, int light, boolean hasFoil) {

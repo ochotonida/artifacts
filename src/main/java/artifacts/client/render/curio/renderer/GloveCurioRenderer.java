@@ -68,9 +68,9 @@ public class GloveCurioRenderer implements ICurioRenderer {
     public <T extends LivingEntity, M extends EntityModel<T>> void render(
             ItemStack stack,
             SlotContext slotContext,
-            PoseStack matrixStack,
+            PoseStack poseStack,
             RenderLayerParent<T, M> renderLayerParent,
-            MultiBufferSource renderTypeBuffer,
+            MultiBufferSource multiBufferSource,
             int light,
             float limbSwing,
             float limbSwingAmount,
@@ -88,7 +88,7 @@ public class GloveCurioRenderer implements ICurioRenderer {
         model.prepareMobModel(slotContext.entity(), limbSwing, limbSwingAmount, partialTicks);
         ICurioRenderer.followBodyRotations(slotContext.entity(), model);
 
-        renderArm(model, matrixStack, renderTypeBuffer, handSide, light, hasSlimArms, stack.hasFoil());
+        renderArm(model, poseStack, multiBufferSource, handSide, light, hasSlimArms, stack.hasFoil());
     }
 
     protected void renderArm(ArmsModel model, PoseStack matrixStack, MultiBufferSource buffer, HumanoidArm handSide, int light, boolean hasSlimArms, boolean hasFoil) {
