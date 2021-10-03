@@ -23,7 +23,6 @@ import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
 import javax.annotation.Nullable;
-import java.util.function.Function;
 
 public class GloveCurioRenderer implements ICurioRenderer {
 
@@ -32,15 +31,15 @@ public class GloveCurioRenderer implements ICurioRenderer {
     private final ArmsModel defaultModel;
     private final ArmsModel slimModel;
 
-    public GloveCurioRenderer(String name, Function<Boolean, ArmsModel> modelFactory) {
-        this(String.format("%s/%s_default", name, name), String.format("%s/%s_slim", name, name), modelFactory);
+    public GloveCurioRenderer(String name, ArmsModel defaultModel, ArmsModel slimModel) {
+        this(String.format("glove/%s/%s_default", name, name), String.format("glove/%s/%s_slim", name, name), defaultModel, slimModel);
     }
 
-    public GloveCurioRenderer(String defaultTexturePath, String slimTexturePath, Function<Boolean, ArmsModel> modelFactory) {
+    public GloveCurioRenderer(String defaultTexturePath, String slimTexturePath, ArmsModel defaultModel, ArmsModel slimModel) {
         this.defaultTexture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/%s.png", defaultTexturePath));
         this.slimTexture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/%s.png", slimTexturePath));
-        this.defaultModel = modelFactory.apply(false);
-        this.slimModel = modelFactory.apply(true);
+        this.defaultModel = defaultModel;
+        this.slimModel = slimModel;
     }
 
     @Nullable

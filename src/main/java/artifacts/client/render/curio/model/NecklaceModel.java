@@ -65,18 +65,14 @@ public class NecklaceModel extends HumanoidModel<LivingEntity> {
     public static MeshDefinition createCharmOfSinking() {
         CubeListBuilder body = CubeListBuilder.create();
 
-        MeshDefinition mesh = createNecklace(body);
-
         body.texOffs(50, 0);
         body.addBox(-1, 3.5F, -5, 2, 4, 1);
 
-        return mesh;
+        return createNecklace(body);
     }
 
     public static MeshDefinition createCrossNecklace() {
         CubeListBuilder body = CubeListBuilder.create();
-
-        MeshDefinition mesh = createCenteredNecklace(body);
 
         // cross vertical
         body.texOffs(52, 0);
@@ -86,12 +82,11 @@ public class NecklaceModel extends HumanoidModel<LivingEntity> {
         body.texOffs(56, 0);
         body.addBox(-1.5F, 5.5F, -5, 3, 1, 1);
 
-        return mesh;
+        return createCenteredNecklace(body);
     }
 
     public static MeshDefinition createPanicNecklace() {
         CubeListBuilder body = CubeListBuilder.create();
-        MeshDefinition mesh = createCenteredNecklace(body);
 
         // gem top
         body.texOffs(52, 0);
@@ -107,17 +102,16 @@ public class NecklaceModel extends HumanoidModel<LivingEntity> {
         body.texOffs(60, 4);
         body.addBox(-0.5F, 8.5F, -5, 1, 1, 1);
 
-        return mesh;
+        return createCenteredNecklace(body);
     }
 
     public static MeshDefinition createPendant() {
         CubeListBuilder body = CubeListBuilder.create();
-        MeshDefinition mesh = createNecklace(body);
 
         // gem
         body.texOffs(50, 0);
         body.addBox(-1, 4.5F, -5, 2, 2, 1);
 
-        return mesh;
+        return createNecklace(body);
     }
 }

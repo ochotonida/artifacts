@@ -14,15 +14,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraftforge.client.ForgeRenderTypes;
 
-import java.util.function.Function;
-
 public class GlowingGloveCurioRenderer extends GloveCurioRenderer {
 
     private final ResourceLocation defaultGlowTexture;
     private final ResourceLocation slimGlowTexture;
 
-    public GlowingGloveCurioRenderer(String name, Function<Boolean, ArmsModel> modelFactory) {
-        super(name, modelFactory);
+    public GlowingGloveCurioRenderer(String name, ArmsModel defaultModel, ArmsModel slimModel) {
+        super(name, defaultModel, slimModel);
         defaultGlowTexture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/glove/%s/%s_default_glow.png", name, name));
         slimGlowTexture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/glove/%s/%s_slim_glow.png", name, name));
     }

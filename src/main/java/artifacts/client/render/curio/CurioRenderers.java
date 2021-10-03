@@ -22,7 +22,7 @@ public class CurioRenderers {
 
         // necklace
         CuriosRendererRegistry.register(ModItems.LUCKY_SCARF.get(), () -> new CurioRenderer("scarf/lucky_scarf", new ScarfModel(bakeLayer(CurioLayers.SCARF), RenderType::entityCutoutNoCull)));
-        CuriosRendererRegistry.register(ModItems.SCARF_OF_INVISIBILITY.get(), () -> new CurioRenderer("scarf/scarf_of_invisibility",  new ScarfModel(bakeLayer(CurioLayers.SCARF), RenderType::entityCutoutNoCull)));
+        CuriosRendererRegistry.register(ModItems.SCARF_OF_INVISIBILITY.get(), () -> new CurioRenderer("scarf/scarf_of_invisibility",  new ScarfModel(bakeLayer(CurioLayers.SCARF), RenderType::entityTranslucent)));
         CuriosRendererRegistry.register(ModItems.CROSS_NECKLACE.get(), () -> new CurioRenderer("cross_necklace", new NecklaceModel(bakeLayer(CurioLayers.CROSS_NECKLACE))));
         CuriosRendererRegistry.register(ModItems.PANIC_NECKLACE.get(), () -> new CurioRenderer("panic_necklace", new NecklaceModel(bakeLayer(CurioLayers.PANIC_NECKLACE))));
         CuriosRendererRegistry.register(ModItems.SHOCK_PENDANT.get(), () -> new CurioRenderer("pendant/shock_pendant", new NecklaceModel(bakeLayer(CurioLayers.PENDANT))));
@@ -31,21 +31,21 @@ public class CurioRenderers {
         CuriosRendererRegistry.register(ModItems.CHARM_OF_SINKING.get(), () -> new CurioRenderer("charm_of_sinking", new NecklaceModel(bakeLayer(CurioLayers.CHARM_OF_SINKING))));
 
         // belt
-        CuriosRendererRegistry.register(ModItems.CLOUD_IN_A_BOTTLE.get(), () -> new BeltCurioRenderer("cloud_in_a_bottle", BeltModel.cloudInABottleModel()));
-        CuriosRendererRegistry.register(ModItems.OBSIDIAN_SKULL.get(), () -> new BeltCurioRenderer("obsidian_skull", new BeltModel(bakeLayer(CurioLayers.OBSIDIAN_SKULL), 4.5F, -4F, -0.5F)));
-        CuriosRendererRegistry.register(ModItems.ANTIDOTE_VESSEL.get(), () -> new BeltCurioRenderer("antidote_vessel", new BeltModel(bakeLayer(CurioLayers.ANTIDOTE_VESSEL), 4, -3, -0.5F)));
-        CuriosRendererRegistry.register(ModItems.UNIVERSAL_ATTRACTOR.get(), () -> new BeltCurioRenderer("universal_attractor", new BeltModel(bakeLayer(CurioLayers.UNIVERSAL_ATTRACTOR), 2.5F, -3, 0)));
-        CuriosRendererRegistry.register(ModItems.CRYSTAL_HEART.get(), () -> new BeltCurioRenderer("crystal_heart", new BeltModel(bakeLayer(CurioLayers.CRYSTAL_HEART), RenderType::entityTranslucent, 2.5F, -3.01F, 0)));
-        CuriosRendererRegistry.register(ModItems.HELIUM_FLAMINGO.get(), () -> new CurioRenderer("helium_flamingo", BeltModel.heliumFlamingo()));
+        CuriosRendererRegistry.register(ModItems.CLOUD_IN_A_BOTTLE.get(), () -> new BeltCurioRenderer("cloud_in_a_bottle", BeltModel.createCloudInABottleModel()));
+        CuriosRendererRegistry.register(ModItems.OBSIDIAN_SKULL.get(), () -> new BeltCurioRenderer("obsidian_skull", BeltModel.createObsidianSkullModel()));
+        CuriosRendererRegistry.register(ModItems.ANTIDOTE_VESSEL.get(), () -> new BeltCurioRenderer("antidote_vessel", BeltModel.createAntidoteVesselModel()));
+        CuriosRendererRegistry.register(ModItems.UNIVERSAL_ATTRACTOR.get(), () -> new BeltCurioRenderer("universal_attractor", BeltModel.createUniversalAttractorModel()));
+        CuriosRendererRegistry.register(ModItems.CRYSTAL_HEART.get(), () -> new BeltCurioRenderer("crystal_heart", BeltModel.createCrystalHeartModel()));
+        CuriosRendererRegistry.register(ModItems.HELIUM_FLAMINGO.get(), () -> new CurioRenderer("helium_flamingo", BeltModel.createHeliumFlamingoModel()));
 
         // hands
-        CuriosRendererRegistry.register(ModItems.DIGGING_CLAWS.get(), () -> new GloveCurioRenderer("claws/digging_claws", "claws/digging_claws", smallArms -> new ArmsModel(bakeLayer(CurioLayers.claws(smallArms)))));
-        CuriosRendererRegistry.register(ModItems.FERAL_CLAWS.get(), () -> new GloveCurioRenderer("claws/feral_claws", "claws/feral_claws", smallArms -> new ArmsModel(bakeLayer(CurioLayers.claws(smallArms)))));
-        CuriosRendererRegistry.register(ModItems.POWER_GLOVE.get(), () -> new GloveCurioRenderer("power_glove", smallArms -> new ArmsModel(bakeLayer(CurioLayers.glove(smallArms)))));
-        CuriosRendererRegistry.register(ModItems.FIRE_GAUNTLET.get(), () -> new GlowingGloveCurioRenderer("fire_gauntlet", smallArms -> new ArmsModel(bakeLayer(CurioLayers.glove(smallArms)))));
-        CuriosRendererRegistry.register(ModItems.POCKET_PISTON.get(), () -> new GloveCurioRenderer("pocket_piston", smallArms -> new ArmsModel(bakeLayer(CurioLayers.glove(smallArms)))));
-        CuriosRendererRegistry.register(ModItems.VAMPIRIC_GLOVE.get(), () -> new GloveCurioRenderer("vampiric_glove", smallArms -> new ArmsModel(bakeLayer(CurioLayers.glove(smallArms)))));
-        CuriosRendererRegistry.register(ModItems.GOLDEN_HOOK.get(), () -> new GloveCurioRenderer("golden_hook", smallArms -> new ArmsModel(bakeLayer(CurioLayers.goldenHook(smallArms)))));
+        CuriosRendererRegistry.register(ModItems.DIGGING_CLAWS.get(), () -> new GloveCurioRenderer("claws/digging_claws", "claws/digging_claws", ArmsModel.createClawsModel(false), ArmsModel.createClawsModel(true)));
+        CuriosRendererRegistry.register(ModItems.FERAL_CLAWS.get(), () -> new GloveCurioRenderer("claws/feral_claws", "claws/feral_claws", ArmsModel.createClawsModel(false), ArmsModel.createClawsModel(true)));
+        CuriosRendererRegistry.register(ModItems.POWER_GLOVE.get(), () -> new GloveCurioRenderer("power_glove", ArmsModel.createGloveModel(false), ArmsModel.createGloveModel(true)));
+        CuriosRendererRegistry.register(ModItems.FIRE_GAUNTLET.get(), () -> new GlowingGloveCurioRenderer("fire_gauntlet", ArmsModel.createGloveModel(false), ArmsModel.createGloveModel(true)));
+        CuriosRendererRegistry.register(ModItems.POCKET_PISTON.get(), () -> new GloveCurioRenderer("pocket_piston", ArmsModel.createGloveModel(false), ArmsModel.createGloveModel(true)));
+        CuriosRendererRegistry.register(ModItems.VAMPIRIC_GLOVE.get(), () -> new GloveCurioRenderer("vampiric_glove", ArmsModel.createGloveModel(false), ArmsModel.createGloveModel(true)));
+        CuriosRendererRegistry.register(ModItems.GOLDEN_HOOK.get(), () -> new GloveCurioRenderer("golden_hook/golden_hook_default", "golden_hook/golden_hook_slim", ArmsModel.createGoldenHookModel(false), ArmsModel.createGoldenHookModel(true)));
 
         // feet
         CuriosRendererRegistry.register(ModItems.AQUA_DASHERS.get(), () -> new CurioRenderer("aqua_dashers", new LegsModel(bakeLayer(CurioLayers.AQUA_DASHERS))));

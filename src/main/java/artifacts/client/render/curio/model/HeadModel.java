@@ -47,12 +47,11 @@ public class HeadModel extends HumanoidModel<LivingEntity> {
 
     public static MeshDefinition createHat(CubeListBuilder head) {
         CubeDeformation deformation = new CubeDeformation(0.5F);
-        MeshDefinition mesh = createEmptyHat(head);
 
         head.texOffs(0, 0);
         head.addBox(-4, -8, -4, 8, 8, 8, deformation);
 
-        return mesh;
+        return createEmptyHat(head);
     }
 
     public static MeshDefinition createDiagonalHat(CubeListBuilder head, CubeListBuilder diagonalParts, String partName) {
@@ -70,7 +69,6 @@ public class HeadModel extends HumanoidModel<LivingEntity> {
     public static MeshDefinition createDrinkingHat() {
         CubeListBuilder head = CubeListBuilder.create();
         CubeListBuilder straws = CubeListBuilder.create();
-        MeshDefinition mesh = createDiagonalHat(head, straws, "straws");
 
         // hat shade
         head.texOffs(32, 11);
@@ -92,12 +90,11 @@ public class HeadModel extends HumanoidModel<LivingEntity> {
         straws.texOffs(18, 16);
         straws.addBox(-6, -4, -3, 1, 1, 8);
 
-        return mesh;
+        return createDiagonalHat(head, straws, "straws");
     }
 
     public static MeshDefinition createNightVisionGoggles() {
         CubeListBuilder head = CubeListBuilder.create();
-        MeshDefinition mesh = createHat(head);
 
         // plate
         head.texOffs(0, 21);
@@ -109,13 +106,12 @@ public class HeadModel extends HumanoidModel<LivingEntity> {
         head.texOffs(10, 16);
         head.addBox(-3.5F, -5, -8 + 0.05F, 2, 2, 3);
 
-        return mesh;
+        return createHat(head);
     }
 
     public static MeshDefinition createSnorkel() {
         CubeListBuilder head = CubeListBuilder.create();
         CubeListBuilder tube = CubeListBuilder.create();
-        MeshDefinition mesh = createDiagonalHat(head, tube, "tube");
 
         // mouth thingy
         head.texOffs(32, 0);
@@ -125,34 +121,31 @@ public class HeadModel extends HumanoidModel<LivingEntity> {
         tube.texOffs(0, 16);
         tube.addBox(4.01F, -5, -3, 2, 2, 12);
 
-        return mesh;
+        return createDiagonalHat(head, tube, "tube");
     }
 
     public static MeshDefinition createSuperstitiousHat() {
         CubeListBuilder head = CubeListBuilder.create();
-        MeshDefinition mesh = createEmptyHat(head);
 
         head.texOffs(0, 0);
         head.addBox(-4, -16, -4, 8, 8, 8);
         head.texOffs(0, 16);
         head.addBox(-5, -9, -5, 10, 1, 10);
 
-        return mesh;
+        return createEmptyHat(head);
     }
 
     public static MeshDefinition createVillagerHat() {
         CubeListBuilder head = CubeListBuilder.create();
-        MeshDefinition mesh = createHat(head);
 
         head.texOffs(0, 16);
         head.addBox(-8, -5.125F, -8, 16, 0, 16);
 
-        return mesh;
+        return createHat(head);
     }
 
     public static MeshDefinition createWhoopeeCushion() {
         CubeListBuilder head = CubeListBuilder.create();
-        MeshDefinition mesh = createEmptyHat(head);
 
         // cushion
         head.texOffs(0, 0);
@@ -162,6 +155,6 @@ public class HeadModel extends HumanoidModel<LivingEntity> {
         head.texOffs(0, 8);
         head.addBox(-2, -9.25F, 3, 4, 0, 4);
 
-        return mesh;
+        return createEmptyHat(head);
     }
 }

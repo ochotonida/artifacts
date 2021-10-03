@@ -1,5 +1,7 @@
 package artifacts.client.render.curio.model;
 
+import artifacts.client.render.curio.CurioLayers;
+import artifacts.client.render.curio.CurioRenderers;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -42,6 +44,18 @@ public class ArmsModel extends HumanoidModel<LivingEntity> {
         renderToBuffer(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
+    public static ArmsModel createClawsModel(boolean smallArms) {
+        return new ArmsModel(CurioRenderers.bakeLayer(CurioLayers.claws(smallArms)));
+    }
+
+    public static ArmsModel createGloveModel(boolean smallArms) {
+        return new ArmsModel(CurioRenderers.bakeLayer(CurioLayers.glove(smallArms)));
+    }
+
+    public static ArmsModel createGoldenHookModel(boolean smallArms) {
+        return new ArmsModel(CurioRenderers.bakeLayer(CurioLayers.goldenHook(smallArms)));
+    }
+
     public static MeshDefinition createEmptyArms(CubeListBuilder leftArm, CubeListBuilder rightArm, boolean smallArms) {
         MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
 
@@ -60,23 +74,19 @@ public class ArmsModel extends HumanoidModel<LivingEntity> {
     }
 
     public static MeshDefinition createArms(CubeListBuilder leftArm, CubeListBuilder rightArm, boolean smallArms) {
-        MeshDefinition mesh = createEmptyArms(leftArm, rightArm, smallArms);
-
         leftArm.texOffs(0, 0);
         rightArm.texOffs(16, 0);
         addArms(leftArm, rightArm, new CubeDeformation(0.5F), smallArms);
 
-        return mesh;
+        return createEmptyArms(leftArm, rightArm, smallArms);
     }
 
     public static MeshDefinition createSleevedArms(CubeListBuilder leftArm, CubeListBuilder rightArm, boolean smallArms) {
-        MeshDefinition mesh = createArms(leftArm, rightArm, smallArms);
-
         leftArm.texOffs(0, 16);
         rightArm.texOffs(16, 16);
         addArms(leftArm, rightArm, new CubeDeformation(0.75F), smallArms);
 
-        return mesh;
+        return createArms(leftArm, rightArm, smallArms);
     }
 
     public static MeshDefinition createSleevedArms(boolean smallArms) {
@@ -91,7 +101,6 @@ public class ArmsModel extends HumanoidModel<LivingEntity> {
     public static MeshDefinition createClaws(boolean smallArms) {
         CubeListBuilder leftArm = CubeListBuilder.create();
         CubeListBuilder rightArm = CubeListBuilder.create();
-        MeshDefinition mesh = createEmptyArms(leftArm, rightArm, smallArms);
 
         int smallArmsOffset = smallArms ? 1 : 0;
 
@@ -119,13 +128,12 @@ public class ArmsModel extends HumanoidModel<LivingEntity> {
         rightArm.texOffs(20, 6);
         rightArm.addBox(-4 + smallArmsOffset, 10, 0.5F, 1, 4, 1);
 
-        return mesh;
+        return createEmptyArms(leftArm, rightArm, smallArms);
     }
 
     public static MeshDefinition createGoldenHook(boolean smallArms) {
         CubeListBuilder leftArm = CubeListBuilder.create();
         CubeListBuilder rightArm = CubeListBuilder.create();
-        MeshDefinition mesh = createSleevedArms(leftArm, rightArm, smallArms); // TODO use non-sleeved arms
 
         // hook
         leftArm.texOffs(32, 0);
@@ -139,6 +147,6 @@ public class ArmsModel extends HumanoidModel<LivingEntity> {
         rightArm.texOffs(48, 6);
         rightArm.addBox(smallArms ? -1 : -1.5F, 10, -0.5F, 1, 2, 1);
 
-        return mesh;
+        return createSleevedArms(leftArm, rightArm, smallArms);
     }
 }

@@ -55,7 +55,7 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
         return ImmutableList.of(body);
     }
 
-    public static BeltModel cloudInABottleModel() {
+    public static BeltModel createCloudInABottleModel() {
         return new BeltModel(CurioRenderers.bakeLayer(CurioLayers.CLOUD_IN_A_BOTTLE), RenderType::entityTranslucent, 3, -3, -0.5F) {
             private final ModelPart cloud = charm.getChild("cloud");
 
@@ -68,7 +68,7 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
         };
     }
 
-    public static HumanoidModel<LivingEntity> heliumFlamingo() {
+    public static HumanoidModel<LivingEntity> createHeliumFlamingoModel() {
         ModelPart part = CurioRenderers.bakeLayer(CurioLayers.HELIUM_FLAMINGO);
         return new HumanoidModel<>(part, RenderType::entityCutoutNoCull) {
             @Override
@@ -81,6 +81,22 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
                 return ImmutableList.of(body);
             }
         };
+    }
+
+    public static BeltModel createObsidianSkullModel() {
+        return new BeltModel(CurioRenderers.bakeLayer(CurioLayers.OBSIDIAN_SKULL), 4.5F, -4F, -0.5F);
+    }
+
+    public static BeltModel createAntidoteVesselModel() {
+        return new BeltModel(CurioRenderers.bakeLayer(CurioLayers.ANTIDOTE_VESSEL), 4, -3, -0.5F);
+    }
+
+    public static BeltModel createUniversalAttractorModel() {
+        return new BeltModel(CurioRenderers.bakeLayer(CurioLayers.UNIVERSAL_ATTRACTOR), 2.5F, -3, 0);
+    }
+
+    public static BeltModel createCrystalHeartModel() {
+        return new BeltModel(CurioRenderers.bakeLayer(CurioLayers.CRYSTAL_HEART), RenderType::entityTranslucent, 2.5F, -3.01F, 0);
     }
 
     private static MeshDefinition createBelt(CubeListBuilder charm) {
@@ -106,7 +122,6 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
 
     public static MeshDefinition createAntidoteVessel() {
         CubeListBuilder charm = CubeListBuilder.create();
-        MeshDefinition mesh = createBelt(charm);
 
         // jar
         charm.texOffs(0, 16);
@@ -116,12 +131,11 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
         charm.texOffs(0, 26);
         charm.addBox(-1, -1, -1, 2, 1, 2);
 
-        return mesh;
+        return createBelt(charm);
     }
 
     public static MeshDefinition createCloudInABottle() {
         CubeListBuilder charm = CubeListBuilder.create();
-        MeshDefinition mesh = createBelt(charm);
 
         // jar
         charm.texOffs(0, 16);
@@ -130,6 +144,8 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
         // lid
         charm.texOffs(0, 25);
         charm.addBox(-1, -1, -1, 2, 1, 2);
+
+        MeshDefinition mesh = createBelt(charm);
 
         mesh.getRoot().getChild("body").getChild("charm").addOrReplaceChild(
                 "cloud",
@@ -144,7 +160,6 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
 
     public static MeshDefinition createCrystalHeart() {
         CubeListBuilder charm = CubeListBuilder.create();
-        MeshDefinition mesh = createBelt(charm);
 
         charm.texOffs(0, 16);
         charm.addBox(-2.5F, 0, 0, 2, 3, 1);
@@ -157,7 +172,7 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
         charm.texOffs(8, 20);
         charm.addBox(0.5F, 3, 0, 1, 1, 1);
 
-        return mesh;
+        return createBelt(charm);
     }
 
     public static MeshDefinition createHeliumFlamingo() {
@@ -180,7 +195,6 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
 
     public static MeshDefinition createObsidianSkull() {
         CubeListBuilder charm = CubeListBuilder.create();
-        MeshDefinition mesh = createBelt(charm);
 
         // cranium
         charm.texOffs(0, 16);
@@ -192,12 +206,11 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
         charm.texOffs(18, 19);
         charm.addBox(0.5F, 3, 0, 1, 1, 2);
 
-        return mesh;
+        return createBelt(charm);
     }
 
     public static MeshDefinition createUniversalAttractor() {
         CubeListBuilder charm = CubeListBuilder.create();
-        MeshDefinition mesh = createBelt(charm);
 
         charm.texOffs(0, 16);
         charm.addBox(-2.5F, 0, 0, 5, 2, 1);
@@ -206,6 +219,6 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
         charm.texOffs(6, 19);
         charm.addBox(0.5F, 2, 0, 2, 4, 1);
 
-        return mesh;
+        return createBelt(charm);
     }
 }

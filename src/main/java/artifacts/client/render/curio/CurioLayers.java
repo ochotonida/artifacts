@@ -101,10 +101,10 @@ public class CurioLayers {
 
         register(event, AQUA_DASHERS, layer(LegsModel.createAquaDashers(), 32, 32));
         register(event, BUNNY_HOPPERS, layer(LegsModel.createBunnyHoppers(), 64, 32));
-        register(event, KITTY_SLIPPERS, layer(LegsModel.createBunnyHoppers(), 64, 32));
-        register(event, RUNNING_SHOES, layer(LegsModel.createBunnyHoppers(), 32, 32));
-        register(event, STEADFAST_SPIKES, layer(LegsModel.createBunnyHoppers(), 64, 32));
-        register(event, FLIPPERS, layer(LegsModel.createBunnyHoppers(), 64, 64));
+        register(event, KITTY_SLIPPERS, layer(LegsModel.createKittySlippers(), 64, 32));
+        register(event, RUNNING_SHOES, layer(LegsModel.createRunningShoes(), 32, 32));
+        register(event, STEADFAST_SPIKES, layer(LegsModel.createSteadfastSpikes(), 64, 32));
+        register(event, FLIPPERS, layer(LegsModel.createFlippers(), 64, 64));
 
         register(event, WHOOPEE_CUSHION, layer(HeadModel.createWhoopeeCushion(), 32, 16));
     }
