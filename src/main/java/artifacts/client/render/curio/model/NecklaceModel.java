@@ -29,9 +29,11 @@ public class NecklaceModel extends HumanoidModel<LivingEntity> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha) {
-        matrixStack.scale(0.5F, 0.5F, 0.5F);
-        body.render(matrixStack, buffer, light, overlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha) {
+        poseStack.pushPose();
+        poseStack.scale(0.5F, 0.5F, 0.5F);
+        body.render(poseStack, buffer, light, overlay, red, green, blue, alpha);
+        poseStack.popPose();
     }
 
     public static MeshDefinition createNecklace(CubeListBuilder body) {
