@@ -1,6 +1,5 @@
 package artifacts;
 
-import artifacts.common.capability.killtracker.EntityKillTrackerCapability;
 import artifacts.common.capability.swimhandler.SwimHandlerCapability;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.*;
@@ -66,7 +65,6 @@ public class Artifacts {
         event.enqueueWork(() -> {
             ModFeatures.registerConfiguredFeatures();
             NetworkHandler.register();
-            EntityKillTrackerCapability.register();
             SwimHandlerCapability.register();
         });
     }
