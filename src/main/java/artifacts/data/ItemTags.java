@@ -3,7 +3,6 @@ package artifacts.data;
 import artifacts.Artifacts;
 import artifacts.common.init.ModItems;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
@@ -26,8 +25,8 @@ public class ItemTags extends ItemTagsProvider {
     private static final Tag.Named<Item> HEAD = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "head"));
     private static final Tag.Named<Item> NECKLACE = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "necklace"));
 
-    public ItemTags(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generator, new BlockTags(generator, existingFileHelper), Artifacts.MODID, existingFileHelper);
+    public ItemTags(DataGenerator generator, BlockTags blockTags, @Nullable ExistingFileHelper existingFileHelper) {
+        super(generator, blockTags, Artifacts.MODID, existingFileHelper);
     }
 
     @Override
@@ -90,17 +89,5 @@ public class ItemTags extends ItemTagsProvider {
                 ModItems.THORN_PENDANT.get(),
                 ModItems.CHARM_OF_SINKING.get()
         );
-    }
-
-    private static class BlockTags extends BlockTagsProvider {
-
-        public BlockTags(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
-            super(generator, Artifacts.MODID, existingFileHelper);
-        }
-
-        @Override
-        protected void addTags() {
-
-        }
     }
 }

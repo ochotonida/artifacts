@@ -2,16 +2,20 @@ package artifacts.common.config.item.curio.hands;
 
 import artifacts.common.config.item.ItemConfig;
 import artifacts.common.init.ModItems;
-import com.google.common.collect.Lists;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Tier;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.TierSortingRegistry;
 
-import java.util.List;
+import javax.annotation.Nullable;
 
 public class DiggingClawsConfig extends ItemConfig {
 
+    @Nullable
+    public Tier toolTier;
+
     public ForgeConfigSpec.DoubleValue miningSpeedBonus;
-    public ForgeConfigSpec.IntValue harvestLevel;
-    public ForgeConfigSpec.ConfigValue<List<String>> toolTypes;
+    public ForgeConfigSpec.ConfigValue<String> toolTierValue;
 
     public DiggingClawsConfig(ForgeConfigSpec.Builder builder) {
         super(builder, ModItems.DIGGING_CLAWS.getId().getPath(), "Affects how many blocks the player can break using the digging claws before breaking");
@@ -24,21 +28,18 @@ public class DiggingClawsConfig extends ItemConfig {
                 .comment("Mining speed bonus applied by digging claws")
                 .translation(translate("mining_speed_bonus"))
                 .defineInRange("mining_speed_bonus", 3.2, 0, Double.POSITIVE_INFINITY);
-        harvestLevel = builder
+        toolTierValue = builder
                 .comment(
-                        "The player's base harvest level when wearing digging claws",
-                        "The player's harvest level is equal to MAX(<digging claws harvest level>, <tool harvest level>)",
-                        "Harvest level 0 is no tool, 1 for a wooden tool, 2 stone etc."
+                        "The tool tier of the digging claws",
+                        "To modify mineable blocks, use the 'artifacts:mineable/digging_claws' block tag"
                 )
-                .translation(translate("harvest_level"))
-                .defineInRange("harvest_level", 2, 0, Integer.MAX_VALUE);
-        toolTypes = builder
-                .comment(
-                        "The tool types of the digging claws",
-                        "Blocks that do not have these tool types are not affected by the digging claws",
-                        "Use \"*\" to give digging claws all tool types"
-                )
-                .translation(translate("tool_types"))
-                .define("tool_types", Lists.newArrayList("*"));
+                .translation(translate("tool_tier"))
+                .define("tool_tier", new ResourceLocation("stone").toString());
+    }
+
+    @Override
+    public void bake() {
+        ResourceLocation location = new ResourceLocation(toolTierValue.get());
+        toolTier = TierSortingRegistry.byName(location);
     }
 }
