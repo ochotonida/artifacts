@@ -6,7 +6,7 @@ import artifacts.client.render.entity.MimicRenderer;
 import artifacts.client.render.entity.model.MimicChestLayerModel;
 import artifacts.client.render.entity.model.MimicModel;
 import artifacts.common.config.ModConfig;
-import artifacts.common.init.ModEntities;
+import artifacts.common.init.ModEntityTypes;
 import artifacts.common.init.ModItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -33,7 +33,7 @@ public class ArtifactsClient {
     }
 
     public void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.MIMIC, MimicRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.MIMIC, MimicRenderer::new);
     }
 
     public void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

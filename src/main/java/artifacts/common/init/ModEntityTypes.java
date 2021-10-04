@@ -10,7 +10,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.registries.ObjectHolder;
 
 @ObjectHolder(Artifacts.MODID)
-public class ModEntities {
+public class ModEntityTypes {
 
     @SuppressWarnings("unchecked") // TODO use DeferredRegistry (https://github.com/MinecraftForge/MinecraftForge/pull/8044)
     public static final EntityType<MimicEntity> MIMIC = (EntityType<MimicEntity>) EntityType.Builder.of(MimicEntity::new, MobCategory.MISC)

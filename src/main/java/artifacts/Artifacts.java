@@ -48,9 +48,9 @@ public class Artifacts {
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::enqueueIMC);
 
-        modBus.addGenericListener(EntityType.class, ModEntities::register);
+        modBus.addGenericListener(EntityType.class, ModEntityTypes::register);
         modBus.addGenericListener(GlobalLootModifierSerializer.class, ModLootConditions::register);
-        modBus.addListener(ModEntities::registerAttributes);
+        modBus.addListener(ModEntityTypes::registerAttributes);
 
         MinecraftForge.EVENT_BUS.addListener(this::addFeatures);
     }

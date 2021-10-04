@@ -1,7 +1,7 @@
 package artifacts.data;
 
 import artifacts.Artifacts;
-import artifacts.common.init.ModEntities;
+import artifacts.common.init.ModEntityTypes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +21,6 @@ public class EntityTypeTags extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags() {
-        tag(MOB_IMPRISONMENT_TOOL_BLACKLIST).add(ModEntities.MIMIC);
+        tag(MOB_IMPRISONMENT_TOOL_BLACKLIST).add(ModEntityTypes.MIMIC);
     }
 }

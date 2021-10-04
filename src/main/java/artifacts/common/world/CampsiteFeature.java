@@ -2,7 +2,7 @@ package artifacts.common.world;
 
 import artifacts.common.config.ModConfig;
 import artifacts.common.entity.MimicEntity;
-import artifacts.common.init.ModEntities;
+import artifacts.common.init.ModEntityTypes;
 import artifacts.common.init.ModLootTables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -164,7 +164,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
 
     public void generateContainer(WorldGenLevel world, BlockPos pos, Random random) {
         if (random.nextFloat() < ModConfig.common.campsiteMimicChance.get()) {
-            MimicEntity mimic = ModEntities.MIMIC.create(world.getLevel());
+            MimicEntity mimic = ModEntityTypes.MIMIC.create(world.getLevel());
             if (mimic != null) {
                 mimic.setDormant();
                 mimic.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
