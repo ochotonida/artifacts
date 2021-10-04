@@ -118,7 +118,6 @@ public class MimicEntity extends Mob implements Enemy {
         if (
                 attackCooldown <= 0
                 && player.getCommandSenderWorld().getDifficulty() != Difficulty.PEACEFUL
-                // TODO && canSee(player)
                 && distanceToSqr(player.getBoundingBox().getCenter().subtract(0, getBoundingBox().getYsize() / 2, 0)) < 1
                 && player.hurt(DamageSource.mobAttack(this), (float) getAttribute(Attributes.ATTACK_DAMAGE).getValue())
         ) {
