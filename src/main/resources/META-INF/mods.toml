@@ -14,7 +14,7 @@ description='''Adds various new powerful uncraftable items to make exploration a
 [[dependencies.artifacts]]
     modId="forge"
     mandatory=true
-    versionRange="[37.0.73,)"
+    versionRange="[37.0.78,)"
     ordering="NONE"
     side="BOTH"
 
