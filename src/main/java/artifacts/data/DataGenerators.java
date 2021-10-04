@@ -20,6 +20,7 @@ public class DataGenerators {
             generator.addProvider(blockTags);
             generator.addProvider(new ItemTags(generator, blockTags, existingFileHelper));
             generator.addProvider(new LootTables(generator, existingFileHelper));
+            generator.addProvider(new EntityTypeTags(generator, existingFileHelper));
         }
         if (event.includeClient()) {
             generator.addProvider(new ItemModels(generator, existingFileHelper));
