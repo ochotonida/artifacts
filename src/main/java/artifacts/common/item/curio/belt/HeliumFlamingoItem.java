@@ -91,8 +91,6 @@ public class HeliumFlamingoItem extends CurioItem {
 
     private class ClientEventHandler {
 
-        // TODO private final ResourceLocation location = new ResourceLocation(Artifacts.MODID, "textures/gui/icons.png");
-
         private boolean wasSprintKeyDown;
         private boolean wasSprintingOnGround;
         private boolean hasTouchedGround;
@@ -144,55 +142,5 @@ public class HeliumFlamingoItem extends CurioItem {
                 wasSprintingOnGround = true;
             }
         }
-
-        /* TODO
-        @OnlyIn(Dist.CLIENT)
-        @SubscribeEvent(priority = EventPriority.LOW)
-        public void render(RenderGameOverlayEvent.Post event) {
-            Minecraft minecraft = Minecraft.getInstance();
-
-            if (ModConfig.server.isCosmetic(HeliumFlamingoItem.this) || !(minecraft.getCameraEntity() instanceof LivingEntity)) {
-                return;
-            }
-
-            LivingEntity player = (LivingEntity) minecraft.getCameraEntity();
-
-            if (event.getType() != RenderGameOverlayEvent.ElementType.AIR || event.isCanceled() || !isEquippedBy(player)) {
-                return;
-            }
-
-            player.getCapability(SwimHandlerCapability.INSTANCE).ifPresent(
-                    handler -> {
-                        int left = minecraft.getWindow().getGuiScaledWidth() / 2 + 91;
-                        int top = minecraft.getWindow().getGuiScaledHeight() - ForgeIngameGui.right_height;
-
-                        int swimTime = Math.abs(handler.getSwimTime());
-                        int maxProgressTime;
-
-                        if (swimTime == 0) {
-                            return;
-                        } else if (handler.getSwimTime() > 0) {
-                            maxProgressTime = ModConfig.server.heliumFlamingo.maxFlightTime.get();
-                        } else {
-                            maxProgressTime = ModConfig.server.heliumFlamingo.rechargeTime.get();
-                        }
-
-                        float progress = 1 - swimTime / (float) maxProgressTime;
-
-                        Minecraft.getInstance().getTextureManager().bind(location);
-                        RenderSystem.enableBlend();
-
-                        int full = Mth.ceil((progress - 2D / maxProgressTime) * 10);
-                        int partial = Mth.ceil(progress * 10) - full;
-
-                        for (int i = 0; i < full + partial; ++i) {
-                            ForgeIngameGui.blit(event.getMatrixStack(), left - i * 8 - 9, top, -90, (i < full ? 0 : 9), 0, 9, 9, 16, 32);
-                        }
-                        ForgeIngameGui.right_height += 10;
-
-                        RenderSystem.disableBlend();
-                    }
-            );
-        } */
     }
 }
