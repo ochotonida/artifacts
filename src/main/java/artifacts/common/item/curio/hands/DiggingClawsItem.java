@@ -20,7 +20,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class DiggingClawsItem extends CurioItem {
 
-    private static final Tag.Named<Block> MINEABLE_WITH_DIGGING_CLAWS = BlockTags.createOptional(new ResourceLocation(Artifacts.MODID, "mineable/digging_claws"));
+    public static final Tag.Named<Block> MINEABLE_WITH_DIGGING_CLAWS = BlockTags.createOptional(new ResourceLocation(Artifacts.MODID, "mineable/digging_claws"));
 
     public DiggingClawsItem() {
         addListener(EventPriority.LOW, PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
