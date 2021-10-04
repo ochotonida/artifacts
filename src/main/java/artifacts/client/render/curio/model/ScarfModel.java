@@ -58,7 +58,7 @@ public class ScarfModel extends HumanoidModel<LivingEntity> {
     }
 
     public static MeshDefinition createScarf() {
-        MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
+        MeshDefinition mesh = createMesh(new CubeDeformation(0.5F), 0);
 
         mesh.getRoot().addOrReplaceChild(
                 "body",
