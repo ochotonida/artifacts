@@ -24,7 +24,7 @@ import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 public class SwimHandler implements INBTSerializable<CompoundTag> {
 
-    public static Capability<SwimHandler> CAPABILITY = CapabilityManager.get(new CapabilityToken<>(){});
+    public static final Capability<SwimHandler> CAPABILITY = CapabilityManager.get(new CapabilityToken<>(){});
 
     private boolean shouldSwim;
     private boolean shouldSink;
