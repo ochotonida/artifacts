@@ -21,7 +21,7 @@ mixin {
     add sourceSets.main, "artifacts.refmap.json"
 }
 
-version = '1.17.1-3.0.0'
+version = '1.17.1-3.0.1'
 group = 'artifacts'
 archivesBaseName = 'artifacts'
 
