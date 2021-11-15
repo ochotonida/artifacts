@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = 'https://maven.minecraftforge.net' }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -42,15 +42,15 @@ dependencies {
         maven {
             url = "http://www.ryanliptak.com/maven/"
         }
-        maven {
-            url = "https://dl.bintray.com/way2muchnoise/dev"
+        maven { url = 'https://www.cursemaven.com/'
         }
+
     }
 
     dependencies {
         compile "baubles:Baubles:1.12:1.5.2"
         compile "applecore:AppleCore:1.10.2-2.2.2:api"
-        compile "jeresources:JustEnoughResources-1.12.2:0.8.9.48"
+        compile "curse.maven:just-enough-resources-jer-240630:2728585"
         compile "artemislib:ArtemisLib:1.12.2:v1.0.2"
     }
 
