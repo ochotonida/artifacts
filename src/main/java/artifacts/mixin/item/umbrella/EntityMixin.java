@@ -15,7 +15,6 @@ public abstract class EntityMixin {
     private void blockRain(CallbackInfoReturnable<Boolean> info) {
         Entity self = (Entity) (Object) this;
 
-        // noinspection ConstantConditions
         if (
                 info.getReturnValueZ()
                 && self instanceof LivingEntity entity

@@ -1,5 +1,5 @@
 package artifacts.common.world;
-
+/*
 import artifacts.common.config.ModConfig;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -31,4 +31,4 @@ public class InCaveWithChance extends FeatureDecorator<ChanceDecoratorConfigurat
         }
         return Stream.empty();
     }
-}
+} */

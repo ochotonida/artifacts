@@ -15,7 +15,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.InputUpdateEvent;
+import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -97,7 +97,7 @@ public class HeliumFlamingoItem extends CurioItem {
 
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
-        public void onInputUpdate(InputUpdateEvent event) {
+        public void onInputUpdate(MovementInputUpdateEvent event) {
             if (ModConfig.server.isCosmetic(HeliumFlamingoItem.this)) {
                 return;
             }

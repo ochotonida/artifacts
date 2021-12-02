@@ -5,7 +5,6 @@ import artifacts.common.config.ModConfig;
 import artifacts.common.network.NetworkHandler;
 import artifacts.common.network.SinkPacket;
 import artifacts.common.network.SwimPacket;
-import be.florens.expandability.api.forge.PlayerSwimEvent;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,8 +18,7 @@ import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.fmllegacy.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor;
 
 public class SwimHandler implements INBTSerializable<CompoundTag> {
 
@@ -99,7 +97,6 @@ public class SwimHandler implements INBTSerializable<CompoundTag> {
         MinecraftForge.EVENT_BUS.addListener(SwimHandler::onRegisterCapabilities);
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, SwimHandler::onAttachCapabilities);
         MinecraftForge.EVENT_BUS.addListener(SwimHandler::onPlayerTick);
-        MinecraftForge.EVENT_BUS.addListener(SwimHandler::onPlayerSwim);
     }
 
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
@@ -112,20 +109,6 @@ public class SwimHandler implements INBTSerializable<CompoundTag> {
             event.addCapability(new ResourceLocation(Artifacts.MODID, "swim_handler"), provider);
             event.addListener(provider::invalidate);
         }
-    }
-
-    public static void onPlayerSwim(PlayerSwimEvent event) {
-        event.getPlayer().getCapability(CAPABILITY).ifPresent(
-                handler -> {
-                    if (event.getResult() == Event.Result.DEFAULT) {
-                        if (handler.isSwimming()) {
-                            event.setResult(Event.Result.ALLOW);
-                        } else if (handler.isSinking()) {
-                            event.setResult(Event.Result.DENY);
-                        }
-                    }
-                }
-        );
     }
 
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {

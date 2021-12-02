@@ -42,8 +42,8 @@ public class Artifacts {
 
         ModItems.REGISTRY.register(modBus);
         ModSoundEvents.REGISTRY.register(modBus);
-        ModFeatures.FEATURE_REGISTRY.register(modBus);
-        ModFeatures.PLACEMENT_REGISTRY.register(modBus);
+        // TODO ModFeatures.FEATURE_REGISTRY.register(modBus);
+        // ModFeatures.PLACEMENT_REGISTRY.register(modBus);
 
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::enqueueIMC);
@@ -52,19 +52,19 @@ public class Artifacts {
         modBus.addGenericListener(GlobalLootModifierSerializer.class, ModLootConditions::register);
         modBus.addListener(ModEntityTypes::registerAttributes);
 
-        MinecraftForge.EVENT_BUS.addListener(this::addFeatures);
+        // MinecraftForge.EVENT_BUS.addListener(this::addFeatures);
     }
-
+    /* TODO
     public void addFeatures(BiomeLoadingEvent event) {
         if (event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND && !ModConfig.common.isBlacklisted(event.getName())) {
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_STRUCTURES).add(() -> ModFeatures.UNDERGROUND_CAMPSITE);
         }
-    }
+    }*/
 
     public void commonSetup(final FMLCommonSetupEvent event) {
         ModConfig.registerServer();
         event.enqueueWork(() -> {
-            ModFeatures.registerConfiguredFeatures();
+            // TODO ModFeatures.registerConfiguredFeatures();
             NetworkHandler.register();
         });
     }

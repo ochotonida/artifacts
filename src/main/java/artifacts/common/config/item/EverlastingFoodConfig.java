@@ -2,7 +2,7 @@ package artifacts.common.config.item;
 
 import artifacts.Artifacts;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 public class EverlastingFoodConfig extends ItemConfig {
 

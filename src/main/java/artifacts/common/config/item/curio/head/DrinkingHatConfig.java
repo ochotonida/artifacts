@@ -3,7 +3,7 @@ package artifacts.common.config.item.curio.head;
 import artifacts.Artifacts;
 import artifacts.common.config.item.ItemConfig;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 public class DrinkingHatConfig extends ItemConfig {
 

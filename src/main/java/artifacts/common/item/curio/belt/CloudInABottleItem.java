@@ -95,6 +95,7 @@ public class CloudInABottleItem extends CurioItem {
         public void onClientTick(TickEvent.ClientTickEvent event) {
             LocalPlayer player = Minecraft.getInstance().player;
 
+            // noinspection ConstantConditions
             if (event.phase == TickEvent.Phase.END && player != null && player.input != null) {
                 if ((player.isOnGround() || player.onClimbable()) && !player.isInWater()) {
                     hasReleasedJumpKey = false;
