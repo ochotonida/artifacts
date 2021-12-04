@@ -1,0 +1,6 @@
+{
+  "conditions": [],
+  "target": "minecraft:entities/cow",
+  "lootTable": "artifacts:inject/entities/cow",
+  "type": "artifacts:roll_loot_table"
+}

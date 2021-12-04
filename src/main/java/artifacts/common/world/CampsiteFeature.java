@@ -1,11 +1,12 @@
 package artifacts.common.world;
 
+import artifacts.Artifacts;
 import artifacts.common.config.ModConfig;
 import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.ModEntityTypes;
-import artifacts.common.init.ModLootTables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.*;
@@ -67,6 +68,8 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
     );
 
     public static final BlockStateProvider FLOWER_POT_PROVIDER;
+
+    public static final ResourceLocation CAMPSITE_CHEST = new ResourceLocation(Artifacts.MODID, "chests/campsite_chest");
 
     static {
         List<Block> flowerPots = Arrays.asList(
@@ -182,7 +185,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
             } else {
                 setBlock(world, pos, Blocks.BARREL.defaultBlockState().setValue(BarrelBlock.FACING, Direction.getRandom(random)));
             }
-            RandomizableContainerBlockEntity.setLootTable(world, random, pos, ModLootTables.CAMPSITE_CHEST);
+            RandomizableContainerBlockEntity.setLootTable(world, random, pos, CAMPSITE_CHEST);
         }
     }
 

@@ -1,0 +1,6 @@
+{
+  "conditions": [],
+  "target": "minecraft:chests/end_city_treasure",
+  "lootTable": "artifacts:inject/chests/end_city_treasure",
+  "type": "artifacts:roll_loot_table"
+}

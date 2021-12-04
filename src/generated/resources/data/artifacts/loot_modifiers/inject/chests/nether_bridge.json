@@ -1,0 +1,6 @@
+{
+  "conditions": [],
+  "target": "minecraft:chests/nether_bridge",
+  "lootTable": "artifacts:inject/chests/nether_bridge",
+  "type": "artifacts:roll_loot_table"
+}

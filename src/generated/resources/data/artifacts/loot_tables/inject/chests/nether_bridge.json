@@ -1,33 +1,28 @@
 {
+  "type": "minecraft:chest",
   "pools": [
     {
-      "name": "main",
       "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:cross_necklace"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:night_vision_goggles"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:pocket_piston"
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
           "name": "artifacts:running_shoes"
         },
         {
           "type": "minecraft:loot_table",
-          "weight": 3,
           "name": "artifacts:items/drinking_hat"
         }
       ],
@@ -36,8 +31,7 @@
           "condition": "artifacts:configurable_random_chance",
           "default_probability": 0.15
         }
-      ],
-      "functions": []
+      ]
     }
   ]
 }

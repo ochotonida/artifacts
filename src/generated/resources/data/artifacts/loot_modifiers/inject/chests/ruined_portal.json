@@ -1,0 +1,6 @@
+{
+  "conditions": [],
+  "target": "minecraft:chests/ruined_portal",
+  "lootTable": "artifacts:inject/chests/ruined_portal",
+  "type": "artifacts:roll_loot_table"
+}

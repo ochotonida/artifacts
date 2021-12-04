@@ -1,0 +1,6 @@
+{
+  "conditions": [],
+  "target": "minecraft:chests/jungle_temple",
+  "lootTable": "artifacts:inject/chests/jungle_temple",
+  "type": "artifacts:roll_loot_table"
+}

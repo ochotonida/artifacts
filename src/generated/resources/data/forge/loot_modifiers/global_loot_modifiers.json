@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "entries": [
+    "artifacts:inject/chests/ruined_portal",
+    "artifacts:inject/chests/village/village_weaponsmith",
+    "artifacts:inject/chests/village/village_savanna_house",
+    "artifacts:inject/chests/bastion_treasure",
+    "artifacts:inject/chests/village/village_tannery",
+    "artifacts:inject/chests/village/village_desert_house",
+    "artifacts:inject/chests/village/village_toolsmith",
+    "artifacts:inject/chests/jungle_temple",
+    "artifacts:inject/chests/end_city_treasure",
+    "artifacts:inject/chests/underwater_ruin_big",
+    "artifacts:inject/chests/spawn_bonus_chest",
+    "artifacts:inject/chests/stronghold_corridor",
+    "artifacts:inject/chests/village/village_temple",
+    "artifacts:inject/chests/woodland_mansion",
+    "artifacts:inject/chests/pillager_outpost",
+    "artifacts:inject/chests/village/village_snowy_house",
+    "artifacts:inject/chests/buried_treasure",
+    "artifacts:inject/entities/cow",
+    "artifacts:inject/chests/desert_pyramid",
+    "artifacts:inject/chests/village/village_plains_house",
+    "artifacts:inject/chests/village/village_taiga_house",
+    "artifacts:inject/chests/village/village_armorer",
+    "artifacts:inject/chests/abandoned_mineshaft",
+    "artifacts:inject/chests/nether_bridge",
+    "artifacts:inject/chests/shipwreck_treasure",
+    "artifacts:inject/chests/village/village_butcher",
+    "artifacts:inject/chests/bastion_hoglin_stable"
+  ]
+}

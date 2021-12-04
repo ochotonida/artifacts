@@ -1,7 +1,7 @@
 {
+  "type": "minecraft:chest",
   "pools": [
     {
-      "name": "main",
       "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
@@ -13,10 +13,9 @@
       "conditions": [
         {
           "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.02
+          "default_probability": 0.05
         }
-      ],
-      "functions": []
+      ]
     }
   ]
 }

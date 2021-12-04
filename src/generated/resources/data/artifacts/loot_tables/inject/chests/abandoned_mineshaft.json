@@ -1,53 +1,44 @@
 {
+  "type": "minecraft:chest",
   "pools": [
     {
-      "name": "main",
       "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:night_vision_goggles"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:panic_necklace"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:obsidian_skull"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:superstitious_hat"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:digging_claws"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:cloud_in_a_bottle"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:vampiric_glove"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
           "name": "artifacts:aqua_dashers"
         },
         {
           "type": "minecraft:loot_table",
-          "weight": 2,
           "name": "artifacts:items/drinking_hat"
         }
       ],
@@ -56,8 +47,7 @@
           "condition": "artifacts:configurable_random_chance",
           "default_probability": 0.3
         }
-      ],
-      "functions": []
+      ]
     }
   ]
 }

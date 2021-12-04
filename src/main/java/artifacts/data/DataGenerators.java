@@ -19,7 +19,9 @@ public class DataGenerators {
             BlockTags blockTags = new BlockTags(generator, existingFileHelper);
             generator.addProvider(blockTags);
             generator.addProvider(new ItemTags(generator, blockTags, existingFileHelper));
-            generator.addProvider(new LootTables(generator, existingFileHelper));
+            LootModifiers lootModifiers = new LootModifiers(generator);
+            generator.addProvider(lootModifiers);
+            generator.addProvider(new LootTables(generator, existingFileHelper, lootModifiers));
             generator.addProvider(new EntityTypeTags(generator, existingFileHelper));
         }
         if (event.includeClient()) {

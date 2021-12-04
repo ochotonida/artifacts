@@ -1,0 +1,6 @@
+{
+  "conditions": [],
+  "target": "minecraft:chests/underwater_ruin_big",
+  "lootTable": "artifacts:inject/chests/underwater_ruin_big",
+  "type": "artifacts:roll_loot_table"
+}

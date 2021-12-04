@@ -101,8 +101,8 @@ dependencies {
 
     // runtimeOnly fg.deobf("curse.maven:curious-armor-stands-398784:3468429")
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18-5.0.2.2:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18-5.0.2.2")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18-5.0.2.3:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18-5.0.2.3")
 
     compileOnly fg.deobf("mezz.jei:jei-1.17.1:8.1.0.19:api") // TODO
     // runtimeOnly fg.deobf("mezz.jei:jei-1.17.1:8.1.0.19")

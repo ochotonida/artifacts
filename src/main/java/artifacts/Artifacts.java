@@ -6,12 +6,8 @@ import artifacts.common.init.*;
 import artifacts.common.network.NetworkHandler;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
@@ -44,6 +40,7 @@ public class Artifacts {
         ModSoundEvents.REGISTRY.register(modBus);
         // TODO ModFeatures.FEATURE_REGISTRY.register(modBus);
         // ModFeatures.PLACEMENT_REGISTRY.register(modBus);
+        ModLootModifiers.REGISTRY.register(modBus);
 
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::enqueueIMC);

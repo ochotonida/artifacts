@@ -32,9 +32,9 @@ description='''Adds various new powerful uncraftable items to make exploration a
     ordering = "NONE"
     side = "BOTH"
 
-#[[dependencies.artifacts]]
-#    modId = "expandability"
-#    mandatory = true
-#    versionRange = "[5.0.0,)"
-#    ordering = "NONE"
-#    side = "BOTH"
+[[dependencies.artifacts]]
+    modId = "expandability"
+    mandatory = false
+    versionRange = "[5.0.0,)"
+    ordering = "NONE"
+    side = "BOTH"
