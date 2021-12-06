@@ -233,7 +233,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
         }
 
         private Builder item(Item item, int weight) {
-            lootPool.add(LootTables.createItemEntry(item, weight));
+            lootPool.add(LootTables.item(item, weight));
             return this;
         }
 
@@ -242,17 +242,17 @@ public class LootModifiers extends GlobalLootModifierProvider {
         }
 
         private Builder artifact(int weight) {
-            lootPool.add(LootTables.createArtifactEntry(weight));
+            lootPool.add(LootTables.artifact(weight));
             return this;
         }
 
         private Builder drinkingHat(int weight) {
-            lootPool.add(LootTables.createDrinkingHatEntry(weight));
+            lootPool.add(LootTables.drinkingHat(weight));
             return this;
         }
 
         private Builder everlastingBeef() {
-            lootPool.add(LootTables.createItemEntry(ModItems.EVERLASTING_BEEF.get(), 1)
+            lootPool.add(LootTables.item(ModItems.EVERLASTING_BEEF.get(), 1)
                     .apply(
                             SmeltItemFunction.smelted().when(
                                     LootItemEntityPropertyCondition.hasProperties(
