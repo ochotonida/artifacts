@@ -17,6 +17,7 @@ public class CommonConfig {
 
     private final ForgeConfigSpec.ConfigValue<List<String>> biomeBlacklist;
     public final ForgeConfigSpec.IntValue campsiteRarity;
+    public final ForgeConfigSpec.DoubleValue campsiteMimicChance;
     public final ForgeConfigSpec.BooleanValue useModdedChests;
     public final ForgeConfigSpec.DoubleValue artifactRarity;
 
@@ -54,6 +55,10 @@ public class CommonConfig {
                 )
                 .translation(Artifacts.MODID + ".config.common.campsite.rarity")
                 .defineInRange("rarity", 5, 1, 10000);
+        campsiteMimicChance = builder
+                .comment("Probability that a campsite has a mimic instead of a chest")
+                .translation(Artifacts.MODID + ".config.common.campsite.mimic_chance")
+                .defineInRange("mimic_chance", 0.3, 0, 1);
         useModdedChests = builder
                 .comment(
                         "Whether to use wooden chests from other mods when generating campsites",

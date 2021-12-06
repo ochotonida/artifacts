@@ -2,6 +2,8 @@ package artifacts.common.world;
 
 import artifacts.Artifacts;
 import artifacts.common.config.ModConfig;
+import artifacts.common.entity.MimicEntity;
+import artifacts.common.init.ModEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -202,28 +204,30 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     public void placeChest(WorldGenLevel level, BlockPos pos, Random random, Direction facing) {
-        // if (random.nextFloat() < ModConfig.common.campsiteMimicChance.get()) {
-        //     MimicEntity mimic = ModEntityTypes.MIMIC.create(level.getLevel());
-        //     if (mimic != null) {
-        //         mimic.setDormant();
-        //         mimic.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
-        //         level.addFreshEntity(mimic);
-        //     }
-        // }
-        BlockState chest;
-        if (random.nextInt(8) == 0) {
-            setBlock(level, pos.below(), Blocks.TNT.defaultBlockState());
-            chest = Blocks.TRAPPED_CHEST.defaultBlockState();
-            setBlock(level, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+        if (random.nextFloat() < ModConfig.common.campsiteMimicChance.get()) {
+            MimicEntity mimic = ModEntityTypes.MIMIC.create(level.getLevel());
+            if (mimic != null) {
+                mimic.setDormant(true);
+                mimic.setFacing(facing);
+                mimic.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+                level.addFreshEntity(mimic);
+            }
         } else {
-            chest = ModConfig.common.useModdedChests.get() ? Tags.Blocks.CHESTS_WOODEN.getRandomElement(random).defaultBlockState() : Blocks.CHEST.defaultBlockState();
-        }
+            BlockState chest;
+            if (random.nextInt(8) == 0) {
+                setBlock(level, pos.below(), Blocks.TNT.defaultBlockState());
+                chest = Blocks.TRAPPED_CHEST.defaultBlockState();
+                setBlock(level, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+            } else {
+                chest = ModConfig.common.useModdedChests.get() ? Tags.Blocks.CHESTS_WOODEN.getRandomElement(random).defaultBlockState() : Blocks.CHEST.defaultBlockState();
+            }
 
-        if (chest.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
-            chest = chest.setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
-        }
-        setBlock(level, pos, chest);
+            if (chest.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+                chest = chest.setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
+            }
+            setBlock(level, pos, chest);
 
-        RandomizableContainerBlockEntity.setLootTable(level, random, pos, CHEST_LOOT);
+            RandomizableContainerBlockEntity.setLootTable(level, random, pos, CHEST_LOOT);
+        }
     }
 }
