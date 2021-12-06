@@ -6,8 +6,12 @@ import artifacts.common.init.*;
 import artifacts.common.network.NetworkHandler;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
@@ -38,8 +42,7 @@ public class Artifacts {
 
         ModItems.REGISTRY.register(modBus);
         ModSoundEvents.REGISTRY.register(modBus);
-        // TODO ModFeatures.FEATURE_REGISTRY.register(modBus);
-        // ModFeatures.PLACEMENT_REGISTRY.register(modBus);
+        ModFeatures.REGISTRY.register(modBus);
         ModLootModifiers.REGISTRY.register(modBus);
 
         modBus.addListener(this::commonSetup);
@@ -49,19 +52,22 @@ public class Artifacts {
         modBus.addGenericListener(GlobalLootModifierSerializer.class, ModLootConditions::register);
         modBus.addListener(ModEntityTypes::registerAttributes);
 
-        // MinecraftForge.EVENT_BUS.addListener(this::addFeatures);
+        MinecraftForge.EVENT_BUS.addListener(this::addFeatures);
     }
-    /* TODO
+
     public void addFeatures(BiomeLoadingEvent event) {
-        if (event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND && !ModConfig.common.isBlacklisted(event.getName())) {
-            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_STRUCTURES).add(() -> ModFeatures.UNDERGROUND_CAMPSITE);
+        if (ModConfig.common.campsiteRarity.get() >= 10000) {
+            return;
         }
-    }*/
+        if (event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND && !ModConfig.common.isBlacklisted(event.getName())) {
+            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_STRUCTURES).add(() -> ModFeatures.PLACED_CAMPSITE);
+        }
+    }
 
     public void commonSetup(final FMLCommonSetupEvent event) {
         ModConfig.registerServer();
         event.enqueueWork(() -> {
-            // TODO ModFeatures.registerConfiguredFeatures();
+            ModFeatures.register();
             NetworkHandler.register();
         });
     }

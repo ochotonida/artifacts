@@ -17,10 +17,6 @@ public class CommonConfig {
 
     private final ForgeConfigSpec.ConfigValue<List<String>> biomeBlacklist;
     public final ForgeConfigSpec.IntValue campsiteRarity;
-    public final ForgeConfigSpec.DoubleValue campsiteMimicChance;
-    public final ForgeConfigSpec.DoubleValue campsiteOreChance;
-    public final ForgeConfigSpec.IntValue campsiteMinY;
-    public final ForgeConfigSpec.IntValue campsiteMaxY;
     public final ForgeConfigSpec.BooleanValue useModdedChests;
     public final ForgeConfigSpec.DoubleValue artifactRarity;
 
@@ -52,27 +48,12 @@ public class CommonConfig {
                 .comment(
                         "Rarity of campsites generating in the world",
                         "The chance a campsite generates in a specific chunk is 1/rarity",
-                        "A rarity of 1 will generate a campsite in every chunk, while 10000 will generate no campsites",
+                        "With a rarity of 1, a campsite will attempt to generate in every chunk",
+                        "With a rarity of 10000, no campsites will generate",
                         "Not every attempt at generating a campsite succeeds, this also depends on the density and shape of caves"
                 )
                 .translation(Artifacts.MODID + ".config.common.campsite.rarity")
-                .defineInRange("rarity", 12, 1, 10000);
-        campsiteMinY = builder
-                .comment("The minimum y-level at which a campsite can generate")
-                .translation(Artifacts.MODID + ".config.common.campsite.min_y")
-                .defineInRange("min_y", 1, 1, 255);
-        campsiteMaxY = builder
-                .comment("The maximum y-level at which a campsite can generate")
-                .translation(Artifacts.MODID + ".config.common.campsite.max_y")
-                .defineInRange("max_y", 45, 1, 255);
-        campsiteMimicChance = builder
-                .comment("Probability for a container of a campsite to be replaced by a mimic")
-                .translation(Artifacts.MODID + ".config.common.campsite.mimic_chance")
-                .defineInRange("mimic_chance", 0.3, 0, 1);
-        campsiteOreChance = builder
-                .comment("Probability for an ore vein to generate underneath a campsite")
-                .translation(Artifacts.MODID + ".config.common.campsite.ore_chance")
-                .defineInRange("ore_chance", 0.25, 0, 1);
+                .defineInRange("rarity", 5, 1, 10000);
         useModdedChests = builder
                 .comment(
                         "Whether to use wooden chests from other mods when generating campsites",
