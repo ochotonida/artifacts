@@ -20,7 +20,7 @@ import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 @Mixin(PlayerRenderer.class)
-public abstract class PlayerRendererMixin {
+public abstract class PlayerRendererMixin { // TODO investigate RenderArmEvent
 
     @Inject(method = "renderLeftHand", at = @At("TAIL"))
     private void renderLeftGlove(PoseStack matrixStack, MultiBufferSource buffer, int light, AbstractClientPlayer player, CallbackInfo callbackInfo) {

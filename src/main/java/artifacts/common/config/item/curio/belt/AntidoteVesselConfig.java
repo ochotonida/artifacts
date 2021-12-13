@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class AntidoteVesselConfig extends ItemConfig {
 
-    public Set<MobEffect> negativeEffects = Collections.emptySet();
+    public Set<MobEffect> negativeEffects = Collections.emptySet(); // TODO replace this with a MobEffect tag
 
     private ForgeConfigSpec.ConfigValue<List<String>> negativeEffectsValue;
     public ForgeConfigSpec.IntValue maxEffectDuration;
