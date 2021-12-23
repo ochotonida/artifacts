@@ -2,6 +2,7 @@ package artifacts;
 
 import artifacts.client.render.curio.CurioLayers;
 import artifacts.client.render.curio.CurioRenderers;
+import artifacts.client.render.curio.renderer.ArmRenderHandler;
 import artifacts.client.render.entity.MimicRenderer;
 import artifacts.client.render.entity.model.MimicChestLayerModel;
 import artifacts.client.render.entity.model.MimicModel;
@@ -35,6 +36,8 @@ public class ArtifactsClient {
         modBus.addListener(this::onClientSetup);
         modBus.addListener(this::onRegisterRenderers);
         modBus.addListener(this::onRegisterLayerDefinitions);
+
+        ArmRenderHandler.setup();
     }
 
     public void onClientSetup(FMLClientSetupEvent event) {

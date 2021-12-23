@@ -10,8 +10,7 @@
     "item.villagerhat.VillagerMixin"
   ],
   "client": [
-    "item.umbrella.HumanoidModelMixin",
-    "render.PlayerRendererMixin"
+    "item.umbrella.HumanoidModelMixin"
   ],
   "server": [
     "item.umbrella.ServerGamePacketListenerImplMixin"
