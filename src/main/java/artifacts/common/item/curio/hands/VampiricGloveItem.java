@@ -20,9 +20,7 @@ public class VampiricGloveItem extends CurioItem {
 
             float damageDealt = Math.min(event.getAmount(), event.getEntityLiving().getHealth());
             float damageAbsorbed = Math.min(maxHealthAbsorbed, absorptionRatio * damageDealt);
-            if (damageAbsorbed >= 1) {
-                wearer.heal(damageAbsorbed);
-            }
+            wearer.heal(damageAbsorbed);
 
             damageEquippedStacks(wearer);
         }
