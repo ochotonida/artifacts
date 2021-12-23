@@ -47,7 +47,7 @@ public class ArtifactsClient {
     }
 
     public void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntityTypes.MIMIC, MimicRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.MIMIC.get(), MimicRenderer::new);
     }
 
     public void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

@@ -21,6 +21,6 @@ public class EntityTypeTags extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags() {
-        tag(MOB_IMPRISONMENT_TOOL_BLACKLIST).add(ModEntityTypes.MIMIC);
+        tag(MOB_IMPRISONMENT_TOOL_BLACKLIST).add(ModEntityTypes.MIMIC.get());
     }
 }

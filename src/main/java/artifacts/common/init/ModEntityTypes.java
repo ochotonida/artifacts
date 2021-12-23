@@ -5,25 +5,23 @@ import artifacts.common.entity.MimicEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
-@ObjectHolder(Artifacts.MODID)
 public class ModEntityTypes {
 
-    @SuppressWarnings("unchecked") // TODO use DeferredRegistry (https://github.com/MinecraftForge/MinecraftForge/pull/8044)
-    public static final EntityType<MimicEntity> MIMIC = (EntityType<MimicEntity>) EntityType.Builder.of(MimicEntity::new, MobCategory.MISC)
-            .sized(14 / 16F, 14 / 16F)
-            .setTrackingRange(64)
-            .build(new ResourceLocation(Artifacts.MODID, "mimic").toString())
-            .setRegistryName(new ResourceLocation(Artifacts.MODID, "mimic"));
+    public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITIES, Artifacts.MODID);
 
-    public static void register(RegistryEvent.Register<EntityType<?>> event) {
-        event.getRegistry().register(MIMIC);
-    }
+    public static final RegistryObject<EntityType<MimicEntity>> MIMIC = REGISTRY.register("mimic",
+            () -> EntityType.Builder.of(MimicEntity::new, MobCategory.MISC)
+                    .sized(14 / 16F, 14 / 16F)
+                    .setTrackingRange(64)
+                    .build(new ResourceLocation(Artifacts.MODID, "mimic").toString())
+    );
 
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(MIMIC, MimicEntity.createMobAttributes().build());
+        event.put(MIMIC.get(), MimicEntity.createMobAttributes().build());
     }
 }

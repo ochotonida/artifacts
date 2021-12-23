@@ -4,7 +4,6 @@ import artifacts.common.capability.SwimHandler;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.*;
 import artifacts.common.network.NetworkHandler;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -19,8 +18,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
@@ -29,8 +26,6 @@ import top.theillusivec4.curios.api.SlotTypePreset;
 public class Artifacts {
 
     public static final String MODID = "artifacts";
-
-    public static final Logger LOGGER = LogManager.getLogger();
 
     public Artifacts() {
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ArtifactsClient::new);
@@ -41,6 +36,7 @@ public class Artifacts {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.REGISTRY.register(modBus);
+        ModEntityTypes.REGISTRY.register(modBus);
         ModSoundEvents.REGISTRY.register(modBus);
         ModFeatures.REGISTRY.register(modBus);
         ModLootModifiers.REGISTRY.register(modBus);
@@ -48,7 +44,6 @@ public class Artifacts {
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::enqueueIMC);
 
-        modBus.addGenericListener(EntityType.class, ModEntityTypes::register);
         modBus.addGenericListener(GlobalLootModifierSerializer.class, ModLootConditions::register);
         modBus.addListener(ModEntityTypes::registerAttributes);
 
