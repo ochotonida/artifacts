@@ -21,7 +21,7 @@ mixin {
     add sourceSets.main, "artifacts.refmap.json"
 }
 
-version = '1.18-4.0.0'
+version = '1.18.1-4.0.0'
 group = 'artifacts'
 archivesBaseName = 'artifacts'
 
@@ -29,7 +29,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.18'
+    mappings channel: 'official', version: '1.18.1'
 
     runs {
         client {
@@ -95,19 +95,19 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18-38.0.8'
+    minecraft 'net.minecraftforge:forge:1.18.1-39.0.8'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     // runtimeOnly fg.deobf("curse.maven:curious-armor-stands-398784:3468429")
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18-5.0.2.3:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18-5.0.2.3")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.1-5.0.3.1:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.1-5.0.3.1")
 
-    compileOnly fg.deobf("mezz.jei:jei-1.17.1:8.1.0.19:api") // TODO
-    // runtimeOnly fg.deobf("mezz.jei:jei-1.17.1:8.1.0.19")
+    compileOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48")
 
-    // implementation fg.deobf("be.florens:expandability-forge:4.0.2") TODO
+    compileOnly fg.deobf("be.florens:expandability-forge:4.0.2") // TODO
 }
 
 mixin {
