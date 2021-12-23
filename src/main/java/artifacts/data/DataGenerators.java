@@ -23,6 +23,7 @@ public class DataGenerators {
             generator.addProvider(lootModifiers);
             generator.addProvider(new LootTables(generator, existingFileHelper, lootModifiers));
             generator.addProvider(new EntityTypeTags(generator, existingFileHelper));
+            generator.addProvider(new MobEffectTags(generator, existingFileHelper));
         }
         if (event.includeClient()) {
             generator.addProvider(new ItemModels(generator, existingFileHelper));

@@ -1,6 +1,7 @@
 package artifacts.common.item.curio.belt;
 
 import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModTags;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
@@ -11,7 +12,6 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class AntidoteVesselItem extends CurioItem {
 
@@ -28,8 +28,7 @@ public class AntidoteVesselItem extends CurioItem {
             int maxEffectDuration = ModConfig.server.antidoteVessel.maxEffectDuration.get();
 
             slotContext.entity().getActiveEffectsMap().forEach((effect, instance) -> {
-                Set<MobEffect> negativeEffects = ModConfig.server.antidoteVessel.negativeEffects;
-                if (negativeEffects.contains(effect) && instance.getDuration() > maxEffectDuration) {
+                if (ModTags.ANTIDOTE_VESSEL_CANCELLABLE.contains(effect) && instance.getDuration() > maxEffectDuration) {
                     effects.put(effect, instance);
                 }
             });
