@@ -18,7 +18,7 @@ public class VampiricGloveConfig extends ItemConfig {
         absorptionRatio = builder
                 .comment("The ratio of dealt damage absorbed by the wearer")
                 .translation(translate("absorption_ratio"))
-                .defineInRange("absorption_ratio", 0.25, 0, Double.POSITIVE_INFINITY);
+                .defineInRange("absorption_ratio", 0.2, 0, Double.POSITIVE_INFINITY);
         maxHealthAbsorbed = builder
                 .comment("The maximum amount of health that can be healed in a single hit")
                 .translation(translate("max_health_absorbed"))
