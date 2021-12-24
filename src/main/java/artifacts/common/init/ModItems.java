@@ -36,7 +36,6 @@ public class ModItems {
         }
     };
 
-    // misc items TODO spawn egg
     public static final RegistryObject<Item> MIMIC_SPAWN_EGG = REGISTRY.register("mimic_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.MIMIC, 0x805113, 0x212121, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
     public static final RegistryObject<Item> UMBRELLA = REGISTRY.register("umbrella", UmbrellaItem::new);
     public static final RegistryObject<Item> EVERLASTING_BEEF = REGISTRY.register("everlasting_beef", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(3).saturationMod(0.3F).build()));
