@@ -39,21 +39,23 @@ public class DrinkingHatItem extends CurioItem {
     }
 
     private void onItemUseStart(LivingEntityUseItemEvent.Start event, LivingEntity wearer) {
-        if (canApplyEffect(event)) {
-            double drinkingDurationMultiplier = ModConfig.server.plasticDrinkingHat.drinkingDurationMultiplier.get();
-            event.setDuration((int) (event.getDuration() * drinkingDurationMultiplier));
+        UseAnim action = event.getItem().getUseAnimation();
+        double drinkingMultiplier = ModConfig.server.plasticDrinkingHat.drinkingDurationMultiplier.get();
+        double eatingMultiplier = ModConfig.server.plasticDrinkingHat.eatingDurationMultiplier.get();
+        if (action == UseAnim.DRINK) {
+            event.setDuration((int) (event.getDuration() * drinkingMultiplier));
+        } else if (action == UseAnim.EAT) {
+            event.setDuration((int) (event.getDuration() * eatingMultiplier));
         }
     }
 
     private void onItemUseFinish(LivingEntityUseItemEvent.Finish event, LivingEntity wearer) {
-        if (canApplyEffect(event)) {
+        UseAnim action = event.getItem().getUseAnimation();
+        double drinkingMultiplier = ModConfig.server.plasticDrinkingHat.drinkingDurationMultiplier.get();
+        double eatingMultiplier = ModConfig.server.plasticDrinkingHat.eatingDurationMultiplier.get();
+        if (action == UseAnim.DRINK && drinkingMultiplier != 1 || action == UseAnim.EAT && eatingMultiplier != 1) {
             damageEquippedStacks(wearer);
         }
-    }
-
-    private boolean canApplyEffect(LivingEntityUseItemEvent event) {
-        UseAnim action = event.getItem().getUseAnimation();
-        return action == UseAnim.DRINK || action == UseAnim.EAT && ModConfig.server.plasticDrinkingHat.enableFastEating.get();
     }
 
     @Override

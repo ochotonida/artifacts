@@ -112,7 +112,6 @@
   "artifacts.config.server.digging_claws.mining_speed_bonus": "Bonus de velocidad al minar",
   "artifacts.config.server.digging_claws.tool_tier": "Base minima de 'Harvest' (Valor necesario para minar un bloque)",
   "artifacts.config.server.drinking_hat.drinking_duration_multiplier": "Multiplicador de la duración de las pociones",
-  "artifacts.config.server.drinking_hat.enable_fast_eating": "Habilitar comer más rapido",
   "artifacts.config.server.everlasting_foods.use_duration": "Duración del uso",
   "artifacts.config.server.feral_claws.attack_speed_bonus": "Bonus de velocidad de ataque",
   "artifacts.config.server.fire_gauntlet.fire_duration": "Duración del fuego inflingido",
