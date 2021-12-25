@@ -36,13 +36,14 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
         super(entityRenderer);
 
         Calendar calendar = Calendar.getInstance();
-        boolean isChristmas = calendar.get(Calendar.MONTH) + 1 == 12 && calendar.get(Calendar.DATE) >= 24 && calendar.get(Calendar.DATE) <= 26;
+        boolean isChristmas = calendar.get(Calendar.MONTH) + 1 == 12 && calendar.get(Calendar.DATE) >= 24 && calendar.get(Calendar.DATE) <= 26
+                || calendar.get(Calendar.MONTH) + 1 == 4 && calendar.get(Calendar.DATE) == 1;
 
         chestModel = new MimicChestLayerModel(modelSet.bakeLayer(MimicChestLayerModel.LAYER_LOCATION));
         chestMaterials = new ArrayList<>();
         vanillaChestMaterial = Sheets.chooseMaterial(null, ChestType.SINGLE, isChristmas);
 
-        if (ModList.get().isLoaded("lootr")) {
+        if (!isChristmas && ModList.get().isLoaded("lootr")) {
             ResourceLocation chestLocation = new ResourceLocation("lootr", "chest");
             chestMaterials.add(new Material(TextureAtlas.LOCATION_BLOCKS, chestLocation));
         } else {
