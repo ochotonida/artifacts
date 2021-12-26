@@ -99,15 +99,15 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    // runtimeOnly fg.deobf("curse.maven:curious-armor-stands-398784:3468429")
+    runtimeOnly fg.deobf("curse.maven:curious-armor-stands-398784:3579775")
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.1-5.0.3.1:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.1-5.0.3.1")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.1-5.0.4.1:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.1-5.0.4.1")
 
     compileOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48")
 
-    compileOnly fg.deobf("be.florens:expandability-forge:4.0.2") // TODO
+    implementation fg.deobf("be.florens:expandability-forge:5.0.0")
 }
 
 mixin {
