@@ -98,7 +98,7 @@ public class ArtifactsClient {
                     int partial = Mth.ceil(progress * 10) - full;
 
                     for (int i = 0; i < full + partial; ++i) {
-                        ForgeIngameGui.blit(poseStack, left - i * 8 - 9, top, -90, (i < full ? 0 : 9), 0, 9, 9, 16, 32);
+                        ForgeIngameGui.blit(poseStack, left - i * 8 - 9, top, -90, (i < full ? 0 : 9), 0, 9, 9, 32, 16);
                     }
                     gui.right_height += 10;
 
