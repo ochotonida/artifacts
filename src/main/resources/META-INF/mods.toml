@@ -5,7 +5,7 @@ license="MIT"
 
 [[mods]]
 modId = "artifacts"
-version = "1.18.1-4.0.0"
+version = "1.18.1-4.0.1"
 displayName = "Artifacts"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/artifacts"
 logoFile="logo.png"
