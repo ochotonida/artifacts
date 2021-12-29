@@ -5,6 +5,7 @@ import artifacts.common.init.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -31,6 +32,14 @@ public abstract class ArtifactItem extends Item {
             return ModConfig.server.items.get(this).durability.get();
         }
         return 0;
+    }
+
+    public int getBarWidth(ItemStack stack) {
+        return Math.round(13 - stack.getDamageValue() * 13F / getMaxDamage(stack));
+    }
+
+    public int getBarColor(ItemStack stack) {
+        return Mth.hsvToRgb(Math.max(0, (getMaxDamage(stack) - stack.getDamageValue()) / (float) getMaxDamage(stack)) / 3, 1, 1);
     }
 
     @Override
