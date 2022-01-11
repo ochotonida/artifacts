@@ -34,10 +34,12 @@ public abstract class ArtifactItem extends Item {
         return 0;
     }
 
+    @Override
     public int getBarWidth(ItemStack stack) {
         return Math.round(13 - stack.getDamageValue() * 13F / getMaxDamage(stack));
     }
 
+    @Override
     public int getBarColor(ItemStack stack) {
         return Mth.hsvToRgb(Math.max(0, (getMaxDamage(stack) - stack.getDamageValue()) / (float) getMaxDamage(stack)) / 3, 1, 1);
     }
@@ -45,6 +47,11 @@ public abstract class ArtifactItem extends Item {
     @Override
     public boolean canBeDepleted() {
         return getMaxDamage(ItemStack.EMPTY) > 0;
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        return getMaxDamage(stack) > 0;
     }
 
     @Override
