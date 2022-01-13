@@ -20,6 +20,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
+import net.minecraftforge.common.loot.LootTableIdCondition;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +37,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
     private void addLoot() {
         builder("entities/cow", 1 / 500F)
                 .parameterSet(LootContextParamSets.ENTITY)
-                .condition(LootItemKilledByPlayerCondition.killedByPlayer())
+                .lootPoolCondition(LootItemKilledByPlayerCondition.killedByPlayer())
                 .everlastingBeef();
 
         for (String biome : Arrays.asList("desert", "plains", "savanna", "snowy", "taiga")) {
@@ -180,7 +181,8 @@ public class LootModifiers extends GlobalLootModifierProvider {
 
     protected Builder builder(String lootTable, float baseChance) {
         Builder builder = new Builder(lootTable);
-        builder.condition(ConfigurableRandomChance.configurableRandomChance(baseChance));
+        builder.lootPoolCondition(ConfigurableRandomChance.configurableRandomChance(baseChance));
+        builder.lootModifierCondition(LootTableIdCondition.builder(new ResourceLocation(lootTable)));
         lootBuilders.add(builder);
         return builder;
     }
@@ -199,15 +201,17 @@ public class LootModifiers extends GlobalLootModifierProvider {
 
         private final String lootTable;
         private final LootPool.Builder lootPool = LootPool.lootPool();
+        private final List<LootItemCondition> conditions;
 
         private LootContextParamSet paramSet = LootContextParamSets.CHEST;
 
         private Builder(String lootTable) {
             this.lootTable = lootTable;
+            this.conditions = new ArrayList<>();
         }
 
         private RollLootTableLootModifier build() {
-            return new RollLootTableLootModifier(new LootItemCondition[0], new ResourceLocation(lootTable), new ResourceLocation(Artifacts.MODID, "inject/" + lootTable));
+            return new RollLootTableLootModifier(conditions.toArray(new LootItemCondition[]{}), new ResourceLocation(Artifacts.MODID, "inject/" + lootTable));
         }
 
         protected LootTable.Builder createLootTable() {
@@ -227,8 +231,13 @@ public class LootModifiers extends GlobalLootModifierProvider {
             return this;
         }
 
-        private Builder condition(LootItemCondition.Builder condition) {
+        private Builder lootPoolCondition(LootItemCondition.Builder condition) {
             lootPool.when(condition);
+            return this;
+        }
+
+        private Builder lootModifierCondition(LootItemCondition.Builder condition) {
+            conditions.add(condition.build());
             return this;
         }
 
