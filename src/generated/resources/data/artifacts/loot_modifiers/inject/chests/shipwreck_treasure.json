@@ -1,6 +1,10 @@
 {
-  "conditions": [],
-  "target": "minecraft:chests/shipwreck_treasure",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/shipwreck_treasure"
+    }
+  ],
   "lootTable": "artifacts:inject/chests/shipwreck_treasure",
   "type": "artifacts:roll_loot_table"
 }

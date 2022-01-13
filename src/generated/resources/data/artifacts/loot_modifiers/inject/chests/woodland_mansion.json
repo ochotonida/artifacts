@@ -1,6 +1,10 @@
 {
-  "conditions": [],
-  "target": "minecraft:chests/woodland_mansion",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/woodland_mansion"
+    }
+  ],
   "lootTable": "artifacts:inject/chests/woodland_mansion",
   "type": "artifacts:roll_loot_table"
 }

@@ -1,6 +1,10 @@
 {
-  "conditions": [],
-  "target": "minecraft:chests/buried_treasure",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/buried_treasure"
+    }
+  ],
   "lootTable": "artifacts:inject/chests/buried_treasure",
   "type": "artifacts:roll_loot_table"
 }

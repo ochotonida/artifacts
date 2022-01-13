@@ -1,6 +1,10 @@
 {
-  "conditions": [],
-  "target": "minecraft:chests/pillager_outpost",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/pillager_outpost"
+    }
+  ],
   "lootTable": "artifacts:inject/chests/pillager_outpost",
   "type": "artifacts:roll_loot_table"
 }

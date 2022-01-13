@@ -1,6 +1,10 @@
 {
-  "conditions": [],
-  "target": "minecraft:chests/spawn_bonus_chest",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/spawn_bonus_chest"
+    }
+  ],
   "lootTable": "artifacts:inject/chests/spawn_bonus_chest",
   "type": "artifacts:roll_loot_table"
 }

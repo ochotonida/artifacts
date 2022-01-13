@@ -1,6 +1,10 @@
 {
-  "conditions": [],
-  "target": "minecraft:chests/village/village_temple",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/village/village_temple"
+    }
+  ],
   "lootTable": "artifacts:inject/chests/village/village_temple",
   "type": "artifacts:roll_loot_table"
 }
