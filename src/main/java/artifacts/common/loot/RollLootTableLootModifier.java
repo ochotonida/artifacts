@@ -8,7 +8,6 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -21,7 +20,6 @@ public class RollLootTableLootModifier extends LootModifier {
         this.lootTable = lootTable;
     }
 
-    @NotNull
     @Override
     protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
         // noinspection deprecation - prevent triggering global loot modifiers again
