@@ -17,7 +17,6 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraftforge.fml.ModList;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
 
         chestModel = new MimicChestLayerModel(modelSet.bakeLayer(MimicChestLayerModel.LAYER_LOCATION));
         chestMaterials = new ArrayList<>();
-        vanillaChestMaterial = Sheets.chooseMaterial(null, ChestType.SINGLE, isChristmas);
+        vanillaChestMaterial = isChristmas ? Sheets.CHEST_XMAS_LOCATION : Sheets.CHEST_LOCATION;
 
         if (!isChristmas && ModList.get().isLoaded("lootr")) {
             ResourceLocation chestLocation = new ResourceLocation("lootr", "chest");
