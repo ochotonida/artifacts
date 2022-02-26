@@ -3,6 +3,8 @@ package artifacts.common.item;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModItems;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
@@ -36,6 +38,11 @@ public abstract class ArtifactItem extends Item {
     @Override
     public boolean canBeDepleted() {
         return getMaxDamage(ItemStack.EMPTY) > 0;
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment != Enchantments.MENDING && super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
     @Override
