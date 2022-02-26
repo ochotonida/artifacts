@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.artifacts.refmap.json",
   "mixins": [
+    "DigDurabilityEnchantmentMixin",
     "item.aquadashers.EntityMixin",
     "item.umbrella.EntityMixin",
     "item.villagerhat.AbstractVillagerMixin",
