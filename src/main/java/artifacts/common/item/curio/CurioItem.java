@@ -3,6 +3,7 @@ package artifacts.common.item.curio;
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.ArtifactItem;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.common.MinecraftForge;
@@ -66,6 +67,9 @@ public class CurioItem extends ArtifactItem implements ICurioItem {
     }
 
     protected void damageEquippedStacks(LivingEntity entity, int damage) {
+        if (entity instanceof Player player && player.isCreative()) {
+            return;
+        }
         CuriosApi.getCuriosHelper().getCuriosHandler(entity).ifPresent(curiosHandler ->
                 curiosHandler.getCurios().forEach((identifier, stacksHandler) -> {
                     IDynamicStackHandler stacks = stacksHandler.getStacks();

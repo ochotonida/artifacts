@@ -6,6 +6,7 @@
   "mixins": [
     "DigDurabilityEnchantmentMixin",
     "item.aquadashers.EntityMixin",
+    "item.diggingclaws.ServerPlayerGameModeMixin",
     "item.umbrella.EntityMixin",
     "item.villagerhat.AbstractVillagerMixin",
     "item.villagerhat.VillagerMixin"
