@@ -7,7 +7,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -19,7 +18,6 @@ public class DiggingClawsItem extends CurioItem {
     public DiggingClawsItem() {
         addListener(EventPriority.LOW, PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
         addListener(PlayerEvent.HarvestCheck.class, this::onHarvestCheck);
-        addListener(EventPriority.LOWEST, BlockEvent.BreakEvent.class, this::onBreakBlock, BlockEvent.BreakEvent::getPlayer);
     }
 
     private boolean canHarvest(BlockState state) {
@@ -42,10 +40,6 @@ public class DiggingClawsItem extends CurioItem {
             int diggingClawsHarvestLevel = ModConfig.server.diggingClaws.harvestLevel.get() - 1;
             event.setCanHarvest(event.getTargetBlock().getHarvestLevel() <= diggingClawsHarvestLevel);
         }
-    }
-
-    private void onBreakBlock(BlockEvent.BreakEvent event, LivingEntity wearer) {
-        damageEquippedStacks(wearer);
     }
 
     @Override

@@ -6,6 +6,7 @@ import artifacts.common.item.ArtifactItem;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.common.MinecraftForge;
@@ -79,6 +80,9 @@ public class CurioItem extends ArtifactItem implements ICurioItem {
     }
 
     protected void damageEquippedStacks(LivingEntity entity, int damage) {
+        if (entity instanceof PlayerEntity && ((PlayerEntity) entity).isCreative()) {
+            return;
+        }
         CuriosApi.getCuriosHelper().getCuriosHandler(entity).ifPresent(curiosHandler ->
                 curiosHandler.getCurios().forEach((identifier, stacksHandler) -> {
                     IDynamicStackHandler stacks = stacksHandler.getStacks();

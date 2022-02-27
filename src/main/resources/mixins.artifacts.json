@@ -6,6 +6,7 @@
   "mixins": [
     "UnbreakingEnchantmentMixin",
     "item.aquadashers.EntityMixin",
+    "item.diggingclaws.PlayerInteractionManagerMixin",
     "item.umbrella.EntityMixin",
     "item.villagerhat.AbstractVillagerEntityMixin",
     "item.villagerhat.VillagerEntityMixin"
