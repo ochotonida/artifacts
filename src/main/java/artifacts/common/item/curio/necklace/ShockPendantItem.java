@@ -29,7 +29,7 @@ public class ShockPendantItem extends PendantItem {
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(attacker.level);
             if (lightningBolt != null) {
                 lightningBolt.moveTo(Vec3.atBottomCenterOf(attacker.blockPosition()));
-                lightningBolt.setCause(attacker instanceof ServerPlayer ? (ServerPlayer) attacker : null);
+                lightningBolt.setCause(attacker instanceof ServerPlayer player ? player : null);
                 attacker.level.addFreshEntity(lightningBolt);
             }
         }

@@ -2,6 +2,7 @@ package artifacts.common.item.curio.feet;
 
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -44,23 +45,24 @@ public class RunningShoesItem extends CurioItem {
     @SuppressWarnings("ConstantConditions")
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         if (!ModConfig.server.isCosmetic(this)) {
-            AttributeInstance movementSpeed = slotContext.entity().getAttribute(Attributes.MOVEMENT_SPEED);
+            LivingEntity entity = slotContext.entity();
+            AttributeInstance movementSpeed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
             AttributeModifier speedBonus = getSpeedBonus();
-            if (slotContext.entity().isSprinting()) {
+            if (entity.isSprinting()) {
                 if (!movementSpeed.hasModifier(speedBonus)) {
                     movementSpeed.addTransientModifier(speedBonus);
                 }
-                if (slotContext.entity() instanceof Player) {
-                    slotContext.entity().maxUpStep = Math.max(slotContext.entity().maxUpStep, 1.1F);
+                if (entity instanceof Player) {
+                    entity.maxUpStep = Math.max(entity.maxUpStep, 1.1F);
                 }
 
-                if (slotContext.entity().tickCount % 20 == 0) {
+                if (entity.tickCount % 20 == 0) {
                     damageStack(slotContext, stack);
                 }
             } else {
                 if (movementSpeed.hasModifier(speedBonus)) {
                     movementSpeed.removeModifier(speedBonus);
-                    slotContext.entity().maxUpStep = 0.6F;
+                    entity.maxUpStep = 0.6F;
                 }
             }
         }
