@@ -33,11 +33,11 @@ public class CharmOfSinkingItem extends CurioItem {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
-        if (!ModConfig.server.isCosmetic(this) && slotContext.entity() instanceof ServerPlayer) {
+        if (!ModConfig.server.isCosmetic(this) && slotContext.entity() instanceof ServerPlayer player) {
             slotContext.entity().getCapability(SwimHandler.CAPABILITY).ifPresent(
                     handler -> {
                         handler.setSinking(true);
-                        handler.syncSinking((ServerPlayer) slotContext.entity());
+                        handler.syncSinking(player);
                     }
             );
         }
@@ -45,11 +45,11 @@ public class CharmOfSinkingItem extends CurioItem {
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
-        if (slotContext.entity() instanceof ServerPlayer) {
+        if (slotContext.entity() instanceof ServerPlayer player) {
             slotContext.entity().getCapability(SwimHandler.CAPABILITY).ifPresent(
                     handler -> {
                         handler.setSinking(false);
-                        handler.syncSinking((ServerPlayer) slotContext.entity());
+                        handler.syncSinking(player);
                     }
             );
         }

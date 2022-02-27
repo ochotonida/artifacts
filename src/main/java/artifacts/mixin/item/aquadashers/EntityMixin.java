@@ -44,6 +44,7 @@ public abstract class EntityMixin {
     @Inject(method = "playStepSound", at = @At("HEAD"))
     private void playWaterStepSound(BlockPos pos, BlockState blockState, CallbackInfo callbackInfo) {
         if (blockState.getMaterial().isLiquid() && isRunningWithAquaDashers()) {
+            //noinspection ConstantConditions
             ((LivingEntity) (Object) this).playSound(ModSoundEvents.WATER_STEP.get(), 0.15F, 1);
         }
     }
@@ -82,6 +83,6 @@ public abstract class EntityMixin {
     @Unique
     private boolean isRunningWithAquaDashers() {
         // noinspection ConstantConditions
-        return (Object) this instanceof LivingEntity && ModItems.AQUA_DASHERS.get().isSprinting((LivingEntity) (Object) this);
+        return (Object) this instanceof LivingEntity entity && ModItems.AQUA_DASHERS.get().isSprinting(entity);
     }
 }

@@ -36,20 +36,20 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
     }
 
     private void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if (!ModConfig.server.isCosmetic(this) && event.getEntity() instanceof Creeper) {
-            ((Creeper) event.getEntity()).goalSelector.addGoal(3, new AvoidEntityGoal<>((Creeper) event.getEntity(), Player.class, (entity) -> entity != null && isEquippedBy(entity), 6, 1, 1.3, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test));
+        if (!ModConfig.server.isCosmetic(this) && event.getEntity() instanceof Creeper creeper) {
+            creeper.goalSelector.addGoal(3, new AvoidEntityGoal<>(creeper, Player.class, (entity) -> entity != null && isEquippedBy(entity), 6, 1, 1.3, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test));
         }
     }
 
     private void onLivingSetAttackTarget(LivingSetAttackTargetEvent event, LivingEntity wearer) {
-        if (event.getEntityLiving() instanceof Creeper) {
-            ((Mob) event.getEntityLiving()).setTarget(null);
+        if (event.getEntityLiving() instanceof Creeper creeper) {
+            creeper.setTarget(null);
         }
     }
 
     private void onLivingUpdate(LivingEvent.LivingUpdateEvent event, LivingEntity wearer) {
-        if (event.getEntityLiving() instanceof Creeper) {
-            event.getEntityLiving().setLastHurtByMob(null);
+        if (event.getEntityLiving() instanceof Creeper creeper) {
+            creeper.setLastHurtByMob(null);
         }
     }
 

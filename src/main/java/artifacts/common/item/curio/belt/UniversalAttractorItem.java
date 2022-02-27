@@ -45,16 +45,17 @@ public class UniversalAttractorItem extends CurioItem {
     // magnet logic from Botania, see https://github.com/Vazkii/Botania
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        if (ModConfig.server.isCosmetic(this) || slotContext.entity().isSpectator() || !(slotContext.entity() instanceof Player)) {
+        LivingEntity entity = slotContext.entity();
+        if (ModConfig.server.isCosmetic(this) || entity.isSpectator() || !(entity instanceof Player)) {
             return;
         }
 
         int cooldown = getCooldown(stack);
         if (cooldown <= 0) {
-            Vec3 playerPos = slotContext.entity().position().add(0, 0.75, 0);
+            Vec3 playerPos = entity.position().add(0, 0.75, 0);
 
             int range = ModConfig.server.universalAttractor.range.get();
-            List<ItemEntity> items = slotContext.entity().level.getEntitiesOfClass(ItemEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
+            List<ItemEntity> items = entity.level.getEntitiesOfClass(ItemEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
             int pulled = 0;
             for (ItemEntity item : items) {
                 if (item.isAlive() && !item.hasPickUpDelay() && !item.getPersistentData().getBoolean("PreventRemoteMovement")) {

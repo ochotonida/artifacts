@@ -153,8 +153,8 @@ public class MimicEntity extends Mob implements Enemy {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (source.getEntity() instanceof Player) {
-            setTarget((LivingEntity) source.getEntity());
+        if (source.getEntity() instanceof Player player) {
+            setTarget(player);
         }
 
         if (ticksInAir <= 0 && source.isProjectile() && !source.isBypassArmor()) {
@@ -206,10 +206,10 @@ public class MimicEntity extends Mob implements Enemy {
         public boolean canUse() {
             LivingEntity target = mimic.getTarget();
 
-            return target instanceof Player
-                    && target.isAlive()
-                    && target.getCommandSenderWorld().getDifficulty() != Difficulty.PEACEFUL
-                    && !((Player) target).getAbilities().invulnerable;
+            return target instanceof Player player
+                    && player.isAlive()
+                    && player.getCommandSenderWorld().getDifficulty() != Difficulty.PEACEFUL
+                    && !player.getAbilities().invulnerable;
         }
 
         @Override
@@ -222,10 +222,10 @@ public class MimicEntity extends Mob implements Enemy {
         public boolean canContinueToUse() {
             LivingEntity target = mimic.getTarget();
 
-            return target instanceof Player
-                    && target.isAlive()
-                    && target.getCommandSenderWorld().getDifficulty() != Difficulty.PEACEFUL
-                    && !((Player) target).getAbilities().invulnerable
+            return target instanceof Player player
+                    && player.isAlive()
+                    && player.getCommandSenderWorld().getDifficulty() != Difficulty.PEACEFUL
+                    && !player.getAbilities().invulnerable
                     && --timeRemaining > 0;
         }
 
@@ -297,8 +297,8 @@ public class MimicEntity extends Mob implements Enemy {
             if (mimic.getRandom().nextFloat() < 0.8F) {
                 mimic.jumpControl.jump();
             }
-            if (mimic.getMoveControl() instanceof MimicMovementController) {
-                ((MimicMovementController) mimic.getMoveControl()).setSpeed(1.2);
+            if (mimic.getMoveControl() instanceof MimicMovementController controller) {
+                controller.setSpeed(1.2);
             }
         }
     }
@@ -319,8 +319,8 @@ public class MimicEntity extends Mob implements Enemy {
 
         @Override
         public void tick() {
-            if (mimic.getMoveControl() instanceof MimicMovementController) {
-                ((MimicMovementController) mimic.getMoveControl()).setSpeed(1);
+            if (mimic.getMoveControl() instanceof MimicMovementController controller) {
+                controller.setSpeed(1);
             }
         }
     }

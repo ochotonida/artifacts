@@ -45,8 +45,9 @@ public class GloveCurioRenderer implements ICurioRenderer {
     @Nullable
     public static GloveCurioRenderer getGloveRenderer(ItemStack stack) {
         if (!stack.isEmpty()) {
-            return (GloveCurioRenderer) CuriosRendererRegistry.getRenderer(stack.getItem())
-                    .filter(renderer -> renderer instanceof GloveCurioRenderer)
+            return CuriosRendererRegistry.getRenderer(stack.getItem())
+                    .filter(GloveCurioRenderer.class::isInstance)
+                    .map(GloveCurioRenderer.class::cast)
                     .orElse(null);
         }
         return null;
@@ -61,8 +62,9 @@ public class GloveCurioRenderer implements ICurioRenderer {
     }
 
     protected static boolean hasSlimArms(Entity entity) {
-        return entity instanceof AbstractClientPlayer && ((AbstractClientPlayer) entity).getModelName().equals("slim");
+        return entity instanceof AbstractClientPlayer player && player.getModelName().equals("slim");
     }
+
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(
             ItemStack stack,

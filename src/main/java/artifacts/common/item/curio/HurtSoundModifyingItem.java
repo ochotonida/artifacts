@@ -31,9 +31,9 @@ public abstract class HurtSoundModifyingItem extends CurioItem {
         public void onPlaySoundAtEntity(PlaySoundAtEntityEvent event) {
             if (ModConfig.client.modifyHurtSounds.get()
                     && isHurtSound(event.getSound())
-                    && event.getEntity() instanceof LivingEntity
-                    && CuriosApi.getCuriosHelper().findEquippedCurio(HurtSoundModifyingItem.this, ((LivingEntity) event.getEntity())).isPresent()) {
-                event.getEntity().getCommandSenderWorld().playLocalSound(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), hurtSound, event.getCategory(), 1, (((LivingEntity) event.getEntity()).getRandom().nextFloat() - ((LivingEntity) event.getEntity()).getRandom().nextFloat()) * 0.2F + 1, false);
+                    && event.getEntity() instanceof LivingEntity entity
+                    && CuriosApi.getCuriosHelper().findEquippedCurio(HurtSoundModifyingItem.this, entity).isPresent()) {
+                entity.getCommandSenderWorld().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), hurtSound, event.getCategory(), 1, (entity.getRandom().nextFloat() - entity.getRandom().nextFloat()) * 0.2F + 1, false);
             }
         }
 
