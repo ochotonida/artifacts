@@ -4,8 +4,10 @@ import artifacts.Artifacts;
 import artifacts.common.config.ModConfig;
 import artifacts.common.world.CampsiteFeature;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -19,34 +21,41 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
+
 public class ModFeatures {
 
     public static final DeferredRegister<Feature<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.FEATURES, Artifacts.MODID);
 
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> CAMPSITE = REGISTRY.register("campsite", CampsiteFeature::new);
 
-    public static PlacedFeature PLACED_CAMPSITE;
+    public static PlacedFeature UNDERGROUND_CAMPSITE;
 
     public static void register() {
         ConfiguredFeature<?, ?> configuredFeature = Registry.register(
                 BuiltinRegistries.CONFIGURED_FEATURE,
                 new ResourceLocation(Artifacts.MODID, "campsite"),
-                CAMPSITE.get().configured(FeatureConfiguration.NONE)
+                new ConfiguredFeature<>(CAMPSITE.get(), FeatureConfiguration.NONE)
         );
 
-        PLACED_CAMPSITE = Registry.register(
+        ResourceKey<ConfiguredFeature<?, ?>> featureKey = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature).orElseThrow();
+        Holder<ConfiguredFeature<?, ?>> featureHolder = BuiltinRegistries.CONFIGURED_FEATURE.getHolderOrThrow(featureKey);
+
+        UNDERGROUND_CAMPSITE = Registry.register(
                 BuiltinRegistries.PLACED_FEATURE,
                 new ResourceLocation(Artifacts.MODID, "underground_campsite"),
-                configuredFeature.placed(
-                        RarityFilter.onAverageOnceEvery(ModConfig.common.campsiteRarity.get()),
-                        InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(
-                                 VerticalAnchor.aboveBottom(32),
-                                 VerticalAnchor.aboveBottom(96)
-                        ),
-                        EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 32),
-                        RandomOffsetPlacement.vertical(ConstantInt.of(1)),
-                        BiomeFilter.biome()
+                new PlacedFeature(featureHolder,
+                        List.of(
+                                RarityFilter.onAverageOnceEvery(ModConfig.common.campsiteRarity.get()),
+                                InSquarePlacement.spread(),
+                                HeightRangePlacement.uniform(
+                                         VerticalAnchor.aboveBottom(32),
+                                         VerticalAnchor.aboveBottom(96)
+                                ),
+                                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 32),
+                                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                                BiomeFilter.biome()
+                        )
                 )
         );
     }

@@ -3,6 +3,7 @@ package artifacts.common.item.curio.belt;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModTags;
 import artifacts.common.item.curio.CurioItem;
+import net.minecraft.core.Registry;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -26,9 +27,9 @@ public class AntidoteVesselItem extends CurioItem {
             Map<MobEffect, MobEffectInstance> effects = new HashMap<>();
 
             int maxEffectDuration = ModConfig.server.antidoteVessel.maxEffectDuration.get();
-
             slotContext.entity().getActiveEffectsMap().forEach((effect, instance) -> {
-                if (ModTags.ANTIDOTE_VESSEL_CANCELLABLE.contains(effect) && instance.getDuration() > maxEffectDuration) {
+                // noinspection deprecation
+                if (Registry.MOB_EFFECT.getHolderOrThrow(Registry.MOB_EFFECT.getResourceKey(effect).orElseThrow()).is(ModTags.ANTIDOTE_VESSEL_CANCELLABLE) && instance.getDuration() > maxEffectDuration) {
                     effects.put(effect, instance);
                 }
             });

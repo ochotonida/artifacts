@@ -6,6 +6,8 @@ import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.ModEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.level.WorldGenLevel;
@@ -218,8 +220,16 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
                 setBlock(level, pos.below(), Blocks.TNT.defaultBlockState());
                 chest = Blocks.TRAPPED_CHEST.defaultBlockState();
                 setBlock(level, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+            } else if (ModConfig.common.useModdedChests.get()) {
+                // noinspection deprecation
+                chest = Registry.BLOCK
+                        .getTag(Tags.Blocks.CHESTS_WOODEN)
+                        .flatMap((set) -> set.getRandomElement(random))
+                        .map(Holder::value)
+                        .orElse(Blocks.CHEST)
+                        .defaultBlockState();
             } else {
-                chest = ModConfig.common.useModdedChests.get() ? Tags.Blocks.CHESTS_WOODEN.getRandomElement(random).defaultBlockState() : Blocks.CHEST.defaultBlockState();
+                chest = Blocks.CHEST.defaultBlockState();
             }
 
             if (chest.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {

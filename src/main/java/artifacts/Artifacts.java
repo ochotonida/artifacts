@@ -4,6 +4,7 @@ import artifacts.common.capability.SwimHandler;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.*;
 import artifacts.common.network.NetworkHandler;
+import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -55,7 +56,11 @@ public class Artifacts {
             return;
         }
         if (event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND && !ModConfig.common.isBlacklisted(event.getName())) {
-            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_STRUCTURES).add(() -> ModFeatures.PLACED_CAMPSITE);
+            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_STRUCTURES).add(
+                    BuiltinRegistries.PLACED_FEATURE.getHolderOrThrow(
+                            BuiltinRegistries.PLACED_FEATURE.getResourceKey(ModFeatures.UNDERGROUND_CAMPSITE).orElseThrow()
+                    )
+            );
         }
     }
 

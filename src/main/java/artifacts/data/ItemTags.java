@@ -2,10 +2,11 @@ package artifacts.data;
 
 import artifacts.Artifacts;
 import artifacts.common.init.ModItems;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -16,14 +17,14 @@ import java.util.stream.Collectors;
 
 public class ItemTags extends ItemTagsProvider {
 
-    private static final Tag.Named<Item> ARTIFACTS = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(Artifacts.MODID, "artifacts"));
+    private static final TagKey<Item> ARTIFACTS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(Artifacts.MODID, "artifacts"));
 
-    private static final Tag.Named<Item> BELT = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "belt"));
-    private static final Tag.Named<Item> CURIO = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "curio"));
-    private static final Tag.Named<Item> FEET = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "feet"));
-    private static final Tag.Named<Item> HANDS = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "hands"));
-    private static final Tag.Named<Item> HEAD = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "head"));
-    private static final Tag.Named<Item> NECKLACE = net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "necklace"));
+    private static final TagKey<Item> BELT = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "belt"));
+    private static final TagKey<Item> CURIO = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "curio"));
+    private static final TagKey<Item> FEET = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "feet"));
+    private static final TagKey<Item> HANDS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "hands"));
+    private static final TagKey<Item> HEAD = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "head"));
+    private static final TagKey<Item> NECKLACE = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "necklace"));
 
     public ItemTags(DataGenerator generator, BlockTags blockTags, @Nullable ExistingFileHelper existingFileHelper) {
         super(generator, blockTags, Artifacts.MODID, existingFileHelper);
