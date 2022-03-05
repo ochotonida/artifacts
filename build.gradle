@@ -1,20 +1,20 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
-        maven { url = 'https://maven.parchmentmc.org' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7.+'
-        classpath 'org.parchmentmc:librarian:1.+'
     }
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+}
+
+apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
 mixin {
@@ -29,7 +29,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.18.1'
+    mappings channel: 'official', version: '1.18.2'
 
     runs {
         client {
@@ -72,8 +72,8 @@ minecraft {
     }
 }
 
-sourceSets {
-    main.resources.srcDirs += 'src/generated/resources'
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
 }
 
 repositories {
@@ -95,17 +95,17 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.1-39.0.88'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.0.2'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     runtimeOnly fg.deobf("curse.maven:curious-armor-stands-398784:3579775")
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.1-5.0.4.1:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.1-5.0.4.1")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.6.3:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.6.3")
 
-    compileOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48")
+    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.116:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.116")
 
     implementation fg.deobf("be.florens:expandability-forge:5.0.0")
 }
