@@ -107,7 +107,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.116:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.116")
 
-    implementation fg.deobf("be.florens:expandability-forge:5.0.0")
+    implementation fg.deobf("be.florens:expandability-forge:6.0.0")
 }
 
 mixin {
