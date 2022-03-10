@@ -105,7 +105,7 @@ efa80538c1ce925145e572d01495ebb5666107cd data/artifacts/loot_tables/inject/chest
 279e99646493dff4dbf68acfa98e30df315d8287 data/artifacts/loot_tables/items/drinking_hat.json
 bcce34a23ff2497a9ce5c5ddfaae9a8d31e3aee7 data/artifacts/tags/blocks/mineable/digging_claws.json
 dabba677a10bb1e12f0ddac823bffe094499445c data/artifacts/tags/items/artifacts.json
-f93d3d5026fa07cfdb12b061ba33cfcd21e390ef data/artifacts/tags/mob_effects/antidote_vessel_cancellable.json
+f93d3d5026fa07cfdb12b061ba33cfcd21e390ef data/artifacts/tags/mob_effect/antidote_vessel_cancellable.json
 94446c2219223bb54ee99e45bbdfb769f69c2c27 data/curios/tags/items/belt.json
 780e1301f1d02678c169e3f3f7bb363a8355a0af data/curios/tags/items/curio.json
 1ad799ef52e39345fa72d6d8b59e07727945a7db data/curios/tags/items/feet.json
