@@ -2,19 +2,20 @@ package artifacts.data;
 
 import artifacts.Artifacts;
 import artifacts.common.init.ModTags;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.ForgeRegistryTagsProvider;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 
-public class MobEffectTags extends ForgeRegistryTagsProvider<MobEffect> {
+public class MobEffectTags extends TagsProvider<MobEffect> {
 
     public MobEffectTags(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generator, ForgeRegistries.MOB_EFFECTS, Artifacts.MODID, existingFileHelper);
+        // noinspection deprecation
+        super(generator, Registry.MOB_EFFECT, Artifacts.MODID, existingFileHelper);
     }
 
     @Override
