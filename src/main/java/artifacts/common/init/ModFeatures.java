@@ -18,14 +18,13 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
 public class ModFeatures {
 
-    public static final DeferredRegister<Feature<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.FEATURES, Artifacts.MODID);
+    public static final DeferredRegister<Feature<?>> REGISTRY = DeferredRegister.create(Registry.FEATURE_REGISTRY, Artifacts.MODID);
 
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> CAMPSITE = REGISTRY.register("campsite", CampsiteFeature::new);
 

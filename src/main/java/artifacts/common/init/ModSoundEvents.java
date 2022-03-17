@@ -1,15 +1,15 @@
 package artifacts.common.init;
 
 import artifacts.Artifacts;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModSoundEvents {
 
-    public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Artifacts.MODID);
+    public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(Registry.SOUND_EVENT_REGISTRY, Artifacts.MODID);
 
     public static final RegistryObject<SoundEvent>
             POP = register("generic.pop"),

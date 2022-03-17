@@ -2,17 +2,17 @@ package artifacts.common.init;
 
 import artifacts.Artifacts;
 import artifacts.common.entity.MimicEntity;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModEntityTypes {
 
-    public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITIES, Artifacts.MODID);
+    public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(Registry.ENTITY_TYPE_REGISTRY, Artifacts.MODID);
 
     public static final RegistryObject<EntityType<MimicEntity>> MIMIC = REGISTRY.register("mimic",
             () -> EntityType.Builder.of(MimicEntity::new, MobCategory.MISC)

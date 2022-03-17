@@ -13,6 +13,7 @@ import artifacts.common.item.curio.head.NightVisionGogglesItem;
 import artifacts.common.item.curio.head.SnorkelItem;
 import artifacts.common.item.curio.head.SuperstitiousHatItem;
 import artifacts.common.item.curio.necklace.*;
+import net.minecraft.core.Registry;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -21,12 +22,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
 
-    public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, Artifacts.MODID);
+    public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(Registry.ITEM_REGISTRY, Artifacts.MODID);
 
     public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(Artifacts.MODID) {
         @Override
