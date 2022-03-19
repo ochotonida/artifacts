@@ -27,7 +27,7 @@ import java.util.EnumSet;
 
 public class MimicEntity extends Mob implements Enemy {
 
-    public static final ResourceLocation MIMIC = new ResourceLocation(Artifacts.MODID, "entities/mimic");
+    public static final ResourceLocation LOOT_TABLE = new ResourceLocation(Artifacts.MODID, "entities/mimic");
 
     public int ticksInAir;
     public int attackCooldown;
@@ -189,7 +189,7 @@ public class MimicEntity extends Mob implements Enemy {
 
     @Override
     protected ResourceLocation getDefaultLootTable() {
-        return MIMIC;
+        return LOOT_TABLE;
     }
 
     protected static class AttackGoal extends Goal {

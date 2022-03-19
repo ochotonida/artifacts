@@ -1,8 +1,10 @@
 package artifacts.data;
 
 import artifacts.Artifacts;
+import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.ModItems;
 import artifacts.common.loot.ConfigurableRandomChance;
+import artifacts.common.world.CampsiteFeature;
 import com.google.common.base.Preconditions;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.data.DataGenerator;
@@ -58,7 +60,7 @@ public class LootTables extends LootTableProvider {
             addLootTable("inject/" + lootBuilder.getName(), lootBuilder.createLootTable(), lootBuilder.getParameterSet());
         }
 
-        addLootTable("entities/mimic", new LootTable.Builder().withPool(new LootPool.Builder().add(artifact(1))));
+        addLootTable(MimicEntity.LOOT_TABLE.getPath(), new LootTable.Builder().withPool(new LootPool.Builder().add(artifact(1))));
 
 
         return tables;
@@ -122,7 +124,8 @@ public class LootTables extends LootTableProvider {
     }
 
     private void addChestLootTables() {
-        addLootTable("chests/campsite_barrel", new LootTable.Builder()
+        String barrel = CampsiteFeature.BARREL_LOOT.getPath();
+        addLootTable(barrel, new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .when(LootItemRandomChanceCondition.randomChance(0.7F))
                         .add(item(Items.COD, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
@@ -135,20 +138,20 @@ public class LootTables extends LootTableProvider {
                         .add(item(Items.BOOK, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
                         .add(item(Items.SUGAR, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
                         .add(item(Items.COAL, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
-                        .add(lootTable("chests/campsite_barrel/tnt", 1))
-                        .add(lootTable("chests/campsite_barrel/cobwebs", 1))
-                        .add(lootTable("chests/campsite_barrel/ores", 1))
-                        .add(lootTable("chests/campsite_barrel/ingots", 1))
-                        .add(lootTable("chests/campsite_barrel/gems", 1))
-                        .add(lootTable("chests/campsite_barrel/crops", 1))
-                        .add(lootTable("chests/campsite_barrel/food", 1))
-                        .add(lootTable("chests/campsite_barrel/cobblestone", 1))
-                        .add(lootTable("chests/campsite_barrel/rails", 1))
-                        .add(lootTable("chests/campsite_barrel/minecarts", 1))
+                        .add(lootTable(barrel + "/tnt", 1))
+                        .add(lootTable(barrel + "/cobwebs", 1))
+                        .add(lootTable(barrel + "/ores", 1))
+                        .add(lootTable(barrel + "/ingots", 1))
+                        .add(lootTable(barrel + "/gems", 1))
+                        .add(lootTable(barrel + "/crops", 1))
+                        .add(lootTable(barrel + "/food", 1))
+                        .add(lootTable(barrel + "/cobblestone", 1))
+                        .add(lootTable(barrel + "/rails", 1))
+                        .add(lootTable(barrel + "/minecarts", 1))
                 )
         );
 
-        addLootTable("chests/campsite_barrel/tnt", new LootTable.Builder()
+        addLootTable(barrel + "/tnt", new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .name("tnt")
                         .setRolls(ConstantValue.exactly(3))
@@ -161,12 +164,12 @@ public class LootTables extends LootTableProvider {
                 )
         );
 
-        addLootTable("chests/campsite_barrel/cobwebs", new LootTable.Builder()
+        addLootTable(barrel + "/cobwebs", new LootTable.Builder()
                 .withPool(new LootPool.Builder().add(item(Items.COBWEB, 1, 3, 8)))
                 .withPool(new LootPool.Builder().add(item(Items.STRING, 1, 6, 16)))
         );
 
-        addLootTable("chests/campsite_barrel/ores", new LootTable.Builder()
+        addLootTable(barrel + "/ores", new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .name("ores")
                         .setRolls(ConstantValue.exactly(2))
@@ -182,7 +185,7 @@ public class LootTables extends LootTableProvider {
                 )
         );
 
-        addLootTable("chests/campsite_barrel/ingots", new LootTable.Builder()
+        addLootTable(barrel + "/ingots", new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .name("ingots")
                         .setRolls(ConstantValue.exactly(2))
@@ -198,7 +201,7 @@ public class LootTables extends LootTableProvider {
                 )
         );
 
-        addLootTable("chests/campsite_barrel/gems", new LootTable.Builder()
+        addLootTable(barrel + "/gems", new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .setRolls(ConstantValue.exactly(3))
                         .add(item(Items.AMETHYST_SHARD, 3, 1, 8))
@@ -207,7 +210,7 @@ public class LootTables extends LootTableProvider {
                 )
         );
 
-        addLootTable("chests/campsite_barrel/crops", new LootTable.Builder()
+        addLootTable(barrel + "/crops", new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .setRolls(ConstantValue.exactly(2))
                         .add(item(Items.POTATO, 1, 2, 12))
@@ -220,7 +223,7 @@ public class LootTables extends LootTableProvider {
                 )
         );
 
-        addLootTable("chests/campsite_barrel/food", new LootTable.Builder()
+        addLootTable(barrel + "/food", new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .setRolls(ConstantValue.exactly(3))
                         .add(item(Items.BREAD, 1, 2, 12))
@@ -232,7 +235,7 @@ public class LootTables extends LootTableProvider {
                 )
         );
 
-        addLootTable("chests/campsite_barrel/cobblestone", new LootTable.Builder()
+        addLootTable(barrel + "/cobblestone", new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .setRolls(ConstantValue.exactly(3))
                         .add(item(Items.COBBLESTONE, 1, 16, 64))
@@ -240,7 +243,7 @@ public class LootTables extends LootTableProvider {
                 )
         );
 
-        addLootTable("chests/campsite_barrel/rails", new LootTable.Builder()
+        addLootTable(barrel + "/rails", new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .setRolls(ConstantValue.exactly(4))
                         .add(item(Items.RAIL, 4, 4, 16))
@@ -250,7 +253,7 @@ public class LootTables extends LootTableProvider {
                 )
         );
 
-        addLootTable("chests/campsite_barrel/minecarts", new LootTable.Builder()
+        addLootTable(barrel + "/minecarts", new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .name("minecarts")
                         .setRolls(ConstantValue.exactly(5))
@@ -265,7 +268,7 @@ public class LootTables extends LootTableProvider {
                 )
         );
 
-        addLootTable("chests/campsite_chest", new LootTable.Builder()
+        addLootTable(CampsiteFeature.CHEST_LOOT.getPath(), new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .name("tools")
                         .setRolls(UniformGenerator.between(1, 3))
