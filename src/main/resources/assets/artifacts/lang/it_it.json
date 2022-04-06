@@ -106,7 +106,7 @@
   "artifacts.config.server.items.cooldown": "Tempo di ricarica",
   "artifacts.config.server.antidote_vessel.max_effect_duration": "Livello di riduzione massimo degli effetti negativi",
   "artifacts.config.server.bunny_hoppers.should_cancel_fall_damage": "Dovrebbe annullare il danno da caduta",
-  "artifacts.config.server.bunny_hoppers.jump_boost_level": "Potenziamento del salto"
+  "artifacts.config.server.bunny_hoppers.jump_boost_level": "Potenziamento del salto",
   "artifacts.config.server.cloud_in_a_bottle.sprint_jump_height_multiplier": "Moltiplicatore dell'altezza del doppio salto",
   "artifacts.config.server.cloud_in_a_bottle.sprint_jump_distance_multiplier": "Moltiplicatore della distanza del doppio salto",
   "artifacts.config.server.cross_necklace.invincibility_bonus": "Tempo invincibilità bonus",
@@ -121,7 +121,7 @@
   "artifacts.config.server.flame_pendant.fire_duration": "Durata fuoco",
   "artifacts.config.server.flippers.swim_speed_bonus": "Velocità di nuoto bonus",
   "artifacts.config.server.golden_hook.experience_bonus": "Esperienza bonus",
-  "artifacts.config.server.helium_flamingo.max_flight_time": "Massimo tempo in volo"
+  "artifacts.config.server.helium_flamingo.max_flight_time": "Massimo tempo in volo",
   "artifacts.config.server.helium_flamingo.recharge_time": "Tempo di ricarica",
   "artifacts.config.server.lucky_scarf.fortune_bonus": "Fortuna bonus",
   "artifacts.config.server.obsidian_skull.fire_resistance_duration": "Durata della resistenza al fuoco",
