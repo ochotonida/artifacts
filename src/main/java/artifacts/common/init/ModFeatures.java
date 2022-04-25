@@ -48,8 +48,8 @@ public class ModFeatures {
                                 RarityFilter.onAverageOnceEvery(ModConfig.common.campsiteRarity.get()),
                                 InSquarePlacement.spread(),
                                 HeightRangePlacement.uniform(
-                                         VerticalAnchor.aboveBottom(32),
-                                         VerticalAnchor.aboveBottom(96)
+                                         VerticalAnchor.aboveBottom(ModConfig.common.campsiteMinY.get()),
+                                         VerticalAnchor.aboveBottom(ModConfig.common.campsiteMaxY.get())
                                 ),
                                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 32),
                                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),

@@ -18,6 +18,8 @@ public class CommonConfig {
     private final ForgeConfigSpec.ConfigValue<List<String>> biomeBlacklist;
     public final ForgeConfigSpec.IntValue campsiteRarity;
     public final ForgeConfigSpec.DoubleValue campsiteMimicChance;
+    public final ForgeConfigSpec.IntValue campsiteMinY;
+    public final ForgeConfigSpec.IntValue campsiteMaxY;
     public final ForgeConfigSpec.BooleanValue useModdedChests;
     public final ForgeConfigSpec.DoubleValue artifactRarity;
 
@@ -55,6 +57,20 @@ public class CommonConfig {
                 )
                 .translation(Artifacts.MODID + ".config.common.campsite.rarity")
                 .defineInRange("rarity", 5, 1, 10000);
+        campsiteMinY = builder
+                .worldRestart()
+                .comment(
+                        "Minimum Y-coordinate height for a campsite to generate"
+                )
+                .translation(Artifacts.MODID + ".config.common.campsite.min_y")
+                .defineInRange("min_y", 32, -2048, 2048);
+        campsiteMaxY = builder
+                .worldRestart()
+                .comment(
+                        "Maximum Y-coordinate height for a campsite to generate"
+                )
+                .translation(Artifacts.MODID + ".config.common.campsite.max_y")
+                .defineInRange("max_y", 96, -2048, 2048);
         campsiteMimicChance = builder
                 .comment("Probability that a campsite has a mimic instead of a chest")
                 .translation(Artifacts.MODID + ".config.common.campsite.mimic_chance")
