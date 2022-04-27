@@ -3,6 +3,7 @@ package artifacts.common.init;
 import artifacts.Artifacts;
 import artifacts.common.config.ModConfig;
 import artifacts.common.world.CampsiteFeature;
+import artifacts.common.world.CeilingHeightFilter;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -26,11 +27,15 @@ public class ModFeatures {
 
     public static final DeferredRegister<Feature<?>> REGISTRY = DeferredRegister.create(Registry.FEATURE_REGISTRY, Artifacts.MODID);
 
+    public static PlacementModifierType<CeilingHeightFilter> CEILING_HEIGHT_FILTER;
+
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> CAMPSITE = REGISTRY.register("campsite", CampsiteFeature::new);
 
     public static PlacedFeature UNDERGROUND_CAMPSITE;
 
     public static void register() {
+        CEILING_HEIGHT_FILTER = Registry.register(Registry.PLACEMENT_MODIFIERS, new ResourceLocation(Artifacts.MODID, "ceiling_height_filter"), () -> CeilingHeightFilter.CODEC);
+
         ConfiguredFeature<?, ?> configuredFeature = Registry.register(
                 BuiltinRegistries.CONFIGURED_FEATURE,
                 new ResourceLocation(Artifacts.MODID, "campsite"),
@@ -45,14 +50,21 @@ public class ModFeatures {
                 new ResourceLocation(Artifacts.MODID, "underground_campsite"),
                 new PlacedFeature(featureHolder,
                         List.of(
+                                CountPlacement.of(ModConfig.common.campsiteCount.get()),
                                 RarityFilter.onAverageOnceEvery(ModConfig.common.campsiteRarity.get()),
                                 InSquarePlacement.spread(),
                                 HeightRangePlacement.uniform(
-                                         VerticalAnchor.aboveBottom(32),
-                                         VerticalAnchor.aboveBottom(96)
+                                        VerticalAnchor.absolute(ModConfig.common.campsiteMinY.get()),
+                                        VerticalAnchor.absolute(ModConfig.common.campsiteMaxY.get())
                                 ),
-                                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 32),
+                                EnvironmentScanPlacement.scanningFor(
+                                        Direction.DOWN,
+                                        BlockPredicate.solid(),
+                                        BlockPredicate.ONLY_IN_AIR_PREDICATE,
+                                        ModConfig.common.campsiteScanRange.get()
+                                ),
                                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                                CeilingHeightFilter.create(ModConfig.common.campsiteMaxCeilingHeight.get()),
                                 BiomeFilter.biome()
                         )
                 )
