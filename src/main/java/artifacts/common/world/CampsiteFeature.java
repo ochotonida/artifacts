@@ -32,8 +32,8 @@ import java.util.stream.Collectors;
 public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
 
     private static final BlockStateProvider CAMPFIRES = new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
-            .add(Blocks.CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, true), 5)
-            .add(Blocks.CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, false), 4)
+            .add(Blocks.CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, true), 4)
+            .add(Blocks.CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, false), 20)
             .add(Blocks.SOUL_CAMPFIRE.defaultBlockState().setValue(CampfireBlock.LIT, true), 1)
     );
 
