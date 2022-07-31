@@ -8,10 +8,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.function.Supplier;
+
 public class EverlastingFoodItem extends ArtifactItem {
 
-    public EverlastingFoodItem(FoodProperties food) {
+    private final Supplier<Integer> cooldownConfig;
+
+    public EverlastingFoodItem(FoodProperties food, Supplier<Integer> cooldownConfig) {
         super(new Item.Properties().food(food));
+        this.cooldownConfig = cooldownConfig;
     }
 
     @Override
@@ -19,8 +24,7 @@ public class EverlastingFoodItem extends ArtifactItem {
         if (isEdible()) {
             entity.eat(world, stack.copy());
             if (!world.isClientSide && entity instanceof Player player) {
-                int cooldown = ModConfig.server.everlastingBeef.cooldown.get();
-                player.getCooldowns().addCooldown(this, cooldown);
+                player.getCooldowns().addCooldown(this, cooldownConfig.get());
             }
         }
 
