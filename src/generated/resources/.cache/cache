@@ -104,6 +104,7 @@ efa80538c1ce925145e572d01495ebb5666107cd data/artifacts/loot_tables/inject/chest
 4f514cfd2fac769574e78b7e213c70caa368cb8b data/artifacts/loot_tables/inject/entities/cow.json
 279e99646493dff4dbf68acfa98e30df315d8287 data/artifacts/loot_tables/items/drinking_hat.json
 bcce34a23ff2497a9ce5c5ddfaae9a8d31e3aee7 data/artifacts/tags/blocks/mineable/digging_claws.json
+51553bc559333fed9b7011ed7e82e62fc67c6f39 data/artifacts/tags/entity_types/creepers.json
 dabba677a10bb1e12f0ddac823bffe094499445c data/artifacts/tags/items/artifacts.json
 f93d3d5026fa07cfdb12b061ba33cfcd21e390ef data/artifacts/tags/mob_effect/antidote_vessel_cancellable.json
 94446c2219223bb54ee99e45bbdfb769f69c2c27 data/curios/tags/items/belt.json
