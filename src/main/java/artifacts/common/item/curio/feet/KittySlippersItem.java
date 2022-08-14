@@ -1,14 +1,15 @@
 package artifacts.common.item.curio.feet;
 
 import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModTags;
 import artifacts.common.item.curio.HurtSoundModifyingItem;
 import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,26 +31,26 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
     }
 
     private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
-        if (event.getEntityLiving() instanceof Creeper) {
+        if (event.getEntityLiving() instanceof Mob creeper && creeper.getType().is(ModTags.CREEPERS)) {
             damageEquippedStacks(wearer);
         }
     }
 
     private void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if (!ModConfig.server.isCosmetic(this) && event.getEntity() instanceof Creeper creeper) {
+        if (!ModConfig.server.isCosmetic(this) && event.getEntity() instanceof PathfinderMob creeper && creeper.getType().is(ModTags.CREEPERS)) {
             creeper.goalSelector.addGoal(3, new AvoidEntityGoal<>(creeper, Player.class, (entity) -> entity != null && isEquippedBy(entity), 6, 1, 1.3, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test));
         }
     }
 
     private void onLivingSetAttackTarget(LivingSetAttackTargetEvent event, LivingEntity wearer) {
-        if (event.getEntityLiving() instanceof Creeper creeper) {
+        if (event.getEntityLiving() instanceof Mob creeper && creeper.getType().is(ModTags.CREEPERS)) {
             creeper.setTarget(null);
         }
     }
 
     private void onLivingUpdate(LivingEvent.LivingUpdateEvent event, LivingEntity wearer) {
-        if (event.getEntityLiving() instanceof Creeper creeper) {
-            creeper.setLastHurtByMob(null);
+        if (event.getEntityLiving().getType().is(ModTags.CREEPERS)) {
+            event.getEntityLiving().setLastHurtByMob(null);
         }
     }
 
