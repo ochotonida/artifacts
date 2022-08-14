@@ -107,6 +107,9 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.116:api")
     // TODO runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.116")
 
+    // runtimeOnly fg.deobf("curse.maven:creeper-overhaul-561625:3676158")
+    // runtimeOnly fg.deobf("curse.maven:geckolib-388172:3930007")
+
     // compileOnly fg.deobf("be.florens:expandability-forge:6.0.0")
 }
 
