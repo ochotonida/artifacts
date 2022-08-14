@@ -18,8 +18,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.gui.ForgeIngameGui;
-import net.minecraftforge.client.gui.OverlayRegistry;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -57,7 +57,7 @@ public class ArtifactsClient {
     }
 
     public void registerHeliumFlamingoOverlay() {
-        OverlayRegistry.registerOverlayAbove(ForgeIngameGui.AIR_LEVEL_ELEMENT, "Helium Flamingo Overlay", (gui, poseStack, partialTicks, screenWidth, screenHeight) -> {
+        GuiOverlayManager.registerOverlayAbove(ForgeGui.AIR_LEVEL_ELEMENT, "Helium Flamingo Overlay", (gui, poseStack, partialTicks, screenWidth, screenHeight) -> {
             if (!Minecraft.getInstance().options.hideGui && gui.shouldDrawSurvivalElements())
             {
                 gui.setupOverlayRenderState(true, false, HELIUM_FLAMINGO_ICON);
@@ -66,7 +66,7 @@ public class ArtifactsClient {
         });
     }
 
-    public void renderHeliumFlamingoOverlay(int width, int height, PoseStack poseStack, ForgeIngameGui gui) {
+    public void renderHeliumFlamingoOverlay(int width, int height, PoseStack poseStack, ForgeGui gui) {
         Minecraft minecraft = Minecraft.getInstance();
 
         if (
@@ -79,7 +79,7 @@ public class ArtifactsClient {
         player.getCapability(SwimHandler.CAPABILITY).ifPresent(
                 handler -> {
                     int left = width / 2 + 91;
-                    int top = height - gui.right_height;
+                    int top = height - gui.rightHeight;
 
                     int swimTime = Math.abs(handler.getSwimTime());
                     int maxProgressTime;
@@ -98,9 +98,9 @@ public class ArtifactsClient {
                     int partial = Mth.ceil(progress * 10) - full;
 
                     for (int i = 0; i < full + partial; ++i) {
-                        ForgeIngameGui.blit(poseStack, left - i * 8 - 9, top, -90, (i < full ? 0 : 9), 0, 9, 9, 32, 16);
+                        ForgeGui.blit(poseStack, left - i * 8 - 9, top, -90, (i < full ? 0 : 9), 0, 9, 9, 32, 16);
                     }
-                    gui.right_height += 10;
+                    gui.rightHeight += 10;
 
                     RenderSystem.disableBlend();
                 }

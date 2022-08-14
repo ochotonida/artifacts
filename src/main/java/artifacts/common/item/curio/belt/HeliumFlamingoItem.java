@@ -102,7 +102,7 @@ public class HeliumFlamingoItem extends CurioItem {
                 return;
             }
 
-            Player player = event.getPlayer();
+            Player player = event.getEntity();
             boolean isSprintKeyDown = Minecraft.getInstance().options.keySprint.isDown();
 
             player.getCapability(SwimHandler.CAPABILITY).ifPresent(

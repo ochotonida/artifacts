@@ -115,7 +115,7 @@ public class SwimHandler implements INBTSerializable<CompoundTag> {
     }
 
     public static void onPlayerSwim(PlayerSwimEvent event) {
-        event.getPlayer().getCapability(CAPABILITY).ifPresent(
+        event.getEntity().getCapability(CAPABILITY).ifPresent(
                 handler -> {
                     if (event.getResult() == Event.Result.DEFAULT) {
                         if (handler.isSwimming()) {

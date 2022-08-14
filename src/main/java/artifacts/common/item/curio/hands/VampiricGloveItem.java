@@ -18,7 +18,7 @@ public class VampiricGloveItem extends CurioItem {
             int maxHealthAbsorbed = ModConfig.server.vampiricGlove.maxHealthAbsorbed.get();
             float absorptionRatio = (float) (double) ModConfig.server.vampiricGlove.absorptionRatio.get();
 
-            float damageDealt = Math.min(event.getAmount(), event.getEntityLiving().getHealth());
+            float damageDealt = Math.min(event.getAmount(), event.getEntity().getHealth());
             float damageAbsorbed = Math.min(maxHealthAbsorbed, absorptionRatio * damageDealt);
             wearer.heal(damageAbsorbed);
 

@@ -39,7 +39,7 @@ public class CurioItem extends ArtifactItem implements ICurioItem {
     }
 
     protected <T extends LivingEvent> void addListener(EventPriority priority, Class<T> eventClass, BiConsumer<T, LivingEntity> listener) {
-        addListener(priority, eventClass, listener, LivingEvent::getEntityLiving);
+        addListener(priority, eventClass, listener, LivingEvent::getEntity);
     }
 
     protected <T extends LivingEvent> void addListener(Class<T> eventClass, BiConsumer<T, LivingEntity> listener) {

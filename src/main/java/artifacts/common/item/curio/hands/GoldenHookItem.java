@@ -13,7 +13,7 @@ public class GoldenHookItem extends CurioItem {
     }
 
     private void onLivingExperienceDrop(LivingExperienceDropEvent event, LivingEntity wearer) {
-        if (event.getEntityLiving() instanceof Player) {
+        if (event.getEntity() instanceof Player) {
             return; // players shouldn't drop extra XP
         }
 

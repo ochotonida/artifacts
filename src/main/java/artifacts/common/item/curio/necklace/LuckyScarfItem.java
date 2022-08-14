@@ -5,7 +5,7 @@ import artifacts.common.item.curio.CurioItem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import top.theillusivec4.curios.api.SlotContext;
 
 public class LuckyScarfItem extends CurioItem {

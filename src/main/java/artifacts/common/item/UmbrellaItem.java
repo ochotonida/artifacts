@@ -38,9 +38,9 @@ public class UmbrellaItem extends ArtifactItem {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingUpdate);
     }
 
-    private void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+    private void onLivingUpdate(LivingEvent.LivingTickEvent event) {
         if (!ModConfig.server.isCosmetic(this)) {
-            LivingEntity entity = event.getEntityLiving();
+            LivingEntity entity = event.getEntity();
             AttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
             if (gravity != null) {
                 boolean isInWater = entity.isInWater() && !entity.getCapability(SwimHandler.CAPABILITY).map(SwimHandler::isSinking).orElse(false);
