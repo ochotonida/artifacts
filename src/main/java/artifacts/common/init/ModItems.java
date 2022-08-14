@@ -39,8 +39,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> MIMIC_SPAWN_EGG = ITEMS.register("mimic_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.MIMIC, 0x805113, 0x212121, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
     public static final RegistryObject<Item> UMBRELLA = ITEMS.register("umbrella", UmbrellaItem::new);
-    public static final RegistryObject<Item> EVERLASTING_BEEF = ITEMS.register("everlasting_beef", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(3).saturationMod(0.3F).build(), ModConfig.server.everlastingBeef.cooldown::get));
-    public static final RegistryObject<Item> ETERNAL_STEAK = ITEMS.register("eternal_steak", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(8).saturationMod(0.8F).build(), ModConfig.server.eternalSteak.cooldown::get));
+    public static final RegistryObject<Item> EVERLASTING_BEEF = ITEMS.register("everlasting_beef", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(3).saturationMod(0.3F).build(), () -> ModConfig.server.everlastingBeef.cooldown.get()));
+    public static final RegistryObject<Item> ETERNAL_STEAK = ITEMS.register("eternal_steak", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(8).saturationMod(0.8F).build(), () -> ModConfig.server.eternalSteak.cooldown.get()));
 
     // head
     public static final RegistryObject<CurioItem> PLASTIC_DRINKING_HAT = ITEMS.register("plastic_drinking_hat", DrinkingHatItem::new);
