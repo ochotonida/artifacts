@@ -19,7 +19,7 @@ public class ItemModels extends ItemModelProvider {
     protected void registerModels() {
         // noinspection ConstantConditions
         ForgeRegistries.ITEMS.getValues().stream()
-                .filter(item -> item.getRegistryName().getNamespace().equals(Artifacts.MODID))
+                .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(Artifacts.MODID))
                 .filter(item -> item != ModItems.MIMIC_SPAWN_EGG.get())
                 .filter(item -> item != ModItems.UMBRELLA.get())
                 .forEach(this::addGeneratedModel);
@@ -27,7 +27,7 @@ public class ItemModels extends ItemModelProvider {
 
     private void addGeneratedModel(Item item) {
         // noinspection ConstantConditions
-        String name = item.getRegistryName().getPath();
+        String name = ForgeRegistries.ITEMS.getKey(item).getPath();
         withExistingParent("item/" + name, "item/generated").texture("layer0", new ResourceLocation(Artifacts.MODID, "item/" + name));
     }
 }

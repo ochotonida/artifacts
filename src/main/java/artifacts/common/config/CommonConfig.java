@@ -1,21 +1,10 @@
 package artifacts.common.config;
 
 import artifacts.Artifacts;
-import com.google.common.collect.Lists;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class CommonConfig {
 
-    private Set<ResourceLocation> worldGenBiomeBlacklist;
-    private Set<String> worldGenModIdBlacklist;
-
-    private final ForgeConfigSpec.ConfigValue<List<String>> biomeBlacklist;
     public final ForgeConfigSpec.IntValue campsiteCount;
     public final ForgeConfigSpec.IntValue campsiteRarity;
     public final ForgeConfigSpec.IntValue campsiteMinY;
@@ -103,32 +92,6 @@ public class CommonConfig {
                 )
                 .translation(Artifacts.MODID + ".config.common.campsite.max_ceiling_height")
                 .defineInRange("max_ceiling_height", 6, 0, 4096);
-        biomeBlacklist = builder
-                .worldRestart()
-                .comment(
-                        "List of biome IDs in which campsites are not allowed to generate",
-                        "End and nether biomes are excluded by default and do not have to be in this list",
-                        "To blacklist all biomes from a single mod, use \"modid:*\""
-                )
-                .translation(Artifacts.MODID + ".config.common.campsite.biome_blacklist")
-                .define("biome_blacklist", Lists.newArrayList("minecraft:void", "undergarden:*", "the_bumblezone:*", "twilightforest:*"));
         builder.pop();
-    }
-
-    public void bake() {
-        worldGenBiomeBlacklist = biomeBlacklist.get()
-                .stream()
-                .filter(string -> !string.endsWith(":*"))
-                .map(ResourceLocation::new)
-                .collect(Collectors.toSet());
-        worldGenModIdBlacklist = biomeBlacklist.get()
-                .stream()
-                .filter(string -> string.endsWith(":*"))
-                .map(string -> string.substring(0, string.length() - 2))
-                .collect(Collectors.toSet());
-    }
-
-    public boolean isBlacklisted(@Nullable ResourceLocation biome) {
-        return biome != null && (worldGenBiomeBlacklist.contains(biome) || worldGenModIdBlacklist.contains(biome.getNamespace()));
     }
 }

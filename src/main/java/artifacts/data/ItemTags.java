@@ -13,7 +13,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import javax.annotation.Nullable;
-import java.util.stream.Collectors;
 
 public class ItemTags extends ItemTagsProvider {
 
@@ -34,9 +33,8 @@ public class ItemTags extends ItemTagsProvider {
     protected void addTags() {
         // noinspection ConstantConditions
         tag(ARTIFACTS).add(ForgeRegistries.ITEMS.getValues().stream()
-                .filter(item -> item.getRegistryName().getNamespace().equals(Artifacts.MODID))
-                .filter(item -> item != ModItems.MIMIC_SPAWN_EGG.get())
-                .collect(Collectors.toList()).toArray(new Item[]{})
+                .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(Artifacts.MODID))
+                .filter(item -> item != ModItems.MIMIC_SPAWN_EGG.get()).toList().toArray(new Item[]{})
         );
 
         tag(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_HOOK.get());

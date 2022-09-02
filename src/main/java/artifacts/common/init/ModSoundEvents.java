@@ -9,7 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModSoundEvents {
 
-    public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(Registry.SOUND_EVENT_REGISTRY, Artifacts.MODID);
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registry.SOUND_EVENT_REGISTRY, Artifacts.MODID);
 
     public static final RegistryObject<SoundEvent>
             POP = register("generic.pop"),
@@ -21,6 +21,6 @@ public class ModSoundEvents {
             WATER_STEP = register("block.water.step");
 
     private static RegistryObject<SoundEvent> register(String name) {
-        return REGISTRY.register(name, () -> new SoundEvent(new ResourceLocation(Artifacts.MODID, name)));
+        return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(Artifacts.MODID, name)));
     }
 }

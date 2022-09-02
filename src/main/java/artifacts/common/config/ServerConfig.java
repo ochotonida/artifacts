@@ -182,7 +182,7 @@ public class ServerConfig {
             // noinspection ConstantConditions
             cosmetics = ForgeRegistries.ITEMS.getValues()
                     .stream()
-                    .filter(item -> item.getRegistryName().getNamespace().equals(Artifacts.MODID))
+                    .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(Artifacts.MODID))
                     .collect(Collectors.toSet());
         } else {
             cosmetics = cosmeticsValue.get()

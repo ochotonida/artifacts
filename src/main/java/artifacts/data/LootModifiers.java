@@ -2,9 +2,8 @@ package artifacts.data;
 
 import artifacts.Artifacts;
 import artifacts.common.init.ModItems;
-import artifacts.common.init.ModLootModifiers;
 import artifacts.common.loot.ConfigurableRandomChance;
-import artifacts.common.loot.RollLootTableLootModifier;
+import artifacts.common.loot.RollLootTableModifier;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.data.DataGenerator;
@@ -192,7 +191,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
         addLoot();
 
         for (Builder lootBuilder : lootBuilders) {
-            add("inject/" + lootBuilder.lootTable, ModLootModifiers.ROLL_LOOT_TABLE.get(), lootBuilder.build());
+            add("inject/" + lootBuilder.lootTable, lootBuilder.build());
         }
     }
 
@@ -210,8 +209,8 @@ public class LootModifiers extends GlobalLootModifierProvider {
             this.conditions = new ArrayList<>();
         }
 
-        private RollLootTableLootModifier build() {
-            return new RollLootTableLootModifier(conditions.toArray(new LootItemCondition[]{}), new ResourceLocation(Artifacts.MODID, "inject/" + lootTable));
+        private RollLootTableModifier build() {
+            return new RollLootTableModifier(conditions.toArray(new LootItemCondition[]{}), new ResourceLocation(Artifacts.MODID, "inject/" + lootTable));
         }
 
         protected LootTable.Builder createLootTable() {

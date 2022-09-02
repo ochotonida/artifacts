@@ -25,11 +25,11 @@ import java.util.List;
 
 public class ModFeatures {
 
-    public static final DeferredRegister<Feature<?>> REGISTRY = DeferredRegister.create(Registry.FEATURE_REGISTRY, Artifacts.MODID);
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registry.FEATURE_REGISTRY, Artifacts.MODID);
 
     public static PlacementModifierType<CeilingHeightFilter> CEILING_HEIGHT_FILTER;
 
-    public static final RegistryObject<Feature<NoneFeatureConfiguration>> CAMPSITE = REGISTRY.register("campsite", CampsiteFeature::new);
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> CAMPSITE = FEATURES.register("campsite", CampsiteFeature::new);
 
     public static PlacedFeature UNDERGROUND_CAMPSITE;
 

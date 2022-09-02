@@ -4,14 +4,8 @@ import artifacts.common.capability.SwimHandler;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.*;
 import artifacts.common.network.NetworkHandler;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
@@ -36,32 +30,17 @@ public class Artifacts {
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.REGISTRY.register(modBus);
-        ModEntityTypes.REGISTRY.register(modBus);
-        ModSoundEvents.REGISTRY.register(modBus);
-        ModFeatures.REGISTRY.register(modBus);
-        ModLootModifiers.REGISTRY.register(modBus);
+        ModItems.ITEMS.register(modBus);
+        ModEntityTypes.ENTITY_TYPES.register(modBus);
+        ModSoundEvents.SOUND_EVENTS.register(modBus);
+        ModFeatures.FEATURES.register(modBus);
+        ModLootModifiers.LOOT_MODIFIERS.register(modBus);
+        ModLootConditions.LOOT_CONDITIONS.register(modBus);
 
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::enqueueIMC);
 
-        modBus.addGenericListener(GlobalLootModifierSerializer.class, ModLootConditions::register);
         modBus.addListener(ModEntityTypes::registerAttributes);
-
-        MinecraftForge.EVENT_BUS.addListener(this::addFeatures);
-    }
-
-    public void addFeatures(BiomeLoadingEvent event) {
-        if (ModConfig.common.campsiteRarity.get() >= 10000) {
-            return;
-        }
-        if (event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND && !ModConfig.common.isBlacklisted(event.getName())) {
-            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_STRUCTURES).add(
-                    BuiltinRegistries.PLACED_FEATURE.getHolderOrThrow(
-                            BuiltinRegistries.PLACED_FEATURE.getResourceKey(ModFeatures.UNDERGROUND_CAMPSITE).orElseThrow()
-                    )
-            );
-        }
     }
 
     public void commonSetup(final FMLCommonSetupEvent event) {

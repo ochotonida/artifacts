@@ -19,7 +19,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -57,13 +56,14 @@ public class ArtifactsClient {
     }
 
     public void registerHeliumFlamingoOverlay() {
-        GuiOverlayManager.registerOverlayAbove(ForgeGui.AIR_LEVEL_ELEMENT, "Helium Flamingo Overlay", (gui, poseStack, partialTicks, screenWidth, screenHeight) -> {
-            if (!Minecraft.getInstance().options.hideGui && gui.shouldDrawSurvivalElements())
-            {
-                gui.setupOverlayRenderState(true, false, HELIUM_FLAMINGO_ICON);
-                renderHeliumFlamingoOverlay(screenWidth, screenHeight, poseStack, gui);
-            }
-        });
+        // TODO
+        // GuiOverlayManager.registerOverlayAbove(ForgeGui.AIR_LEVEL_ELEMENT, "Helium Flamingo Overlay", (gui, poseStack, partialTicks, screenWidth, screenHeight) -> {
+        //     if (!Minecraft.getInstance().options.hideGui && gui.shouldDrawSurvivalElements())
+        //     {
+        //         gui.setupOverlayRenderState(true, false, HELIUM_FLAMINGO_ICON);
+        //         renderHeliumFlamingoOverlay(screenWidth, screenHeight, poseStack, gui);
+        //     }
+        // });
     }
 
     public void renderHeliumFlamingoOverlay(int width, int height, PoseStack poseStack, ForgeGui gui) {

@@ -7,8 +7,6 @@ import artifacts.common.item.curio.CurioItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -16,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -44,8 +43,8 @@ public class HeliumFlamingoItem extends CurioItem {
         if (ModConfig.server != null && ModConfig.server.isCosmetic(this)) {
             super.appendHoverText(stack, world, tooltip, flags);
         } else if (ModConfig.client.showTooltips.get()) {
-            tooltip.add(new TranslatableComponent(getDescriptionId() + ".tooltip.0").withStyle(ChatFormatting.GRAY));
-            tooltip.add(new TranslatableComponent(getDescriptionId() + ".tooltip.1", Minecraft.getInstance().options.keySprint.getTranslatedKeyMessage()).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable(getDescriptionId() + ".tooltip.0").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable(getDescriptionId() + ".tooltip.1", Minecraft.getInstance().options.keySprint.getTranslatedKeyMessage()).withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -70,7 +69,7 @@ public class HeliumFlamingoItem extends CurioItem {
                             }
                         }
 
-                        if (isEquippedBy(event.player) && !event.player.isEyeInFluid(FluidTags.WATER)) {
+                        if (isEquippedBy(event.player) && !event.player.isEyeInFluidType(ForgeMod.WATER_TYPE.get())) {
                             if (event.player.tickCount % 20 == 0) {
                                 damageEquippedStacks(event.player);
                             }

@@ -8,13 +8,16 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class RunningShoesItem extends CurioItem {
+public class RunningShoesItem extends CurioItem { // TODO test step height
+
+    private static final AttributeModifier STEP_HEIGHT_BONUS = new AttributeModifier(UUID.fromString("4a312f09-78e0-4f3a-95c2-07ed63212472"), "artifacts:running_shoes_step_height", 0.5, AttributeModifier.Operation.ADDITION);
 
     public RunningShoesItem() {
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
@@ -32,11 +35,14 @@ public class RunningShoesItem extends CurioItem {
 
         // onUnequip does not get called on the client
         if (!isEquippedBy(event.player)) {
+            AttributeInstance stepHeight = event.player.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
             AttributeInstance movementSpeed = event.player.getAttribute(Attributes.MOVEMENT_SPEED);
-            AttributeModifier speedBonus = getSpeedBonus();
-            if (movementSpeed != null && movementSpeed.hasModifier(speedBonus)) {
-                movementSpeed.removeModifier(speedBonus);
-                event.player.maxUpStep = 0.6F;
+            AttributeModifier movementSpeedBonus = getSpeedBonus();
+            if (movementSpeed != null && movementSpeed.hasModifier(movementSpeedBonus)) {
+                movementSpeed.removeModifier(movementSpeedBonus);
+            }
+            if (stepHeight != null && stepHeight.hasModifier(STEP_HEIGHT_BONUS)) {
+                stepHeight.removeModifier(STEP_HEIGHT_BONUS);
             }
         }
     }
@@ -46,23 +52,25 @@ public class RunningShoesItem extends CurioItem {
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         if (!ModConfig.server.isCosmetic(this)) {
             LivingEntity entity = slotContext.entity();
+            AttributeInstance stepHeight = entity.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
             AttributeInstance movementSpeed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
             AttributeModifier speedBonus = getSpeedBonus();
             if (entity.isSprinting()) {
                 if (!movementSpeed.hasModifier(speedBonus)) {
                     movementSpeed.addTransientModifier(speedBonus);
                 }
-                if (entity instanceof Player) {
-                    entity.maxUpStep = Math.max(entity.maxUpStep, 1.1F);
+                if (!stepHeight.hasModifier(STEP_HEIGHT_BONUS) && entity instanceof Player) {
+                    stepHeight.addTransientModifier(STEP_HEIGHT_BONUS);
                 }
-
                 if (entity.tickCount % 20 == 0) {
                     damageStack(slotContext, stack);
                 }
             } else {
                 if (movementSpeed.hasModifier(speedBonus)) {
                     movementSpeed.removeModifier(speedBonus);
-                    entity.maxUpStep = 0.6F;
+                }
+                if (stepHeight.hasModifier(STEP_HEIGHT_BONUS)) {
+                    stepHeight.removeModifier(STEP_HEIGHT_BONUS);
                 }
             }
         }

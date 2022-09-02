@@ -15,13 +15,12 @@ public class ModConfig {
     public static ServerConfig server;
     public static ClientConfig client;
 
-    private static ForgeConfigSpec commonSpec;
     private static ForgeConfigSpec serverSpec;
 
     public static void registerCommon() {
         Pair<CommonConfig, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
+        ForgeConfigSpec commonSpec = commonSpecPair.getRight();
         common = commonSpecPair.getLeft();
-        commonSpec = commonSpecPair.getRight();
         ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, commonSpec);
     }
 
@@ -41,9 +40,7 @@ public class ModConfig {
 
     @SubscribeEvent
     public static void onModConfigEvent(ModConfigEvent configEvent) {
-        if (configEvent.getConfig().getSpec() == commonSpec) {
-            common.bake();
-        } else if (configEvent.getConfig().getSpec() == serverSpec) {
+        if (configEvent.getConfig().getSpec() == serverSpec) {
             server.bake();
         }
     }

@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
+import net.minecraftforge.event.PlayLevelSoundEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -28,12 +28,12 @@ public abstract class HurtSoundModifyingItem extends CurioItem {
         @SubscribeEvent
         @OnlyIn(Dist.CLIENT)
         @SuppressWarnings("unused")
-        public void onPlaySoundAtEntity(PlaySoundAtEntityEvent event) {
+        public void onPlaySoundAtEntity(PlayLevelSoundEvent.AtEntity event) {
             if (ModConfig.client.modifyHurtSounds.get()
                     && isHurtSound(event.getSound())
                     && event.getEntity() instanceof LivingEntity entity
-                    && CuriosApi.getCuriosHelper().findEquippedCurio(HurtSoundModifyingItem.this, entity).isPresent()) {
-                entity.getCommandSenderWorld().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), hurtSound, event.getCategory(), 1, (entity.getRandom().nextFloat() - entity.getRandom().nextFloat()) * 0.2F + 1, false);
+                    && CuriosApi.getCuriosHelper().findFirstCurio(entity, HurtSoundModifyingItem.this).isPresent()) {
+                entity.getCommandSenderWorld().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), hurtSound, event.getSource(), 1, (entity.getRandom().nextFloat() - entity.getRandom().nextFloat()) * 0.2F + 1, false);
             }
         }
 

@@ -4,11 +4,10 @@ import artifacts.common.init.ModFeatures;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.ExtraCodecs;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementFilter;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
-
-import java.util.Random;
 
 public class CeilingHeightFilter extends PlacementFilter {
 
@@ -27,7 +26,7 @@ public class CeilingHeightFilter extends PlacementFilter {
         return new CeilingHeightFilter(maxHeight);
     }
 
-    protected boolean shouldPlace(PlacementContext context, Random random, BlockPos pos) {
+    protected boolean shouldPlace(PlacementContext context, RandomSource random, BlockPos pos) {
         if (maxHeight == 0) {
             return true;
         }

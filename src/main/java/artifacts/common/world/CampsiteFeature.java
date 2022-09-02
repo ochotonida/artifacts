@@ -9,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.*;
@@ -26,7 +27,6 @@ import net.minecraftforge.common.Tags;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
@@ -95,7 +95,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         WorldGenLevel level = context.level();
         BlockPos origin = context.origin();
-        Random random = context.random();
+        RandomSource random = context.random();
 
         if (!isSufficientlyFlat(level, origin)) {
             return false;
@@ -158,7 +158,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
                 .count() >= 6;
     }
 
-    private void placeFloor(WorldGenLevel level, BlockPos origin, Random random) {
+    private void placeFloor(WorldGenLevel level, BlockPos origin, RandomSource random) {
         BlockPos.betweenClosedStream(origin.offset(-2, -1, -2), origin.offset(2, -1, 2))
                 .filter(pos -> Math.abs(pos.getX() - origin.getX()) < 2 ||  Math.abs(pos.getZ() - origin.getZ()) < 2)
                 .forEach(pos -> {
@@ -174,7 +174,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
                 });
     }
 
-    private void placeCraftingStation(WorldGenLevel level, BlockPos pos, Random random, Direction facing) {
+    private void placeCraftingStation(WorldGenLevel level, BlockPos pos, RandomSource random, Direction facing) {
         BlockState craftingStation = CRAFTING_STATIONS.getState(random, pos);
         if (craftingStation.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
             craftingStation = craftingStation.setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
@@ -185,7 +185,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
         }
     }
 
-    private void placeFurnace(WorldGenLevel level, BlockPos pos, Random random, Direction facing) {
+    private void placeFurnace(WorldGenLevel level, BlockPos pos, RandomSource random, Direction facing) {
         BlockState furnace = FURNACES.getState(random, pos);
         furnace = furnace.setValue(FurnaceBlock.FACING, facing);
         setBlock(level, pos, furnace);
@@ -194,7 +194,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
         }
     }
 
-    private void placeBarrel(WorldGenLevel level, BlockPos pos, Random random) {
+    private void placeBarrel(WorldGenLevel level, BlockPos pos, RandomSource random) {
         BlockState barrel = Blocks.BARREL.defaultBlockState();
         if (random.nextBoolean()) {
             barrel = barrel.setValue(BarrelBlock.FACING, Direction.UP);
@@ -205,7 +205,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
         RandomizableContainerBlockEntity.setLootTable(level, random, pos, BARREL_LOOT);
     }
 
-    public void placeChest(WorldGenLevel level, BlockPos pos, Random random, Direction facing) {
+    public void placeChest(WorldGenLevel level, BlockPos pos, RandomSource random, Direction facing) {
         if (random.nextFloat() < ModConfig.common.campsiteMimicChance.get()) {
             MimicEntity mimic = ModEntityTypes.MIMIC.get().create(level.getLevel());
             if (mimic != null) {

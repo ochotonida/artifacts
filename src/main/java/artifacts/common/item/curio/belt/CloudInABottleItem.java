@@ -63,7 +63,7 @@ public class CloudInABottleItem extends CurioItem {
             player.causeFoodExhaustion(0.05F);
         }
 
-        if (CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.WHOOPEE_CUSHION.get(), player).isPresent()) {
+        if (CuriosApi.getCuriosHelper().findFirstCurio(player, ModItems.WHOOPEE_CUSHION.get()).isPresent()) {
             player.playSound(ModSoundEvents.FART.get(), 1, 0.9F + player.getRandom().nextFloat() * 0.2F);
         } else {
             player.playSound(SoundEvents.WOOL_FALL, 1, 0.9F + player.getRandom().nextFloat() * 0.2F);

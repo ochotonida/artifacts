@@ -12,9 +12,9 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModEntityTypes {
 
-    public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(Registry.ENTITY_TYPE_REGISTRY, Artifacts.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registry.ENTITY_TYPE_REGISTRY, Artifacts.MODID);
 
-    public static final RegistryObject<EntityType<MimicEntity>> MIMIC = REGISTRY.register("mimic",
+    public static final RegistryObject<EntityType<MimicEntity>> MIMIC = ENTITY_TYPES.register("mimic",
             () -> EntityType.Builder.of(MimicEntity::new, MobCategory.MISC)
                     .sized(14 / 16F, 14 / 16F)
                     .setTrackingRange(64)
