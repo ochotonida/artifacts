@@ -1,0 +1,61 @@
+{
+  "values": [
+    "minecraft:creeper",
+    {
+      "id": "creeperoverhaul:jungle_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:bamboo_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:desert_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:badlands_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:hills_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:savannah_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:mushroom_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:swamp_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:dripstone_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:cave_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:dark_oak_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:spruce_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:beach_creeper",
+      "required": false
+    },
+    {
+      "id": "creeperoverhaul:snowy_creeper",
+      "required": false
+    }
+  ]
+}

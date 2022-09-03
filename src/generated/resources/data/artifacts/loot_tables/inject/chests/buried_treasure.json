@@ -2,71 +2,71 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "weight": 5,
-          "name": "artifacts:snorkel"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 5,
-          "name": "artifacts:flippers"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 5,
-          "name": "artifacts:umbrella"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 5,
-          "name": "artifacts:golden_hook"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:feral_claws"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:digging_claws"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:kitty_slippers"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:bunny_hoppers"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:lucky_scarf"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:aqua_dashers"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 3,
-          "name": "artifacts:items/drinking_hat"
-        }
-      ],
       "conditions": [
         {
           "condition": "artifacts:configurable_random_chance",
           "default_probability": 0.25
         }
-      ]
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:snorkel",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:flippers",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:umbrella",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:golden_hook",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:feral_claws",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:digging_claws",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:kitty_slippers",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:bunny_hoppers",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:lucky_scarf",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:aqua_dashers",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "artifacts:items/drinking_hat",
+          "weight": 3
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }

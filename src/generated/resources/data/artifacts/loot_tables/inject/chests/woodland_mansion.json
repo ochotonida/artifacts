@@ -2,20 +2,20 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.25
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:loot_table",
           "name": "artifacts:artifact"
         }
       ],
-      "conditions": [
-        {
-          "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.25
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

@@ -2,13 +2,18 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.3
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "weight": 3,
-          "name": "artifacts:artifact"
+          "name": "artifacts:artifact",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
@@ -20,16 +25,11 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 4,
-          "name": "artifacts:helium_flamingo"
+          "name": "artifacts:helium_flamingo",
+          "weight": 4
         }
       ],
-      "conditions": [
-        {
-          "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.3
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

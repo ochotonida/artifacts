@@ -2,8 +2,13 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.2
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
@@ -18,12 +23,7 @@
           "name": "artifacts:charm_of_sinking"
         }
       ],
-      "conditions": [
-        {
-          "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.2
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

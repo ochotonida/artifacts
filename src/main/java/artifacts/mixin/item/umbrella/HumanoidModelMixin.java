@@ -26,7 +26,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> {
 
     // see https://github.com/florensie/artifacts-fabric/blob/1.16-fabric/src/main/java/artifacts/mixin/mixins/item/umbrella/client/HumanoidModelMixin.java
     @Inject(method = "setupAnim", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getMainArm()Lnet/minecraft/world/entity/HumanoidArm;"))
-    private void reduceHandSwing(T entity, float f, float g, float h, float i, float j, CallbackInfo info) { // TODO
+    private void reduceHandSwing(T entity, float f, float g, float h, float i, float j, CallbackInfo info) {
         boolean isHoldingOffHand = UmbrellaItem.isHoldingUmbrellaUpright(entity, InteractionHand.OFF_HAND);
         boolean isHoldingMainHand = UmbrellaItem.isHoldingUmbrellaUpright(entity, InteractionHand.MAIN_HAND);
         boolean isRightHanded = entity.getMainArm() == HumanoidArm.RIGHT;

@@ -15,7 +15,7 @@ public class ModConfig {
     public static ServerConfig server;
     public static ClientConfig client;
 
-    private static ForgeConfigSpec serverSpec;
+    public static ForgeConfigSpec serverSpec;
 
     public static void registerCommon() {
         Pair<CommonConfig, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(CommonConfig::new);

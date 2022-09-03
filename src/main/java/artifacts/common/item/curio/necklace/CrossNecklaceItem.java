@@ -26,12 +26,10 @@ public class CrossNecklaceItem extends CurioItem {
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         if (slotContext.entity().invulnerableTime <= 10) {
             setCanApplyBonus(stack, true);
-        } else {
-            if (canApplyBonus(stack)) {
-                slotContext.entity().invulnerableTime += ModConfig.server.crossNecklace.invincibilityBonus.get();
-                setCanApplyBonus(stack, false);
-                damageStack(slotContext, stack);
-            }
+        } else if (canApplyBonus(stack)) {
+            slotContext.entity().invulnerableTime += ModConfig.server.crossNecklace.invincibilityBonus.get();
+            setCanApplyBonus(stack, false);
+            damageStack(slotContext, stack);
         }
     }
 }

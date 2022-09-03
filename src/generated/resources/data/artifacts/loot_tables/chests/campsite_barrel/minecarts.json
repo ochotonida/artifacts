@@ -1,14 +1,12 @@
 {
   "pools": [
     {
-      "name": "minecarts",
-      "rolls": 5.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 4,
-          "name": "minecraft:minecart"
+          "name": "minecraft:minecart",
+          "weight": 4
         },
         {
           "type": "minecraft:item",
@@ -22,29 +20,31 @@
           "type": "minecraft:item",
           "name": "minecraft:hopper_minecart"
         }
-      ]
+      ],
+      "name": "minecarts",
+      "rolls": 5.0
     },
     {
-      "name": "rails",
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "min": 4.0,
-                "max": 16.0
+                "max": 16.0,
+                "min": 4.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             }
           ],
           "name": "minecraft:rail"
         }
-      ]
+      ],
+      "name": "rails",
+      "rolls": 1.0
     }
   ]
 }

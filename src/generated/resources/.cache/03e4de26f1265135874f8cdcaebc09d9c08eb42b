@@ -1,0 +1,9 @@
+// 1.19.2	2022-09-02T22:25:21.7100808	Tags for minecraft:item
+e6da33714dc6f02de7616fffaaafd4829586dff0 data/artifacts/tags/items/artifacts.json
+aaef62c2ed7c5f4699fe62fa0eb39f701dc1035b data/curios/tags/items/belt.json
+2465e2164941a4a1d92ea3320f702f0c092e64c6 data/curios/tags/items/curio.json
+03844c6c346bbda5d133acc659d21f148ce05e84 data/curios/tags/items/feet.json
+3f4964ed85f3612db1d456ba176180ebff6e4e57 data/curios/tags/items/hands.json
+8cbb980dfc3fb7834a4dffd360961a077e6f2a17 data/curios/tags/items/head.json
+01026cd88837eab8bea3b8c27b8b22521b22076d data/curios/tags/items/necklace.json
+ca485f07958acb2443c5b49cc46bf32ba3bef275 data/minecraft/tags/items/piglin_loved.json

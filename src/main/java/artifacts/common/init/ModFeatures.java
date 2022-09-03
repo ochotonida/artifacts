@@ -5,10 +5,8 @@ import artifacts.common.config.ModConfig;
 import artifacts.common.world.CampsiteFeature;
 import artifacts.common.world.CeilingHeightFilter;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -25,30 +23,27 @@ import java.util.List;
 
 public class ModFeatures {
 
+    public static final DeferredRegister<PlacementModifierType<?>> PLACEMENT_MODIFIERS = DeferredRegister.create(Registry.PLACEMENT_MODIFIER_REGISTRY, Artifacts.MODID);
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registry.FEATURE_REGISTRY, Artifacts.MODID);
+    public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, Artifacts.MODID);
+    public static final DeferredRegister<PlacedFeature> PLACED_FEATURES = DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, Artifacts.MODID);
 
-    public static PlacementModifierType<CeilingHeightFilter> CEILING_HEIGHT_FILTER;
-
+    public static final RegistryObject<PlacementModifierType<CeilingHeightFilter>> CEILING_HEIGHT_FILTER = PLACEMENT_MODIFIERS.register("ceiling_height_filter", () -> () -> CeilingHeightFilter.CODEC);
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> CAMPSITE = FEATURES.register("campsite", CampsiteFeature::new);
+    public static final RegistryObject<ConfiguredFeature<?, ?>> CONFIGURED_CAMPSITE = CONFIGURED_FEATURES.register("campsite", () -> new ConfiguredFeature<>(CAMPSITE.get(), FeatureConfiguration.NONE));
 
     public static PlacedFeature UNDERGROUND_CAMPSITE;
 
     public static void register() {
-        CEILING_HEIGHT_FILTER = Registry.register(Registry.PLACEMENT_MODIFIERS, new ResourceLocation(Artifacts.MODID, "ceiling_height_filter"), () -> CeilingHeightFilter.CODEC);
-
-        ConfiguredFeature<?, ?> configuredFeature = Registry.register(
-                BuiltinRegistries.CONFIGURED_FEATURE,
-                new ResourceLocation(Artifacts.MODID, "campsite"),
-                new ConfiguredFeature<>(CAMPSITE.get(), FeatureConfiguration.NONE)
-        );
-
-        ResourceKey<ConfiguredFeature<?, ?>> featureKey = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature).orElseThrow();
-        Holder<ConfiguredFeature<?, ?>> featureHolder = BuiltinRegistries.CONFIGURED_FEATURE.getHolderOrThrow(featureKey);
-
         UNDERGROUND_CAMPSITE = Registry.register(
                 BuiltinRegistries.PLACED_FEATURE,
                 new ResourceLocation(Artifacts.MODID, "underground_campsite"),
-                new PlacedFeature(featureHolder,
+                new PlacedFeature(
+                        BuiltinRegistries.CONFIGURED_FEATURE.getHolderOrThrow(
+                                BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(
+                                        CONFIGURED_CAMPSITE.get()
+                                ).orElseThrow()
+                        ),
                         List.of(
                                 CountPlacement.of(ModConfig.common.campsiteCount.get()),
                                 RarityFilter.onAverageOnceEvery(ModConfig.common.campsiteRarity.get()),

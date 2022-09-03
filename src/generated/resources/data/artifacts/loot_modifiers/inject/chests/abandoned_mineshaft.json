@@ -1,10 +1,10 @@
 {
+  "type": "artifacts:roll_loot_table",
   "conditions": [
     {
       "condition": "forge:loot_table_id",
       "loot_table_id": "minecraft:chests/abandoned_mineshaft"
     }
   ],
-  "lootTable": "artifacts:inject/chests/abandoned_mineshaft",
-  "type": "artifacts:roll_loot_table"
+  "lootTable": "artifacts:inject/chests/abandoned_mineshaft"
 }

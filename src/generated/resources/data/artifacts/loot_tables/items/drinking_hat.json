@@ -1,20 +1,20 @@
 {
   "pools": [
     {
-      "name": "main",
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:plastic_drinking_hat"
+          "name": "artifacts:plastic_drinking_hat",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "artifacts:novelty_drinking_hat"
         }
-      ]
+      ],
+      "name": "main",
+      "rolls": 1.0
     }
   ]
 }

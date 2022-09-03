@@ -2,20 +2,20 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.1
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "name": "artifacts:feral_claws"
         }
       ],
-      "conditions": [
-        {
-          "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.1
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

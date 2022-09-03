@@ -2,28 +2,33 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.65
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "weight": 6,
-          "name": "artifacts:artifact"
+          "name": "artifacts:artifact",
+          "weight": 6
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:golden_hook"
+          "name": "artifacts:golden_hook",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:cross_necklace"
+          "name": "artifacts:cross_necklace",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
-          "name": "artifacts:fire_gauntlet"
+          "name": "artifacts:fire_gauntlet",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -42,12 +47,7 @@
           "name": "artifacts:antidote_vessel"
         }
       ],
-      "conditions": [
-        {
-          "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.65
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

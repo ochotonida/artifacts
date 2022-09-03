@@ -3,7 +3,7 @@
   "overrides": [
     {
       "predicate": {
-        "blocking": 1
+        "artifacts:blocking": 1
       },
       "model": "artifacts:item/umbrella_blocking"
     }

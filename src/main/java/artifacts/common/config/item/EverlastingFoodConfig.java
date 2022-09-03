@@ -22,6 +22,6 @@ public class EverlastingFoodConfig extends ItemConfig {
         useDuration = builder
                 .comment("Time (in ticks) it takes to eat this item")
                 .translation(Artifacts.MODID + ".server.everlasting_foods.use_duration")
-                .defineInRange("use_duration", 24, 0, Integer.MAX_VALUE);
+                .defineInRange("use_duration", 32, 0, Integer.MAX_VALUE);
     }
 }

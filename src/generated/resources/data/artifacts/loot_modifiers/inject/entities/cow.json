@@ -1,10 +1,10 @@
 {
+  "type": "artifacts:roll_loot_table",
   "conditions": [
     {
       "condition": "forge:loot_table_id",
       "loot_table_id": "minecraft:entities/cow"
     }
   ],
-  "lootTable": "artifacts:inject/entities/cow",
-  "type": "artifacts:roll_loot_table"
+  "lootTable": "artifacts:inject/entities/cow"
 }

@@ -9,6 +9,8 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,14 +36,15 @@ public class JEIPlugin implements IModPlugin {
         for (Item item : ForgeRegistries.ITEMS.getValues()) {
             if (item instanceof ArtifactItem) {
                 if (ModConfig.server.isCosmetic(item)) {
-                    registration.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM, Component.translatable("artifacts.cosmetic.jei"));
+                    registration.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM_STACK, Component.translatable("artifacts.cosmetic.jei"));
                 } else if (item != ModItems.NOVELTY_DRINKING_HAT.get()) {
                     List<Component> textComponents = new ArrayList<>();
                     item.appendHoverText(new ItemStack(item), null, textComponents, TooltipFlag.Default.NORMAL);
-                    registration.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM, textComponents.toArray(new Component[]{}));
+                    textComponents.forEach(component -> ((MutableComponent) component).setStyle(Style.EMPTY));
+                    registration.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM_STACK, textComponents.toArray(new Component[]{}));
                 }
             }
         }
-        registration.addIngredientInfo(new ItemStack(ModItems.NOVELTY_DRINKING_HAT.get()), VanillaTypes.ITEM, Component.translatable("item.artifacts.plastic_drinking_hat.tooltip"));
+        registration.addIngredientInfo(new ItemStack(ModItems.NOVELTY_DRINKING_HAT.get()), VanillaTypes.ITEM_STACK, Component.translatable("item.artifacts.plastic_drinking_hat.tooltip"));
     }
 }

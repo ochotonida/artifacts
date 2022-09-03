@@ -6,7 +6,6 @@ import com.mojang.serialization.JsonOps;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceKey;
@@ -48,10 +47,9 @@ public class DataGenerators {
         RegistryAccess registryAccess = RegistryAccess.builtinCopy();
         RegistryOps<JsonElement> registryOps = RegistryOps.create(JsonOps.INSTANCE, registryAccess);
 
-        // noinspection deprecation
         BiomeModifier modifier = new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                BuiltinRegistries.BIOME.getOrCreateTag(BiomeTags.IS_OVERWORLD),
-                HolderSet.direct(BuiltinRegistries.PLACED_FEATURE.getHolderOrThrow(ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY, new ResourceLocation(Artifacts.MODID, "underground_campsite")))),
+                registryAccess.registryOrThrow(Registry.BIOME_REGISTRY).getOrCreateTag(BiomeTags.IS_OVERWORLD),
+                HolderSet.direct(registryAccess.registryOrThrow(Registry.PLACED_FEATURE_REGISTRY).getOrCreateHolderOrThrow(ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY, new ResourceLocation(Artifacts.MODID, "underground_campsite")))),
                 GenerationStep.Decoration.UNDERGROUND_STRUCTURES
         );
 

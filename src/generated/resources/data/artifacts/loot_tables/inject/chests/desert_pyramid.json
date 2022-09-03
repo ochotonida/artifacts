@@ -2,28 +2,33 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.2
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 2,
-          "name": "artifacts:flame_pendant"
+          "name": "artifacts:flame_pendant",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
-          "name": "artifacts:thorn_pendant"
+          "name": "artifacts:thorn_pendant",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
-          "name": "artifacts:whoopee_cushion"
+          "name": "artifacts:whoopee_cushion",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
-          "name": "artifacts:charm_of_sinking"
+          "name": "artifacts:charm_of_sinking",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -46,12 +51,7 @@
           "name": "artifacts:vampiric_glove"
         }
       ],
-      "conditions": [
-        {
-          "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.2
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

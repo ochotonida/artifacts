@@ -29,7 +29,7 @@ public abstract class ArtifactItem extends Item {
 
     @Override
     public int getMaxDamage(ItemStack stack) {
-        if (ModConfig.server != null && ModConfig.server.items.containsKey(this)) {
+        if (ModConfig.serverSpec != null && ModConfig.serverSpec.isLoaded()) {
             return ModConfig.server.items.get(this).durability.get();
         }
         return 0;

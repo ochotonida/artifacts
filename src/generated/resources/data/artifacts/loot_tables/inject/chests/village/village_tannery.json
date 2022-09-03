@@ -2,18 +2,23 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.2
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:umbrella"
+          "name": "artifacts:umbrella",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
-          "name": "artifacts:whoopee_cushion"
+          "name": "artifacts:whoopee_cushion",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -28,12 +33,7 @@
           "name": "artifacts:scarf_of_invisibility"
         }
       ],
-      "conditions": [
-        {
-          "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.2
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

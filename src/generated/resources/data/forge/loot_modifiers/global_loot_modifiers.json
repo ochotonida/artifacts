@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "entries": [
     "artifacts:inject/chests/ruined_portal",
     "artifacts:inject/chests/village/village_weaponsmith",
@@ -28,5 +27,6 @@
     "artifacts:inject/chests/shipwreck_treasure",
     "artifacts:inject/chests/village/village_butcher",
     "artifacts:inject/chests/bastion_hoglin_stable"
-  ]
+  ],
+  "replace": false
 }

@@ -2,18 +2,23 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.45
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:snorkel"
+          "name": "artifacts:snorkel",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:flippers"
+          "name": "artifacts:flippers",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
@@ -40,12 +45,7 @@
           "name": "artifacts:cloud_in_a_bottle"
         }
       ],
-      "conditions": [
-        {
-          "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.45
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

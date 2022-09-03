@@ -2,35 +2,35 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.2
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "weight": 5,
-          "name": "artifacts:artifact"
+          "name": "artifacts:artifact",
+          "weight": 5
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:bunny_hoppers"
+          "name": "artifacts:bunny_hoppers",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:flame_pendant"
+          "name": "artifacts:flame_pendant",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "artifacts:everlasting_beef"
         }
       ],
-      "conditions": [
-        {
-          "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.2
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

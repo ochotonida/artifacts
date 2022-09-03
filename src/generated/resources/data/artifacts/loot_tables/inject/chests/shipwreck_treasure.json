@@ -2,13 +2,18 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.15
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "artifacts:golden_hook"
+          "name": "artifacts:golden_hook",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
@@ -51,12 +56,7 @@
           "name": "artifacts:charm_of_sinking"
         }
       ],
-      "conditions": [
-        {
-          "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.15
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

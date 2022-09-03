@@ -104,8 +104,9 @@ dependencies {
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0")
 
-    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.116:api")
-    // TODO runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.116")
+    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
     // runtimeOnly fg.deobf("curse.maven:creeper-overhaul-561625:3676158")
     // runtimeOnly fg.deobf("curse.maven:geckolib-388172:3930007")
