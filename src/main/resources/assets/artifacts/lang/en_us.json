@@ -99,7 +99,6 @@
   "artifacts.config.common.campsite.scan_range": "Campsite downwards scan range",
   "artifacts.config.common.campsite.max_ceiling_height": "Campsite maximum ceiling height",
   "artifacts.config.common.campsite.mimic_chance": "Campsite mimic chance",
-  "artifacts.config.common.campsite.ore_chance": "Campsite ore vein chance",
   "artifacts.config.common.campsite.use_modded_chests": "Use modded chests",
   "artifacts.config.client.items.modify_hurt_sounds": "Modify player hurt sounds",
   "artifacts.config.client.items.show_first_person_gloves": "Show first person gloves",

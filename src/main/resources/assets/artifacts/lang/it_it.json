@@ -96,7 +96,6 @@
   "artifacts.config.common.campsite.min_y": "Altezza minima Campo base",
   "artifacts.config.common.campsite.max_y": "Altezza Massima Campo base",
   "artifacts.config.common.campsite.mimic_chance": "Probabilità di mimic nel Campo base",
-  "artifacts.config.common.campsite.ore_chance": "Probabilità di minerali nel Campo base",
   "artifacts.config.common.campsite.use_modded_chests": "Usa bauli delle mod",
   "artifacts.config.client.items.modify_hurt_sounds": "Modifica i suoni del colpo sul giocatore",
   "artifacts.config.client.items.show_first_person_gloves": "Mostra i guanti in prima persona",
