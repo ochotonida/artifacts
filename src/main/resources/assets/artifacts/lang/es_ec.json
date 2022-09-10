@@ -94,7 +94,6 @@
   "artifacts.config.common.campsite.min_y": "Altura minima para generar campamentos",
   "artifacts.config.common.campsite.max_y": "Altura maxima para generar campamentos",
   "artifacts.config.common.campsite.mimic_chance": "Probabilidad de generar mimics en campamentos",
-  "artifacts.config.common.campsite.ore_chance": "Campsite ore vein chance",
   "artifacts.config.common.campsite.use_modded_chests": "Usar cofres de mods",
   "artifacts.config.client.items.modify_hurt_sounds": "Modificar los sonidos de daño en el jugador",
   "artifacts.config.client.items.show_first_person_gloves": "Mostrar los guantes en primera persona",

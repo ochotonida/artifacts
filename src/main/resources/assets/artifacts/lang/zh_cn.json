@@ -96,7 +96,6 @@
   "artifacts.config.common.campsite.min_y": "营地最低高度值",
   "artifacts.config.common.campsite.max_y": "营地最高高度值",
   "artifacts.config.common.campsite.mimic_chance": "营地宝箱怪机率",
-  "artifacts.config.common.campsite.ore_chance": "营地矿脉机率",
   "artifacts.config.common.campsite.use_modded_chests": "使用模组的宝箱",
   "artifacts.config.client.items.modify_hurt_sounds": "修改玩家受伤音效",
   "artifacts.config.client.items.show_first_person_gloves": "显示第一名玩家的手套",

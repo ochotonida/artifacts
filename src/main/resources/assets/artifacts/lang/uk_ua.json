@@ -96,7 +96,6 @@
   "artifacts.config.common.campsite.min_y": "Мінімальна висота для спавну табору",
   "artifacts.config.common.campsite.max_y": "Максимальна висота для спавну табору",
   "artifacts.config.common.campsite.mimic_chance": "Шанс появи міміку у таборі",
-  "artifacts.config.common.campsite.ore_chance": "Шанс появи рудного скупчення у таборі",
   "artifacts.config.common.campsite.use_modded_chests": "Використовувати скрині з модів",
   "artifacts.config.client.items.modify_hurt_sounds": "Змінити звуки шкоди гравця",
   "artifacts.config.client.items.show_first_person_gloves": "Показувати рукавички від першої особи",

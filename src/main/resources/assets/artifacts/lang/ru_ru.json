@@ -105,7 +105,6 @@
   "artifacts.config.common.campsite.min_y": "Минимальная высота палаточных лагерей",
   "artifacts.config.common.campsite.max_y": "Максимальная высота палаточных лагерей",
   "artifacts.config.common.campsite.mimic_chance": "Вероятность появления подражателя в палаточных лагерях",
-  "artifacts.config.common.campsite.ore_chance": "Вероятность появления рудных жил в палаточных лагерях.",
   "artifacts.config.common.campsite.use_modded_chests": "Использование сундуков из модов.",
 
   "artifacts.config.client.items.modify_hurt_sounds": "Изменить звуки причинения урона",
