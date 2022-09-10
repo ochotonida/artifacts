@@ -2,6 +2,7 @@ package artifacts.data;
 
 import artifacts.Artifacts;
 import artifacts.common.init.ModEntityTypes;
+import artifacts.common.init.ModTags;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
@@ -11,6 +12,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 
 public class EntityTypeTags extends EntityTypeTagsProvider {
 
@@ -23,5 +26,26 @@ public class EntityTypeTags extends EntityTypeTagsProvider {
     @Override
     protected void addTags() {
         tag(MOB_IMPRISONMENT_TOOL_BLACKLIST).add(ModEntityTypes.MIMIC.get());
+        tag(ModTags.CREEPERS).add(EntityType.CREEPER);
+
+        List<String> creepers = Arrays.asList(
+                "jungle_creeper",
+                "bamboo_creeper",
+                "desert_creeper",
+                "badlands_creeper",
+                "hills_creeper",
+                "savannah_creeper",
+                "mushroom_creeper",
+                "swamp_creeper",
+                "dripstone_creeper",
+                "cave_creeper",
+                "dark_oak_creeper",
+                "spruce_creeper",
+                "beach_creeper",
+                "snowy_creeper"
+        );
+        for (String creeper : creepers) {
+            tag(ModTags.CREEPERS).addOptional(new ResourceLocation("creeperoverhaul", creeper));
+        }
     }
 }

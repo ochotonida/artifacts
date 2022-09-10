@@ -41,7 +41,7 @@ public class ArtifactsClient {
     }
 
     public void onClientSetup(FMLClientSetupEvent event) {
-        ItemProperties.register(ModItems.UMBRELLA.get(), new ResourceLocation("blocking"), (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
+        event.enqueueWork(() -> ItemProperties.register(ModItems.UMBRELLA.get(), new ResourceLocation("blocking"), (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0));
         CurioRenderers.register();
         registerHeliumFlamingoOverlay();
     }
