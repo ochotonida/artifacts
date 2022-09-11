@@ -34,7 +34,7 @@ description='''Adds various new powerful uncraftable items to make exploration a
 
 [[dependencies.artifacts]]
     modId = "expandability"
-    mandatory = false #TODO
+    mandatory = true
     versionRange = "[6.0.0,)"
     ordering = "NONE"
     side = "BOTH"

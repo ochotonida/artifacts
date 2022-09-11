@@ -21,7 +21,7 @@ mixin {
     add sourceSets.main, "artifacts.refmap.json"
 }
 
-version = '1.18.2-4.1.0'
+version = '1.18.2-4.2.0'
 group = 'artifacts'
 archivesBaseName = 'artifacts'
 
@@ -92,7 +92,12 @@ repositories {
         name "expandability"
         url "https://maven.florens.be"
     }
+    maven {
+        url 'https://jitpack.io'
+    }
 }
+
+jarJar.enable()
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.19.2-43.0.8'
@@ -111,12 +116,17 @@ dependencies {
     // runtimeOnly fg.deobf("curse.maven:creeper-overhaul-561625:3676158")
     // runtimeOnly fg.deobf("curse.maven:geckolib-388172:3930007")
 
-    // compileOnly fg.deobf("be.florens:expandability-forge:6.0.0")
+    implementation fg.deobf("be.florens:expandability-forge:7.0.0")
+    jarJar "be.florens:expandability-forge:[7.0,8.0)"
 }
 
 mixin {
     add sourceSets.main, 'mixins.artifacts.refmap.json'
     config 'mixins.artifacts.json'
+}
+
+tasks.jarJar.configure {
+    classifier ''
 }
 
 jar {
@@ -132,6 +142,8 @@ jar {
         ])
     }
 }
+
+reobf { jarJar { } }
 
 jar.finalizedBy('reobfJar')
 
