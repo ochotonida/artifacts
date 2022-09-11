@@ -18,7 +18,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -35,6 +37,7 @@ public class ArtifactsClient {
         modBus.addListener(this::onClientSetup);
         modBus.addListener(this::onRegisterRenderers);
         modBus.addListener(this::onRegisterLayerDefinitions);
+        modBus.addListener(this::onRegisterGuiOverlays);
 
         ArmRenderHandler.setup();
     }
@@ -47,7 +50,6 @@ public class ArtifactsClient {
                         (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0)
         );
         CurioRenderers.register();
-        registerHeliumFlamingoOverlay();
     }
 
     public void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -60,15 +62,15 @@ public class ArtifactsClient {
         event.registerLayerDefinition(MimicChestLayerModel.LAYER_LOCATION, MimicChestLayerModel::createLayer);
     }
 
-    public void registerHeliumFlamingoOverlay() {
-        // TODO
-        // GuiOverlayManager.registerOverlayAbove(ForgeGui.AIR_LEVEL_ELEMENT, "Helium Flamingo Overlay", (gui, poseStack, partialTicks, screenWidth, screenHeight) -> {
-        //     if (!Minecraft.getInstance().options.hideGui && gui.shouldDrawSurvivalElements())
-        //     {
-        //         gui.setupOverlayRenderState(true, false, HELIUM_FLAMINGO_ICON);
-        //         renderHeliumFlamingoOverlay(screenWidth, screenHeight, poseStack, gui);
-        //     }
-        // });
+
+    public void onRegisterGuiOverlays(RegisterGuiOverlaysEvent event) {
+        event.registerAbove(VanillaGuiOverlay.AIR_LEVEL.id(), "helium_flamingo_charge", (gui, poseStack, partialTicks, screenWidth, screenHeight) -> {
+            if (!Minecraft.getInstance().options.hideGui && gui.shouldDrawSurvivalElements())
+            {
+                gui.setupOverlayRenderState(true, false, HELIUM_FLAMINGO_ICON);
+                renderHeliumFlamingoOverlay(screenWidth, screenHeight, poseStack, gui);
+            }
+        });
     }
 
     public void renderHeliumFlamingoOverlay(int width, int height, PoseStack poseStack, ForgeGui gui) {
