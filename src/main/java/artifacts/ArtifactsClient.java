@@ -62,7 +62,6 @@ public class ArtifactsClient {
         event.registerLayerDefinition(MimicChestLayerModel.LAYER_LOCATION, MimicChestLayerModel::createLayer);
     }
 
-
     public void onRegisterGuiOverlays(RegisterGuiOverlaysEvent event) {
         event.registerAbove(VanillaGuiOverlay.AIR_LEVEL.id(), "helium_flamingo_charge", (gui, poseStack, partialTicks, screenWidth, screenHeight) -> {
             if (!Minecraft.getInstance().options.hideGui && gui.shouldDrawSurvivalElements())
