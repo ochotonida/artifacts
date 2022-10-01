@@ -21,7 +21,7 @@ mixin {
     add sourceSets.main, "artifacts.refmap.json"
 }
 
-version = '1.19.2-5.0.0'
+version = '1.19.2-5.0.1'
 group = 'artifacts'
 archivesBaseName = 'artifacts'
 
@@ -100,7 +100,7 @@ repositories {
 jarJar.enable()
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.0.8'
+    minecraft 'net.minecraftforge:forge:1.19.2-43.1.1'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
