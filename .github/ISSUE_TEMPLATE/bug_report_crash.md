@@ -18,7 +18,7 @@ Steps to reproduce the behavior:
 4. See error
 
 **Game Environment**
-Please provide details about the game environment, either by crash report/logs or by detailing it below.
+Please provide details about the game environment, either by crash report/logs or by detailing it below. Try to reproduce the issue without irrelevant mods first. Otherwise, include a complete list of mods or the name and version of the modpack you're using.
  - Artifacts: [version]
  - Forge: [version]
  - [other relevant mods...]
