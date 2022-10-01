@@ -38,8 +38,6 @@ public class ServerConfig {
     public final CrossNecklaceConfig crossNecklace;
     public final CrystalHeartConfig crystalHeart;
     public final DiggingClawsConfig diggingClaws;
-    public final EverlastingFoodConfig eternalSteak;
-    public final EverlastingFoodConfig everlastingBeef;
     public final FeralClawsConfig feralClaws;
     public final FireGauntletConfig fireGauntlet;
     public final FlamePendantConfig flamePendant;
@@ -49,10 +47,8 @@ public class ServerConfig {
     public final ItemConfig kittySlippers;
     public final LuckyScarfConfig luckyScarf;
     public final ItemConfig nightVisionGoggles;
-    public final DrinkingHatConfig noveltyDrinkingHat;
     public final ObsidianSkullConfig obsidianSkull;
     public final PanicNecklaceConfig panicNecklace;
-    public final DrinkingHatConfig plasticDrinkingHat;
     public final PocketPistonConfig pocketPiston;
     public final PowerGloveConfig powerGlove;
     public final RunningShoesConfig runningShoes;
@@ -94,8 +90,8 @@ public class ServerConfig {
         crossNecklace = new CrossNecklaceConfig(builder);
         crystalHeart = new CrystalHeartConfig(builder);
         diggingClaws = new DiggingClawsConfig(builder);
-        eternalSteak = new EverlastingFoodConfig(builder, ModItems.ETERNAL_STEAK);
-        everlastingBeef = new EverlastingFoodConfig(builder, ModItems.EVERLASTING_BEEF);
+        EverlastingFoodConfig eternalSteak = new EverlastingFoodConfig(builder, ModItems.ETERNAL_STEAK);
+        EverlastingFoodConfig everlastingBeef = new EverlastingFoodConfig(builder, ModItems.EVERLASTING_BEEF);
         feralClaws = new FeralClawsConfig(builder);
         fireGauntlet = new FireGauntletConfig(builder);
         flamePendant = new FlamePendantConfig(builder);
@@ -105,10 +101,10 @@ public class ServerConfig {
         kittySlippers = new ItemConfig(builder, ModItems.KITTY_SLIPPERS, "Affects how many creepers the player can attack using the kitty slippers before breaking");
         luckyScarf = new LuckyScarfConfig(builder);
         nightVisionGoggles = new ItemConfig(builder, ModItems.NIGHT_VISION_GOGGLES, "Affects how many seconds the night vision effect should apply before breaking");
-        noveltyDrinkingHat = new DrinkingHatConfig(builder, ModItems.NOVELTY_DRINKING_HAT);
+        DrinkingHatConfig noveltyDrinkingHat = new DrinkingHatConfig(builder, ModItems.NOVELTY_DRINKING_HAT);
         obsidianSkull = new ObsidianSkullConfig(builder);
         panicNecklace = new PanicNecklaceConfig(builder);
-        plasticDrinkingHat = new DrinkingHatConfig(builder, ModItems.PLASTIC_DRINKING_HAT);
+        DrinkingHatConfig plasticDrinkingHat = new DrinkingHatConfig(builder, ModItems.PLASTIC_DRINKING_HAT);
         pocketPiston = new PocketPistonConfig(builder);
         powerGlove = new PowerGloveConfig(builder);
         runningShoes = new RunningShoesConfig(builder);

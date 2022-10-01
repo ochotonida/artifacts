@@ -39,8 +39,8 @@ public class DrinkingHatItem extends CurioItem {
 
     private void onItemUseStart(LivingEntityUseItemEvent.Start event, LivingEntity wearer) {
         UseAnim action = event.getItem().getUseAnimation();
-        double drinkingMultiplier = ModConfig.server.plasticDrinkingHat.drinkingDurationMultiplier.get();
-        double eatingMultiplier = ModConfig.server.plasticDrinkingHat.eatingDurationMultiplier.get();
+        double drinkingMultiplier = ModConfig.server.drinkingHats.get(this).drinkingDurationMultiplier.get();
+        double eatingMultiplier = ModConfig.server.drinkingHats.get(this).eatingDurationMultiplier.get();
         if (action == UseAnim.DRINK) {
             event.setDuration((int) (event.getDuration() * drinkingMultiplier));
         } else if (action == UseAnim.EAT) {
@@ -50,8 +50,8 @@ public class DrinkingHatItem extends CurioItem {
 
     private void onItemUseFinish(LivingEntityUseItemEvent.Finish event, LivingEntity wearer) {
         UseAnim action = event.getItem().getUseAnimation();
-        double drinkingMultiplier = ModConfig.server.plasticDrinkingHat.drinkingDurationMultiplier.get();
-        double eatingMultiplier = ModConfig.server.plasticDrinkingHat.eatingDurationMultiplier.get();
+        double drinkingMultiplier = ModConfig.server.drinkingHats.get(this).drinkingDurationMultiplier.get();
+        double eatingMultiplier = ModConfig.server.drinkingHats.get(this).eatingDurationMultiplier.get();
         if (action == UseAnim.DRINK && drinkingMultiplier != 1 || action == UseAnim.EAT && eatingMultiplier != 1) {
             damageEquippedStacks(wearer);
         }
