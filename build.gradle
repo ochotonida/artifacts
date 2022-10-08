@@ -90,7 +90,7 @@ repositories {
     }
     maven {
         name "expandability"
-        url "https://maven.florens.be"
+        url "https://maven.florens.be/releases"
     }
     maven {
         url 'https://jitpack.io'
