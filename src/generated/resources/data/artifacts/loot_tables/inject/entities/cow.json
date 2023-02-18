@@ -5,8 +5,8 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "condition": "artifacts:configurable_random_chance",
-          "default_probability": 0.002
+          "chance": 0.002,
+          "condition": "minecraft:random_chance"
         },
         {
           "condition": "minecraft:killed_by_player"

@@ -18,6 +18,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.common.loot.LootTableIdCondition;
 
@@ -34,10 +35,14 @@ public class LootModifiers extends GlobalLootModifierProvider {
     }
 
     private void addLoot() {
-        builder("entities/cow", 1 / 500F)
-                .parameterSet(LootContextParamSets.ENTITY)
-                .lootPoolCondition(LootItemKilledByPlayerCondition.killedByPlayer())
-                .everlastingBeef();
+        lootBuilders.add(
+                new Builder("entities/cow")
+                        .lootPoolCondition(LootItemRandomChanceCondition.randomChance(1 / 500F))
+                        .lootModifierCondition(LootTableIdCondition.builder(new ResourceLocation("entities/cow")))
+                        .parameterSet(LootContextParamSets.ENTITY)
+                        .lootPoolCondition(LootItemKilledByPlayerCondition.killedByPlayer())
+                        .everlastingBeef()
+        );
 
         for (String biome : Arrays.asList("desert", "plains", "savanna", "snowy", "taiga")) {
             builder(String.format("chests/village/village_%s_house", biome), 0.02F)

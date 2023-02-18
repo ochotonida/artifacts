@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-02T22:25:21.7070802	LootTables
+// 1.19.2	2023-02-18T13:00:02.8158665	LootTables
 52f37abd3f3dc9dd182c376f5e93e81844f69504 data/artifacts/loot_tables/artifact.json
 cb8697b4a5ddbf7ac5544d03c513f33ac87e091e data/artifacts/loot_tables/chests/campsite_barrel.json
 722a076c8e2eb908e7bf83e1c6b9d8510aabdc92 data/artifacts/loot_tables/chests/campsite_barrel/cobblestone.json
@@ -39,5 +39,5 @@ f12edf2114b91ac40a4540b8af38e63375fb51e9 data/artifacts/loot_tables/inject/chest
 1ba995622755ca3074e4eb4b3619d66d3cde0e89 data/artifacts/loot_tables/inject/chests/village/village_toolsmith.json
 8cb565d26adea3bc846c63936e16e3c6f103eee2 data/artifacts/loot_tables/inject/chests/village/village_weaponsmith.json
 da6a37d9f5e18ca6f7db3eea69ca45fffd4c7487 data/artifacts/loot_tables/inject/chests/woodland_mansion.json
-18ba32073211f41c335551062a799ff65659673a data/artifacts/loot_tables/inject/entities/cow.json
+beb2f4fe3e34ef73fa535a18448f9cf6f4dd39cd data/artifacts/loot_tables/inject/entities/cow.json
 a3c26ec913e80520d343c4272ae01e788264ae02 data/artifacts/loot_tables/items/drinking_hat.json
