@@ -134,7 +134,7 @@ public class LegsModel extends HumanoidModel<LivingEntity> {
                         .addBox(1.15F, 3.51F, -3.01F, 2, 5, 1),
                 PartPose.rotation(0, 0.2617994F, 0)
         );
-        mesh.getRoot().getChild("left_leg").addOrReplaceChild(
+        mesh.getRoot().getChild("right_leg").addOrReplaceChild(
                 "right_ear",
                 CubeListBuilder.create()
                         .texOffs(58, 16)
