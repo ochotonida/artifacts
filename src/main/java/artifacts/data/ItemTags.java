@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ItemTags extends ItemTagsProvider {
 
-    private static final TagKey<Item> ARTIFACTS = TagKey.create(Registries.ITEM, new ResourceLocation(Artifacts.MODID, "artifacts"));
+    private static final TagKey<Item> ARTIFACTS = TagKey.create(Registries.ITEM, Artifacts.id("artifacts"));
 
     private static final TagKey<Item> BELT = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "belt"));
     private static final TagKey<Item> CURIO = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "curio"));

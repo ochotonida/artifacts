@@ -17,7 +17,7 @@ public class ModTags {
 
     public static final TagKey<Block> MINEABLE_WITH_DIGGING_CLAWS = create(Registries.BLOCK, "mineable/digging_claws");
     public static final TagKey<MobEffect> ANTIDOTE_VESSEL_CANCELLABLE = create(Registries.MOB_EFFECT, "antidote_vessel_cancellable");
-    public static final TagKey<EntityType<?>> CREEPERS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Artifacts.MODID, "creepers"));
+    public static final TagKey<EntityType<?>> CREEPERS = TagKey.create(Registries.ENTITY_TYPE, Artifacts.id("creepers"));
 
     private static <T> TagKey<T> create(ResourceKey<Registry<T>> registry, String id) {
         return TagKey.create(registry, new ResourceLocation(Artifacts.MODID, id));

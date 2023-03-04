@@ -66,6 +66,10 @@ public class Artifacts {
         return new ResourceLocation(Artifacts.MODID, path);
     }
 
+    public static ResourceLocation id(String path, String... args) {
+        return new ResourceLocation(Artifacts.MODID, String.format(path, (Object[]) args));
+    }
+
     public static <T> ResourceKey<T> key(ResourceKey<? extends Registry<T>> registry, String path) {
         return ResourceKey.create(registry, id(path));
     }

@@ -36,8 +36,8 @@ public class GloveCurioRenderer implements ICurioRenderer {
     }
 
     public GloveCurioRenderer(String defaultTexturePath, String slimTexturePath, ArmsModel defaultModel, ArmsModel slimModel) {
-        this.defaultTexture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/%s.png", defaultTexturePath));
-        this.slimTexture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/%s.png", slimTexturePath));
+        this.defaultTexture = Artifacts.id("textures/entity/curio/%s.png", defaultTexturePath);
+        this.slimTexture = Artifacts.id("textures/entity/curio/%s.png", slimTexturePath);
         this.defaultModel = defaultModel;
         this.slimModel = slimModel;
     }

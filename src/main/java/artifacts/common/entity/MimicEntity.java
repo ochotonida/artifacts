@@ -26,7 +26,7 @@ import java.util.EnumSet;
 
 public class MimicEntity extends Mob implements Enemy {
 
-    public static final ResourceLocation LOOT_TABLE = new ResourceLocation(Artifacts.MODID, "entities/mimic");
+    public static final ResourceLocation LOOT_TABLE = Artifacts.id("entities/mimic");
 
     public int ticksInAir;
     public int attackCooldown;

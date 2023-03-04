@@ -4,7 +4,6 @@ import artifacts.Artifacts;
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
 import com.google.common.collect.Multimap;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +26,7 @@ public class FlippersItem extends CurioItem {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
         if (!ModConfig.server.isCosmetic(this)) {
             double swimSpeedBonus = ModConfig.server.flippers.swimSpeedBonus.get();
-            result.put(ForgeMod.SWIM_SPEED.get(), new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "flipper_swim_speed").toString(), swimSpeedBonus, AttributeModifier.Operation.ADDITION));
+            result.put(ForgeMod.SWIM_SPEED.get(), new AttributeModifier(uuid, Artifacts.id("flipper_swim_speed").toString(), swimSpeedBonus, AttributeModifier.Operation.ADDITION));
         }
         return result;
     }

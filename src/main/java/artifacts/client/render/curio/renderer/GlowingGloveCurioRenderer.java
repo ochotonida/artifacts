@@ -21,8 +21,8 @@ public class GlowingGloveCurioRenderer extends GloveCurioRenderer {
 
     public GlowingGloveCurioRenderer(String name, ArmsModel defaultModel, ArmsModel slimModel) {
         super(name, defaultModel, slimModel);
-        defaultGlowTexture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/glove/%s/%s_default_glow.png", name, name));
-        slimGlowTexture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/glove/%s/%s_slim_glow.png", name, name));
+        defaultGlowTexture = Artifacts.id("textures/entity/curio/glove/%s/%s_default_glow.png", name, name);
+        slimGlowTexture = Artifacts.id("textures/entity/curio/glove/%s/%s_slim_glow.png", name, name);
     }
 
     private ResourceLocation getGlowTexture(boolean hasSlimArms) {

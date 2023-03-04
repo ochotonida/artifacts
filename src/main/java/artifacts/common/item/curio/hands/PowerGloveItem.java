@@ -5,7 +5,6 @@ import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
 import artifacts.common.util.DamageSourceHelper;
 import com.google.common.collect.Multimap;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -33,7 +32,7 @@ public class PowerGloveItem extends CurioItem {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
         if (!ModConfig.server.isCosmetic(this)) {
             int attackDamageBonus = ModConfig.server.powerGlove.attackDamageBonus.get();
-            result.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "power_glove_attack_damage").toString(), attackDamageBonus, AttributeModifier.Operation.ADDITION));
+            result.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(uuid, Artifacts.id("power_glove_attack_damage").toString(), attackDamageBonus, AttributeModifier.Operation.ADDITION));
         }
         return result;
     }

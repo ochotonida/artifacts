@@ -7,7 +7,6 @@ import artifacts.common.network.SinkPacket;
 import artifacts.common.network.SwimPacket;
 import be.florens.expandability.api.forge.PlayerSwimEvent;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -109,7 +108,7 @@ public class SwimHandler implements INBTSerializable<CompoundTag> {
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
             SwimHandlerProvider provider = new SwimHandlerProvider();
-            event.addCapability(new ResourceLocation(Artifacts.MODID, "swim_handler"), provider);
+            event.addCapability(Artifacts.id("swim_handler"), provider);
             event.addListener(provider::invalidate);
         }
     }

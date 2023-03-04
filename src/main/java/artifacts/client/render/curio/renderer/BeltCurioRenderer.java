@@ -22,7 +22,7 @@ public class BeltCurioRenderer implements ICurioRenderer {
     private final BeltModel model;
 
     public BeltCurioRenderer(String texturePath, BeltModel model) {
-        this(new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/%s.png", texturePath)), model);
+        this(Artifacts.id("textures/entity/curio/%s.png", texturePath), model);
     }
 
     public BeltCurioRenderer(ResourceLocation texture, BeltModel model) {

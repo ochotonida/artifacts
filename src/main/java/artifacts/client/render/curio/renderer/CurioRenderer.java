@@ -22,7 +22,7 @@ public class CurioRenderer implements ICurioRenderer {
     private final HumanoidModel<LivingEntity> model;
 
     public CurioRenderer(String texturePath, HumanoidModel<LivingEntity> model) {
-        this(new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/%s.png", texturePath)), model);
+        this(Artifacts.id("textures/entity/curio/%s.png", texturePath), model);
     }
 
     public CurioRenderer(ResourceLocation texture, HumanoidModel<LivingEntity> model) {

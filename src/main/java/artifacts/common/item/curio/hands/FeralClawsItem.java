@@ -5,7 +5,6 @@ import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
 import artifacts.common.util.DamageSourceHelper;
 import com.google.common.collect.Multimap;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -40,7 +39,7 @@ public class FeralClawsItem extends CurioItem {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
         if (!ModConfig.server.isCosmetic(this)) {
             double attackSpeedBonus = ModConfig.server.feralClaws.attackSpeedBonus.get();
-            result.put(Attributes.ATTACK_SPEED, new AttributeModifier(uuid, new ResourceLocation(Artifacts.MODID, "feral_claws_attack_speed").toString(), attackSpeedBonus, AttributeModifier.Operation.ADDITION));
+            result.put(Attributes.ATTACK_SPEED, new AttributeModifier(uuid, Artifacts.id("feral_claws_attack_speed").toString(), attackSpeedBonus, AttributeModifier.Operation.ADDITION));
         }
         return result;
     }

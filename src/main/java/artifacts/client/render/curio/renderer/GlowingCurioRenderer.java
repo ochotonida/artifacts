@@ -19,7 +19,7 @@ public class GlowingCurioRenderer extends CurioRenderer {
 
     public GlowingCurioRenderer(String name, HumanoidModel<LivingEntity> model) {
         super(String.format("%s/%s", name, name), model);
-        this.glowTexture = new ResourceLocation(Artifacts.MODID, String.format("textures/entity/curio/%s/%s_glow.png", name, name));
+        this.glowTexture = Artifacts.id("textures/entity/curio/%s/%s_glow.png", name, name);
     }
 
     private ResourceLocation getGlowTexture() {

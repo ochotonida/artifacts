@@ -84,8 +84,8 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
             .add(Blocks.SOUL_LANTERN.defaultBlockState(), 1)
     );
 
-    public static final ResourceLocation CHEST_LOOT = new ResourceLocation(Artifacts.MODID, "chests/campsite_chest");
-    public static final ResourceLocation BARREL_LOOT = new ResourceLocation(Artifacts.MODID, "chests/campsite_barrel");
+    public static final ResourceLocation CHEST_LOOT = Artifacts.id("chests/campsite_chest");
+    public static final ResourceLocation BARREL_LOOT = Artifacts.id("chests/campsite_barrel");
 
     public CampsiteFeature() {
         super(NoneFeatureConfiguration.CODEC);

@@ -27,7 +27,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class ArtifactsClient {
 
-    private static final ResourceLocation HELIUM_FLAMINGO_ICON = new ResourceLocation(Artifacts.MODID, "textures/gui/icons.png");
+    private static final ResourceLocation HELIUM_FLAMINGO_ICON = Artifacts.id("textures/gui/icons.png");
 
     public ArtifactsClient() {
         ModConfig.registerClient();

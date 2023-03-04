@@ -24,7 +24,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class JEIPlugin implements IModPlugin {
 
-    private static final ResourceLocation ID = new ResourceLocation(Artifacts.MODID, "main");
+    private static final ResourceLocation ID = Artifacts.id("main");
 
     @Override
     public ResourceLocation getPluginUid() {

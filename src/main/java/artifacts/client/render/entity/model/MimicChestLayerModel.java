@@ -11,11 +11,10 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.resources.ResourceLocation;
 
 public class MimicChestLayerModel extends EntityModel<MimicEntity> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Artifacts.MODID, "mimic_overlay"), "mimic_overlay");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Artifacts.id("mimic_overlay"), "mimic_overlay");
 
     protected final ModelPart bottom;
     protected final ModelPart lid;

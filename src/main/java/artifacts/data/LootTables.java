@@ -339,7 +339,7 @@ public class LootTables extends LootTableProvider {
     }
 
     private static LootPoolEntryContainer.Builder<?> lootTable(String lootTable, int weight) {
-        return LootTableReference.lootTableReference(new ResourceLocation(Artifacts.MODID, lootTable)).setWeight(weight);
+        return LootTableReference.lootTableReference(Artifacts.id(lootTable)).setWeight(weight);
     }
 
     private void addLootTable(String location, LootTable.Builder lootTable, LootContextParamSet lootParameterSet) {
@@ -347,7 +347,7 @@ public class LootTables extends LootTableProvider {
             String actualLocation = location.replace("inject/", "");
             Preconditions.checkArgument(existingFileHelper.exists(new ResourceLocation("loot_tables/" + actualLocation + ".json"), PackType.SERVER_DATA), "Loot table %s does not exist in any known data pack", actualLocation);
         }
-        tables.add(new SubProviderEntry(() -> lootBuilder -> lootBuilder.accept(new ResourceLocation(Artifacts.MODID, location), lootTable), lootParameterSet));
+        tables.add(new SubProviderEntry(() -> lootBuilder -> lootBuilder.accept(Artifacts.id(location), lootTable), lootParameterSet));
     }
 
     private void addLootTable(String location, LootTable.Builder lootTable) {

@@ -215,7 +215,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
         }
 
         private RollLootTableModifier build() {
-            return new RollLootTableModifier(conditions.toArray(new LootItemCondition[]{}), new ResourceLocation(Artifacts.MODID, "inject/" + lootTable));
+            return new RollLootTableModifier(conditions.toArray(new LootItemCondition[]{}), Artifacts.id("inject/%s", lootTable));
         }
 
         protected LootTable.Builder createLootTable() {
