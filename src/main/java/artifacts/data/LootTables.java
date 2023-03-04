@@ -6,8 +6,7 @@ import artifacts.common.init.ModItems;
 import artifacts.common.loot.ConfigurableRandomChance;
 import artifacts.common.world.CampsiteFeature;
 import com.google.common.base.Preconditions;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -32,25 +31,23 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.Set;
 
 public class LootTables extends LootTableProvider {
 
-    private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> tables = new ArrayList<>();
+    private final List<SubProviderEntry> tables = new ArrayList<>();
 
     private final ExistingFileHelper existingFileHelper;
     private final LootModifiers lootModifiers;
 
-    public LootTables(DataGenerator dataGenerator, ExistingFileHelper existingFileHelper, LootModifiers lootModifiers) {
-        super(dataGenerator);
+    public LootTables(PackOutput packOutput, ExistingFileHelper existingFileHelper, LootModifiers lootModifiers) {
+        super(packOutput, Set.of(), List.of());
         this.existingFileHelper = existingFileHelper;
         this.lootModifiers = lootModifiers;
     }
 
     @Override
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
+    public List<SubProviderEntry> getTables() {
         tables.clear();
         addDrinkingHatsLootTable();
         addArtifactsLootTable();
@@ -350,7 +347,7 @@ public class LootTables extends LootTableProvider {
             String actualLocation = location.replace("inject/", "");
             Preconditions.checkArgument(existingFileHelper.exists(new ResourceLocation("loot_tables/" + actualLocation + ".json"), PackType.SERVER_DATA), "Loot table %s does not exist in any known data pack", actualLocation);
         }
-        tables.add(Pair.of(() -> lootBuilder -> lootBuilder.accept(new ResourceLocation(Artifacts.MODID, location), lootTable), lootParameterSet));
+        tables.add(new SubProviderEntry(() -> lootBuilder -> lootBuilder.accept(new ResourceLocation(Artifacts.MODID, location), lootTable), lootParameterSet));
     }
 
     private void addLootTable(String location, LootTable.Builder lootTable) {

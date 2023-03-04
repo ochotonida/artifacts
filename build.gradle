@@ -1,10 +1,5 @@
 buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net/' }
-        mavenCentral()
-    }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 }
@@ -12,24 +7,20 @@ buildscript {
 plugins {
     id 'eclipse'
     id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
-apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
-mixin {
-    add sourceSets.main, "artifacts.refmap.json"
-}
-
-version = '1.19.2-5.0.1'
-group = 'artifacts'
-archivesBaseName = 'artifacts'
+version = "${minecraft_version}-${mod_version}"
+group = mod_id
+archivesBaseName = mod_id
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: 'official', version: '1.19.2'
+    mappings channel: 'official', version: minecraft_version
 
     runs {
         client {
@@ -38,7 +29,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                artifacts {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -50,7 +41,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                artifacts {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -60,11 +51,11 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', ''
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'artifacts', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             environment 'target', 'fmluserdevdata'
 
             mods {
-                artifacts {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -82,17 +73,15 @@ repositories {
         url "https://maven.theillusivec4.top/"
     }
     maven {
-        url "https://www.cursemaven.com"
-    }
-    maven {
         name "jei"
-        url "https://dvs1.progwml6.com/files/maven/"
+        url "https://maven.blamejared.com/"
     }
     maven {
         name "expandability"
         url "https://maven.florens.be/releases"
     }
     maven {
+        name "mixin-extras"
         url 'https://jitpack.io'
     }
 }
@@ -100,24 +89,19 @@ repositories {
 jarJar.enable()
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.1.1'
+    minecraft 'net.minecraftforge:forge:1.19.3-44.1.16'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    //runtimeOnly fg.deobf("curse.maven:curious-armor-stands-398784:3579775")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}")
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0")
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
-
-    // runtimeOnly fg.deobf("curse.maven:creeper-overhaul-561625:3676158")
-    // runtimeOnly fg.deobf("curse.maven:geckolib-388172:3930007")
-
-    implementation fg.deobf("be.florens:expandability-forge:7.0.0")
-    jarJar "be.florens:expandability-forge:[7.0,8.0)"
+    implementation fg.deobf("be.florens:expandability-forge:${expandability_version}")
+    jarJar "be.florens:expandability-forge:${expandability_version_range}"
 }
 
 mixin {
@@ -136,7 +120,7 @@ jar {
             "Specification-Vendor": "ochotonida",
             "Specification-Version": "1",
             "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
+            "Implementation-Version": project.jar.archiveVersion,
             "Implementation-Vendor": "ochotonida",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])

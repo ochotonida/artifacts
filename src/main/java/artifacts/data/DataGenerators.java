@@ -1,29 +1,21 @@
 package artifacts.data;
 
 import artifacts.Artifacts;
-import com.google.gson.JsonElement;
-import com.mojang.serialization.JsonOps;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.RegistryOps;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.data.PackOutput;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.JsonCodecProvider;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
-@SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Artifacts.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
@@ -31,32 +23,29 @@ public class DataGenerators {
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+        PackOutput packOutput = event.getGenerator().getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        BlockTags blockTags = new BlockTags(generator, existingFileHelper);
-        LootModifiers lootModifiers = new LootModifiers(generator);
+        BlockTags blockTags = new BlockTags(packOutput, lookupProvider, existingFileHelper);
+        LootModifiers lootModifiers = new LootModifiers(packOutput);
 
         generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new ItemTags(generator, blockTags, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ItemTags(packOutput, lookupProvider, blockTags, existingFileHelper));
         generator.addProvider(event.includeServer(), lootModifiers);
-        generator.addProvider(event.includeServer(), new LootTables(generator, existingFileHelper, lootModifiers));
-        generator.addProvider(event.includeServer(), new EntityTypeTags(generator, existingFileHelper));
-        generator.addProvider(event.includeServer(), new MobEffectTags(generator, existingFileHelper));
+        generator.addProvider(event.includeServer(), new LootTables(packOutput, existingFileHelper, lootModifiers));
+        generator.addProvider(event.includeServer(), new EntityTypeTags(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new MobEffectTags(packOutput, lookupProvider, existingFileHelper));
 
-        generator.addProvider(event.includeClient(), new ItemModels(generator, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ItemModels(packOutput, existingFileHelper));
 
-        RegistryAccess registryAccess = RegistryAccess.builtinCopy();
-        RegistryOps<JsonElement> registryOps = RegistryOps.create(JsonOps.INSTANCE, registryAccess);
+        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(generator.getPackOutput(), event.getLookupProvider(), createLevelProvider(), Set.of(Artifacts.MODID)));
+    }
 
-        BiomeModifier modifier = new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                registryAccess.registryOrThrow(Registry.BIOME_REGISTRY).getOrCreateTag(BiomeTags.IS_OVERWORLD),
-                HolderSet.direct(registryAccess.registryOrThrow(Registry.PLACED_FEATURE_REGISTRY).getOrCreateHolderOrThrow(ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY, new ResourceLocation(Artifacts.MODID, "underground_campsite")))),
-                GenerationStep.Decoration.UNDERGROUND_STRUCTURES
-        );
-
-        Map<ResourceLocation, BiomeModifier> map = Map.of(new ResourceLocation(Artifacts.MODID, "add_campsite"), modifier);
-
-        JsonCodecProvider<BiomeModifier> provider = JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, Artifacts.MODID, registryOps, ForgeRegistries.Keys.BIOME_MODIFIERS, map);
-
-        generator.addProvider(event.includeServer(), provider);
+    public static RegistrySetBuilder createLevelProvider() {
+        RegistrySetBuilder builder = new RegistrySetBuilder();
+        builder.add(ForgeRegistries.Keys.BIOME_MODIFIERS, BiomeModifiers::create);
+        builder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatures::create);
+        builder.add(Registries.PLACED_FEATURE, PlacedFeatures::create);
+        return builder;
     }
 }

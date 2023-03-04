@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-02T22:25:21.70808	Global Loot Modifiers : artifacts
+// 1.19.3	2023-03-04T18:08:11.2249383	Global Loot Modifiers : artifacts
 717aecbcb5de27f53f2554062faa538697ceba2b data/artifacts/loot_modifiers/inject/chests/abandoned_mineshaft.json
 4f13c072a3167f1d359e73c42eac7b7e84d258a2 data/artifacts/loot_modifiers/inject/chests/bastion_hoglin_stable.json
 c8b4c3f12d1080273ac90d021b8b9e8f49d83383 data/artifacts/loot_modifiers/inject/chests/bastion_treasure.json

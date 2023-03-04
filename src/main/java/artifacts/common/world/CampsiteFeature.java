@@ -4,10 +4,10 @@ import artifacts.Artifacts;
 import artifacts.common.config.ModConfig;
 import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.ModEntityTypes;
+import artifacts.common.init.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -221,10 +221,8 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
                 chest = Blocks.TRAPPED_CHEST.defaultBlockState();
                 setBlock(level, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
             } else if (ModConfig.common.useModdedChests.get()) {
-                // noinspection deprecation
-                chest = Registry.BLOCK
-                        .getTag(Tags.Blocks.CHESTS_WOODEN)
-                        .flatMap((set) -> set.getRandomElement(random))
+                chest = ModTags.getTag(Tags.Blocks.CHESTS_WOODEN)
+                        .getRandomElement(random)
                         .map(Holder::value)
                         .orElse(Blocks.CHEST)
                         .defaultBlockState();

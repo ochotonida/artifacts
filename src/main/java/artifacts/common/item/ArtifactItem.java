@@ -1,7 +1,6 @@
 package artifacts.common.item;
 
 import artifacts.common.config.ModConfig;
-import artifacts.common.init.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -20,7 +19,7 @@ import java.util.List;
 public abstract class ArtifactItem extends Item {
 
     public ArtifactItem(Properties properties) {
-        super(properties.stacksTo(1).tab(ModItems.CREATIVE_TAB).rarity(Rarity.RARE).fireResistant());
+        super(properties.stacksTo(1).rarity(Rarity.RARE).fireResistant());
     }
 
     public ArtifactItem() {

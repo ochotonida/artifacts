@@ -3,8 +3,9 @@ package artifacts.data;
 import artifacts.Artifacts;
 import artifacts.common.init.ModEntityTypes;
 import artifacts.common.init.ModTags;
-import net.minecraft.core.Registry;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -14,17 +15,18 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class EntityTypeTags extends EntityTypeTagsProvider {
 
-    private static final TagKey<EntityType<?>> MOB_IMPRISONMENT_TOOL_BLACKLIST = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation("industrialforegoing", "mob_imprisonment_tool_blacklist"));
+    private static final TagKey<EntityType<?>> MOB_IMPRISONMENT_TOOL_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("industrialforegoing", "mob_imprisonment_tool_blacklist"));
 
-    public EntityTypeTags(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generator, Artifacts.MODID, existingFileHelper);
+    public EntityTypeTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(packOutput, lookupProvider, Artifacts.MODID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider provider) {
         tag(MOB_IMPRISONMENT_TOOL_BLACKLIST).add(ModEntityTypes.MIMIC.get());
         tag(ModTags.CREEPERS).add(EntityType.CREEPER);
 

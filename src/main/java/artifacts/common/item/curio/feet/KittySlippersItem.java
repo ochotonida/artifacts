@@ -15,8 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -25,7 +25,7 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
     public KittySlippersItem() {
         super(SoundEvents.CAT_HURT);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJoinWorld);
-        addListener(LivingSetAttackTargetEvent.class, this::onLivingSetAttackTarget, LivingSetAttackTargetEvent::getTarget);
+        addListener(LivingChangeTargetEvent.class, this::onLivingChangeTargetEvent, LivingChangeTargetEvent::getNewTarget);
         addListener(LivingEvent.LivingTickEvent.class, this::onLivingUpdate, event -> event.getEntity().getLastHurtByMob());
         addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
@@ -42,9 +42,9 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
         }
     }
 
-    private void onLivingSetAttackTarget(LivingSetAttackTargetEvent event, LivingEntity wearer) {
+    private void onLivingChangeTargetEvent(LivingChangeTargetEvent event, LivingEntity wearer) {
         if (event.getEntity() instanceof Mob creeper && creeper.getType().is(ModTags.CREEPERS)) {
-            creeper.setTarget(null);
+            event.setCanceled(true);
         }
     }
 

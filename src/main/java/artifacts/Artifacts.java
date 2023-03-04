@@ -4,6 +4,9 @@ import artifacts.common.capability.SwimHandler;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.*;
 import artifacts.common.network.NetworkHandler;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,12 +34,11 @@ public class Artifacts {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.ITEMS.register(modBus);
+        modBus.addListener(ModItems::registerTab);
         ModEntityTypes.ENTITY_TYPES.register(modBus);
         ModSoundEvents.SOUND_EVENTS.register(modBus);
         ModFeatures.PLACEMENT_MODIFIERS.register(modBus);
         ModFeatures.FEATURES.register(modBus);
-        ModFeatures.CONFIGURED_FEATURES.register(modBus);
-        ModFeatures.PLACED_FEATURES.register(modBus);
         ModLootModifiers.LOOT_MODIFIERS.register(modBus);
         ModLootConditions.LOOT_CONDITIONS.register(modBus);
 
@@ -48,10 +50,7 @@ public class Artifacts {
 
     public void commonSetup(final FMLCommonSetupEvent event) {
         ModConfig.registerServer();
-        event.enqueueWork(() -> {
-            ModFeatures.register();
-            NetworkHandler.register();
-        });
+        event.enqueueWork(NetworkHandler::register);
     }
 
     public void enqueueIMC(final InterModEnqueueEvent event) {
@@ -61,5 +60,13 @@ public class Artifacts {
         }
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HANDS.getMessageBuilder().size(2).build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("feet").priority(220).icon(InventoryMenu.EMPTY_ARMOR_SLOT_BOOTS).build());
+    }
+
+    public static ResourceLocation id(String path) {
+        return new ResourceLocation(Artifacts.MODID, path);
+    }
+
+    public static <T> ResourceKey<T> key(ResourceKey<? extends Registry<T>> registry, String path) {
+        return ResourceKey.create(registry, id(path));
     }
 }

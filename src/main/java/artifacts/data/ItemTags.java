@@ -2,8 +2,9 @@ package artifacts.data;
 
 import artifacts.Artifacts;
 import artifacts.common.init.ModItems;
-import net.minecraft.core.Registry;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -13,24 +14,25 @@ import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import javax.annotation.Nullable;
+import java.util.concurrent.CompletableFuture;
 
 public class ItemTags extends ItemTagsProvider {
 
-    private static final TagKey<Item> ARTIFACTS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(Artifacts.MODID, "artifacts"));
+    private static final TagKey<Item> ARTIFACTS = TagKey.create(Registries.ITEM, new ResourceLocation(Artifacts.MODID, "artifacts"));
 
-    private static final TagKey<Item> BELT = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "belt"));
-    private static final TagKey<Item> CURIO = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "curio"));
-    private static final TagKey<Item> FEET = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "feet"));
-    private static final TagKey<Item> HANDS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "hands"));
-    private static final TagKey<Item> HEAD = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "head"));
-    private static final TagKey<Item> NECKLACE = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(CuriosApi.MODID, "necklace"));
+    private static final TagKey<Item> BELT = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "belt"));
+    private static final TagKey<Item> CURIO = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "curio"));
+    private static final TagKey<Item> FEET = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "feet"));
+    private static final TagKey<Item> HANDS = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "hands"));
+    private static final TagKey<Item> HEAD = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "head"));
+    private static final TagKey<Item> NECKLACE = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "necklace"));
 
-    public ItemTags(DataGenerator generator, BlockTags blockTags, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generator, blockTags, Artifacts.MODID, existingFileHelper);
+    public ItemTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, BlockTags blockTags, @Nullable ExistingFileHelper existingFileHelper) {
+        super(packOutput, lookupProvider, blockTags, Artifacts.MODID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider provider) {
         // noinspection ConstantConditions
         tag(ARTIFACTS).add(ForgeRegistries.ITEMS.getValues().stream()
                 .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(Artifacts.MODID))

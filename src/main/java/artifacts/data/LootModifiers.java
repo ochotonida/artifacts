@@ -6,7 +6,7 @@ import artifacts.common.loot.ConfigurableRandomChance;
 import artifacts.common.loot.RollLootTableModifier;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -30,8 +30,8 @@ public class LootModifiers extends GlobalLootModifierProvider {
 
     protected List<Builder> lootBuilders = new ArrayList<>();
 
-    public LootModifiers(DataGenerator generator) {
-        super(generator, Artifacts.MODID);
+    public LootModifiers(PackOutput packOutput) {
+        super(packOutput, Artifacts.MODID);
     }
 
     private void addLoot() {

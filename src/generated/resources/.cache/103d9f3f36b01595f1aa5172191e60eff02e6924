@@ -1,0 +1,4 @@
+// 1.19.3	2023-03-04T17:50:10.623635	Registries
+96988143fda71fcd968708a19c41ea988399bfcc data/artifacts/forge/biome_modifier/add_campsite.json
+83bca172098f2297d0b047bd1885c49ac9b2f4b1 data/artifacts/worldgen/configured_feature/campsite.json
+dde790b2d97ebae58db7cec58dcb767e42ea8a86 data/artifacts/worldgen/placed_feature/underground_campsite.json

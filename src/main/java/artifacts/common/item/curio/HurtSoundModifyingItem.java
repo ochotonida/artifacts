@@ -30,7 +30,8 @@ public abstract class HurtSoundModifyingItem extends CurioItem {
         @SuppressWarnings("unused")
         public void onPlaySoundAtEntity(PlayLevelSoundEvent.AtEntity event) {
             if (ModConfig.client.modifyHurtSounds.get()
-                    && isHurtSound(event.getSound())
+                    && event.getSound() != null
+                    && isHurtSound(event.getSound().get())
                     && event.getEntity() instanceof LivingEntity entity
                     && CuriosApi.getCuriosHelper().findFirstCurio(entity, HurtSoundModifyingItem.this).isPresent()) {
                 entity.getCommandSenderWorld().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), hurtSound, event.getSource(), 1, (entity.getRandom().nextFloat() - entity.getRandom().nextFloat()) * 0.2F + 1, false);

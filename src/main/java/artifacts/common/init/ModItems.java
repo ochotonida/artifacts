@@ -13,30 +13,39 @@ import artifacts.common.item.curio.head.NightVisionGogglesItem;
 import artifacts.common.item.curio.head.SnorkelItem;
 import artifacts.common.item.curio.head.SuperstitiousHatItem;
 import artifacts.common.item.curio.necklace.*;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registry.ITEM_REGISTRY, Artifacts.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, Artifacts.MODID);
 
-    public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(Artifacts.MODID) {
-        @Override
-        @OnlyIn(Dist.CLIENT)
-        public ItemStack makeIcon() {
-            return new ItemStack(BUNNY_HOPPERS.get());
-        }
-    };
+    public static CreativeModeTab CREATIVE_TAB;
 
-    public static final RegistryObject<Item> MIMIC_SPAWN_EGG = ITEMS.register("mimic_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.MIMIC, 0x805113, 0x212121, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+    public static void registerTab(CreativeModeTabEvent.Register event) {
+        CREATIVE_TAB = event.registerCreativeModeTab(Artifacts.id("main"), builder -> builder
+                .icon(() -> new ItemStack(ModItems.BUNNY_HOPPERS.get()))
+                .title(Component.translatable("itemGroup.%s".formatted(Artifacts.MODID)))
+                .displayItems((featureFlags, output, hasOp) -> ForgeRegistries.ITEMS.forEach(item -> {
+                    ResourceLocation key = ForgeRegistries.ITEMS.getKey(item);
+                    if (key != null && key.getNamespace().equals(Artifacts.MODID)) {
+                        output.accept(item);
+                    }
+                }))
+        );
+    }
+
+    public static final RegistryObject<Item> MIMIC_SPAWN_EGG = ITEMS.register("mimic_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.MIMIC, 0x805113, 0x212121, new Item.Properties()));
     public static final RegistryObject<Item> UMBRELLA = ITEMS.register("umbrella", UmbrellaItem::new);
     public static final RegistryObject<Item> EVERLASTING_BEEF = ITEMS.register("everlasting_beef", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(3).saturationMod(0.3F).build()));
     public static final RegistryObject<Item> ETERNAL_STEAK = ITEMS.register("eternal_steak", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(8).saturationMod(0.8F).build()));

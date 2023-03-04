@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "source": "entity",
+      "resource": "minecraft:entity/chest/normal"
+    },
+    {
+      "type": "single",
+      "source": "entity",
+      "resource": "artifacts:entity/mimic"
+    }
+  ]
+}

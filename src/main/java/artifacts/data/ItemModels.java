@@ -2,7 +2,7 @@ package artifacts.data;
 
 import artifacts.Artifacts;
 import artifacts.common.init.ModItems;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -11,8 +11,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ItemModels extends ItemModelProvider {
 
-    public ItemModels(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, Artifacts.MODID, existingFileHelper);
+    public ItemModels(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
+        super(packOutput, Artifacts.MODID, existingFileHelper);
     }
 
     @Override
