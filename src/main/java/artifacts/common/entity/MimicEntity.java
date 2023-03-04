@@ -4,7 +4,6 @@ import artifacts.Artifacts;
 import artifacts.common.init.ModSoundEvents;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -98,13 +97,12 @@ public class MimicEntity extends Mob implements Enemy {
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         ticksInAir = compound.getInt("ticksInAir");
-        if (compound.contains("facing", Tag.TAG_STRING)) {
-            facing = Direction.byName(compound.getString("facing"));
+        if (compound.contains("facing")) {
+            setFacing(Direction.byName(compound.getString("facing").toLowerCase()));
         } else {
-            facing = null;
+            setFacing(null);
         }
         setDormant(compound.getBoolean("isDormant"));
-        setFacing(facing);
     }
 
     @Override
