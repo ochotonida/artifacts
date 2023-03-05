@@ -6,11 +6,6 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class CommonConfig {
 
     public final ForgeConfigSpec.IntValue campsiteCount;
-    public final ForgeConfigSpec.IntValue campsiteRarity;
-    public final ForgeConfigSpec.IntValue campsiteMinY;
-    public final ForgeConfigSpec.IntValue campsiteMaxY;
-    public final ForgeConfigSpec.IntValue campsiteScanRange;
-    public final ForgeConfigSpec.IntValue campsiteMaxCeilingHeight;
     public final ForgeConfigSpec.DoubleValue campsiteMimicChance;
     public final ForgeConfigSpec.BooleanValue useModdedChests;
     public final ForgeConfigSpec.DoubleValue artifactRarity;
@@ -50,48 +45,6 @@ public class CommonConfig {
                 )
                 .translation(Artifacts.MODID + ".config.common.campsite.count")
                 .defineInRange("count", 4, 0, Integer.MAX_VALUE);
-        campsiteRarity = builder
-                .worldRestart()
-                .comment(
-                        "Rarity of campsites generating in the world",
-                        "You don't need this unless you want to make campsites rarer than 1 attempt per chunk",
-                        "Each attempt to generate a campsite will succeed with a chance of 1/rarity"
-                )
-                .translation(Artifacts.MODID + ".config.common.campsite.rarity")
-                .defineInRange("rarity", 1, 1, Integer.MAX_VALUE);
-        campsiteMinY = builder
-                .worldRestart()
-                .comment(
-                        "The minimum y-level campsites can spawn at"
-                )
-                .translation(Artifacts.MODID + ".config.common.campsite.min_y")
-                .defineInRange("min_y", -60, -2048, 2048);
-        campsiteMaxY = builder
-                .worldRestart()
-                .comment(
-                        "The maximum y-level campsites can spawn at"
-                )
-                .translation(Artifacts.MODID + ".config.common.campsite.max_y")
-                .defineInRange("max_y", 40, -2048, 2048);
-        campsiteScanRange = builder
-                .worldRestart()
-                .comment(
-                        "After choosing an initial position between min_y and max_y, a downwards scan will be performed to find a suitable non-air block to place the campsite on",
-                        "(This means campsites can spawn slightly below min_y)",
-                        "The scan range is the amount of blocks downwards to search for",
-                        "If no suitable location is found, no campsite will spawn"
-                )
-                .translation(Artifacts.MODID + ".config.common.campsite.scan_range")
-                .defineInRange("scan_range", 8, 1, 4096);
-        campsiteMaxCeilingHeight = builder
-                .worldRestart()
-                .comment(
-                        "The maximum amount of air blocks above a campsite",
-                        "To prevent too many campsites from spawning in large, open caves, campsites will not spawn if the cave ceiling in a candidate location is higher than this value",
-                        "Set this to 0 to allow campsites to be placed regardless of ceiling height"
-                )
-                .translation(Artifacts.MODID + ".config.common.campsite.max_ceiling_height")
-                .defineInRange("max_ceiling_height", 6, 0, 4096);
         builder.pop();
     }
 }

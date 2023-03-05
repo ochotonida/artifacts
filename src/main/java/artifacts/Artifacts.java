@@ -37,7 +37,7 @@ public class Artifacts {
         modBus.addListener(ModItems::registerTab);
         ModEntityTypes.ENTITY_TYPES.register(modBus);
         ModSoundEvents.SOUND_EVENTS.register(modBus);
-        ModFeatures.PLACEMENT_MODIFIERS.register(modBus);
+        ModPlacementModifierTypes.PLACEMENT_MODIFIERS.register(modBus);
         ModFeatures.FEATURES.register(modBus);
         ModLootModifiers.LOOT_MODIFIERS.register(modBus);
         ModLootConditions.LOOT_CONDITIONS.register(modBus);

@@ -2,6 +2,7 @@ package artifacts.data;
 
 import artifacts.common.init.ModConfiguredFeatures;
 import artifacts.common.init.ModPlacedFeatures;
+import artifacts.common.world.CampsiteCountPlacement;
 import artifacts.common.world.CeilingHeightFilter;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -28,7 +29,7 @@ public class PlacedFeatures {
         PlacedFeature undergroundCampsite = new PlacedFeature(
                 campsite,
                 List.of(
-                        CountPlacement.of(4), // TODO config
+                        CampsiteCountPlacement.campsiteCount(),
                         InSquarePlacement.spread(),
                         HeightRangePlacement.uniform(
                                 VerticalAnchor.absolute(-60),
@@ -41,7 +42,7 @@ public class PlacedFeatures {
                                 8
                         ),
                         RandomOffsetPlacement.vertical(ConstantInt.of(1)),
-                        CeilingHeightFilter.create(6),
+                        CeilingHeightFilter.maxCeilingHeight(6),
                         BiomeFilter.biome()
                 )
         );

@@ -1,6 +1,6 @@
 package artifacts.common.world;
 
-import artifacts.common.init.ModFeatures;
+import artifacts.common.init.ModPlacementModifierTypes;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.ExtraCodecs;
@@ -22,7 +22,7 @@ public class CeilingHeightFilter extends PlacementFilter {
         this.maxHeight = maxHeight;
     }
 
-    public static CeilingHeightFilter create(int maxHeight) {
+    public static CeilingHeightFilter maxCeilingHeight(int maxHeight) {
         return new CeilingHeightFilter(maxHeight);
     }
 
@@ -40,6 +40,6 @@ public class CeilingHeightFilter extends PlacementFilter {
     }
 
     public PlacementModifierType<?> type() {
-        return ModFeatures.CEILING_HEIGHT_FILTER.get();
+        return ModPlacementModifierTypes.CEILING_HEIGHT_FILTER.get();
     }
 }

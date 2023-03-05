@@ -2,8 +2,7 @@
   "feature": "artifacts:campsite",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 4
+      "type": "artifacts:campsite_count"
     },
     {
       "type": "minecraft:in_square"
