@@ -9,7 +9,7 @@ public class CrossNecklaceConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue invincibilityBonus;
 
     public CrossNecklaceConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.CROSS_NECKLACE.getId().getPath(), "Affects how many times the player can take damage with the cross necklace before breaking");
+        super(builder, ModItems.CROSS_NECKLACE.getId().getPath());
     }
 
     @Override

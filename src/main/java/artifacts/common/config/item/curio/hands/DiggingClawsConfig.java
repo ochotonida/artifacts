@@ -18,7 +18,7 @@ public class DiggingClawsConfig extends ItemConfig {
     public ForgeConfigSpec.ConfigValue<String> toolTierValue;
 
     public DiggingClawsConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.DIGGING_CLAWS.getId().getPath(), "Affects how many blocks the player can break using the digging claws before breaking");
+        super(builder, ModItems.DIGGING_CLAWS.getId().getPath());
     }
 
     @Override
@@ -37,7 +37,6 @@ public class DiggingClawsConfig extends ItemConfig {
                 .define("tool_tier", new ResourceLocation("stone").toString());
     }
 
-    @Override
     public void bake() {
         ResourceLocation location = new ResourceLocation(toolTierValue.get());
         toolTier = TierSortingRegistry.byName(location);

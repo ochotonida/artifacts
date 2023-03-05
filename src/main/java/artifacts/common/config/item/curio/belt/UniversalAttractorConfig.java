@@ -12,7 +12,7 @@ public class UniversalAttractorConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue cooldown;
 
     public UniversalAttractorConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.UNIVERSAL_ATTRACTOR.getId().getPath(), "Affects how many items can be picked up using the universal attractor");
+        super(builder, ModItems.UNIVERSAL_ATTRACTOR.getId().getPath());
     }
 
     @Override

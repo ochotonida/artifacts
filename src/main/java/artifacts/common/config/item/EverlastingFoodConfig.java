@@ -10,7 +10,7 @@ public class EverlastingFoodConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue useDuration;
 
     public EverlastingFoodConfig(ForgeConfigSpec.Builder builder, RegistryObject<?> item) {
-        super(builder, item, "Affects how many times this item can be eaten before breaking");
+        super(builder, item);
     }
 
     @Override

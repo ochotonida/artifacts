@@ -8,7 +8,7 @@ public class UmbrellaConfig extends ItemConfig {
     public ForgeConfigSpec.BooleanValue isShield;
 
     public UmbrellaConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.UMBRELLA.getId().getPath(), "Affects how many attacks can be blocked using the umbrella");
+        super(builder, ModItems.UMBRELLA.getId().getPath());
     }
 
     @Override

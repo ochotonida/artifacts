@@ -11,7 +11,7 @@ public class DrinkingHatConfig extends ItemConfig {
     public ForgeConfigSpec.DoubleValue eatingDurationMultiplier;
 
     public DrinkingHatConfig(ForgeConfigSpec.Builder builder, RegistryObject<?> item) {
-        super(builder, item, "Affects how many items the player can drink or eat using the drinking hat before breaking");
+        super(builder, item);
     }
 
     @Override

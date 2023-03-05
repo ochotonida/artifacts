@@ -9,7 +9,7 @@ public class GoldenHookConfig extends ItemConfig {
     public ForgeConfigSpec.DoubleValue experienceBonus;
 
     public GoldenHookConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.GOLDEN_HOOK.getId().getPath(), "Affects how many enemies can be killed using the golden hook before breaking");
+        super(builder, ModItems.GOLDEN_HOOK.getId().getPath());
     }
 
     @Override

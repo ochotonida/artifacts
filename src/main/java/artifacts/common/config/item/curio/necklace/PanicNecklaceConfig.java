@@ -10,7 +10,7 @@ public class PanicNecklaceConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue speedDuration;
 
     public PanicNecklaceConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.PANIC_NECKLACE.getId().getPath(), "Affects how many times the necklace's effect can be applied");
+        super(builder, ModItems.PANIC_NECKLACE.getId().getPath());
     }
 
     @Override

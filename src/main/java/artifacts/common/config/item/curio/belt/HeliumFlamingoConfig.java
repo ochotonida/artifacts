@@ -10,7 +10,7 @@ public class HeliumFlamingoConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue rechargeTime;
 
     public HeliumFlamingoConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.HELIUM_FLAMINGO.getId().getPath(), "Affects how many seconds the player can fly using the helium flamingo before breaking");
+        super(builder, ModItems.HELIUM_FLAMINGO.getId().getPath());
     }
 
     @Override

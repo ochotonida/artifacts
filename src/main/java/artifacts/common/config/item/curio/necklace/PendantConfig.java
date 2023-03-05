@@ -9,7 +9,7 @@ public abstract class PendantConfig extends ItemConfig {
     public ForgeConfigSpec.DoubleValue strikeChance;
 
     public PendantConfig(ForgeConfigSpec.Builder builder, String itemName) {
-        super(builder, itemName, "Affects how many times the pendant's effect can be applied before breaking");
+        super(builder, itemName);
     }
 
     @Override

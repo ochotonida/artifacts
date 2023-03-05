@@ -9,7 +9,7 @@ public class PocketPistonConfig extends ItemConfig {
     public ForgeConfigSpec.DoubleValue knockbackBonus;
 
     public PocketPistonConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.POCKET_PISTON.getId().getPath(), "Affects how many enemies can be hit using the pocket piston");
+        super(builder, ModItems.POCKET_PISTON.getId().getPath());
     }
 
     @Override

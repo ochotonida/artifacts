@@ -9,7 +9,7 @@ public class FireGauntletConfig extends ItemConfig {
     public ForgeConfigSpec.IntValue fireDuration;
 
     public FireGauntletConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.FIRE_GAUNTLET.getId().getPath(), "Affects how many enemies can be hit using the fire gauntlet before breaking");
+        super(builder, ModItems.FIRE_GAUNTLET.getId().getPath());
     }
 
     @Override

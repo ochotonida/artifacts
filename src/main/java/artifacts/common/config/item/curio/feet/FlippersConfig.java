@@ -9,7 +9,7 @@ public class FlippersConfig extends ItemConfig {
     public ForgeConfigSpec.DoubleValue swimSpeedBonus;
 
     public FlippersConfig(ForgeConfigSpec.Builder builder) {
-        super(builder, ModItems.FLIPPERS.getId().getPath(), "Affects how many seconds the player can swim using the flippers");
+        super(builder, ModItems.FLIPPERS.getId().getPath());
     }
 
     @Override
