@@ -68,8 +68,6 @@ public class CloudInABottleItem extends CurioItem {
         } else {
             player.playSound(SoundEvents.WOOL_FALL, 1, 0.9F + player.getRandom().nextFloat() * 0.2F);
         }
-
-        damageEquippedStacks(player);
     }
 
     private void onLivingFall(LivingFallEvent event, LivingEntity wearer) {

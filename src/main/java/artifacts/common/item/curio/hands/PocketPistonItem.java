@@ -20,7 +20,6 @@ public class PocketPistonItem extends CurioItem {
     private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         float knockbackBonus = (float) (double) ModConfig.server.pocketPiston.knockbackBonus.get();
         event.getEntity().knockback(knockbackBonus, Mth.sin((float) (wearer.getYRot() * (Math.PI / 180))), -Mth.cos((float) (wearer.getYRot() * (Math.PI / 180))));
-        damageEquippedStacks(wearer);
     }
 
     @Override

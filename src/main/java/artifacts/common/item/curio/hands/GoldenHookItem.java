@@ -19,7 +19,5 @@ public class GoldenHookItem extends CurioItem {
 
         int experienceBonus = (int) (event.getOriginalExperience() * ModConfig.server.goldenHook.experienceBonus.get());
         event.setDroppedExperience(event.getDroppedExperience() + experienceBonus);
-
-        damageEquippedStacks(wearer);
     }
 }

@@ -31,8 +31,6 @@ public class ObsidianSkullItem extends CurioItem {
 
             wearer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceDuration, 0, false, true));
             player.getCooldowns().addCooldown(this, cooldown);
-
-            damageEquippedStacks(wearer);
         }
     }
 

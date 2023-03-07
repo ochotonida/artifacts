@@ -18,13 +18,6 @@ public class CharmOfSinkingItem extends CurioItem {
         addListener(EventPriority.HIGH, PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
     }
 
-    @Override
-    public void curioTick(SlotContext slotContext, ItemStack stack) {
-        if (slotContext.entity().tickCount % 20 == 0 && slotContext.entity().isEyeInFluidType(ForgeMod.WATER_TYPE.get())) {
-            damageStack(slotContext, stack);
-        }
-    }
-
     public void onBreakSpeed(PlayerEvent.BreakSpeed event, LivingEntity wearer) {
         if (wearer.isEyeInFluidType(ForgeMod.WATER_TYPE.get()) && !EnchantmentHelper.hasAquaAffinity(wearer)) {
             event.setNewSpeed(event.getNewSpeed() * 5);

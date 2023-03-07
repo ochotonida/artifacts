@@ -8,10 +8,8 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.eventbus.api.Event;
-import top.theillusivec4.curios.api.SlotContext;
 
 public class AquaDashersItem extends CurioItem {
 
@@ -31,13 +29,6 @@ public class AquaDashersItem extends CurioItem {
                     }
                 }
             });
-        }
-    }
-
-    @Override
-    public void curioTick(SlotContext slotContext, ItemStack stack) {
-        if (slotContext.entity().tickCount % 20 == 0 && isSprintingOnFluid(slotContext.entity())) {
-            damageStack(slotContext, stack);
         }
     }
 

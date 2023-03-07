@@ -70,9 +70,6 @@ public class HeliumFlamingoItem extends CurioItem {
                         }
 
                         if (isEquippedBy(event.player) && !event.player.isEyeInFluidType(ForgeMod.WATER_TYPE.get())) {
-                            if (event.player.tickCount % 20 == 0) {
-                                damageEquippedStacks(event.player);
-                            }
                             if (!event.player.getAbilities().invulnerable && maxFlightTime > 0) {
                                 handler.setSwimTime(handler.getSwimTime() + 1);
                             }

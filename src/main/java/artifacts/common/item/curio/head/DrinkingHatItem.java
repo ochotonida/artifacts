@@ -52,9 +52,6 @@ public class DrinkingHatItem extends CurioItem {
         UseAnim action = event.getItem().getUseAnimation();
         double drinkingMultiplier = ModConfig.server.drinkingHats.get(this).drinkingDurationMultiplier.get();
         double eatingMultiplier = ModConfig.server.drinkingHats.get(this).eatingDurationMultiplier.get();
-        if (action == UseAnim.DRINK && drinkingMultiplier != 1 || action == UseAnim.EAT && eatingMultiplier != 1) {
-            damageEquippedStacks(wearer);
-        }
     }
 
     @Override

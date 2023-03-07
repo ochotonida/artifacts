@@ -15,13 +15,6 @@ import java.util.UUID;
 public class FlippersItem extends CurioItem {
 
     @Override
-    public void curioTick(SlotContext slotContext, ItemStack stack) {
-        if (slotContext.entity().tickCount % 20 == 0 && slotContext.entity().isSwimming()) {
-            damageStack(slotContext, stack);
-        }
-    }
-
-    @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
         if (!ModConfig.server.isCosmetic(this)) {

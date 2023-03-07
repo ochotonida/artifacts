@@ -3,12 +3,10 @@ package artifacts.common.item.curio.belt;
 import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -16,19 +14,9 @@ import java.util.UUID;
 
 public class CrystalHeartItem extends CurioItem {
 
-    public CrystalHeartItem() {
-        addListener(LivingDamageEvent.class, this::onLivingDamage);
-    }
-
     private static AttributeModifier getHealthBonus() {
         int healthBonus = ModConfig.server.crystalHeart.healthBonus.get();
         return new AttributeModifier(UUID.fromString("99fa0537-90b9-481a-bc76-4650987faba3"), "artifacts:crystal_heart_health_bonus", healthBonus, AttributeModifier.Operation.ADDITION);
-    }
-
-    private void onLivingDamage(LivingDamageEvent event, LivingEntity wearer) {
-        if (!event.isCanceled() && event.getAmount() >= 1) {
-            damageEquippedStacks(wearer, (int) event.getAmount());
-        }
     }
 
     @Override

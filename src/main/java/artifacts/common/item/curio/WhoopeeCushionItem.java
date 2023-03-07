@@ -23,7 +23,6 @@ public class WhoopeeCushionItem extends CurioItem {
                 double fartChance = ModConfig.server.whoopeeCushion.flatulence.get();
                 if (entity.getRandom().nextFloat() < fartChance) {
                     entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), ModSoundEvents.FART.get(), SoundSource.PLAYERS, 1, 0.9F + entity.getRandom().nextFloat() * 0.2F);
-                    damageStack(slotContext, stack);
                 }
             }
         }

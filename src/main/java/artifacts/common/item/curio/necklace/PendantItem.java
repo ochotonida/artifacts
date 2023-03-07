@@ -23,7 +23,6 @@ public abstract class PendantItem extends CurioItem {
                 && attacker != null
                 && wearer.getRandom().nextDouble() < ModConfig.server.pendants.get(this).strikeChance.get()) {
             applyEffect(wearer, attacker);
-            damageEquippedStacks(wearer);
         }
     }
 

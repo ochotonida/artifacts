@@ -33,7 +33,6 @@ public class AntidoteVesselItem extends CurioItem {
             });
 
             effects.forEach((effect, instance) -> {
-                damageStack(slotContext, stack);
                 slotContext.entity().removeEffectNoUpdate(effect);
                 if (maxEffectDuration > 0) {
                     slotContext.entity().addEffect(new MobEffectInstance(effect, maxEffectDuration, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));

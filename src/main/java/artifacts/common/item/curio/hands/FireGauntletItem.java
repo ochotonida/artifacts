@@ -19,7 +19,6 @@ public class FireGauntletItem extends CurioItem {
     private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource()) && !event.getEntity().fireImmune()) {
             event.getEntity().setSecondsOnFire(ModConfig.server.fireGauntlet.fireDuration.get());
-            damageEquippedStacks(wearer);
         }
     }
 

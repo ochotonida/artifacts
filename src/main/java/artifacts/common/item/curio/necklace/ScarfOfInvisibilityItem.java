@@ -14,8 +14,5 @@ public class ScarfOfInvisibilityItem extends CurioItem {
         if (!ModConfig.server.isCosmetic(this) && !slotContext.entity().level.isClientSide && slotContext.entity().tickCount % 15 == 0) {
             slotContext.entity().addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 39, 0, true, false));
         }
-        if (slotContext.entity().tickCount % 20 == 0) {
-            damageStack(slotContext, stack);
-        }
     }
 }

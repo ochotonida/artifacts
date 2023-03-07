@@ -10,7 +10,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -19,12 +18,7 @@ import java.util.List;
 public class UniversalAttractorItem extends CurioItem {
 
     public UniversalAttractorItem() {
-        addListener(PlayerEvent.ItemPickupEvent.class, this::onItemPickup);
         MinecraftForge.EVENT_BUS.addListener(this::onItemToss);
-    }
-
-    private void onItemPickup(PlayerEvent.ItemPickupEvent event, LivingEntity wearer) {
-        damageEquippedStacks(wearer);
     }
 
     public static int getCooldown(ItemStack stack) {

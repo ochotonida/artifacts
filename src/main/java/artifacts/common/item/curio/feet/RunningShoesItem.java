@@ -62,9 +62,6 @@ public class RunningShoesItem extends CurioItem {
                 if (!stepHeight.hasModifier(STEP_HEIGHT_BONUS) && entity instanceof Player) {
                     stepHeight.addTransientModifier(STEP_HEIGHT_BONUS);
                 }
-                if (entity.tickCount % 20 == 0) {
-                    damageStack(slotContext, stack);
-                }
             } else {
                 if (movementSpeed.hasModifier(speedBonus)) {
                     movementSpeed.removeModifier(speedBonus);

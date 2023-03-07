@@ -4,11 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.artifacts.refmap.json",
   "mixins": [
-    "DigDurabilityEnchantmentMixin",
     "item.aquadashers.EntityMixin",
-    "item.diggingclaws.ServerPlayerGameModeMixin",
     "item.umbrella.EntityMixin",
-    "item.villagerhat.AbstractVillagerMixin",
     "item.villagerhat.VillagerMixin"
   ],
   "client": [

@@ -7,7 +7,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.SlotContext;
@@ -17,17 +16,12 @@ public class BunnyHoppersItem extends HurtSoundModifyingItem {
     public BunnyHoppersItem() {
         super(SoundEvents.RABBIT_HURT);
         addListener(EventPriority.HIGH, LivingFallEvent.class, this::onLivingFall);
-        addListener(LivingEvent.LivingJumpEvent.class, this::onLivingJump);
     }
 
     private void onLivingFall(LivingFallEvent event, LivingEntity wearer) {
         if (ModConfig.server.bunnyHoppers.shouldCancelFallDamage.get()) {
             event.setDamageMultiplier(0);
         }
-    }
-
-    private void onLivingJump(LivingEvent.LivingJumpEvent event, LivingEntity wearer) {
-        damageEquippedStacks(wearer);
     }
 
 
