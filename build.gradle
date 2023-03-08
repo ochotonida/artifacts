@@ -73,10 +73,6 @@ repositories {
         url "https://maven.theillusivec4.top/"
     }
     maven {
-        name "jei"
-        url "https://maven.blamejared.com/"
-    }
-    maven {
         name "expandability"
         url "https://maven.florens.be/releases"
     }
@@ -95,10 +91,6 @@ dependencies {
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}")
-
-    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
     implementation fg.deobf("be.florens:expandability-forge:${expandability_version}")
     jarJar "be.florens:expandability-forge:${expandability_version_range}"
