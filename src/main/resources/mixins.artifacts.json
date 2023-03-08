@@ -4,6 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.artifacts.refmap.json",
   "mixins": [
+    "gamerule.BooleanValueInvoker",
+    "gamerule.IntegerValueInvoker",
     "item.aquadashers.EntityMixin",
     "item.umbrella.EntityMixin",
     "item.villagerhat.VillagerMixin"

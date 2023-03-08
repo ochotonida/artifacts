@@ -1,5 +1,6 @@
 package artifacts.common.item.curio.necklace;
 
+import artifacts.common.init.ModGameRules;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -12,6 +13,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 public class ShockPendantItem extends PendantItem {
 
     public ShockPendantItem() {
+        super(ModGameRules.SHOCK_PENDANT_STRIKE_CHANCE);
         addListener(LivingHurtEvent.class, this::onLivingHurt);
     }
 

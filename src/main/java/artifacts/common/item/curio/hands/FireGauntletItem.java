@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.hands;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.CurioItem;
 import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.sounds.SoundEvents;
@@ -18,7 +18,7 @@ public class FireGauntletItem extends CurioItem {
 
     private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource()) && !event.getEntity().fireImmune()) {
-            event.getEntity().setSecondsOnFire(ModConfig.server.fireGauntlet.fireDuration.get());
+            event.getEntity().setSecondsOnFire(Math.max(0, ModGameRules.FIRE_GAUNTLET_FIRE_DURATION.get()));
         }
     }
 

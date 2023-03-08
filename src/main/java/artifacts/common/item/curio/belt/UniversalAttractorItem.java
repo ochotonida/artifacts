@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.belt;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -30,9 +30,8 @@ public class UniversalAttractorItem extends CurioItem {
     }
 
     private void onItemToss(ItemTossEvent event) {
-        int cooldown = ModConfig.server.universalAttractor.cooldown.get();
-        if (cooldown > 0) {
-            CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, cooldown));
+        if (ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get()) {
+            CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, 200));
         }
     }
 
@@ -40,7 +39,7 @@ public class UniversalAttractorItem extends CurioItem {
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         LivingEntity entity = slotContext.entity();
-        if (ModConfig.server.isCosmetic(this) || entity.isSpectator() || !(entity instanceof Player)) {
+        if (!ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get() || entity.isSpectator() || !(entity instanceof Player)) {
             return;
         }
 
@@ -48,7 +47,7 @@ public class UniversalAttractorItem extends CurioItem {
         if (cooldown <= 0) {
             Vec3 playerPos = entity.position().add(0, 0.75, 0);
 
-            int range = ModConfig.server.universalAttractor.range.get();
+            int range = 5;
             List<ItemEntity> items = entity.level.getEntitiesOfClass(ItemEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
             int pulled = 0;
             for (ItemEntity item : items) {
@@ -61,7 +60,7 @@ public class UniversalAttractorItem extends CurioItem {
                     if (Math.sqrt(motion.x * motion.x + motion.y * motion.y + motion.z * motion.z) > 1) {
                         motion = motion.normalize();
                     }
-                    item.setDeltaMovement(motion.scale(ModConfig.server.universalAttractor.motionMultiplier.get()));
+                    item.setDeltaMovement(motion.scale(0.6));
                 }
             }
         } else {

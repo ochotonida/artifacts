@@ -33,7 +33,7 @@ public abstract class ArtifactItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
-        if (ModConfig.server != null && ModConfig.server.isCosmetic(this)) {
+        if (false) { // TODO
             tooltip.add(Component.translatable("artifacts.cosmetic.tooltip").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
         } else if (ModConfig.client.showTooltips.get()) {
             tooltip.add(Component.translatable(getDescriptionId() + ".tooltip").withStyle(ChatFormatting.GRAY));

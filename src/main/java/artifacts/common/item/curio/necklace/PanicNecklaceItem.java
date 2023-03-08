@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.necklace;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -18,9 +18,9 @@ public class PanicNecklaceItem extends CurioItem {
     }
 
     private void onLivingHurt(LivingHurtEvent event, LivingEntity wearer) {
-        if (!wearer.level.isClientSide && event.getAmount() >= 1) {
-            int duration = ModConfig.server.panicNecklace.speedDuration.get();
-            int level = ModConfig.server.panicNecklace.speedLevel.get() - 1;
+        if (!wearer.level.isClientSide() && event.getAmount() >= 1) {
+            int duration = Math.max(0, ModGameRules.PANIC_NECKLACE_SPEED_DURATION.get() * 20);
+            int level = Math.min(127, ModGameRules.PANIC_NECKLACE_SPEED_LEVEL.get() - 1);
 
             if (duration > 0 && level >= 0) {
                 wearer.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, duration, level, false, false));

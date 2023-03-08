@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.necklace;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -11,7 +11,7 @@ public class ScarfOfInvisibilityItem extends CurioItem {
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        if (!ModConfig.server.isCosmetic(this) && !slotContext.entity().level.isClientSide && slotContext.entity().tickCount % 15 == 0) {
+        if (ModGameRules.SCARF_OF_INVISIBILITY_ENABLED.get() && !slotContext.entity().level.isClientSide && slotContext.entity().tickCount % 15 == 0) {
             slotContext.entity().addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 39, 0, true, false));
         }
     }

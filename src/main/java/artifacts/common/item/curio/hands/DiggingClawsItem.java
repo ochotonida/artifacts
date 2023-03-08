@@ -1,12 +1,13 @@
 package artifacts.common.item.curio.hands;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.init.ModTags;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -22,15 +23,27 @@ public class DiggingClawsItem extends CurioItem {
     }
 
     private boolean canHarvest(BlockState state) {
-        Tier tier = ModConfig.server.diggingClaws.toolTier;
+        Tier tier = getToolTier();
         return tier != null
                 && TierSortingRegistry.isCorrectTierForDrops(tier, state)
                 && state.is(ModTags.MINEABLE_WITH_DIGGING_CLAWS);
     }
 
+    private Tier getToolTier() {
+        return switch (Math.max(0, ModGameRules.DIGGING_CLAWS_TOOL_TIER.get())) {
+            case 0 -> null;
+            case 1 -> Tiers.WOOD;
+            case 2 -> Tiers.STONE;
+            case 3 -> Tiers.IRON;
+            case 4 -> Tiers.DIAMOND;
+            default -> Tiers.NETHERITE;
+        };
+    }
+
     private void onBreakSpeed(PlayerEvent.BreakSpeed event, LivingEntity wearer) {
         if (canHarvest(event.getState())) {
-            event.setNewSpeed((float) (event.getNewSpeed() + ModConfig.server.diggingClaws.miningSpeedBonus.get()));
+            float speedBonus = Math.max(0, ModGameRules.DIGGING_CLAWS_DIG_SPEED_BONUS.get() / 10F);
+            event.setNewSpeed(event.getNewSpeed() + speedBonus);
         }
     }
 

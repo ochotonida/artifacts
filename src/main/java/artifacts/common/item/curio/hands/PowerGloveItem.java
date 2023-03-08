@@ -1,26 +1,20 @@
 package artifacts.common.item.curio.hands;
 
 import artifacts.Artifacts;
-import artifacts.common.config.ModConfig;
-import artifacts.common.item.curio.CurioItem;
-import com.google.common.collect.Multimap;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import artifacts.common.init.ModGameRules;
+import artifacts.common.item.curio.AttributeModifyingItem;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.ItemStack;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class PowerGloveItem extends CurioItem {
+public class PowerGloveItem extends AttributeModifyingItem {
+
+    public PowerGloveItem() {
+        super(Attributes.ATTACK_DAMAGE, UUID.fromString("126a0b73-ae15-466c-a75b-28bbd61d1374"), Artifacts.id("power_glove_attack_damage_bonus").toString());
+    }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
-        if (!ModConfig.server.isCosmetic(this)) {
-            int attackDamageBonus = ModConfig.server.powerGlove.attackDamageBonus.get();
-            result.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(uuid, Artifacts.id("power_glove_attack_damage").toString(), attackDamageBonus, AttributeModifier.Operation.ADDITION));
-        }
-        return result;
+    protected double getAmount() {
+        return Math.max(0, ModGameRules.POWER_GLOVE_ATTACK_DAMAGE_BONUS.get());
     }
 }

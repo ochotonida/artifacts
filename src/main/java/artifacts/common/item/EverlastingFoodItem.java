@@ -1,6 +1,9 @@
 package artifacts.common.item;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
+import artifacts.common.init.ModItems;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -19,19 +22,42 @@ public class EverlastingFoodItem extends ArtifactItem {
         if (isEdible()) {
             entity.eat(world, stack.copy());
             if (!world.isClientSide && entity instanceof Player player) {
-                int cooldown = ModConfig.server.everlastingFoods.get(this).cooldown.get();
-                player.getCooldowns().addCooldown(this, cooldown);
+                int cooldown;
+                if (this == ModItems.ETERNAL_STEAK.get()) {
+                    cooldown = ModGameRules.ETERNAL_STEAK_COOLDOWN.get() * 20;
+                } else {
+                    cooldown = ModGameRules.EVERLASTING_BEEF_COOLDOWN.get() * 20;
+                }
+                if (cooldown > 0) {
+                    player.getCooldowns().addCooldown(this, cooldown);
+                }
             }
         }
-
-        stack.hurtAndBreak(1, entity, damager -> {
-        });
 
         return stack;
     }
 
     @Override
-    public int getUseDuration(ItemStack stack) {
-        return ModConfig.server.isCosmetic(this) ? 72000 : ModConfig.server.everlastingFoods.get(this).useDuration.get();
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        if (this == ModItems.ETERNAL_STEAK.get()) {
+            if (!ModGameRules.ETERNAL_STEAK_ENABLED.get()) {
+                return InteractionResultHolder.pass(player.getItemInHand(hand));
+            }
+        } else if (!ModGameRules.EVERLASTING_BEEF_ENABLED.get()) {
+            return InteractionResultHolder.pass(player.getItemInHand(hand));
+        }
+        return super.use(level, player, hand);
+    }
+
+    @Override
+    public boolean isEdible() {
+        if (this == ModItems.ETERNAL_STEAK.get()) {
+            if (!ModGameRules.ETERNAL_STEAK_ENABLED.get()) {
+                return false;
+            }
+        } else if (!ModGameRules.EVERLASTING_BEEF_ENABLED.get()) {
+            return false;
+        }
+        return super.isEdible();
     }
 }

@@ -1,7 +1,7 @@
 package artifacts.common.item.curio.necklace;
 
 import artifacts.common.capability.SwimHandler;
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,18 +19,25 @@ public class CharmOfSinkingItem extends CurioItem {
     }
 
     public void onBreakSpeed(PlayerEvent.BreakSpeed event, LivingEntity wearer) {
-        if (wearer.isEyeInFluidType(ForgeMod.WATER_TYPE.get()) && !EnchantmentHelper.hasAquaAffinity(wearer)) {
+        if (ModGameRules.CHARM_OF_SINKING_ENABLED.get() && wearer.isEyeInFluidType(ForgeMod.WATER_TYPE.get()) && !EnchantmentHelper.hasAquaAffinity(wearer)) {
             event.setNewSpeed(event.getNewSpeed() * 5);
         }
     }
 
     @Override
-    public void onEquip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
-        if (!ModConfig.server.isCosmetic(this) && slotContext.entity() instanceof ServerPlayer player) {
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+        if (slotContext.entity() instanceof ServerPlayer player) {
             slotContext.entity().getCapability(SwimHandler.CAPABILITY).ifPresent(
                     handler -> {
-                        handler.setSinking(true);
-                        handler.syncSinking(player);
+                        if (ModGameRules.CHARM_OF_SINKING_ENABLED.get()) {
+                            if (!handler.isSinking()) {
+                                handler.setSinking(true);
+                                handler.syncSinking(player);
+                            }
+                        } else if (handler.isSinking()) {
+                            handler.setSinking(false);
+                            handler.syncSinking(player);
+                        }
                     }
             );
         }

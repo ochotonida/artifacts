@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.belt;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.init.ModItems;
 import artifacts.common.init.ModSoundEvents;
 import artifacts.common.item.curio.CurioItem;
@@ -42,10 +42,10 @@ public class CloudInABottleItem extends CurioItem {
             // noinspection ConstantConditions
             upwardsMotion += 0.1 * (player.getEffect(MobEffects.JUMP).getAmplifier() + 1);
         }
-        upwardsMotion *= player.isSprinting() ? ModConfig.server.cloudInABottle.sprintJumpHeightMultiplier.get() : 1;
+        upwardsMotion *= player.isSprinting() ? 1 + Math.max(0, ModGameRules.CLOUD_IN_A_BOTTLE_SPRINT_JUMP_VERTICAL_VELOCITY.get() / 100D) : 1;
 
         Vec3 motion = player.getDeltaMovement();
-        double motionMultiplier = player.isSprinting() ? ModConfig.server.cloudInABottle.sprintJumpDistanceMultiplier.get() : 0;
+        double motionMultiplier = player.isSprinting() ? Math.max(0, ModGameRules.CLOUD_IN_A_BOTTLE_SPRINT_JUMP_HORIZONTAL_VELOCITY.get() / 100D) : 0;
         float direction = (float) (player.getYRot() * Math.PI / 180);
         player.setDeltaMovement(player.getDeltaMovement().add(
                 -Mth.sin(direction) * motionMultiplier,
@@ -71,7 +71,9 @@ public class CloudInABottleItem extends CurioItem {
     }
 
     private void onLivingFall(LivingFallEvent event, LivingEntity wearer) {
-        event.setDistance(Math.max(0, event.getDistance() - 3));
+        if (ModGameRules.CLOUD_IN_A_BOTTLE_ENABLED.get()) {
+            event.setDistance(Math.max(0, event.getDistance() - 3));
+        }
     }
 
     @Override
@@ -94,7 +96,7 @@ public class CloudInABottleItem extends CurioItem {
             LocalPlayer player = Minecraft.getInstance().player;
 
             // noinspection ConstantConditions
-            if (event.phase == TickEvent.Phase.END && player != null && player.input != null) {
+            if (event.phase == TickEvent.Phase.END && player != null && player.input != null && ModGameRules.CLOUD_IN_A_BOTTLE_ENABLED.get()) {
                 if ((player.isOnGround() || player.onClimbable()) && !player.isInWater()) {
                     hasReleasedJumpKey = false;
                     canDoubleJump = true;

@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.hands;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.CurioItem;
 import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.sounds.SoundEvents;
@@ -18,7 +18,7 @@ public class PocketPistonItem extends CurioItem {
     }
 
     private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
-        float knockbackBonus = (float) (double) ModConfig.server.pocketPiston.knockbackBonus.get();
+        float knockbackBonus = Math.max(0, ModGameRules.POCKET_PISTON_KNOCKBACK_STRENGTH.get() / 10F);
         event.getEntity().knockback(knockbackBonus, Mth.sin((float) (wearer.getYRot() * (Math.PI / 180))), -Mth.cos((float) (wearer.getYRot() * (Math.PI / 180))));
     }
 

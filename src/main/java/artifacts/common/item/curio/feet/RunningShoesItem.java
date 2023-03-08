@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.feet;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -24,7 +24,7 @@ public class RunningShoesItem extends CurioItem {
     }
 
     private static AttributeModifier getSpeedBonus() {
-        double speedMultiplier = ModConfig.server.runningShoes.speedMultiplier.get();
+        double speedMultiplier = Math.max(0, ModGameRules.RUNNING_SHOES_SPEED_BONUS.get() / 100D);
         return new AttributeModifier(UUID.fromString("ac7ab816-2b08-46b6-879d-e5dea34ff305"), "artifacts:running_shoes_movement_speed", speedMultiplier, AttributeModifier.Operation.MULTIPLY_TOTAL);
     }
 
@@ -50,25 +50,23 @@ public class RunningShoesItem extends CurioItem {
     @Override
     @SuppressWarnings("ConstantConditions")
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        if (!ModConfig.server.isCosmetic(this)) {
-            LivingEntity entity = slotContext.entity();
-            AttributeInstance stepHeight = entity.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
-            AttributeInstance movementSpeed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
-            AttributeModifier speedBonus = getSpeedBonus();
-            if (entity.isSprinting()) {
-                if (!movementSpeed.hasModifier(speedBonus)) {
-                    movementSpeed.addTransientModifier(speedBonus);
-                }
-                if (!stepHeight.hasModifier(STEP_HEIGHT_BONUS) && entity instanceof Player) {
-                    stepHeight.addTransientModifier(STEP_HEIGHT_BONUS);
-                }
-            } else {
-                if (movementSpeed.hasModifier(speedBonus)) {
-                    movementSpeed.removeModifier(speedBonus);
-                }
-                if (stepHeight.hasModifier(STEP_HEIGHT_BONUS)) {
-                    stepHeight.removeModifier(STEP_HEIGHT_BONUS);
-                }
+        LivingEntity entity = slotContext.entity();
+        AttributeInstance stepHeight = entity.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
+        AttributeInstance movementSpeed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
+        AttributeModifier speedBonus = getSpeedBonus();
+        if (entity.isSprinting()) {
+            if (!movementSpeed.hasModifier(speedBonus)) {
+                movementSpeed.addTransientModifier(speedBonus);
+            }
+            if (ModGameRules.RUNNING_SHOES_DO_INCREASE_STEP_HEIGHT.get() && !stepHeight.hasModifier(STEP_HEIGHT_BONUS) && entity instanceof Player) {
+                stepHeight.addTransientModifier(STEP_HEIGHT_BONUS);
+            }
+        } else {
+            if (movementSpeed.hasModifier(speedBonus)) {
+                movementSpeed.removeModifier(speedBonus);
+            }
+            if (stepHeight.hasModifier(STEP_HEIGHT_BONUS)) {
+                stepHeight.removeModifier(STEP_HEIGHT_BONUS);
             }
         }
     }

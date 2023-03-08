@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.feet;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.HurtSoundModifyingItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,16 +19,15 @@ public class BunnyHoppersItem extends HurtSoundModifyingItem {
     }
 
     private void onLivingFall(LivingFallEvent event, LivingEntity wearer) {
-        if (ModConfig.server.bunnyHoppers.shouldCancelFallDamage.get()) {
+        if (ModGameRules.BUNNY_HOPPERS_DO_CANCEL_FALL_DAMAGE.get()) {
             event.setDamageMultiplier(0);
         }
     }
 
-
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        int jumpBoostLevel = ModConfig.server.bunnyHoppers.jumpBoostLevel.get() - 1;
-        if (!ModConfig.server.isCosmetic(this) && !slotContext.entity().level.isClientSide && slotContext.entity().tickCount % 15 == 0 && jumpBoostLevel >= 0) {
+        int jumpBoostLevel = Math.min(127, ModGameRules.BUNNY_HOPPERS_JUMP_BOOST_LEVEL.get() - 1);
+        if (jumpBoostLevel >= 0 && !slotContext.entity().level.isClientSide() && slotContext.entity().tickCount % 15 == 0) {
             slotContext.entity().addEffect(new MobEffectInstance(MobEffects.JUMP, 39, jumpBoostLevel, true, false));
         }
     }

@@ -9,6 +9,7 @@ import artifacts.client.render.entity.model.MimicModel;
 import artifacts.common.capability.SwimHandler;
 import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModEntityTypes;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.init.ModItems;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -76,7 +77,7 @@ public class ArtifactsClient {
         Minecraft minecraft = Minecraft.getInstance();
 
         if (
-                ModConfig.server.isCosmetic(ModItems.HELIUM_FLAMINGO.get())
+                ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() <= 0
                 || !(minecraft.getCameraEntity() instanceof LivingEntity player)
         ) {
             return;
@@ -93,9 +94,9 @@ public class ArtifactsClient {
                     if (swimTime == 0) {
                         return;
                     } else if (handler.getSwimTime() > 0) {
-                        maxProgressTime = ModConfig.server.heliumFlamingo.maxFlightTime.get();
+                        maxProgressTime = Math.max(1, ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() * 20);
                     } else {
-                        maxProgressTime = ModConfig.server.heliumFlamingo.rechargeTime.get();
+                        maxProgressTime = Math.max(1, ModGameRules.HELIUM_FLAMINGO_RECHARGE_DURATION.get() * 20);
                     }
 
                     float progress = 1 - swimTime / (float) maxProgressTime;

@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
@@ -46,10 +47,12 @@ public class Artifacts {
         modBus.addListener(this::enqueueIMC);
 
         modBus.addListener(ModEntityTypes::registerAttributes);
+
+        MinecraftForge.EVENT_BUS.addListener(ModGameRules::onPlayerJoinWorld);
+        MinecraftForge.EVENT_BUS.addListener(ModGameRules::onServerStarted);
     }
 
     public void commonSetup(final FMLCommonSetupEvent event) {
-        ModConfig.registerServer();
         event.enqueueWork(NetworkHandler::register);
     }
 

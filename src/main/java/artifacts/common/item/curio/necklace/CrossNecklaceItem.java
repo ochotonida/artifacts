@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.necklace;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
@@ -10,7 +10,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 public class CrossNecklaceItem extends CurioItem {
 
     private boolean canApplyBonus(ItemStack stack) {
-        return !ModConfig.server.isCosmetic(this) && stack.getOrCreateTag().getBoolean("CanApplyBonus");
+        return ModGameRules.CROSS_NECKLACE_BONUS_INVINCIBILITY_TICKS.get() > 0 && stack.getOrCreateTag().getBoolean("CanApplyBonus");
     }
 
     private static void setCanApplyBonus(ItemStack stack, boolean canApplyBonus) {
@@ -27,7 +27,7 @@ public class CrossNecklaceItem extends CurioItem {
         if (slotContext.entity().invulnerableTime <= 10) {
             setCanApplyBonus(stack, true);
         } else if (canApplyBonus(stack)) {
-            slotContext.entity().invulnerableTime += ModConfig.server.crossNecklace.invincibilityBonus.get();
+            slotContext.entity().invulnerableTime += Math.min(60 * 20, Math.max(0, ModGameRules.CROSS_NECKLACE_BONUS_INVINCIBILITY_TICKS.get()));
             setCanApplyBonus(stack, false);
         }
     }

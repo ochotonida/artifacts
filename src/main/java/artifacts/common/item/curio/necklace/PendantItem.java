@@ -1,6 +1,5 @@
 package artifacts.common.item.curio.necklace;
 
-import artifacts.common.config.ModConfig;
 import artifacts.common.item.curio.CurioItem;
 import artifacts.common.util.DamageSourceHelper;
 import net.minecraft.sounds.SoundEvents;
@@ -10,10 +9,15 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
+import java.util.function.Supplier;
+
 public abstract class PendantItem extends CurioItem {
 
-    public PendantItem() {
+    private final Supplier<Integer> strikeChance;
+
+    public PendantItem(Supplier<Integer> strikeChance) {
         addListener(LivingAttackEvent.class, this::onLivingAttack);
+        this.strikeChance = strikeChance;
     }
 
     private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
@@ -21,7 +25,7 @@ public abstract class PendantItem extends CurioItem {
         if (!wearer.level.isClientSide()
                 && event.getAmount() >= 1
                 && attacker != null
-                && wearer.getRandom().nextDouble() < ModConfig.server.pendants.get(this).strikeChance.get()) {
+                && wearer.getRandom().nextDouble() < strikeChance.get() / 100D) {
             applyEffect(wearer, attacker);
         }
     }

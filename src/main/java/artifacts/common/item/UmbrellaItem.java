@@ -2,7 +2,7 @@ package artifacts.common.item;
 
 import artifacts.Artifacts;
 import artifacts.common.capability.SwimHandler;
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -39,21 +39,19 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     private void onLivingUpdate(LivingEvent.LivingTickEvent event) {
-        if (!ModConfig.server.isCosmetic(this)) {
-            LivingEntity entity = event.getEntity();
-            AttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
-            if (gravity != null) {
-                boolean isInWater = entity.isInWater() && !entity.getCapability(SwimHandler.CAPABILITY).map(SwimHandler::isSinking).orElse(false);
-                if (!entity.isOnGround() && !isInWater && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(MobEffects.SLOW_FALLING)
-                        && (entity.getOffhandItem().getItem() == this
-                        || entity.getMainHandItem().getItem() == this) && !(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAnim.BLOCK)) {
-                    if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                        gravity.addTransientModifier(UMBRELLA_SLOW_FALLING);
-                    }
-                    entity.fallDistance = 0;
-                } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
-                    gravity.removeModifier(UMBRELLA_SLOW_FALLING);
+        LivingEntity entity = event.getEntity();
+        AttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
+        if (gravity != null) {
+            boolean isInWater = entity.isInWater() && !entity.getCapability(SwimHandler.CAPABILITY).map(SwimHandler::isSinking).orElse(false);
+            if (ModGameRules.UMBRELLA_IS_GLIDER.get() && !entity.isOnGround() && !isInWater && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(MobEffects.SLOW_FALLING)
+                    && (entity.getOffhandItem().getItem() == this
+                    || entity.getMainHandItem().getItem() == this) && !(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAnim.BLOCK)) {
+                if (!gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
+                    gravity.addTransientModifier(UMBRELLA_SLOW_FALLING);
                 }
+                entity.fallDistance = 0;
+            } else if (gravity.hasModifier(UMBRELLA_SLOW_FALLING)) {
+                gravity.removeModifier(UMBRELLA_SLOW_FALLING);
             }
         }
     }
@@ -61,8 +59,7 @@ public class UmbrellaItem extends ArtifactItem {
     @Override
     public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
         return ToolActions.DEFAULT_SHIELD_ACTIONS.contains(toolAction)
-                && !ModConfig.server.isCosmetic(this)
-                && ModConfig.server.umbrella.isShield.get();
+                && ModGameRules.UMBRELLA_IS_SHIELD.get();
     }
 
     public UseAnim getUseAnimation(ItemStack stack) {

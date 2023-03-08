@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.feet;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.init.ModTags;
 import artifacts.common.item.curio.HurtSoundModifyingItem;
 import net.minecraft.sounds.SoundEvents;
@@ -28,19 +28,19 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
     }
 
     private void onEntityJoinWorld(EntityJoinLevelEvent event) {
-        if (!ModConfig.server.isCosmetic(this) && event.getEntity() instanceof PathfinderMob creeper && creeper.getType().is(ModTags.CREEPERS)) {
-            creeper.goalSelector.addGoal(3, new AvoidEntityGoal<>(creeper, Player.class, (entity) -> entity != null && isEquippedBy(entity), 6, 1, 1.3, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test));
+        if (event.getEntity() instanceof PathfinderMob creeper && creeper.getType().is(ModTags.CREEPERS)) {
+            creeper.goalSelector.addGoal(3, new AvoidEntityGoal<>(creeper, Player.class, (entity) -> entity != null && ModGameRules.KITTY_SLIPPERS_ENABLED.get() && isEquippedBy(entity), 6, 1, 1.3, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test));
         }
     }
 
     private void onLivingChangeTargetEvent(LivingChangeTargetEvent event, LivingEntity wearer) {
-        if (event.getEntity() instanceof Mob creeper && creeper.getType().is(ModTags.CREEPERS)) {
+        if (ModGameRules.KITTY_SLIPPERS_ENABLED.get() && event.getEntity() instanceof Mob creeper && creeper.getType().is(ModTags.CREEPERS)) {
             event.setCanceled(true);
         }
     }
 
     private void onLivingUpdate(LivingEvent.LivingTickEvent event, LivingEntity wearer) {
-        if (event.getEntity().getType().is(ModTags.CREEPERS)) {
+        if (ModGameRules.KITTY_SLIPPERS_ENABLED.get() && event.getEntity().getType().is(ModTags.CREEPERS)) {
             event.getEntity().setLastHurtByMob(null);
         }
     }

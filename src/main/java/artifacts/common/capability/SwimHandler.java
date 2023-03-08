@@ -1,7 +1,7 @@
 package artifacts.common.capability;
 
 import artifacts.Artifacts;
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.network.NetworkHandler;
 import artifacts.common.network.SinkPacket;
 import artifacts.common.network.SwimPacket;
@@ -48,8 +48,8 @@ public class SwimHandler implements INBTSerializable<CompoundTag> {
 
     public void setSwimming(boolean shouldSwim) {
         if (this.shouldSwim && !shouldSwim) {
-            int rechargeTime = ModConfig.server.heliumFlamingo.rechargeTime.get();
-            int maxFlightTime = ModConfig.server.heliumFlamingo.maxFlightTime.get();
+            int rechargeTime = Math.max(1, ModGameRules.HELIUM_FLAMINGO_RECHARGE_DURATION.get() * 20);
+            int maxFlightTime = Math.max(1, ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() * 20);
 
             setSwimTime((int) (-rechargeTime * getSwimTime() / (float) maxFlightTime));
         }

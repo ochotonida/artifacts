@@ -1,6 +1,5 @@
 package artifacts.common.item.curio;
 
-import artifacts.common.config.ModConfig;
 import artifacts.common.item.ArtifactItem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +19,7 @@ import java.util.function.Function;
 public class CurioItem extends ArtifactItem implements ICurioItem {
 
     public boolean isEquippedBy(@Nullable LivingEntity entity) {
-        return !ModConfig.server.isCosmetic(this) && entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
+        return entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
     }
 
     protected <T extends Event, S extends LivingEntity> void addListener(EventPriority priority, Class<T> eventClass, BiConsumer<T, S> listener, Function<T, S> wearerSupplier) {

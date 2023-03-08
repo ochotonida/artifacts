@@ -1,26 +1,20 @@
 package artifacts.common.item.curio.feet;
 
 import artifacts.Artifacts;
-import artifacts.common.config.ModConfig;
-import artifacts.common.item.curio.CurioItem;
-import com.google.common.collect.Multimap;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.item.ItemStack;
+import artifacts.common.init.ModGameRules;
+import artifacts.common.item.curio.AttributeModifyingItem;
 import net.minecraftforge.common.ForgeMod;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class FlippersItem extends CurioItem {
+public class FlippersItem extends AttributeModifyingItem {
+
+    public FlippersItem() {
+        super(ForgeMod.SWIM_SPEED.get(), UUID.fromString("83f4e257-cd5c-4a36-ba4b-c052422ce7cf"), Artifacts.id("flippers_swim_speed_bonus").toString());
+    }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        Multimap<Attribute, AttributeModifier> result = super.getAttributeModifiers(slotContext, uuid, stack);
-        if (!ModConfig.server.isCosmetic(this)) {
-            double swimSpeedBonus = ModConfig.server.flippers.swimSpeedBonus.get();
-            result.put(ForgeMod.SWIM_SPEED.get(), new AttributeModifier(uuid, Artifacts.id("flipper_swim_speed").toString(), swimSpeedBonus, AttributeModifier.Operation.ADDITION));
-        }
-        return result;
+    protected double getAmount() {
+        return Math.max(0, ModGameRules.FLIPPERS_SWIM_SPEED_BONUS.get() / 100D);
     }
 }

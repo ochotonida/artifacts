@@ -1,6 +1,6 @@
 package artifacts.common.item.curio.belt;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -26,11 +26,15 @@ public class ObsidianSkullItem extends CurioItem {
                 && wearer instanceof Player player
                 && !player.getCooldowns().isOnCooldown(this)
         ) {
-            int cooldown = ModConfig.server.obsidianSkull.cooldown.get();
-            int fireResistanceDuration = ModConfig.server.obsidianSkull.fireResistanceDuration.get();
+            int cooldown = ModGameRules.OBSIDIAN_SKULL_FIRE_RESISTANCE_COOLDOWN.get() * 20;
+            int fireResistanceDuration = ModGameRules.OBSIDIAN_SKULL_FIRE_RESISTANCE_DURATION.get() * 20;
 
-            wearer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceDuration, 0, false, true));
-            player.getCooldowns().addCooldown(this, cooldown);
+            if (fireResistanceDuration > 0) {
+                wearer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceDuration, 0, false, true));
+                if (cooldown > 0) {
+                    player.getCooldowns().addCooldown(this, cooldown);
+                }
+            }
         }
     }
 

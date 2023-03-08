@@ -1,7 +1,6 @@
 package artifacts.client.jei;
 
 import artifacts.Artifacts;
-import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModItems;
 import artifacts.common.item.ArtifactItem;
 import mezz.jei.api.IModPlugin;
@@ -35,7 +34,7 @@ public class JEIPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         for (Item item : ForgeRegistries.ITEMS.getValues()) {
             if (item instanceof ArtifactItem) {
-                if (ModConfig.server.isCosmetic(item)) {
+                if (false) { // TODO
                     registration.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM_STACK, Component.translatable("artifacts.cosmetic.jei"));
                 } else if (item != ModItems.NOVELTY_DRINKING_HAT.get()) {
                     List<Component> textComponents = new ArrayList<>();

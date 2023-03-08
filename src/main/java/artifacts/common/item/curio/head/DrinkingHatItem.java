@@ -1,12 +1,14 @@
 package artifacts.common.item.curio.head;
 
 import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.init.ModItems;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
@@ -23,13 +25,12 @@ public class DrinkingHatItem extends CurioItem {
 
     public DrinkingHatItem() {
         addListener(LivingEntityUseItemEvent.Start.class, this::onItemUseStart);
-        addListener(LivingEntityUseItemEvent.Finish.class, this::onItemUseFinish);
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
-        if (ModConfig.client.showTooltips.get() && ModConfig.server != null && !ModConfig.server.isCosmetic(this)) {
+        if (ModConfig.client.showTooltips.get()) {
             if (this != ModItems.PLASTIC_DRINKING_HAT.get()) {
                 tooltip.add(Component.translatable(ModItems.PLASTIC_DRINKING_HAT.get().getDescriptionId() + ".tooltip").withStyle(ChatFormatting.GRAY));
             }
@@ -39,19 +40,24 @@ public class DrinkingHatItem extends CurioItem {
 
     private void onItemUseStart(LivingEntityUseItemEvent.Start event, LivingEntity wearer) {
         UseAnim action = event.getItem().getUseAnimation();
-        double drinkingMultiplier = ModConfig.server.drinkingHats.get(this).drinkingDurationMultiplier.get();
-        double eatingMultiplier = ModConfig.server.drinkingHats.get(this).eatingDurationMultiplier.get();
-        if (action == UseAnim.DRINK) {
-            event.setDuration((int) (event.getDuration() * drinkingMultiplier));
-        } else if (action == UseAnim.EAT) {
-            event.setDuration((int) (event.getDuration() * eatingMultiplier));
+        if (action != UseAnim.EAT && action != UseAnim.DRINK) {
+            return;
         }
+        event.setDuration((int) (event.getDuration() * getDurationMultiplier(this, action)));
     }
 
-    private void onItemUseFinish(LivingEntityUseItemEvent.Finish event, LivingEntity wearer) {
-        UseAnim action = event.getItem().getUseAnimation();
-        double drinkingMultiplier = ModConfig.server.drinkingHats.get(this).drinkingDurationMultiplier.get();
-        double eatingMultiplier = ModConfig.server.drinkingHats.get(this).eatingDurationMultiplier.get();
+    private double getDurationMultiplier(Item drinkingHat, UseAnim action) {
+        if (action == UseAnim.DRINK) {
+            if (drinkingHat == ModItems.PLASTIC_DRINKING_HAT.get()) {
+                return ModGameRules.PLASTIC_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER.get() / 100D;
+            }
+            return ModGameRules.NOVELTY_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER.get() / 100D;
+        } else {
+            if (drinkingHat == ModItems.PLASTIC_DRINKING_HAT.get()) {
+                return ModGameRules.PLASTIC_DRINKING_HAT_EATING_DURATION_MULTIPLIER.get() / 100D;
+            }
+            return ModGameRules.NOVELTY_DRINKING_HAT_EATING_DURATION_MULTIPLIER.get() / 100D;
+        }
     }
 
     @Override

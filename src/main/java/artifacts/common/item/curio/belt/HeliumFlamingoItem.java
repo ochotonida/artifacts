@@ -2,6 +2,7 @@ package artifacts.common.item.curio.belt;
 
 import artifacts.common.capability.SwimHandler;
 import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.init.ModSoundEvents;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.ChatFormatting;
@@ -40,7 +41,7 @@ public class HeliumFlamingoItem extends CurioItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
-        if (ModConfig.server != null && ModConfig.server.isCosmetic(this)) {
+        if (false) { // TODO
             super.appendHoverText(stack, world, tooltip, flags);
         } else if (ModConfig.client.showTooltips.get()) {
             tooltip.add(Component.translatable(getDescriptionId() + ".tooltip.0").withStyle(ChatFormatting.GRAY));
@@ -55,8 +56,8 @@ public class HeliumFlamingoItem extends CurioItem {
 
         event.player.getCapability(SwimHandler.CAPABILITY).ifPresent(
                 handler -> {
-                    int maxFlightTime = ModConfig.server.heliumFlamingo.maxFlightTime.get();
-                    int rechargeTime = ModConfig.server.heliumFlamingo.rechargeTime.get();
+                    int maxFlightTime = Math.max(1, ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() * 20);
+                    int rechargeTime = Math.max(1, ModGameRules.HELIUM_FLAMINGO_RECHARGE_DURATION.get() * 20);
 
                     if (handler.isSwimming()) {
                         if (!isEquippedBy(event.player)
@@ -70,7 +71,7 @@ public class HeliumFlamingoItem extends CurioItem {
                         }
 
                         if (isEquippedBy(event.player) && !event.player.isEyeInFluidType(ForgeMod.WATER_TYPE.get())) {
-                            if (!event.player.getAbilities().invulnerable && maxFlightTime > 0) {
+                            if (!event.player.getAbilities().invulnerable) {
                                 handler.setSwimTime(handler.getSwimTime() + 1);
                             }
                         }
@@ -94,7 +95,7 @@ public class HeliumFlamingoItem extends CurioItem {
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public void onInputUpdate(MovementInputUpdateEvent event) {
-            if (ModConfig.server.isCosmetic(HeliumFlamingoItem.this)) {
+            if (ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() * 20 <= 0) {
                 return;
             }
 

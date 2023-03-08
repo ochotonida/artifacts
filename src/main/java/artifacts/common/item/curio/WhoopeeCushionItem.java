@@ -1,6 +1,6 @@
 package artifacts.common.item.curio;
 
-import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.init.ModSoundEvents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
@@ -20,7 +20,7 @@ public class WhoopeeCushionItem extends CurioItem {
                 tag.putBoolean("HasFarted", false);
             } else if (!tag.getBoolean("HasFarted") && entity.isShiftKeyDown()) {
                 tag.putBoolean("HasFarted", true);
-                double fartChance = ModConfig.server.whoopeeCushion.flatulence.get();
+                double fartChance = ModGameRules.WHOOPEE_CUSHION_FART_CHANCE.get() / 100D;
                 if (entity.getRandom().nextFloat() < fartChance) {
                     entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), ModSoundEvents.FART.get(), SoundSource.PLAYERS, 1, 0.9F + entity.getRandom().nextFloat() * 0.2F);
                 }
