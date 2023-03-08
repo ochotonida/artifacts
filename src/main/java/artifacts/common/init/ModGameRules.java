@@ -59,7 +59,7 @@ public class ModGameRules {
             FIRE_GAUNTLET_FIRE_DURATION = integerValue(createName(ModItems.FIRE_GAUNTLET, "fireDuration"), 8),
             FLAME_PENDANT_FIRE_DURATION = integerValue(createName(ModItems.FLAME_PENDANT, "fireDuration"), 10),
             FLAME_PENDANT_STRIKE_CHANCE = integerValue(createName(ModItems.FLAME_PENDANT, "strikeChance"), 40),
-            FLIPPERS_SWIM_SPEED_BONUS = integerValue(createName(ModItems.FLIPPERS, "speedBonus"), 100),
+            FLIPPERS_SWIM_SPEED_BONUS = integerValue(createName(ModItems.FLIPPERS, "swimSpeedBonus"), 100),
             GOLDEN_HOOK_EXPERIENCE_BONUS = integerValue(createName(ModItems.GOLDEN_HOOK, "experienceBonus"), 75),
             HELIUM_FLAMINGO_FLIGHT_DURATION = integerValue(createName(ModItems.HELIUM_FLAMINGO, "flightDuration"), 8),
             HELIUM_FLAMINGO_RECHARGE_DURATION = integerValue(createName(ModItems.HELIUM_FLAMINGO, "rechargeDuration"), 15),
