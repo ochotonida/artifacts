@@ -1,21 +1,13 @@
 {
-  "_comment": "Eng: Updated by DrHesperus. For any further questions contact DrHesperus#2411 or <handbrake.mine@gmail.com> (Always Online)",
-  "_comment": "Ru: Обновлён DrHesperus. По любым вопросам обращайся к DrHesperus#2411 или <handbrake.mine@gmail.com> (Всегда онлайн)",
-
   "itemGroup.artifacts": "Artifacts",
   "curios.identifier.feet": "Ноги",
   "curios.modifiers.feet": "Находясь на ногах:",
-
   "artifacts.advancements.amateur_archaeologist.title": "Археолог-любитель",
   "artifacts.advancements.amateur_archaeologist.description": "Найди артефакт",
   "artifacts.advancements.chest_slayer.title": "Убийца сундуков",
   "artifacts.advancements.chest_slayer.description": "Убей подражателя",
-
   "entity.artifacts.mimic": "Подражатель",
-
   "artifacts.cosmetic.tooltip": "Косметика",
-  "artifacts.cosmetic.jei": "Этот предмет был отмечен как только косметика в конфигурации для сервера.",
-
   "item.artifacts.mimic_spawn_egg": "Яйцо призыва подражателя",
   "item.artifacts.snorkel": "Дыхательная трубка",
   "item.artifacts.plastic_drinking_hat": "Питьевая пластиковая шляпа",
@@ -92,27 +84,18 @@
   "item.artifacts.helium_flamingo.tooltip.1": "Нажми %s находясь в воздухе, чтобы начать плавание.",
   "item.artifacts.aqua_dashers.tooltip": "Позволяют владельцу ходить по жидкости во время бега.",
   "item.artifacts.charm_of_sinking.tooltip": "Владелец может свободно двигаться в воде.",
-
   "artifacts.subtitles.entity.mimic.close": "Подражатель приближается",
   "artifacts.subtitles.entity.mimic.open": "Подражатель подпрыгивает",
   "artifacts.subtitles.entity.mimic.hurt": "Подражатель получает урон",
   "artifacts.subtitles.entity.mimic.death": "Подражатель умирает",
   "artifacts.subtitles.item.whoopee_cushion.fart": "Пукание",
-
   "artifacts.config.common.artifact_rarity": "Редкость артефакта",
-  "artifacts.config.common.campsite.biome_blacklist": "Чёрный список палаточных лагерей в биомах.",
-  "artifacts.config.common.campsite.rarity": "Редкость палаточных лагерей",
-  "artifacts.config.common.campsite.min_y": "Минимальная высота палаточных лагерей",
-  "artifacts.config.common.campsite.max_y": "Максимальная высота палаточных лагерей",
   "artifacts.config.common.campsite.mimic_chance": "Вероятность появления подражателя в палаточных лагерях",
   "artifacts.config.common.campsite.use_modded_chests": "Использование сундуков из модов.",
-
   "artifacts.config.client.items.modify_hurt_sounds": "Изменить звуки причинения урона",
   "artifacts.config.client.items.show_first_person_gloves": "Показать перчатки от первого лица",
   "artifacts.config.client.items.show_tooltips": "Показывать подсказки предмета",
   "artifacts.config.client.mimic.use_modded_textures": "Использовать текстуры сундука из модов",
-
-  "artifacts.config.server.cosmetics": "Список предметов «Только косметика»",
   "artifacts.config.server.items.cooldown": "Время восстановления",
   "artifacts.config.server.antidote_vessel.max_effect_duration": "Максимальная длительность отрицательных эффектов",
   "artifacts.config.server.bunny_hoppers.should_cancel_fall_damage": "Следует отменить урон от падения",
