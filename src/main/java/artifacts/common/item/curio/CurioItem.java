@@ -16,10 +16,10 @@ import javax.annotation.Nullable;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-public class CurioItem extends ArtifactItem implements ICurioItem {
+public abstract class CurioItem extends ArtifactItem implements ICurioItem {
 
     public boolean isEquippedBy(@Nullable LivingEntity entity) {
-        return entity != null && CuriosApi.getCuriosHelper().findEquippedCurio(this, entity).isPresent();
+        return entity != null && CuriosApi.getCuriosHelper().findFirstCurio(entity, this).isPresent();
     }
 
     protected <T extends Event, S extends LivingEntity> void addListener(EventPriority priority, Class<T> eventClass, BiConsumer<T, S> listener, Function<T, S> wearerSupplier) {

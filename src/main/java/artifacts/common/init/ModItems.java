@@ -8,10 +8,7 @@ import artifacts.common.item.curio.WhoopeeCushionItem;
 import artifacts.common.item.curio.belt.*;
 import artifacts.common.item.curio.feet.*;
 import artifacts.common.item.curio.hands.*;
-import artifacts.common.item.curio.head.DrinkingHatItem;
-import artifacts.common.item.curio.head.NightVisionGogglesItem;
-import artifacts.common.item.curio.head.SnorkelItem;
-import artifacts.common.item.curio.head.SuperstitiousHatItem;
+import artifacts.common.item.curio.head.*;
 import artifacts.common.item.curio.necklace.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -47,15 +44,15 @@ public class ModItems {
 
     public static final RegistryObject<Item> MIMIC_SPAWN_EGG = ITEMS.register("mimic_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.MIMIC, 0x805113, 0x212121, new Item.Properties()));
     public static final RegistryObject<Item> UMBRELLA = ITEMS.register("umbrella", UmbrellaItem::new);
-    public static final RegistryObject<Item> EVERLASTING_BEEF = ITEMS.register("everlasting_beef", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(3).saturationMod(0.3F).build()));
-    public static final RegistryObject<Item> ETERNAL_STEAK = ITEMS.register("eternal_steak", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(8).saturationMod(0.8F).build()));
+    public static final RegistryObject<Item> EVERLASTING_BEEF = ITEMS.register("everlasting_beef", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(3).saturationMod(0.3F).build(), ModGameRules.EVERLASTING_BEEF_COOLDOWN, ModGameRules.EVERLASTING_BEEF_ENABLED));
+    public static final RegistryObject<Item> ETERNAL_STEAK = ITEMS.register("eternal_steak", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(8).saturationMod(0.8F).build(), ModGameRules.ETERNAL_STEAK_COOLDOWN, ModGameRules.ETERNAL_STEAK_ENABLED));
 
     // head
-    public static final RegistryObject<CurioItem> PLASTIC_DRINKING_HAT = ITEMS.register("plastic_drinking_hat", DrinkingHatItem::new);
-    public static final RegistryObject<CurioItem> NOVELTY_DRINKING_HAT = ITEMS.register("novelty_drinking_hat", DrinkingHatItem::new);
+    public static final RegistryObject<CurioItem> PLASTIC_DRINKING_HAT = ITEMS.register("plastic_drinking_hat", () -> new DrinkingHatItem(ModGameRules.PLASTIC_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER, ModGameRules.PLASTIC_DRINKING_HAT_EATING_DURATION_MULTIPLIER));
+    public static final RegistryObject<CurioItem> NOVELTY_DRINKING_HAT = ITEMS.register("novelty_drinking_hat", () -> new DrinkingHatItem(ModGameRules.NOVELTY_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER, ModGameRules.NOVELTY_DRINKING_HAT_EATING_DURATION_MULTIPLIER));
     public static final RegistryObject<CurioItem> SNORKEL = ITEMS.register("snorkel", SnorkelItem::new);
     public static final RegistryObject<CurioItem> NIGHT_VISION_GOGGLES = ITEMS.register("night_vision_goggles", NightVisionGogglesItem::new);
-    public static final RegistryObject<CurioItem> VILLAGER_HAT = ITEMS.register("villager_hat", CurioItem::new);
+    public static final RegistryObject<CurioItem> VILLAGER_HAT = ITEMS.register("villager_hat", VillagerHatItem::new);
     public static final RegistryObject<CurioItem> SUPERSTITIOUS_HAT = ITEMS.register("superstitious_hat", SuperstitiousHatItem::new);
 
     // necklace

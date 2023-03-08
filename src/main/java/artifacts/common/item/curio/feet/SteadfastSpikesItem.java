@@ -1,6 +1,7 @@
 package artifacts.common.item.curio.feet;
 
 import artifacts.Artifacts;
+import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.AttributeModifyingItem;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
@@ -14,6 +15,6 @@ public class SteadfastSpikesItem extends AttributeModifyingItem {
 
     @Override
     protected double getAmount() {
-        return 1;
+        return ModGameRules.STEADFAST_SPIKES_ENABLED.get() ? 1 : 0;
     }
 }

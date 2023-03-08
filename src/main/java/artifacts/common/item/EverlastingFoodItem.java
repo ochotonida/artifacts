@@ -1,7 +1,5 @@
 package artifacts.common.item;
 
-import artifacts.common.init.ModGameRules;
-import artifacts.common.init.ModItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,10 +9,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.function.Supplier;
+
 public class EverlastingFoodItem extends ArtifactItem {
 
-    public EverlastingFoodItem(FoodProperties food) {
+    private final Supplier<Integer> eatingCooldown;
+    private final Supplier<Boolean> isEnabled;
+
+    public EverlastingFoodItem(FoodProperties food, Supplier<Integer> eatingCooldown, Supplier<Boolean> isEnabled) {
         super(new Item.Properties().food(food));
+        this.eatingCooldown = eatingCooldown;
+        this.isEnabled = isEnabled;
     }
 
     @Override
@@ -22,12 +27,7 @@ public class EverlastingFoodItem extends ArtifactItem {
         if (isEdible()) {
             entity.eat(world, stack.copy());
             if (!world.isClientSide && entity instanceof Player player) {
-                int cooldown;
-                if (this == ModItems.ETERNAL_STEAK.get()) {
-                    cooldown = ModGameRules.ETERNAL_STEAK_COOLDOWN.get() * 20;
-                } else {
-                    cooldown = ModGameRules.EVERLASTING_BEEF_COOLDOWN.get() * 20;
-                }
+                int cooldown = eatingCooldown.get() * 20;
                 if (cooldown > 0) {
                     player.getCooldowns().addCooldown(this, cooldown);
                 }
@@ -39,11 +39,7 @@ public class EverlastingFoodItem extends ArtifactItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if (this == ModItems.ETERNAL_STEAK.get()) {
-            if (!ModGameRules.ETERNAL_STEAK_ENABLED.get()) {
-                return InteractionResultHolder.pass(player.getItemInHand(hand));
-            }
-        } else if (!ModGameRules.EVERLASTING_BEEF_ENABLED.get()) {
+        if (!isEnabled.get()) {
             return InteractionResultHolder.pass(player.getItemInHand(hand));
         }
         return super.use(level, player, hand);
@@ -51,11 +47,7 @@ public class EverlastingFoodItem extends ArtifactItem {
 
     @Override
     public boolean isEdible() {
-        if (this == ModItems.ETERNAL_STEAK.get()) {
-            if (!ModGameRules.ETERNAL_STEAK_ENABLED.get()) {
-                return false;
-            }
-        } else if (!ModGameRules.EVERLASTING_BEEF_ENABLED.get()) {
+        if (!isEnabled.get()) {
             return false;
         }
         return super.isEdible();

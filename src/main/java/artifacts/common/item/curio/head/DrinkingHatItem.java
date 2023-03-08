@@ -1,7 +1,6 @@
 package artifacts.common.item.curio.head;
 
 import artifacts.common.config.ModConfig;
-import artifacts.common.init.ModGameRules;
 import artifacts.common.init.ModItems;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.ChatFormatting;
@@ -20,11 +19,17 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class DrinkingHatItem extends CurioItem {
 
-    public DrinkingHatItem() {
+    private final Supplier<Integer> drinkingDurationMultiplier;
+    private final Supplier<Integer> eatingDurationMultiplier;
+
+    public DrinkingHatItem(Supplier<Integer> drinkingDurationMultiplier, Supplier<Integer> eatingDurationMultiplier) {
         addListener(LivingEntityUseItemEvent.Start.class, this::onItemUseStart);
+        this.drinkingDurationMultiplier = drinkingDurationMultiplier;
+        this.eatingDurationMultiplier = eatingDurationMultiplier;
     }
 
     @Override
@@ -43,20 +48,14 @@ public class DrinkingHatItem extends CurioItem {
         if (action != UseAnim.EAT && action != UseAnim.DRINK) {
             return;
         }
-        event.setDuration((int) (event.getDuration() * getDurationMultiplier(this, action)));
+        event.setDuration((int) (event.getDuration() * Math.max(0, getDurationMultiplier(this, action))));
     }
 
     private double getDurationMultiplier(Item drinkingHat, UseAnim action) {
         if (action == UseAnim.DRINK) {
-            if (drinkingHat == ModItems.PLASTIC_DRINKING_HAT.get()) {
-                return ModGameRules.PLASTIC_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER.get() / 100D;
-            }
-            return ModGameRules.NOVELTY_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER.get() / 100D;
+            return drinkingDurationMultiplier.get() / 100D;
         } else {
-            if (drinkingHat == ModItems.PLASTIC_DRINKING_HAT.get()) {
-                return ModGameRules.PLASTIC_DRINKING_HAT_EATING_DURATION_MULTIPLIER.get() / 100D;
-            }
-            return ModGameRules.NOVELTY_DRINKING_HAT_EATING_DURATION_MULTIPLIER.get() / 100D;
+            return eatingDurationMultiplier.get() / 100D;
         }
     }
 
