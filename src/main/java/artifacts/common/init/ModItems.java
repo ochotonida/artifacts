@@ -4,15 +4,19 @@ import artifacts.Artifacts;
 import artifacts.common.item.EverlastingFoodItem;
 import artifacts.common.item.UmbrellaItem;
 import artifacts.common.item.curio.CurioItem;
+import artifacts.common.item.curio.MobEffectItem;
 import artifacts.common.item.curio.WhoopeeCushionItem;
 import artifacts.common.item.curio.belt.*;
 import artifacts.common.item.curio.feet.*;
 import artifacts.common.item.curio.hands.*;
-import artifacts.common.item.curio.head.*;
+import artifacts.common.item.curio.head.DrinkingHatItem;
+import artifacts.common.item.curio.head.SuperstitiousHatItem;
+import artifacts.common.item.curio.head.VillagerHatItem;
 import artifacts.common.item.curio.necklace.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -50,14 +54,14 @@ public class ModItems {
     // head
     public static final RegistryObject<CurioItem> PLASTIC_DRINKING_HAT = ITEMS.register("plastic_drinking_hat", () -> new DrinkingHatItem(ModGameRules.PLASTIC_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER, ModGameRules.PLASTIC_DRINKING_HAT_EATING_DURATION_MULTIPLIER, false));
     public static final RegistryObject<CurioItem> NOVELTY_DRINKING_HAT = ITEMS.register("novelty_drinking_hat", () -> new DrinkingHatItem(ModGameRules.NOVELTY_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER, ModGameRules.NOVELTY_DRINKING_HAT_EATING_DURATION_MULTIPLIER, true));
-    public static final RegistryObject<CurioItem> SNORKEL = ITEMS.register("snorkel", SnorkelItem::new);
-    public static final RegistryObject<CurioItem> NIGHT_VISION_GOGGLES = ITEMS.register("night_vision_goggles", NightVisionGogglesItem::new);
+    public static final RegistryObject<CurioItem> SNORKEL = ITEMS.register("snorkel", () -> new MobEffectItem(MobEffects.WATER_BREATHING, ModGameRules.SNORKEL_ENABLED));
+    public static final RegistryObject<CurioItem> NIGHT_VISION_GOGGLES = ITEMS.register("night_vision_goggles", () -> new MobEffectItem(MobEffects.NIGHT_VISION, 320, ModGameRules.NIGHT_VISION_GOGGLES_ENABLED));
     public static final RegistryObject<CurioItem> VILLAGER_HAT = ITEMS.register("villager_hat", VillagerHatItem::new);
     public static final RegistryObject<CurioItem> SUPERSTITIOUS_HAT = ITEMS.register("superstitious_hat", SuperstitiousHatItem::new);
 
     // necklace
     public static final RegistryObject<CurioItem> LUCKY_SCARF = ITEMS.register("lucky_scarf", LuckyScarfItem::new);
-    public static final RegistryObject<CurioItem> SCARF_OF_INVISIBILITY = ITEMS.register("scarf_of_invisibility", ScarfOfInvisibilityItem::new);
+    public static final RegistryObject<CurioItem> SCARF_OF_INVISIBILITY = ITEMS.register("scarf_of_invisibility", () -> new MobEffectItem(MobEffects.INVISIBILITY, ModGameRules.SCARF_OF_INVISIBILITY_ENABLED));
     public static final RegistryObject<CurioItem> CROSS_NECKLACE = ITEMS.register("cross_necklace", CrossNecklaceItem::new);
     public static final RegistryObject<CurioItem> PANIC_NECKLACE = ITEMS.register("panic_necklace", PanicNecklaceItem::new);
     public static final RegistryObject<CurioItem> SHOCK_PENDANT = ITEMS.register("shock_pendant", ShockPendantItem::new);
