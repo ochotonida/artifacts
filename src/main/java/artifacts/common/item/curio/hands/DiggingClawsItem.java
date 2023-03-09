@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
@@ -66,7 +67,7 @@ public class DiggingClawsItem extends CurioItem {
     }
 
     private void onBreakSpeed(PlayerEvent.BreakSpeed event, LivingEntity wearer) {
-        if (canHarvest(event.getState())) {
+        if (!(wearer instanceof Player player) || player.hasCorrectToolForDrops(event.getState())) {
             float speedBonus = Math.max(0, ModGameRules.DIGGING_CLAWS_DIG_SPEED_BONUS.get() / 10F);
             event.setNewSpeed(event.getNewSpeed() + speedBonus);
         }

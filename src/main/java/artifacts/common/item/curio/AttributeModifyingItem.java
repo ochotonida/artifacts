@@ -1,13 +1,27 @@
 package artifacts.common.item.curio;
 
+import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.function.Consumer;
+
+import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
 
 public abstract class AttributeModifyingItem extends CurioItem {
 
@@ -72,6 +86,32 @@ public abstract class AttributeModifyingItem extends CurioItem {
                 attributeInstance.removeModifier(modifierId);
                 onAttributeUpdated(slotContext.entity());
             }
+        }
+    }
+
+    @Override
+    protected void addTooltip(Consumer<MutableComponent> tooltip) {
+        super.addTooltip(tooltip);
+
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltipList, TooltipFlag flags) {
+        super.appendHoverText(stack, world, tooltipList, flags);
+        Set<String> curioTags = CuriosApi.getCuriosHelper().getCurioTags(stack.getItem());
+        List<String> slots = new ArrayList<>(curioTags);
+        if (ModConfig.client.showTooltips.get() && ModGameRules.isInitialized() && !isCosmetic() && !slots.isEmpty()) {
+            tooltipList.add(Component.empty());
+
+            String identifier = slots.contains("curio") ? "curio" : slots.get(0);
+            tooltipList.add(Component.translatable("curios.modifiers." + identifier));
+
+            tooltipList.add((Component.translatable(
+                    "attribute.modifier.plus." +
+                            AttributeModifier.Operation.ADDITION.toValue(),
+                    ATTRIBUTE_MODIFIER_FORMAT.format(getAmount()),
+                    Component.translatable(attribute.getDescriptionId())))
+                    .withStyle(ChatFormatting.BLUE));
         }
     }
 }

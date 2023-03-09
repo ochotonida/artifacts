@@ -30,7 +30,7 @@ public class DrinkingHatItem extends CurioItem {
 
     @Override
     protected boolean isCosmetic() {
-        return drinkingDurationMultiplier.get() == 100 && eatingDurationMultiplier.get() == 100;
+        return drinkingDurationMultiplier.get() >= 100 && eatingDurationMultiplier.get() >= 100;
     }
 
     @Override
@@ -45,10 +45,10 @@ public class DrinkingHatItem extends CurioItem {
 
     @Override
     protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
-        if (drinkingDurationMultiplier.get() != 100) {
+        if (drinkingDurationMultiplier.get() < 100) {
             tooltip.accept(tooltipLine("drinking"));
         }
-        if (eatingDurationMultiplier.get() != 100) {
+        if (eatingDurationMultiplier.get() < 100) {
             tooltip.accept(tooltipLine("eating"));
         }
     }
@@ -63,7 +63,7 @@ public class DrinkingHatItem extends CurioItem {
         if (action != UseAnim.EAT && action != UseAnim.DRINK) {
             return;
         }
-        int newDuration = (int) (event.getDuration() * Math.max(0, getDurationMultiplier(this, action)));
+        int newDuration = (int) (event.getDuration() * Math.min(1, Math.max(0, getDurationMultiplier(this, action))));
         event.setDuration(Math.max(1, newDuration));
     }
 

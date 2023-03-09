@@ -2,6 +2,7 @@ package artifacts.common.item.curio.necklace;
 
 import artifacts.common.init.ModGameRules;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -9,6 +10,8 @@ import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
+import java.util.function.Consumer;
 
 public class ShockPendantItem extends PendantItem {
 
@@ -19,12 +22,23 @@ public class ShockPendantItem extends PendantItem {
 
     @Override
     protected boolean isCosmetic() {
-        return ModGameRules.SHOCK_PENDANT_STRIKE_CHANCE.get() <= 0;
+        return ModGameRules.SHOCK_PENDANT_STRIKE_CHANCE.get() <= 0 && !ModGameRules.SHOCK_PENDANT_DO_CANCEL_LIGHTNING_DAMAGE.get();
+    }
+
+    @Override
+    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+        if (ModGameRules.SHOCK_PENDANT_STRIKE_CHANCE.get() > 0) {
+            tooltip.accept(tooltipLine("strike_chance"));
+        }
+        if (ModGameRules.SHOCK_PENDANT_DO_CANCEL_LIGHTNING_DAMAGE.get()) {
+            tooltip.accept(tooltipLine("lightning_damage"));
+        }
     }
 
     private void onLivingHurt(LivingHurtEvent event, LivingEntity wearer) {
-        if (!event.getEntity().level.isClientSide
-                && event.getAmount() >= 1
+        if (!event.getEntity().level.isClientSide()
+                && ModGameRules.SHOCK_PENDANT_DO_CANCEL_LIGHTNING_DAMAGE.get()
+                && event.getAmount() > 0
                 && event.getSource() == DamageSource.LIGHTNING_BOLT) {
             event.setCanceled(true);
         }

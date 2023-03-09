@@ -19,9 +19,9 @@ public class LuckyScarfItem extends CurioItem {
     @Override
     protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
         if (ModGameRules.LUCKY_SCARF_FORTUNE_BONUS.get() == 1) {
-            tooltip.accept(tooltipLine("single"));
+            tooltip.accept(tooltipLine("single_level"));
         } else {
-            tooltip.accept(tooltipLine("multiple", ModGameRules.LUCKY_SCARF_FORTUNE_BONUS.get()));
+            tooltip.accept(tooltipLine("multiple_levels", ModGameRules.LUCKY_SCARF_FORTUNE_BONUS.get()));
         }
     }
 

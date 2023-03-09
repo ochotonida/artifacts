@@ -10,7 +10,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
-import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
@@ -26,17 +25,9 @@ public class UniversalAttractorItem extends CurioItem {
         return !ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get();
     }
 
-    public static int getCooldown(ItemStack stack) {
-        return stack.getOrCreateTag().getInt("Cooldown");
-    }
-
-    public static void setCooldown(ItemStack stack, int cooldown) {
-        stack.getOrCreateTag().putInt("Cooldown", cooldown);
-    }
-
     private void onItemToss(ItemTossEvent event) {
         if (ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get()) {
-            CuriosApi.getCuriosHelper().findCurios(event.getPlayer(), this).forEach((slotResult) -> setCooldown(slotResult.stack(), 200));
+            event.getPlayer().getCooldowns().addCooldown(this, 100);
         }
     }
 
@@ -48,8 +39,7 @@ public class UniversalAttractorItem extends CurioItem {
             return;
         }
 
-        int cooldown = getCooldown(stack);
-        if (cooldown <= 0) {
+        if (slotContext.entity() instanceof Player player && !player.getCooldowns().isOnCooldown(this)) {
             Vec3 playerPos = entity.position().add(0, 0.75, 0);
 
             int range = 5;
@@ -68,8 +58,6 @@ public class UniversalAttractorItem extends CurioItem {
                     item.setDeltaMovement(motion.scale(0.6));
                 }
             }
-        } else {
-            setCooldown(stack, cooldown - 1);
         }
     }
 }

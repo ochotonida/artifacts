@@ -32,7 +32,7 @@ public class AntidoteVesselItem extends CurioItem {
         }
         Map<MobEffect, MobEffectInstance> effects = new HashMap<>();
 
-        int maxEffectDuration = Math.max(0, ModGameRules.ANTIDOTE_VESSEL_MAX_EFFECT_DURATION.get());
+        int maxEffectDuration = Math.max(0, ModGameRules.ANTIDOTE_VESSEL_MAX_EFFECT_DURATION.get() * 20);
         slotContext.entity().getActiveEffectsMap().forEach((effect, instance) -> {
             if (ModTags.isInTag(effect, ModTags.ANTIDOTE_VESSEL_CANCELLABLE) && instance.getDuration() > maxEffectDuration) {
                 effects.put(effect, instance);

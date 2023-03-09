@@ -32,7 +32,7 @@ public class RunningShoesItem extends CurioItem {
 
     @Override
     protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
-        if (ModGameRules.RUNNING_SHOES_SPEED_BONUS.get() >= 0) {
+        if (ModGameRules.RUNNING_SHOES_SPEED_BONUS.get() > 0) {
             tooltip.accept(tooltipLine("movement_speed"));
         }
         if (ModGameRules.RUNNING_SHOES_DO_INCREASE_STEP_HEIGHT.get()) {

@@ -13,7 +13,7 @@ public class WhoopeeCushionItem extends CurioItem {
 
     @Override
     protected boolean isCosmetic() {
-        return ModGameRules.WHOOPEE_CUSHION_FART_CHANCE.get() <= 0;
+        return false;
     }
 
     @Override

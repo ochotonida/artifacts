@@ -20,9 +20,9 @@ public class SuperstitiousHatItem extends CurioItem {
     @Override
     protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
         if (ModGameRules.SUPERSTITIOUS_HAT_LOOTING_LEVEL_BONUS.get() == 1) {
-            tooltip.accept(tooltipLine("single"));
+            tooltip.accept(tooltipLine("single_level"));
         } else {
-            tooltip.accept(tooltipLine("multiple", ModGameRules.SUPERSTITIOUS_HAT_LOOTING_LEVEL_BONUS.get()));
+            tooltip.accept(tooltipLine("multiple_levels", ModGameRules.SUPERSTITIOUS_HAT_LOOTING_LEVEL_BONUS.get()));
         }
     }
 

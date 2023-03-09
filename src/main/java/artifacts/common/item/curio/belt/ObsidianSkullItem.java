@@ -35,7 +35,7 @@ public class ObsidianSkullItem extends CurioItem {
             int fireResistanceDuration = ModGameRules.OBSIDIAN_SKULL_FIRE_RESISTANCE_DURATION.get() * 20;
 
             if (fireResistanceDuration > 0) {
-                wearer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceDuration, 0, false, true));
+                wearer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceDuration, 0, false, false, true));
                 if (cooldown > 0) {
                     player.getCooldowns().addCooldown(this, cooldown);
                 }
