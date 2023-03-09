@@ -1,8 +1,11 @@
 package artifacts.common.item;
 
+import artifacts.Artifacts;
 import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModGameRules;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -12,8 +15,10 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public abstract class ArtifactItem extends Item {
 
@@ -32,11 +37,33 @@ public abstract class ArtifactItem extends Item {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
-        if (false) { // TODO
-            tooltip.add(Component.translatable("artifacts.cosmetic.tooltip").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
-        } else if (ModConfig.client.showTooltips.get()) {
-            tooltip.add(Component.translatable(getDescriptionId() + ".tooltip").withStyle(ChatFormatting.GRAY));
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltipList, TooltipFlag flags) {
+        if (ModConfig.client.showTooltips.get() && ModGameRules.isInitialized()) {
+            Consumer<MutableComponent> tooltip = component -> tooltipList.add(component.withStyle(ChatFormatting.GRAY));
+            addTooltip(tooltip);
         }
     }
+
+    protected void addTooltip(Consumer<MutableComponent> tooltip) {
+        if (isCosmetic()) {
+            tooltip.accept(Component.translatable("%s.tooltip.cosmetic".formatted(Artifacts.MODID)).withStyle(ChatFormatting.ITALIC));
+        } else {
+            addEffectsTooltip(tooltip);
+        }
+    }
+
+    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+        tooltip.accept(Component.translatable("%s.tooltip.%s".formatted(Artifacts.MODID, getTooltipItemName())));
+    }
+
+    protected MutableComponent tooltipLine(String lineId, Object... args) {
+        return Component.translatable("%s.tooltip.%s.%s".formatted(Artifacts.MODID, getTooltipItemName(), lineId), args);
+    }
+
+    protected String getTooltipItemName() {
+        // noinspection ConstantConditions
+        return ForgeRegistries.ITEMS.getKey(this).getPath();
+    }
+
+    protected abstract boolean isCosmetic();
 }

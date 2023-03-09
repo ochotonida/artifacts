@@ -23,6 +23,16 @@ public class EverlastingFoodItem extends ArtifactItem {
     }
 
     @Override
+    protected boolean isCosmetic() {
+        return !isEnabled.get();
+    }
+
+    @Override
+    protected String getTooltipItemName() {
+        return "everlasting_food";
+    }
+
+    @Override
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entity) {
         if (isEdible()) {
             entity.eat(world, stack.copy());
@@ -53,3 +63,5 @@ public class EverlastingFoodItem extends ArtifactItem {
         return super.isEdible();
     }
 }
+
+

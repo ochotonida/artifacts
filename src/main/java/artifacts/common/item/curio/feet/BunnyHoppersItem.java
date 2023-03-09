@@ -2,6 +2,7 @@ package artifacts.common.item.curio.feet;
 
 import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.HurtSoundModifyingItem;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -11,11 +12,28 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.SlotContext;
 
+import java.util.function.Consumer;
+
 public class BunnyHoppersItem extends HurtSoundModifyingItem {
 
     public BunnyHoppersItem() {
         super(SoundEvents.RABBIT_HURT);
         addListener(EventPriority.HIGH, LivingFallEvent.class, this::onLivingFall);
+    }
+
+    @Override
+    protected boolean isCosmetic() {
+        return !ModGameRules.BUNNY_HOPPERS_DO_CANCEL_FALL_DAMAGE.get() && ModGameRules.BUNNY_HOPPERS_JUMP_BOOST_LEVEL.get() <= 0;
+    }
+
+    @Override
+    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+        if (ModGameRules.BUNNY_HOPPERS_JUMP_BOOST_LEVEL.get() >= 0) {
+            tooltip.accept(tooltipLine("jump_height"));
+        }
+        if (ModGameRules.BUNNY_HOPPERS_DO_CANCEL_FALL_DAMAGE.get()) {
+            tooltip.accept(tooltipLine("fall_damage"));
+        }
     }
 
     private void onLivingFall(LivingFallEvent event, LivingEntity wearer) {

@@ -18,6 +18,11 @@ public class CharmOfSinkingItem extends CurioItem {
         addListener(EventPriority.HIGH, PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return !ModGameRules.CHARM_OF_SINKING_ENABLED.get();
+    }
+
     public void onBreakSpeed(PlayerEvent.BreakSpeed event, LivingEntity wearer) {
         if (ModGameRules.CHARM_OF_SINKING_ENABLED.get() && wearer.isEyeInFluidType(ForgeMod.WATER_TYPE.get()) && !EnchantmentHelper.hasAquaAffinity(wearer)) {
             event.setNewSpeed(event.getNewSpeed() * 5);

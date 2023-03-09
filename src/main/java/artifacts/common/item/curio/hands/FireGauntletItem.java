@@ -16,6 +16,11 @@ public class FireGauntletItem extends CurioItem {
         addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.FIRE_GAUNTLET_FIRE_DURATION.get() <= 0;
+    }
+
     private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource()) && !event.getEntity().fireImmune()) {
             event.getEntity().setSecondsOnFire(Math.max(0, ModGameRules.FIRE_GAUNTLET_FIRE_DURATION.get()));

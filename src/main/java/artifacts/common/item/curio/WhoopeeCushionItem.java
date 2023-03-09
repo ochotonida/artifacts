@@ -12,6 +12,11 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 public class WhoopeeCushionItem extends CurioItem {
 
     @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.WHOOPEE_CUSHION_FART_CHANCE.get() <= 0;
+    }
+
+    @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         LivingEntity entity = slotContext.entity();
         if (!entity.level.isClientSide()) {

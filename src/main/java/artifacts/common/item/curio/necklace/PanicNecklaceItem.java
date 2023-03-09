@@ -17,6 +17,11 @@ public class PanicNecklaceItem extends CurioItem {
         addListener(LivingHurtEvent.class, this::onLivingHurt);
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.PANIC_NECKLACE_SPEED_DURATION.get() <= 0 || ModGameRules.PANIC_NECKLACE_SPEED_LEVEL.get() <= 0;
+    }
+
     private void onLivingHurt(LivingHurtEvent event, LivingEntity wearer) {
         if (!wearer.level.isClientSide() && event.getAmount() >= 1) {
             int duration = Math.max(0, ModGameRules.PANIC_NECKLACE_SPEED_DURATION.get() * 20);

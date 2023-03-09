@@ -21,6 +21,11 @@ public abstract class AttributeModifyingItem extends CurioItem {
         this.modifierName = modifierName;
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return getAmount() <= 0;
+    }
+
     private AttributeModifier createModifier() {
         return new AttributeModifier(modifierId, modifierName, getAmount(), AttributeModifier.Operation.ADDITION);
     }

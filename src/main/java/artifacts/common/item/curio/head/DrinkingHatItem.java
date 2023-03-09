@@ -1,46 +1,61 @@
 package artifacts.common.item.curio.head;
 
-import artifacts.common.config.ModConfig;
-import artifacts.common.init.ModItems;
 import artifacts.common.item.curio.CurioItem;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
-import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class DrinkingHatItem extends CurioItem {
 
     private final Supplier<Integer> drinkingDurationMultiplier;
     private final Supplier<Integer> eatingDurationMultiplier;
+    private final boolean hasSpecialTooltip;
 
-    public DrinkingHatItem(Supplier<Integer> drinkingDurationMultiplier, Supplier<Integer> eatingDurationMultiplier) {
+    public DrinkingHatItem(Supplier<Integer> drinkingDurationMultiplier, Supplier<Integer> eatingDurationMultiplier, boolean hasSpecialTooltip) {
         addListener(LivingEntityUseItemEvent.Start.class, this::onItemUseStart);
         this.drinkingDurationMultiplier = drinkingDurationMultiplier;
         this.eatingDurationMultiplier = eatingDurationMultiplier;
+        this.hasSpecialTooltip = hasSpecialTooltip;
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
-        if (ModConfig.client.showTooltips.get()) {
-            if (this != ModItems.PLASTIC_DRINKING_HAT.get()) {
-                tooltip.add(Component.translatable(ModItems.PLASTIC_DRINKING_HAT.get().getDescriptionId() + ".tooltip").withStyle(ChatFormatting.GRAY));
-            }
+    protected boolean isCosmetic() {
+        return drinkingDurationMultiplier.get() == 100 && eatingDurationMultiplier.get() == 100;
+    }
+
+    @Override
+    protected void addTooltip(Consumer<MutableComponent> tooltip) {
+        if (hasSpecialTooltip) {
+            tooltip.accept(tooltipLine("special").withStyle(ChatFormatting.ITALIC));
+            addEffectsTooltip(tooltip);
+        } else {
+            super.addTooltip(tooltip);
         }
-        super.appendHoverText(stack, world, tooltip, flags);
+    }
+
+    @Override
+    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+        if (drinkingDurationMultiplier.get() != 100) {
+            tooltip.accept(tooltipLine("drinking"));
+        }
+        if (eatingDurationMultiplier.get() != 100) {
+            tooltip.accept(tooltipLine("eating"));
+        }
+    }
+
+    @Override
+    protected String getTooltipItemName() {
+        return "drinking_hat";
     }
 
     private void onItemUseStart(LivingEntityUseItemEvent.Start event, LivingEntity wearer) {
@@ -48,7 +63,8 @@ public class DrinkingHatItem extends CurioItem {
         if (action != UseAnim.EAT && action != UseAnim.DRINK) {
             return;
         }
-        event.setDuration((int) (event.getDuration() * Math.max(0, getDurationMultiplier(this, action))));
+        int newDuration = (int) (event.getDuration() * Math.max(0, getDurationMultiplier(this, action)));
+        event.setDuration(Math.max(1, newDuration));
     }
 
     private double getDurationMultiplier(Item drinkingHat, UseAnim action) {

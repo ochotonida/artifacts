@@ -18,6 +18,11 @@ public class ObsidianSkullItem extends CurioItem {
         addListener(LivingHurtEvent.class, this::onLivingHurt);
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.OBSIDIAN_SKULL_FIRE_RESISTANCE_DURATION.get() <= 0;
+    }
+
     private void onLivingHurt(LivingHurtEvent event, LivingEntity wearer) {
         if (
                 !wearer.level.isClientSide

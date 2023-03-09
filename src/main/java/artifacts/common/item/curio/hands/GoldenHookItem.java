@@ -12,6 +12,11 @@ public class GoldenHookItem extends CurioItem {
         addListener(LivingExperienceDropEvent.class, this::onLivingExperienceDrop, LivingExperienceDropEvent::getAttackingPlayer);
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.GOLDEN_HOOK_EXPERIENCE_BONUS.get() <= 0;
+    }
+
     private void onLivingExperienceDrop(LivingExperienceDropEvent event, LivingEntity wearer) {
         if (event.getEntity() instanceof Player) {
             return; // players shouldn't drop extra XP

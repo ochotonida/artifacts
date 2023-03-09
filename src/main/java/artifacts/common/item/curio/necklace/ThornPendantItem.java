@@ -11,6 +11,11 @@ public class ThornPendantItem extends PendantItem {
     }
 
     @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.THORN_PENDANT_MAX_DAMAGE.get() <= 0 || ModGameRules.THORN_PENDANT_STRIKE_CHANCE.get() <= 0;
+    }
+
+    @Override
     protected void applyEffect(LivingEntity target, LivingEntity attacker) {
         if (attacker.attackable()) {
             int minDamage = Math.max(0, ModGameRules.THORN_PENDANT_MIN_DAMAGE.get());

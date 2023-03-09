@@ -13,6 +13,11 @@ public class VampiricGloveItem extends CurioItem {
         addListener(EventPriority.LOWEST, LivingDamageEvent.class, this::onLivingDamage, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.VAMPIRIC_GLOVE_ABSORPTION_RATIO.get() <= 0 || ModGameRules.VAMPIRIC_GLOVE_MAX_HEALING_PER_HIT.get() <= 0;
+    }
+
     private void onLivingDamage(LivingDamageEvent event, LivingEntity wearer) {
         if (DamageSourceHelper.isMeleeAttack(event.getSource())) {
             int maxHealthAbsorbed = ModGameRules.VAMPIRIC_GLOVE_MAX_HEALING_PER_HIT.get();

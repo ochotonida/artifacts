@@ -27,6 +27,11 @@ public class KittySlippersItem extends HurtSoundModifyingItem {
         addListener(LivingEvent.LivingTickEvent.class, this::onLivingUpdate, event -> event.getEntity().getLastHurtByMob());
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return !ModGameRules.KITTY_SLIPPERS_ENABLED.get();
+    }
+
     private void onEntityJoinWorld(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof PathfinderMob creeper && creeper.getType().is(ModTags.CREEPERS)) {
             creeper.goalSelector.addGoal(3, new AvoidEntityGoal<>(creeper, Player.class, (entity) -> entity != null && ModGameRules.KITTY_SLIPPERS_ENABLED.get() && isEquippedBy(entity), 6, 1, 1.3, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test));

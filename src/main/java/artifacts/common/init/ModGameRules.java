@@ -85,6 +85,10 @@ public class ModGameRules {
             VILLAGER_HAT_REPUTATION_BONUS = integerValue(createName(ModItems.VILLAGER_HAT, "reputationBonus"), 100),
             WHOOPEE_CUSHION_FART_CHANCE = integerValue(createName(ModItems.WHOOPEE_CUSHION, "fartChance"), 12);
 
+    public static boolean isInitialized() {
+        return ANTIDOTE_VESSEL_ENABLED.get() != null;
+    }
+
     private static String createName(RegistryObject<? extends Item> item, String name) {
         return String.format("%s.%s.%s",
                 Artifacts.MODID,

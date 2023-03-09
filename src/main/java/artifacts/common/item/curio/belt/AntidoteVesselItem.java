@@ -21,6 +21,11 @@ public class AntidoteVesselItem extends CurioItem {
     }
 
     @Override
+    protected boolean isCosmetic() {
+        return !ModGameRules.ANTIDOTE_VESSEL_ENABLED.get();
+    }
+
+    @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         if (!ModGameRules.ANTIDOTE_VESSEL_ENABLED.get()) {
             return;

@@ -34,6 +34,11 @@ public class CloudInABottleItem extends CurioItem {
         addListener(EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return !ModGameRules.CLOUD_IN_A_BOTTLE_ENABLED.get();
+    }
+
     public void jump(Player player) {
         player.fallDistance = 0;
 

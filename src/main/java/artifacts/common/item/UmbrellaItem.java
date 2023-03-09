@@ -4,6 +4,7 @@ import artifacts.Artifacts;
 import artifacts.common.capability.SwimHandler;
 import artifacts.common.init.ModGameRules;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffects;
@@ -28,6 +29,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class UmbrellaItem extends ArtifactItem {
 
@@ -36,6 +38,21 @@ public class UmbrellaItem extends ArtifactItem {
     public UmbrellaItem() {
         DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
         MinecraftForge.EVENT_BUS.addListener(this::onLivingUpdate);
+    }
+
+    @Override
+    protected boolean isCosmetic() {
+        return !ModGameRules.UMBRELLA_IS_GLIDER.get() && !ModGameRules.UMBRELLA_IS_SHIELD.get();
+    }
+
+    @Override
+    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+        if (ModGameRules.UMBRELLA_IS_GLIDER.get()) {
+            tooltip.accept(tooltipLine("glider"));
+        }
+        if (ModGameRules.UMBRELLA_IS_SHIELD.get()) {
+            tooltip.accept(tooltipLine("shield"));
+        }
     }
 
     private void onLivingUpdate(LivingEvent.LivingTickEvent event) {

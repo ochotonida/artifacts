@@ -17,6 +17,11 @@ public class ShockPendantItem extends PendantItem {
         addListener(LivingHurtEvent.class, this::onLivingHurt);
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.SHOCK_PENDANT_STRIKE_CHANCE.get() <= 0;
+    }
+
     private void onLivingHurt(LivingHurtEvent event, LivingEntity wearer) {
         if (!event.getEntity().level.isClientSide
                 && event.getAmount() >= 1

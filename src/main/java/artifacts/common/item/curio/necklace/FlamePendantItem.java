@@ -10,6 +10,11 @@ public class FlamePendantItem extends PendantItem {
     }
 
     @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.FLAME_PENDANT_FIRE_DURATION.get() <= 0 || ModGameRules.FLAME_PENDANT_STRIKE_CHANCE.get() <= 0;
+    }
+
+    @Override
     protected void applyEffect(LivingEntity target, LivingEntity attacker) {
         if (!attacker.fireImmune() && attacker.attackable()) {
             attacker.setSecondsOnFire(ModGameRules.FLAME_PENDANT_FIRE_DURATION.get());

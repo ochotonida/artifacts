@@ -13,6 +13,11 @@ public class CrossNecklaceItem extends CurioItem {
         return ModGameRules.CROSS_NECKLACE_BONUS_INVINCIBILITY_TICKS.get() > 0 && stack.getOrCreateTag().getBoolean("CanApplyBonus");
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.CROSS_NECKLACE_BONUS_INVINCIBILITY_TICKS.get() <= 0;
+    }
+
     private static void setCanApplyBonus(ItemStack stack, boolean canApplyBonus) {
         stack.getOrCreateTag().putBoolean("CanApplyBonus", canApplyBonus);
     }

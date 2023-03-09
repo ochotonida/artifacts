@@ -1,17 +1,13 @@
 package artifacts.common.item.curio.belt;
 
 import artifacts.common.capability.SwimHandler;
-import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModGameRules;
 import artifacts.common.init.ModSoundEvents;
 import artifacts.common.item.curio.CurioItem;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
@@ -23,7 +19,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import javax.annotation.Nonnull;
-import java.util.List;
+import java.util.function.Consumer;
 
 public class HeliumFlamingoItem extends CurioItem {
 
@@ -32,21 +28,21 @@ public class HeliumFlamingoItem extends CurioItem {
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() <= 0;
+    }
+
+    @Override
+    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+        tooltip.accept(tooltipLine("swimming"));
+        tooltip.accept(tooltipLine("keybinding", Minecraft.getInstance().options.keySprint.getTranslatedKeyMessage()));
+    }
+
     @Nonnull
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
         return new ICurio.SoundInfo(ModSoundEvents.POP.get(), 1, 0.7F);
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
-        if (false) { // TODO
-            super.appendHoverText(stack, world, tooltip, flags);
-        } else if (ModConfig.client.showTooltips.get()) {
-            tooltip.add(Component.translatable(getDescriptionId() + ".tooltip.0").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.translatable(getDescriptionId() + ".tooltip.1", Minecraft.getInstance().options.keySprint.getTranslatedKeyMessage()).withStyle(ChatFormatting.GRAY));
-        }
     }
 
     private void onPlayerTick(TickEvent.PlayerTickEvent event) {

@@ -2,6 +2,7 @@ package artifacts.common.item.curio.feet;
 
 import artifacts.common.init.ModGameRules;
 import artifacts.common.item.curio.CurioItem;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -14,6 +15,7 @@ import net.minecraftforge.event.TickEvent;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class RunningShoesItem extends CurioItem {
 
@@ -21,6 +23,21 @@ public class RunningShoesItem extends CurioItem {
 
     public RunningShoesItem() {
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
+    }
+
+    @Override
+    protected boolean isCosmetic() {
+        return !ModGameRules.RUNNING_SHOES_DO_INCREASE_STEP_HEIGHT.get() && ModGameRules.RUNNING_SHOES_SPEED_BONUS.get() <= 0;
+    }
+
+    @Override
+    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+        if (ModGameRules.RUNNING_SHOES_SPEED_BONUS.get() >= 0) {
+            tooltip.accept(tooltipLine("movement_speed"));
+        }
+        if (ModGameRules.RUNNING_SHOES_DO_INCREASE_STEP_HEIGHT.get()) {
+            tooltip.accept(tooltipLine("step_height"));
+        }
     }
 
     private static AttributeModifier getSpeedBonus() {

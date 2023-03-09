@@ -17,6 +17,11 @@ public class PocketPistonItem extends CurioItem {
         addListener(LivingAttackEvent.class, this::onLivingAttack, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return ModGameRules.POCKET_PISTON_KNOCKBACK_STRENGTH.get() <= 0;
+    }
+
     private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         float knockbackBonus = Math.max(0, ModGameRules.POCKET_PISTON_KNOCKBACK_STRENGTH.get() / 10F);
         event.getEntity().knockback(knockbackBonus, Mth.sin((float) (wearer.getYRot() * (Math.PI / 180))), -Mth.cos((float) (wearer.getYRot() * (Math.PI / 180))));

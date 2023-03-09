@@ -18,6 +18,11 @@ public class AquaDashersItem extends CurioItem {
         addListener(LivingFluidCollisionEvent.class, this::onFluidCollision);
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return !ModGameRules.AQUA_DASHERS_ENABLED.get();
+    }
+
     private void onFluidCollision(LivingFluidCollisionEvent event, LivingEntity wearer) {
         if (ModGameRules.AQUA_DASHERS_ENABLED.get() && wearer.isSprinting() && wearer.fallDistance < 6 && !wearer.isUsingItem() && !wearer.isCrouching()) {
             wearer.getCapability(SwimHandler.CAPABILITY).ifPresent(handler -> {

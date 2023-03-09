@@ -21,6 +21,11 @@ public class UniversalAttractorItem extends CurioItem {
         MinecraftForge.EVENT_BUS.addListener(this::onItemToss);
     }
 
+    @Override
+    protected boolean isCosmetic() {
+        return !ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get();
+    }
+
     public static int getCooldown(ItemStack stack) {
         return stack.getOrCreateTag().getInt("Cooldown");
     }
@@ -31,7 +36,7 @@ public class UniversalAttractorItem extends CurioItem {
 
     private void onItemToss(ItemTossEvent event) {
         if (ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get()) {
-            CuriosApi.getCuriosHelper().findEquippedCurio(this, event.getPlayer()).ifPresent((triple) -> setCooldown(triple.right, 200));
+            CuriosApi.getCuriosHelper().findCurios(event.getPlayer(), this).forEach((slotResult) -> setCooldown(slotResult.stack(), 200));
         }
     }
 
