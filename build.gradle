@@ -77,11 +77,14 @@ repositories {
         url "https://maven.florens.be/releases"
     }
     maven {
-        name "mixin-extras"
-        url "https://jitpack.io"
+        url "https://maven.shedaniel.me/"
     }
     maven {
-        url "https://maven.shedaniel.me/"
+        name "mixin-extras"
+        url = "https://jitpack.io"
+        content {
+            includeGroupByRegex "com.github.*"
+        }
     }
 }
 
