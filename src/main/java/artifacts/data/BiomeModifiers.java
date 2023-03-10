@@ -1,7 +1,6 @@
 package artifacts.data;
 
 import artifacts.Artifacts;
-import artifacts.common.init.ModPlacedFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -22,7 +21,7 @@ public class BiomeModifiers {
 
         BiomeModifier modifier = new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.UNDERGROUND_CAMPSITE)),
+                HolderSet.direct(placedFeatures.getOrThrow(PlacedFeatures.UNDERGROUND_CAMPSITE)),
                 GenerationStep.Decoration.UNDERGROUND_STRUCTURES
         );
 

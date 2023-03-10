@@ -1,7 +1,6 @@
 package artifacts.data;
 
-import artifacts.common.init.ModConfiguredFeatures;
-import artifacts.common.init.ModPlacedFeatures;
+import artifacts.Artifacts;
 import artifacts.common.world.CampsiteCountPlacement;
 import artifacts.common.world.CeilingHeightFilter;
 import net.minecraft.core.Direction;
@@ -9,6 +8,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -20,11 +20,13 @@ import java.util.List;
 
 public class PlacedFeatures {
 
+    public static final ResourceKey<PlacedFeature> UNDERGROUND_CAMPSITE = Artifacts.key(Registries.PLACED_FEATURE, "underground_campsite");
+
     public static void create(BootstapContext<PlacedFeature> context) {
         HolderGetter<Feature<?>> featureRegistry = context.lookup(Registries.FEATURE);
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        Holder<ConfiguredFeature<?, ?>> campsite =configuredFeatures.getOrThrow(ModConfiguredFeatures.CAMPSITE);
+        Holder<ConfiguredFeature<?, ?>> campsite =configuredFeatures.getOrThrow(ConfiguredFeatures.CAMPSITE);
 
         PlacedFeature undergroundCampsite = new PlacedFeature(
                 campsite,
@@ -47,6 +49,6 @@ public class PlacedFeatures {
                 )
         );
 
-        context.register(ModPlacedFeatures.UNDERGROUND_CAMPSITE, undergroundCampsite);
+        context.register(UNDERGROUND_CAMPSITE, undergroundCampsite);
     }
 }
