@@ -41,7 +41,7 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
 
         public static final class Campsite implements ConfigData {
 
-            @ConfigEntry.Gui.Tooltip(count = 3)
+            @ConfigEntry.Gui.Tooltip(count = 4)
             @Comment("""
                     
                     How many times a campsite will attempt to generate per chunk
@@ -71,7 +71,7 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
     @Config(name = "client")
     public static final class Client implements ConfigData {
 
-        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.Gui.Tooltip(count = 2)
         @Comment("Whether the Kitty Slippers and Bunny Hoppers change the player's hurt sounds")
         public boolean modifyHurtSounds = true;
 
