@@ -19,7 +19,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class DiggingClawsItem extends CurioItem {
 
@@ -34,13 +34,13 @@ public class DiggingClawsItem extends CurioItem {
     }
 
     @Override
-    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
         int tierLevel = getToolTierLevel();
         if (tierLevel > 0) {
-            tooltip.accept(tooltipLine("mining_level", Component.translatable("%s.tooltip.tool_tier.%s".formatted(Artifacts.MODID, tierLevel))));
+            tooltip.add(tooltipLine("mining_level", Component.translatable("%s.tooltip.tool_tier.%s".formatted(Artifacts.MODID, tierLevel))));
         }
         if (ModGameRules.DIGGING_CLAWS_DIG_SPEED_BONUS.get() > 0) {
-            tooltip.accept(tooltipLine("mining_speed"));
+            tooltip.add(tooltipLine("mining_speed"));
         }
     }
 

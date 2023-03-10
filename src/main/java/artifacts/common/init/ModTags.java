@@ -24,7 +24,7 @@ public class ModTags {
         return TagKey.create(registry, new ResourceLocation(Artifacts.MODID, id));
     }
 
-    // yeet
+    // yeet 🤠
     public static <T> HolderSet<T> getTag(TagKey<T> tagKey) {
         // noinspection unchecked
         Registry<T> registry = (Registry<T>) BuiltInRegistries.REGISTRY.get(tagKey.registry().location());

@@ -18,8 +18,8 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.SlotResult;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public class NightVisionGogglesItem extends MobEffectItem {
 
@@ -29,10 +29,10 @@ public class NightVisionGogglesItem extends MobEffectItem {
     }
 
     @Override
-    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
-        tooltip.accept(tooltipLine("night_vision"));
+    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
+        tooltip.add(tooltipLine("night_vision"));
         if (!ModKeyMappings.TOGGLE_NIGHT_VISION_GOGGLES.isUnbound()) {
-            tooltip.accept(tooltipLine("keymapping", ModKeyMappings.TOGGLE_NIGHT_VISION_GOGGLES.getTranslatedKeyMessage()));
+            tooltip.add(tooltipLine("keymapping", ModKeyMappings.TOGGLE_NIGHT_VISION_GOGGLES.getTranslatedKeyMessage()));
         }
     }
 

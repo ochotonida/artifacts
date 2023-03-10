@@ -16,8 +16,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public abstract class ArtifactItem extends Item {
 
@@ -38,21 +38,22 @@ public abstract class ArtifactItem extends Item {
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltipList, TooltipFlag flags) {
         if (Artifacts.CONFIG.client.showTooltips && ModGameRules.isInitialized()) {
-            Consumer<MutableComponent> tooltip = component -> tooltipList.add(component.withStyle(ChatFormatting.GRAY));
+            List<MutableComponent> tooltip = new ArrayList<>();
             addTooltip(tooltip);
+            tooltip.forEach(line -> tooltipList.add(line.withStyle(ChatFormatting.GRAY)));
         }
     }
 
-    protected void addTooltip(Consumer<MutableComponent> tooltip) {
+    protected void addTooltip(List<MutableComponent> tooltip) {
         if (isCosmetic()) {
-            tooltip.accept(Component.translatable("%s.tooltip.cosmetic".formatted(Artifacts.MODID)).withStyle(ChatFormatting.ITALIC));
+            tooltip.add(Component.translatable("%s.tooltip.cosmetic".formatted(Artifacts.MODID)).withStyle(ChatFormatting.ITALIC));
         } else {
             addEffectsTooltip(tooltip);
         }
     }
 
-    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
-        tooltip.accept(Component.translatable("%s.tooltip.item.%s".formatted(Artifacts.MODID, getTooltipItemName())));
+    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
+        tooltip.add(Component.translatable("%s.tooltip.item.%s".formatted(Artifacts.MODID, getTooltipItemName())));
     }
 
     protected MutableComponent tooltipLine(String lineId, Object... args) {

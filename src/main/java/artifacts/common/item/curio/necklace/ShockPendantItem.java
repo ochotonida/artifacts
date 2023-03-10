@@ -11,7 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class ShockPendantItem extends PendantItem {
 
@@ -26,12 +26,12 @@ public class ShockPendantItem extends PendantItem {
     }
 
     @Override
-    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
         if (ModGameRules.SHOCK_PENDANT_STRIKE_CHANCE.get() > 0) {
-            tooltip.accept(tooltipLine("strike_chance"));
+            tooltip.add(tooltipLine("strike_chance"));
         }
         if (ModGameRules.SHOCK_PENDANT_DO_CANCEL_LIGHTNING_DAMAGE.get()) {
-            tooltip.accept(tooltipLine("lightning_damage"));
+            tooltip.add(tooltipLine("lightning_damage"));
         }
     }
 

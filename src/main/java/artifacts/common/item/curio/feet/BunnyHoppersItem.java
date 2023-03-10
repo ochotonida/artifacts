@@ -12,7 +12,7 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.SlotContext;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class BunnyHoppersItem extends HurtSoundModifyingItem {
 
@@ -27,12 +27,12 @@ public class BunnyHoppersItem extends HurtSoundModifyingItem {
     }
 
     @Override
-    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
         if (ModGameRules.BUNNY_HOPPERS_JUMP_BOOST_LEVEL.get() >= 0) {
-            tooltip.accept(tooltipLine("jump_height"));
+            tooltip.add(tooltipLine("jump_height"));
         }
         if (ModGameRules.BUNNY_HOPPERS_DO_CANCEL_FALL_DAMAGE.get()) {
-            tooltip.accept(tooltipLine("fall_damage"));
+            tooltip.add(tooltipLine("fall_damage"));
         }
     }
 

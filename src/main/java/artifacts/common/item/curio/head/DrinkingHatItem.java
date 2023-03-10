@@ -12,7 +12,7 @@ import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
-import java.util.function.Consumer;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class DrinkingHatItem extends CurioItem {
@@ -34,9 +34,9 @@ public class DrinkingHatItem extends CurioItem {
     }
 
     @Override
-    protected void addTooltip(Consumer<MutableComponent> tooltip) {
+    protected void addTooltip(List<MutableComponent> tooltip) {
         if (hasSpecialTooltip) {
-            tooltip.accept(tooltipLine("special").withStyle(ChatFormatting.ITALIC));
+            tooltip.add(tooltipLine("special").withStyle(ChatFormatting.ITALIC));
             addEffectsTooltip(tooltip);
         } else {
             super.addTooltip(tooltip);
@@ -44,12 +44,12 @@ public class DrinkingHatItem extends CurioItem {
     }
 
     @Override
-    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
         if (drinkingDurationMultiplier.get() < 100) {
-            tooltip.accept(tooltipLine("drinking"));
+            tooltip.add(tooltipLine("drinking"));
         }
         if (eatingDurationMultiplier.get() < 100) {
-            tooltip.accept(tooltipLine("eating"));
+            tooltip.add(tooltipLine("eating"));
         }
     }
 

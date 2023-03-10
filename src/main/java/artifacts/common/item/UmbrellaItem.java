@@ -28,8 +28,8 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.List;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 public class UmbrellaItem extends ArtifactItem {
 
@@ -46,12 +46,12 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     @Override
-    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
         if (ModGameRules.UMBRELLA_IS_GLIDER.get()) {
-            tooltip.accept(tooltipLine("glider"));
+            tooltip.add(tooltipLine("glider"));
         }
         if (ModGameRules.UMBRELLA_IS_SHIELD.get()) {
-            tooltip.accept(tooltipLine("shield"));
+            tooltip.add(tooltipLine("shield"));
         }
     }
 

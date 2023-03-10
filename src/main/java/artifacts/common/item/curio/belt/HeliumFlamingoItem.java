@@ -19,7 +19,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import javax.annotation.Nonnull;
-import java.util.function.Consumer;
+import java.util.List;
 
 public class HeliumFlamingoItem extends CurioItem {
 
@@ -34,9 +34,9 @@ public class HeliumFlamingoItem extends CurioItem {
     }
 
     @Override
-    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
-        tooltip.accept(tooltipLine("swimming"));
-        tooltip.accept(tooltipLine("keymapping", ModKeyMappings.getHeliumFlamingoKey().getTranslatedKeyMessage()));
+    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
+        tooltip.add(tooltipLine("swimming"));
+        tooltip.add(tooltipLine("keymapping", ModKeyMappings.getHeliumFlamingoKey().getTranslatedKeyMessage()));
     }
 
     @Nonnull

@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class FlamePendantItem extends PendantItem {
 
@@ -20,10 +20,10 @@ public class FlamePendantItem extends PendantItem {
     }
 
     @Override
-    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
-        tooltip.accept(tooltipLine("strike_chance"));
+    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
+        tooltip.add(tooltipLine("strike_chance"));
         if (ModGameRules.FLAME_PENDANT_DO_GRANT_FIRE_RESISTANCE.get()) {
-            tooltip.accept(tooltipLine("fire_resistance"));
+            tooltip.add(tooltipLine("fire_resistance"));
         }
     }
 

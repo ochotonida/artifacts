@@ -14,8 +14,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import top.theillusivec4.curios.api.SlotContext;
 
+import java.util.List;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 public class RunningShoesItem extends CurioItem {
 
@@ -31,12 +31,12 @@ public class RunningShoesItem extends CurioItem {
     }
 
     @Override
-    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
         if (ModGameRules.RUNNING_SHOES_SPEED_BONUS.get() > 0) {
-            tooltip.accept(tooltipLine("movement_speed"));
+            tooltip.add(tooltipLine("movement_speed"));
         }
         if (ModGameRules.RUNNING_SHOES_DO_INCREASE_STEP_HEIGHT.get()) {
-            tooltip.accept(tooltipLine("step_height"));
+            tooltip.add(tooltipLine("step_height"));
         }
     }
 

@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import top.theillusivec4.curios.api.SlotContext;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class LuckyScarfItem extends CurioItem {
 
@@ -17,11 +17,11 @@ public class LuckyScarfItem extends CurioItem {
     }
 
     @Override
-    protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
         if (ModGameRules.LUCKY_SCARF_FORTUNE_BONUS.get() == 1) {
-            tooltip.accept(tooltipLine("single_level"));
+            tooltip.add(tooltipLine("single_level"));
         } else {
-            tooltip.accept(tooltipLine("multiple_levels", ModGameRules.LUCKY_SCARF_FORTUNE_BONUS.get()));
+            tooltip.add(tooltipLine("multiple_levels", ModGameRules.LUCKY_SCARF_FORTUNE_BONUS.get()));
         }
     }
 
