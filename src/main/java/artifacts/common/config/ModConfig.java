@@ -24,7 +24,6 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
 
         @ConfigEntry.Gui.Tooltip(count = 4)
         @Comment("""
-                
                 Affects how common artifacts are in chests
                 Values above 1 will make artifacts rarer
                 Values between 0 and 1 will make artifacts more common
@@ -41,18 +40,24 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
 
         public static final class Campsite implements ConfigData {
 
-            @ConfigEntry.Gui.Tooltip(count = 4)
+            @ConfigEntry.Gui.Tooltip(count = 2)
             @Comment("""
-                    
                     How many times a campsite will attempt to generate per chunk
                     Set this to 0 to prevent campsites from generating
-                    Use a data pack if you need more precise control over where campsites spawn
                     """)
             public int count = 4;
 
             public int getCount() {
                 return Math.max(0, count);
             }
+
+            @ConfigEntry.Gui.Tooltip()
+            @Comment("The minimum height campsites can spawn at")
+            public int minY = -60;
+
+            @ConfigEntry.Gui.Tooltip()
+            @Comment("The maximum height campsites can spawn at")
+            public int maxY = 40;
 
             @ConfigEntry.Gui.Tooltip
             @Comment("Probability that a campsite has a mimic instead of a chest")

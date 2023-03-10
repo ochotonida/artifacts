@@ -2,6 +2,7 @@ package artifacts.data;
 
 import artifacts.Artifacts;
 import artifacts.common.world.CampsiteCountPlacement;
+import artifacts.common.world.CampsiteHeightRangePlacement;
 import artifacts.common.world.CeilingHeightFilter;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -10,7 +11,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -26,17 +26,14 @@ public class PlacedFeatures {
         HolderGetter<Feature<?>> featureRegistry = context.lookup(Registries.FEATURE);
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        Holder<ConfiguredFeature<?, ?>> campsite =configuredFeatures.getOrThrow(ConfiguredFeatures.CAMPSITE);
+        Holder<ConfiguredFeature<?, ?>> campsite = configuredFeatures.getOrThrow(ConfiguredFeatures.CAMPSITE);
 
         PlacedFeature undergroundCampsite = new PlacedFeature(
                 campsite,
                 List.of(
                         CampsiteCountPlacement.campsiteCount(),
                         InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(
-                                VerticalAnchor.absolute(-60),
-                                VerticalAnchor.absolute(40)
-                        ),
+                        CampsiteHeightRangePlacement.campsiteHeightRange(),
                         EnvironmentScanPlacement.scanningFor(
                                 Direction.DOWN,
                                 BlockPredicate.solid(),

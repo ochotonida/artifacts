@@ -2,6 +2,7 @@ package artifacts.common.init;
 
 import artifacts.Artifacts;
 import artifacts.common.world.CampsiteCountPlacement;
+import artifacts.common.world.CampsiteHeightRangePlacement;
 import artifacts.common.world.CeilingHeightFilter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
@@ -14,4 +15,5 @@ public class ModPlacementModifierTypes {
 
     public static final RegistryObject<PlacementModifierType<CeilingHeightFilter>> CEILING_HEIGHT_FILTER = PLACEMENT_MODIFIERS.register("ceiling_height_filter", () -> () -> CeilingHeightFilter.CODEC);
     public static final RegistryObject<PlacementModifierType<CampsiteCountPlacement>> CAMPSITE_COUNT = PLACEMENT_MODIFIERS.register("campsite_count", () -> () -> CampsiteCountPlacement.CODEC);
+    public static final RegistryObject<PlacementModifierType<CampsiteHeightRangePlacement>> CAMPSITE_HEIGHT_RANGE = PLACEMENT_MODIFIERS.register("campsite_height_range", () -> () -> CampsiteHeightRangePlacement.CODEC);
 }
