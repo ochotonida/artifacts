@@ -21,7 +21,6 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
-import net.minecraftforge.common.Tags;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -220,7 +219,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
                 chest = Blocks.TRAPPED_CHEST.defaultBlockState();
                 setBlock(level, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
             } else if (Artifacts.CONFIG.common.campsite.useModdedChests) {
-                chest = ModTags.getTag(Tags.Blocks.CHESTS_WOODEN)
+                chest = ModTags.getTag(ModTags.CAMPSITE_CHESTS)
                         .getRandomElement(random)
                         .map(Holder::value)
                         .orElse(Blocks.CHEST)
