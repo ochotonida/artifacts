@@ -6,7 +6,7 @@
   },
   "entity.mimic.close": {
     "sounds": [
-      "block/chest/close",
+      "block/chest/close1",
       "block/chest/close2",
       "block/chest/close3"
     ],
