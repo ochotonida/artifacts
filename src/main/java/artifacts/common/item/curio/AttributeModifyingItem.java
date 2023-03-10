@@ -4,7 +4,6 @@ import artifacts.Artifacts;
 import artifacts.common.init.ModGameRules;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
 
@@ -87,12 +85,6 @@ public abstract class AttributeModifyingItem extends CurioItem {
                 onAttributeUpdated(slotContext.entity());
             }
         }
-    }
-
-    @Override
-    protected void addTooltip(Consumer<MutableComponent> tooltip) {
-        super.addTooltip(tooltip);
-
     }
 
     @Override

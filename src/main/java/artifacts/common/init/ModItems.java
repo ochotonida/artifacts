@@ -10,6 +10,7 @@ import artifacts.common.item.curio.belt.*;
 import artifacts.common.item.curio.feet.*;
 import artifacts.common.item.curio.hands.*;
 import artifacts.common.item.curio.head.DrinkingHatItem;
+import artifacts.common.item.curio.head.NightVisionGogglesItem;
 import artifacts.common.item.curio.head.SuperstitiousHatItem;
 import artifacts.common.item.curio.head.VillagerHatItem;
 import artifacts.common.item.curio.necklace.*;
@@ -55,7 +56,7 @@ public class ModItems {
     public static final RegistryObject<CurioItem> PLASTIC_DRINKING_HAT = ITEMS.register("plastic_drinking_hat", () -> new DrinkingHatItem(ModGameRules.PLASTIC_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER, ModGameRules.PLASTIC_DRINKING_HAT_EATING_DURATION_MULTIPLIER, false));
     public static final RegistryObject<CurioItem> NOVELTY_DRINKING_HAT = ITEMS.register("novelty_drinking_hat", () -> new DrinkingHatItem(ModGameRules.NOVELTY_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER, ModGameRules.NOVELTY_DRINKING_HAT_EATING_DURATION_MULTIPLIER, true));
     public static final RegistryObject<CurioItem> SNORKEL = ITEMS.register("snorkel", () -> new MobEffectItem(MobEffects.WATER_BREATHING, ModGameRules.SNORKEL_ENABLED));
-    public static final RegistryObject<CurioItem> NIGHT_VISION_GOGGLES = ITEMS.register("night_vision_goggles", () -> new MobEffectItem(MobEffects.NIGHT_VISION, 320, ModGameRules.NIGHT_VISION_GOGGLES_ENABLED));
+    public static final RegistryObject<CurioItem> NIGHT_VISION_GOGGLES = ITEMS.register("night_vision_goggles", NightVisionGogglesItem::new);
     public static final RegistryObject<CurioItem> VILLAGER_HAT = ITEMS.register("villager_hat", VillagerHatItem::new);
     public static final RegistryObject<CurioItem> SUPERSTITIOUS_HAT = ITEMS.register("superstitious_hat", SuperstitiousHatItem::new);
 

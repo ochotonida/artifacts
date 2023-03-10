@@ -27,7 +27,7 @@
   "artifacts.tooltip.item.helium_flamingo.swimming": "Permite al usuario nadar en el aire por un periodo limitado de tiempo.",
   "artifacts.tooltip.item.kitty_slippers": "Los Creepers huirán de ti.",
   "artifacts.tooltip.item.lucky_scarf.single_level": "Aplica un nivel extra de fortuna a los bloques que se minan.",
-  "artifacts.tooltip.item.night_vision_goggles": "Podrás ver en la oscuridad.",
+  "artifacts.tooltip.item.night_vision_goggles.night_vision": "Podrás ver en la oscuridad.",
   "artifacts.tooltip.item.obsidian_skull": "Cuando lo llevas puesto, te vuelves inmune al fuego por unos segundos.",
   "artifacts.tooltip.item.panic_necklace": "Cuando un mob te ataca, tu velocidad de movimiento aumenta.",
   "artifacts.tooltip.item.pocket_piston": "Empujas más al atacar.",

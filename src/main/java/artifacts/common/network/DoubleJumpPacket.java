@@ -10,15 +10,16 @@ import java.util.function.Supplier;
 
 public class DoubleJumpPacket {
 
-    @SuppressWarnings("unused")
     public DoubleJumpPacket(FriendlyByteBuf buffer) {
+
     }
 
     public DoubleJumpPacket() {
+
     }
 
-    @SuppressWarnings("unused")
     void encode(FriendlyByteBuf buffer) {
+
     }
 
     void handle(Supplier<NetworkEvent.Context> context) {

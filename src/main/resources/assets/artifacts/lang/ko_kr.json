@@ -22,7 +22,7 @@
   "artifacts.tooltip.item.helium_flamingo.swimming": "공중에서 잠깐 비행할 수 있습니다",
   "artifacts.tooltip.item.kitty_slippers": "'크리퍼는 왜 이 귀여운 슬리퍼를 싫어하는지 모르겠네'",
   "artifacts.tooltip.item.lucky_scarf.single_level": "행운 효과 증가",
-  "artifacts.tooltip.item.night_vision_goggles": "어둠 속에서도 물체를 볼 수 있습니다",
+  "artifacts.tooltip.item.night_vision_goggles.night_vision": "어둠 속에서도 물체를 볼 수 있습니다",
   "artifacts.tooltip.item.obsidian_skull": "화염 피해를 입었을 때 화염 저항 부여",
   "artifacts.tooltip.item.panic_necklace": "착용자에게 데미지를 주는 대신 이동속도가 증가합니다",
   "artifacts.tooltip.item.pocket_piston": "모든 공격의 넉백이 증가합니다",

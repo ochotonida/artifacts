@@ -16,7 +16,7 @@
   "artifacts.tooltip.item.flippers": "Verbessert Beweglichkeit im Wasser.",
   "artifacts.tooltip.item.kitty_slippers": "Creepers weichen den Träger oder die Trägerin aus.",
   "artifacts.tooltip.item.lucky_scarf.single_level": "Gibt eine Bonusstufe von Glück auf angebauter Blocks.",
-  "artifacts.tooltip.item.night_vision_goggles": "Träger(in) kann in der Dunkelheit sehen.",
+  "artifacts.tooltip.item.night_vision_goggles.night_vision": "Träger(in) kann in der Dunkelheit sehen.",
   "artifacts.tooltip.item.obsidian_skull": "Träger(in) vorübergehend immun zu Feuerschaden, nach mit Feuer verletzen werden.",
   "artifacts.tooltip.item.panic_necklace": "Die Geschwindigkeit des Trägers oder der Trägerin wächst, nach bekommen Schaden.",
   "artifacts.tooltip.item.pocket_piston": "Die Angriffen des Trägers oder der Trägerin gibt mehr Rückstoß.",

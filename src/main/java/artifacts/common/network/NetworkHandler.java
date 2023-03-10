@@ -20,5 +20,6 @@ public class NetworkHandler {
         INSTANCE.registerMessage(2, SinkPacket.class, SinkPacket::encode, SinkPacket::new, SinkPacket::handle);
         INSTANCE.registerMessage(3, IntegerGameRuleChangedPacket.class, IntegerGameRuleChangedPacket::encode, IntegerGameRuleChangedPacket::new, IntegerGameRuleChangedPacket::handle);
         INSTANCE.registerMessage(4, BooleanGameRuleChangedPacket.class, BooleanGameRuleChangedPacket::encode, BooleanGameRuleChangedPacket::new, BooleanGameRuleChangedPacket::handle);
+        INSTANCE.registerMessage(5, ToggleNightVisionGogglesPacket.class, ToggleNightVisionGogglesPacket::encode, ToggleNightVisionGogglesPacket::new, ToggleNightVisionGogglesPacket::handle);
     }
 }

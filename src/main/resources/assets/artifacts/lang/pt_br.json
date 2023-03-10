@@ -29,7 +29,7 @@
   "artifacts.tooltip.item.helium_flamingo.swimming": "Permite que o usuário nade no ar por um período limitado de tempo.",
   "artifacts.tooltip.item.kitty_slippers": "Os Creepers evitam o usuário",
   "artifacts.tooltip.item.lucky_scarf.single_level": "Aplica um nível extra de fortuna ao minerar blocos ",
-  "artifacts.tooltip.item.night_vision_goggles": "Permite que o usuário veja no escuro",
+  "artifacts.tooltip.item.night_vision_goggles.night_vision": "Permite que o usuário veja no escuro",
   "artifacts.tooltip.item.obsidian_skull": "O usuário fica temporariamente imune a dano de fogo quando atingido por fogo",
   "artifacts.tooltip.item.panic_necklace": "Aumenta a velocidade de movimento do usuário após sofrer dano",
   "artifacts.tooltip.item.pocket_piston": "Aumenta a repulsão causada pelo usuário",

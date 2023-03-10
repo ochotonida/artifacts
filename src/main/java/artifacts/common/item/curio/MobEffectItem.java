@@ -2,6 +2,7 @@ package artifacts.common.item.curio;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -11,7 +12,7 @@ public class MobEffectItem extends CurioItem {
 
     private final MobEffect mobEffect;
     private final int duration;
-    private final Supplier<Boolean> isEnabled;
+    protected final Supplier<Boolean> isEnabled;
 
     public MobEffectItem(MobEffect mobEffect, Supplier<Boolean> isEnabled) {
         this(mobEffect, 40, isEnabled);
@@ -28,9 +29,13 @@ public class MobEffectItem extends CurioItem {
         return !isEnabled.get();
     }
 
+    protected boolean isActive(LivingEntity entity) {
+        return isEnabled.get();
+    }
+
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        if (isEnabled.get() && !slotContext.entity().level.isClientSide()) {
+        if (isActive(slotContext.entity()) && !slotContext.entity().level.isClientSide()) {
             slotContext.entity().addEffect(new MobEffectInstance(mobEffect, duration - 1, 0, true, false));
         }
     }

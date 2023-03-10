@@ -28,7 +28,7 @@
   "artifacts.tooltip.item.helium_flamingo.swimming": "Дозволяє власнику плавати в повітрі протягом обмеженого періоду часу.",
   "artifacts.tooltip.item.kitty_slippers": "Кріпери уникають власника",
   "artifacts.tooltip.item.lucky_scarf.single_level": "Застосовує додатковий рівень удачі до видобутих блоків",
-  "artifacts.tooltip.item.night_vision_goggles": "Дозволяє власнику бачити в темряві",
+  "artifacts.tooltip.item.night_vision_goggles.night_vision": "Дозволяє власнику бачити в темряві",
   "artifacts.tooltip.item.obsidian_skull": "Носій набуває тимчасового імунітету до вогняної шкоди, якщо поранений вогнем",
   "artifacts.tooltip.item.panic_necklace": "Збільшує швидкість пересування власника після отримання шкоди",
   "artifacts.tooltip.item.pocket_piston": "Збільшує відкидання, завдане власником",

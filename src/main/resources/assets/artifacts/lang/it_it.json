@@ -29,7 +29,7 @@
   "artifacts.tooltip.item.helium_flamingo.swimming": "Consente a chi lo indossa di nuotare nell'aria per un periodo di tempo limitato.",
   "artifacts.tooltip.item.kitty_slippers": "I Creeper eviteranno chi li indossa",
   "artifacts.tooltip.item.lucky_scarf.single_level": "Applica un livello bonus di fortuna all'estrazione dai blocchi",
-  "artifacts.tooltip.item.night_vision_goggles": "Permette a chi li indossa di guardare nell'oscurità",
+  "artifacts.tooltip.item.night_vision_goggles.night_vision": "Permette a chi li indossa di guardare nell'oscurità",
   "artifacts.tooltip.item.obsidian_skull": "Chi lo indossa diventa temporaneamente immune ai danni da fuoco quando viene danneggiato dal fuoco",
   "artifacts.tooltip.item.panic_necklace": "Aumenta la velocità di movimento di chi la indossa dopo aver subito un danno",
   "artifacts.tooltip.item.pocket_piston": "Aumentà il contraccolpo inflitto da chi lo indossa",
