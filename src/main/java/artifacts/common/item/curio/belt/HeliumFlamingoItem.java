@@ -2,9 +2,9 @@ package artifacts.common.item.curio.belt;
 
 import artifacts.common.capability.SwimHandler;
 import artifacts.common.init.ModGameRules;
+import artifacts.common.init.ModKeyMappings;
 import artifacts.common.init.ModSoundEvents;
 import artifacts.common.item.curio.CurioItem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +36,7 @@ public class HeliumFlamingoItem extends CurioItem {
     @Override
     protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
         tooltip.accept(tooltipLine("swimming"));
-        tooltip.accept(tooltipLine("keybinding", Minecraft.getInstance().options.keySprint.getTranslatedKeyMessage()));
+        tooltip.accept(tooltipLine("keymapping", ModKeyMappings.getHeliumFlamingoKey().getTranslatedKeyMessage()));
     }
 
     @Nonnull
@@ -96,7 +96,7 @@ public class HeliumFlamingoItem extends CurioItem {
             }
 
             Player player = event.getEntity();
-            boolean isSprintKeyDown = Minecraft.getInstance().options.keySprint.isDown();
+            boolean isSprintKeyDown = ModKeyMappings.getHeliumFlamingoKey().isDown();
 
             player.getCapability(SwimHandler.CAPABILITY).ifPresent(
                     handler -> {

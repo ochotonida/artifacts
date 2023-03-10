@@ -10,6 +10,7 @@ import artifacts.common.capability.SwimHandler;
 import artifacts.common.init.ModEntityTypes;
 import artifacts.common.init.ModGameRules;
 import artifacts.common.init.ModItems;
+import artifacts.common.init.ModKeyMappings;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -36,6 +37,7 @@ public class ArtifactsClient {
         modBus.addListener(this::onRegisterRenderers);
         modBus.addListener(this::onRegisterLayerDefinitions);
         modBus.addListener(this::onRegisterGuiOverlays);
+        modBus.addListener(ModKeyMappings::register);
 
         ArmRenderHandler.setup();
     }
