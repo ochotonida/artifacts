@@ -4,6 +4,7 @@ import artifacts.Artifacts;
 import artifacts.common.config.ModConfig;
 import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.ModEntityTypes;
+import artifacts.common.init.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -21,7 +22,6 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
-import net.minecraftforge.common.Tags;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -223,7 +223,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
             } else if (ModConfig.common.useModdedChests.get()) {
                 // noinspection deprecation
                 chest = Registry.BLOCK
-                        .getTag(Tags.Blocks.CHESTS_WOODEN)
+                        .getTag(ModTags.CAMPSITE_CHESTS)
                         .flatMap((set) -> set.getRandomElement(random))
                         .map(Holder::value)
                         .orElse(Blocks.CHEST)

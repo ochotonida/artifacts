@@ -103,6 +103,7 @@ c9b88f0333085bb04713a0dfd12865d9cffda61f data/artifacts/loot_tables/inject/chest
 efa80538c1ce925145e572d01495ebb5666107cd data/artifacts/loot_tables/inject/chests/woodland_mansion.json
 4f514cfd2fac769574e78b7e213c70caa368cb8b data/artifacts/loot_tables/inject/entities/cow.json
 279e99646493dff4dbf68acfa98e30df315d8287 data/artifacts/loot_tables/items/drinking_hat.json
+0f9b82e451cc18fb2bdd7e08bd47a093b0ec0964 data/artifacts/tags/blocks/campsite_chests.json
 bcce34a23ff2497a9ce5c5ddfaae9a8d31e3aee7 data/artifacts/tags/blocks/mineable/digging_claws.json
 51553bc559333fed9b7011ed7e82e62fc67c6f39 data/artifacts/tags/entity_types/creepers.json
 dabba677a10bb1e12f0ddac823bffe094499445c data/artifacts/tags/items/artifacts.json
