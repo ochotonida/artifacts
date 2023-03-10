@@ -52,11 +52,11 @@ public abstract class ArtifactItem extends Item {
     }
 
     protected void addEffectsTooltip(Consumer<MutableComponent> tooltip) {
-        tooltip.accept(Component.translatable("%s.tooltip.%s".formatted(Artifacts.MODID, getTooltipItemName())));
+        tooltip.accept(Component.translatable("%s.tooltip.item.%s".formatted(Artifacts.MODID, getTooltipItemName())));
     }
 
     protected MutableComponent tooltipLine(String lineId, Object... args) {
-        return Component.translatable("%s.tooltip.%s.%s".formatted(Artifacts.MODID, getTooltipItemName(), lineId), args);
+        return Component.translatable("%s.tooltip.item.%s.%s".formatted(Artifacts.MODID, getTooltipItemName(), lineId), args);
     }
 
     protected String getTooltipItemName() {
