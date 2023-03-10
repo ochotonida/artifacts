@@ -83,11 +83,11 @@
   "artifacts.subtitles.entity.mimic.hurt": "Мімік атакований",
   "artifacts.subtitles.entity.mimic.death": "Мімік вмирає",
   "artifacts.subtitles.item.whoopee_cushion.fart": "Пук",
-  "artifacts.config.common.artifact_rarity": "Артефактна рідкість",
-  "artifacts.config.common.campsite.mimic_chance": "Шанс появи міміку у таборі",
-  "artifacts.config.common.campsite.use_modded_chests": "Використовувати скрині з модів",
-  "artifacts.config.client.items.modify_hurt_sounds": "Змінити звуки шкоди гравця",
-  "artifacts.config.client.items.show_first_person_gloves": "Показувати рукавички від першої особи",
-  "artifacts.config.client.items.show_tooltips": "Показувати опис предмета",
-  "artifacts.config.client.mimic.use_modded_textures": "Використовувати текстури скрині з модів"
+  "text.autoconfig.artifacts.option.common.artifactRarity": "Артефактна рідкість",
+  "text.autoconfig.artifacts.option.common.campsite.mimicChance": "Шанс появи міміку у таборі",
+  "text.autoconfig.artifacts.option.common.campsite.useModdedChests": "Використовувати скрині з модів",
+  "text.autoconfig.artifacts.option.client.modifyHurtSounds": "Змінити звуки шкоди гравця",
+  "text.autoconfig.artifacts.option.client.showFirstPersonGloves": "Показувати рукавички від першої особи",
+  "text.autoconfig.artifacts.option.client.showTooltips": "Показувати опис предмета",
+  "text.autoconfig.artifacts.option.client.useModdedMimicTextures": "Використовувати текстури скрині з модів"
 }

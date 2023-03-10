@@ -1,6 +1,6 @@
 package artifacts.common.item.curio;
 
-import artifacts.common.config.ModConfig;
+import artifacts.Artifacts;
 import artifacts.common.init.ModGameRules;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -100,7 +100,7 @@ public abstract class AttributeModifyingItem extends CurioItem {
         super.appendHoverText(stack, world, tooltipList, flags);
         Set<String> curioTags = CuriosApi.getCuriosHelper().getCurioTags(stack.getItem());
         List<String> slots = new ArrayList<>(curioTags);
-        if (ModConfig.client.showTooltips.get() && ModGameRules.isInitialized() && !isCosmetic() && !slots.isEmpty()) {
+        if (Artifacts.CONFIG.client.showTooltips && ModGameRules.isInitialized() && !isCosmetic() && !slots.isEmpty()) {
             tooltipList.add(Component.empty());
 
             String identifier = slots.contains("curio") ? "curio" : slots.get(0);

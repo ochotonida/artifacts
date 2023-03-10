@@ -1,6 +1,6 @@
 package artifacts.client.render.curio.renderer;
 
-import artifacts.common.config.ModConfig;
+import artifacts.Artifacts;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.RenderArmEvent;
@@ -18,7 +18,7 @@ public class ArmRenderHandler {
     }
 
     public static void onRenderArm(RenderArmEvent event) {
-        if (!ModConfig.client.showFirstPersonGloves.get() || event.isCanceled()) {
+        if (!Artifacts.CONFIG.client.showFirstPersonGloves || event.isCanceled()) {
             return;
         }
 

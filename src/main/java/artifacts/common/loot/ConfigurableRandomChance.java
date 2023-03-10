@@ -1,6 +1,6 @@
 package artifacts.common.loot;
 
-import artifacts.common.config.ModConfig;
+import artifacts.Artifacts;
 import artifacts.common.init.ModLootConditions;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
@@ -17,12 +17,13 @@ public record ConfigurableRandomChance(float defaultProbability) implements Loot
     }
 
     public boolean test(LootContext context) {
-        if (ModConfig.common.artifactRarity.get() >= 9999) {
+        if (Artifacts.CONFIG.common.getArtifactRarity() > 9999) {
             return false;
         }
-        float c = (float) (double) ModConfig.common.artifactRarity.get();
+        float r = (float) Artifacts.CONFIG.common.getArtifactRarity();
         float p = defaultProbability;
-        return context.getRandom().nextFloat() < p / (p + c - c * p);
+        float adjustedProbability = p / (p + r - r * p);
+        return context.getRandom().nextFloat() < adjustedProbability;
     }
 
     public static LootItemCondition.Builder configurableRandomChance(float probability) {

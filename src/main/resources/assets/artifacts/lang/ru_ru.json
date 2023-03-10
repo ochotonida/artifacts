@@ -83,11 +83,11 @@
   "artifacts.subtitles.entity.mimic.hurt": "Подражатель получает урон",
   "artifacts.subtitles.entity.mimic.death": "Подражатель умирает",
   "artifacts.subtitles.item.whoopee_cushion.fart": "Пукание",
-  "artifacts.config.common.artifact_rarity": "Редкость артефакта",
-  "artifacts.config.common.campsite.mimic_chance": "Вероятность появления подражателя в палаточных лагерях",
-  "artifacts.config.common.campsite.use_modded_chests": "Использование сундуков из модов.",
-  "artifacts.config.client.items.modify_hurt_sounds": "Изменить звуки причинения урона",
-  "artifacts.config.client.items.show_first_person_gloves": "Показать перчатки от первого лица",
-  "artifacts.config.client.items.show_tooltips": "Показывать подсказки предмета",
-  "artifacts.config.client.mimic.use_modded_textures": "Использовать текстуры сундука из модов"
+  "text.autoconfig.artifacts.option.common.artifactRarity": "Редкость артефакта",
+  "text.autoconfig.artifacts.option.common.campsite.mimicChance": "Вероятность появления подражателя в палаточных лагерях",
+  "text.autoconfig.artifacts.option.common.campsite.useModdedChests": "Использование сундуков из модов.",
+  "text.autoconfig.artifacts.option.client.modifyHurtSounds": "Изменить звуки причинения урона",
+  "text.autoconfig.artifacts.option.client.showFirstPersonGloves": "Показать перчатки от первого лица",
+  "text.autoconfig.artifacts.option.client.showTooltips": "Показывать подсказки предмета",
+  "text.autoconfig.artifacts.option.client.useModdedMimicTextures": "Использовать текстуры сундука из модов"
 }

@@ -1,7 +1,6 @@
 package artifacts.common.world;
 
 import artifacts.Artifacts;
-import artifacts.common.config.ModConfig;
 import artifacts.common.entity.MimicEntity;
 import artifacts.common.init.ModEntityTypes;
 import artifacts.common.init.ModTags;
@@ -206,7 +205,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     public void placeChest(WorldGenLevel level, BlockPos pos, RandomSource random, Direction facing) {
-        if (random.nextFloat() < ModConfig.common.campsiteMimicChance.get()) {
+        if (random.nextFloat() < Artifacts.CONFIG.common.campsite.getMimicChance()) {
             MimicEntity mimic = ModEntityTypes.MIMIC.get().create(level.getLevel());
             if (mimic != null) {
                 mimic.setDormant(true);
@@ -220,7 +219,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
                 setBlock(level, pos.below(), Blocks.TNT.defaultBlockState());
                 chest = Blocks.TRAPPED_CHEST.defaultBlockState();
                 setBlock(level, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
-            } else if (ModConfig.common.useModdedChests.get()) {
+            } else if (Artifacts.CONFIG.common.campsite.useModdedChests) {
                 chest = ModTags.getTag(Tags.Blocks.CHESTS_WOODEN)
                         .getRandomElement(random)
                         .map(Holder::value)

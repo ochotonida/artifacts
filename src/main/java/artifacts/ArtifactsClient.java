@@ -7,7 +7,6 @@ import artifacts.client.render.entity.MimicRenderer;
 import artifacts.client.render.entity.model.MimicChestLayerModel;
 import artifacts.client.render.entity.model.MimicModel;
 import artifacts.common.capability.SwimHandler;
-import artifacts.common.config.ModConfig;
 import artifacts.common.init.ModEntityTypes;
 import artifacts.common.init.ModGameRules;
 import artifacts.common.init.ModItems;
@@ -31,8 +30,6 @@ public class ArtifactsClient {
     private static final ResourceLocation HELIUM_FLAMINGO_ICON = Artifacts.id("textures/gui/icons.png");
 
     public ArtifactsClient() {
-        ModConfig.registerClient();
-
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modBus.addListener(this::onClientSetup);

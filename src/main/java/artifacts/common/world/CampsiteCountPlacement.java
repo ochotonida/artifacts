@@ -1,6 +1,6 @@
 package artifacts.common.world;
 
-import artifacts.common.config.ModConfig;
+import artifacts.Artifacts;
 import artifacts.common.init.ModPlacementModifierTypes;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -22,7 +22,7 @@ public class CampsiteCountPlacement extends RepeatingPlacement {
     }
 
     protected int count(RandomSource p_226333_, BlockPos p_226334_) {
-        return ModConfig.common.campsiteCount.get();
+        return Artifacts.CONFIG.common.campsite.getCount();
     }
 
     public PlacementModifierType<?> type() {

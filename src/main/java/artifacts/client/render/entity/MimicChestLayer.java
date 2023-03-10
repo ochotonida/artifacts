@@ -1,8 +1,8 @@
 package artifacts.client.render.entity;
 
+import artifacts.Artifacts;
 import artifacts.client.render.entity.model.MimicChestLayerModel;
 import artifacts.client.render.entity.model.MimicModel;
-import artifacts.common.config.ModConfig;
 import artifacts.common.entity.MimicEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -88,7 +88,7 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
     }
 
     private Material getChestMaterial(MimicEntity mimic) {
-        if (!ModConfig.client.useModdedMimicTextures.get()) {
+        if (!Artifacts.CONFIG.client.useModdedMimicTextures) {
             return vanillaChestMaterial;
         }
         if (chestMaterials.size() == 1) {

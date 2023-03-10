@@ -83,11 +83,11 @@
   "artifacts.subtitles.entity.mimic.hurt": "宝箱怪：受伤",
   "artifacts.subtitles.entity.mimic.death": "宝箱怪：死亡",
   "artifacts.subtitles.item.whoopee_cushion.fart": "放屁",
-  "artifacts.config.common.artifact_rarity": "Artifact 稀有度",
-  "artifacts.config.common.campsite.mimic_chance": "营地宝箱怪机率",
-  "artifacts.config.common.campsite.use_modded_chests": "使用模组的宝箱",
-  "artifacts.config.client.items.modify_hurt_sounds": "修改玩家受伤音效",
-  "artifacts.config.client.items.show_first_person_gloves": "显示第一名玩家的手套",
-  "artifacts.config.client.items.show_tooltips": "显示物品详情",
-  "artifacts.config.client.mimic.use_modded_textures": "使用模组的宝箱材质"
+  "text.autoconfig.artifacts.option.common.artifactRarity": "Artifact 稀有度",
+  "text.autoconfig.artifacts.option.common.campsite.mimicChance": "营地宝箱怪机率",
+  "text.autoconfig.artifacts.option.common.campsite.useModdedChests": "使用模组的宝箱",
+  "text.autoconfig.artifacts.option.client.modifyHurtSounds": "修改玩家受伤音效",
+  "text.autoconfig.artifacts.option.client.showFirstPersonGloves": "显示第一名玩家的手套",
+  "text.autoconfig.artifacts.option.client.showTooltips": "显示物品详情",
+  "text.autoconfig.artifacts.option.client.useModdedMimicTextures": "使用模组的宝箱材质"
 }

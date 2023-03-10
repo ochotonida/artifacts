@@ -82,12 +82,12 @@
   "artifacts.subtitles.entity.mimic.hurt": "El mimic dañado",
   "artifacts.subtitles.entity.mimic.death": "El mimic murió",
   "artifacts.subtitles.item.whoopee_cushion.fart": "Pedo.",
-  "artifacts.config.common.artifact_rarity": "Rareza de Artefactos.",
-  "artifacts.config.common.campsite.count": "Cantidad de campamentos",
-  "artifacts.config.common.campsite.mimic_chance": "Probabilidad de generar mimics en campamentos.",
-  "artifacts.config.common.campsite.use_modded_chests": "Usar cofres de otros mods.",
-  "artifacts.config.client.items.modify_hurt_sounds": "Modificar los sonidos de daño en el jugador.",
-  "artifacts.config.client.items.show_first_person_gloves": "Mostrar los guantes en primera persona.",
-  "artifacts.config.client.items.show_tooltips": "Mostrar las descripciones.",
-  "artifacts.config.client.mimic.use_modded_textures": "Usar texturas de cofres de otros mods."
+  "text.autoconfig.artifacts.option.common.artifactRarity": "Rareza de Artefactos.",
+  "text.autoconfig.artifacts.option.common.campsite.count": "Cantidad de campamentos",
+  "text.autoconfig.artifacts.option.common.campsite.mimicChance": "Probabilidad de generar mimics en campamentos.",
+  "text.autoconfig.artifacts.option.common.campsite.useModdedChests": "Usar cofres de otros mods.",
+  "text.autoconfig.artifacts.option.client.modifyHurtSounds": "Modificar los sonidos de daño en el jugador.",
+  "text.autoconfig.artifacts.option.client.showFirstPersonGloves": "Mostrar los guantes en primera persona.",
+  "text.autoconfig.artifacts.option.client.showTooltips": "Mostrar las descripciones.",
+  "text.autoconfig.artifacts.option.client.useModdedMimicTextures": "Usar texturas de cofres de otros mods."
 }

@@ -78,7 +78,10 @@ repositories {
     }
     maven {
         name "mixin-extras"
-        url 'https://jitpack.io'
+        url "https://jitpack.io"
+    }
+    maven {
+        url "https://maven.shedaniel.me/"
     }
 }
 
@@ -94,6 +97,8 @@ dependencies {
 
     implementation fg.deobf("be.florens:expandability-forge:${expandability_version}")
     jarJar "be.florens:expandability-forge:${expandability_version_range}"
+
+    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:9.0.94")
 }
 
 mixin {

@@ -84,11 +84,11 @@
   "artifacts.subtitles.entity.mimic.hurt": "Mimic ferito",
   "artifacts.subtitles.entity.mimic.death": "Morte del Mimic",
   "artifacts.subtitles.item.whoopee_cushion.fart": "Scoreggia",
-  "artifacts.config.common.artifact_rarity": "Rarità Manufatto",
-  "artifacts.config.common.campsite.mimic_chance": "Probabilità di mimic nel Campo base",
-  "artifacts.config.common.campsite.use_modded_chests": "Usa bauli delle mod",
-  "artifacts.config.client.items.modify_hurt_sounds": "Modifica i suoni del colpo sul giocatore",
-  "artifacts.config.client.items.show_first_person_gloves": "Mostra i guanti in prima persona",
-  "artifacts.config.client.items.show_tooltips": "Mostra suggerimenti oggetti",
-  "artifacts.config.client.mimic.use_modded_textures": "Usa texture dei bauli delle mod"
+  "text.autoconfig.artifacts.option.common.artifactRarity": "Rarità Manufatto",
+  "text.autoconfig.artifacts.option.common.campsite.mimicChance": "Probabilità di mimic nel Campo base",
+  "text.autoconfig.artifacts.option.common.campsite.useModdedChests": "Usa bauli delle mod",
+  "text.autoconfig.artifacts.option.client.modifyHurtSounds": "Modifica i suoni del colpo sul giocatore",
+  "text.autoconfig.artifacts.option.client.showFirstPersonGloves": "Mostra i guanti in prima persona",
+  "text.autoconfig.artifacts.option.client.showTooltips": "Mostra suggerimenti oggetti",
+  "text.autoconfig.artifacts.option.client.useModdedMimicTextures": "Usa texture dei bauli delle mod"
 }
