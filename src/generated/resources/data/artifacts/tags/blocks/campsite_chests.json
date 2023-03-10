@@ -1,0 +1,45 @@
+{
+  "values": [
+    "minecraft:chest",
+    {
+      "id": "quark:oak_chest",
+      "required": false
+    },
+    {
+      "id": "quark:spruce_chest",
+      "required": false
+    },
+    {
+      "id": "quark:birch_chest",
+      "required": false
+    },
+    {
+      "id": "quark:jungle_chest",
+      "required": false
+    },
+    {
+      "id": "quark:acacia_chest",
+      "required": false
+    },
+    {
+      "id": "quark:dark_oak_chest",
+      "required": false
+    },
+    {
+      "id": "quark:warped_chest",
+      "required": false
+    },
+    {
+      "id": "quark:crimson_chest",
+      "required": false
+    },
+    {
+      "id": "quark:azalea_chest",
+      "required": false
+    },
+    {
+      "id": "quark:mangrove_chest",
+      "required": false
+    }
+  ]
+}

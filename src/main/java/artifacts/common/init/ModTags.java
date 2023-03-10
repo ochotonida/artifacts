@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 public class ModTags {
 
     public static final TagKey<Block> MINEABLE_WITH_DIGGING_CLAWS = create(Registry.BLOCK_REGISTRY, "mineable/digging_claws");
+    public static final TagKey<Block> CAMPSITE_CHESTS = create(Registry.BLOCK_REGISTRY, "campsite_chests");
     public static final TagKey<MobEffect> ANTIDOTE_VESSEL_CANCELLABLE = create(Registry.MOB_EFFECT_REGISTRY, "antidote_vessel_cancellable");
     public static final TagKey<EntityType<?>> CREEPERS = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(Artifacts.MODID, "creepers"));
 

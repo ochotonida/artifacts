@@ -30,13 +30,27 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
     public final Material vanillaChestMaterial;
     public final List<Material> chestMaterials;
 
+    public static final List<String> QUARK_CHEST_TYPES = Arrays.asList(
+            "oak",
+            "spruce",
+            "birch",
+            "jungle",
+            "acacia",
+            "dark_oak",
+            "warped",
+            "crimson",
+            "azalea",
+            "blossom",
+            "mangrove"
+    );
+
     @SuppressWarnings("deprecation")
     public MimicChestLayer(RenderLayerParent<MimicEntity, MimicModel> entityRenderer, EntityModelSet modelSet) {
         super(entityRenderer);
 
         Calendar calendar = Calendar.getInstance();
-        boolean isChristmas = calendar.get(Calendar.MONTH) + 1 == 12 && calendar.get(Calendar.DATE) >= 24 && calendar.get(Calendar.DATE) <= 26
-                || calendar.get(Calendar.MONTH) + 1 == 4 && calendar.get(Calendar.DATE) == 1;
+        boolean isChristmas = calendar.get(Calendar.MONTH) == Calendar.DECEMBER && calendar.get(Calendar.DATE) >= 24 && calendar.get(Calendar.DATE) <= 26
+                || calendar.get(Calendar.MONTH) == Calendar.APRIL && calendar.get(Calendar.DATE) == 1;
 
         chestModel = new MimicChestLayerModel(modelSet.bakeLayer(MimicChestLayerModel.LAYER_LOCATION));
         chestMaterials = new ArrayList<>();
@@ -47,19 +61,8 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
             chestMaterials.add(new Material(TextureAtlas.LOCATION_BLOCKS, chestLocation));
         } else {
             if (!isChristmas && ModList.get().isLoaded("quark")) {
-                List<String> chestTypes = Arrays.asList(
-                        "oak",
-                        "spruce",
-                        "birch",
-                        "jungle",
-                        "acacia",
-                        "dark_oak",
-                        "warped",
-                        "crimson"
-                );
-
                 ResourceLocation atlas = new ResourceLocation("textures/atlas/chest.png");
-                for (String chestType : chestTypes) {
+                for (String chestType : QUARK_CHEST_TYPES) {
                     ResourceLocation chestLocation = new ResourceLocation("quark", String.format("model/chest/%s/normal", chestType));
                     chestMaterials.add(new Material(atlas, chestLocation));
                 }
