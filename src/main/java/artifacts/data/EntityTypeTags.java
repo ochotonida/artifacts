@@ -19,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class EntityTypeTags extends EntityTypeTagsProvider {
 
-    private static final TagKey<EntityType<?>> MOB_IMPRISONMENT_TOOL_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("industrialforegoing", "mob_imprisonment_tool_blacklist"));
+    private static final TagKey<EntityType<?>> MOB_DUPLICATOR_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("industrialforegoing", "mob_duplicator_blacklist"));
 
     public EntityTypeTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, lookupProvider, Artifacts.MODID, existingFileHelper);
@@ -27,7 +27,7 @@ public class EntityTypeTags extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(MOB_IMPRISONMENT_TOOL_BLACKLIST).add(ModEntityTypes.MIMIC.get());
+        tag(MOB_DUPLICATOR_BLACKLIST).add(ModEntityTypes.MIMIC.get());
         tag(ModTags.CREEPERS).add(EntityType.CREEPER);
 
         List<String> creepers = Arrays.asList(
