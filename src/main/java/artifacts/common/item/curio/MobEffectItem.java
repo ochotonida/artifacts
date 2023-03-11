@@ -4,8 +4,11 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.SlotResult;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class MobEffectItem extends CurioItem {
@@ -29,13 +32,17 @@ public class MobEffectItem extends CurioItem {
         return !isEnabled.get();
     }
 
-    protected boolean isActive(LivingEntity entity) {
-        return isEnabled.get();
+    public boolean isEffectActive(LivingEntity entity) {
+        if (!isEnabled.get()) {
+            return false;
+        }
+        Optional<SlotResult> curio = CuriosApi.getCuriosHelper().findFirstCurio(entity, this);
+        return curio.isPresent() && isActivated(curio.get().stack());
     }
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        if (isActive(slotContext.entity()) && !slotContext.entity().level.isClientSide()) {
+        if (isEffectActive(slotContext.entity()) && !slotContext.entity().level.isClientSide()) {
             slotContext.entity().addEffect(new MobEffectInstance(mobEffect, duration - 1, 0, true, false));
         }
     }

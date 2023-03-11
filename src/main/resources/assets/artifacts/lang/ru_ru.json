@@ -28,7 +28,7 @@
   "artifacts.tooltip.item.helium_flamingo.swimming": "Позволяет владельцу плавать по воздуху в течение ограниченного периода времени.",
   "artifacts.tooltip.item.kitty_slippers": "Криперы избегают владельца.",
   "artifacts.tooltip.item.lucky_scarf.single_level": "Налаживает дополнительный уровень удачи к добываемым блокам.",
-  "artifacts.tooltip.item.night_vision_goggles.night_vision": "Позволяет владельцу видеть в темноте.",
+  "artifacts.tooltip.item.night_vision_goggles": "Позволяет владельцу видеть в темноте.",
   "artifacts.tooltip.item.obsidian_skull": "Владелец становится временно неуязвим к огненному урону при ранении от огня.",
   "artifacts.tooltip.item.panic_necklace": "Увеличивает скорость движения владельца после получения урона.",
   "artifacts.tooltip.item.pocket_piston": "Увеличивает отбрасывание, наносимое владельцу.",

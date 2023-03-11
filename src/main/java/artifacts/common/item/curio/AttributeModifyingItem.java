@@ -50,6 +50,7 @@ public abstract class AttributeModifyingItem extends CurioItem {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
+        super.onEquip(slotContext, originalStack, newStack);
         if (!slotContext.entity().level.isClientSide()) {
             AttributeInstance attributeInstance = slotContext.entity().getAttribute(attribute);
             if (attributeInstance != null) {
