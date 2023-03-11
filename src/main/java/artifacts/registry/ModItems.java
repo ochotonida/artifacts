@@ -10,7 +10,6 @@ import artifacts.item.wearable.belt.*;
 import artifacts.item.wearable.feet.*;
 import artifacts.item.wearable.hands.*;
 import artifacts.item.wearable.head.DrinkingHatItem;
-import artifacts.item.wearable.head.NightVisionGogglesItem;
 import artifacts.item.wearable.head.SuperstitiousHatItem;
 import artifacts.item.wearable.head.VillagerHatItem;
 import artifacts.item.wearable.necklace.*;
@@ -56,7 +55,7 @@ public class ModItems {
     public static final RegistryObject<WearableArtifactItem> PLASTIC_DRINKING_HAT = ITEMS.register("plastic_drinking_hat", () -> new DrinkingHatItem(ModGameRules.PLASTIC_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER, ModGameRules.PLASTIC_DRINKING_HAT_EATING_DURATION_MULTIPLIER, false));
     public static final RegistryObject<WearableArtifactItem> NOVELTY_DRINKING_HAT = ITEMS.register("novelty_drinking_hat", () -> new DrinkingHatItem(ModGameRules.NOVELTY_DRINKING_HAT_DRINKING_DURATION_MULTIPLIER, ModGameRules.NOVELTY_DRINKING_HAT_EATING_DURATION_MULTIPLIER, true));
     public static final RegistryObject<WearableArtifactItem> SNORKEL = ITEMS.register("snorkel", () -> new MobEffectItem(MobEffects.WATER_BREATHING, ModGameRules.SNORKEL_ENABLED));
-    public static final RegistryObject<WearableArtifactItem> NIGHT_VISION_GOGGLES = ITEMS.register("night_vision_goggles", NightVisionGogglesItem::new);
+    public static final RegistryObject<WearableArtifactItem> NIGHT_VISION_GOGGLES = ITEMS.register("night_vision_goggles", () -> new MobEffectItem(MobEffects.NIGHT_VISION, 320, ModGameRules.NIGHT_VISION_GOGGLES_ENABLED));
     public static final RegistryObject<WearableArtifactItem> VILLAGER_HAT = ITEMS.register("villager_hat", VillagerHatItem::new);
     public static final RegistryObject<WearableArtifactItem> SUPERSTITIOUS_HAT = ITEMS.register("superstitious_hat", SuperstitiousHatItem::new);
 

@@ -1,13 +1,9 @@
 package artifacts.item.wearable.belt;
 
 import artifacts.item.wearable.WearableArtifactItem;
-import artifacts.network.DoubleJumpPacket;
-import artifacts.network.NetworkHandler;
 import artifacts.registry.ModGameRules;
 import artifacts.registry.ModItems;
 import artifacts.registry.ModSoundEvents;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
@@ -16,13 +12,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -30,7 +21,6 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 public class CloudInABottleItem extends WearableArtifactItem {
 
     public CloudInABottleItem() {
-        MinecraftForge.EVENT_BUS.register(new DoubleJumpHandler());
         addListener(EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
     }
 
@@ -39,7 +29,7 @@ public class CloudInABottleItem extends WearableArtifactItem {
         return !ModGameRules.CLOUD_IN_A_BOTTLE_ENABLED.get();
     }
 
-    public void jump(Player player) {
+    public static void jump(Player player) {
         player.fallDistance = 0;
 
         double upwardsMotion = 0.5;
@@ -84,37 +74,5 @@ public class CloudInABottleItem extends WearableArtifactItem {
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
         return new ICurio.SoundInfo(SoundEvents.BOTTLE_FILL_DRAGONBREATH, 1, 1);
-    }
-
-    private class DoubleJumpHandler {
-
-        @OnlyIn(Dist.CLIENT)
-        private boolean canDoubleJump;
-
-        @OnlyIn(Dist.CLIENT)
-        private boolean hasReleasedJumpKey;
-
-        @SubscribeEvent
-        @OnlyIn(Dist.CLIENT)
-        @SuppressWarnings("unused")
-        public void onClientTick(TickEvent.ClientTickEvent event) {
-            LocalPlayer player = Minecraft.getInstance().player;
-
-            // noinspection ConstantConditions
-            if (event.phase == TickEvent.Phase.END && player != null && player.input != null && ModGameRules.CLOUD_IN_A_BOTTLE_ENABLED.get()) {
-                if ((player.isOnGround() || player.onClimbable()) && !player.isInWater()) {
-                    hasReleasedJumpKey = false;
-                    canDoubleJump = true;
-                } else if (!player.input.jumping) {
-                    hasReleasedJumpKey = true;
-                } else if (!player.getAbilities().flying && canDoubleJump && hasReleasedJumpKey) {
-                    canDoubleJump = false;
-                    if (isEquippedBy(player)) {
-                        NetworkHandler.INSTANCE.sendToServer(new DoubleJumpPacket());
-                        jump(player);
-                    }
-                }
-            }
-        }
     }
 }

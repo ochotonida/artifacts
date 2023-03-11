@@ -1,6 +1,6 @@
 package artifacts.network;
 
-import artifacts.registry.ModItems;
+import artifacts.item.wearable.belt.CloudInABottleItem;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,7 +26,7 @@ public class DoubleJumpPacket {
         ServerPlayer player = context.get().getSender();
         if (player != null) {
             context.get().enqueueWork(() -> {
-                ModItems.CLOUD_IN_A_BOTTLE.get().jump(player);
+                CloudInABottleItem.jump(player);
 
                 for (int i = 0; i < 20; ++i) {
                     double motionX = player.getRandom().nextGaussian() * 0.02;

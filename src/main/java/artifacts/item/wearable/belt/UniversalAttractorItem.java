@@ -2,8 +2,6 @@ package artifacts.item.wearable.belt;
 
 import artifacts.item.wearable.WearableArtifactItem;
 import artifacts.registry.ModGameRules;
-import artifacts.registry.ModKeyMappings;
-import net.minecraft.client.KeyMapping;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -19,15 +17,6 @@ public class UniversalAttractorItem extends WearableArtifactItem {
 
     public UniversalAttractorItem() {
         MinecraftForge.EVENT_BUS.addListener(this::onItemToss);
-    }
-
-    protected KeyMapping getToggleKey() {
-        return ModKeyMappings.TOGGLE_UNIVERSAL_ATTRACTOR;
-    }
-
-    @Override
-    public boolean isToggleable() {
-        return true;
     }
 
     @Override

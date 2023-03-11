@@ -1,6 +1,6 @@
 package artifacts.item.wearable.feet;
 
-import artifacts.item.wearable.HurtSoundModifyingItem;
+import artifacts.item.wearable.WearableArtifactItem;
 import artifacts.registry.ModGameRules;
 import artifacts.registry.ModTags;
 import net.minecraft.sounds.SoundEvents;
@@ -18,10 +18,9 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
-public class KittySlippersItem extends HurtSoundModifyingItem {
+public class KittySlippersItem extends WearableArtifactItem {
 
     public KittySlippersItem() {
-        super(SoundEvents.CAT_HURT);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJoinWorld);
         addListener(LivingChangeTargetEvent.class, this::onLivingChangeTargetEvent, LivingChangeTargetEvent::getNewTarget);
         addListener(LivingEvent.LivingTickEvent.class, this::onLivingUpdate, event -> event.getEntity().getLastHurtByMob());

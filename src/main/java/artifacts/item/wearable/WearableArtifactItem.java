@@ -1,10 +1,8 @@
 package artifacts.item.wearable;
 
 import artifacts.Artifacts;
+import artifacts.client.InputEventHandler;
 import artifacts.item.ArtifactItem;
-import artifacts.network.NetworkHandler;
-import artifacts.network.ToggleArtifactPacket;
-import artifacts.registry.ModGameRules;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -13,11 +11,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.SlotResult;
@@ -29,12 +25,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public abstract class WearableArtifactItem extends ArtifactItem implements ICurioItem {
-
-    protected WearableArtifactItem() {
-        if (isToggleable()) {
-            MinecraftForge.EVENT_BUS.register(new ToggleInputEventHandler());
-        }
-    }
 
     public boolean isEquippedBy(@Nullable LivingEntity entity) {
         return entity != null && CuriosApi.getCuriosHelper().findFirstCurio(entity, this).isPresent();
@@ -73,24 +63,14 @@ public abstract class WearableArtifactItem extends ArtifactItem implements ICuri
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        if (prevStack.getItem() != this && !slotContext.entity().level.isClientSide()) {
+        if (!isActivated(stack) && prevStack.getItem() != this && !slotContext.entity().level.isClientSide()) {
             setActivated(stack, true);
         }
     }
 
-    protected KeyMapping getToggleKey() {
-        return null;
-    }
-
-    public boolean isToggleable() {
-        return false;
-    }
-
     public void toggleItem(ServerPlayer player) {
-        if (isToggleable()) {
-            for (SlotResult curio : CuriosApi.getCuriosHelper().findCurios(player, this)) {
-                setActivated(curio.stack(), !isActivated(curio.stack()));
-            }
+        for (SlotResult curio : CuriosApi.getCuriosHelper().findCurios(player, this)) {
+            setActivated(curio.stack(), !isActivated(curio.stack()));
         }
     }
 
@@ -105,24 +85,9 @@ public abstract class WearableArtifactItem extends ArtifactItem implements ICuri
     @Override
     protected void addEffectsTooltip(List<MutableComponent> tooltip) {
         super.addEffectsTooltip(tooltip);
-        if (isToggleable() && !getToggleKey().isUnbound()) {
-            tooltip.add(Component.translatable("%s.tooltip.toggle_keymapping".formatted(Artifacts.MODID), getToggleKey().getTranslatedKeyMessage()));
-        }
-    }
-
-    private class ToggleInputEventHandler {
-
-        private boolean wasToggleKeyDown;
-
-        @SubscribeEvent
-        public void onClientTick(TickEvent.ClientTickEvent event) {
-            boolean isToggleKeyDown = getToggleKey().isDown();
-
-            if (isToggleKeyDown && !wasToggleKeyDown && ModGameRules.isInitialized() && !isCosmetic()) {
-                NetworkHandler.INSTANCE.sendToServer(new ToggleArtifactPacket(WearableArtifactItem.this));
-            }
-
-            wasToggleKeyDown = isToggleKeyDown;
+        KeyMapping key = InputEventHandler.getToggleKey(this);
+        if (key != null && !key.isUnbound()) {
+            tooltip.add(Component.translatable("%s.tooltip.toggle_keymapping".formatted(Artifacts.MODID), InputEventHandler.getToggleKey(this).getTranslatedKeyMessage()));
         }
     }
 }
