@@ -1,10 +1,10 @@
 package artifacts.data;
 
 import artifacts.Artifacts;
-import artifacts.common.entity.MimicEntity;
-import artifacts.common.init.ModItems;
-import artifacts.common.loot.ConfigurableRandomChance;
-import artifacts.common.world.CampsiteFeature;
+import artifacts.entity.MimicEntity;
+import artifacts.loot.ConfigurableRandomChance;
+import artifacts.registry.ModItems;
+import artifacts.world.CampsiteFeature;
 import com.google.common.base.Preconditions;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;

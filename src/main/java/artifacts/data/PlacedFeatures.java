@@ -1,9 +1,9 @@
 package artifacts.data;
 
 import artifacts.Artifacts;
-import artifacts.common.world.CampsiteCountPlacement;
-import artifacts.common.world.CampsiteHeightRangePlacement;
-import artifacts.common.world.CeilingHeightFilter;
+import artifacts.world.placement.CampsiteCountPlacement;
+import artifacts.world.placement.CampsiteHeightRangePlacement;
+import artifacts.world.placement.CeilingHeightFilter;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;

@@ -1,7 +1,7 @@
 package artifacts.data;
 
 import artifacts.Artifacts;
-import artifacts.common.init.ModFeatures;
+import artifacts.registry.ModFeatures;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;

@@ -1,9 +1,9 @@
 package artifacts;
 
-import artifacts.common.capability.SwimHandler;
-import artifacts.common.config.ModConfig;
-import artifacts.common.init.*;
-import artifacts.common.network.NetworkHandler;
+import artifacts.capability.SwimHandler;
+import artifacts.config.ModConfig;
+import artifacts.network.NetworkHandler;
+import artifacts.registry.*;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;

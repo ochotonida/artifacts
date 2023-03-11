@@ -1,6 +1,6 @@
 package artifacts.mixin.item.umbrella;
 
-import artifacts.common.item.UmbrellaItem;
+import artifacts.item.UmbrellaItem;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;

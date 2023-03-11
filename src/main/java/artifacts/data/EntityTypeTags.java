@@ -1,8 +1,8 @@
 package artifacts.data;
 
 import artifacts.Artifacts;
-import artifacts.common.init.ModEntityTypes;
-import artifacts.common.init.ModTags;
+import artifacts.registry.ModEntityTypes;
+import artifacts.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;

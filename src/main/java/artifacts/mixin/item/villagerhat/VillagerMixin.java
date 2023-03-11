@@ -1,7 +1,7 @@
 package artifacts.mixin.item.villagerhat;
 
-import artifacts.common.init.ModGameRules;
-import artifacts.common.init.ModItems;
+import artifacts.registry.ModGameRules;
+import artifacts.registry.ModItems;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;

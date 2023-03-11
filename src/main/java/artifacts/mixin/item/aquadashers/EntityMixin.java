@@ -1,7 +1,7 @@
 package artifacts.mixin.item.aquadashers;
 
-import artifacts.common.init.ModItems;
-import artifacts.common.init.ModSoundEvents;
+import artifacts.registry.ModItems;
+import artifacts.registry.ModSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;

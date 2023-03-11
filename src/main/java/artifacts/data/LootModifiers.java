@@ -1,9 +1,9 @@
 package artifacts.data;
 
 import artifacts.Artifacts;
-import artifacts.common.init.ModItems;
-import artifacts.common.loot.ConfigurableRandomChance;
-import artifacts.common.loot.RollLootTableModifier;
+import artifacts.loot.ConfigurableRandomChance;
+import artifacts.loot.RollLootTableModifier;
+import artifacts.registry.ModItems;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.data.PackOutput;

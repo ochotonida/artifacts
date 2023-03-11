@@ -1,16 +1,16 @@
 package artifacts;
 
-import artifacts.client.render.artifact.ArtifactLayers;
-import artifacts.client.render.artifact.ArtifactRenderers;
-import artifacts.client.render.artifact.renderer.ArmRenderHandler;
-import artifacts.client.render.entity.MimicRenderer;
-import artifacts.client.render.entity.model.MimicChestLayerModel;
-import artifacts.client.render.entity.model.MimicModel;
-import artifacts.common.capability.SwimHandler;
-import artifacts.common.init.ModEntityTypes;
-import artifacts.common.init.ModGameRules;
-import artifacts.common.init.ModItems;
-import artifacts.common.init.ModKeyMappings;
+import artifacts.capability.SwimHandler;
+import artifacts.client.item.ArtifactLayers;
+import artifacts.client.item.ArtifactRenderers;
+import artifacts.client.item.renderer.ArmRenderHandler;
+import artifacts.client.mimic.MimicRenderer;
+import artifacts.client.mimic.model.MimicChestLayerModel;
+import artifacts.client.mimic.model.MimicModel;
+import artifacts.registry.ModEntityTypes;
+import artifacts.registry.ModGameRules;
+import artifacts.registry.ModItems;
+import artifacts.registry.ModKeyMappings;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;

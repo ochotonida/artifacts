@@ -1,6 +1,6 @@
 package artifacts.mixin.item.umbrella;
 
-import artifacts.common.item.UmbrellaItem;
+import artifacts.item.UmbrellaItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.InteractionHand;

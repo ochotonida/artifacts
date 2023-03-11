@@ -1,8 +1,8 @@
 package artifacts.data;
 
 import artifacts.Artifacts;
-import artifacts.client.render.entity.MimicChestLayer;
-import artifacts.common.init.ModTags;
+import artifacts.client.mimic.MimicChestLayer;
+import artifacts.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;

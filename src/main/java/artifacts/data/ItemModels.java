@@ -1,7 +1,7 @@
 package artifacts.data;
 
 import artifacts.Artifacts;
-import artifacts.common.init.ModItems;
+import artifacts.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
