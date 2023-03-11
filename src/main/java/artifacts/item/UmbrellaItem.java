@@ -1,14 +1,11 @@
 package artifacts.item;
 
-import artifacts.Artifacts;
 import artifacts.capability.SwimHandler;
 import artifacts.registry.ModGameRules;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -18,15 +15,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 import java.util.UUID;
@@ -102,30 +95,5 @@ public class UmbrellaItem extends ArtifactItem {
 
     public static boolean isHoldingUmbrellaUpright(LivingEntity entity) {
         return isHoldingUmbrellaUpright(entity, InteractionHand.MAIN_HAND) || isHoldingUmbrellaUpright(entity, InteractionHand.OFF_HAND);
-    }
-
-    @SuppressWarnings("unused")
-    @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Artifacts.MOD_ID)
-    public static class ClientEvents {
-
-        @SubscribeEvent
-        public static void onLivingRender(RenderLivingEvent.Pre<?, ?> event) {
-            if (!(event.getRenderer().getModel() instanceof HumanoidModel<?> model)) {
-                return;
-            }
-
-            LivingEntity entity = event.getEntity();
-
-            boolean isHoldingOffHand = isHoldingUmbrellaUpright(entity, InteractionHand.OFF_HAND);
-            boolean isHoldingMainHand = isHoldingUmbrellaUpright(entity, InteractionHand.MAIN_HAND);
-            boolean isRightHanded = entity.getMainArm() == HumanoidArm.RIGHT;
-
-            if ((isHoldingMainHand && isRightHanded) || (isHoldingOffHand && !isRightHanded)) {
-                model.rightArmPose = HumanoidModel.ArmPose.THROW_SPEAR;
-            }
-            if ((isHoldingMainHand && !isRightHanded) || (isHoldingOffHand && isRightHanded)) {
-                model.leftArmPose = HumanoidModel.ArmPose.THROW_SPEAR;
-            }
-        }
     }
 }

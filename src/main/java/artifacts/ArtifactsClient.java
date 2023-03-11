@@ -3,6 +3,7 @@ package artifacts;
 import artifacts.client.HeliumFlamingoOverlayRenderer;
 import artifacts.client.HurtSoundEventHandler;
 import artifacts.client.InputEventHandler;
+import artifacts.client.UmbrellaArmPoseHandler;
 import artifacts.client.item.ArtifactLayers;
 import artifacts.client.item.ArtifactRenderers;
 import artifacts.client.item.renderer.ArmRenderHandler;
@@ -44,6 +45,7 @@ public class ArtifactsClient {
         ArtifactRenderers.register();
         InputEventHandler.setup();
         HurtSoundEventHandler.setup();
+        UmbrellaArmPoseHandler.setup();
     }
 
     public void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
