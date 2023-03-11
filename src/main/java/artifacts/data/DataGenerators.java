@@ -9,17 +9,13 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-@Mod.EventBusSubscriber(modid = Artifacts.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
-    @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
@@ -35,6 +31,8 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new LootTables(packOutput, existingFileHelper, lootModifiers));
         generator.addProvider(event.includeServer(), new EntityTypeTags(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new MobEffectTags(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new SoundDefinitions(packOutput, existingFileHelper));
+        generator.addProvider(event.includeServer(), new Advancements(packOutput, lookupProvider, existingFileHelper));
 
         generator.addProvider(event.includeClient(), new ItemModels(packOutput, existingFileHelper));
 

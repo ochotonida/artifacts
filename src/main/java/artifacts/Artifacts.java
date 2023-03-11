@@ -2,6 +2,7 @@ package artifacts;
 
 import artifacts.capability.SwimHandler;
 import artifacts.config.ModConfig;
+import artifacts.data.DataGenerators;
 import artifacts.network.NetworkHandler;
 import artifacts.registry.*;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -44,7 +45,6 @@ public class Artifacts {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.ITEMS.register(modBus);
-        modBus.addListener(ModItems::registerTab);
         ModEntityTypes.ENTITY_TYPES.register(modBus);
         ModSoundEvents.SOUND_EVENTS.register(modBus);
         ModPlacementModifierTypes.PLACEMENT_MODIFIERS.register(modBus);
@@ -55,6 +55,8 @@ public class Artifacts {
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::enqueueIMC);
 
+        modBus.addListener(ModItems::registerTab);
+        modBus.addListener(DataGenerators::gatherData);
         modBus.addListener(ModEntityTypes::registerAttributes);
 
         MinecraftForge.EVENT_BUS.addListener(ModGameRules::onPlayerJoinWorld);

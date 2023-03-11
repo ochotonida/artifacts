@@ -1,0 +1,56 @@
+{
+  "block.water.step": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.cod.flop"
+      }
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.mimic.close": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.chest.close"
+      }
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.close"
+  },
+  "entity.mimic.death": {
+    "sounds": [
+      "artifacts:mimic/death1",
+      "artifacts:mimic/death2"
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.death"
+  },
+  "entity.mimic.hurt": {
+    "sounds": [
+      "artifacts:mimic/hurt1",
+      "artifacts:mimic/hurt2",
+      "artifacts:mimic/hurt3"
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.hurt"
+  },
+  "entity.mimic.open": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.chest.open"
+      }
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.open"
+  },
+  "generic.pop": {
+    "sounds": [
+      "random/pop"
+    ]
+  },
+  "item.whoopee_cushion.fart": {
+    "sounds": [
+      "artifacts:fart1",
+      "artifacts:fart2"
+    ],
+    "subtitle": "artifacts.subtitles.item.whoopee_cushion.fart"
+  }
+}
