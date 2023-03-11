@@ -1,8 +1,8 @@
 package artifacts;
 
-import artifacts.client.render.curio.CurioLayers;
-import artifacts.client.render.curio.CurioRenderers;
-import artifacts.client.render.curio.renderer.ArmRenderHandler;
+import artifacts.client.render.artifact.ArtifactLayers;
+import artifacts.client.render.artifact.ArtifactRenderers;
+import artifacts.client.render.artifact.renderer.ArmRenderHandler;
 import artifacts.client.render.entity.MimicRenderer;
 import artifacts.client.render.entity.model.MimicChestLayerModel;
 import artifacts.client.render.entity.model.MimicModel;
@@ -49,7 +49,7 @@ public class ArtifactsClient {
                         new ResourceLocation(Artifacts.MODID, "blocking"),
                         (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0)
         );
-        CurioRenderers.register();
+        ArtifactRenderers.register();
     }
 
     public void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -57,7 +57,7 @@ public class ArtifactsClient {
     }
 
     public void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        CurioLayers.register(event);
+        ArtifactLayers.register(event);
         event.registerLayerDefinition(MimicModel.LAYER_LOCATION, MimicModel::createLayer);
         event.registerLayerDefinition(MimicChestLayerModel.LAYER_LOCATION, MimicChestLayerModel::createLayer);
     }

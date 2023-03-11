@@ -1,6 +1,6 @@
 package artifacts.common.network;
 
-import artifacts.common.item.curio.CurioItem;
+import artifacts.common.item.wearable.WearableArtifactItem;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
@@ -11,17 +11,17 @@ import java.util.function.Supplier;
 
 public class ToggleArtifactPacket {
 
-    private final CurioItem item;
+    private final WearableArtifactItem item;
 
     public ToggleArtifactPacket(FriendlyByteBuf buffer) {
         Item item = ForgeRegistries.ITEMS.getValue(buffer.readResourceLocation());
-        if (!(item instanceof CurioItem curioItem)) {
+        if (!(item instanceof WearableArtifactItem wearableArtifactItem)) {
             throw new IllegalStateException();
         }
-        this.item = curioItem;
+        this.item = wearableArtifactItem;
     }
 
-    public ToggleArtifactPacket(CurioItem item) {
+    public ToggleArtifactPacket(WearableArtifactItem item) {
         this.item = item;
     }
 
