@@ -21,7 +21,7 @@ public class MobEffectTags extends IntrinsicHolderTagsProvider<MobEffect> {
                 Registries.MOB_EFFECT,
                 lookupProvider,
                 effect -> ForgeRegistries.MOB_EFFECTS.getResourceKey(effect).orElseThrow(),
-                Artifacts.MODID,
+                Artifacts.MOD_ID,
                 existingFileHelper
         );
     }

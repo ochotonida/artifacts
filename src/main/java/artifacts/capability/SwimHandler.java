@@ -94,7 +94,7 @@ public class SwimHandler implements INBTSerializable<CompoundTag> {
         setSwimTime(nbt.getInt("SwimTime"));
     }
 
-    public static void init() {
+    public static void setup() {
         MinecraftForge.EVENT_BUS.addListener(SwimHandler::onRegisterCapabilities);
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, SwimHandler::onAttachCapabilities);
         MinecraftForge.EVENT_BUS.addListener(SwimHandler::onPlayerTick);

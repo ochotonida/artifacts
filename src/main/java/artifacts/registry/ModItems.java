@@ -29,17 +29,17 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, Artifacts.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, Artifacts.MOD_ID);
 
     public static CreativeModeTab CREATIVE_TAB;
 
     public static void registerTab(CreativeModeTabEvent.Register event) {
         CREATIVE_TAB = event.registerCreativeModeTab(Artifacts.id("main"), builder -> builder
                 .icon(() -> new ItemStack(ModItems.BUNNY_HOPPERS.get()))
-                .title(Component.translatable("%s.creative_tab".formatted(Artifacts.MODID)))
+                .title(Component.translatable("%s.creative_tab".formatted(Artifacts.MOD_ID)))
                 .displayItems((featureFlags, output, hasOp) -> ForgeRegistries.ITEMS.forEach(item -> {
                     ResourceLocation key = ForgeRegistries.ITEMS.getKey(item);
-                    if (key != null && key.getNamespace().equals(Artifacts.MODID)) {
+                    if (key != null && key.getNamespace().equals(Artifacts.MOD_ID)) {
                         output.accept(item);
                     }
                 }))

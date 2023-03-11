@@ -13,7 +13,6 @@ import artifacts.registry.ModEntityTypes;
 import artifacts.registry.ModItems;
 import artifacts.registry.ModKeyMappings;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
@@ -39,7 +38,7 @@ public class ArtifactsClient {
         event.enqueueWork(
                 () -> ItemProperties.register(
                         ModItems.UMBRELLA.get(),
-                        new ResourceLocation(Artifacts.MODID, "blocking"),
+                        Artifacts.id("blocking"),
                         (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0)
         );
         ArtifactRenderers.register();

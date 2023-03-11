@@ -105,7 +105,7 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     @SuppressWarnings("unused")
-    @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Artifacts.MODID)
+    @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Artifacts.MOD_ID)
     public static class ClientEvents {
 
         @SubscribeEvent

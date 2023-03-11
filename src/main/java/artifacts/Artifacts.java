@@ -27,10 +27,10 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
 
-@Mod(Artifacts.MODID)
+@Mod(Artifacts.MOD_ID)
 public class Artifacts {
 
-    public static final String MODID = "artifacts";
+    public static final String MOD_ID = "artifacts";
     public static ModConfig CONFIG;
 
     public Artifacts() {
@@ -40,7 +40,7 @@ public class Artifacts {
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> AutoConfig.getConfigScreen(ModConfig.class, parent).get()));
         CONFIG = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
-        SwimHandler.init();
+        SwimHandler.setup();
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -77,11 +77,11 @@ public class Artifacts {
     }
 
     public static ResourceLocation id(String path) {
-        return new ResourceLocation(Artifacts.MODID, path);
+        return new ResourceLocation(Artifacts.MOD_ID, path);
     }
 
     public static ResourceLocation id(String path, String... args) {
-        return new ResourceLocation(Artifacts.MODID, String.format(path, (Object[]) args));
+        return new ResourceLocation(Artifacts.MOD_ID, String.format(path, (Object[]) args));
     }
 
     public static <T> ResourceKey<T> key(ResourceKey<? extends Registry<T>> registry, String path) {

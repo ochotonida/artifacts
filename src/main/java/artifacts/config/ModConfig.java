@@ -7,7 +7,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
-@Config(name = Artifacts.MODID)
+@Config(name = Artifacts.MOD_ID)
 @Config.Gui.Background("minecraft:textures/block/mossy_cobblestone.png")
 public class ModConfig extends PartitioningSerializer.GlobalData {
 

@@ -9,7 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModLootConditions {
 
-    public static final DeferredRegister<LootItemConditionType> LOOT_CONDITIONS = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, Artifacts.MODID);
+    public static final DeferredRegister<LootItemConditionType> LOOT_CONDITIONS = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, Artifacts.MOD_ID);
 
     public static final RegistryObject<LootItemConditionType> CONFIGURABLE_ARTIFACT_CHANCE = LOOT_CONDITIONS.register("configurable_random_chance", () -> new LootItemConditionType(new ConfigurableRandomChance.Serializer()));
 }

@@ -37,7 +37,7 @@ public class DiggingClawsItem extends WearableArtifactItem {
     protected void addEffectsTooltip(List<MutableComponent> tooltip) {
         int tierLevel = getToolTierLevel();
         if (tierLevel > 0) {
-            tooltip.add(tooltipLine("mining_level", Component.translatable("%s.tooltip.tool_tier.%s".formatted(Artifacts.MODID, tierLevel))));
+            tooltip.add(tooltipLine("mining_level", Component.translatable("%s.tooltip.tool_tier.%s".formatted(Artifacts.MOD_ID, tierLevel))));
         }
         if (ModGameRules.DIGGING_CLAWS_DIG_SPEED_BONUS.get() > 0) {
             tooltip.add(tooltipLine("mining_speed"));

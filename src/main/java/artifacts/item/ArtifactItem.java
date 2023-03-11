@@ -46,18 +46,18 @@ public abstract class ArtifactItem extends Item {
 
     protected void addTooltip(List<MutableComponent> tooltip) {
         if (isCosmetic()) {
-            tooltip.add(Component.translatable("%s.tooltip.cosmetic".formatted(Artifacts.MODID)).withStyle(ChatFormatting.ITALIC));
+            tooltip.add(Component.translatable("%s.tooltip.cosmetic".formatted(Artifacts.MOD_ID)).withStyle(ChatFormatting.ITALIC));
         } else {
             addEffectsTooltip(tooltip);
         }
     }
 
     protected void addEffectsTooltip(List<MutableComponent> tooltip) {
-        tooltip.add(Component.translatable("%s.tooltip.item.%s".formatted(Artifacts.MODID, getTooltipItemName())));
+        tooltip.add(Component.translatable("%s.tooltip.item.%s".formatted(Artifacts.MOD_ID, getTooltipItemName())));
     }
 
     protected MutableComponent tooltipLine(String lineId, Object... args) {
-        return Component.translatable("%s.tooltip.item.%s.%s".formatted(Artifacts.MODID, getTooltipItemName(), lineId), args);
+        return Component.translatable("%s.tooltip.item.%s.%s".formatted(Artifacts.MOD_ID, getTooltipItemName(), lineId), args);
     }
 
     protected String getTooltipItemName() {

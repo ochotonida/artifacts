@@ -93,7 +93,7 @@ public class ModGameRules {
 
     private static String createName(RegistryObject<? extends Item> item, String name) {
         return String.format("%s.%s.%s",
-                Artifacts.MODID,
+                Artifacts.MOD_ID,
                 CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, item.getId().getPath()),
                 name
         );

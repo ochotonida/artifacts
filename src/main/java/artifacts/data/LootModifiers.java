@@ -31,7 +31,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
     protected List<Builder> lootBuilders = new ArrayList<>();
 
     public LootModifiers(PackOutput packOutput) {
-        super(packOutput, Artifacts.MODID);
+        super(packOutput, Artifacts.MOD_ID);
     }
 
     private void addLoot() {

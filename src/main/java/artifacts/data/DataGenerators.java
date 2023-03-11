@@ -36,7 +36,7 @@ public class DataGenerators {
 
         generator.addProvider(event.includeClient(), new ItemModels(packOutput, existingFileHelper));
 
-        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(generator.getPackOutput(), event.getLookupProvider(), createLevelProvider(), Set.of(Artifacts.MODID)));
+        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(generator.getPackOutput(), event.getLookupProvider(), createLevelProvider(), Set.of(Artifacts.MOD_ID)));
     }
 
     public static RegistrySetBuilder createLevelProvider() {

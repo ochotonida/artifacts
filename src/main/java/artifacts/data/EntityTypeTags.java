@@ -22,7 +22,7 @@ public class EntityTypeTags extends EntityTypeTagsProvider {
     private static final TagKey<EntityType<?>> MOB_DUPLICATOR_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("industrialforegoing", "mob_duplicator_blacklist"));
 
     public EntityTypeTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(packOutput, lookupProvider, Artifacts.MODID, existingFileHelper);
+        super(packOutput, lookupProvider, Artifacts.MOD_ID, existingFileHelper);
     }
 
     @Override

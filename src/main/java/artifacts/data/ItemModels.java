@@ -11,14 +11,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ItemModels extends ItemModelProvider {
 
     public ItemModels(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
-        super(packOutput, Artifacts.MODID, existingFileHelper);
+        super(packOutput, Artifacts.MOD_ID, existingFileHelper);
     }
 
     @Override
     protected void registerModels() {
         // noinspection ConstantConditions
         ForgeRegistries.ITEMS.getValues().stream()
-                .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(Artifacts.MODID))
+                .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(Artifacts.MOD_ID))
                 .filter(item -> item != ModItems.MIMIC_SPAWN_EGG.get())
                 .filter(item -> item != ModItems.UMBRELLA.get())
                 .forEach(this::addGeneratedModel);

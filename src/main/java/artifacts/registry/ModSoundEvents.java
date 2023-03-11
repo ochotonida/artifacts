@@ -8,7 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModSoundEvents {
 
-    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, Artifacts.MODID);
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, Artifacts.MOD_ID);
 
     public static final RegistryObject<SoundEvent>
             POP = register("generic.pop"),

@@ -52,8 +52,8 @@ public class Advancements extends ForgeAdvancementProvider {
     private static DisplayInfo display(String title, ItemLike icon) {
         return new DisplayInfo(
                 new ItemStack(icon),
-                Component.translatable("%s.advancements.%s.title".formatted(Artifacts.MODID, title)),
-                Component.translatable("%s.advancements.%s.description".formatted(Artifacts.MODID, title)),
+                Component.translatable("%s.advancements.%s.title".formatted(Artifacts.MOD_ID, title)),
+                Component.translatable("%s.advancements.%s.description".formatted(Artifacts.MOD_ID, title)),
                 null,
                 FrameType.TASK,
                 true,

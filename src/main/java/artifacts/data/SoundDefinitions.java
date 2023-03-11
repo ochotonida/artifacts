@@ -13,7 +13,7 @@ import net.minecraftforge.common.data.SoundDefinitionsProvider;
 public class SoundDefinitions extends SoundDefinitionsProvider {
 
     protected SoundDefinitions(PackOutput output, ExistingFileHelper helper) {
-        super(output, Artifacts.MODID, helper);
+        super(output, Artifacts.MOD_ID, helper);
     }
 
     @Override
@@ -56,6 +56,6 @@ public class SoundDefinitions extends SoundDefinitionsProvider {
     }
 
     private SoundDefinition addSubtitled(SoundEvent soundEvent) {
-        return add(soundEvent).subtitle("%s.subtitles.%s".formatted(Artifacts.MODID, soundEvent.getLocation().getPath()));
+        return add(soundEvent).subtitle("%s.subtitles.%s".formatted(Artifacts.MOD_ID, soundEvent.getLocation().getPath()));
     }
 }

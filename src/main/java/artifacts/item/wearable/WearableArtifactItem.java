@@ -87,7 +87,7 @@ public abstract class WearableArtifactItem extends ArtifactItem implements ICuri
         super.addEffectsTooltip(tooltip);
         KeyMapping key = InputEventHandler.getToggleKey(this);
         if (key != null && !key.isUnbound()) {
-            tooltip.add(Component.translatable("%s.tooltip.toggle_keymapping".formatted(Artifacts.MODID), InputEventHandler.getToggleKey(this).getTranslatedKeyMessage()));
+            tooltip.add(Component.translatable("%s.tooltip.toggle_keymapping".formatted(Artifacts.MOD_ID), InputEventHandler.getToggleKey(this).getTranslatedKeyMessage()));
         }
     }
 }

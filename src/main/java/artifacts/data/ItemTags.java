@@ -28,14 +28,14 @@ public class ItemTags extends ItemTagsProvider {
     private static final TagKey<Item> NECKLACE = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "necklace"));
 
     public ItemTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, BlockTags blockTags, @Nullable ExistingFileHelper existingFileHelper) {
-        super(packOutput, lookupProvider, blockTags, Artifacts.MODID, existingFileHelper);
+        super(packOutput, lookupProvider, blockTags, Artifacts.MOD_ID, existingFileHelper);
     }
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         // noinspection ConstantConditions
         tag(ARTIFACTS).add(ForgeRegistries.ITEMS.getValues().stream()
-                .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(Artifacts.MODID))
+                .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(Artifacts.MOD_ID))
                 .filter(item -> item != ModItems.MIMIC_SPAWN_EGG.get()).toList().toArray(new Item[]{})
         );
 
