@@ -76,7 +76,7 @@ public class ArtifactsClient {
         Minecraft minecraft = Minecraft.getInstance();
 
         if (
-                ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() <= 0
+                ModGameRules.isInitialized() && ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() <= 0
                 || !(minecraft.getCameraEntity() instanceof LivingEntity player)
         ) {
             return;
