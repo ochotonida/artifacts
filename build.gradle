@@ -101,7 +101,7 @@ dependencies {
     implementation fg.deobf("be.florens:expandability-forge:${expandability_version}")
     jarJar "be.florens:expandability-forge:${expandability_version_range}"
 
-    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:9.0.94")
+    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
 }
 
 mixin {

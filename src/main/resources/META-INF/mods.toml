@@ -38,3 +38,10 @@ description='''Adds various new powerful uncraftable items to make exploration a
     versionRange = "[7.0.0,)"
     ordering = "NONE"
     side = "BOTH"
+
+[[dependencies.artifacts]]
+    modId = "cloth_config"
+    mandatory = true
+    versionRange = "[9.0.94,)"
+    ordering = "NONE"
+    side = "BOTH"
