@@ -28,6 +28,9 @@ public class SuperstitiousHatItem extends WearableArtifactItem {
 
     @Override
     public int getLootingLevel(SlotContext slotContext, DamageSource source, LivingEntity target, int baseLooting, ItemStack stack) {
+        if (!ModGameRules.isInitialized()) {
+            return 0;
+        }
         return Math.max(0, ModGameRules.SUPERSTITIOUS_HAT_LOOTING_LEVEL_BONUS.get());
     }
 }

@@ -1,5 +1,6 @@
 package artifacts.item;
 
+import artifacts.registry.ModGameRules;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -49,7 +50,7 @@ public class EverlastingFoodItem extends ArtifactItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if (!isEnabled.get()) {
+        if (isEnabled.get()) {
             return InteractionResultHolder.pass(player.getItemInHand(hand));
         }
         return super.use(level, player, hand);
@@ -57,7 +58,7 @@ public class EverlastingFoodItem extends ArtifactItem {
 
     @Override
     public boolean isEdible() {
-        if (!isEnabled.get()) {
+        if (!ModGameRules.isInitialized() || !isEnabled.get()) {
             return false;
         }
         return super.isEdible();
