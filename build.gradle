@@ -21,7 +21,7 @@ mixin {
     add sourceSets.main, "artifacts.refmap.json"
 }
 
-version = '1.18.2-4.2.0'
+version = '1.18.2-4.2.1'
 group = 'artifacts'
 archivesBaseName = 'artifacts'
 
@@ -90,7 +90,7 @@ repositories {
     }
     maven {
         name "expandability"
-        url "https://maven.florens.be"
+        url "https://maven.florens.be/releases"
     }
 }
 
