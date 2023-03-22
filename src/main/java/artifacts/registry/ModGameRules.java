@@ -87,10 +87,6 @@ public class ModGameRules {
             VILLAGER_HAT_REPUTATION_BONUS = integerValue(createName(ModItems.VILLAGER_HAT, "reputationBonus"), 100),
             WHOOPEE_CUSHION_FART_CHANCE = integerValue(createName(ModItems.WHOOPEE_CUSHION, "fartChance"), 12);
 
-    public static boolean isInitialized() {
-        return ANTIDOTE_VESSEL_ENABLED.get() != null;
-    }
-
     private static String createName(RegistryObject<? extends Item> item, String name) {
         return String.format("%s.%s.%s",
                 Artifacts.MOD_ID,
@@ -100,9 +96,8 @@ public class ModGameRules {
     }
 
     private static BooleanValue booleanValue(String name) {
-        boolean defaultValue = true;
         BooleanValue result = new BooleanValue();
-        GameRules.Type<GameRules.BooleanValue> type = BooleanValueInvoker.invokeCreate(defaultValue, (server, value) -> {
+        GameRules.Type<GameRules.BooleanValue> type = BooleanValueInvoker.invokeCreate(true, (server, value) -> {
             result.update(value.get());
             NetworkHandler.INSTANCE.send(PacketDistributor.ALL.noArg(), new BooleanGameRuleChangedPacket(name, value.get()));
         });
@@ -117,6 +112,7 @@ public class ModGameRules {
 
     private static IntegerValue integerValue(String name, int defaultValue, BiConsumer<MinecraftServer, GameRules.IntegerValue> onChanged) {
         IntegerValue result = new IntegerValue();
+        result.update(defaultValue);
         GameRules.Type<GameRules.IntegerValue> type = IntegerValueInvoker.invokeCreate(defaultValue, (server, value) -> {
             result.update(value.get());
             NetworkHandler.INSTANCE.send(PacketDistributor.ALL.noArg(), new IntegerGameRuleChangedPacket(name, value.get()));
@@ -150,7 +146,7 @@ public class ModGameRules {
 
     public static class BooleanValue implements Supplier<Boolean> {
 
-        private Boolean value;
+        private Boolean value = true;
         private GameRules.Key<GameRules.BooleanValue> key;
 
         public Boolean get() {

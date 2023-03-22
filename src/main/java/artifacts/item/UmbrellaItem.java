@@ -68,9 +68,7 @@ public class UmbrellaItem extends ArtifactItem {
 
     @Override
     public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-        return ToolActions.DEFAULT_SHIELD_ACTIONS.contains(toolAction)
-                && ModGameRules.isInitialized()
-                && ModGameRules.UMBRELLA_IS_SHIELD.get();
+        return ToolActions.DEFAULT_SHIELD_ACTIONS.contains(toolAction) && ModGameRules.UMBRELLA_IS_SHIELD.get();
     }
 
     public UseAnim getUseAnimation(ItemStack stack) {

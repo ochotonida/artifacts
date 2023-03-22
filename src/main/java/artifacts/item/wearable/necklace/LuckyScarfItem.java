@@ -27,9 +27,6 @@ public class LuckyScarfItem extends WearableArtifactItem {
 
     @Override
     public int getFortuneLevel(SlotContext slotContext, LootContext lootContext, ItemStack stack) {
-        if (!ModGameRules.isInitialized()) {
-            return 0;
-        }
         return Math.max(0, ModGameRules.LUCKY_SCARF_FORTUNE_BONUS.get());
     }
 }
