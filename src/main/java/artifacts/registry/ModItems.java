@@ -37,7 +37,7 @@ public class ModItems {
         CREATIVE_TAB = event.registerCreativeModeTab(Artifacts.id("main"), builder -> builder
                 .icon(() -> new ItemStack(ModItems.BUNNY_HOPPERS.get()))
                 .title(Component.translatable("%s.creative_tab".formatted(Artifacts.MOD_ID)))
-                .displayItems((featureFlags, output, hasOp) -> ForgeRegistries.ITEMS.forEach(item -> {
+                .displayItems((parameters, output) -> ForgeRegistries.ITEMS.forEach(item -> {
                     ResourceLocation key = ForgeRegistries.ITEMS.getKey(item);
                     if (key != null && key.getNamespace().equals(Artifacts.MOD_ID)) {
                         output.accept(item);

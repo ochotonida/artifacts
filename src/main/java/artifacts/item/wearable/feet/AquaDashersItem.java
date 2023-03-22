@@ -5,11 +5,11 @@ import artifacts.item.wearable.WearableArtifactItem;
 import artifacts.registry.ModGameRules;
 import be.florens.expandability.api.forge.LivingFluidCollisionEvent;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.eventbus.api.Event;
 
+@SuppressWarnings("UnstableApiUsage")
 public class AquaDashersItem extends WearableArtifactItem {
 
     public AquaDashersItem() {
@@ -28,7 +28,7 @@ public class AquaDashersItem extends WearableArtifactItem {
                     event.setResult(Event.Result.ALLOW);
                     if (event.getFluidState().is(FluidTags.LAVA)) {
                         if (!wearer.fireImmune() && !EnchantmentHelper.hasFrostWalker(wearer)) {
-                            wearer.hurt(DamageSource.HOT_FLOOR, 1);
+                            wearer.hurt(wearer.damageSources().hotFloor(), 1);
                         }
                     }
                 }

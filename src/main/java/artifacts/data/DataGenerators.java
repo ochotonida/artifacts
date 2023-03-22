@@ -26,7 +26,7 @@ public class DataGenerators {
         LootModifiers lootModifiers = new LootModifiers(packOutput);
 
         generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new ItemTags(packOutput, lookupProvider, blockTags, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ItemTags(packOutput, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
         generator.addProvider(event.includeServer(), lootModifiers);
         generator.addProvider(event.includeServer(), new LootTables(packOutput, existingFileHelper, lootModifiers));
         generator.addProvider(event.includeServer(), new EntityTypeTags(packOutput, lookupProvider, existingFileHelper));

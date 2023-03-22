@@ -1,7 +1,6 @@
 package artifacts.item.wearable.necklace;
 
 import artifacts.registry.ModGameRules;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 
 public class ThornPendantItem extends PendantItem {
@@ -25,7 +24,7 @@ public class ThornPendantItem extends PendantItem {
             }
             int damage = minDamage + target.getRandom().nextInt(maxDamage - minDamage + 1);
             if (damage > 0) {
-                attacker.hurt(DamageSource.thorns(target), damage);
+                attacker.hurt(target.damageSources().thorns(target), damage);
             }
         }
     }

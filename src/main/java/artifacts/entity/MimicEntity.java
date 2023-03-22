@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
@@ -136,7 +137,7 @@ public class MimicEntity extends Mob implements Enemy {
                 attackCooldown <= 0
                 && player.getCommandSenderWorld().getDifficulty() != Difficulty.PEACEFUL
                 && distanceToSqr(player.getBoundingBox().getCenter().subtract(0, getBoundingBox().getYsize() / 2, 0)) < 1
-                && player.hurt(DamageSource.mobAttack(this), (float) getAttribute(Attributes.ATTACK_DAMAGE).getValue())
+                && player.hurt(damageSources().mobAttack(this), (float) getAttribute(Attributes.ATTACK_DAMAGE).getValue())
         ) {
             attackCooldown = 20;
             doEnchantDamageEffects(this, player);
@@ -155,7 +156,7 @@ public class MimicEntity extends Mob implements Enemy {
             setTarget(player);
         }
 
-        if (ticksInAir <= 0 && source.isProjectile() && !source.isBypassArmor()) {
+        if (ticksInAir <= 0 && source.is(DamageTypeTags.IS_PROJECTILE) && !source.is(DamageTypeTags.BYPASSES_ARMOR)) {
             playSound(ModSoundEvents.MIMIC_HURT.get(), getSoundVolume(), getVoicePitch());
             return false;
         }

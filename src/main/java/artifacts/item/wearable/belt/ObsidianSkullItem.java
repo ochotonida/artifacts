@@ -3,6 +3,7 @@ package artifacts.item.wearable.belt;
 import artifacts.item.wearable.WearableArtifactItem;
 import artifacts.registry.ModGameRules;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,7 +28,7 @@ public class ObsidianSkullItem extends WearableArtifactItem {
         if (
                 !wearer.level.isClientSide
                 && event.getAmount() >= 1
-                && event.getSource().isFire()
+                && event.getSource().is(DamageTypeTags.IS_FIRE)
                 && wearer instanceof Player player
                 && !player.getCooldowns().isOnCooldown(this)
         ) {

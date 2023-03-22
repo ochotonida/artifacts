@@ -4,7 +4,7 @@ import artifacts.registry.ModGameRules;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,14 +39,14 @@ public class ShockPendantItem extends PendantItem {
         if (!event.getEntity().level.isClientSide()
                 && ModGameRules.SHOCK_PENDANT_DO_CANCEL_LIGHTNING_DAMAGE.get()
                 && event.getAmount() > 0
-                && event.getSource() == DamageSource.LIGHTNING_BOLT) {
+                && event.getSource().is(DamageTypeTags.IS_LIGHTNING)) {
             event.setCanceled(true);
         }
     }
 
     @Override
     protected void applyEffect(LivingEntity target, LivingEntity attacker) {
-        if (attacker.level.canSeeSky(new BlockPos(attacker.position()))) {
+        if (attacker.level.canSeeSky(BlockPos.containing(attacker.position()))) {
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(attacker.level);
             if (lightningBolt != null) {
                 lightningBolt.moveTo(Vec3.atBottomCenterOf(attacker.blockPosition()));

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[44,)"
+loaderVersion="[45,)"
 issueTrackerURL="https://github.com/ochotonida/artifacts/issues"
 license="MIT"
 
@@ -14,34 +14,34 @@ description='''Adds various new powerful uncraftable items to make exploration a
 [[dependencies.artifacts]]
     modId="forge"
     mandatory=true
-    versionRange="[44.1.0,)"
+    versionRange="[45.0.0,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.artifacts]]
     modId = "minecraft"
     mandatory = true
-    versionRange = "[1.19.3,1.20)"
+    versionRange = "[1.19.4,1.20)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.artifacts]]
     modId = "curios"
     mandatory = true
-    versionRange = "[1.19.3-5.1.3.1,)"
+    versionRange = "[1.19.4-5.1.4.2,)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.artifacts]]
     modId = "expandability"
     mandatory = true
-    versionRange = "[7.0.0,)"
+    versionRange = "[8.0.0,)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.artifacts]]
     modId = "cloth_config"
     mandatory = true
-    versionRange = "[9.0.94,)"
+    versionRange = "[10.0.96,)"
     ordering = "NONE"
     side = "BOTH"

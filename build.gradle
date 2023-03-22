@@ -91,7 +91,7 @@ repositories {
 jarJar.enable()
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.3-44.1.16'
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
