@@ -6,6 +6,7 @@
     "artifacts:inject/chests/bastion_treasure",
     "artifacts:inject/chests/village/village_tannery",
     "artifacts:inject/chests/village/village_desert_house",
+    "artifacts:inject/entities/mooshroom",
     "artifacts:inject/chests/village/village_toolsmith",
     "artifacts:inject/chests/jungle_temple",
     "artifacts:inject/chests/end_city_treasure",

@@ -9,6 +9,7 @@ import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.common.loot.LootTableIdCondition;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,14 +37,18 @@ public class LootModifiers extends GlobalLootModifierProvider {
     }
 
     private void addLoot() {
-        lootBuilders.add(
-                new Builder("entities/cow")
-                        .lootPoolCondition(EverlastingBeefChance.everlastingBeefChance())
-                        .lootModifierCondition(LootTableIdCondition.builder(new ResourceLocation("entities/cow")))
-                        .parameterSet(LootContextParamSets.ENTITY)
-                        .lootPoolCondition(LootItemKilledByPlayerCondition.killedByPlayer())
-                        .everlastingBeef()
-        );
+        for (EntityType<?> type : List.of(EntityType.COW, EntityType.MOOSHROOM)) {
+            // noinspection ConstantConditions
+            String name = "entities/" + ForgeRegistries.ENTITY_TYPES.getKey(type).getPath();
+            lootBuilders.add(
+                    new Builder(name)
+                            .lootPoolCondition(EverlastingBeefChance.everlastingBeefChance())
+                            .lootModifierCondition(LootTableIdCondition.builder(new ResourceLocation(name)))
+                            .parameterSet(LootContextParamSets.ENTITY)
+                            .lootPoolCondition(LootItemKilledByPlayerCondition.killedByPlayer())
+                            .everlastingBeef()
+            );
+        }
 
         for (String biome : Arrays.asList("desert", "plains", "savanna", "snowy", "taiga")) {
             builder(String.format("chests/village/village_%s_house", biome), 0.02F)

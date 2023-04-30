@@ -1,4 +1,4 @@
-// 1.19.3	2023-03-04T18:08:11.2249383	Global Loot Modifiers : artifacts
+// 1.19.4	2023-04-30T19:31:50.9278099	Global Loot Modifiers : artifacts
 717aecbcb5de27f53f2554062faa538697ceba2b data/artifacts/loot_modifiers/inject/chests/abandoned_mineshaft.json
 4f13c072a3167f1d359e73c42eac7b7e84d258a2 data/artifacts/loot_modifiers/inject/chests/bastion_hoglin_stable.json
 c8b4c3f12d1080273ac90d021b8b9e8f49d83383 data/artifacts/loot_modifiers/inject/chests/bastion_treasure.json
@@ -26,4 +26,5 @@ f23eef62da07a760899aea7f6e76c283fc271b39 data/artifacts/loot_modifiers/inject/ch
 aa004b56e758f047e2efa0c436b720565b04a82d data/artifacts/loot_modifiers/inject/chests/village/village_weaponsmith.json
 10a6c319b2afb7f114f8891378e00aee5f12a14b data/artifacts/loot_modifiers/inject/chests/woodland_mansion.json
 1e4ac93672397e8208ea88df5e54031c544bca9f data/artifacts/loot_modifiers/inject/entities/cow.json
-cd646f058bd77730ef1cc4e805078d41561e541c data/forge/loot_modifiers/global_loot_modifiers.json
+b7e6a6a646af246fa0a137a886aaf7d5142df8be data/artifacts/loot_modifiers/inject/entities/mooshroom.json
+e11d190ce299d2981048f9564399dabc6c679870 data/forge/loot_modifiers/global_loot_modifiers.json
