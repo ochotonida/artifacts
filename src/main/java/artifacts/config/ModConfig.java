@@ -35,6 +35,17 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
             return Math.max(0, artifactRarity);
         }
 
+        @ConfigEntry.Gui.Tooltip(count = 2)
+        @Comment("""
+                The chance everlasting beef drops when a cow
+                or mooshroom is killed by a player
+                """)
+        double everlastingBeefChance = 1 / 500D;
+
+        public double getEverlastingBeefChance() {
+            return Math.max(0, everlastingBeefChance);
+        }
+
         @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
         public Campsite campsite = new Campsite();
 

@@ -2,6 +2,7 @@ package artifacts.data;
 
 import artifacts.Artifacts;
 import artifacts.loot.ConfigurableRandomChance;
+import artifacts.loot.EverlastingBeefChance;
 import artifacts.loot.RollLootTableModifier;
 import artifacts.registry.ModItems;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
@@ -18,7 +19,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.common.loot.LootTableIdCondition;
 
@@ -37,7 +37,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
     private void addLoot() {
         lootBuilders.add(
                 new Builder("entities/cow")
-                        .lootPoolCondition(LootItemRandomChanceCondition.randomChance(1 / 500F))
+                        .lootPoolCondition(EverlastingBeefChance.everlastingBeefChance())
                         .lootModifierCondition(LootTableIdCondition.builder(new ResourceLocation("entities/cow")))
                         .parameterSet(LootContextParamSets.ENTITY)
                         .lootPoolCondition(LootItemKilledByPlayerCondition.killedByPlayer())

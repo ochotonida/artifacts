@@ -192,5 +192,8 @@
   "text.autoconfig.artifacts.option.common.campsite.minY.@Tooltip": "The minimum height campsites can spawn at",
   "text.autoconfig.artifacts.option.common.campsite.useModdedChests": "Use modded chests",
   "text.autoconfig.artifacts.option.common.campsite.useModdedChests.@Tooltip": "Whether chests from other mods generate in campsites",
+  "text.autoconfig.artifacts.option.common.everlastingBeefChance": "Everlasting Beef chance",
+  "text.autoconfig.artifacts.option.common.everlastingBeefChance.@Tooltip[0]": "The chance everlasting beef drops when a cow",
+  "text.autoconfig.artifacts.option.common.everlastingBeefChance.@Tooltip[1]": "or mooshroom is killed by a player",
   "text.autoconfig.artifacts.title": "Artifacts Config"
 }
