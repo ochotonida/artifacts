@@ -18,7 +18,7 @@ public class HeliumFlamingoOverlayRenderer {
     public static void render(ForgeGui gui, PoseStack poseStack, float partialTick, int screenWidth, int screenHeight) {
         if (!Minecraft.getInstance().options.hideGui && gui.shouldDrawSurvivalElements()) {
             Minecraft minecraft = Minecraft.getInstance();
-            boolean isEnabled = !ModGameRules.isInitialized() || ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() > 0;
+            boolean isEnabled = ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() > 0;
             if (isEnabled && minecraft.getCameraEntity() instanceof LivingEntity player) {
                 player.getCapability(SwimHandler.CAPABILITY).ifPresent(
                         handler -> renderOverlay(gui, poseStack, screenWidth, screenHeight, handler.getSwimTime())

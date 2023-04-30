@@ -133,7 +133,7 @@ public class InputEventHandler {
 
         public void onClientTick(TickEvent.ClientTickEvent event) {
             boolean isToggleKeyDown = getToggleKey(item).isDown();
-            if (isToggleKeyDown && !wasToggleKeyDown && ModGameRules.isInitialized()) {
+            if (isToggleKeyDown && !wasToggleKeyDown) {
                 NetworkHandler.INSTANCE.sendToServer(new ToggleArtifactPacket(item));
             }
             wasToggleKeyDown = isToggleKeyDown;

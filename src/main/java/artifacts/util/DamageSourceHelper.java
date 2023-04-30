@@ -1,8 +1,7 @@
 package artifacts.util;
 
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.EntityDamageSource;
-import net.minecraft.world.damagesource.IndirectEntityDamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 
 import javax.annotation.Nullable;
@@ -18,8 +17,9 @@ public class DamageSourceHelper {
     }
 
     public static boolean isMeleeAttack(DamageSource source) {
-        return source instanceof EntityDamageSource entitySource
-                && !(source instanceof IndirectEntityDamageSource)
-                && !entitySource.isThorns();
+        return !source.isIndirect()
+                && (source.is(DamageTypes.MOB_ATTACK)
+                || source.is(DamageTypes.PLAYER_ATTACK)
+                || source.is(DamageTypes.MOB_ATTACK_NO_AGGRO));
     }
 }

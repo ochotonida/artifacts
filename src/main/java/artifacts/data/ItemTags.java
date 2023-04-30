@@ -6,9 +6,11 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -27,7 +29,7 @@ public class ItemTags extends ItemTagsProvider {
     private static final TagKey<Item> HEAD = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "head"));
     private static final TagKey<Item> NECKLACE = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "necklace"));
 
-    public ItemTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, BlockTags blockTags, @Nullable ExistingFileHelper existingFileHelper) {
+    public ItemTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagsProvider.TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, lookupProvider, blockTags, Artifacts.MOD_ID, existingFileHelper);
     }
 

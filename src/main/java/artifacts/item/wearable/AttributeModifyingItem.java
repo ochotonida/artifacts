@@ -1,7 +1,6 @@
 package artifacts.item.wearable;
 
 import artifacts.Artifacts;
-import artifacts.registry.ModGameRules;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -93,7 +92,7 @@ public abstract class AttributeModifyingItem extends WearableArtifactItem {
         super.appendHoverText(stack, world, tooltipList, flags);
         Set<String> curioTags = CuriosApi.getCuriosHelper().getCurioTags(stack.getItem());
         List<String> slots = new ArrayList<>(curioTags);
-        if (Artifacts.CONFIG.client.showTooltips && ModGameRules.isInitialized() && !isCosmetic() && !slots.isEmpty()) {
+        if (Artifacts.CONFIG.client.showTooltips && !isCosmetic() && !slots.isEmpty()) {
             tooltipList.add(Component.empty());
 
             String identifier = slots.contains("curio") ? "curio" : slots.get(0);
