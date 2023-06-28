@@ -62,8 +62,8 @@ public class HeliumFlamingoItem extends CurioItem {
                     if (handler.isSwimming()) {
                         if (!isEquippedBy(event.player)
                                 || handler.getSwimTime() > maxFlightTime
-                                || event.player.isInWater() && !event.player.isSwimming() && !handler.isSinking()
-                                || (!event.player.isInWater() || handler.isSinking()) && event.player.isOnGround()) {
+                                || event.player.isInWater() && !event.player.isSwimming() && !SwimHandler.isSinking(event.player)
+                                || (!event.player.isInWater() || SwimHandler.isSinking(event.player)) && event.player.isOnGround()) {
                             handler.setSwimming(false);
                             if (!event.player.isOnGround() && !event.player.isInWater()) {
                                 event.player.playSound(ModSoundEvents.POP.get(), 0.5F, 0.75F);
@@ -119,7 +119,7 @@ public class HeliumFlamingoItem extends CurioItem {
                                     && !wasSprintingOnGround
                                     && hasTouchedGround
                                     && !player.isOnGround()
-                                    && (!player.isInWater() || handler.isSinking())
+                                    && (!player.isInWater() || SwimHandler.isSinking(player))
                                     && !player.isFallFlying()
                                     && !player.getAbilities().flying
                                     && !player.isPassenger())) {

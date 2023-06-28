@@ -2,32 +2,28 @@ package artifacts.common.capability;
 
 import artifacts.Artifacts;
 import artifacts.common.config.ModConfig;
+import artifacts.common.init.ModItems;
 import artifacts.common.network.NetworkHandler;
-import artifacts.common.network.SinkPacket;
 import artifacts.common.network.SwimPacket;
 import be.florens.expandability.api.forge.PlayerSwimEvent;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.network.PacketDistributor;
 
-public class SwimHandler implements INBTSerializable<CompoundTag> {
+public class SwimHandler {
 
     public static final Capability<SwimHandler> CAPABILITY = CapabilityManager.get(new CapabilityToken<>(){});
 
     private boolean shouldSwim;
-    private boolean shouldSink;
     private boolean hasTouchedWater;
     private int swimTime;
 
@@ -35,8 +31,8 @@ public class SwimHandler implements INBTSerializable<CompoundTag> {
         return shouldSwim;
     }
 
-    public boolean isSinking() {
-        return shouldSink;
+    public static boolean isSinking(LivingEntity entity) {
+        return !ModConfig.server.isCosmetic(ModItems.CHARM_OF_SINKING.get()) && ModItems.CHARM_OF_SINKING.get().isEquippedBy(entity);
     }
 
     public boolean isWet() {
@@ -58,10 +54,6 @@ public class SwimHandler implements INBTSerializable<CompoundTag> {
         this.shouldSwim = shouldSwim;
     }
 
-    public void setSinking(boolean shouldSink) {
-        this.shouldSink = shouldSink;
-    }
-
     public void setWet(boolean hasTouchedWater) {
         this.hasTouchedWater = hasTouchedWater;
     }
@@ -72,27 +64,6 @@ public class SwimHandler implements INBTSerializable<CompoundTag> {
 
     public void syncSwimming() {
         NetworkHandler.INSTANCE.sendToServer(new SwimPacket(shouldSwim));
-    }
-
-    public void syncSinking(ServerPlayer player) {
-        NetworkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SinkPacket(shouldSink));
-    }
-
-    public CompoundTag serializeNBT() {
-        CompoundTag compoundNBT = new CompoundTag();
-        compoundNBT.putBoolean("ShouldSwim", isSwimming());
-        compoundNBT.putBoolean("ShouldSink", isSinking());
-        compoundNBT.putBoolean("IsWet", isWet());
-        compoundNBT.putInt("SwimTime", getSwimTime());
-        return compoundNBT;
-    }
-
-    @Override
-    public void deserializeNBT(CompoundTag nbt) {
-        setSwimming(nbt.getBoolean("ShouldSwim"));
-        setSinking(nbt.getBoolean("ShouldSink"));
-        setWet(nbt.getBoolean("IsWet"));
-        setSwimTime(nbt.getInt("SwimTime"));
     }
 
     public static void init() {
@@ -110,7 +81,6 @@ public class SwimHandler implements INBTSerializable<CompoundTag> {
         if (event.getObject() instanceof Player) {
             SwimHandlerProvider provider = new SwimHandlerProvider();
             event.addCapability(new ResourceLocation(Artifacts.MODID, "swim_handler"), provider);
-            event.addListener(provider::invalidate);
         }
     }
 
@@ -120,7 +90,7 @@ public class SwimHandler implements INBTSerializable<CompoundTag> {
                     if (event.getResult() == Event.Result.DEFAULT) {
                         if (handler.isSwimming()) {
                             event.setResult(Event.Result.ALLOW);
-                        } else if (handler.isSinking()) {
+                        } else if (isSinking(event.getPlayer())) {
                             event.setResult(Event.Result.DENY);
                         }
                     }
