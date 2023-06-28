@@ -52,7 +52,7 @@ public class UmbrellaItem extends ArtifactItem {
         LivingEntity entity = event.getEntity();
         AttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
         if (gravity != null) {
-            boolean isInWater = entity.isInWater() && !entity.getCapability(SwimHandler.CAPABILITY).map(SwimHandler::isSinking).orElse(false);
+            boolean isInWater = entity.isInWater() && !SwimHandler.isSinking(entity);
             if (ModGameRules.UMBRELLA_IS_GLIDER.get() && !entity.isOnGround() && !isInWater && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(MobEffects.SLOW_FALLING)
                     && (entity.getOffhandItem().getItem() == this
                     || entity.getMainHandItem().getItem() == this) && !(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAnim.BLOCK)) {

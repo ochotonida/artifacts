@@ -17,9 +17,8 @@ public class NetworkHandler {
     public static void register() {
         INSTANCE.registerMessage(0, DoubleJumpPacket.class, DoubleJumpPacket::encode, DoubleJumpPacket::new, DoubleJumpPacket::handle);
         INSTANCE.registerMessage(1, SwimPacket.class, SwimPacket::encode, SwimPacket::new, SwimPacket::handle);
-        INSTANCE.registerMessage(2, SinkPacket.class, SinkPacket::encode, SinkPacket::new, SinkPacket::handle);
-        INSTANCE.registerMessage(3, IntegerGameRuleChangedPacket.class, IntegerGameRuleChangedPacket::encode, IntegerGameRuleChangedPacket::new, IntegerGameRuleChangedPacket::handle);
-        INSTANCE.registerMessage(4, BooleanGameRuleChangedPacket.class, BooleanGameRuleChangedPacket::encode, BooleanGameRuleChangedPacket::new, BooleanGameRuleChangedPacket::handle);
-        INSTANCE.registerMessage(5, ToggleArtifactPacket.class, ToggleArtifactPacket::encode, ToggleArtifactPacket::new, ToggleArtifactPacket::handle);
+        INSTANCE.registerMessage(2, IntegerGameRuleChangedPacket.class, IntegerGameRuleChangedPacket::encode, IntegerGameRuleChangedPacket::new, IntegerGameRuleChangedPacket::handle);
+        INSTANCE.registerMessage(3, BooleanGameRuleChangedPacket.class, BooleanGameRuleChangedPacket::encode, BooleanGameRuleChangedPacket::new, BooleanGameRuleChangedPacket::handle);
+        INSTANCE.registerMessage(4, ToggleArtifactPacket.class, ToggleArtifactPacket::encode, ToggleArtifactPacket::new, ToggleArtifactPacket::handle);
     }
 }

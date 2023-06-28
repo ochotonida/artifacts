@@ -116,7 +116,7 @@ public class InputEventHandler {
                 && !wasSprintingOnGround
                 && hasTouchedGround
                 && !player.isOnGround()
-                && (!player.isInWater() || handler.isSinking())
+                && (!player.isInWater() || SwimHandler.isSinking(player))
                 && !player.isFallFlying()
                 && !player.getAbilities().flying
                 && !player.isPassenger();
