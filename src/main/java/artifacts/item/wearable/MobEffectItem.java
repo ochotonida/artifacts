@@ -56,14 +56,14 @@ public class MobEffectItem extends WearableArtifactItem {
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        if (isEffectActive(slotContext.entity()) && !slotContext.entity().level.isClientSide()) {
+        if (isEffectActive(slotContext.entity()) && !slotContext.entity().level().isClientSide()) {
             slotContext.entity().addEffect(new MobEffectInstance(mobEffect, duration - 1, getAmplifier(), true, false));
         }
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        if (isEnabled.get() && !slotContext.entity().level.isClientSide()) {
+        if (isEnabled.get() && !slotContext.entity().level().isClientSide()) {
             MobEffectInstance effectInstance = slotContext.entity().getEffect(mobEffect);
             if (effectInstance != null && effectInstance.getAmplifier() == getAmplifier() && !effectInstance.isVisible() && effectInstance.getDuration() < duration) {
                 slotContext.entity().removeEffect(mobEffect);

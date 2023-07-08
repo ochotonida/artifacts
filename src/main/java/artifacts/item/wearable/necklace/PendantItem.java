@@ -22,7 +22,7 @@ public abstract class PendantItem extends WearableArtifactItem {
 
     private void onLivingAttack(LivingAttackEvent event, LivingEntity wearer) {
         LivingEntity attacker = DamageSourceHelper.getAttacker(event.getSource());
-        if (!wearer.level.isClientSide()
+        if (!wearer.level().isClientSide()
                 && event.getAmount() >= 1
                 && attacker != null
                 && wearer.getRandom().nextDouble() < strikeChance.get() / 100D) {

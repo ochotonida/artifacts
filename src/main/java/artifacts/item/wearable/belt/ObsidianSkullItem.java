@@ -26,7 +26,7 @@ public class ObsidianSkullItem extends WearableArtifactItem {
 
     private void onLivingHurt(LivingHurtEvent event, LivingEntity wearer) {
         if (
-                !wearer.level.isClientSide
+                !wearer.level().isClientSide
                 && event.getAmount() >= 1
                 && event.getSource().is(DamageTypeTags.IS_FIRE)
                 && wearer instanceof Player player

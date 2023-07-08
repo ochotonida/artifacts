@@ -22,7 +22,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -30,21 +29,19 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, Artifacts.MOD_ID);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Artifacts.MOD_ID);
 
-    public static CreativeModeTab CREATIVE_TAB;
-
-    public static void registerTab(CreativeModeTabEvent.Register event) {
-        CREATIVE_TAB = event.registerCreativeModeTab(Artifacts.id("main"), builder -> builder
-                .icon(() -> new ItemStack(ModItems.BUNNY_HOPPERS.get()))
-                .title(Component.translatable("%s.creative_tab".formatted(Artifacts.MOD_ID)))
-                .displayItems((parameters, output) -> ForgeRegistries.ITEMS.forEach(item -> {
-                    ResourceLocation key = ForgeRegistries.ITEMS.getKey(item);
-                    if (key != null && key.getNamespace().equals(Artifacts.MOD_ID)) {
-                        output.accept(item);
-                    }
-                }))
-        );
-    }
+    public static RegistryObject<CreativeModeTab> CREATIVE_TAB = CREATIVE_MODE_TABS.register("main", () -> CreativeModeTab.builder()
+            .icon(() -> new ItemStack(ModItems.BUNNY_HOPPERS.get()))
+            .title(Component.translatable("%s.creative_tab".formatted(Artifacts.MOD_ID)))
+            .displayItems((parameters, output) -> ForgeRegistries.ITEMS.forEach(item -> {
+                ResourceLocation key = ForgeRegistries.ITEMS.getKey(item);
+                if (key != null && key.getNamespace().equals(Artifacts.MOD_ID)) {
+                    output.accept(item);
+                }
+            }))
+            .build()
+    );
 
     public static final RegistryObject<Item> MIMIC_SPAWN_EGG = ITEMS.register("mimic_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.MIMIC, 0x805113, 0x212121, new Item.Properties()));
     public static final RegistryObject<Item> UMBRELLA = ITEMS.register("umbrella", UmbrellaItem::new);

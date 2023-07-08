@@ -45,7 +45,7 @@ public class UniversalAttractorItem extends WearableArtifactItem {
         Vec3 playerPos = player.position().add(0, 0.75, 0);
 
         int range = 5;
-        List<ItemEntity> items = player.level.getEntitiesOfClass(ItemEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
+        List<ItemEntity> items = player.level().getEntitiesOfClass(ItemEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
         int pulled = 0;
         for (ItemEntity item : items) {
             if (item.isAlive() && !item.hasPickUpDelay() && !item.getPersistentData().getBoolean("PreventRemoteMovement")) {

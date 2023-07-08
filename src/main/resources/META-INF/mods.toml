@@ -1,47 +1,48 @@
 modLoader="javafml"
-loaderVersion="[45,)"
-issueTrackerURL="https://github.com/ochotonida/artifacts/issues"
+loaderVersion="${loader_version_range}"
 license="MIT"
+issueTrackerURL="https://github.com/ochotonida/artifacts/issues"
 
 [[mods]]
-modId = "artifacts"
-version = "${file.jarVersion}"
-displayName = "Artifacts"
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/artifacts"
 logoFile="logo.png"
-description='''Adds various new powerful uncraftable items to make exploration a bit more interesting'''
+authors="${mod_authors}"
+description='''${mod_description}'''
 
-[[dependencies.artifacts]]
+[[dependencies.${mod_id}]]
     modId="forge"
     mandatory=true
-    versionRange="[45.0.0,)"
+    versionRange="${forge_version_range}"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.artifacts]]
+[[dependencies.${mod_id}]]
     modId = "minecraft"
     mandatory = true
-    versionRange = "[1.19.4,1.20)"
+    versionRange = "${minecraft_version_range}"
     ordering = "NONE"
     side = "BOTH"
 
-[[dependencies.artifacts]]
+[[dependencies.${mod_id}]]
     modId = "curios"
     mandatory = true
-    versionRange = "[1.19.4-5.1.4.2,)"
+    versionRange = "${curios_version_range}"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.artifacts]]
     modId = "expandability"
     mandatory = true
-    versionRange = "[8.0.0,)"
+    versionRange = "${expandability_version_range}"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.artifacts]]
     modId = "cloth_config"
     mandatory = true
-    versionRange = "[10.0.96,)"
+    versionRange = "${cloth_config_version_range}"
     ordering = "NONE"
     side = "BOTH"

@@ -36,7 +36,7 @@ public class ShockPendantItem extends PendantItem {
     }
 
     private void onLivingHurt(LivingHurtEvent event, LivingEntity wearer) {
-        if (!event.getEntity().level.isClientSide()
+        if (!event.getEntity().level().isClientSide()
                 && ModGameRules.SHOCK_PENDANT_DO_CANCEL_LIGHTNING_DAMAGE.get()
                 && event.getAmount() > 0
                 && event.getSource().is(DamageTypeTags.IS_LIGHTNING)) {
@@ -46,12 +46,12 @@ public class ShockPendantItem extends PendantItem {
 
     @Override
     protected void applyEffect(LivingEntity target, LivingEntity attacker) {
-        if (attacker.level.canSeeSky(BlockPos.containing(attacker.position()))) {
-            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(attacker.level);
+        if (attacker.level().canSeeSky(BlockPos.containing(attacker.position()))) {
+            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(attacker.level());
             if (lightningBolt != null) {
                 lightningBolt.moveTo(Vec3.atBottomCenterOf(attacker.blockPosition()));
                 lightningBolt.setCause(attacker instanceof ServerPlayer player ? player : null);
-                attacker.level.addFreshEntity(lightningBolt);
+                attacker.level().addFreshEntity(lightningBolt);
             }
         }
     }

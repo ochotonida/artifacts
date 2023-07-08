@@ -63,7 +63,7 @@ public abstract class WearableArtifactItem extends ArtifactItem implements ICuri
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        if (!isActivated(stack) && prevStack.getItem() != this && !slotContext.entity().level.isClientSide()) {
+        if (!isActivated(stack) && prevStack.getItem() != this && !slotContext.entity().level().isClientSide()) {
             setActivated(stack, true);
         }
     }

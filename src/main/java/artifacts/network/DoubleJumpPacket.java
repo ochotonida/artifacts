@@ -32,7 +32,7 @@ public class DoubleJumpPacket {
                     double motionX = player.getRandom().nextGaussian() * 0.02;
                     double motionY = player.getRandom().nextGaussian() * 0.02 + 0.20;
                     double motionZ = player.getRandom().nextGaussian() * 0.02;
-                    player.getLevel().sendParticles(ParticleTypes.POOF, player.getX(), player.getY(), player.getZ(), 1, motionX, motionY, motionZ, 0.15);
+                    player.serverLevel().sendParticles(ParticleTypes.POOF, player.getX(), player.getY(), player.getZ(), 1, motionX, motionY, motionZ, 0.15);
                 }
             });
         }

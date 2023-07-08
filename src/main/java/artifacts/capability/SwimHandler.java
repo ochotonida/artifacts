@@ -108,7 +108,7 @@ public class SwimHandler {
                         if (!handler.isWet()) {
                             handler.setWet(true);
                         }
-                    } else if (event.player.isOnGround() || event.player.getAbilities().flying) {
+                    } else if (event.player.onGround() || event.player.getAbilities().flying) {
                         handler.setWet(false);
                     }
                 }

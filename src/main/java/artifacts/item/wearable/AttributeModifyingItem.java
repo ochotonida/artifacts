@@ -50,7 +50,7 @@ public abstract class AttributeModifyingItem extends WearableArtifactItem {
     @Override
     public void onEquip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
         super.onEquip(slotContext, originalStack, newStack);
-        if (!slotContext.entity().level.isClientSide()) {
+        if (!slotContext.entity().level().isClientSide()) {
             AttributeInstance attributeInstance = slotContext.entity().getAttribute(attribute);
             if (attributeInstance != null) {
                 attributeInstance.removeModifier(modifierId);
@@ -63,7 +63,7 @@ public abstract class AttributeModifyingItem extends WearableArtifactItem {
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        if (!slotContext.entity().level.isClientSide()) {
+        if (!slotContext.entity().level().isClientSide()) {
             AttributeInstance attributeInstance = slotContext.entity().getAttribute(attribute);
             if (attributeInstance != null) {
                 AttributeModifier existingModifier = attributeInstance.getModifier(modifierId);
@@ -78,7 +78,7 @@ public abstract class AttributeModifyingItem extends WearableArtifactItem {
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack originalStack, ItemStack newStack) {
-        if (!slotContext.entity().level.isClientSide()) {
+        if (!slotContext.entity().level().isClientSide()) {
             AttributeInstance attributeInstance = slotContext.entity().getAttribute(attribute);
             if (attributeInstance != null) {
                 attributeInstance.removeModifier(modifierId);

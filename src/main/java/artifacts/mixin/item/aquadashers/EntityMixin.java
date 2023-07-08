@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Entity.class)
 public abstract class EntityMixin {
 
-    @Shadow public Level level;
+    @Shadow private Level level;
 
     @Shadow @Final protected RandomSource random;
 
@@ -42,7 +42,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "playStepSound", at = @At("HEAD"))
     private void playWaterStepSound(BlockPos pos, BlockState blockState, CallbackInfo callbackInfo) {
-        if (blockState.getMaterial().isLiquid() && isRunningWithAquaDashers()) {
+        if (blockState.liquid() && isRunningWithAquaDashers()) {
             //noinspection ConstantConditions
             ((LivingEntity) (Object) this).playSound(ModSoundEvents.WATER_STEP.get(), 0.15F, 1);
         }

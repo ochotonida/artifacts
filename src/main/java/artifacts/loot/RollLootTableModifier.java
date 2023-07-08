@@ -32,7 +32,7 @@ public class RollLootTableModifier extends LootModifier {
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         // noinspection deprecation
-        context.getLootTable(lootTable).getRandomItems(context, generatedLoot::add);
+        context.getResolver().getLootTable(lootTable).getRandomItems(context, generatedLoot::add);
         return generatedLoot;
     }
 

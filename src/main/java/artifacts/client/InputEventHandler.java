@@ -55,7 +55,7 @@ public class InputEventHandler {
     }
 
     private static void handleCloudInABottleInput(LocalPlayer player) {
-        if ((player.isOnGround() || player.onClimbable()) && !player.isInWater()) {
+        if ((player.onGround() || player.onClimbable()) && !player.isInWater()) {
             hasReleasedJumpKey = false;
             canDoubleJump = true;
         } else if (!player.input.jumping) {
@@ -79,7 +79,7 @@ public class InputEventHandler {
         player.getCapability(SwimHandler.CAPABILITY).ifPresent(
                 handler -> {
                     if (!handler.isSwimming()) {
-                        if (player.isOnGround()) {
+                        if (player.onGround()) {
                             hasTouchedGround = true;
                         } else if (canActivateHeliumFlamingo(handler, player, isSprintKeyDown)) {
                             handler.setSwimming(true);
@@ -97,7 +97,7 @@ public class InputEventHandler {
         wasSprintKeyDown = isSprintKeyDown;
         if (!isSprintKeyDown) {
             wasSprintingOnGround = false;
-        } else if (player.isOnGround()) {
+        } else if (player.onGround()) {
             wasSprintingOnGround = true;
         }
     }
@@ -115,7 +115,7 @@ public class InputEventHandler {
                 && !wasSprintKeyDown
                 && !wasSprintingOnGround
                 && hasTouchedGround
-                && !player.isOnGround()
+                && !player.onGround()
                 && (!player.isInWater() || SwimHandler.isSinking(player))
                 && !player.isFallFlying()
                 && !player.getAbilities().flying
