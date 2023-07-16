@@ -1,13 +1,17 @@
 pluginManagement {
     repositories {
+        maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://maven.architectury.dev/" }
+        maven { url "https://maven.minecraftforge.net/" }
         gradlePluginPortal()
-        maven {
-            name = 'MinecraftForge'
-            url = 'https://maven.minecraftforge.net/'
-        }
     }
 }
 
-plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.5.0'
-}
+include("common")
+include("fabric")
+include("forge")
+include("data")
+
+rootProject.name = "artifacts"
+include 'data'
+

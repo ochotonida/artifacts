@@ -1,0 +1,61 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7.+'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.spongepowered.mixin'
+
+evaluationDependsOn(':common')
+evaluationDependsOn(':forge')
+
+minecraft {
+
+    mappings channel: 'official', version: "${rootProject.minecraft_version}"
+
+    runs {
+        data {
+            ideaModule "${rootProject.name}.${project.name}.main"
+            workingDirectory file('run')
+            property 'forge.logging.markers', ''
+            property 'forge.logging.console.level', 'debug'
+            property 'fml.earlyprogresswindow', 'false'
+            args '--mod', rootProject.mod_id
+            args '--client', '--server', '--validate'
+            args '--output', project(':common').file('src/generated/resources')
+            args '--existing', project(':common').file('src/main/resources')
+            forceExit false
+
+            mods {
+                "${rootProject.mod_id}" {
+                    source sourceSets.main
+                    source project(':common').sourceSets.main
+                    source project(':forge').sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+mixin {
+    config "mixins.${mod_id}.common.json"
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${rootProject.forge_version}"
+    implementation fg.deobf("dev.architectury:architectury-forge:$architectury_version")
+    implementation(project(path: ':common', configuration: 'namedElements')) { transitive false }
+    implementation(project(path: ':forge', configuration: 'namedElements')) { transitive false }
+}
+
+jar.finalizedBy('reobfJar')
+
+idea.module {
+    excludeDirs += [ file('run') ]
+}

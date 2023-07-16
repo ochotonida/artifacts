@@ -1,167 +1,85 @@
-buildscript {
-    dependencies {
-        classpath 'org.spongepowered:mixingradle:0.7.+'
-    }
-}
-
 plugins {
-    id 'eclipse'
-    id 'idea'
-    id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "dev.architectury.loom" version "1.1-SNAPSHOT" apply false
 }
 
-apply plugin: 'org.spongepowered.mixin'
-
-version = mod_version
-group = mod_group_id
-
-base {
-    archivesName = mod_id
+architectury {
+    minecraft = rootProject.minecraft_version
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+subprojects {
+    if (project.name != 'data') {
+        apply plugin: "dev.architectury.loom"
 
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-minecraft {
-    mappings channel: mapping_channel, version: mapping_version
-
-    copyIdeResources = true
-
-    runs {
-
-        configureEach {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
+        loom {
+            silentMojangMappingsLicense()
         }
 
-        client {
-
-        }
-
-        server {
-            args '--nogui'
-        }
-
-        data {
-            workingDirectory project.file('run-data')
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+        dependencies {
+            minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+            mappings loom.officialMojangMappings()
         }
     }
 }
 
-sourceSets.main.resources {
-    srcDir 'src/generated/resources'
-}
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+    apply plugin: "maven-publish"
 
-repositories {
-    maven {
-        name "curios"
-        url "https://maven.theillusivec4.top/"
+    sourceSets {
+        main.resources.srcDirs = ['src/main/resources', 'src/generated/resources']
     }
-    maven {
-        name "expandability"
-        url "https://maven.florens.be/releases"
-    }
-    maven {
-        url "https://maven.shedaniel.me/"
-    }
-    maven {
-        url = "https://api.modrinth.com/maven"
-    }
-    maven {
-        name "mixin-extras"
-        url = "https://jitpack.io"
-        content {
-            includeGroupByRegex "com.github.*"
-        }
-    }
-}
 
-jarJar.enable()
+    archivesBaseName = rootProject.archives_base_name
+    version = rootProject.mod_version
+    group = rootProject.maven_group
 
-dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
-
-    implementation fg.deobf("be.florens:expandability-forge:${expandability_version}")
-    jarJar "be.florens:expandability-forge:${expandability_version_range}"
-
-    runtimeOnly fg.deobf("maven.modrinth:curious-armor-stands:1.20-5.0.1")
-
-    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
-}
-
-mixin {
-    add sourceSets.main, 'mixins.artifacts.refmap.json'
-    config 'mixins.artifacts.json'
-}
-
-tasks.named('processResources', ProcessResources).configure {
-    var replaceProperties = [
-            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
-            forge_version: forge_version, forge_version_range: forge_version_range,
-            loader_version_range: loader_version_range,
-            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-            mod_authors: mod_authors, mod_description: mod_description,
-            curios_version_range: curios_version_range,
-            expandability_version_range: expandability_version_range,
-            cloth_config_version_range: cloth_config_version_range
-    ]
-    inputs.properties replaceProperties
-
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties + [project: project]
-    }
-}
-
-tasks.jarJar.configure {
-    archiveClassifier = ''
-}
-
-tasks.named('jar', Jar).configure {
-    archiveClassifier = 'slim'
-
-    manifest {
-        attributes([
-                'Specification-Title'     : mod_id,
-                'Specification-Vendor'    : mod_authors,
-                'Specification-Version'   : '1', // We are version 1 of ourselves
-                'Implementation-Title'    : project.name,
-                'Implementation-Version'  : project.jar.archiveVersion,
-                'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-}
-
-reobf { jarJar { } }
-
-jar.finalizedBy('reobfJar')
-
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            artifact jar
-        }
-    }
     repositories {
         maven {
-            url "file://${project.projectDir}/mcmodsrepo"
+            name "curios"
+            url "https://maven.theillusivec4.top/"
+        }
+        maven {
+            name "expandability"
+            url "https://maven.florens.be/releases"
+        }
+        maven {
+            url "https://maven.shedaniel.me/"
+        }
+        maven {
+            url = "https://api.modrinth.com/maven"
+        }
+        maven {
+            name "mixin-extras"
+            url = "https://jitpack.io"
+            content {
+                includeGroupByRegex "com.github.*"
+            }
         }
     }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+        options.release = 17
+    }
+
+    java {
+        withSourcesJar()
+    }
+}
+task collectJars(type: Copy) {
+    subprojects {
+        if (project.name != "common" && project.name != "data") {
+            def remapJar = project.tasks.named('remapJar')
+            dependsOn remapJar
+            from remapJar
+        }
+    }
+
+    into(buildDir.toPath().resolve("libs"))
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+assemble {
+    dependsOn(collectJars)
 }
