@@ -187,10 +187,10 @@
   "text.autoconfig.artifacts.option.common.campsite.maxY": "Nivel Y máximo",
   "text.autoconfig.artifacts.option.common.campsite.maxY.@Tooltip": "La altura máxima a la que pueden generarse los campings",
   "text.autoconfig.artifacts.option.common.campsite.mimicChance": "Probabilidad del Mimic",
-  "text.autoconfig.artifacts.option.common.campsite.mimicChance": "Probabilidad de generar mimics en campamentos.",
+  "text.autoconfig.artifacts.option.common.campsite.mimicChance.@Tooltip": "Probabilidad de generar mimics en campamentos.",
   "text.autoconfig.artifacts.option.common.campsite.minY": "Nivel Y mínimo",
   "text.autoconfig.artifacts.option.common.campsite.minY.@Tooltip": "La altura mínima a la que pueden generarse los campings",
-  "text.autoconfig.artifacts.option.common.campsite.useModdedChests": "Usar cofres de otros mods."
+  "text.autoconfig.artifacts.option.common.campsite.useModdedChests": "Usar cofres de otros mods.",
   "text.autoconfig.artifacts.option.common.campsite.useModdedChests.@Tooltip": "Si cofres de otros mods se pueden generar en los campings",
   "text.autoconfig.artifacts.title": "Configuración de Artifacts"
 }
