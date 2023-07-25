@@ -1,11 +1,11 @@
 package artifacts.forge.registry;
 
 import artifacts.Artifacts;
-import artifacts.forge.mixin.gamerule.BooleanValueInvoker;
-import artifacts.forge.mixin.gamerule.IntegerValueInvoker;
 import artifacts.forge.network.BooleanGameRuleChangedPacket;
 import artifacts.forge.network.IntegerGameRuleChangedPacket;
 import artifacts.forge.network.NetworkHandler;
+import artifacts.mixin.gamerule.BooleanValueInvoker;
+import artifacts.mixin.gamerule.IntegerValueInvoker;
 import com.google.common.base.CaseFormat;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.server.MinecraftServer;

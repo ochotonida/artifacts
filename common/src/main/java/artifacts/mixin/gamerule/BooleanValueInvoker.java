@@ -1,4 +1,4 @@
-package artifacts.forge.mixin.gamerule;
+package artifacts.mixin.gamerule;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
@@ -7,11 +7,11 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.function.BiConsumer;
 
-@Mixin(GameRules.IntegerValue.class)
-public interface IntegerValueInvoker {
+@Mixin(GameRules.BooleanValue.class)
+public interface BooleanValueInvoker {
 
     @Invoker("create")
-    static GameRules.Type<GameRules.IntegerValue> invokeCreate(int defaultValue, BiConsumer<MinecraftServer, GameRules.IntegerValue> onChanged) {
+    static GameRules.Type<GameRules.BooleanValue> invokeCreate(boolean defaultValue, BiConsumer<MinecraftServer, GameRules.BooleanValue> onChanged) {
         throw new AssertionError();
     }
 }

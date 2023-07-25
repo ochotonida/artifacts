@@ -45,6 +45,7 @@ minecraft {
 
 mixin {
     config "mixins.${mod_id}.common.json"
+    config "mixins.${mod_id}.forge.json"
 }
 
 dependencies {

@@ -1,20 +1,11 @@
 {
   "required": true,
-  "package": "artifacts.forge.mixin",
+  "package": "artifacts.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.artifacts.refmap.json",
   "mixins": [
     "gamerule.BooleanValueInvoker",
-    "gamerule.IntegerValueInvoker",
-    "item.aquadashers.EntityMixin",
-    "item.umbrella.EntityMixin",
-    "item.villagerhat.VillagerMixin"
-  ],
-  "client": [
-    "item.umbrella.HumanoidModelMixin"
-  ],
-  "server": [
-    "item.umbrella.ServerGamePacketListenerImplMixin"
+    "gamerule.IntegerValueInvoker"
   ],
   "injectors": {
     "defaultRequire": 1
