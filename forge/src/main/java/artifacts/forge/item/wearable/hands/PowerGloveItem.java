@@ -1,6 +1,6 @@
 package artifacts.forge.item.wearable.hands;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.item.wearable.AttributeModifyingItem;
 import artifacts.forge.registry.ModGameRules;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -10,7 +10,7 @@ import java.util.UUID;
 public class PowerGloveItem extends AttributeModifyingItem {
 
     public PowerGloveItem() {
-        super(Attributes.ATTACK_DAMAGE, UUID.fromString("126a0b73-ae15-466c-a75b-28bbd61d1374"), ArtifactsForge.id("power_glove_attack_damage_bonus").toString());
+        super(Attributes.ATTACK_DAMAGE, UUID.fromString("126a0b73-ae15-466c-a75b-28bbd61d1374"), Artifacts.id("power_glove_attack_damage_bonus").toString());
     }
 
     @Override

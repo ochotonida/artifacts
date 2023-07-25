@@ -1,10 +1,10 @@
 package artifacts.forge.data;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.loot.ConfigurableRandomChance;
-import artifacts.forge.loot.EverlastingBeefChance;
+import artifacts.Artifacts;
 import artifacts.forge.loot.RollLootTableModifier;
 import artifacts.forge.registry.ModItems;
+import artifacts.loot.ConfigurableRandomChance;
+import artifacts.loot.EverlastingBeefChance;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.data.PackOutput;
@@ -33,7 +33,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
     protected List<Builder> lootBuilders = new ArrayList<>();
 
     public LootModifiers(PackOutput packOutput) {
-        super(packOutput, ArtifactsForge.MOD_ID);
+        super(packOutput, Artifacts.MOD_ID);
     }
 
     private void addLoot() {
@@ -221,7 +221,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
         }
 
         private RollLootTableModifier build() {
-            return new RollLootTableModifier(conditions.toArray(new LootItemCondition[]{}), ArtifactsForge.id("inject/%s", lootTable));
+            return new RollLootTableModifier(conditions.toArray(new LootItemCondition[]{}), Artifacts.id("inject/%s", lootTable));
         }
 
         protected LootTable.Builder createLootTable() {

@@ -1,7 +1,7 @@
-package artifacts.forge.client.mimic.model;
+package artifacts.client.mimic.model;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.entity.MimicEntity;
+import artifacts.Artifacts;
+import artifacts.entity.MimicEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 
 public class MimicModel extends EntityModel<MimicEntity> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ArtifactsForge.id("mimic"), "mimic");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Artifacts.id("mimic"), "mimic");
 
     protected final ModelPart bottom;
     protected final ModelPart lid;

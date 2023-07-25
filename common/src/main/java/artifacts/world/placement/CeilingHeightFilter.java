@@ -1,6 +1,6 @@
-package artifacts.forge.world.placement;
+package artifacts.world.placement;
 
-import artifacts.forge.registry.ModPlacementModifierTypes;
+import artifacts.registry.ModPlacementModifierTypes;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.ExtraCodecs;

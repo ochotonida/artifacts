@@ -1,10 +1,9 @@
-package artifacts.forge.util;
+package artifacts.util;
 
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class DamageSourceHelper {
 

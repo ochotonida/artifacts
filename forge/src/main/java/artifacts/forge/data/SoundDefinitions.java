@@ -1,7 +1,7 @@
 package artifacts.forge.data;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.registry.ModSoundEvents;
+import artifacts.Artifacts;
+import artifacts.registry.ModSoundEvents;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -13,7 +13,7 @@ import net.minecraftforge.common.data.SoundDefinitionsProvider;
 public class SoundDefinitions extends SoundDefinitionsProvider {
 
     protected SoundDefinitions(PackOutput output, ExistingFileHelper helper) {
-        super(output, ArtifactsForge.MOD_ID, helper);
+        super(output, Artifacts.MOD_ID, helper);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class SoundDefinitions extends SoundDefinitionsProvider {
     }
 
     protected static SoundDefinition.Sound sound(String path) {
-        return sound(ArtifactsForge.id(path));
+        return sound(Artifacts.id(path));
     }
 
     protected static SoundDefinition.Sound[] sounds(String path, int count) {
@@ -56,6 +56,6 @@ public class SoundDefinitions extends SoundDefinitionsProvider {
     }
 
     private SoundDefinition addSubtitled(SoundEvent soundEvent) {
-        return add(soundEvent).subtitle("%s.subtitles.%s".formatted(ArtifactsForge.MOD_ID, soundEvent.getLocation().getPath()));
+        return add(soundEvent).subtitle("%s.subtitles.%s".formatted(Artifacts.MOD_ID, soundEvent.getLocation().getPath()));
     }
 }

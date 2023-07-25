@@ -1,6 +1,6 @@
 package artifacts.forge.data;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.registry.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -20,7 +20,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ItemTags extends ItemTagsProvider {
 
-    public static final TagKey<Item> ARTIFACTS = TagKey.create(Registries.ITEM, ArtifactsForge.id("artifacts"));
+    public static final TagKey<Item> ARTIFACTS = TagKey.create(Registries.ITEM, Artifacts.id("artifacts"));
 
     private static final TagKey<Item> BELT = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "belt"));
     private static final TagKey<Item> CURIO = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "curio"));
@@ -30,14 +30,14 @@ public class ItemTags extends ItemTagsProvider {
     private static final TagKey<Item> NECKLACE = TagKey.create(Registries.ITEM, new ResourceLocation(CuriosApi.MODID, "necklace"));
 
     public ItemTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagsProvider.TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
-        super(packOutput, lookupProvider, blockTags, ArtifactsForge.MOD_ID, existingFileHelper);
+        super(packOutput, lookupProvider, blockTags, Artifacts.MOD_ID, existingFileHelper);
     }
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         // noinspection ConstantConditions
         tag(ARTIFACTS).add(ForgeRegistries.ITEMS.getValues().stream()
-                .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(ArtifactsForge.MOD_ID))
+                .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(Artifacts.MOD_ID))
                 .filter(item -> item != ModItems.MIMIC_SPAWN_EGG.get()).toList().toArray(new Item[]{})
         );
 

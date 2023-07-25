@@ -1,9 +1,9 @@
 package artifacts.forge.item.wearable.hands;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.item.wearable.WearableArtifactItem;
 import artifacts.forge.registry.ModGameRules;
-import artifacts.forge.registry.ModTags;
+import artifacts.registry.ModTags;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
@@ -37,7 +37,7 @@ public class DiggingClawsItem extends WearableArtifactItem {
     protected void addEffectsTooltip(List<MutableComponent> tooltip) {
         int tierLevel = getToolTierLevel();
         if (tierLevel > 0) {
-            tooltip.add(tooltipLine("mining_level", Component.translatable("%s.tooltip.tool_tier.%s".formatted(ArtifactsForge.MOD_ID, tierLevel))));
+            tooltip.add(tooltipLine("mining_level", Component.translatable("%s.tooltip.tool_tier.%s".formatted(Artifacts.MOD_ID, tierLevel))));
         }
         if (ModGameRules.DIGGING_CLAWS_DIG_SPEED_BONUS.get() > 0) {
             tooltip.add(tooltipLine("mining_speed"));

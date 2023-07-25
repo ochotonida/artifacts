@@ -1,6 +1,6 @@
 package artifacts.forge.client;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.capability.SwimHandler;
 import artifacts.forge.registry.ModGameRules;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -13,7 +13,7 @@ import net.minecraftforge.client.gui.overlay.ForgeGui;
 
 public class HeliumFlamingoOverlayRenderer {
 
-    private static final ResourceLocation HELIUM_FLAMINGO_ICON = ArtifactsForge.id("textures/gui/icons.png");
+    private static final ResourceLocation HELIUM_FLAMINGO_ICON = Artifacts.id("textures/gui/icons.png");
 
     public static void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         if (!Minecraft.getInstance().options.hideGui && gui.shouldDrawSurvivalElements()) {

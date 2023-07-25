@@ -1,13 +1,13 @@
-package artifacts.forge.config;
+package artifacts.config;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
-@Config(name = ArtifactsForge.MOD_ID)
+@Config(name = Artifacts.MOD_ID)
 @Config.Gui.Background("minecraft:textures/block/mossy_cobblestone.png")
 public class ModConfig extends PartitioningSerializer.GlobalData {
 

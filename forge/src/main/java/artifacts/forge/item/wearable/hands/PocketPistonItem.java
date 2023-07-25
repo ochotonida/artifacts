@@ -2,7 +2,7 @@ package artifacts.forge.item.wearable.hands;
 
 import artifacts.forge.item.wearable.WearableArtifactItem;
 import artifacts.forge.registry.ModGameRules;
-import artifacts.forge.util.DamageSourceHelper;
+import artifacts.util.DamageSourceHelper;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;

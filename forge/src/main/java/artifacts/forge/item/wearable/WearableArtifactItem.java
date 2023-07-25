@@ -1,8 +1,8 @@
 package artifacts.forge.item.wearable;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.client.InputEventHandler;
-import artifacts.forge.item.ArtifactItem;
+import artifacts.item.ArtifactItem;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -87,7 +87,7 @@ public abstract class WearableArtifactItem extends ArtifactItem implements ICuri
         super.addEffectsTooltip(tooltip);
         KeyMapping key = InputEventHandler.getToggleKey(this);
         if (key != null && !key.isUnbound()) {
-            tooltip.add(Component.translatable("%s.tooltip.toggle_keymapping".formatted(ArtifactsForge.MOD_ID), InputEventHandler.getToggleKey(this).getTranslatedKeyMessage()));
+            tooltip.add(Component.translatable("%s.tooltip.toggle_keymapping".formatted(Artifacts.MOD_ID), InputEventHandler.getToggleKey(this).getTranslatedKeyMessage()));
         }
     }
 }

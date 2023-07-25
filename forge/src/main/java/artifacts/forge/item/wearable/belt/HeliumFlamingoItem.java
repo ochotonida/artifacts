@@ -4,7 +4,7 @@ import artifacts.forge.capability.SwimHandler;
 import artifacts.forge.item.wearable.WearableArtifactItem;
 import artifacts.forge.registry.ModGameRules;
 import artifacts.forge.registry.ModKeyMappings;
-import artifacts.forge.registry.ModSoundEvents;
+import artifacts.registry.ModSoundEvents;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;

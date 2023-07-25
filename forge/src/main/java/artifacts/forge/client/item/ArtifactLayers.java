@@ -1,6 +1,6 @@
 package artifacts.forge.client.item;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.client.item.model.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -60,7 +60,7 @@ public class ArtifactLayers {
     }
 
     public static ModelLayerLocation createLayerLocation(String name) {
-        return new ModelLayerLocation(ArtifactsForge.id(name), name);
+        return new ModelLayerLocation(Artifacts.id(name), name);
     }
 
     private static Supplier<LayerDefinition> layer(MeshDefinition mesh, int textureWidth, int textureHeight) {

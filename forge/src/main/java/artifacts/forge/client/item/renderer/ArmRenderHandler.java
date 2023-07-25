@@ -1,6 +1,6 @@
 package artifacts.forge.client.item.renderer;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.RenderArmEvent;
@@ -18,7 +18,7 @@ public abstract class ArmRenderHandler {
     }
 
     public static void onRenderArm(RenderArmEvent event) {
-        if (!ArtifactsForge.CONFIG.client.showFirstPersonGloves || event.isCanceled()) {
+        if (!Artifacts.CONFIG.client.showFirstPersonGloves || event.isCanceled()) {
             return;
         }
 

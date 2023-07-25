@@ -1,7 +1,7 @@
-package artifacts.forge.entity;
+package artifacts.entity;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.registry.ModSoundEvents;
+import artifacts.Artifacts;
+import artifacts.registry.ModSoundEvents;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +27,7 @@ import java.util.EnumSet;
 
 public class MimicEntity extends Mob implements Enemy {
 
-    public static final ResourceLocation LOOT_TABLE = ArtifactsForge.id("entities/mimic");
+    public static final ResourceLocation LOOT_TABLE = Artifacts.id("entities/mimic");
 
     public int ticksInAir;
     public int attackCooldown;

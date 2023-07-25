@@ -1,7 +1,7 @@
-package artifacts.forge.loot;
+package artifacts.loot;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.registry.ModLootConditions;
+import artifacts.Artifacts;
+import artifacts.registry.ModLootConditions;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
@@ -17,10 +17,10 @@ public record ConfigurableRandomChance(float defaultProbability) implements Loot
     }
 
     public boolean test(LootContext context) {
-        if (ArtifactsForge.CONFIG.common.getArtifactRarity() > 9999) {
+        if (Artifacts.CONFIG.common.getArtifactRarity() > 9999) {
             return false;
         }
-        float r = (float) ArtifactsForge.CONFIG.common.getArtifactRarity();
+        float r = (float) Artifacts.CONFIG.common.getArtifactRarity();
         float p = defaultProbability;
         float adjustedProbability = p / (p + r - r * p);
         return context.getRandom().nextFloat() < adjustedProbability;

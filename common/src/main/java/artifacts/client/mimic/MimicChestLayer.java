@@ -1,12 +1,13 @@
-package artifacts.forge.client.mimic;
+package artifacts.client.mimic;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.client.mimic.model.MimicChestLayerModel;
-import artifacts.forge.client.mimic.model.MimicModel;
-import artifacts.forge.entity.MimicEntity;
+import artifacts.Artifacts;
+import artifacts.client.mimic.model.MimicChestLayerModel;
+import artifacts.client.mimic.model.MimicModel;
+import artifacts.entity.MimicEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import dev.architectury.platform.Platform;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -17,7 +18,6 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,11 +57,11 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
         chestMaterials = new ArrayList<>();
         vanillaChestMaterial = isChristmas ? Sheets.CHEST_XMAS_LOCATION : Sheets.CHEST_LOCATION;
 
-        if (!isChristmas && ModList.get().isLoaded("lootr")) {
+        if (!isChristmas && Platform.isModLoaded("lootr")) {
             ResourceLocation chestLocation = new ResourceLocation("lootr", "chest");
             chestMaterials.add(new Material(TextureAtlas.LOCATION_BLOCKS, chestLocation));
         } else {
-            if (!isChristmas && ModList.get().isLoaded("quark")) {
+            if (!isChristmas && Platform.isModLoaded("quark")) {
                 ResourceLocation atlas = new ResourceLocation("textures/atlas/chest.png");
                 for (String chestType : QUARK_CHEST_TYPES) {
                     ResourceLocation chestLocation = new ResourceLocation("quark", String.format("model/chest/%s/normal", chestType));
@@ -92,7 +92,7 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
     }
 
     private Material getChestMaterial(MimicEntity mimic) {
-        if (!ArtifactsForge.CONFIG.client.useModdedMimicTextures) {
+        if (!Artifacts.CONFIG.client.useModdedMimicTextures) {
             return vanillaChestMaterial;
         }
         if (chestMaterials.size() == 1) {

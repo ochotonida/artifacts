@@ -1,6 +1,6 @@
 package artifacts.forge.data;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -25,6 +25,6 @@ public class BiomeModifiers {
                 GenerationStep.Decoration.UNDERGROUND_STRUCTURES
         );
 
-        context.register(ArtifactsForge.key(ForgeRegistries.Keys.BIOME_MODIFIERS, "add_campsite"), modifier);
+        context.register(Artifacts.key(ForgeRegistries.Keys.BIOME_MODIFIERS, "add_campsite"), modifier);
     }
 }

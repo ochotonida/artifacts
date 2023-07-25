@@ -2,7 +2,7 @@ package artifacts.forge.item.wearable.belt;
 
 import artifacts.forge.item.wearable.WearableArtifactItem;
 import artifacts.forge.registry.ModGameRules;
-import artifacts.forge.registry.ModTags;
+import artifacts.registry.ModTags;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;

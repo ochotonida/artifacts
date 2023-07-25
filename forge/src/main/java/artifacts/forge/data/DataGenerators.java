@@ -1,6 +1,6 @@
 package artifacts.forge.data;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -36,7 +36,7 @@ public class DataGenerators {
 
         generator.addProvider(event.includeClient(), new ItemModels(packOutput, existingFileHelper));
 
-        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(generator.getPackOutput(), event.getLookupProvider(), createLevelProvider(), Set.of(ArtifactsForge.MOD_ID)));
+        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(generator.getPackOutput(), event.getLookupProvider(), createLevelProvider(), Set.of(Artifacts.MOD_ID)));
     }
 
     public static RegistrySetBuilder createLevelProvider() {

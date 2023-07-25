@@ -1,12 +1,13 @@
 package artifacts.forge.registry;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.mixin.gamerule.BooleanValueInvoker;
 import artifacts.forge.mixin.gamerule.IntegerValueInvoker;
 import artifacts.forge.network.BooleanGameRuleChangedPacket;
 import artifacts.forge.network.IntegerGameRuleChangedPacket;
 import artifacts.forge.network.NetworkHandler;
 import com.google.common.base.CaseFormat;
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
@@ -14,7 +15,6 @@ import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -87,9 +87,9 @@ public class ModGameRules {
             VILLAGER_HAT_REPUTATION_BONUS = integerValue(createName(ModItems.VILLAGER_HAT, "reputationBonus"), 100),
             WHOOPEE_CUSHION_FART_CHANCE = integerValue(createName(ModItems.WHOOPEE_CUSHION, "fartChance"), 12);
 
-    private static String createName(RegistryObject<? extends Item> item, String name) {
+    private static String createName(RegistrySupplier<? extends Item> item, String name) {
         return String.format("%s.%s.%s",
-                ArtifactsForge.MOD_ID,
+                Artifacts.MOD_ID,
                 CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, item.getId().getPath()),
                 name
         );

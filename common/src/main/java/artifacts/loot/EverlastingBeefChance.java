@@ -1,7 +1,7 @@
-package artifacts.forge.loot;
+package artifacts.loot;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.registry.ModLootConditions;
+import artifacts.Artifacts;
+import artifacts.registry.ModLootConditions;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
@@ -22,7 +22,7 @@ public class EverlastingBeefChance  implements LootItemCondition {
     }
 
     public boolean test(LootContext context) {
-        return context.getRandom().nextDouble() < ArtifactsForge.CONFIG.common.getEverlastingBeefChance();
+        return context.getRandom().nextDouble() < Artifacts.CONFIG.common.getEverlastingBeefChance();
     }
 
     public static LootItemCondition.Builder everlastingBeefChance() {

@@ -1,6 +1,6 @@
 package artifacts.forge.capability;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.network.NetworkHandler;
 import artifacts.forge.network.SwimPacket;
 import artifacts.forge.registry.ModGameRules;
@@ -79,7 +79,7 @@ public class SwimHandler {
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
             SwimHandlerProvider provider = new SwimHandlerProvider();
-            event.addCapability(ArtifactsForge.id("swim_handler"), provider);
+            event.addCapability(Artifacts.id("swim_handler"), provider);
         }
     }
 

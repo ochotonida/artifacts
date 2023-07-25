@@ -1,10 +1,10 @@
 package artifacts.forge.data;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.entity.MimicEntity;
-import artifacts.forge.loot.ConfigurableRandomChance;
+import artifacts.Artifacts;
+import artifacts.entity.MimicEntity;
 import artifacts.forge.registry.ModItems;
-import artifacts.forge.world.CampsiteFeature;
+import artifacts.loot.ConfigurableRandomChance;
+import artifacts.world.CampsiteFeature;
 import com.google.common.base.Preconditions;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -337,7 +337,7 @@ public class LootTables extends LootTableProvider {
     }
 
     private static LootPoolEntryContainer.Builder<?> lootTable(String lootTable, int weight) {
-        return LootTableReference.lootTableReference(ArtifactsForge.id(lootTable)).setWeight(weight);
+        return LootTableReference.lootTableReference(Artifacts.id(lootTable)).setWeight(weight);
     }
 
     private void addLootTable(String location, LootTable.Builder lootTable, LootContextParamSet lootParameterSet) {
@@ -345,7 +345,7 @@ public class LootTables extends LootTableProvider {
             String actualLocation = location.replace("inject/", "");
             Preconditions.checkArgument(existingFileHelper.exists(new ResourceLocation("loot_tables/" + actualLocation + ".json"), PackType.SERVER_DATA), "Loot table %s does not exist in any known data pack", actualLocation);
         }
-        tables.add(new SubProviderEntry(() -> lootBuilder -> lootBuilder.accept(ArtifactsForge.id(location), lootTable), lootParameterSet));
+        tables.add(new SubProviderEntry(() -> lootBuilder -> lootBuilder.accept(Artifacts.id(location), lootTable), lootParameterSet));
     }
 
     private void addLootTable(String location, LootTable.Builder lootTable) {

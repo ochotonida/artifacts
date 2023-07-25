@@ -1,6 +1,6 @@
 package artifacts.forge.item.wearable.hands;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.item.wearable.AttributeModifyingItem;
 import artifacts.forge.registry.ModGameRules;
 import net.minecraft.sounds.SoundEvents;
@@ -14,7 +14,7 @@ import java.util.UUID;
 public class FeralClawsItem extends AttributeModifyingItem {
 
     public FeralClawsItem() {
-        super(Attributes.ATTACK_SPEED, UUID.fromString("9f08b24d-a700-4515-91d2-d32f6c8b4dfc"), ArtifactsForge.id("feral_claws_attack_speed_bonus").toString());
+        super(Attributes.ATTACK_SPEED, UUID.fromString("9f08b24d-a700-4515-91d2-d32f6c8b4dfc"), Artifacts.id("feral_claws_attack_speed_bonus").toString());
     }
 
     @Override

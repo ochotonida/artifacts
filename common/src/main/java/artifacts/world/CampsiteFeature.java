@@ -1,9 +1,9 @@
-package artifacts.forge.world;
+package artifacts.world;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.entity.MimicEntity;
-import artifacts.forge.registry.ModEntityTypes;
-import artifacts.forge.registry.ModTags;
+import artifacts.Artifacts;
+import artifacts.entity.MimicEntity;
+import artifacts.registry.ModEntityTypes;
+import artifacts.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -82,8 +82,8 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
             .add(Blocks.SOUL_LANTERN.defaultBlockState(), 1)
     );
 
-    public static final ResourceLocation CHEST_LOOT = ArtifactsForge.id("chests/campsite_chest");
-    public static final ResourceLocation BARREL_LOOT = ArtifactsForge.id("chests/campsite_barrel");
+    public static final ResourceLocation CHEST_LOOT = Artifacts.id("chests/campsite_chest");
+    public static final ResourceLocation BARREL_LOOT = Artifacts.id("chests/campsite_barrel");
 
     public CampsiteFeature() {
         super(NoneFeatureConfiguration.CODEC);
@@ -204,7 +204,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     public void placeChest(WorldGenLevel level, BlockPos pos, RandomSource random, Direction facing) {
-        if (random.nextFloat() < ArtifactsForge.CONFIG.common.campsite.getMimicChance()) {
+        if (random.nextFloat() < Artifacts.CONFIG.common.campsite.getMimicChance()) {
             MimicEntity mimic = ModEntityTypes.MIMIC.get().create(level.getLevel());
             if (mimic != null) {
                 mimic.setDormant(true);
@@ -218,7 +218,7 @@ public class CampsiteFeature extends Feature<NoneFeatureConfiguration> {
                 setBlock(level, pos.below(), Blocks.TNT.defaultBlockState());
                 chest = Blocks.TRAPPED_CHEST.defaultBlockState();
                 setBlock(level, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
-            } else if (ArtifactsForge.CONFIG.common.campsite.useModdedChests) {
+            } else if (Artifacts.CONFIG.common.campsite.useModdedChests) {
                 chest = ModTags.getTag(ModTags.CAMPSITE_CHESTS)
                         .getRandomElement(random)
                         .map(Holder::value)

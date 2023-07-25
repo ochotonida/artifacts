@@ -1,5 +1,9 @@
 package artifacts.forge;
 
+import artifacts.Artifacts;
+import artifacts.client.mimic.MimicRenderer;
+import artifacts.client.mimic.model.MimicChestLayerModel;
+import artifacts.client.mimic.model.MimicModel;
 import artifacts.forge.client.HeliumFlamingoOverlayRenderer;
 import artifacts.forge.client.HurtSoundEventHandler;
 import artifacts.forge.client.InputEventHandler;
@@ -7,12 +11,9 @@ import artifacts.forge.client.UmbrellaArmPoseHandler;
 import artifacts.forge.client.item.ArtifactLayers;
 import artifacts.forge.client.item.ArtifactRenderers;
 import artifacts.forge.client.item.renderer.ArmRenderHandler;
-import artifacts.forge.client.mimic.MimicRenderer;
-import artifacts.forge.client.mimic.model.MimicChestLayerModel;
-import artifacts.forge.client.mimic.model.MimicModel;
-import artifacts.forge.registry.ModEntityTypes;
 import artifacts.forge.registry.ModItems;
 import artifacts.forge.registry.ModKeyMappings;
+import artifacts.registry.ModEntityTypes;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -39,7 +40,7 @@ public class ArtifactsForgeClient {
         event.enqueueWork(
                 () -> ItemProperties.register(
                         ModItems.UMBRELLA.get(),
-                        ArtifactsForge.id("blocking"),
+                        Artifacts.id("blocking"),
                         (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0)
         );
         ArtifactRenderers.register();

@@ -1,6 +1,6 @@
 package artifacts.forge.item.wearable.belt;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.item.wearable.AttributeModifyingItem;
 import artifacts.forge.registry.ModGameRules;
 import net.minecraft.sounds.SoundEvents;
@@ -15,7 +15,7 @@ import java.util.UUID;
 public class CrystalHeartItem extends AttributeModifyingItem {
 
     public CrystalHeartItem() {
-        super(Attributes.MAX_HEALTH, UUID.fromString("99fa0537-90b9-481a-bc76-4650987faba3"), ArtifactsForge.id("crystal_heart_health_bonus").toString());
+        super(Attributes.MAX_HEALTH, UUID.fromString("99fa0537-90b9-481a-bc76-4650987faba3"), Artifacts.id("crystal_heart_health_bonus").toString());
     }
 
     @Override

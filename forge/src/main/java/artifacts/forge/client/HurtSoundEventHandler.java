@@ -1,6 +1,6 @@
 package artifacts.forge.client;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.item.wearable.WearableArtifactItem;
 import artifacts.forge.registry.ModItems;
 import net.minecraft.sounds.SoundEvent;
@@ -25,7 +25,7 @@ public class HurtSoundEventHandler {
     }
     
     public static void onPlaySoundAtEntity(PlayLevelSoundEvent.AtEntity event) {
-        boolean canModifySound = ArtifactsForge.CONFIG.client.modifyHurtSounds
+        boolean canModifySound = Artifacts.CONFIG.client.modifyHurtSounds
                 && event.getSound() != null
                 && isHurtSound(event.getSound().get());
         if (canModifySound && event.getEntity() instanceof LivingEntity entity) {

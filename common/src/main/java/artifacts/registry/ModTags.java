@@ -1,6 +1,6 @@
-package artifacts.forge.registry;
+package artifacts.registry;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -16,10 +16,10 @@ public class ModTags {
     public static final TagKey<Block> MINEABLE_WITH_DIGGING_CLAWS = create(Registries.BLOCK, "mineable/digging_claws");
     public static final TagKey<Block> CAMPSITE_CHESTS = create(Registries.BLOCK, "campsite_chests");
     public static final TagKey<MobEffect> ANTIDOTE_VESSEL_CANCELLABLE = create(Registries.MOB_EFFECT, "antidote_vessel_cancellable");
-    public static final TagKey<EntityType<?>> CREEPERS = TagKey.create(Registries.ENTITY_TYPE, ArtifactsForge.id("creepers"));
+    public static final TagKey<EntityType<?>> CREEPERS = TagKey.create(Registries.ENTITY_TYPE, Artifacts.id("creepers"));
 
     private static <T> TagKey<T> create(ResourceKey<Registry<T>> registry, String id) {
-        return TagKey.create(registry, ArtifactsForge.id(id));
+        return TagKey.create(registry, Artifacts.id(id));
     }
 
     // yeet 🤠

@@ -1,8 +1,8 @@
 package artifacts.forge.data;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.registry.ModEntityTypes;
-import artifacts.forge.registry.ModTags;
+import artifacts.Artifacts;
+import artifacts.registry.ModEntityTypes;
+import artifacts.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -22,7 +22,7 @@ public class EntityTypeTags extends EntityTypeTagsProvider {
     private static final TagKey<EntityType<?>> MOB_DUPLICATOR_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("industrialforegoing", "mob_duplicator_blacklist"));
 
     public EntityTypeTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(packOutput, lookupProvider, ArtifactsForge.MOD_ID, existingFileHelper);
+        super(packOutput, lookupProvider, Artifacts.MOD_ID, existingFileHelper);
     }
 
     @Override

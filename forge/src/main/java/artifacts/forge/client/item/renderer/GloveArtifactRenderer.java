@@ -1,6 +1,6 @@
 package artifacts.forge.client.item.renderer;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.client.item.model.ArmsModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -36,8 +36,8 @@ public class GloveArtifactRenderer implements ICurioRenderer {
     }
 
     public GloveArtifactRenderer(String defaultTexturePath, String slimTexturePath, ArmsModel defaultModel, ArmsModel slimModel) {
-        this.defaultTexture = ArtifactsForge.id("textures/entity/curio/%s.png", defaultTexturePath);
-        this.slimTexture = ArtifactsForge.id("textures/entity/curio/%s.png", slimTexturePath);
+        this.defaultTexture = Artifacts.id("textures/entity/curio/%s.png", defaultTexturePath);
+        this.slimTexture = Artifacts.id("textures/entity/curio/%s.png", slimTexturePath);
         this.defaultModel = defaultModel;
         this.slimModel = slimModel;
     }

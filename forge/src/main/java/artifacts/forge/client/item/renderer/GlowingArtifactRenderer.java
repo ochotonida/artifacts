@@ -1,6 +1,6 @@
 package artifacts.forge.client.item.renderer;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
@@ -19,7 +19,7 @@ public class GlowingArtifactRenderer extends ArtifactRenderer {
 
     public GlowingArtifactRenderer(String name, HumanoidModel<LivingEntity> model) {
         super(String.format("%s/%s", name, name), model);
-        this.glowTexture = ArtifactsForge.id("textures/entity/curio/%s/%s_glow.png", name, name);
+        this.glowTexture = Artifacts.id("textures/entity/curio/%s/%s_glow.png", name, name);
     }
 
     private ResourceLocation getGlowTexture() {

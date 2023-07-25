@@ -1,7 +1,7 @@
 package artifacts.forge.item.wearable;
 
 import artifacts.forge.registry.ModGameRules;
-import artifacts.forge.registry.ModSoundEvents;
+import artifacts.registry.ModSoundEvents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;

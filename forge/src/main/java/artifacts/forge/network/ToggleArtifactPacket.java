@@ -1,11 +1,11 @@
 package artifacts.forge.network;
 
 import artifacts.forge.item.wearable.WearableArtifactItem;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
@@ -14,7 +14,7 @@ public class ToggleArtifactPacket {
     private final WearableArtifactItem item;
 
     public ToggleArtifactPacket(FriendlyByteBuf buffer) {
-        Item item = ForgeRegistries.ITEMS.getValue(buffer.readResourceLocation());
+        Item item = BuiltInRegistries.ITEM.get(buffer.readResourceLocation());
         if (!(item instanceof WearableArtifactItem wearableArtifactItem)) {
             throw new IllegalStateException();
         }
@@ -26,8 +26,7 @@ public class ToggleArtifactPacket {
     }
 
     void encode(FriendlyByteBuf buffer) {
-        //noinspection ConstantConditions
-        buffer.writeResourceLocation(ForgeRegistries.ITEMS.getKey(item));
+        buffer.writeResourceLocation(BuiltInRegistries.ITEM.getKey(item));
     }
 
     void handle(Supplier<NetworkEvent.Context> context) {

@@ -1,8 +1,8 @@
 package artifacts.forge.data;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.registry.ModEntityTypes;
+import artifacts.Artifacts;
 import artifacts.forge.registry.ModItems;
+import artifacts.registry.ModEntityTypes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.advancements.FrameType;
@@ -30,14 +30,14 @@ public class Advancements extends ForgeAdvancementProvider {
     }
 
     private static void generate(HolderLookup.Provider registries, Consumer<Advancement> saver, ExistingFileHelper existingFileHelper) {
-        ResourceLocation amateurArcheologist = ArtifactsForge.id("amateur_archaeologist");
+        ResourceLocation amateurArcheologist = Artifacts.id("amateur_archaeologist");
         Advancement parent = advancement(amateurArcheologist, ModItems.FLAME_PENDANT.get())
                 .parent(new ResourceLocation("adventure/root"))
                 .addCriterion("find_artifact", InventoryChangeTrigger.TriggerInstance.hasItems(
                         ItemPredicate.Builder.item().of(ItemTags.ARTIFACTS).build()
                 )).save(saver, amateurArcheologist, existingFileHelper);
 
-        ResourceLocation chestSlayer = ArtifactsForge.id("chest_slayer");
+        ResourceLocation chestSlayer = Artifacts.id("chest_slayer");
         advancement(chestSlayer, ModItems.MIMIC_SPAWN_EGG.get())
                 .parent(parent)
                 .addCriterion("kill_mimic", KilledTrigger.TriggerInstance.playerKilledEntity(
@@ -52,8 +52,8 @@ public class Advancements extends ForgeAdvancementProvider {
     private static DisplayInfo display(String title, ItemLike icon) {
         return new DisplayInfo(
                 new ItemStack(icon),
-                Component.translatable("%s.advancements.%s.title".formatted(ArtifactsForge.MOD_ID, title)),
-                Component.translatable("%s.advancements.%s.description".formatted(ArtifactsForge.MOD_ID, title)),
+                Component.translatable("%s.advancements.%s.title".formatted(Artifacts.MOD_ID, title)),
+                Component.translatable("%s.advancements.%s.description".formatted(Artifacts.MOD_ID, title)),
                 null,
                 FrameType.TASK,
                 true,

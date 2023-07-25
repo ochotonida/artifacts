@@ -1,7 +1,7 @@
 package artifacts.forge.data;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.registry.ModTags;
+import artifacts.Artifacts;
+import artifacts.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -21,7 +21,7 @@ public class MobEffectTags extends IntrinsicHolderTagsProvider<MobEffect> {
                 Registries.MOB_EFFECT,
                 lookupProvider,
                 effect -> ForgeRegistries.MOB_EFFECTS.getResourceKey(effect).orElseThrow(),
-                ArtifactsForge.MOD_ID,
+                Artifacts.MOD_ID,
                 existingFileHelper
         );
     }

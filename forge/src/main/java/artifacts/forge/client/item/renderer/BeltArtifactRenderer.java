@@ -1,6 +1,6 @@
 package artifacts.forge.client.item.renderer;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.client.item.model.BeltModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -22,7 +22,7 @@ public class BeltArtifactRenderer implements ICurioRenderer {
     private final BeltModel model;
 
     public BeltArtifactRenderer(String texturePath, BeltModel model) {
-        this(ArtifactsForge.id("textures/entity/curio/%s.png", texturePath), model);
+        this(Artifacts.id("textures/entity/curio/%s.png", texturePath), model);
     }
 
     public BeltArtifactRenderer(ResourceLocation texture, BeltModel model) {

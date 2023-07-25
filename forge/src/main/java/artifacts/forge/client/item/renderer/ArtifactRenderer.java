@@ -1,6 +1,6 @@
 package artifacts.forge.client.item.renderer;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -22,7 +22,7 @@ public class ArtifactRenderer implements ICurioRenderer {
     private final HumanoidModel<LivingEntity> model;
 
     public ArtifactRenderer(String texturePath, HumanoidModel<LivingEntity> model) {
-        this(ArtifactsForge.id("textures/entity/curio/%s.png", texturePath), model);
+        this(Artifacts.id("textures/entity/curio/%s.png", texturePath), model);
     }
 
     public ArtifactRenderer(ResourceLocation texture, HumanoidModel<LivingEntity> model) {

@@ -1,7 +1,7 @@
-package artifacts.forge.world.placement;
+package artifacts.world.placement;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.registry.ModPlacementModifierTypes;
+import artifacts.Artifacts;
+import artifacts.registry.ModPlacementModifierTypes;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -26,8 +26,8 @@ public class CampsiteHeightRangePlacement extends PlacementModifier {
     }
 
     public Stream<BlockPos> getPositions(PlacementContext context, RandomSource randomSource, BlockPos pos) {
-        int minY = ArtifactsForge.CONFIG.common.campsite.minY;
-        int maxY = ArtifactsForge.CONFIG.common.campsite.maxY;
+        int minY = Artifacts.CONFIG.common.campsite.minY;
+        int maxY = Artifacts.CONFIG.common.campsite.maxY;
         if (minY > maxY) {
             return Stream.of();
         }

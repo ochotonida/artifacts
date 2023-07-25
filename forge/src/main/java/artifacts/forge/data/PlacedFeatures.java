@@ -1,9 +1,9 @@
 package artifacts.forge.data;
 
-import artifacts.forge.ArtifactsForge;
-import artifacts.forge.world.placement.CampsiteCountPlacement;
-import artifacts.forge.world.placement.CampsiteHeightRangePlacement;
-import artifacts.forge.world.placement.CeilingHeightFilter;
+import artifacts.Artifacts;
+import artifacts.world.placement.CampsiteCountPlacement;
+import artifacts.world.placement.CampsiteHeightRangePlacement;
+import artifacts.world.placement.CeilingHeightFilter;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class PlacedFeatures {
 
-    public static final ResourceKey<PlacedFeature> UNDERGROUND_CAMPSITE = ArtifactsForge.key(Registries.PLACED_FEATURE, "underground_campsite");
+    public static final ResourceKey<PlacedFeature> UNDERGROUND_CAMPSITE = Artifacts.key(Registries.PLACED_FEATURE, "underground_campsite");
 
     public static void create(BootstapContext<PlacedFeature> context) {
         HolderGetter<Feature<?>> featureRegistry = context.lookup(Registries.FEATURE);

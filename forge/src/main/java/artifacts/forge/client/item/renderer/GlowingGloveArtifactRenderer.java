@@ -1,6 +1,6 @@
 package artifacts.forge.client.item.renderer;
 
-import artifacts.forge.ArtifactsForge;
+import artifacts.Artifacts;
 import artifacts.forge.client.item.model.ArmsModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -21,8 +21,8 @@ public class GlowingGloveArtifactRenderer extends GloveArtifactRenderer {
 
     public GlowingGloveArtifactRenderer(String name, ArmsModel defaultModel, ArmsModel slimModel) {
         super(name, defaultModel, slimModel);
-        defaultGlowTexture = ArtifactsForge.id("textures/entity/curio/glove/%s/%s_default_glow.png", name, name);
-        slimGlowTexture = ArtifactsForge.id("textures/entity/curio/glove/%s/%s_slim_glow.png", name, name);
+        defaultGlowTexture = Artifacts.id("textures/entity/curio/glove/%s/%s_default_glow.png", name, name);
+        slimGlowTexture = Artifacts.id("textures/entity/curio/glove/%s/%s_slim_glow.png", name, name);
     }
 
     private ResourceLocation getGlowTexture(boolean hasSlimArms) {

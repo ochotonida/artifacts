@@ -2,7 +2,7 @@ package artifacts.forge.item.wearable.feet;
 
 import artifacts.forge.item.wearable.WearableArtifactItem;
 import artifacts.forge.registry.ModGameRules;
-import artifacts.forge.registry.ModTags;
+import artifacts.registry.ModTags;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;

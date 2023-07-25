@@ -1,7 +1,7 @@
 package artifacts.forge.item.wearable.necklace;
 
 import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.util.DamageSourceHelper;
+import artifacts.util.DamageSourceHelper;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;

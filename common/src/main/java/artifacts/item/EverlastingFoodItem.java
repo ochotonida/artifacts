@@ -1,4 +1,4 @@
-package artifacts.forge.item;
+package artifacts.item;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
