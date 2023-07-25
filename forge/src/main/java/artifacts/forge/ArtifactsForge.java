@@ -4,7 +4,6 @@ import artifacts.Artifacts;
 import artifacts.config.ModConfig;
 import artifacts.entity.MimicEntity;
 import artifacts.forge.capability.SwimHandler;
-import artifacts.forge.data.DataGenerators;
 import artifacts.forge.network.NetworkHandler;
 import artifacts.forge.registry.ModGameRules;
 import artifacts.forge.registry.ModItems;
@@ -48,7 +47,6 @@ public class ArtifactsForge {
 
         modBus.addListener(this::commonSetup);
 
-        modBus.addListener(DataGenerators::gatherData);
         modBus.addListener(ArtifactsForge::registerAttributes);
 
         MinecraftForge.EVENT_BUS.addListener(ModGameRules::onPlayerJoinWorld);

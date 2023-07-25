@@ -1,4 +1,4 @@
-package artifacts.forge.data;
+package artifacts.data.providers;
 
 import artifacts.Artifacts;
 import artifacts.registry.ModSoundEvents;
@@ -12,7 +12,7 @@ import net.minecraftforge.common.data.SoundDefinitionsProvider;
 
 public class SoundDefinitions extends SoundDefinitionsProvider {
 
-    protected SoundDefinitions(PackOutput output, ExistingFileHelper helper) {
+    public SoundDefinitions(PackOutput output, ExistingFileHelper helper) {
         super(output, Artifacts.MOD_ID, helper);
     }
 

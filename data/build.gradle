@@ -52,6 +52,10 @@ dependencies {
     implementation fg.deobf("dev.architectury:architectury-forge:$architectury_version")
     implementation(project(path: ':common', configuration: 'namedElements')) { transitive false }
     implementation(project(path: ':forge', configuration: 'namedElements')) { transitive false }
+
+    implementation fg.deobf("be.florens:expandability-forge:${expandability_version}")
+    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
+    implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
 }
 
 jar.finalizedBy('reobfJar')

@@ -1,6 +1,7 @@
-package artifacts.forge.data;
+package artifacts.data;
 
 import artifacts.Artifacts;
+import artifacts.data.providers.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -9,13 +10,17 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public class DataGenerators {
+@Mod.EventBusSubscriber(modid = Artifacts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class ArtifactsData {
 
+    @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();

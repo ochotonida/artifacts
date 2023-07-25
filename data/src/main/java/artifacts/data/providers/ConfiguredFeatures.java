@@ -1,4 +1,4 @@
-package artifacts.forge.data;
+package artifacts.data.providers;
 
 import artifacts.Artifacts;
 import artifacts.registry.ModFeatures;
