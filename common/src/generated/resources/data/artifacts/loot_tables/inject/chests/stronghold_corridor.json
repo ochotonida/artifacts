@@ -42,5 +42,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "artifacts:inject/chests/stronghold_corridor"
 }

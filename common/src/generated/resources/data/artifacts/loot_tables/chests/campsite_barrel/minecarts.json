@@ -46,5 +46,6 @@
       "name": "rails",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "artifacts:chests/campsite_barrel/minecarts"
 }

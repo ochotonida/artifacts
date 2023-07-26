@@ -10,5 +10,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "artifacts:entities/mimic"
 }

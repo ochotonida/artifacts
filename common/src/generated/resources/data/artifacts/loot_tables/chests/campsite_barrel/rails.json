@@ -68,5 +68,6 @@
       ],
       "rolls": 4.0
     }
-  ]
+  ],
+  "random_sequence": "artifacts:chests/campsite_barrel/rails"
 }

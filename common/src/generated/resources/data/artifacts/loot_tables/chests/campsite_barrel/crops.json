@@ -111,5 +111,6 @@
       ],
       "rolls": 2.0
     }
-  ]
+  ],
+  "random_sequence": "artifacts:chests/campsite_barrel/crops"
 }

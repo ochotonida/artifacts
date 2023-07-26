@@ -32,5 +32,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "artifacts:inject/chests/bastion_hoglin_stable"
 }

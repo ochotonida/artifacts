@@ -52,5 +52,6 @@
       ],
       "rolls": 3.0
     }
-  ]
+  ],
+  "random_sequence": "artifacts:chests/campsite_barrel/gems"
 }

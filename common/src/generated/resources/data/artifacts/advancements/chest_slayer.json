@@ -35,5 +35,6 @@
     [
       "kill_mimic"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }
