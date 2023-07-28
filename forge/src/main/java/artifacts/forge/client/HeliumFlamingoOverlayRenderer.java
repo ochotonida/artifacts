@@ -2,7 +2,7 @@ package artifacts.forge.client;
 
 import artifacts.Artifacts;
 import artifacts.forge.capability.SwimHandler;
-import artifacts.forge.registry.ModGameRules;
+import artifacts.registry.ModGameRules;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

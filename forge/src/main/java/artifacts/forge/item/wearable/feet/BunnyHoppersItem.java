@@ -1,7 +1,8 @@
 package artifacts.forge.item.wearable.feet;
 
-import artifacts.forge.item.wearable.MobEffectItem;
-import artifacts.forge.registry.ModGameRules;
+import artifacts.forge.event.ArtifactEventHandler;
+import artifacts.item.wearable.MobEffectItem;
+import artifacts.registry.ModGameRules;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,7 +15,7 @@ public class BunnyHoppersItem extends MobEffectItem {
 
     public BunnyHoppersItem() {
         super(MobEffects.JUMP, ModGameRules.BUNNY_HOPPERS_JUMP_BOOST_LEVEL, 40);
-        addListener(EventPriority.HIGH, LivingFallEvent.class, this::onLivingFall);
+        ArtifactEventHandler.addListener(this, EventPriority.HIGH, LivingFallEvent.class, this::onLivingFall);
     }
 
     @Override

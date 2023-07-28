@@ -1,6 +1,7 @@
 package artifacts.item;
 
 import artifacts.Artifacts;
+import artifacts.registry.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -16,8 +17,9 @@ import java.util.List;
 
 public abstract class ArtifactItem extends Item {
 
+    @SuppressWarnings("UnstableApiUsage")
     public ArtifactItem(Properties properties) {
-        super(properties.stacksTo(1).rarity(Rarity.RARE).fireResistant());
+        super(properties.arch$tab(ModItems.CREATIVE_TAB).stacksTo(1).rarity(Rarity.RARE).fireResistant());
     }
 
     public ArtifactItem() {

@@ -1,27 +1,25 @@
 package artifacts.forge.item.wearable.belt;
 
-import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.registry.ModGameRules;
-import artifacts.forge.registry.ModItems;
+import artifacts.forge.event.ArtifactEventHandler;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.registry.ModGameRules;
+import artifacts.registry.ModItems;
 import artifacts.registry.ModSoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
-import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class CloudInABottleItem extends WearableArtifactItem {
 
     public CloudInABottleItem() {
-        addListener(EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
+        ArtifactEventHandler.addListener(this, EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
     }
 
     @Override
@@ -58,7 +56,7 @@ public class CloudInABottleItem extends WearableArtifactItem {
             player.causeFoodExhaustion(0.05F);
         }
 
-        if (CuriosApi.getCuriosHelper().findFirstCurio(player, ModItems.WHOOPEE_CUSHION.get()).isPresent()) {
+        if (ModItems.WHOOPEE_CUSHION.get().isEquippedBy(player)) {
             player.playSound(ModSoundEvents.FART.get(), 1, 0.9F + player.getRandom().nextFloat() * 0.2F);
         } else {
             player.playSound(SoundEvents.WOOL_FALL, 1, 0.9F + player.getRandom().nextFloat() * 0.2F);
@@ -72,7 +70,7 @@ public class CloudInABottleItem extends WearableArtifactItem {
     }
 
     @Override
-    public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.BOTTLE_FILL_DRAGONBREATH, 1, 1);
+    public SoundEvent getEquipSound() {
+        return SoundEvents.BOTTLE_FILL_DRAGONBREATH;
     }
 }

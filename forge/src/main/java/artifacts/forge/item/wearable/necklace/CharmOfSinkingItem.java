@@ -1,7 +1,8 @@
 package artifacts.forge.item.wearable.necklace;
 
-import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.registry.ModGameRules;
+import artifacts.forge.event.ArtifactEventHandler;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.registry.ModGameRules;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.common.ForgeMod;
@@ -11,7 +12,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 public class CharmOfSinkingItem extends WearableArtifactItem {
 
     public CharmOfSinkingItem() {
-        addListener(EventPriority.HIGH, PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
+        ArtifactEventHandler.addListener(this, EventPriority.HIGH, PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
     }
 
     @Override

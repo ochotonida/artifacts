@@ -2,8 +2,8 @@ package artifacts.data.providers;
 
 import artifacts.Artifacts;
 import artifacts.entity.MimicEntity;
-import artifacts.forge.registry.ModItems;
 import artifacts.loot.ConfigurableRandomChance;
+import artifacts.registry.ModItems;
 import artifacts.world.CampsiteFeature;
 import com.google.common.base.Preconditions;
 import net.minecraft.data.PackOutput;

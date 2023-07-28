@@ -1,6 +1,6 @@
 package artifacts.forge.item.wearable.necklace;
 
-import artifacts.forge.registry.ModGameRules;
+import artifacts.registry.ModGameRules;
 import net.minecraft.world.entity.LivingEntity;
 
 public class ThornPendantItem extends PendantItem {

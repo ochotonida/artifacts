@@ -1,20 +1,19 @@
 package artifacts.forge.client;
 
 import artifacts.forge.capability.SwimHandler;
-import artifacts.forge.item.wearable.WearableArtifactItem;
 import artifacts.forge.item.wearable.belt.CloudInABottleItem;
 import artifacts.forge.network.DoubleJumpPacket;
-import artifacts.forge.network.NetworkHandler;
-import artifacts.forge.network.ToggleArtifactPacket;
-import artifacts.forge.registry.ModGameRules;
-import artifacts.forge.registry.ModItems;
-import artifacts.forge.registry.ModKeyMappings;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.network.NetworkHandler;
+import artifacts.network.ToggleArtifactPacket;
+import artifacts.registry.ModGameRules;
+import artifacts.registry.ModItems;
+import artifacts.registry.ModKeyMappings;
+import dev.architectury.event.events.client.ClientTickEvent;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +29,7 @@ public class InputEventHandler {
     private static final Map<WearableArtifactItem, KeyMapping> TOGGLE_KEY_MAPPINGS = new HashMap<>();
 
     public static void setup() {
-        MinecraftForge.EVENT_BUS.addListener(InputEventHandler::onClientTick);
+        ClientTickEvent.CLIENT_POST.register(InputEventHandler::onClientTick);
         addToggleInputHandler(ModItems.NIGHT_VISION_GOGGLES.get(), ModKeyMappings.TOGGLE_NIGHT_VISION_GOGGLES);
         addToggleInputHandler(ModItems.UNIVERSAL_ATTRACTOR.get(), ModKeyMappings.TOGGLE_UNIVERSAL_ATTRACTOR);
     }
@@ -42,13 +41,13 @@ public class InputEventHandler {
     private static void addToggleInputHandler(WearableArtifactItem item, KeyMapping toggleKey) {
         TOGGLE_KEY_MAPPINGS.put(item, toggleKey);
         ToggleInputHandler handler = new ToggleInputHandler(item);
-        MinecraftForge.EVENT_BUS.addListener(handler::onClientTick);
+        ClientTickEvent.CLIENT_PRE.register(instance -> handler.onClientTick());
     }
 
-    private static void onClientTick(TickEvent.ClientTickEvent event) {
-        LocalPlayer player = Minecraft.getInstance().player;
+    private static void onClientTick(Minecraft instance) {
+        LocalPlayer player = instance.player;
         // noinspection ConstantConditions
-        if (event.phase == TickEvent.Phase.END && player != null && player.input != null) {
+        if (player != null && player.input != null) {
             handleCloudInABottleInput(player);
             handleHeliumFlamingoInput(player);
         }
@@ -63,7 +62,7 @@ public class InputEventHandler {
         } else if (!player.getAbilities().flying && canDoubleJump && hasReleasedJumpKey) {
             canDoubleJump = false;
             if (ModItems.CLOUD_IN_A_BOTTLE.get().isEquippedBy(player)) {
-                NetworkHandler.INSTANCE.sendToServer(new DoubleJumpPacket());
+                artifacts.forge.network.NetworkHandler.INSTANCE.sendToServer(new DoubleJumpPacket());
                 CloudInABottleItem.jump(player);
             }
         }
@@ -131,10 +130,10 @@ public class InputEventHandler {
             this.item = item;
         }
 
-        public void onClientTick(TickEvent.ClientTickEvent event) {
+        public void onClientTick() {
             boolean isToggleKeyDown = getToggleKey(item).isDown();
             if (isToggleKeyDown && !wasToggleKeyDown) {
-                NetworkHandler.INSTANCE.sendToServer(new ToggleArtifactPacket(item));
+                NetworkHandler.CHANNEL.sendToServer(new ToggleArtifactPacket(item));
             }
             wasToggleKeyDown = isToggleKeyDown;
         }

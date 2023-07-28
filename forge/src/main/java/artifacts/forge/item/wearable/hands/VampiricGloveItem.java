@@ -1,7 +1,8 @@
 package artifacts.forge.item.wearable.hands;
 
-import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.registry.ModGameRules;
+import artifacts.forge.event.ArtifactEventHandler;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.registry.ModGameRules;
 import artifacts.util.DamageSourceHelper;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -10,7 +11,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 public class VampiricGloveItem extends WearableArtifactItem {
 
     public VampiricGloveItem() {
-        addListener(EventPriority.LOWEST, LivingDamageEvent.class, this::onLivingDamage, event -> DamageSourceHelper.getAttacker(event.getSource()));
+        ArtifactEventHandler.addListener(this, EventPriority.LOWEST, LivingDamageEvent.class, this::onLivingDamage, event -> DamageSourceHelper.getAttacker(event.getSource()));
     }
 
     @Override

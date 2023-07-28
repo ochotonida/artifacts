@@ -1,17 +1,15 @@
 package artifacts.forge.item.wearable.belt;
 
 import artifacts.forge.capability.SwimHandler;
-import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.registry.ModGameRules;
-import artifacts.forge.registry.ModKeyMappings;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.registry.ModGameRules;
+import artifacts.registry.ModKeyMappings;
 import artifacts.registry.ModSoundEvents;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -35,8 +33,8 @@ public class HeliumFlamingoItem extends WearableArtifactItem {
 
     @Nonnull
     @Override
-    public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(ModSoundEvents.POP.get(), 1, 0.7F);
+    public SoundEvent getEquipSound() {
+        return ModSoundEvents.POP.get(); // TODO pitch 0.7
     }
 
     private void onPlayerTick(TickEvent.PlayerTickEvent event) {

@@ -5,7 +5,8 @@
   "refmap": "mixins.artifacts.refmap.json",
   "mixins": [
     "gamerule.BooleanValueInvoker",
-    "gamerule.IntegerValueInvoker"
+    "gamerule.IntegerValueInvoker",
+    "item.wearable.villagerhat.VillagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

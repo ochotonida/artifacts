@@ -4,9 +4,12 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.artifacts.refmap.json",
   "mixins": [
-    "item.aquadashers.EntityMixin",
     "item.umbrella.EntityMixin",
-    "item.villagerhat.VillagerMixin"
+    "item.wearable.AttributeModifyingItemMixin",
+    "item.wearable.WearableArtifactItemMixin",
+    "item.wearable.aquadashers.EntityMixin",
+    "item.wearable.luckyscarf.LuckyScarfItemMixin",
+    "item.wearable.superstitioushat.SuperstitiousHatItemMixin"
   ],
   "client": [
     "item.umbrella.HumanoidModelMixin"

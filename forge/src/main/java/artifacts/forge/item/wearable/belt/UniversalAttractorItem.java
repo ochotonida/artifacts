@@ -1,7 +1,8 @@
 package artifacts.forge.item.wearable.belt;
 
-import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.registry.ModGameRules;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.registry.ModGameRules;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -9,7 +10,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
@@ -32,9 +32,9 @@ public class UniversalAttractorItem extends WearableArtifactItem {
 
     // magnet logic from Botania, see https://github.com/Vazkii/Botania
     @Override
-    public void curioTick(SlotContext slotContext, ItemStack stack) {
+    public void wornTick(LivingEntity entity, ItemStack stack) {
         if (!ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get()
-                || !(slotContext.entity() instanceof Player player)
+                || !(entity instanceof Player player)
                 || player.isSpectator()
                 || player.getCooldowns().isOnCooldown(this)
                 || !isActivated(stack)

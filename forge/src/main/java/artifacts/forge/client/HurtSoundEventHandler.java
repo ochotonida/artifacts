@@ -1,15 +1,14 @@
 package artifacts.forge.client;
 
 import artifacts.Artifacts;
-import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.registry.ModItems;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.registry.ModItems;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.PlayLevelSoundEvent;
-import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +29,7 @@ public class HurtSoundEventHandler {
                 && isHurtSound(event.getSound().get());
         if (canModifySound && event.getEntity() instanceof LivingEntity entity) {
             for (WearableArtifactItem item : HURT_SOUNDS.keySet()) {
-                if (CuriosApi.getCuriosHelper().findFirstCurio(entity, item).isPresent()) {
+                if (item.isEquippedBy(entity)) {
                     playHurtSound(entity, item, event.getSource());
                 }
             }

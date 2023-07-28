@@ -1,7 +1,7 @@
 package artifacts.forge.item.wearable.feet;
 
-import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.registry.ModGameRules;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.registry.ModGameRules;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -12,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 import java.util.UUID;
@@ -66,8 +65,7 @@ public class RunningShoesItem extends WearableArtifactItem {
 
     @Override
     @SuppressWarnings("ConstantConditions")
-    public void curioTick(SlotContext slotContext, ItemStack stack) {
-        LivingEntity entity = slotContext.entity();
+    public void wornTick(LivingEntity entity, ItemStack stack) {
         AttributeInstance stepHeight = entity.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
         AttributeInstance movementSpeed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
         AttributeModifier speedBonus = getSpeedBonus();

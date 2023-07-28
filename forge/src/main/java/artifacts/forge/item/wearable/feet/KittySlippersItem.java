@@ -1,8 +1,10 @@
 package artifacts.forge.item.wearable.feet;
 
-import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.registry.ModGameRules;
+import artifacts.forge.event.ArtifactEventHandler;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.registry.ModGameRules;
 import artifacts.registry.ModTags;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,20 +12,17 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class KittySlippersItem extends WearableArtifactItem {
 
     public KittySlippersItem() {
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJoinWorld);
-        addListener(LivingChangeTargetEvent.class, this::onLivingChangeTargetEvent, LivingChangeTargetEvent::getNewTarget);
-        addListener(LivingEvent.LivingTickEvent.class, this::onLivingUpdate, event -> event.getEntity().getLastHurtByMob());
+        ArtifactEventHandler.addListener(this, LivingChangeTargetEvent.class, this::onLivingChangeTargetEvent, LivingChangeTargetEvent::getNewTarget);
+        ArtifactEventHandler.addListener(this, LivingEvent.LivingTickEvent.class, this::onLivingUpdate, event -> event.getEntity().getLastHurtByMob());
     }
 
     @Override
@@ -50,7 +49,7 @@ public class KittySlippersItem extends WearableArtifactItem {
     }
 
     @Override
-    public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.CAT_AMBIENT, 1, 1);
+    public SoundEvent getEquipSound() {
+        return SoundEvents.CAT_AMBIENT;
     }
 }

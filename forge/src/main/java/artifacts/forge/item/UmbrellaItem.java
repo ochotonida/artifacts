@@ -1,8 +1,8 @@
 package artifacts.forge.item;
 
 import artifacts.forge.capability.SwimHandler;
-import artifacts.forge.registry.ModGameRules;
 import artifacts.item.ArtifactItem;
+import artifacts.registry.ModGameRules;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

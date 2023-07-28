@@ -2,7 +2,7 @@ package artifacts.forge.client.item;
 
 import artifacts.forge.client.item.model.*;
 import artifacts.forge.client.item.renderer.*;
-import artifacts.forge.registry.ModItems;
+import artifacts.registry.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

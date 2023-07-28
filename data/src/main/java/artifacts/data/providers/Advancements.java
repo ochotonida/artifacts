@@ -1,8 +1,8 @@
 package artifacts.data.providers;
 
 import artifacts.Artifacts;
-import artifacts.forge.registry.ModItems;
 import artifacts.registry.ModEntityTypes;
+import artifacts.registry.ModItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.advancements.FrameType;

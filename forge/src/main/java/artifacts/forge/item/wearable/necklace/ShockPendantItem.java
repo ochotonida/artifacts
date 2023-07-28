@@ -1,6 +1,7 @@
 package artifacts.forge.item.wearable.necklace;
 
-import artifacts.forge.registry.ModGameRules;
+import artifacts.forge.event.ArtifactEventHandler;
+import artifacts.registry.ModGameRules;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,7 +18,7 @@ public class ShockPendantItem extends PendantItem {
 
     public ShockPendantItem() {
         super(ModGameRules.SHOCK_PENDANT_STRIKE_CHANCE);
-        addListener(LivingHurtEvent.class, this::onLivingHurt);
+        ArtifactEventHandler.addListener(this, LivingHurtEvent.class, this::onLivingHurt);
     }
 
     @Override

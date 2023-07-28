@@ -1,6 +1,6 @@
 package artifacts.forge.item.wearable.necklace;
 
-import artifacts.forge.registry.ModGameRules;
+import artifacts.registry.ModGameRules;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

@@ -1,8 +1,8 @@
 package artifacts.forge.item.wearable.feet;
 
 import artifacts.Artifacts;
-import artifacts.forge.item.wearable.AttributeModifyingItem;
-import artifacts.forge.registry.ModGameRules;
+import artifacts.item.wearable.AttributeModifyingItem;
+import artifacts.registry.ModGameRules;
 import net.minecraftforge.common.ForgeMod;
 
 import java.util.UUID;

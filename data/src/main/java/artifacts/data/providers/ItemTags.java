@@ -1,7 +1,7 @@
 package artifacts.data.providers;
 
 import artifacts.Artifacts;
-import artifacts.forge.registry.ModItems;
+import artifacts.registry.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;

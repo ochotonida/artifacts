@@ -1,31 +1,30 @@
 package artifacts.forge.item.wearable.hands;
 
 import artifacts.Artifacts;
-import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.registry.ModGameRules;
+import artifacts.forge.event.ArtifactEventHandler;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.registry.ModGameRules;
 import artifacts.registry.ModTags;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.List;
 
 public class DiggingClawsItem extends WearableArtifactItem {
 
     public DiggingClawsItem() {
-        addListener(EventPriority.LOW, PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
-        addListener(PlayerEvent.HarvestCheck.class, this::onHarvestCheck);
+        ArtifactEventHandler.addListener(this, EventPriority.LOW, PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
+        ArtifactEventHandler.addListener(this, PlayerEvent.HarvestCheck.class, this::onHarvestCheck);
     }
 
     @Override
@@ -80,7 +79,7 @@ public class DiggingClawsItem extends WearableArtifactItem {
     }
 
     @Override
-    public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_NETHERITE, 1, 1);
+    public SoundEvent getEquipSound() {
+        return SoundEvents.ARMOR_EQUIP_NETHERITE;
     }
 }

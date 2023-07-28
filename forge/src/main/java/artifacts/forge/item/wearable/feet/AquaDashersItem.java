@@ -1,8 +1,10 @@
 package artifacts.forge.item.wearable.feet;
 
 import artifacts.forge.capability.SwimHandler;
-import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.registry.ModGameRules;
+import artifacts.forge.event.ArtifactEventHandler;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.registry.ModGameRules;
+import artifacts.registry.ModItems;
 import be.florens.expandability.api.forge.LivingFluidCollisionEvent;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,7 +15,7 @@ import net.minecraftforge.eventbus.api.Event;
 public class AquaDashersItem extends WearableArtifactItem {
 
     public AquaDashersItem() {
-        addListener(LivingFluidCollisionEvent.class, this::onFluidCollision);
+        ArtifactEventHandler.addListener(this, LivingFluidCollisionEvent.class, this::onFluidCollision);
     }
 
     @Override
@@ -36,8 +38,8 @@ public class AquaDashersItem extends WearableArtifactItem {
         }
     }
 
-    public boolean isSprinting(LivingEntity entity) {
-        return isEquippedBy(entity)
+    public static boolean isSprinting(LivingEntity entity) {
+        return ModItems.AQUA_DASHERS.get().isEquippedBy(entity)
                 && ModGameRules.AQUA_DASHERS_ENABLED.get()
                 && entity.isSprinting()
                 && entity.fallDistance < 6

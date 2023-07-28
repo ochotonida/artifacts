@@ -1,7 +1,8 @@
 package artifacts.forge.item.wearable.hands;
 
-import artifacts.forge.item.wearable.WearableArtifactItem;
-import artifacts.forge.registry.ModGameRules;
+import artifacts.forge.event.ArtifactEventHandler;
+import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.registry.ModGameRules;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
@@ -9,7 +10,7 @@ import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 public class GoldenHookItem extends WearableArtifactItem {
 
     public GoldenHookItem() {
-        addListener(LivingExperienceDropEvent.class, this::onLivingExperienceDrop, LivingExperienceDropEvent::getAttackingPlayer);
+        ArtifactEventHandler.addListener(this, LivingExperienceDropEvent.class, this::onLivingExperienceDrop, LivingExperienceDropEvent::getAttackingPlayer);
     }
 
     @Override

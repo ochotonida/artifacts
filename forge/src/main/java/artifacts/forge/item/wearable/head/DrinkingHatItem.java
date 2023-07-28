@@ -1,16 +1,14 @@
 package artifacts.forge.item.wearable.head;
 
-import artifacts.forge.item.wearable.WearableArtifactItem;
+import artifacts.forge.event.ArtifactEventHandler;
+import artifacts.item.wearable.WearableArtifactItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -22,7 +20,7 @@ public class DrinkingHatItem extends WearableArtifactItem {
     private final boolean hasSpecialTooltip;
 
     public DrinkingHatItem(Supplier<Integer> drinkingDurationMultiplier, Supplier<Integer> eatingDurationMultiplier, boolean hasSpecialTooltip) {
-        addListener(LivingEntityUseItemEvent.Start.class, this::onItemUseStart);
+        ArtifactEventHandler.addListener(this, LivingEntityUseItemEvent.Start.class, this::onItemUseStart);
         this.drinkingDurationMultiplier = drinkingDurationMultiplier;
         this.eatingDurationMultiplier = eatingDurationMultiplier;
         this.hasSpecialTooltip = hasSpecialTooltip;
@@ -63,11 +61,11 @@ public class DrinkingHatItem extends WearableArtifactItem {
         if (action != UseAnim.EAT && action != UseAnim.DRINK) {
             return;
         }
-        int newDuration = (int) (event.getDuration() * Math.min(1, Math.max(0, getDurationMultiplier(this, action))));
+        int newDuration = (int) (event.getDuration() * Math.min(1, Math.max(0, getDurationMultiplier(action))));
         event.setDuration(Math.max(1, newDuration));
     }
 
-    private double getDurationMultiplier(Item drinkingHat, UseAnim action) {
+    private double getDurationMultiplier(UseAnim action) {
         if (action == UseAnim.DRINK) {
             return drinkingDurationMultiplier.get() / 100D;
         } else {
@@ -76,7 +74,7 @@ public class DrinkingHatItem extends WearableArtifactItem {
     }
 
     @Override
-    public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.BOTTLE_FILL, 1, 1);
+    public SoundEvent getEquipSound() {
+        return SoundEvents.BOTTLE_FILL;
     }
 }

@@ -11,9 +11,8 @@ import artifacts.forge.client.UmbrellaArmPoseHandler;
 import artifacts.forge.client.item.ArtifactLayers;
 import artifacts.forge.client.item.ArtifactRenderers;
 import artifacts.forge.client.item.renderer.ArmRenderHandler;
-import artifacts.forge.registry.ModItems;
-import artifacts.forge.registry.ModKeyMappings;
 import artifacts.registry.ModEntityTypes;
+import artifacts.registry.ModItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -31,7 +30,6 @@ public class ArtifactsForgeClient {
         modBus.addListener(this::onRegisterRenderers);
         modBus.addListener(this::onRegisterLayerDefinitions);
         modBus.addListener(this::onRegisterGuiOverlays);
-        modBus.addListener(ModKeyMappings::register);
 
         ArmRenderHandler.setup();
     }
