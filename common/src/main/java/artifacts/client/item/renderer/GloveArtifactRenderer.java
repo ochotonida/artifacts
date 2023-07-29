@@ -1,7 +1,8 @@
-package artifacts.forge.client.item.renderer;
+package artifacts.client.item.renderer;
 
 import artifacts.Artifacts;
-import artifacts.forge.client.item.model.ArmsModel;
+import artifacts.client.item.model.ArmsModel;
+import artifacts.platform.PlatformServices;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -18,13 +19,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
-import top.theillusivec4.curios.api.client.ICurioRenderer;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
-
-public class GloveArtifactRenderer implements ICurioRenderer {
+public class GloveArtifactRenderer implements ArtifactRenderer {
 
     private final ResourceLocation defaultTexture;
     private final ResourceLocation slimTexture;
@@ -45,10 +42,7 @@ public class GloveArtifactRenderer implements ICurioRenderer {
     @Nullable
     public static GloveArtifactRenderer getGloveRenderer(ItemStack stack) {
         if (!stack.isEmpty()) {
-            return CuriosRendererRegistry.getRenderer(stack.getItem())
-                    .filter(GloveArtifactRenderer.class::isInstance)
-                    .map(GloveArtifactRenderer.class::cast)
-                    .orElse(null);
+            return (GloveArtifactRenderer) PlatformServices.platformHelper.getArtifactRenderer(stack.getItem());
         }
         return null;
     }
@@ -68,7 +62,8 @@ public class GloveArtifactRenderer implements ICurioRenderer {
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(
             ItemStack stack,
-            SlotContext slotContext,
+            LivingEntity entity,
+            int slotIndex,
             PoseStack poseStack,
             RenderLayerParent<T, M> renderLayerParent,
             MultiBufferSource multiBufferSource,
@@ -80,14 +75,14 @@ public class GloveArtifactRenderer implements ICurioRenderer {
             float netHeadYaw,
             float headPitch
     ) {
-        boolean hasSlimArms = hasSlimArms(slotContext.entity());
+        boolean hasSlimArms = hasSlimArms(entity);
         ArmsModel model = getModel(hasSlimArms);
-        InteractionHand hand = slotContext.index() % 2 == 0 ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
-        HumanoidArm handSide = hand == InteractionHand.MAIN_HAND ? slotContext.entity().getMainArm() : slotContext.entity().getMainArm().getOpposite();
+        InteractionHand hand = slotIndex % 2 == 0 ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+        HumanoidArm handSide = hand == InteractionHand.MAIN_HAND ? entity.getMainArm() : entity.getMainArm().getOpposite();
 
-        model.setupAnim(slotContext.entity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        model.prepareMobModel(slotContext.entity(), limbSwing, limbSwingAmount, partialTicks);
-        ICurioRenderer.followBodyRotations(slotContext.entity(), model);
+        model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
+        ArtifactRenderer.followBodyRotations(entity, model);
 
         renderArm(model, poseStack, multiBufferSource, handSide, light, hasSlimArms, stack.hasFoil());
     }

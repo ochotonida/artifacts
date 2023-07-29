@@ -9,8 +9,6 @@ import artifacts.forge.network.NetworkHandler;
 import artifacts.forge.registry.ModItemsForge;
 import artifacts.forge.registry.ModLootModifiers;
 import artifacts.registry.ModEntityTypes;
-import artifacts.registry.ModFeatures;
-import artifacts.registry.ModItems;
 import dev.architectury.platform.forge.EventBuses;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraftforge.api.distmarker.Dist;
@@ -39,12 +37,7 @@ public class ArtifactsForge {
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.CREATIVE_MODE_TABS.register();
-        ModItems.ITEMS.register();
         ModItemsForge.registerItems();
-        ModEntityTypes.ENTITY_TYPES.register();
-        ModFeatures.FEATURES.register();
-
         ModLootModifiers.LOOT_MODIFIERS.register(modBus);
 
         modBus.addListener(this::commonSetup);

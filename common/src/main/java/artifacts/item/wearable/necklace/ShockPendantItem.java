@@ -1,16 +1,17 @@
-package artifacts.forge.item.wearable.necklace;
+package artifacts.item.wearable.necklace;
 
-import artifacts.forge.event.ArtifactEventHandler;
 import artifacts.registry.ModGameRules;
+import dev.architectury.event.EventResult;
+import dev.architectury.event.events.common.EntityEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class ShockPendantItem extends PendantItem {
 
     public ShockPendantItem() {
         super(ModGameRules.SHOCK_PENDANT_STRIKE_CHANCE);
-        ArtifactEventHandler.addListener(this, LivingHurtEvent.class, this::onLivingHurt);
+        EntityEvent.LIVING_HURT.register(this::onLivingHurt);
     }
 
     @Override
@@ -36,13 +37,18 @@ public class ShockPendantItem extends PendantItem {
         }
     }
 
-    private void onLivingHurt(LivingHurtEvent event, LivingEntity wearer) {
-        if (!event.getEntity().level().isClientSide()
+    @Override
+    protected EventResult onLivingHurt(LivingEntity entity, DamageSource damageSource, float amount) {
+        if (
+                isEquippedBy(entity)
+                && !entity.level().isClientSide()
                 && ModGameRules.SHOCK_PENDANT_DO_CANCEL_LIGHTNING_DAMAGE.get()
-                && event.getAmount() > 0
-                && event.getSource().is(DamageTypeTags.IS_LIGHTNING)) {
-            event.setCanceled(true);
+                && amount > 0
+                && damageSource.is(DamageTypeTags.IS_LIGHTNING)
+        ) {
+            return EventResult.interruptFalse();
         }
+        return super.onLivingHurt(entity, damageSource, amount);
     }
 
     @Override

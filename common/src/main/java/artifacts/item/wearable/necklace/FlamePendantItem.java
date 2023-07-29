@@ -1,4 +1,4 @@
-package artifacts.forge.item.wearable.necklace;
+package artifacts.item.wearable.necklace;
 
 import artifacts.registry.ModGameRules;
 import net.minecraft.network.chat.MutableComponent;

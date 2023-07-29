@@ -1,10 +1,10 @@
-package artifacts.forge.client.item.renderer;
+package artifacts.client.item.renderer;
 
 import artifacts.Artifacts;
+import artifacts.client.item.model.BeltModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -13,19 +13,17 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.client.ICurioRenderer;
 
-public class ArtifactRenderer implements ICurioRenderer {
+public class BeltArtifactRenderer implements ArtifactRenderer {
 
     private final ResourceLocation texture;
-    private final HumanoidModel<LivingEntity> model;
+    private final BeltModel model;
 
-    public ArtifactRenderer(String texturePath, HumanoidModel<LivingEntity> model) {
+    public BeltArtifactRenderer(String texturePath, BeltModel model) {
         this(Artifacts.id("textures/entity/curio/%s.png", texturePath), model);
     }
 
-    public ArtifactRenderer(ResourceLocation texture, HumanoidModel<LivingEntity> model) {
+    public BeltArtifactRenderer(ResourceLocation texture, BeltModel model) {
         this.texture = texture;
         this.model = model;
     }
@@ -34,14 +32,15 @@ public class ArtifactRenderer implements ICurioRenderer {
         return texture;
     }
 
-    protected HumanoidModel<LivingEntity> getModel() {
+    protected BeltModel getModel() {
         return model;
     }
 
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(
             ItemStack stack,
-            SlotContext slotContext,
+            LivingEntity entity,
+            int slotIndex,
             PoseStack poseStack,
             RenderLayerParent<T, M> renderLayerParent,
             MultiBufferSource multiBufferSource,
@@ -53,11 +52,12 @@ public class ArtifactRenderer implements ICurioRenderer {
             float netHeadYaw,
             float headPitch
     ) {
-        HumanoidModel<LivingEntity> model = getModel();
+        BeltModel model = getModel();
 
-        model.setupAnim(slotContext.entity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        model.prepareMobModel(slotContext.entity(), limbSwing, limbSwingAmount, partialTicks);
-        ICurioRenderer.followBodyRotations(slotContext.entity(), model);
+        model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
+        model.setCharmPosition(slotIndex);
+        ArtifactRenderer.followBodyRotations(entity, model);
         render(poseStack, multiBufferSource, light, stack.hasFoil());
     }
 

@@ -1,4 +1,4 @@
-package artifacts.forge.client.item.model;
+package artifacts.client.item.model;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.HumanoidModel;

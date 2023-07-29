@@ -1,17 +1,17 @@
-package artifacts.forge.item.wearable.feet;
+package artifacts.item.wearable.feet;
 
 import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.platform.PlatformServices;
 import artifacts.registry.ModGameRules;
+import dev.architectury.event.events.common.TickEvent;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,7 +21,11 @@ public class RunningShoesItem extends WearableArtifactItem {
     private static final AttributeModifier STEP_HEIGHT_BONUS = new AttributeModifier(UUID.fromString("4a312f09-78e0-4f3a-95c2-07ed63212472"), "artifacts:running_shoes_step_height", 0.5, AttributeModifier.Operation.ADDITION);
 
     public RunningShoesItem() {
-        MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
+        TickEvent.PLAYER_PRE.register(this::onPlayerTick);
+    }
+
+    private static Attribute getStepHeightAttribute() {
+        return PlatformServices.platformHelper.getStepHeightAttribute();
     }
 
     @Override
@@ -44,15 +48,11 @@ public class RunningShoesItem extends WearableArtifactItem {
         return new AttributeModifier(UUID.fromString("ac7ab816-2b08-46b6-879d-e5dea34ff305"), "artifacts:running_shoes_movement_speed", speedMultiplier, AttributeModifier.Operation.MULTIPLY_TOTAL);
     }
 
-    private void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.START) {
-            return;
-        }
-
+    private void onPlayerTick(Player player) {
         // onUnequip does not get called on the client
-        if (!isEquippedBy(event.player)) {
-            AttributeInstance stepHeight = event.player.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
-            AttributeInstance movementSpeed = event.player.getAttribute(Attributes.MOVEMENT_SPEED);
+        if (!isEquippedBy(player)) {
+            AttributeInstance stepHeight = player.getAttribute(getStepHeightAttribute());
+            AttributeInstance movementSpeed = player.getAttribute(Attributes.MOVEMENT_SPEED);
             AttributeModifier movementSpeedBonus = getSpeedBonus();
             if (movementSpeed != null && movementSpeed.hasModifier(movementSpeedBonus)) {
                 movementSpeed.removeModifier(movementSpeedBonus);
@@ -66,7 +66,7 @@ public class RunningShoesItem extends WearableArtifactItem {
     @Override
     @SuppressWarnings("ConstantConditions")
     public void wornTick(LivingEntity entity, ItemStack stack) {
-        AttributeInstance stepHeight = entity.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
+        AttributeInstance stepHeight = entity.getAttribute(getStepHeightAttribute());
         AttributeInstance movementSpeed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
         AttributeModifier speedBonus = getSpeedBonus();
         if (entity.isSprinting()) {

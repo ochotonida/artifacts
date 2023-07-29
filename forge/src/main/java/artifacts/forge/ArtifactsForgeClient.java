@@ -1,16 +1,12 @@
 package artifacts.forge;
 
 import artifacts.Artifacts;
+import artifacts.client.item.ArtifactLayers;
+import artifacts.client.item.ArtifactRenderers;
 import artifacts.client.mimic.MimicRenderer;
 import artifacts.client.mimic.model.MimicChestLayerModel;
 import artifacts.client.mimic.model.MimicModel;
-import artifacts.forge.client.HeliumFlamingoOverlayRenderer;
-import artifacts.forge.client.HurtSoundEventHandler;
-import artifacts.forge.client.InputEventHandler;
-import artifacts.forge.client.UmbrellaArmPoseHandler;
-import artifacts.forge.client.item.ArtifactLayers;
-import artifacts.forge.client.item.ArtifactRenderers;
-import artifacts.forge.client.item.renderer.ArmRenderHandler;
+import artifacts.forge.client.*;
 import artifacts.registry.ModEntityTypes;
 import artifacts.registry.ModItems;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -52,7 +48,7 @@ public class ArtifactsForgeClient {
     }
 
     public void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        ArtifactLayers.register(event);
+        ArtifactLayers.register(event::registerLayerDefinition);
         event.registerLayerDefinition(MimicModel.LAYER_LOCATION, MimicModel::createLayer);
         event.registerLayerDefinition(MimicChestLayerModel.LAYER_LOCATION, MimicChestLayerModel::createLayer);
     }

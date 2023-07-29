@@ -1,6 +1,7 @@
-package artifacts.forge.client.item.renderer;
+package artifacts.forge.client;
 
 import artifacts.Artifacts;
+import artifacts.client.item.renderer.GloveArtifactRenderer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.RenderArmEvent;

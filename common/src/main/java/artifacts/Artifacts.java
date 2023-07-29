@@ -2,10 +2,7 @@ package artifacts;
 
 import artifacts.config.ModConfig;
 import artifacts.network.NetworkHandler;
-import artifacts.registry.ModGameRules;
-import artifacts.registry.ModLootConditions;
-import artifacts.registry.ModPlacementModifierTypes;
-import artifacts.registry.ModSoundEvents;
+import artifacts.registry.*;
 import dev.architectury.event.events.common.EntityEvent;
 import dev.architectury.event.events.common.LifecycleEvent;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -45,6 +42,11 @@ public class Artifacts {
         ModSoundEvents.SOUND_EVENTS.register();
         ModLootConditions.LOOT_CONDITIONS.register();
         ModPlacementModifierTypes.PLACEMENT_MODIFIERS.register();
+        ModItems.CREATIVE_MODE_TABS.register();
+        ModItems.ITEMS.register();
+        ModEntityTypes.ENTITY_TYPES.register();
+        ModFeatures.FEATURES.register();
+
 
         LifecycleEvent.SERVER_STARTED.register(ModGameRules::onServerStarted);
         EntityEvent.ADD.register((entity, level) -> ModGameRules.onPlayerJoinLevel(entity));

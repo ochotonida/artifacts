@@ -1,22 +1,22 @@
-package artifacts.forge.item.wearable.belt;
+package artifacts.item.wearable.belt;
 
 import artifacts.item.wearable.WearableArtifactItem;
 import artifacts.registry.ModGameRules;
+import dev.architectury.event.EventResult;
+import dev.architectury.event.events.common.PlayerEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.item.ItemTossEvent;
 
 import java.util.List;
 
 public class UniversalAttractorItem extends WearableArtifactItem {
 
     public UniversalAttractorItem() {
-        MinecraftForge.EVENT_BUS.addListener(this::onItemToss);
+        PlayerEvent.DROP_ITEM.register(this::onItemToss);
     }
 
     @Override
@@ -24,16 +24,17 @@ public class UniversalAttractorItem extends WearableArtifactItem {
         return !ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get();
     }
 
-    private void onItemToss(ItemTossEvent event) {
-        if (ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get()) {
-            event.getPlayer().getCooldowns().addCooldown(this, 100);
+    EventResult onItemToss(Player player, ItemEntity entity) {
+        if (ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get() && isEquippedBy(player)) {
+            player.getCooldowns().addCooldown(this, 100);
         }
+        return EventResult.pass();
     }
 
-    // magnet logic from Botania, see https://github.com/Vazkii/Botania
     @Override
     public void wornTick(LivingEntity entity, ItemStack stack) {
-        if (!ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get()
+        if (
+                !ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get()
                 || !(entity instanceof Player player)
                 || player.isSpectator()
                 || player.getCooldowns().isOnCooldown(this)
@@ -46,10 +47,10 @@ public class UniversalAttractorItem extends WearableArtifactItem {
 
         int range = 5;
         List<ItemEntity> items = player.level().getEntitiesOfClass(ItemEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
-        int pulled = 0;
+        int amountPulled = 0;
         for (ItemEntity item : items) {
-            if (item.isAlive() && !item.hasPickUpDelay() && !item.getPersistentData().getBoolean("PreventRemoteMovement")) {
-                if (pulled++ > 200) {
+            if (item.isAlive() && !item.hasPickUpDelay()) {
+                if (amountPulled++ > 200) {
                     break;
                 }
 

@@ -1,7 +1,7 @@
-package artifacts.forge.client.item.model;
+package artifacts.client.item.model;
 
-import artifacts.forge.client.item.ArtifactLayers;
-import artifacts.forge.client.item.ArtifactRenderers;
+import artifacts.client.item.ArtifactLayers;
+import artifacts.client.item.RendererUtil;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -45,15 +45,15 @@ public class ArmsModel extends HumanoidModel<LivingEntity> {
     }
 
     public static ArmsModel createClawsModel(boolean smallArms) {
-        return new ArmsModel(ArtifactRenderers.bakeLayer(ArtifactLayers.claws(smallArms)));
+        return new ArmsModel(RendererUtil.bakeLayer(ArtifactLayers.claws(smallArms)));
     }
 
     public static ArmsModel createGloveModel(boolean smallArms) {
-        return new ArmsModel(ArtifactRenderers.bakeLayer(ArtifactLayers.glove(smallArms)));
+        return new ArmsModel(RendererUtil.bakeLayer(ArtifactLayers.glove(smallArms)));
     }
 
     public static ArmsModel createGoldenHookModel(boolean smallArms) {
-        return new ArmsModel(ArtifactRenderers.bakeLayer(ArtifactLayers.goldenHook(smallArms)));
+        return new ArmsModel(RendererUtil.bakeLayer(ArtifactLayers.goldenHook(smallArms)));
     }
 
     public static MeshDefinition createEmptyArms(CubeListBuilder leftArm, CubeListBuilder rightArm, boolean smallArms) {
