@@ -1,6 +1,5 @@
-package artifacts.forge.item.wearable.belt;
+package artifacts.item.wearable.belt;
 
-import artifacts.forge.event.ArtifactEventHandler;
 import artifacts.item.wearable.WearableArtifactItem;
 import artifacts.registry.ModGameRules;
 import artifacts.registry.ModItems;
@@ -10,17 +9,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 
 public class CloudInABottleItem extends WearableArtifactItem {
-
-    public CloudInABottleItem() {
-        ArtifactEventHandler.addListener(this, EventPriority.HIGHEST, LivingFallEvent.class, this::onLivingFall);
-    }
 
     @Override
     protected boolean isCosmetic() {
@@ -47,7 +39,6 @@ public class CloudInABottleItem extends WearableArtifactItem {
         );
 
         player.hasImpulse = true;
-        net.minecraftforge.common.ForgeHooks.onLivingJump(player);
 
         player.awardStat(Stats.JUMP);
         if (player.isSprinting()) {
@@ -60,12 +51,6 @@ public class CloudInABottleItem extends WearableArtifactItem {
             player.playSound(ModSoundEvents.FART.get(), 1, 0.9F + player.getRandom().nextFloat() * 0.2F);
         } else {
             player.playSound(SoundEvents.WOOL_FALL, 1, 0.9F + player.getRandom().nextFloat() * 0.2F);
-        }
-    }
-
-    private void onLivingFall(LivingFallEvent event, LivingEntity wearer) {
-        if (ModGameRules.CLOUD_IN_A_BOTTLE_ENABLED.get()) {
-            event.setDistance(Math.max(0, event.getDistance() - 3));
         }
     }
 

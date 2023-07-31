@@ -4,9 +4,17 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.artifacts.refmap.json",
   "mixins": [
+    "accessors.MobAccessor",
     "gamerule.BooleanValueInvoker",
     "gamerule.IntegerValueInvoker",
+    "item.umbrella.EntityMixin",
     "item.wearable.villagerhat.VillagerMixin"
+  ],
+  "client": [
+    "item.umbrella.HumanoidModelMixin"
+  ],
+  "server": [
+    "item.umbrella.ServerGamePacketListenerImplMixin"
   ],
   "injectors": {
     "defaultRequire": 1

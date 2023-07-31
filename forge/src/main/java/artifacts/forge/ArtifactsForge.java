@@ -5,8 +5,8 @@ import artifacts.ArtifactsClient;
 import artifacts.config.ModConfig;
 import artifacts.entity.MimicEntity;
 import artifacts.forge.capability.SwimHandler;
+import artifacts.forge.event.ArtifactEventHandler;
 import artifacts.forge.network.NetworkHandler;
-import artifacts.forge.registry.ModItemsForge;
 import artifacts.forge.registry.ModLootModifiers;
 import artifacts.registry.ModEntityTypes;
 import dev.architectury.platform.forge.EventBuses;
@@ -37,10 +37,10 @@ public class ArtifactsForge {
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItemsForge.registerItems();
         ModLootModifiers.LOOT_MODIFIERS.register(modBus);
 
         modBus.addListener(this::commonSetup);
+        ArtifactEventHandler.register();
 
         modBus.addListener(ArtifactsForge::registerAttributes);
     }

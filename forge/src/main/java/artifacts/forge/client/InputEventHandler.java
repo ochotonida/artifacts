@@ -1,9 +1,9 @@
 package artifacts.forge.client;
 
 import artifacts.forge.capability.SwimHandler;
-import artifacts.forge.item.wearable.belt.CloudInABottleItem;
-import artifacts.forge.network.DoubleJumpPacket;
 import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.item.wearable.belt.CloudInABottleItem;
+import artifacts.network.DoubleJumpPacket;
 import artifacts.network.NetworkHandler;
 import artifacts.network.ToggleArtifactPacket;
 import artifacts.registry.ModGameRules;
@@ -62,7 +62,7 @@ public class InputEventHandler {
         } else if (!player.getAbilities().flying && canDoubleJump && hasReleasedJumpKey) {
             canDoubleJump = false;
             if (ModItems.CLOUD_IN_A_BOTTLE.get().isEquippedBy(player)) {
-                artifacts.forge.network.NetworkHandler.INSTANCE.sendToServer(new DoubleJumpPacket());
+                NetworkHandler.CHANNEL.sendToServer(new DoubleJumpPacket());
                 CloudInABottleItem.jump(player);
             }
         }

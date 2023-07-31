@@ -1,6 +1,6 @@
 package artifacts.forge.client;
 
-import artifacts.forge.item.UmbrellaItem;
+import artifacts.item.UmbrellaItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;

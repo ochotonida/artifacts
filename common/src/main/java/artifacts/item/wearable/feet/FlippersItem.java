@@ -1,16 +1,16 @@
-package artifacts.forge.item.wearable.feet;
+package artifacts.item.wearable.feet;
 
 import artifacts.Artifacts;
 import artifacts.item.wearable.AttributeModifyingItem;
+import artifacts.platform.PlatformServices;
 import artifacts.registry.ModGameRules;
-import net.minecraftforge.common.ForgeMod;
 
 import java.util.UUID;
 
 public class FlippersItem extends AttributeModifyingItem {
 
     public FlippersItem() {
-        super(ForgeMod.SWIM_SPEED.get(), UUID.fromString("83f4e257-cd5c-4a36-ba4b-c052422ce7cf"), Artifacts.id("flippers_swim_speed_bonus").toString());
+        super(PlatformServices.platformHelper.getSwimSpeedAttribute(), UUID.fromString("83f4e257-cd5c-4a36-ba4b-c052422ce7cf"), Artifacts.id("flippers_swim_speed_bonus").toString());
     }
 
     @Override

@@ -1,13 +1,9 @@
-package artifacts.forge.item.wearable.feet;
+package artifacts.item.wearable.feet;
 
-import artifacts.forge.event.ArtifactEventHandler;
 import artifacts.item.wearable.MobEffectItem;
 import artifacts.registry.ModGameRules;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 
 import java.util.List;
 
@@ -15,7 +11,6 @@ public class BunnyHoppersItem extends MobEffectItem {
 
     public BunnyHoppersItem() {
         super(MobEffects.JUMP, ModGameRules.BUNNY_HOPPERS_JUMP_BOOST_LEVEL, 40);
-        ArtifactEventHandler.addListener(this, EventPriority.HIGH, LivingFallEvent.class, this::onLivingFall);
     }
 
     @Override
@@ -30,12 +25,6 @@ public class BunnyHoppersItem extends MobEffectItem {
         }
         if (ModGameRules.BUNNY_HOPPERS_DO_CANCEL_FALL_DAMAGE.get()) {
             tooltip.add(tooltipLine("fall_damage"));
-        }
-    }
-
-    private void onLivingFall(LivingFallEvent event, LivingEntity wearer) {
-        if (ModGameRules.BUNNY_HOPPERS_DO_CANCEL_FALL_DAMAGE.get()) {
-            event.setDamageMultiplier(0);
         }
     }
 }

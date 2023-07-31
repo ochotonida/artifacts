@@ -1,6 +1,6 @@
-package artifacts.forge.mixin.item.umbrella;
+package artifacts.mixin.item.umbrella;
 
-import artifacts.forge.item.UmbrellaItem;
+import artifacts.item.UmbrellaItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.InteractionHand;
@@ -25,6 +25,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> {
     public ModelPart leftArm;
 
     // see https://github.com/florensie/artifacts-fabric/blob/1.16-fabric/src/main/java/artifacts/mixin/mixins/item/umbrella/client/HumanoidModelMixin.java
+    @SuppressWarnings("AmbiguousMixinReference")
     @Inject(method = "setupAnim", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getMainArm()Lnet/minecraft/world/entity/HumanoidArm;"))
     private void reduceHandSwing(T entity, float f, float g, float h, float i, float j, CallbackInfo info) {
         boolean isHoldingOffHand = UmbrellaItem.isHoldingUmbrellaUpright(entity, InteractionHand.OFF_HAND);

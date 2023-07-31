@@ -1,10 +1,10 @@
-package artifacts.forge.network;
+package artifacts.network;
 
-import artifacts.forge.item.wearable.belt.CloudInABottleItem;
+import artifacts.item.wearable.belt.CloudInABottleItem;
+import dev.architectury.networking.NetworkManager;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -22,10 +22,9 @@ public class DoubleJumpPacket {
 
     }
 
-    void handle(Supplier<NetworkEvent.Context> context) {
-        ServerPlayer player = context.get().getSender();
-        if (player != null) {
-            context.get().enqueueWork(() -> {
+    void apply(Supplier<NetworkManager.PacketContext> context) {
+        if (context.get().getPlayer() instanceof ServerPlayer player) {
+            context.get().queue(() -> {
                 CloudInABottleItem.jump(player);
 
                 for (int i = 0; i < 20; ++i) {
@@ -36,6 +35,5 @@ public class DoubleJumpPacket {
                 }
             });
         }
-        context.get().setPacketHandled(true);
     }
 }

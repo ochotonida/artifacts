@@ -1,6 +1,8 @@
 package artifacts.forge.mixin.item.wearable.aquadashers;
 
-import artifacts.forge.item.wearable.feet.AquaDashersItem;
+import artifacts.forge.capability.SwimHandler;
+import artifacts.registry.ModGameRules;
+import artifacts.registry.ModItems;
 import artifacts.registry.ModSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -82,6 +84,11 @@ public abstract class EntityMixin {
     @Unique
     private boolean isRunningWithAquaDashers() {
         // noinspection ConstantConditions
-        return (Object) this instanceof LivingEntity entity && AquaDashersItem.isSprinting(entity);
+        return (Object) this instanceof LivingEntity entity
+                && ModItems.AQUA_DASHERS.get().isEquippedBy(entity)
+                && ModGameRules.AQUA_DASHERS_ENABLED.get()
+                && entity.isSprinting()
+                && entity.fallDistance < 6
+                && !entity.getCapability(SwimHandler.CAPABILITY).map(SwimHandler::isWet).orElse(true);
     }
 }

@@ -16,6 +16,8 @@ public abstract class ModRenderTypes extends RenderType {
         throw new IllegalStateException();
     }
 
+    // TODO this doesn't look the same as before, not actually unlit
+    // creating a custom renderstate is too much work though
     private static final Function<ResourceLocation, RenderType> UNLIT_TRANSLUCENT = Util.memoize(Util.memoize(textureLocation -> {
         RenderType.CompositeState renderState = RenderType.CompositeState.builder()
                 .setShaderState(RenderStateShard.RENDERTYPE_ENTITY_CUTOUT_NO_CULL_SHADER) // no idea what this is, good enough until something breaks
