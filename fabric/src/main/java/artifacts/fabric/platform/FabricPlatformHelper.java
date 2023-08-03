@@ -15,9 +15,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.Tuple;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -64,11 +62,6 @@ public class FabricPlatformHelper implements PlatformHelper {
     @Override
     public Attribute getEntityGravityAttribute() {
         return PortingLibAttributes.ENTITY_GRAVITY;
-    }
-
-    @Override
-    public Item createSpawnEgg(Supplier<? extends EntityType<? extends Mob>> entityType, int backgroundColor, int highlightColor, Item.Properties properties) {
-        return new Item(properties); // TODO
     }
 
     @Override

@@ -9,14 +9,11 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.ForgeSpawnEggItem;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
@@ -57,11 +54,6 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public Attribute getEntityGravityAttribute() {
         return ForgeMod.ENTITY_GRAVITY.get();
-    }
-
-    @Override
-    public Item createSpawnEgg(Supplier<? extends EntityType<? extends Mob>> entityType, int backgroundColor, int highlightColor, Item.Properties properties) {
-        return new ForgeSpawnEggItem(entityType, backgroundColor, highlightColor, properties);
     }
 
     @Override

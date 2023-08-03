@@ -3,9 +3,7 @@ package artifacts.platform;
 import artifacts.client.item.renderer.ArtifactRenderer;
 import artifacts.item.wearable.WearableArtifactItem;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -27,8 +25,6 @@ public interface PlatformHelper {
     Attribute getSwimSpeedAttribute();
 
     Attribute getEntityGravityAttribute();
-
-    Item createSpawnEgg(Supplier<? extends EntityType<? extends Mob>> entityType, int backgroundColor, int highlightColor, Item.Properties properties);
 
     void registerArtifactRenderer(WearableArtifactItem item, Supplier<ArtifactRenderer> rendererSupplier);
 

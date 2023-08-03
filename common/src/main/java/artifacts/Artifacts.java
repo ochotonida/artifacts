@@ -1,10 +1,12 @@
 package artifacts;
 
 import artifacts.config.ModConfig;
+import artifacts.entity.MimicEntity;
 import artifacts.network.NetworkHandler;
 import artifacts.registry.*;
 import dev.architectury.event.events.common.EntityEvent;
 import dev.architectury.event.events.common.LifecycleEvent;
+import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
@@ -47,6 +49,7 @@ public class Artifacts {
         ModEntityTypes.ENTITY_TYPES.register();
         ModFeatures.FEATURES.register();
 
+        EntityAttributeRegistry.register(ModEntityTypes.MIMIC, MimicEntity::createMobAttributes);
 
         LifecycleEvent.SERVER_STARTED.register(ModGameRules::onServerStarted);
         EntityEvent.ADD.register((entity, level) -> ModGameRules.onPlayerJoinLevel(entity));

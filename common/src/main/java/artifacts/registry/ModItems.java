@@ -13,7 +13,7 @@ import artifacts.item.wearable.head.DrinkingHatItem;
 import artifacts.item.wearable.head.SuperstitiousHatItem;
 import artifacts.item.wearable.head.VillagerHatItem;
 import artifacts.item.wearable.necklace.*;
-import artifacts.platform.PlatformServices;
+import dev.architectury.core.item.ArchitecturySpawnEggItem;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -38,7 +38,7 @@ public class ModItems {
             )
     );
 
-    public static RegistrySupplier<Item> MIMIC_SPAWN_EGG = ITEMS.register("mimic_spawn_egg", () -> PlatformServices.platformHelper.createSpawnEgg(ModEntityTypes.MIMIC, 0x805113, 0x212121, new Item.Properties().arch$tab(CREATIVE_TAB)));
+    public static RegistrySupplier<Item> MIMIC_SPAWN_EGG = ITEMS.register("mimic_spawn_egg", () -> new ArchitecturySpawnEggItem(ModEntityTypes.MIMIC, 0x805113, 0x212121, new Item.Properties().arch$tab(CREATIVE_TAB)));
     public static RegistrySupplier<Item> UMBRELLA = ITEMS.register("umbrella", UmbrellaItem::new);
     public static RegistrySupplier<Item> EVERLASTING_BEEF = ITEMS.register("everlasting_beef", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(3).saturationMod(0.3F).build(), ModGameRules.EVERLASTING_BEEF_COOLDOWN, ModGameRules.EVERLASTING_BEEF_ENABLED));
     public static RegistrySupplier<Item> ETERNAL_STEAK = ITEMS.register("eternal_steak", () -> new EverlastingFoodItem(new FoodProperties.Builder().nutrition(8).saturationMod(0.8F).build(), ModGameRules.ETERNAL_STEAK_COOLDOWN, ModGameRules.ETERNAL_STEAK_ENABLED));

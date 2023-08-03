@@ -3,14 +3,12 @@ package artifacts.forge;
 import artifacts.Artifacts;
 import artifacts.ArtifactsClient;
 import artifacts.config.ModConfig;
-import artifacts.entity.MimicEntity;
 import artifacts.forge.capability.SwimHandler;
 import artifacts.forge.curio.WearableArtifactCurio;
 import artifacts.forge.event.ArtifactEventHandler;
 import artifacts.forge.network.NetworkHandler;
 import artifacts.forge.registry.ModLootModifiers;
 import artifacts.item.wearable.WearableArtifactItem;
-import artifacts.registry.ModEntityTypes;
 import dev.architectury.platform.forge.EventBuses;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +16,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -50,12 +47,6 @@ public class ArtifactsForge {
         ArtifactEventHandler.register();
 
         MinecraftForge.EVENT_BUS.addGenericListener(ItemStack.class, this::onAttachCapabilities);
-
-        modBus.addListener(ArtifactsForge::registerAttributes);
-    }
-
-    public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntityTypes.MIMIC.get(), MimicEntity.createMobAttributes().build());
     }
 
     private void registerConfig() {
