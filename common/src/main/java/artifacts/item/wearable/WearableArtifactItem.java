@@ -1,6 +1,7 @@
 package artifacts.item.wearable;
 
 import artifacts.Artifacts;
+import artifacts.client.ToggleKeyHandler;
 import artifacts.item.ArtifactItem;
 import artifacts.platform.PlatformServices;
 import net.minecraft.client.KeyMapping;
@@ -38,7 +39,9 @@ public abstract class WearableArtifactItem extends ArtifactItem {
     }
 
     public void onUnequip(LivingEntity entity, ItemStack stack) {
-
+        // TODO this gets called by Curios when nbt is updated, but not by trinkets
+        // causes inconsistent behaviour with night vision goggles
+        // Trinkets' equip/unequip/tick methods are also just kind of buggy in general
     }
 
     public void wornTick(LivingEntity entity, ItemStack stack) {
@@ -72,7 +75,7 @@ public abstract class WearableArtifactItem extends ArtifactItem {
     @Override
     protected void addEffectsTooltip(List<MutableComponent> tooltip) {
         super.addEffectsTooltip(tooltip);
-        KeyMapping key = PlatformServices.platformHelper.getToggleKey(this);
+        KeyMapping key = ToggleKeyHandler.getToggleKey(this);
         if (key != null && !key.isUnbound()) {
             tooltip.add(Component.translatable("%s.tooltip.toggle_keymapping".formatted(Artifacts.MOD_ID), key.getTranslatedKeyMessage()));
         }

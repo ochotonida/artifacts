@@ -1,11 +1,9 @@
 package artifacts.forge.platform;
 
 import artifacts.client.item.renderer.ArtifactRenderer;
-import artifacts.forge.client.InputEventHandler;
 import artifacts.item.wearable.WearableArtifactItem;
 import artifacts.platform.PlatformHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -34,11 +32,6 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public Stream<ItemStack> findAllEquippedBy(LivingEntity entity, Item item) {
         return CuriosApi.getCuriosHelper().findCurios(entity, item).stream().map(SlotResult::stack);
-    }
-
-    @Override
-    public KeyMapping getToggleKey(WearableArtifactItem item) {
-        return InputEventHandler.getToggleKey(item);
     }
 
     @Override

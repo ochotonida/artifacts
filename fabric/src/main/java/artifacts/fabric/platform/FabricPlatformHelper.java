@@ -11,7 +11,6 @@ import dev.emi.trinkets.api.TrinketsApi;
 import dev.emi.trinkets.api.client.TrinketRenderer;
 import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import io.github.fabricators_of_create.porting_lib.attributes.PortingLibAttributes;
-import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.Tuple;
@@ -42,11 +41,6 @@ public class FabricPlatformHelper implements PlatformHelper {
                 .stream()
                 .map(Tuple::getB)
                 .filter(stack -> stack.getItem() == item);
-    }
-
-    @Override
-    public KeyMapping getToggleKey(WearableArtifactItem item) {
-        return null; // TODO move this to common
     }
 
     @Override

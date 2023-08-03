@@ -2,7 +2,6 @@ package artifacts.platform;
 
 import artifacts.client.item.renderer.ArtifactRenderer;
 import artifacts.item.wearable.WearableArtifactItem;
-import net.minecraft.client.KeyMapping;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
@@ -17,8 +16,6 @@ public interface PlatformHelper {
     boolean isEquippedBy(@Nullable LivingEntity entity, Item item);
 
     Stream<ItemStack> findAllEquippedBy(LivingEntity entity, Item item);
-
-    KeyMapping getToggleKey(WearableArtifactItem item);
 
     Attribute getStepHeightAttribute();
 
