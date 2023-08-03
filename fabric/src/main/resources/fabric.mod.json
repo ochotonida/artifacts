@@ -22,6 +22,9 @@
     ],
     "client": [
       "artifacts.fabric.ArtifactsFabricClient"
+    ],
+    "modmenu": [
+      "artifacts.fabric.integration.ModMenuIntegration"
     ]
   },
   "mixins": [
