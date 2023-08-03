@@ -1,89 +1,97 @@
-package artifacts.forge.platform;
+package artifacts.fabric.platform;
 
 import artifacts.client.item.renderer.ArtifactRenderer;
-import artifacts.forge.client.InputEventHandler;
 import artifacts.item.wearable.WearableArtifactItem;
 import artifacts.platform.PlatformHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
+import dev.emi.stepheightentityattribute.StepHeightEntityAttributeMain;
+import dev.emi.trinkets.api.SlotReference;
+import dev.emi.trinkets.api.TrinketComponent;
+import dev.emi.trinkets.api.TrinketsApi;
+import dev.emi.trinkets.api.client.TrinketRenderer;
+import dev.emi.trinkets.api.client.TrinketRendererRegistry;
+import io.github.fabricators_of_create.porting_lib.attributes.PortingLibAttributes;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.ForgeSpawnEggItem;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.SlotResult;
-import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
-import top.theillusivec4.curios.api.client.ICurioRenderer;
 
+import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public class ForgePlatformHelper implements PlatformHelper {
+public class FabricPlatformHelper implements PlatformHelper {
 
     @Override
     public boolean isEquippedBy(@Nullable LivingEntity entity, Item item) {
-        return entity != null && CuriosApi.getCuriosHelper().findFirstCurio(entity, item).isPresent();
+        return TrinketsApi.getTrinketComponent(entity)
+                .map(component -> component.isEquipped(item))
+                .orElse(false);
     }
 
     @Override
     public Stream<ItemStack> findAllEquippedBy(LivingEntity entity, Item item) {
-        return CuriosApi.getCuriosHelper().findCurios(entity, item).stream().map(SlotResult::stack);
+        return TrinketsApi.getTrinketComponent(entity)
+                .map(TrinketComponent::getAllEquipped)
+                .orElse(List.of())
+                .stream()
+                .map(Tuple::getB)
+                .filter(stack -> stack.getItem() == item);
     }
 
     @Override
     public KeyMapping getToggleKey(WearableArtifactItem item) {
-        return InputEventHandler.getToggleKey(item);
+        return null; // TODO move this to common
     }
 
     @Override
     public Attribute getStepHeightAttribute() {
-        return ForgeMod.STEP_HEIGHT_ADDITION.get();
+        return StepHeightEntityAttributeMain.STEP_HEIGHT;
     }
 
     @Override
     public Attribute getSwimSpeedAttribute() {
-        return ForgeMod.SWIM_SPEED.get();
+        return PortingLibAttributes.SWIM_SPEED;
     }
 
     @Override
     public Attribute getEntityGravityAttribute() {
-        return ForgeMod.ENTITY_GRAVITY.get();
+        return PortingLibAttributes.ENTITY_GRAVITY;
     }
 
     @Override
     public Item createSpawnEgg(Supplier<? extends EntityType<? extends Mob>> entityType, int backgroundColor, int highlightColor, Item.Properties properties) {
-        return new ForgeSpawnEggItem(entityType, backgroundColor, highlightColor, properties);
+        return new Item(properties); // TODO
     }
 
     @Override
     public void registerArtifactRenderer(WearableArtifactItem item, Supplier<ArtifactRenderer> rendererSupplier) {
-        CuriosRendererRegistry.register(item, () -> new ArtifactCurioRenderer(rendererSupplier.get()));
+        TrinketRendererRegistry.registerRenderer(item, new ArtifactCurioRenderer(rendererSupplier.get()));
     }
 
     @Override
     public ArtifactRenderer getArtifactRenderer(Item item) {
-        return ((ArtifactCurioRenderer) CuriosRendererRegistry.getRenderer(item).orElseThrow()).renderer;
+        return (ArtifactRenderer) TrinketRendererRegistry.getRenderer(item).orElseThrow();
     }
 
-    private record ArtifactCurioRenderer(ArtifactRenderer renderer) implements ICurioRenderer {
+    private record ArtifactCurioRenderer(ArtifactRenderer renderer) implements TrinketRenderer {
 
         @Override
-        public <T extends LivingEntity, M extends EntityModel<T>> void render(
+        public void render(
                 ItemStack stack,
-                SlotContext slotContext,
+                SlotReference slotReference,
+                EntityModel<? extends LivingEntity> entityModel,
                 PoseStack poseStack,
-                RenderLayerParent<T, M> renderLayerParent,
                 MultiBufferSource multiBufferSource,
                 int light,
+                LivingEntity entity,
                 float limbSwing,
                 float limbSwingAmount,
                 float partialTicks,
@@ -93,8 +101,8 @@ public class ForgePlatformHelper implements PlatformHelper {
         ) {
             renderer.render(
                     stack,
-                    slotContext.entity(),
-                    slotContext.index(),
+                    entity,
+                    slotReference.index(),
                     poseStack,
                     multiBufferSource,
                     light,

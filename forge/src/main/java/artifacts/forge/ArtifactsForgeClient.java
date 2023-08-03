@@ -1,16 +1,10 @@
 package artifacts.forge;
 
 import artifacts.Artifacts;
-import artifacts.client.item.ArtifactLayers;
 import artifacts.client.item.ArtifactRenderers;
-import artifacts.client.mimic.MimicRenderer;
-import artifacts.client.mimic.model.MimicChestLayerModel;
-import artifacts.client.mimic.model.MimicModel;
 import artifacts.forge.client.*;
-import artifacts.registry.ModEntityTypes;
 import artifacts.registry.ModItems;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,8 +17,6 @@ public class ArtifactsForgeClient {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modBus.addListener(this::onClientSetup);
-        modBus.addListener(this::onRegisterRenderers);
-        modBus.addListener(this::onRegisterLayerDefinitions);
         modBus.addListener(this::onRegisterGuiOverlays);
 
         ArmRenderHandler.setup();
@@ -41,16 +33,6 @@ public class ArtifactsForgeClient {
         InputEventHandler.setup();
         HurtSoundEventHandler.setup();
         UmbrellaArmPoseHandler.setup();
-    }
-
-    public void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntityTypes.MIMIC.get(), MimicRenderer::new);
-    }
-
-    public void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        ArtifactLayers.register(event::registerLayerDefinition);
-        event.registerLayerDefinition(MimicModel.LAYER_LOCATION, MimicModel::createLayer);
-        event.registerLayerDefinition(MimicChestLayerModel.LAYER_LOCATION, MimicChestLayerModel::createLayer);
     }
 
     public void onRegisterGuiOverlays(RegisterGuiOverlaysEvent event) {

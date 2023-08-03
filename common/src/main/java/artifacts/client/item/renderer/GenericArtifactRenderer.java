@@ -8,7 +8,6 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,7 +41,6 @@ public class GenericArtifactRenderer implements ArtifactRenderer {
             LivingEntity entity,
             int slotIndex,
             PoseStack poseStack,
-            RenderLayerParent<T, M> renderLayerParent,
             MultiBufferSource multiBufferSource,
             int light,
             float limbSwing,

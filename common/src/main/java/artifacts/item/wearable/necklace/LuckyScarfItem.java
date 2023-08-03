@@ -21,4 +21,9 @@ public class LuckyScarfItem extends WearableArtifactItem {
             tooltip.add(tooltipLine("multiple_levels", ModGameRules.LUCKY_SCARF_FORTUNE_BONUS.get()));
         }
     }
+
+    @Override
+    public int getFortuneLevel() {
+        return Math.max(0, ModGameRules.LUCKY_SCARF_FORTUNE_BONUS.get());
+    }
 }

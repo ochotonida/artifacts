@@ -48,7 +48,22 @@ allprojects {
             url "https://maven.shedaniel.me/"
         }
         maven {
-            url = "https://api.modrinth.com/maven"
+            url "https://api.modrinth.com/maven"
+        }
+        maven {
+            name "TerraformersMC"
+            url "https://maven.terraformersmc.com/"
+        }
+        maven {
+            name "Ladysnake Libs"
+            url 'https://maven.ladysnake.org/releases'
+        }
+        maven {
+            name "Porting Lib"
+            url "https://mvn.devos.one/snapshots/"
+        }
+        maven {
+            url = "https://maven.vram.io"
         }
         maven {
             name "mixin-extras"

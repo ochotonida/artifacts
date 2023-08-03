@@ -57,7 +57,7 @@ public class MobEffectItem extends WearableArtifactItem {
     }
 
     @Override
-    public void onUnequip(LivingEntity entity, ItemStack originalStack, ItemStack newStack) {
+    public void onUnequip(LivingEntity entity, ItemStack stack) {
         if (isEnabled.get() && !entity.level().isClientSide()) {
             MobEffectInstance effectInstance = entity.getEffect(mobEffect);
             if (effectInstance != null && effectInstance.getAmplifier() == getAmplifier() && !effectInstance.isVisible() && effectInstance.getDuration() < duration) {

@@ -1,12 +1,9 @@
 {
   "required": true,
-  "package": "artifacts.forge.mixin",
+  "package": "artifacts.fabric.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.artifacts.refmap.json",
   "mixins": [
-    "item.umbrella.UmbrellaItemMixin",
-    "item.wearable.AttributeModifyingItemMixin",
-    "item.wearable.aquadashers.EntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

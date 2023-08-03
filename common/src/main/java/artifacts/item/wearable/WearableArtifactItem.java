@@ -32,25 +32,29 @@ public abstract class WearableArtifactItem extends ArtifactItem {
         return Rarity.RARE;
     }
 
-    @SuppressWarnings("unused")
-    public void onEquip(LivingEntity entity, ItemStack originalStack, ItemStack newStack) {
-        if (!isActivated(newStack) && originalStack.getItem() != this && !entity.level().isClientSide()) {
-            setActivated(newStack, true);
-        }
+    public void onEquip(LivingEntity entity, ItemStack stack) {
+        // TODO activate worn items if keybinding is unbound
+        // if (!isActivated(newStack) && originalStack.getItem() != this && !entity.level().isClientSide()) {setActivated(newStack, true);}
     }
 
-    @SuppressWarnings("unused")
-    public void onUnequip(LivingEntity entity, ItemStack originalStack, ItemStack newStack) {
+    public void onUnequip(LivingEntity entity, ItemStack stack) {
 
     }
 
-    @SuppressWarnings("unused")
     public void wornTick(LivingEntity entity, ItemStack stack) {
 
     }
 
     public SoundEvent getEquipSound() {
         return SoundEvents.ARMOR_EQUIP_GENERIC;
+    }
+
+    public int getFortuneLevel() {
+        return 0;
+    }
+
+    public int getLootingLevel() {
+        return 0;
     }
 
     public void toggleItem(ServerPlayer player) {

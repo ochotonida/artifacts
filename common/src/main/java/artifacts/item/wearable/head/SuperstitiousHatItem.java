@@ -21,4 +21,9 @@ public class SuperstitiousHatItem extends WearableArtifactItem {
             tooltip.add(tooltipLine("multiple_levels", ModGameRules.SUPERSTITIOUS_HAT_LOOTING_LEVEL_BONUS.get()));
         }
     }
+
+    @Override
+    public int getLootingLevel() {
+        return Math.max(0, ModGameRules.SUPERSTITIOUS_HAT_LOOTING_LEVEL_BONUS.get());
+    }
 }
