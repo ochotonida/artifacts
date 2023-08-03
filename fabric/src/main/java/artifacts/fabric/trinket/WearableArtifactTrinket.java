@@ -16,9 +16,7 @@ public class WearableArtifactTrinket implements Trinket {
 
     @Override
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
-        if (!entity.level().isClientSide()) {
-            item.wornTick(entity, stack);
-        }
+        item.wornTick(entity, stack);
     }
 
     @Override
