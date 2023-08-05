@@ -2,6 +2,7 @@ package artifacts.forge.event;
 
 import artifacts.forge.capability.SwimHandler;
 import artifacts.item.UmbrellaItem;
+import artifacts.item.wearable.feet.BunnyHoppersItem;
 import artifacts.item.wearable.hands.DiggingClawsItem;
 import artifacts.item.wearable.head.DrinkingHatItem;
 import artifacts.platform.PlatformServices;
@@ -49,7 +50,7 @@ public class ArtifactEventsForge {
     }
 
     private static void onBunnyHoppersFall(LivingFallEvent event) {
-        if (ModGameRules.BUNNY_HOPPERS_DO_CANCEL_FALL_DAMAGE.get() && ModItems.BUNNY_HOPPERS.get().isEquippedBy(event.getEntity())) {
+        if (BunnyHoppersItem.shouldCancelFallDamage(event.getEntity())) {
             event.setDamageMultiplier(0);
         }
     }

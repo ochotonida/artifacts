@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.artifacts.refmap.json",
   "mixins": [
+    "item.wearable.bunnyhoppers.LivingEntityMixin",
     "item.wearable.diggingclaws.PlayerMixin"
   ],
   "injectors": {
