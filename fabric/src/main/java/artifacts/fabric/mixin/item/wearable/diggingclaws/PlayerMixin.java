@@ -1,4 +1,4 @@
-package artifacts.fabric.mixin.item.diggingclaws;
+package artifacts.fabric.mixin.item.wearable.diggingclaws;
 
 import artifacts.item.wearable.hands.DiggingClawsItem;
 import net.minecraft.world.entity.EntityType;

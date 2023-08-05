@@ -4,7 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.artifacts.refmap.json",
   "mixins": [
-    "item.diggingclaws.PlayerMixin"
+    "item.wearable.diggingclaws.PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

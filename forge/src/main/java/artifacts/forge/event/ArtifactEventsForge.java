@@ -32,7 +32,6 @@ public class ArtifactEventsForge {
     public static void register() {
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ArtifactEventsForge::onLivingFall);
         MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onDrinkingHatItemUse);
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ArtifactEventsForge::onCharmOfSinkingBreakSpeed);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, ArtifactEventsForge::onVampiricGlovesLivingDamage);
         MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onGoldenHookExperienceDrop);
         MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onKittySlippersChangeTarget);
@@ -76,18 +75,6 @@ public class ArtifactEventsForge {
             return event.getDuration();
         }
         return (int) (event.getDuration() * Math.min(1, Math.max(0, drinkingHat.getDurationMultiplier(action))));
-    }
-
-    // TODO might be better as a mixin
-    private static void onCharmOfSinkingBreakSpeed(PlayerEvent.BreakSpeed event) {
-        if (
-                ModGameRules.CHARM_OF_SINKING_ENABLED.get()
-                && ModItems.CHARM_OF_SINKING.get().isEquippedBy(event.getEntity())
-                && event.getEntity().isEyeInFluidType(ForgeMod.WATER_TYPE.get())
-                && !EnchantmentHelper.hasAquaAffinity(event.getEntity())
-        ) {
-            event.setNewSpeed(event.getNewSpeed() * 5);
-        }
     }
 
     private static void onVampiricGlovesLivingDamage(LivingDamageEvent event) {
@@ -212,7 +199,7 @@ public class ArtifactEventsForge {
     }
 
     private static void onDiggingClawsHarvestCheck(PlayerEvent.HarvestCheck event) {
-        event.setCanHarvest(DiggingClawsItem.canDiggingClawsHarvest(event.getEntity(), event.getTargetBlock()));
+        event.setCanHarvest(event.canHarvest() || DiggingClawsItem.canDiggingClawsHarvest(event.getEntity(), event.getTargetBlock()));
     }
 
     private static void onUmbrellaLivingUpdate(LivingEvent.LivingTickEvent event) {
