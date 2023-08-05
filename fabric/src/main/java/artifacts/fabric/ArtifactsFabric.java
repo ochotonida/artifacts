@@ -1,10 +1,10 @@
 package artifacts.fabric;
 
 import artifacts.Artifacts;
+import artifacts.fabric.registry.ModLootModifiers;
 import artifacts.fabric.trinket.WearableArtifactTrinket;
 import artifacts.item.wearable.WearableArtifactItem;
 import dev.emi.trinkets.api.TrinketsApi;
-import io.github.fabricators_of_create.porting_lib.loot.PortingLibLoot;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.registries.BuiltInRegistries;
 
@@ -15,8 +15,7 @@ public class ArtifactsFabric implements ModInitializer {
         Artifacts.init();
         registerTrinkets();
 
-        // TODO need this so porting lib doesn't crash on world load
-        PortingLibLoot.GLOBAL_LOOT_MODIFIER_SERIALIZERS.get();
+        ModLootModifiers.register();
     }
 
     public void registerTrinkets() {

@@ -4,6 +4,7 @@ import artifacts.Artifacts;
 import artifacts.forge.loot.RollLootTableModifier;
 import artifacts.loot.ConfigurableRandomChance;
 import artifacts.loot.EverlastingBeefChance;
+import artifacts.loot.LootTableIdCondition;
 import artifacts.registry.ModItems;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -21,7 +22,6 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
-import net.minecraftforge.common.loot.LootTableIdCondition;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;

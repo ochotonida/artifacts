@@ -13,11 +13,13 @@ import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import io.github.fabricators_of_create.porting_lib.attributes.PortingLibAttributes;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -56,6 +58,11 @@ public class FabricPlatformHelper implements PlatformHelper {
     @Override
     public Attribute getEntityGravityAttribute() {
         return PortingLibAttributes.ENTITY_GRAVITY;
+    }
+
+    @Override
+    public ResourceLocation getQueriedLootTableId(LootContext lootContext) {
+        return lootContext.getQueriedLootTableId(); // TODO this doesn't work yet
     }
 
     @Override
