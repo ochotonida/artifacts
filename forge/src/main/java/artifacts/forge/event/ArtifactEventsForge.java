@@ -17,34 +17,31 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 
-public class ArtifactEventHandler {
+public class ArtifactEventsForge {
 
     public static void register() {
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ArtifactEventHandler::onLivingFall);
-        MinecraftForge.EVENT_BUS.addListener(ArtifactEventHandler::onDrinkingHatItemUse);
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ArtifactEventHandler::onCharmOfSinkingBreakSpeed);
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, ArtifactEventHandler::onVampiricGlovesLivingDamage);
-        MinecraftForge.EVENT_BUS.addListener(ArtifactEventHandler::onGoldenHookExperienceDrop);
-        MinecraftForge.EVENT_BUS.addListener(ArtifactEventHandler::onKittySlippersChangeTarget);
-        MinecraftForge.EVENT_BUS.addListener(ArtifactEventHandler::onKittySlippersLivingUpdate);
-        MinecraftForge.EVENT_BUS.addListener(ArtifactEventHandler::onHeliumFlamingoTick);
-        MinecraftForge.EVENT_BUS.addListener(ArtifactEventHandler::onAquaDashersFluidCollision);
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, ArtifactEventHandler::onDiggingClawsBreakSpeed);
-        MinecraftForge.EVENT_BUS.addListener(ArtifactEventHandler::onDiggingClawsHarvestCheck);
-        MinecraftForge.EVENT_BUS.addListener(ArtifactEventHandler::onUmbrellaLivingUpdate);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ArtifactEventsForge::onLivingFall);
+        MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onDrinkingHatItemUse);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ArtifactEventsForge::onCharmOfSinkingBreakSpeed);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, ArtifactEventsForge::onVampiricGlovesLivingDamage);
+        MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onGoldenHookExperienceDrop);
+        MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onKittySlippersChangeTarget);
+        MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onKittySlippersLivingUpdate);
+        MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onHeliumFlamingoTick);
+        MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onAquaDashersFluidCollision);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, ArtifactEventsForge::onDiggingClawsBreakSpeed);
+        MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onDiggingClawsHarvestCheck);
+        MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onUmbrellaLivingUpdate);
     }
 
     private static void onLivingFall(LivingFallEvent event) {
@@ -208,23 +205,14 @@ public class ArtifactEventHandler {
     }
 
     private static void onDiggingClawsBreakSpeed(PlayerEvent.BreakSpeed event) {
-        if (ModItems.DIGGING_CLAWS.get().isEquippedBy(event.getEntity()) && event.getEntity().hasCorrectToolForDrops(event.getState())) {
-            float speedBonus = Math.max(0, ModGameRules.DIGGING_CLAWS_DIG_SPEED_BONUS.get() / 10F);
+        float speedBonus = DiggingClawsItem.getSpeedBonus(event.getEntity(), event.getState());
+        if (speedBonus > 0) {
             event.setNewSpeed(event.getNewSpeed() + speedBonus);
         }
     }
 
     private static void onDiggingClawsHarvestCheck(PlayerEvent.HarvestCheck event) {
-        if (ModItems.DIGGING_CLAWS.get().isEquippedBy(event.getEntity()) && !event.canHarvest()) {
-            event.setCanHarvest(canDiggingClawsHarvest(event.getTargetBlock()));
-        }
-    }
-
-    private static boolean canDiggingClawsHarvest(BlockState state) {
-        Tier tier = DiggingClawsItem.getToolTier();
-        return tier != null
-                && TierSortingRegistry.isCorrectTierForDrops(tier, state)
-                && state.is(ModTags.MINEABLE_WITH_DIGGING_CLAWS);
+        event.setCanHarvest(DiggingClawsItem.canDiggingClawsHarvest(event.getEntity(), event.getTargetBlock()));
     }
 
     private static void onUmbrellaLivingUpdate(LivingEvent.LivingTickEvent event) {

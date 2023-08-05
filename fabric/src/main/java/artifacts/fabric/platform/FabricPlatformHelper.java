@@ -11,6 +11,7 @@ import dev.emi.trinkets.api.TrinketsApi;
 import dev.emi.trinkets.api.client.TrinketRenderer;
 import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import io.github.fabricators_of_create.porting_lib.attributes.PortingLibAttributes;
+import io.github.fabricators_of_create.porting_lib.util.TierSortingRegistry;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
@@ -19,6 +20,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,6 +61,11 @@ public class FabricPlatformHelper implements PlatformHelper {
     @Override
     public Attribute getEntityGravityAttribute() {
         return PortingLibAttributes.ENTITY_GRAVITY;
+    }
+
+    @Override
+    public boolean isCorrectTierForDrops(Tier tier, BlockState state) {
+        return TierSortingRegistry.isCorrectTierForDrops(tier, state);
     }
 
     @Override

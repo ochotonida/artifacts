@@ -5,7 +5,7 @@ import artifacts.ArtifactsClient;
 import artifacts.config.ModConfig;
 import artifacts.forge.capability.SwimHandler;
 import artifacts.forge.curio.WearableArtifactCurio;
-import artifacts.forge.event.ArtifactEventHandler;
+import artifacts.forge.event.ArtifactEventsForge;
 import artifacts.forge.network.NetworkHandler;
 import artifacts.forge.registry.ModLootModifiers;
 import artifacts.item.wearable.WearableArtifactItem;
@@ -44,7 +44,7 @@ public class ArtifactsForge {
         ModLootModifiers.LOOT_MODIFIERS.register(modBus);
 
         modBus.addListener(this::commonSetup);
-        ArtifactEventHandler.register();
+        ArtifactEventsForge.register();
 
         MinecraftForge.EVENT_BUS.addGenericListener(ItemStack.class, this::onAttachCapabilities);
     }

@@ -1,6 +1,7 @@
 package artifacts.fabric;
 
 import artifacts.Artifacts;
+import artifacts.fabric.event.ArtifactEventsFabric;
 import artifacts.fabric.registry.ModLootModifiers;
 import artifacts.fabric.trinket.WearableArtifactTrinket;
 import artifacts.item.wearable.WearableArtifactItem;
@@ -16,6 +17,8 @@ public class ArtifactsFabric implements ModInitializer {
         registerTrinkets();
 
         ModLootModifiers.register();
+
+        ArtifactEventsFabric.register();
     }
 
     public void registerTrinkets() {

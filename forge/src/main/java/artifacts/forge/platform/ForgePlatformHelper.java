@@ -12,8 +12,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.TierSortingRegistry;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
@@ -54,6 +57,11 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public ResourceLocation getQueriedLootTableId(LootContext lootContext) {
         return lootContext.getQueriedLootTableId();
+    }
+
+    @Override
+    public boolean isCorrectTierForDrops(Tier tier, BlockState state) {
+        return TierSortingRegistry.isCorrectTierForDrops(tier, state);
     }
 
     @Override

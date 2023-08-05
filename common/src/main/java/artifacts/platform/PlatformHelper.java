@@ -7,6 +7,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,6 +26,8 @@ public interface PlatformHelper {
     Attribute getSwimSpeedAttribute();
 
     Attribute getEntityGravityAttribute();
+
+    boolean isCorrectTierForDrops(Tier tier, BlockState state);
 
     ResourceLocation getQueriedLootTableId(LootContext lootContext);
 

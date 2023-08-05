@@ -2,13 +2,19 @@ package artifacts.item.wearable.hands;
 
 import artifacts.Artifacts;
 import artifacts.item.wearable.WearableArtifactItem;
+import artifacts.platform.PlatformServices;
 import artifacts.registry.ModGameRules;
+import artifacts.registry.ModItems;
+import artifacts.registry.ModTags;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
@@ -43,6 +49,23 @@ public class DiggingClawsItem extends WearableArtifactItem {
             case 4 -> Tiers.DIAMOND;
             default -> Tiers.NETHERITE;
         };
+    }
+
+    public static boolean canDiggingClawsHarvest(LivingEntity entity, BlockState state) {
+        if (ModItems.DIGGING_CLAWS.get().isEquippedBy(entity)) {
+            Tier tier = DiggingClawsItem.getToolTier();
+            return tier != null
+                    && PlatformServices.platformHelper.isCorrectTierForDrops(tier, state)
+                    && state.is(ModTags.MINEABLE_WITH_DIGGING_CLAWS);
+        }
+        return false;
+    }
+
+    public static float getSpeedBonus(Player player, BlockState state) {
+        if (ModItems.DIGGING_CLAWS.get().isEquippedBy(player) && player.hasCorrectToolForDrops(state)) {
+            return Math.max(0, ModGameRules.DIGGING_CLAWS_DIG_SPEED_BONUS.get() / 10F);
+        }
+        return 0;
     }
 
     @Override
