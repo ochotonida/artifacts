@@ -1,6 +1,7 @@
-package artifacts.forge.mixin.item.wearable.aquadashers;
+package artifacts.mixin.item.wearable.aquadashers;
 
-import artifacts.forge.capability.SwimHandler;
+import artifacts.component.SwimData;
+import artifacts.platform.PlatformServices;
 import artifacts.registry.ModGameRules;
 import artifacts.registry.ModItems;
 import artifacts.registry.ModSoundEvents;
@@ -42,6 +43,7 @@ public abstract class EntityMixin {
 
     @Shadow public abstract Vec3 getDeltaMovement();
 
+    @SuppressWarnings("deprecation")
     @Inject(method = "playStepSound", at = @At("HEAD"))
     private void playWaterStepSound(BlockPos pos, BlockState blockState, CallbackInfo callbackInfo) {
         if (blockState.liquid() && isRunningWithAquaDashers()) {
@@ -81,14 +83,18 @@ public abstract class EntityMixin {
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Unique
     private boolean isRunningWithAquaDashers() {
-        // noinspection ConstantConditions
-        return (Object) this instanceof LivingEntity entity
+        if (!((Object) this instanceof LivingEntity entity)) {
+            return false;
+        }
+        SwimData swimData = PlatformServices.platformHelper.getSwimData(entity);
+        return swimData != null
                 && ModItems.AQUA_DASHERS.get().isEquippedBy(entity)
                 && ModGameRules.AQUA_DASHERS_ENABLED.get()
                 && entity.isSprinting()
                 && entity.fallDistance < 6
-                && !entity.getCapability(SwimHandler.CAPABILITY).map(SwimHandler::isWet).orElse(true);
+                && !swimData.isWet();
     }
 }

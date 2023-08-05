@@ -1,10 +1,12 @@
 package artifacts.platform;
 
 import artifacts.client.item.renderer.ArtifactRenderer;
+import artifacts.component.SwimData;
 import artifacts.item.wearable.WearableArtifactItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
@@ -28,6 +30,11 @@ public interface PlatformHelper {
     Attribute getEntityGravityAttribute();
 
     boolean isCorrectTierForDrops(Tier tier, BlockState state);
+
+    @Nullable
+    SwimData getSwimData(LivingEntity player);
+
+    boolean isEyeInWater(Player player);
 
     ResourceLocation getQueriedLootTableId(LootContext lootContext);
 

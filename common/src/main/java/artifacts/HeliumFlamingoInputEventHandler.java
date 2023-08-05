@@ -1,6 +1,8 @@
-package artifacts.forge.client;
+package artifacts;
 
-import artifacts.forge.capability.SwimHandler;
+import artifacts.component.SwimData;
+import artifacts.item.wearable.necklace.CharmOfSinkingItem;
+import artifacts.platform.PlatformServices;
 import artifacts.registry.ModGameRules;
 import artifacts.registry.ModItems;
 import artifacts.registry.ModKeyMappings;
@@ -9,19 +11,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.player.Player;
 
-public class InputEventHandler {
+public class HeliumFlamingoInputEventHandler {
 
     private static boolean wasSprintKeyDown;
     private static boolean wasSprintingOnGround;
     private static boolean hasTouchedGround;
 
-    public static void setup() {
-        ClientTickEvent.CLIENT_POST.register(InputEventHandler::onClientTick);
+    public static void register() {
+        ClientTickEvent.CLIENT_POST.register(HeliumFlamingoInputEventHandler::onClientTick);
     }
 
     private static void onClientTick(Minecraft instance) {
         LocalPlayer player = instance.player;
-        // noinspection ConstantConditions
         if (player != null && player.input != null) {
             handleHeliumFlamingoInput(player);
         }
@@ -34,23 +35,24 @@ public class InputEventHandler {
 
         boolean isSprintKeyDown = ModKeyMappings.getHeliumFlamingoKey().isDown();
 
-        player.getCapability(SwimHandler.CAPABILITY).ifPresent(
-                handler -> {
-                    if (!handler.isSwimming()) {
-                        if (player.onGround()) {
-                            hasTouchedGround = true;
-                        } else if (canActivateHeliumFlamingo(handler, player, isSprintKeyDown)) {
-                            handler.setSwimming(true);
-                            handler.syncSwimming();
-                            hasTouchedGround = false;
-                        }
-                    } else if (player.getAbilities().flying) {
-                        handler.setSwimming(false);
-                        handler.syncSwimming();
-                        hasTouchedGround = true;
-                    }
-                }
-        );
+        SwimData swimData = PlatformServices.platformHelper.getSwimData(player);
+        if (swimData == null) {
+            return;
+        }
+
+        if (!swimData.isSwimming()) {
+            if (player.onGround()) {
+                hasTouchedGround = true;
+            } else if (canActivateHeliumFlamingo(swimData, player, isSprintKeyDown)) {
+                swimData.setSwimming(true);
+                swimData.syncSwimming();
+                hasTouchedGround = false;
+            }
+        } else if (player.getAbilities().flying) {
+            swimData.setSwimming(false);
+            swimData.syncSwimming();
+            hasTouchedGround = true;
+        }
 
         wasSprintKeyDown = isSprintKeyDown;
         if (!isSprintKeyDown) {
@@ -60,9 +62,9 @@ public class InputEventHandler {
         }
     }
 
-    private static boolean canActivateHeliumFlamingo(SwimHandler handler, Player player, boolean isSprintKeyDown) {
-        if (handler.isSwimming()
-                || handler.getSwimTime() < 0
+    private static boolean canActivateHeliumFlamingo(SwimData swimData, Player player, boolean isSprintKeyDown) {
+        if (swimData.isSwimming()
+                || swimData.getSwimTime() < 0
                 || !ModItems.HELIUM_FLAMINGO.get().isEquippedBy(player)) {
             return false;
         }
@@ -74,7 +76,7 @@ public class InputEventHandler {
                 && !wasSprintingOnGround
                 && hasTouchedGround
                 && !player.onGround()
-                && (!player.isInWater() || SwimHandler.isSinking(player))
+                && (!player.isInWater() || CharmOfSinkingItem.shouldSink(player))
                 && !player.isFallFlying()
                 && !player.getAbilities().flying
                 && !player.isPassenger();

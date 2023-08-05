@@ -1,6 +1,8 @@
 package artifacts.forge.platform;
 
 import artifacts.client.item.renderer.ArtifactRenderer;
+import artifacts.component.SwimData;
+import artifacts.forge.capability.SwimDataCapability;
 import artifacts.item.wearable.WearableArtifactItem;
 import artifacts.platform.PlatformHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -10,6 +12,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
@@ -62,6 +65,18 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public boolean isCorrectTierForDrops(Tier tier, BlockState state) {
         return TierSortingRegistry.isCorrectTierForDrops(tier, state);
+    }
+
+    @Nullable
+    @Override
+    public SwimData getSwimData(LivingEntity player) {
+        // noinspection ConstantConditions
+        return player.getCapability(SwimDataCapability.CAPABILITY).orElse(null);
+    }
+
+    @Override
+    public boolean isEyeInWater(Player player) {
+        return player.isEyeInFluidType(ForgeMod.WATER_TYPE.get());
     }
 
     @Override

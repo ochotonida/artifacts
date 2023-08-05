@@ -13,7 +13,7 @@ public class CloudInABottleInputHandler {
     private static boolean canDoubleJump;
     private static boolean hasReleasedJumpKey;
 
-    public static void setup() {
+    public static void register() {
         ClientTickEvent.CLIENT_POST.register(CloudInABottleInputHandler::onClientTick);
     }
 

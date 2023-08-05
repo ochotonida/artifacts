@@ -25,12 +25,20 @@
     ],
     "modmenu": [
       "artifacts.fabric.integration.ModMenuIntegration"
+    ],
+    "cardinal-components": [
+      "artifacts.fabric.registry.ModComponents"
     ]
   },
   "mixins": [
     "mixins.artifacts.common.json",
     "mixins.artifacts.fabric.json"
   ],
+  "custom": {
+    "cardinal-components": [
+      "artifacts:swim_data"
+    ]
+  },
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.20",

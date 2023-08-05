@@ -1,7 +1,7 @@
 package artifacts.forge.client;
 
 import artifacts.Artifacts;
-import artifacts.forge.capability.SwimHandler;
+import artifacts.forge.capability.SwimDataCapability;
 import artifacts.registry.ModGameRules;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -20,7 +20,7 @@ public class HeliumFlamingoOverlayRenderer {
             Minecraft minecraft = Minecraft.getInstance();
             boolean isEnabled = ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() > 0;
             if (isEnabled && minecraft.getCameraEntity() instanceof LivingEntity player) {
-                player.getCapability(SwimHandler.CAPABILITY).ifPresent(
+                player.getCapability(SwimDataCapability.CAPABILITY).ifPresent(
                         handler -> renderOverlay(gui, guiGraphics, screenWidth, screenHeight, handler.getSwimTime())
                 );
             }

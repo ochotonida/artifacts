@@ -1,31 +1,19 @@
 package artifacts.forge.event;
 
-import artifacts.forge.capability.SwimHandler;
-import artifacts.item.UmbrellaItem;
 import artifacts.item.wearable.feet.BunnyHoppersItem;
 import artifacts.item.wearable.hands.DiggingClawsItem;
 import artifacts.item.wearable.head.DrinkingHatItem;
-import artifacts.platform.PlatformServices;
 import artifacts.registry.ModGameRules;
 import artifacts.registry.ModItems;
-import artifacts.registry.ModSoundEvents;
 import artifacts.registry.ModTags;
 import artifacts.util.DamageSourceHelper;
-import be.florens.expandability.api.forge.LivingFluidCollisionEvent;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 
 public class ArtifactEventsForge {
@@ -37,11 +25,8 @@ public class ArtifactEventsForge {
         MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onGoldenHookExperienceDrop);
         MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onKittySlippersChangeTarget);
         MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onKittySlippersLivingUpdate);
-        MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onHeliumFlamingoTick);
-        MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onAquaDashersFluidCollision);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, ArtifactEventsForge::onDiggingClawsBreakSpeed);
         MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onDiggingClawsHarvestCheck);
-        MinecraftForge.EVENT_BUS.addListener(ArtifactEventsForge::onUmbrellaLivingUpdate);
     }
 
     private static void onLivingFall(LivingFallEvent event) {
@@ -132,66 +117,6 @@ public class ArtifactEventsForge {
         }
     }
 
-    private static void onHeliumFlamingoTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.START) {
-            return;
-        }
-
-        event.player.getCapability(SwimHandler.CAPABILITY).ifPresent(
-                handler -> {
-                    int maxFlightTime = Math.max(1, ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() * 20);
-                    int rechargeTime = Math.max(20, ModGameRules.HELIUM_FLAMINGO_RECHARGE_DURATION.get() * 20);
-
-                    if (handler.isSwimming()) {
-                        if (!ModItems.HELIUM_FLAMINGO.get().isEquippedBy(event.player)
-                                || handler.getSwimTime() > maxFlightTime
-                                || event.player.isInWater() && !event.player.isSwimming() && !SwimHandler.isSinking(event.player)
-                                || (!event.player.isInWater() || SwimHandler.isSinking(event.player)) && event.player.onGround()) {
-                            handler.setSwimming(false);
-                            if (!event.player.onGround() && !event.player.isInWater()) {
-                                event.player.playSound(ModSoundEvents.POP.get(), 0.5F, 0.75F);
-                            }
-                        }
-
-                        if (ModItems.HELIUM_FLAMINGO.get().isEquippedBy(event.player) && !event.player.isEyeInFluidType(ForgeMod.WATER_TYPE.get())) {
-                            if (!event.player.getAbilities().invulnerable) {
-                                handler.setSwimTime(handler.getSwimTime() + 1);
-                            }
-                        }
-                    } else if (handler.getSwimTime() < 0) {
-                        handler.setSwimTime(
-                                handler.getSwimTime() < -rechargeTime
-                                        ? -rechargeTime
-                                        : handler.getSwimTime() + 1
-                        );
-                    }
-                }
-        );
-    }
-
-    @SuppressWarnings("UnstableApiUsage")
-    private static void onAquaDashersFluidCollision(LivingFluidCollisionEvent event) {
-        if (
-                ModGameRules.AQUA_DASHERS_ENABLED.get()
-                        && ModItems.AQUA_DASHERS.get().isEquippedBy(event.getEntity())
-                        && event.getEntity().isSprinting()
-                        && event.getEntity().fallDistance < 6
-                        && !event.getEntity().isUsingItem()
-                        && !event.getEntity().isCrouching()
-        ) {
-            event.getEntity().getCapability(SwimHandler.CAPABILITY).ifPresent(handler -> {
-                if (!handler.isWet() && !handler.isSwimming()) {
-                    event.setResult(Event.Result.ALLOW);
-                    if (event.getFluidState().is(FluidTags.LAVA)) {
-                        if (!event.getEntity().fireImmune() && !EnchantmentHelper.hasFrostWalker(event.getEntity())) {
-                            event.getEntity().hurt(event.getEntity().damageSources().hotFloor(), 1);
-                        }
-                    }
-                }
-            });
-        }
-    }
-
     private static void onDiggingClawsBreakSpeed(PlayerEvent.BreakSpeed event) {
         float speedBonus = DiggingClawsItem.getSpeedBonus(event.getEntity(), event.getState());
         if (speedBonus > 0) {
@@ -201,23 +126,5 @@ public class ArtifactEventsForge {
 
     private static void onDiggingClawsHarvestCheck(PlayerEvent.HarvestCheck event) {
         event.setCanHarvest(event.canHarvest() || DiggingClawsItem.canDiggingClawsHarvest(event.getEntity(), event.getTargetBlock()));
-    }
-
-    private static void onUmbrellaLivingUpdate(LivingEvent.LivingTickEvent event) {
-        LivingEntity entity = event.getEntity();
-        AttributeInstance gravity = entity.getAttribute(PlatformServices.platformHelper.getEntityGravityAttribute());
-        if (gravity != null) {
-            boolean isInWater = entity.isInWater() && !SwimHandler.isSinking(entity);
-            if (ModGameRules.UMBRELLA_IS_GLIDER.get() && !entity.onGround() && !isInWater && event.getEntity().getDeltaMovement().y < 0 && !entity.hasEffect(MobEffects.SLOW_FALLING)
-                    && (entity.getOffhandItem().getItem() == ModItems.UMBRELLA.get()
-                    || entity.getMainHandItem().getItem() == ModItems.UMBRELLA.get()) && !(entity.isUsingItem() && !entity.getUseItem().isEmpty() && entity.getUseItem().getItem().getUseAnimation(entity.getUseItem()) == UseAnim.BLOCK)) {
-                if (!gravity.hasModifier(UmbrellaItem.UMBRELLA_SLOW_FALLING)) {
-                    gravity.addTransientModifier(UmbrellaItem.UMBRELLA_SLOW_FALLING);
-                }
-                entity.fallDistance = 0;
-            } else if (gravity.hasModifier(UmbrellaItem.UMBRELLA_SLOW_FALLING)) {
-                gravity.removeModifier(UmbrellaItem.UMBRELLA_SLOW_FALLING);
-            }
-        }
     }
 }

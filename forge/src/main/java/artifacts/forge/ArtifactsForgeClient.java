@@ -2,7 +2,10 @@ package artifacts.forge;
 
 import artifacts.Artifacts;
 import artifacts.client.item.ArtifactRenderers;
-import artifacts.forge.client.*;
+import artifacts.forge.client.ArmRenderHandler;
+import artifacts.forge.client.HeliumFlamingoOverlayRenderer;
+import artifacts.forge.client.HurtSoundEventHandler;
+import artifacts.forge.client.UmbrellaArmPoseHandler;
 import artifacts.registry.ModItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -30,7 +33,6 @@ public class ArtifactsForgeClient {
                         (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0)
         );
         ArtifactRenderers.register();
-        InputEventHandler.setup();
         HurtSoundEventHandler.setup();
         UmbrellaArmPoseHandler.setup();
     }

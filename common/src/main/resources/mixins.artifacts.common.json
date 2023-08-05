@@ -8,6 +8,7 @@
     "gamerule.BooleanValueInvoker",
     "gamerule.IntegerValueInvoker",
     "item.umbrella.EntityMixin",
+    "item.wearable.aquadashers.EntityMixin",
     "item.wearable.charmofsinking.EnchantmentHelperMixin",
     "item.wearable.villagerhat.VillagerMixin"
   ],

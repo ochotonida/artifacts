@@ -22,8 +22,9 @@ public class ArtifactsClient {
     }
 
     public static void onClientStarted() {
-        ToggleKeyHandler.setup();
-        CloudInABottleInputHandler.setup();
+        ToggleKeyHandler.register();
+        CloudInABottleInputHandler.register();
+        HeliumFlamingoInputEventHandler.register();
     }
 
     public static void registerLayerDefinitions() {

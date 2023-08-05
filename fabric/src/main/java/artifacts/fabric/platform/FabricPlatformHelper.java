@@ -1,6 +1,8 @@
 package artifacts.fabric.platform;
 
 import artifacts.client.item.renderer.ArtifactRenderer;
+import artifacts.component.SwimData;
+import artifacts.fabric.registry.ModComponents;
 import artifacts.item.wearable.WearableArtifactItem;
 import artifacts.platform.PlatformHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -15,9 +17,11 @@ import io.github.fabricators_of_create.porting_lib.util.TierSortingRegistry;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
@@ -66,6 +70,17 @@ public class FabricPlatformHelper implements PlatformHelper {
     @Override
     public boolean isCorrectTierForDrops(Tier tier, BlockState state) {
         return TierSortingRegistry.isCorrectTierForDrops(tier, state);
+    }
+
+    @Nullable
+    @Override
+    public SwimData getSwimData(LivingEntity player) {
+        return ModComponents.SWIM_DATA.getNullable(player);
+    }
+
+    @Override
+    public boolean isEyeInWater(Player player) {
+        return player.isEyeInFluid(FluidTags.WATER);
     }
 
     @Override
