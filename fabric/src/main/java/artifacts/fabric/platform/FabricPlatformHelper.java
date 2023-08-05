@@ -90,15 +90,15 @@ public class FabricPlatformHelper implements PlatformHelper {
 
     @Override
     public void registerArtifactRenderer(WearableArtifactItem item, Supplier<ArtifactRenderer> rendererSupplier) {
-        TrinketRendererRegistry.registerRenderer(item, new ArtifactCurioRenderer(rendererSupplier.get()));
+        TrinketRendererRegistry.registerRenderer(item, new ArtifactTrinketRenderer(rendererSupplier.get()));
     }
 
     @Override
     public ArtifactRenderer getArtifactRenderer(Item item) {
-        return (ArtifactRenderer) TrinketRendererRegistry.getRenderer(item).orElseThrow();
+        return ((ArtifactTrinketRenderer) TrinketRendererRegistry.getRenderer(item).orElseThrow()).renderer();
     }
 
-    private record ArtifactCurioRenderer(ArtifactRenderer renderer) implements TrinketRenderer {
+    private record ArtifactTrinketRenderer(ArtifactRenderer renderer) implements TrinketRenderer {
 
         @Override
         public void render(
@@ -116,10 +116,11 @@ public class FabricPlatformHelper implements PlatformHelper {
                 float netHeadYaw,
                 float headPitch
         ) {
+            int index = slotReference.index() + (slotReference.inventory().getSlotType().getGroup().equals("hand") ? 0 : 1);
             renderer.render(
                     stack,
                     entity,
-                    slotReference.index(),
+                    index,
                     poseStack,
                     multiBufferSource,
                     light,

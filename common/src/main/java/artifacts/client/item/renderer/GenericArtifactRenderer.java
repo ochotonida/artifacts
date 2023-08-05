@@ -3,7 +3,6 @@ package artifacts.client.item.renderer;
 import artifacts.Artifacts;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -36,7 +35,7 @@ public class GenericArtifactRenderer implements ArtifactRenderer {
     }
 
     @Override
-    public <T extends LivingEntity, M extends EntityModel<T>> void render(
+    public void render(
             ItemStack stack,
             LivingEntity entity,
             int slotIndex,

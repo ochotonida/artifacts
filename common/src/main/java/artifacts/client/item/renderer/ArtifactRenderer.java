@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 
 public interface ArtifactRenderer {
 
-    <T extends LivingEntity, M extends EntityModel<T>> void render(
+    void render(
             ItemStack stack,
             LivingEntity entity,
             int slotIndex,

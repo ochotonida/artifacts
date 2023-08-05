@@ -4,7 +4,6 @@ import artifacts.Artifacts;
 import artifacts.client.item.model.BeltModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -36,7 +35,7 @@ public class BeltArtifactRenderer implements ArtifactRenderer {
     }
 
     @Override
-    public <T extends LivingEntity, M extends EntityModel<T>> void render(
+    public void render(
             ItemStack stack,
             LivingEntity entity,
             int slotIndex,

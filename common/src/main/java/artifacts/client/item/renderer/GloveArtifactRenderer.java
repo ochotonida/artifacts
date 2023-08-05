@@ -5,7 +5,6 @@ import artifacts.client.item.model.ArmsModel;
 import artifacts.platform.PlatformServices;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -59,7 +58,7 @@ public class GloveArtifactRenderer implements ArtifactRenderer {
     }
 
     @Override
-    public <T extends LivingEntity, M extends EntityModel<T>> void render(
+    public void render(
             ItemStack stack,
             LivingEntity entity,
             int slotIndex,

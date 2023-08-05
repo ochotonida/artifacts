@@ -8,7 +8,6 @@ import net.minecraftforge.client.event.RenderArmEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.SlotTypePreset;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
@@ -26,7 +25,7 @@ public abstract class ArmRenderHandler {
         InteractionHand hand = event.getArm() == event.getPlayer().getMainArm() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
 
         CuriosApi.getCuriosHelper().getCuriosHandler(event.getPlayer()).ifPresent(handler -> {
-            ICurioStacksHandler stacksHandler = handler.getCurios().get(SlotTypePreset.HANDS.getIdentifier());
+            ICurioStacksHandler stacksHandler = handler.getCurios().get("hands");
             if (stacksHandler != null) {
                 IDynamicStackHandler stacks = stacksHandler.getStacks();
                 IDynamicStackHandler cosmeticStacks = stacksHandler.getCosmeticStacks();
