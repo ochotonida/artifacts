@@ -30,7 +30,8 @@ public class ArtifactsForgeClient {
                 () -> ItemProperties.register(
                         ModItems.UMBRELLA.get(),
                         Artifacts.id("blocking"),
-                        (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0)
+                        (stack, level, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0
+                )
         );
         ArtifactRenderers.register();
         HurtSoundEventHandler.setup();

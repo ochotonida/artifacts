@@ -7,13 +7,16 @@ import artifacts.registry.ModItems;
 import dev.architectury.event.events.common.TickEvent;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 
 import java.util.List;
@@ -41,6 +44,26 @@ public class UmbrellaItem extends ArtifactItem {
         if (ModGameRules.UMBRELLA_IS_SHIELD.get()) {
             tooltip.add(tooltipLine("shield"));
         }
+    }
+
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.BLOCK;
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack) {
+        return 72000;
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (!ModGameRules.UMBRELLA_IS_SHIELD.get()) {
+            return super.use(level, player, hand);
+        }
+        player.startUsingItem(hand);
+        return InteractionResultHolder.consume(stack);
     }
 
     public static boolean isHoldingUmbrellaUpright(LivingEntity entity, InteractionHand hand) {

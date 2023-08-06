@@ -1,4 +1,4 @@
-package artifacts.mixin.item.umbrella;
+package artifacts.mixin.item.umbrella.server;
 
 import artifacts.item.UmbrellaItem;
 import artifacts.platform.PlatformServices;

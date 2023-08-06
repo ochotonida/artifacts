@@ -13,10 +13,10 @@
     "item.wearable.villagerhat.VillagerMixin"
   ],
   "client": [
-    "item.umbrella.HumanoidModelMixin"
+    "item.umbrella.client.HumanoidModelMixin"
   ],
   "server": [
-    "item.umbrella.ServerGamePacketListenerImplMixin"
+    "item.umbrella.server.ServerGamePacketListenerImplMixin"
   ],
   "injectors": {
     "defaultRequire": 1

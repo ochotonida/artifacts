@@ -8,6 +8,10 @@
     "item.wearable.bunnyhoppers.LivingEntityMixin",
     "item.wearable.diggingclaws.PlayerMixin"
   ],
+  "client": [
+    "item.umbrella.client.ItemRendererMixin",
+    "item.umbrella.client.LivingEntityRendererMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

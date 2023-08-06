@@ -15,11 +15,7 @@ public abstract class EntityMixin {
     private void blockRain(CallbackInfoReturnable<Boolean> info) {
         Entity self = (Entity) (Object) this;
 
-        if (
-                info.getReturnValueZ()
-                && self instanceof LivingEntity entity
-                && UmbrellaItem.isHoldingUmbrellaUpright(entity)
-        ) {
+        if (info.getReturnValueZ() && self instanceof LivingEntity entity && UmbrellaItem.isHoldingUmbrellaUpright(entity)) {
             info.setReturnValue(false);
         }
     }

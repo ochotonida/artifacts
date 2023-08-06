@@ -1,4 +1,4 @@
-package artifacts.mixin.item.umbrella;
+package artifacts.mixin.item.umbrella.client;
 
 import artifacts.item.UmbrellaItem;
 import net.minecraft.client.model.HumanoidModel;
