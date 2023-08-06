@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
@@ -57,5 +58,12 @@ public class CloudInABottleItem extends WearableArtifactItem {
     @Override
     public SoundEvent getEquipSound() {
         return SoundEvents.BOTTLE_FILL_DRAGONBREATH;
+    }
+
+    public static float getReducedFallDistance(LivingEntity entity, float distance) {
+        if (ModGameRules.CLOUD_IN_A_BOTTLE_ENABLED.get() && ModItems.CLOUD_IN_A_BOTTLE.get().isEquippedBy(entity)) {
+            return Math.max(0, distance - 3);
+        }
+        return distance;
     }
 }

@@ -1,5 +1,6 @@
 package artifacts.forge.event;
 
+import artifacts.item.wearable.belt.CloudInABottleItem;
 import artifacts.item.wearable.feet.BunnyHoppersItem;
 import artifacts.item.wearable.hands.DiggingClawsItem;
 import artifacts.item.wearable.head.DrinkingHatItem;
@@ -10,7 +11,6 @@ import artifacts.util.DamageSourceHelper;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.UseAnim;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -41,26 +41,11 @@ public class ArtifactEventsForge {
     }
 
     private static void onCloudInABottleFall(LivingFallEvent event) {
-        if (ModGameRules.CLOUD_IN_A_BOTTLE_ENABLED.get() && ModItems.CLOUD_IN_A_BOTTLE.get().isEquippedBy(event.getEntity())) {
-            event.setDistance(Math.max(0, event.getDistance() - 3));
-        }
+        event.setDistance(CloudInABottleItem.getReducedFallDistance(event.getEntity(), event.getDistance()));
     }
 
     private static void onDrinkingHatItemUse(LivingEntityUseItemEvent.Start event) {
-        int newDuration = Math.min(
-                getDrinkingHatUseDuration(event, ModItems.PLASTIC_DRINKING_HAT.get()),
-                getDrinkingHatUseDuration(event, ModItems.NOVELTY_DRINKING_HAT.get())
-        );
-        event.setDuration(Math.max(1, newDuration));
-
-    }
-
-    private static int getDrinkingHatUseDuration(LivingEntityUseItemEvent.Start event, DrinkingHatItem drinkingHat) {
-        UseAnim action = event.getItem().getUseAnimation();
-        if (!drinkingHat.isEquippedBy(event.getEntity()) || action != UseAnim.EAT && action != UseAnim.DRINK) {
-            return event.getDuration();
-        }
-        return (int) (event.getDuration() * Math.min(1, Math.max(0, drinkingHat.getDurationMultiplier(action))));
+        event.setDuration(DrinkingHatItem.getDrinkingHatUseDuration(event.getEntity(), event.getItem().getUseAnimation(), event.getDuration()));
     }
 
     private static void onVampiricGlovesLivingDamage(LivingDamageEvent event) {
