@@ -5,6 +5,7 @@
   "refmap": "mixins.artifacts.refmap.json",
   "mixins": [
     "client.PlayerRendererMixin",
+    "item.wearable.LivingEntitiesMixin",
     "item.wearable.bunnyhoppers.LivingEntityMixin",
     "item.wearable.cloudinabottle.LivingEntityMixin",
     "item.wearable.diggingclaws.PlayerMixin",
