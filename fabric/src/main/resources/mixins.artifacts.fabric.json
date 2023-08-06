@@ -9,6 +9,9 @@
     "item.wearable.cloudinabottle.LivingEntityMixin",
     "item.wearable.diggingclaws.PlayerMixin",
     "item.wearable.drinkinghat.LivingEntityMixin",
+    "item.wearable.goldenhook.LivingEntityMixin",
+    "item.wearable.kittyslippers.HurtByTargetGoalMixin",
+    "item.wearable.kittyslippers.NearestAttackableTargetGoalMixin",
     "item.wearable.luckyscarf.ApplyBonusCountMixin",
     "item.wearable.superstitioushat.EnchantmentHelperMixin"
   ],

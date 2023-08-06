@@ -84,7 +84,7 @@
   "item.artifacts.vampiric_glove": "吸血手套",
   "item.artifacts.villager_hat": "村民草帽",
   "item.artifacts.whoopee_cushion": "整蛊坐垫",
-  "text.autoconfig.artifacts.option.client.modifyHurtSounds": "修改玩家受伤音效",
+  "text.autoconfig.artifacts.option.common.modifyHurtSounds": "修改玩家受伤音效",
   "text.autoconfig.artifacts.option.client.showFirstPersonGloves": "显示第一名玩家的手套",
   "text.autoconfig.artifacts.option.client.showTooltips": "显示物品详情",
   "text.autoconfig.artifacts.option.common.artifactRarity": "Artifact 稀有度",

@@ -4,7 +4,6 @@ import artifacts.Artifacts;
 import artifacts.client.item.ArtifactRenderers;
 import artifacts.forge.client.ArmRenderHandler;
 import artifacts.forge.client.HeliumFlamingoOverlayRenderer;
-import artifacts.forge.client.HurtSoundEventHandler;
 import artifacts.forge.client.UmbrellaArmPoseHandler;
 import artifacts.registry.ModItems;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -34,7 +33,6 @@ public class ArtifactsForgeClient {
                 )
         );
         ArtifactRenderers.register();
-        HurtSoundEventHandler.setup();
         UmbrellaArmPoseHandler.setup();
     }
 

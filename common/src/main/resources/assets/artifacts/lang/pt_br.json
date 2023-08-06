@@ -85,7 +85,7 @@
   "item.artifacts.vampiric_glove": "Luva Vampírica",
   "item.artifacts.villager_hat": "Chapéu de Aldeão",
   "item.artifacts.whoopee_cushion": "Almofada Engraçadinha",
-  "text.autoconfig.artifacts.option.client.modifyHurtSounds": "Modificar sons de ferimento dos jogadores",
+  "text.autoconfig.artifacts.option.common.modifyHurtSounds": "Modificar sons de ferimento dos jogadores",
   "text.autoconfig.artifacts.option.client.showFirstPersonGloves": "Mostrar luvas de primeira pessoa",
   "text.autoconfig.artifacts.option.client.showTooltips": "Mostrar descrição dos itens",
   "text.autoconfig.artifacts.option.common.artifactRarity": "Raridade do artefato",

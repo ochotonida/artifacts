@@ -3,6 +3,7 @@ package artifacts.forge.event;
 import artifacts.item.wearable.belt.CloudInABottleItem;
 import artifacts.item.wearable.feet.BunnyHoppersItem;
 import artifacts.item.wearable.hands.DiggingClawsItem;
+import artifacts.item.wearable.hands.GoldenHookItem;
 import artifacts.item.wearable.head.DrinkingHatItem;
 import artifacts.registry.ModGameRules;
 import artifacts.registry.ModItems;
@@ -10,7 +11,6 @@ import artifacts.registry.ModTags;
 import artifacts.util.DamageSourceHelper;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -68,16 +68,7 @@ public class ArtifactEventsForge {
     }
 
     private static void onGoldenHookExperienceDrop(LivingExperienceDropEvent event) {
-        if (ModItems.GOLDEN_HOOK.get().isEquippedBy(event.getAttackingPlayer())) {
-            if (event.getEntity() instanceof Player) {
-                return; // players shouldn't drop extra XP
-            }
-
-            int experienceBonus = (int) (event.getOriginalExperience() * ModGameRules.GOLDEN_HOOK_EXPERIENCE_BONUS.get() / 100F);
-            if (experienceBonus > 0) {
-                event.setDroppedExperience(event.getDroppedExperience() + experienceBonus);
-            }
-        }
+        event.setDroppedExperience(GoldenHookItem.getModifiedExperience(event.getOriginalExperience(), event.getEntity(), event.getAttackingPlayer()));
     }
 
     private static void onKittySlippersChangeTarget(LivingChangeTargetEvent event) {

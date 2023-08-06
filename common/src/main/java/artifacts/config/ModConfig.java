@@ -46,6 +46,10 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
             return Math.max(0, everlastingBeefChance);
         }
 
+        @ConfigEntry.Gui.Tooltip(count = 2)
+        @Comment("Whether the Kitty Slippers and Bunny Hoppers change the player's hurt sounds")
+        public boolean modifyHurtSounds = true;
+
         @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
         public Campsite campsite = new Campsite();
 
@@ -86,10 +90,6 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
 
     @Config(name = "client")
     public static final class Client implements ConfigData {
-
-        @ConfigEntry.Gui.Tooltip(count = 2)
-        @Comment("Whether the Kitty Slippers and Bunny Hoppers change the player's hurt sounds")
-        public boolean modifyHurtSounds = true;
 
         @ConfigEntry.Gui.Tooltip
         @Comment("Whether models for gloves should be shown in first person")
