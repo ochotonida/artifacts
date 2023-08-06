@@ -6,7 +6,9 @@
   "mixins": [
     "client.PlayerRendererMixin",
     "item.wearable.bunnyhoppers.LivingEntityMixin",
-    "item.wearable.diggingclaws.PlayerMixin"
+    "item.wearable.diggingclaws.PlayerMixin",
+    "item.wearable.luckyscarf.ApplyBonusCountMixin",
+    "item.wearable.superstitioushat.EnchantmentHelperMixin"
   ],
   "client": [
     "item.umbrella.client.ItemRendererMixin",

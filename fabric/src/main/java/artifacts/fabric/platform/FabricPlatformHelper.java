@@ -3,12 +3,12 @@ package artifacts.fabric.platform;
 import artifacts.client.item.renderer.ArtifactRenderer;
 import artifacts.component.SwimData;
 import artifacts.fabric.registry.ModComponents;
+import artifacts.fabric.trinket.TrinketsHelper;
 import artifacts.item.wearable.WearableArtifactItem;
 import artifacts.platform.PlatformHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.emi.stepheightentityattribute.StepHeightEntityAttributeMain;
 import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import dev.emi.trinkets.api.client.TrinketRenderer;
 import dev.emi.trinkets.api.client.TrinketRendererRegistry;
@@ -18,7 +18,6 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +28,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -44,12 +42,7 @@ public class FabricPlatformHelper implements PlatformHelper {
 
     @Override
     public Stream<ItemStack> findAllEquippedBy(LivingEntity entity, Item item) {
-        return TrinketsApi.getTrinketComponent(entity)
-                .map(TrinketComponent::getAllEquipped)
-                .orElse(List.of())
-                .stream()
-                .map(Tuple::getB)
-                .filter(stack -> stack.getItem() == item);
+        return TrinketsHelper.findAllEquippedBy(entity).filter(stack -> stack.getItem() == item);
     }
 
     @Override
