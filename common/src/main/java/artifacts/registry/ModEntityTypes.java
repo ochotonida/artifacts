@@ -15,7 +15,7 @@ public class ModEntityTypes {
     public static final RegistrySupplier<EntityType<MimicEntity>> MIMIC = ENTITY_TYPES.register("mimic",
             () -> EntityType.Builder.of(MimicEntity::new, MobCategory.MISC)
                     .sized(14 / 16F, 14 / 16F)
-                    .clientTrackingRange(8) // TODO forgot what this does
+                    .clientTrackingRange(8)
                     .build(Artifacts.id("mimic").toString())
     );
 }

@@ -1,7 +1,6 @@
 package artifacts.client.item.renderer;
 
 import artifacts.Artifacts;
-import artifacts.client.item.ModRenderTypes;
 import artifacts.client.item.model.ArmsModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -32,7 +31,7 @@ public class GlowingGloveArtifactRenderer extends GloveArtifactRenderer {
     @Override
     protected void renderArm(ArmsModel model, PoseStack poseStack, MultiBufferSource multiBufferSource, HumanoidArm armSide, int light, boolean hasSlimArms, boolean hasFoil) {
         super.renderArm(model, poseStack, multiBufferSource, armSide, light, hasSlimArms, hasFoil);
-        RenderType renderType = ModRenderTypes.unlit(getGlowTexture(hasSlimArms));
+        RenderType renderType = model.renderType(getGlowTexture(hasSlimArms));
         VertexConsumer builder = ItemRenderer.getFoilBuffer(multiBufferSource, renderType, false, hasFoil);
         model.renderArm(armSide, poseStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
@@ -40,7 +39,7 @@ public class GlowingGloveArtifactRenderer extends GloveArtifactRenderer {
     @Override
     protected void renderFirstPersonArm(ArmsModel model, ModelPart arm, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, boolean hasSlimArms, boolean hasFoil) {
         super.renderFirstPersonArm(model, arm, poseStack, multiBufferSource, light, hasSlimArms, hasFoil);
-        VertexConsumer builder = ItemRenderer.getFoilBuffer(multiBufferSource, ModRenderTypes.unlit(getGlowTexture(hasSlimArms)), false, hasFoil);
+        VertexConsumer builder = ItemRenderer.getFoilBuffer(multiBufferSource, model.renderType(getGlowTexture(hasSlimArms)), false, hasFoil);
         arm.render(poseStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY);
     }
 }

@@ -1,7 +1,6 @@
 package artifacts.client.item.renderer;
 
 import artifacts.Artifacts;
-import artifacts.client.item.ModRenderTypes;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
@@ -29,7 +28,7 @@ public class GlowingArtifactRenderer extends GenericArtifactRenderer {
     @Override
     protected void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int light, boolean hasFoil) {
         super.render(poseStack, multiBufferSource, light, hasFoil);
-        RenderType renderType = ModRenderTypes.unlit(getGlowTexture());
+        RenderType renderType = getModel().renderType(getGlowTexture());
         VertexConsumer builder = ItemRenderer.getFoilBuffer(multiBufferSource, renderType, false, hasFoil);
         getModel().renderToBuffer(poseStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }

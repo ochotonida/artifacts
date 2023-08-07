@@ -3,7 +3,6 @@ package artifacts.platform;
 import artifacts.client.item.renderer.ArtifactRenderer;
 import artifacts.component.SwimData;
 import artifacts.item.wearable.WearableArtifactItem;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
@@ -11,7 +10,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootContext;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
@@ -35,8 +33,6 @@ public interface PlatformHelper {
     SwimData getSwimData(LivingEntity player);
 
     boolean isEyeInWater(Player player);
-
-    ResourceLocation getQueriedLootTableId(LootContext lootContext);
 
     void registerArtifactRenderer(WearableArtifactItem item, Supplier<ArtifactRenderer> rendererSupplier);
 
