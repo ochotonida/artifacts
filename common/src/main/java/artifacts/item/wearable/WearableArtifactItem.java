@@ -62,7 +62,9 @@ public abstract class WearableArtifactItem extends ArtifactItem {
     }
 
     public static boolean isActivated(ItemStack stack) {
-        return !stack.hasTag() || stack.getOrCreateTag().getBoolean("isActivated");
+        return !stack.hasTag()
+                || !stack.getOrCreateTag().contains("isActivated")
+                || stack.getOrCreateTag().getBoolean("isActivated");
     }
 
     public static void setActivated(ItemStack stack, boolean active) {
