@@ -29,6 +29,8 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
+    implementation annotationProcessor(include("com.github.LlamaLad7:MixinExtras:${rootProject.mixin_extras_version}"))
+
     modImplementation(include("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:${rootProject.porting_lib_version}"))
 
     modImplementation("dev.emi:trinkets:${rootProject.trinkets_version}")

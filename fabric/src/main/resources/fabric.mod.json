@@ -40,7 +40,8 @@
   "depends": {
     "fabric": "0.86.1",
     "minecraft": ">=1.20",
-    "architectury": ">=9.0.7"
+    "architectury": ">=9.0.7",
+    "trinkets": "*"
   },
   "suggests": {
     "modmenu": "*"
