@@ -14,7 +14,7 @@ public class PowerGloveItem extends AttributeModifyingItem {
     }
 
     @Override
-    protected double getAmount() {
+    public double getAmount() {
         return Math.max(0, ModGameRules.POWER_GLOVE_ATTACK_DAMAGE_BONUS.get());
     }
 }

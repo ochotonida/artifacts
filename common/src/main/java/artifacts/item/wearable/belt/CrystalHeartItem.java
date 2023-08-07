@@ -17,7 +17,7 @@ public class CrystalHeartItem extends AttributeModifyingItem {
     }
 
     @Override
-    protected double getAmount() {
+    public double getAmount() {
         return Math.max(0, ModGameRules.CRYSTAL_HEART_HEALTH_BONUS.get());
     }
 

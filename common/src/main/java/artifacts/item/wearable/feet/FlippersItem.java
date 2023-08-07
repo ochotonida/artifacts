@@ -14,7 +14,7 @@ public class FlippersItem extends AttributeModifyingItem {
     }
 
     @Override
-    protected double getAmount() {
+    public double getAmount() {
         return Math.max(0, ModGameRules.FLIPPERS_SWIM_SPEED_BONUS.get() / 100D);
     }
 }

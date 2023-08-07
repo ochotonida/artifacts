@@ -14,7 +14,7 @@ public class SteadfastSpikesItem extends AttributeModifyingItem {
     }
 
     @Override
-    protected double getAmount() {
+    public double getAmount() {
         return ModGameRules.STEADFAST_SPIKES_ENABLED.get() ? 1 : 0;
     }
 }

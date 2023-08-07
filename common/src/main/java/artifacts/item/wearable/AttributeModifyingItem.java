@@ -29,7 +29,11 @@ public abstract class AttributeModifyingItem extends WearableArtifactItem {
         return new AttributeModifier(modifierId, modifierName, getAmount(), AttributeModifier.Operation.ADDITION);
     }
 
-    protected abstract double getAmount();
+    public Attribute getAttribute() {
+        return attribute;
+    }
+
+    public abstract double getAmount();
 
     protected void onAttributeUpdated(LivingEntity entity) {
 

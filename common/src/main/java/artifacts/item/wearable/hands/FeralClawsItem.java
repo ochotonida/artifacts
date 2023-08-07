@@ -16,7 +16,7 @@ public class FeralClawsItem extends AttributeModifyingItem {
     }
 
     @Override
-    protected double getAmount() {
+    public double getAmount() {
         return Math.max(0, ModGameRules.FERAL_CLAWS_ATTACK_SPEED_BONUS.get() / 100D);
     }
 

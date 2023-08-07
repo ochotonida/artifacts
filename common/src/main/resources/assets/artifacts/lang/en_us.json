@@ -164,6 +164,7 @@
   "item.artifacts.vampiric_glove": "Vampiric Glove",
   "item.artifacts.villager_hat": "Villager Hat",
   "item.artifacts.whoopee_cushion": "Whoopee Cushion",
+  "porting_lib.swimSpeed": "Swim Speed",
   "text.autoconfig.artifacts.category.client": "Client",
   "text.autoconfig.artifacts.category.common": "Common",
   "text.autoconfig.artifacts.option.common.modifyHurtSounds": "Modify player hurt sounds",
