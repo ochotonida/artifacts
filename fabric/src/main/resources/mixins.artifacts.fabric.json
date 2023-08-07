@@ -18,7 +18,8 @@
   ],
   "client": [
     "item.umbrella.client.ItemRendererMixin",
-    "item.umbrella.client.LivingEntityRendererMixin"
+    "item.umbrella.client.LivingEntityRendererMixin",
+    "item.wearable.heliumflamingo.client.GuiMixin"
   ],
   "injectors": {
     "defaultRequire": 1
