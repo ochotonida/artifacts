@@ -1,0 +1,24 @@
+{
+  "loader": "forge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "artifacts:item/umbrella_gui"
+  },
+  "perspectives": {
+    "firstperson_righthand": {
+      "parent": "artifacts:item/umbrella_held_idle"
+    },
+    "firstperson_lefthand": {
+      "parent": "artifacts:item/umbrella_held_idle"
+    },
+    "thirdperson_righthand": {
+      "parent": "artifacts:item/umbrella_held_idle"
+    },
+    "thirdperson_lefthand": {
+      "parent": "artifacts:item/umbrella_held_idle"
+    },
+    "head": {
+      "parent": "artifacts:item/umbrella_held_idle"
+    }
+  }
+}

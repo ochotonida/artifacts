@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "artifacts",
+  "version": "${version}",
+  "name": "Artifacts",
+  "description": "Adds various new powerful uncraftable items to make exploration a bit more interesting",
+  "authors": [
+    "ochotonida",
+    "Florens"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/artifacts",
+    "sources": "https://github.com/ochotonida/artifacts",
+    "issues": "https://github.com/ochotonida/artifacts/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/artifacts/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "artifacts.fabric.ArtifactsFabric"
+    ],
+    "client": [
+      "artifacts.fabric.ArtifactsFabricClient"
+    ],
+    "artifacts:compat_handlers": [
+      "artifacts.fabric.integration.OriginsCompat"
+    ],
+    "modmenu": [
+      "artifacts.fabric.integration.ModMenuIntegration"
+    ],
+    "cardinal-components": [
+      "artifacts.fabric.registry.ModComponents"
+    ]
+  },
+  "mixins": [
+    "mixins.artifacts.common.json",
+    "mixins.artifacts.fabric.json"
+  ],
+  "depends": {
+    "fabric": ">=0.86.1",
+    "minecraft": ">=1.20",
+    "architectury": ">=9.0.7",
+    "trinkets": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  },
+  "custom": {
+    "cardinal-components": [
+      "artifacts:swim_data"
+    ]
+  }
+}

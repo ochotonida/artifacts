@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.15
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:digging_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:pocket_piston"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "artifacts:inject/chests/village/village_toolsmith"
+}

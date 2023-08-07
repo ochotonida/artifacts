@@ -1,0 +1,26 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "artifacts.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "accessors.MobAccessor",
+    "gamerule.BooleanValueInvoker",
+    "gamerule.IntegerValueInvoker",
+    "item.hurtsound.LivingEntityMixin",
+    "item.umbrella.EntityMixin",
+    "item.wearable.aquadashers.EntityMixin",
+    "item.wearable.charmofsinking.EnchantmentHelperMixin",
+    "item.wearable.villagerhat.VillagerMixin"
+  ],
+  "client": [
+    "item.hurtsound.client.LivingEntityMixin",
+    "item.umbrella.client.HumanoidModelMixin"
+  ],
+  "server": [
+    "item.umbrella.server.ServerGamePacketListenerImplMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

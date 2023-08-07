@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "find_artifact": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "artifacts:artifacts"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "artifacts.advancements.amateur_archaeologist.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "artifacts:flame_pendant"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "artifacts.advancements.amateur_archaeologist.title"
+    }
+  },
+  "requirements": [
+    [
+      "find_artifact"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

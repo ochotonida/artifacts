@@ -1,0 +1,63 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.15
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:golden_hook",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:snorkel"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:flippers"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:scarf_of_invisibility"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:steadfast_spikes"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:universal_attractor"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:feral_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:night_vision_goggles"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:obsidian_skull"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:running_shoes"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:charm_of_sinking"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "artifacts:inject/chests/shipwreck_treasure"
+}

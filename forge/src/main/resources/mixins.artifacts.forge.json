@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "artifacts.forge.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "item.umbrella.UmbrellaItemMixin",
+    "item.wearable.AttributeModifyingItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

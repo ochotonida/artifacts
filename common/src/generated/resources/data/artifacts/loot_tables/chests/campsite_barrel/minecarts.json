@@ -1,0 +1,51 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:minecart",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:chest_minecart"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:furnace_minecart"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:hopper_minecart"
+        }
+      ],
+      "name": "minecarts",
+      "rolls": 5.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 16.0,
+                "min": 4.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:rail"
+        }
+      ],
+      "name": "rails",
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "artifacts:chests/campsite_barrel/minecarts"
+}
