@@ -45,6 +45,17 @@ dependencies {
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${rootProject.cardinal_components_version}")
 
     modImplementation include("be.florens:expandability-fabric:${rootProject.expandability_version}")
+
+    // Compat & integration
+    modCompileOnly("curse.maven:origins-391943:4609386") {
+        transitive = false
+    }
+    modCompileOnly("com.github.apace100:apoli:v${rootProject.apoli_version}") {
+        transitive = false
+    }
+    modCompileOnly("com.github.apace100:calio:v${rootProject.calio_version}") {
+        transitive = false
+    }
 }
 
 processResources {

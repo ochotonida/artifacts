@@ -66,6 +66,13 @@ allprojects {
             url = "https://maven.vram.io"
         }
         maven {
+            name "Will BL Releases"
+            url "https://maven.willbl.dev/releases"
+        }
+        maven {
+            url "https://cursemaven.com"
+        }
+        maven {
             name "mixin-extras"
             url = "https://jitpack.io"
             content {

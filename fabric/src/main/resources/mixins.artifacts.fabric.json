@@ -1,10 +1,12 @@
 {
   "required": true,
+  "minVersion": "0.8",
   "package": "artifacts.fabric.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "refmap": "mixins.artifacts.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "plugin": "artifacts.fabric.ArtifactsMixinPlugin",
   "mixins": [
     "client.PlayerRendererMixin",
+    "compat.origins.ConditionFactoryAccessor",
     "item.wearable.ItemStackMixin",
     "item.wearable.LivingEntitiesMixin",
     "item.wearable.bunnyhoppers.LivingEntityMixin",
@@ -24,6 +26,5 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "minVersion": "0.8"
+  }
 }

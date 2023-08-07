@@ -1,0 +1,28 @@
+{
+  "map": [
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "artifacts:textures/entity/trinket/fire_gauntlet_default_glow.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "artifacts:textures/entity/trinket/fire_gauntlet_slim_glow.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "artifacts:textures/entity/trinket/night_vision_goggles_glow.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    }
+  ]
+}
