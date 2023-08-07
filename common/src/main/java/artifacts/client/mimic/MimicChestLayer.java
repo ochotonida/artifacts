@@ -26,9 +26,7 @@ import java.util.List;
 
 public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
 
-    private final MimicChestLayerModel chestModel;
-    public final Material vanillaChestMaterial;
-    public final List<Material> chestMaterials;
+    public static final ResourceLocation CHEST_ATLAS = new ResourceLocation("textures/atlas/chest.png");
 
     public static final List<String> QUARK_CHEST_TYPES = Arrays.asList(
             "oak",
@@ -45,6 +43,10 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
             "bamboo"
     );
 
+    private final MimicChestLayerModel chestModel;
+    public final Material vanillaChestMaterial;
+    public final List<Material> chestMaterials;
+
     @SuppressWarnings("deprecation")
     public MimicChestLayer(RenderLayerParent<MimicEntity, MimicModel> entityRenderer, EntityModelSet modelSet) {
         super(entityRenderer);
@@ -57,19 +59,25 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
         chestMaterials = new ArrayList<>();
         vanillaChestMaterial = isChristmas ? Sheets.CHEST_XMAS_LOCATION : Sheets.CHEST_LOCATION;
 
-        if (!isChristmas && Platform.isModLoaded("lootr")) {
+        if (isChristmas) {
+            chestMaterials.add(vanillaChestMaterial);
+            return;
+        }
+
+        if (Platform.isModLoaded("lootr")) {
             ResourceLocation chestLocation = new ResourceLocation("lootr", "chest");
             chestMaterials.add(new Material(TextureAtlas.LOCATION_BLOCKS, chestLocation));
+        } else if (Platform.isModLoaded("myloot")) {
+            ResourceLocation chestLocation = new ResourceLocation("myloot", "entity/chest/loot");
+            chestMaterials.add(new Material(CHEST_ATLAS, chestLocation));
         } else {
-            if (!isChristmas && Platform.isModLoaded("quark")) {
-                ResourceLocation atlas = new ResourceLocation("textures/atlas/chest.png");
+            chestMaterials.add(vanillaChestMaterial);
+            if (Platform.isModLoaded("quark")) {
                 for (String chestType : QUARK_CHEST_TYPES) {
                     ResourceLocation chestLocation = new ResourceLocation("quark", String.format("model/chest/%s/normal", chestType));
-                    chestMaterials.add(new Material(atlas, chestLocation));
+                    chestMaterials.add(new Material(CHEST_ATLAS, chestLocation));
                 }
             }
-
-            chestMaterials.add(vanillaChestMaterial);
         }
     }
 
