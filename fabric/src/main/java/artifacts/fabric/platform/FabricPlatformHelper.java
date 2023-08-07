@@ -2,6 +2,7 @@ package artifacts.fabric.platform;
 
 import artifacts.client.item.renderer.ArtifactRenderer;
 import artifacts.component.SwimData;
+import artifacts.fabric.client.CosmeticsHelper;
 import artifacts.fabric.registry.ModComponents;
 import artifacts.fabric.trinket.TrinketsHelper;
 import artifacts.item.wearable.WearableArtifactItem;
@@ -109,6 +110,9 @@ public class FabricPlatformHelper implements PlatformHelper {
                 float netHeadYaw,
                 float headPitch
         ) {
+            if (CosmeticsHelper.isCosmeticsDisabled(stack)) {
+                return;
+            }
             int index = slotReference.index() + (slotReference.inventory().getSlotType().getGroup().equals("hand") ? 0 : 1);
             renderer.render(
                     stack,

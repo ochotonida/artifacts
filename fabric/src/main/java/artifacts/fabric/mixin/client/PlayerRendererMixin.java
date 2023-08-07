@@ -2,6 +2,7 @@ package artifacts.fabric.mixin.client;
 
 import artifacts.Artifacts;
 import artifacts.client.item.renderer.GloveArtifactRenderer;
+import artifacts.fabric.client.CosmeticsHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -40,6 +41,7 @@ public abstract class PlayerRendererMixin {
                 .stream()
                 .filter(pair -> pair.getA().inventory().getSlotType().getGroup().equals(groupId))
                 .map(Tuple::getB)
+                .filter(stack -> !CosmeticsHelper.isCosmeticsDisabled(stack))
                 .forEach(stack -> {
                     GloveArtifactRenderer gloveRenderer = GloveArtifactRenderer.getGloveRenderer(stack);
                     if (gloveRenderer != null) {

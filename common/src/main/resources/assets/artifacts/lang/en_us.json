@@ -14,6 +14,7 @@
   "artifacts.subtitles.entity.mimic.open": "Mimic hops",
   "artifacts.subtitles.item.whoopee_cushion.fart": "Fart",
   "artifacts.tooltip.cosmetic": "Cosmetic",
+  "artifacts.tooltip.cosmetics_disabled": "Cosmetics disabled (right-click to toggle)",
   "artifacts.tooltip.item.antidote_vessel": "Greatly reduces the duration of negative effects",
   "artifacts.tooltip.item.aqua_dashers": "Allows the wearer to walk on fluids while sprinting",
   "artifacts.tooltip.item.bunny_hoppers.fall_damage": "Grants immunity to fall damage",

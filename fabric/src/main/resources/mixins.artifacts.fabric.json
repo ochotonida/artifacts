@@ -9,6 +9,7 @@
     "compat.origins.ConditionFactoryAccessor",
     "item.wearable.ItemStackMixin",
     "item.wearable.LivingEntitiesMixin",
+    "item.wearable.WearableArtifactItemMixin",
     "item.wearable.bunnyhoppers.LivingEntityMixin",
     "item.wearable.cloudinabottle.LivingEntityMixin",
     "item.wearable.diggingclaws.PlayerMixin",
