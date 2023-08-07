@@ -11,6 +11,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class ShockPendantItem extends PendantItem {
     }
 
     @Override
-    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(ItemStack stack, List<MutableComponent> tooltip) {
         if (ModGameRules.SHOCK_PENDANT_STRIKE_CHANCE.get() > 0) {
             tooltip.add(tooltipLine("strike_chance"));
         }

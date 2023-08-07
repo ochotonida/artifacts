@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,7 +27,7 @@ public class DiggingClawsItem extends WearableArtifactItem {
     }
 
     @Override
-    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(ItemStack stack, List<MutableComponent> tooltip) {
         int tierLevel = getToolTierLevel();
         if (tierLevel > 0) {
             tooltip.add(tooltipLine("mining_level", Component.translatable("%s.tooltip.tool_tier.%s".formatted(Artifacts.MOD_ID, tierLevel))));

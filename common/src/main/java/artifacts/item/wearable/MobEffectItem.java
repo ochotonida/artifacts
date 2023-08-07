@@ -1,5 +1,6 @@
 package artifacts.item.wearable;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -58,11 +59,24 @@ public class MobEffectItem extends WearableArtifactItem {
 
     @Override
     public void onUnequip(LivingEntity entity, ItemStack stack) {
+        removeRemainingEffect(entity);
+    }
+
+    private void removeRemainingEffect(LivingEntity entity) {
         if (isEnabled.get() && !entity.level().isClientSide()) {
             MobEffectInstance effectInstance = entity.getEffect(mobEffect);
             if (effectInstance != null && effectInstance.getAmplifier() == getAmplifier() && !effectInstance.isVisible() && effectInstance.getDuration() < duration) {
                 entity.removeEffect(mobEffect);
             }
+        }
+
+    }
+
+    @Override
+    public void toggleItem(ServerPlayer player) {
+        super.toggleItem(player);
+        if (!isEffectActive(player)) {
+            removeRemainingEffect(player);
         }
     }
 }

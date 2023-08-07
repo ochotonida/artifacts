@@ -37,7 +37,7 @@ public class UmbrellaItem extends ArtifactItem {
     }
 
     @Override
-    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(ItemStack stack, List<MutableComponent> tooltip) {
         if (ModGameRules.UMBRELLA_IS_GLIDER.get()) {
             tooltip.add(tooltipLine("glider"));
         }

@@ -6,6 +6,7 @@ import artifacts.registry.ModItems;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class BunnyHoppersItem extends MobEffectItem {
     }
 
     @Override
-    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(ItemStack stack, List<MutableComponent> tooltip) {
         if (ModGameRules.BUNNY_HOPPERS_JUMP_BOOST_LEVEL.get() >= 0) {
             tooltip.add(tooltipLine("jump_height"));
         }

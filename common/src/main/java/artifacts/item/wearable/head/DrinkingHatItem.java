@@ -7,6 +7,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 
 import java.util.List;
@@ -30,17 +31,17 @@ public class DrinkingHatItem extends WearableArtifactItem {
     }
 
     @Override
-    protected void addTooltip(List<MutableComponent> tooltip) {
+    protected void addTooltip(ItemStack stack, List<MutableComponent> tooltip) {
         if (hasSpecialTooltip) {
             tooltip.add(tooltipLine("special").withStyle(ChatFormatting.ITALIC));
-            addEffectsTooltip(tooltip);
+            addEffectsTooltip(stack, tooltip);
         } else {
-            super.addTooltip(tooltip);
+            super.addTooltip(stack, tooltip);
         }
     }
 
     @Override
-    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(ItemStack stack, List<MutableComponent> tooltip) {
         if (drinkingDurationMultiplier.get() < 100) {
             tooltip.add(tooltipLine("drinking"));
         }

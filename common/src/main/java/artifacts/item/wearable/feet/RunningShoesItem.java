@@ -34,7 +34,7 @@ public class RunningShoesItem extends WearableArtifactItem {
     }
 
     @Override
-    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(ItemStack stack, List<MutableComponent> tooltip) {
         if (ModGameRules.RUNNING_SHOES_SPEED_BONUS.get() > 0) {
             tooltip.add(tooltipLine("movement_speed"));
         }

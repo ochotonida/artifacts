@@ -30,20 +30,20 @@ public abstract class ArtifactItem extends Item {
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltipList, TooltipFlag flags) {
         if (Artifacts.CONFIG.client.showTooltips) {
             List<MutableComponent> tooltip = new ArrayList<>();
-            addTooltip(tooltip);
+            addTooltip(stack, tooltip);
             tooltip.forEach(line -> tooltipList.add(line.withStyle(ChatFormatting.GRAY)));
         }
     }
 
-    protected void addTooltip(List<MutableComponent> tooltip) {
+    protected void addTooltip(ItemStack stack, List<MutableComponent> tooltip) {
         if (isCosmetic()) {
             tooltip.add(Component.translatable("%s.tooltip.cosmetic".formatted(Artifacts.MOD_ID)).withStyle(ChatFormatting.ITALIC));
         } else {
-            addEffectsTooltip(tooltip);
+            addEffectsTooltip(stack, tooltip);
         }
     }
 
-    protected void addEffectsTooltip(List<MutableComponent> tooltip) {
+    protected void addEffectsTooltip(ItemStack stack, List<MutableComponent> tooltip) {
         tooltip.add(Component.translatable("%s.tooltip.item.%s".formatted(Artifacts.MOD_ID, getTooltipItemName())));
     }
 
