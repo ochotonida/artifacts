@@ -25,7 +25,7 @@ public class CloudInABottleInputHandler {
     }
 
     private static void handleCloudInABottleInput(LocalPlayer player) {
-        if ((player.onGround() || player.onClimbable()) && !player.isInWater()) {
+        if ((player.isOnGround() || player.onClimbable()) && !player.isInWater()) {
             hasReleasedJumpKey = false;
             canDoubleJump = true;
         } else if (!player.input.jumping) {

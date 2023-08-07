@@ -17,7 +17,7 @@ public class WhoopeeCushionItem extends WearableArtifactItem {
 
     @Override
     public void wornTick(LivingEntity entity, ItemStack stack) {
-        if (!entity.level().isClientSide()) {
+        if (!entity.level.isClientSide()) {
             CompoundTag tag = stack.getOrCreateTag();
             if (tag.getBoolean("HasFarted") && !entity.isShiftKeyDown()) {
                 tag.putBoolean("HasFarted", false);
@@ -25,7 +25,7 @@ public class WhoopeeCushionItem extends WearableArtifactItem {
                 tag.putBoolean("HasFarted", true);
                 double fartChance = ModGameRules.WHOOPEE_CUSHION_FART_CHANCE.get() / 100D;
                 if (entity.getRandom().nextFloat() < fartChance) {
-                    entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), ModSoundEvents.FART.get(), SoundSource.PLAYERS, 1, 0.9F + entity.getRandom().nextFloat() * 0.2F);
+                    entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), ModSoundEvents.FART.get(), SoundSource.PLAYERS, 1, 0.9F + entity.getRandom().nextFloat() * 0.2F);
                 }
             }
         }

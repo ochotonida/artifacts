@@ -24,7 +24,7 @@ public abstract class PendantItem extends WearableArtifactItem {
         LivingEntity attacker = DamageSourceHelper.getAttacker(damageSource);
         if (
                 isEquippedBy(entity)
-                && !entity.level().isClientSide()
+                && !entity.level.isClientSide()
                 && amount >= 1
                 && attacker != null
                 && entity.getRandom().nextDouble() < strikeChance.get() / 100D

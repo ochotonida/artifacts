@@ -115,7 +115,7 @@ public class MimicEntity extends Mob implements Enemy {
             if (isDormant) {
                 setDormant(false);
             }
-        } else if (!onGround()) {
+        } else if (!isOnGround()) {
             ticksInAir++;
         } else {
             if (ticksInAir > 0) {
@@ -161,7 +161,7 @@ public class MimicEntity extends Mob implements Enemy {
             return false;
         }
 
-        if (onGround() && getRandom().nextBoolean() && getMoveControl() instanceof MimicMovementController controller) {
+        if (isOnGround() && getRandom().nextBoolean() && getMoveControl() instanceof MimicMovementController controller) {
             controller.setDirection(getRandom().nextInt(4) * 90, true);
         }
 
@@ -256,7 +256,7 @@ public class MimicEntity extends Mob implements Enemy {
 
         @Override
         public boolean canUse() {
-            return mimic.getTarget() == null && (mimic.onGround() || mimic.isInWater() || mimic.isInLava() || mimic.hasEffect(MobEffects.LEVITATION));
+            return mimic.getTarget() == null && (mimic.isOnGround() || mimic.isInWater() || mimic.isInLava() || mimic.hasEffect(MobEffects.LEVITATION));
         }
 
         @Override
@@ -357,7 +357,7 @@ public class MimicEntity extends Mob implements Enemy {
                 mimic.setZza(0);
             } else {
                 operation = Operation.WAIT;
-                if (mimic.onGround()) {
+                if (mimic.isOnGround()) {
                     // noinspection ConstantConditions
                     mimic.setSpeed((float) (speedModifier * mimic.getAttribute(Attributes.MOVEMENT_SPEED).getValue()));
                     if (jumpDelay-- > 0) {

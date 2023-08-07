@@ -21,7 +21,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -29,13 +28,10 @@ import net.minecraft.world.item.ItemStack;
 public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Artifacts.MOD_ID, Registries.ITEM);
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Artifacts.MOD_ID, Registries.CREATIVE_MODE_TAB);
 
-    public static final RegistrySupplier<CreativeModeTab> CREATIVE_TAB = CREATIVE_MODE_TABS.register("main", () ->
-            CreativeTabRegistry.create(
-                    Component.translatable("%s.creative_tab".formatted(Artifacts.MOD_ID)),
-                    () -> new ItemStack(ModItems.BUNNY_HOPPERS.get())
-            )
+    public static final CreativeTabRegistry.TabSupplier CREATIVE_TAB = CreativeTabRegistry.create(Artifacts.id("main"), builder -> builder
+            .title(Component.translatable("%s.creative_tab".formatted(Artifacts.MOD_ID)))
+            .icon(() -> new ItemStack(ModItems.BUNNY_HOPPERS.get()))
     );
 
     public static RegistrySupplier<Item> MIMIC_SPAWN_EGG = ITEMS.register("mimic_spawn_egg", () -> new ArchitecturySpawnEggItem(ModEntityTypes.MIMIC, 0x805113, 0x212121, new Item.Properties().arch$tab(CREATIVE_TAB)));

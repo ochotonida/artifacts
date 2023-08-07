@@ -19,7 +19,7 @@ public class SwimEventHandler {
                 if (!swimData.isWet()) {
                     swimData.setWet(true);
                 }
-            } else if (player.onGround() || player.getAbilities().flying) {
+            } else if (player.isOnGround() || player.getAbilities().flying) {
                 swimData.setWet(false);
             }
         }

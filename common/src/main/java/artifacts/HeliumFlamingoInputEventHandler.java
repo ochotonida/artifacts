@@ -41,7 +41,7 @@ public class HeliumFlamingoInputEventHandler {
         }
 
         if (!swimData.isSwimming()) {
-            if (player.onGround()) {
+            if (player.isOnGround()) {
                 hasTouchedGround = true;
             } else if (canActivateHeliumFlamingo(swimData, player, isSprintKeyDown)) {
                 swimData.setSwimming(true);
@@ -57,7 +57,7 @@ public class HeliumFlamingoInputEventHandler {
         wasSprintKeyDown = isSprintKeyDown;
         if (!isSprintKeyDown) {
             wasSprintingOnGround = false;
-        } else if (player.onGround()) {
+        } else if (player.isOnGround()) {
             wasSprintingOnGround = true;
         }
     }
@@ -75,7 +75,7 @@ public class HeliumFlamingoInputEventHandler {
                 && !wasSprintKeyDown
                 && !wasSprintingOnGround
                 && hasTouchedGround
-                && !player.onGround()
+                && !player.isOnGround()
                 && (!player.isInWater() || CharmOfSinkingItem.shouldSink(player))
                 && !player.isFallFlying()
                 && !player.getAbilities().flying

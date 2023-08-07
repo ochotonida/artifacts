@@ -52,9 +52,9 @@ public class HeliumFlamingoItem extends WearableArtifactItem {
             if (!ModItems.HELIUM_FLAMINGO.get().isEquippedBy(player)
                     || swimData.getSwimTime() > maxFlightTime
                     || player.isInWater() && !player.isSwimming() && !CharmOfSinkingItem.shouldSink(player)
-                    || (!player.isInWater() || CharmOfSinkingItem.shouldSink(player)) && player.onGround()) {
+                    || (!player.isInWater() || CharmOfSinkingItem.shouldSink(player)) && player.isOnGround()) {
                 swimData.setSwimming(false);
-                if (!player.onGround() && !player.isInWater()) {
+                if (!player.isOnGround() && !player.isInWater()) {
                     player.playSound(ModSoundEvents.POP.get(), 0.5F, 0.75F);
                 }
             }

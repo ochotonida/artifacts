@@ -78,7 +78,7 @@ public class UmbrellaItem extends ArtifactItem {
         AttributeInstance gravity = player.getAttribute(PlatformServices.platformHelper.getEntityGravityAttribute());
         if (gravity != null) {
             boolean isInWater = player.isInWater() && !CharmOfSinkingItem.shouldSink(player);
-            if (ModGameRules.UMBRELLA_IS_GLIDER.get() && !player.onGround() && !isInWater && player.getDeltaMovement().y < 0 && !player.hasEffect(MobEffects.SLOW_FALLING)
+            if (ModGameRules.UMBRELLA_IS_GLIDER.get() && !player.isOnGround() && !isInWater && player.getDeltaMovement().y < 0 && !player.hasEffect(MobEffects.SLOW_FALLING)
                     && (player.getOffhandItem().getItem() == ModItems.UMBRELLA.get()
                     || player.getMainHandItem().getItem() == ModItems.UMBRELLA.get()) && !(player.isUsingItem() && !player.getUseItem().isEmpty() && player.getUseItem().getItem().getUseAnimation(player.getUseItem()) == UseAnim.BLOCK)) {
                 if (!gravity.hasModifier(UmbrellaItem.UMBRELLA_SLOW_FALLING)) {

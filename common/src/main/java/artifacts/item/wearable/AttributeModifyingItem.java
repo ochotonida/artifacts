@@ -42,7 +42,7 @@ public abstract class AttributeModifyingItem extends WearableArtifactItem {
     @Override
     public void onEquip(LivingEntity entity, ItemStack stack) {
         super.onEquip(entity, stack);
-        if (!entity.level().isClientSide()) {
+        if (!entity.level.isClientSide()) {
             AttributeInstance attributeInstance = entity.getAttribute(attribute);
             if (attributeInstance != null) {
                 attributeInstance.removeModifier(modifierId);
@@ -55,7 +55,7 @@ public abstract class AttributeModifyingItem extends WearableArtifactItem {
 
     @Override
     public void wornTick(LivingEntity entity, ItemStack stack) {
-        if (!entity.level().isClientSide()) {
+        if (!entity.level.isClientSide()) {
             AttributeInstance attributeInstance = entity.getAttribute(attribute);
             if (attributeInstance != null) {
                 AttributeModifier existingModifier = attributeInstance.getModifier(modifierId);
@@ -70,7 +70,7 @@ public abstract class AttributeModifyingItem extends WearableArtifactItem {
 
     @Override
     public void onUnequip(LivingEntity entity, ItemStack stack) {
-        if (!entity.level().isClientSide()) {
+        if (!entity.level.isClientSide()) {
             AttributeInstance attributeInstance = entity.getAttribute(attribute);
             if (attributeInstance != null) {
                 attributeInstance.removeModifier(modifierId);

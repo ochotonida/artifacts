@@ -45,7 +45,6 @@ public class Artifacts {
         ModSoundEvents.SOUND_EVENTS.register();
         ModLootConditions.LOOT_CONDITIONS.register();
         ModPlacementModifierTypes.PLACEMENT_MODIFIERS.register();
-        ModItems.CREATIVE_MODE_TABS.register();
         ModItems.ITEMS.register();
         ModEntityTypes.ENTITY_TYPES.register();
         ModFeatures.FEATURES.register();

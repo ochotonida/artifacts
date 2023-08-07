@@ -27,7 +27,7 @@ public class ObsidianSkullItem extends WearableArtifactItem {
     public static void onLivingDamage(LivingEntity entity, DamageSource damageSource, float amount) {
         if (
                 ModItems.OBSIDIAN_SKULL.get().isEquippedBy(entity)
-                && !entity.level().isClientSide
+                && !entity.level.isClientSide
                 && amount >= 1
                 && damageSource.is(DamageTypeTags.IS_FIRE)
                 && entity instanceof Player player

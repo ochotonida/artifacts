@@ -52,7 +52,7 @@ public class MobEffectItem extends WearableArtifactItem {
 
     @Override
     public void wornTick(LivingEntity entity, ItemStack stack) {
-        if (isEffectActive(entity) && !entity.level().isClientSide()) {
+        if (isEffectActive(entity) && !entity.level.isClientSide()) {
             entity.addEffect(new MobEffectInstance(mobEffect, duration - 1, getAmplifier(), true, false));
         }
     }
@@ -63,7 +63,7 @@ public class MobEffectItem extends WearableArtifactItem {
     }
 
     private void removeRemainingEffect(LivingEntity entity) {
-        if (isEnabled.get() && !entity.level().isClientSide()) {
+        if (isEnabled.get() && !entity.level.isClientSide()) {
             MobEffectInstance effectInstance = entity.getEffect(mobEffect);
             if (effectInstance != null && effectInstance.getAmplifier() == getAmplifier() && !effectInstance.isVisible() && effectInstance.getDuration() < duration) {
                 entity.removeEffect(mobEffect);

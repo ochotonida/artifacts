@@ -1,9 +1,16 @@
 package artifacts.fabric.mixin.item.wearable.heliumflamingo.client;
 
 import artifacts.client.HeliumFlamingoOverlay;
+import artifacts.component.SwimData;
+import artifacts.platform.PlatformServices;
+import artifacts.registry.ModGameRules;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Gui.class)
-public abstract class GuiMixin {
+public abstract class GuiMixin extends GuiComponent {
 
     @Shadow
     private int screenHeight;
@@ -35,13 +42,53 @@ public abstract class GuiMixin {
     protected abstract Player getCameraPlayer();
 
     @Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-    private void renderFlamingoAir(GuiGraphics guiGraphics, CallbackInfo ci) {
+    private void renderFlamingoAir(PoseStack poseStack, CallbackInfo ci) {
         Player player = this.getCameraPlayer();
         if (player == null) {
             return;
         }
 
-        HeliumFlamingoOverlay.renderOverlay(- getStatusBarHeightOffset(player), guiGraphics, screenWidth, screenHeight);
+        renderOverlay(- getStatusBarHeightOffset(player), poseStack, screenWidth, screenHeight);
+    }
+
+    @Unique
+    public boolean renderOverlay(int height, PoseStack poseStack, int screenWidth, int screenHeight) {
+        boolean isEnabled = ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() > 0;
+        if (!isEnabled || !(Minecraft.getInstance().getCameraEntity() instanceof LivingEntity player)) {
+            return false;
+        }
+        SwimData swimData = PlatformServices.platformHelper.getSwimData(player);
+        if (swimData == null) {
+            return false;
+        }
+        int swimTime = swimData.getSwimTime();
+
+        RenderSystem.enableBlend();
+        RenderSystem.setShaderTexture(0, HeliumFlamingoOverlay.HELIUM_FLAMINGO_ICON);
+
+        int left = screenWidth / 2 + 91;
+        int top = screenHeight - height;
+
+        int maxProgressTime;
+        if (Math.abs(swimTime) == 0) {
+            return false;
+        } else if (swimTime > 0) {
+            maxProgressTime = Math.max(1, ModGameRules.HELIUM_FLAMINGO_FLIGHT_DURATION.get() * 20);
+        } else {
+            maxProgressTime = Math.max(1, ModGameRules.HELIUM_FLAMINGO_RECHARGE_DURATION.get() * 20);
+        }
+
+        float progress = 1 - Math.abs(swimTime) / (float) maxProgressTime;
+
+        int full = Mth.ceil((progress - 2D / maxProgressTime) * 10);
+        int partial = Mth.ceil(progress * 10) - full;
+
+        for (int i = 0; i < full + partial; ++i) {
+            blit(poseStack, left - i * 8 - 9, top, -90, (i < full ? 0 : 9), 0, 9, 9, 32, 16);
+        }
+
+        RenderSystem.disableBlend();
+        return true;
     }
 
     /**

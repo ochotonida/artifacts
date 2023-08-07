@@ -39,7 +39,7 @@ dependencies {
     modImplementation("me.shedaniel.cloth:cloth-config-forge:${rootProject.cloth_config_version}")
     modImplementation("top.theillusivec4.curios:curios-forge:${rootProject.curios_version}")
 
-    modRuntimeOnly("maven.modrinth:curious-armor-stands:1.20-5.0.1")
+    // modRuntimeOnly("maven.modrinth:curious-armor-stands:1.20-5.0.1")
 }
 
 processResources {

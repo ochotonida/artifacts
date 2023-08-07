@@ -38,9 +38,9 @@
     "mixins.artifacts.fabric.json"
   ],
   "depends": {
-    "fabric": "0.86.1",
-    "minecraft": ">=1.20",
-    "architectury": ">=9.0.7",
+    "fabric": ">=0.85.0",
+    "minecraft": ">=1.19.4",
+    "architectury": ">=8.0.0",
     "trinkets": "*"
   },
   "suggests": {

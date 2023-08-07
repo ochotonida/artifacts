@@ -23,7 +23,7 @@ public class PanicNecklaceItem extends WearableArtifactItem {
     }
 
     private EventResult onLivingHurt(LivingEntity entity, DamageSource damageSource, float amount) {
-        if (isEquippedBy(entity) && !entity.level().isClientSide() && amount >= 1) {
+        if (isEquippedBy(entity) && !entity.level.isClientSide() && amount >= 1) {
             int duration = Math.max(0, ModGameRules.PANIC_NECKLACE_SPEED_DURATION.get() * 20);
             int level = Math.min(127, ModGameRules.PANIC_NECKLACE_SPEED_LEVEL.get() - 1);
 
