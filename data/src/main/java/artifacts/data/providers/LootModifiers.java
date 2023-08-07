@@ -4,14 +4,23 @@ import artifacts.Artifacts;
 import artifacts.forge.loot.RollLootTableModifier;
 import artifacts.loot.ConfigurableRandomChance;
 import artifacts.loot.EverlastingBeefChance;
-import artifacts.loot.LootTableIdCondition;
 import artifacts.registry.ModItems;
+import com.google.common.collect.ImmutableList;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.mojang.serialization.JsonOps;
+import cpw.mods.modlauncher.api.LamdbaExceptionUtils;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.data.CachedOutput;
+import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -21,64 +30,73 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
-import net.minecraftforge.common.data.GlobalLootModifierProvider;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.common.loot.IGlobalLootModifier;
+import net.minecraftforge.common.loot.LootTableIdCondition;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Path;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
-public class LootModifiers extends GlobalLootModifierProvider {
+public class LootModifiers implements DataProvider {
+
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     protected List<Builder> lootBuilders = new ArrayList<>();
+    private final PackOutput packOutput;
+    private final Map<String, JsonElement> toSerialize = new HashMap<>();
 
     public LootModifiers(PackOutput packOutput) {
-        super(packOutput, Artifacts.MOD_ID);
+        this.packOutput = packOutput;
     }
 
     private void addLoot() {
-        for (EntityType<?> type : List.of(EntityType.COW, EntityType.MOOSHROOM)) {
-            // noinspection ConstantConditions
-            String name = "entities/" + ForgeRegistries.ENTITY_TYPES.getKey(type).getPath();
+        for (ResourceLocation lootTable : List.of(EntityType.COW.getDefaultLootTable(), EntityType.MOOSHROOM.getDefaultLootTable())) {
             lootBuilders.add(
-                    new Builder(name)
+                    new Builder(lootTable)
                             .lootPoolCondition(EverlastingBeefChance.everlastingBeefChance())
-                            .lootModifierCondition(LootTableIdCondition.builder(new ResourceLocation(name)))
+                            .lootModifierCondition(LootTableIdCondition.builder(lootTable))
                             .parameterSet(LootContextParamSets.ENTITY)
                             .lootPoolCondition(LootItemKilledByPlayerCondition.killedByPlayer())
                             .everlastingBeef()
             );
         }
 
-        for (String biome : Arrays.asList("desert", "plains", "savanna", "snowy", "taiga")) {
-            builder(String.format("chests/village/village_%s_house", biome), 0.02F)
+        for (ResourceLocation lootTable : Arrays.asList(
+                BuiltInLootTables.VILLAGE_DESERT_HOUSE,
+                BuiltInLootTables.VILLAGE_PLAINS_HOUSE,
+                BuiltInLootTables.VILLAGE_SAVANNA_HOUSE,
+                BuiltInLootTables.VILLAGE_SNOWY_HOUSE,
+                BuiltInLootTables.VILLAGE_TAIGA_HOUSE
+        )) {
+            builder(lootTable, 0.02F)
                     .item(ModItems.VILLAGER_HAT.get());
         }
-        builder("chests/spawn_bonus_chest", 1)
+        builder(BuiltInLootTables.SPAWN_BONUS_CHEST, 1)
                 .item(ModItems.WHOOPEE_CUSHION.get());
-        builder("chests/village/village_armorer", 0.1F)
+        builder(BuiltInLootTables.VILLAGE_ARMORER, 0.1F)
                 .item(ModItems.STEADFAST_SPIKES.get())
                 .item(ModItems.SUPERSTITIOUS_HAT.get())
                 .item(ModItems.RUNNING_SHOES.get())
                 .item(ModItems.VAMPIRIC_GLOVE.get());
-        builder("chests/village/village_butcher", 0.05F)
+        builder(BuiltInLootTables.VILLAGE_BUTCHER, 0.05F)
                 .item(ModItems.EVERLASTING_BEEF.get());
-        builder("chests/village/village_tannery", 0.2F)
+        builder(BuiltInLootTables.VILLAGE_TANNERY, 0.2F)
                 .item(ModItems.UMBRELLA.get(), 3)
                 .item(ModItems.WHOOPEE_CUSHION.get(), 2)
                 .item(ModItems.KITTY_SLIPPERS.get())
                 .item(ModItems.BUNNY_HOPPERS.get())
                 .item(ModItems.SCARF_OF_INVISIBILITY.get());
-        builder("chests/village/village_temple", 0.2F)
+        builder(BuiltInLootTables.VILLAGE_TEMPLE, 0.2F)
                 .item(ModItems.CROSS_NECKLACE.get())
                 .item(ModItems.ANTIDOTE_VESSEL.get())
                 .item(ModItems.CHARM_OF_SINKING.get());
-        builder("chests/village/village_toolsmith", 0.15F)
+        builder(BuiltInLootTables.VILLAGE_TOOLSMITH, 0.15F)
                 .item(ModItems.DIGGING_CLAWS.get())
                 .item(ModItems.POCKET_PISTON.get());
-        builder("chests/village/village_weaponsmith", 0.1F)
+        builder(BuiltInLootTables.VILLAGE_WEAPONSMITH, 0.1F)
                 .item(ModItems.FERAL_CLAWS.get());
-        builder("chests/abandoned_mineshaft", 0.3F)
+        builder(BuiltInLootTables.ABANDONED_MINESHAFT, 0.3F)
                 .item(ModItems.NIGHT_VISION_GOGGLES.get())
                 .item(ModItems.PANIC_NECKLACE.get())
                 .item(ModItems.OBSIDIAN_SKULL.get())
@@ -88,12 +106,12 @@ public class LootModifiers extends GlobalLootModifierProvider {
                 .item(ModItems.VAMPIRIC_GLOVE.get())
                 .item(ModItems.AQUA_DASHERS.get())
                 .drinkingHat(1);
-        builder("chests/bastion_hoglin_stable", 0.2F)
+        builder(BuiltInLootTables.BASTION_HOGLIN_STABLE, 0.2F)
                 .artifact(5)
                 .item(ModItems.BUNNY_HOPPERS.get(), 3)
                 .item(ModItems.FLAME_PENDANT.get(), 3)
                 .item(ModItems.EVERLASTING_BEEF.get());
-        builder("chests/bastion_treasure", 0.65F)
+        builder(BuiltInLootTables.BASTION_TREASURE, 0.65F)
                 .artifact(6)
                 .item(ModItems.GOLDEN_HOOK.get(), 3)
                 .item(ModItems.CROSS_NECKLACE.get(), 3)
@@ -102,7 +120,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
                 .item(ModItems.PANIC_NECKLACE.get())
                 .item(ModItems.CRYSTAL_HEART.get())
                 .item(ModItems.ANTIDOTE_VESSEL.get());
-        builder("chests/buried_treasure", 0.25F)
+        builder(BuiltInLootTables.BURIED_TREASURE, 0.25F)
                 .item(ModItems.SNORKEL.get(), 5)
                 .item(ModItems.FLIPPERS.get(), 5)
                 .item(ModItems.UMBRELLA.get(), 5)
@@ -114,7 +132,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
                 .item(ModItems.LUCKY_SCARF.get(), 3)
                 .item(ModItems.AQUA_DASHERS.get(), 3)
                 .drinkingHat(3);
-        builder("chests/desert_pyramid", 0.2F)
+        builder(BuiltInLootTables.DESERT_PYRAMID, 0.2F)
                 .item(ModItems.FLAME_PENDANT.get(), 2)
                 .item(ModItems.THORN_PENDANT.get(), 2)
                 .item(ModItems.WHOOPEE_CUSHION.get(), 2)
@@ -124,21 +142,21 @@ public class LootModifiers extends GlobalLootModifierProvider {
                 .item(ModItems.SCARF_OF_INVISIBILITY.get())
                 .item(ModItems.UNIVERSAL_ATTRACTOR.get())
                 .item(ModItems.VAMPIRIC_GLOVE.get());
-        builder("chests/end_city_treasure", 0.3F)
+        builder(BuiltInLootTables.END_CITY_TREASURE, 0.3F)
                 .artifact(3)
                 .item(ModItems.CRYSTAL_HEART.get())
                 .item(ModItems.CLOUD_IN_A_BOTTLE.get())
                 .item(ModItems.HELIUM_FLAMINGO.get(), 4);
-        builder("chests/jungle_temple", 0.3F)
+        builder(BuiltInLootTables.JUNGLE_TEMPLE, 0.3F)
                 .item(ModItems.KITTY_SLIPPERS.get(), 2)
                 .item(ModItems.BUNNY_HOPPERS.get());
-        builder("chests/nether_bridge", 0.15F)
+        builder(BuiltInLootTables.NETHER_BRIDGE, 0.15F)
                 .item(ModItems.CROSS_NECKLACE.get())
                 .item(ModItems.NIGHT_VISION_GOGGLES.get())
                 .item(ModItems.POCKET_PISTON.get())
                 .item(ModItems.RUNNING_SHOES.get())
                 .drinkingHat(1);
-        builder("chests/pillager_outpost", 0.25F)
+        builder(BuiltInLootTables.PILLAGER_OUTPOST, 0.25F)
                 .item(ModItems.PANIC_NECKLACE.get())
                 .item(ModItems.POCKET_PISTON.get())
                 .item(ModItems.STEADFAST_SPIKES.get())
@@ -148,7 +166,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
                 .item(ModItems.CRYSTAL_HEART.get())
                 .item(ModItems.CLOUD_IN_A_BOTTLE.get())
                 .item(ModItems.SUPERSTITIOUS_HAT.get());
-        builder("chests/ruined_portal", 0.15F)
+        builder(BuiltInLootTables.RUINED_PORTAL, 0.15F)
                 .item(ModItems.NIGHT_VISION_GOGGLES.get())
                 .item(ModItems.THORN_PENDANT.get())
                 .item(ModItems.FIRE_GAUNTLET.get())
@@ -156,7 +174,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
                 .item(ModItems.UNIVERSAL_ATTRACTOR.get())
                 .item(ModItems.OBSIDIAN_SKULL.get())
                 .item(ModItems.LUCKY_SCARF.get());
-        builder("chests/shipwreck_treasure", 0.15F)
+        builder(BuiltInLootTables.SHIPWRECK_TREASURE, 0.15F)
                 .item(ModItems.GOLDEN_HOOK.get(), 3)
                 .item(ModItems.SNORKEL.get())
                 .item(ModItems.FLIPPERS.get())
@@ -168,7 +186,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
                 .item(ModItems.OBSIDIAN_SKULL.get())
                 .item(ModItems.RUNNING_SHOES.get())
                 .item(ModItems.CHARM_OF_SINKING.get());
-        builder("chests/stronghold_corridor", 0.3F)
+        builder(BuiltInLootTables.STRONGHOLD_CORRIDOR, 0.3F)
                 .artifact(3)
                 .item(ModItems.POWER_GLOVE.get())
                 .item(ModItems.ANTIDOTE_VESSEL.get())
@@ -176,7 +194,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
                 .item(ModItems.LUCKY_SCARF.get())
                 .item(ModItems.AQUA_DASHERS.get())
                 .item(ModItems.HELIUM_FLAMINGO.get());
-        builder("chests/underwater_ruin_big", 0.45F)
+        builder(BuiltInLootTables.UNDERWATER_RUIN_BIG, 0.45F)
                 .item(ModItems.SNORKEL.get(), 3)
                 .item(ModItems.FLIPPERS.get(), 3)
                 .item(ModItems.SUPERSTITIOUS_HAT.get())
@@ -185,43 +203,79 @@ public class LootModifiers extends GlobalLootModifierProvider {
                 .item(ModItems.CROSS_NECKLACE.get())
                 .item(ModItems.POWER_GLOVE.get())
                 .item(ModItems.CLOUD_IN_A_BOTTLE.get());
-        builder("chests/woodland_mansion", 0.25F)
+        builder(BuiltInLootTables.WOODLAND_MANSION, 0.25F)
                 .artifact(1);
     }
 
-    protected Builder builder(String lootTable, float baseChance) {
+    protected Builder builder(ResourceLocation lootTable, float baseChance) {
         Builder builder = new Builder(lootTable);
         builder.lootPoolCondition(ConfigurableRandomChance.configurableRandomChance(baseChance));
-        builder.lootModifierCondition(LootTableIdCondition.builder(new ResourceLocation(lootTable)));
+        builder.lootModifierCondition(LootTableIdCondition.builder(lootTable));
         lootBuilders.add(builder);
         return builder;
     }
 
-    @Override
     protected void start() {
         addLoot();
 
         for (Builder lootBuilder : lootBuilders) {
-            add("inject/" + lootBuilder.lootTable, lootBuilder.build());
+            add("inject/" + lootBuilder.getName(), lootBuilder.build());
         }
+    }
+
+    @Override
+    public CompletableFuture<?> run(CachedOutput cache) {
+        start();
+
+        // Path forgePath = this.packOutput.getOutputFolder(PackOutput.Target.DATA_PACK).resolve("forge").resolve("loot_modifiers").resolve("global_loot_modifiers.json");
+        Path modifierFolderPath = this.packOutput.getOutputFolder(PackOutput.Target.DATA_PACK).resolve(Artifacts.MOD_ID).resolve("loot_modifiers");
+        List<ResourceLocation> entries = new ArrayList<>();
+
+        ImmutableList.Builder<CompletableFuture<?>> futuresBuilder = new ImmutableList.Builder<>();
+
+        toSerialize.forEach(LamdbaExceptionUtils.rethrowBiConsumer((name, json) -> {
+            entries.add(new ResourceLocation(Artifacts.MOD_ID, name));
+            Path modifierPath = modifierFolderPath.resolve(name + ".json");
+            futuresBuilder.add(DataProvider.saveStable(cache, json, modifierPath));
+        }));
+
+        JsonObject forgeJson = new JsonObject();
+        forgeJson.addProperty("replace", false);
+        forgeJson.add("entries", GSON.toJsonTree(entries.stream().map(ResourceLocation::toString).collect(Collectors.toList())));
+
+        // futuresBuilder.add(DataProvider.saveStable(cache, forgeJson, forgePath));
+
+        return CompletableFuture.allOf(futuresBuilder.build().toArray(CompletableFuture[]::new));
+    }
+
+    public <T extends IGlobalLootModifier> void add(String modifier, T instance) {
+        JsonElement json = IGlobalLootModifier.DIRECT_CODEC.encodeStart(JsonOps.INSTANCE, instance).getOrThrow(false, s -> {});
+        this.toSerialize.put(modifier, json);
+    }
+
+    @Override
+    public String getName() {
+        return "Global Loot Modifiers : " + Artifacts.MOD_ID;
     }
 
     @SuppressWarnings({"UnusedReturnValue", "SameParameterValue"})
     protected static class Builder {
 
-        private final String lootTable;
+        private final ResourceLocation lootTable;
         private final LootPool.Builder lootPool = LootPool.lootPool();
         private final List<LootItemCondition> conditions;
 
         private LootContextParamSet paramSet = LootContextParamSets.CHEST;
 
-        private Builder(String lootTable) {
+        private Builder(ResourceLocation lootTable) {
             this.lootTable = lootTable;
             this.conditions = new ArrayList<>();
         }
 
         private RollLootTableModifier build() {
-            return new RollLootTableModifier(conditions.toArray(new LootItemCondition[]{}), Artifacts.id("inject/%s", lootTable));
+            System.out.println(lootTable);
+            System.out.println(lootTable.getPath());
+            return new RollLootTableModifier(conditions.toArray(new LootItemCondition[]{}), Artifacts.id("inject/%s", lootTable.getPath()));
         }
 
         protected LootTable.Builder createLootTable() {
@@ -233,7 +287,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
         }
 
         protected String getName() {
-            return lootTable;
+            return lootTable.getPath();
         }
 
         private Builder parameterSet(LootContextParamSet paramSet) {

@@ -3,7 +3,6 @@ package artifacts.registry;
 import artifacts.Artifacts;
 import artifacts.loot.ConfigurableRandomChance;
 import artifacts.loot.EverlastingBeefChance;
-import artifacts.loot.LootTableIdCondition;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
@@ -19,7 +18,6 @@ public class ModLootConditions {
 
     public static final RegistrySupplier<LootItemConditionType> CONFIGURABLE_ARTIFACT_CHANCE = register("configurable_random_chance", ConfigurableRandomChance.Serializer::new);
     public static final RegistrySupplier<LootItemConditionType> EVERLASTING_BEEF_CHANCE = register("everlasting_beef_chance", EverlastingBeefChance.Serializer::new);
-    public static final RegistrySupplier<LootItemConditionType> LOOT_TABLE_ID = register("loot_table_id", LootTableIdCondition.Serializer::new);
 
     private static RegistrySupplier<LootItemConditionType> register(String name, Supplier<Serializer<? extends LootItemCondition>> serializer) {
         return LOOT_CONDITIONS.register(name, () -> new LootItemConditionType(serializer.get()));

@@ -12,7 +12,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -46,7 +45,6 @@ public class ArtifactsData {
 
     public static RegistrySetBuilder createLevelProvider() {
         RegistrySetBuilder builder = new RegistrySetBuilder();
-        builder.add(ForgeRegistries.Keys.BIOME_MODIFIERS, BiomeModifiers::create);
         builder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatures::create);
         builder.add(Registries.PLACED_FEATURE, PlacedFeatures::create);
         return builder;
