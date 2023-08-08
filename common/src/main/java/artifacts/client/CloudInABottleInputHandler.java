@@ -1,6 +1,7 @@
 package artifacts.client;
 
 import artifacts.item.wearable.belt.CloudInABottleItem;
+import artifacts.item.wearable.necklace.CharmOfSinkingItem;
 import artifacts.network.DoubleJumpPacket;
 import artifacts.network.NetworkHandler;
 import artifacts.registry.ModItems;
@@ -25,7 +26,7 @@ public class CloudInABottleInputHandler {
     }
 
     private static void handleCloudInABottleInput(LocalPlayer player) {
-        if ((player.onGround() || player.onClimbable()) && !player.isInWater()) {
+        if ((player.onGround() || player.onClimbable()) && (!player.isInWater() || CharmOfSinkingItem.shouldSink(player))) {
             hasReleasedJumpKey = false;
             canDoubleJump = true;
         } else if (!player.input.jumping) {
