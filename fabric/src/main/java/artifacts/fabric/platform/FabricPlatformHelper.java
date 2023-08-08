@@ -14,9 +14,9 @@ import dev.emi.trinkets.api.TrinketsApi;
 import dev.emi.trinkets.api.client.TrinketRenderer;
 import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import io.github.fabricators_of_create.porting_lib.attributes.PortingLibAttributes;
-import io.github.fabricators_of_create.porting_lib.util.TierSortingRegistry;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -61,7 +61,12 @@ public class FabricPlatformHelper implements PlatformHelper {
 
     @Override
     public boolean isCorrectTierForDrops(Tier tier, BlockState state) {
-        return TierSortingRegistry.isCorrectTierForDrops(tier, state);
+        int i = tier.getLevel();
+        if (i < 3 && state.is(BlockTags.NEEDS_DIAMOND_TOOL)) {
+            return false;
+        } else if (i < 2 && state.is(BlockTags.NEEDS_IRON_TOOL)) {
+            return false;
+        } else return i >= 1 || !state.is(BlockTags.NEEDS_STONE_TOOL);
     }
 
     @Nullable

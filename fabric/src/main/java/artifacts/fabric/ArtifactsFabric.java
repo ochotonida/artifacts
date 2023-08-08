@@ -1,7 +1,6 @@
 package artifacts.fabric;
 
 import artifacts.Artifacts;
-import artifacts.fabric.event.ArtifactEventsFabric;
 import artifacts.fabric.event.SwimEventsFabric;
 import artifacts.fabric.integration.CompatHandler;
 import artifacts.fabric.registry.ModFeatures;
@@ -21,7 +20,6 @@ public class ArtifactsFabric implements ModInitializer {
         Artifacts.init();
         registerTrinkets();
 
-        ArtifactEventsFabric.register();
         SwimEventsFabric.register();
         ModFeatures.register();
 

@@ -31,9 +31,7 @@ dependencies {
 
     implementation annotationProcessor(include("com.github.LlamaLad7:MixinExtras:${rootProject.mixin_extras_version}"))
 
-    modImplementation(include("io.github.fabricators_of_create.Porting-Lib:base:${rootProject.porting_lib_version}"))
     modImplementation(include("io.github.fabricators_of_create.Porting-Lib:attributes:${rootProject.porting_lib_version}"))
-    modImplementation(include("io.github.fabricators_of_create.Porting-Lib:entity:${rootProject.porting_lib_version}"))
 
     modImplementation("dev.emi:trinkets:${rootProject.trinkets_version}")
 
