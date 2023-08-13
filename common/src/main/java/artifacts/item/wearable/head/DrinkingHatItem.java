@@ -71,17 +71,16 @@ public class DrinkingHatItem extends WearableArtifactItem {
     }
 
     public static int getDrinkingHatUseDuration(LivingEntity entity, UseAnim action, int duration) {
-        int newDuration = Math.min(
+        return Math.min(
                 getDrinkingHatUseDuration(entity, action, duration, ModItems.PLASTIC_DRINKING_HAT.get()),
                 getDrinkingHatUseDuration(entity, action, duration, ModItems.NOVELTY_DRINKING_HAT.get())
         );
-        return Math.max(1, newDuration);
     }
 
     private static int getDrinkingHatUseDuration(LivingEntity entity, UseAnim action, int duration, DrinkingHatItem drinkingHat) {
-        if (!drinkingHat.isEquippedBy(entity) || action != UseAnim.EAT && action != UseAnim.DRINK) {
+        if (!drinkingHat.isEquippedBy(entity) || action != UseAnim.EAT && action != UseAnim.DRINK || drinkingHat.getDurationMultiplier(action) == 1) {
             return duration;
         }
-        return (int) (duration * drinkingHat.getDurationMultiplier(action));
+        return Math.max(1, (int) (duration * drinkingHat.getDurationMultiplier(action)));
     }
 }
