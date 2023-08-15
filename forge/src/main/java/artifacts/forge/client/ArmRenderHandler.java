@@ -2,6 +2,7 @@ package artifacts.forge.client;
 
 import artifacts.Artifacts;
 import artifacts.client.item.renderer.GloveArtifactRenderer;
+import artifacts.item.wearable.WearableArtifactItem;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.RenderArmEvent;
@@ -36,9 +37,11 @@ public abstract class ArmRenderHandler {
                         stack = stacks.getStackInSlot(slot);
                     }
 
-                    GloveArtifactRenderer renderer = GloveArtifactRenderer.getGloveRenderer(stack);
-                    if (renderer != null) {
-                        renderer.renderFirstPersonArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), event.getPlayer(), event.getArm(), stack.hasFoil());
+                    if (stack.getItem() instanceof WearableArtifactItem) {
+                        GloveArtifactRenderer renderer = GloveArtifactRenderer.getGloveRenderer(stack);
+                        if (renderer != null) {
+                            renderer.renderFirstPersonArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), event.getPlayer(), event.getArm(), stack.hasFoil());
+                        }
                     }
                 }
             }

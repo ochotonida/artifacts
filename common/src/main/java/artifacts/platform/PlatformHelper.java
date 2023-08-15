@@ -36,5 +36,6 @@ public interface PlatformHelper {
 
     void registerArtifactRenderer(WearableArtifactItem item, Supplier<ArtifactRenderer> rendererSupplier);
 
+    @Nullable
     ArtifactRenderer getArtifactRenderer(Item item);
 }

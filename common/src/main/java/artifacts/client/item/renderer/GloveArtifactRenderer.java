@@ -39,8 +39,8 @@ public class GloveArtifactRenderer implements ArtifactRenderer {
 
     @Nullable
     public static GloveArtifactRenderer getGloveRenderer(ItemStack stack) {
-        if (!stack.isEmpty()) {
-            return (GloveArtifactRenderer) PlatformServices.platformHelper.getArtifactRenderer(stack.getItem());
+        if (!stack.isEmpty() && PlatformServices.platformHelper.getArtifactRenderer(stack.getItem()) instanceof GloveArtifactRenderer gloveRenderer) {
+            return gloveRenderer;
         }
         return null;
     }

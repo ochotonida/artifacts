@@ -25,6 +25,7 @@ import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -77,9 +78,14 @@ public class ForgePlatformHelper implements PlatformHelper {
         CuriosRendererRegistry.register(item, () -> new ArtifactCurioRenderer(rendererSupplier.get()));
     }
 
+    @Nullable
     @Override
     public ArtifactRenderer getArtifactRenderer(Item item) {
-        return ((ArtifactCurioRenderer) CuriosRendererRegistry.getRenderer(item).orElseThrow()).renderer;
+        Optional<ICurioRenderer> renderer = CuriosRendererRegistry.getRenderer(item);
+        if (renderer.isPresent() && renderer.get() instanceof ArtifactCurioRenderer artifactTrinketRenderer) {
+            return artifactTrinketRenderer.renderer();
+        }
+        return null;
     }
 
     private record ArtifactCurioRenderer(ArtifactRenderer renderer) implements ICurioRenderer {

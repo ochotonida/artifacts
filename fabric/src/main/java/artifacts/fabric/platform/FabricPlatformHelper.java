@@ -27,6 +27,7 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -85,9 +86,14 @@ public class FabricPlatformHelper implements PlatformHelper {
         TrinketRendererRegistry.registerRenderer(item, new ArtifactTrinketRenderer(rendererSupplier.get()));
     }
 
+    @Nullable
     @Override
     public ArtifactRenderer getArtifactRenderer(Item item) {
-        return ((ArtifactTrinketRenderer) TrinketRendererRegistry.getRenderer(item).orElseThrow()).renderer();
+        Optional<TrinketRenderer> renderer = TrinketRendererRegistry.getRenderer(item);
+        if (renderer.isPresent() && renderer.get() instanceof ArtifactTrinketRenderer artifactTrinketRenderer) {
+            return artifactTrinketRenderer.renderer();
+        }
+        return null;
     }
 
     private record ArtifactTrinketRenderer(ArtifactRenderer renderer) implements TrinketRenderer {
