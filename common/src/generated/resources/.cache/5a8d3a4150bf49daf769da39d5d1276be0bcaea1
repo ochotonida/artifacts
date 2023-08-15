@@ -1,4 +1,5 @@
-// 1.20.1	2023-08-14T15:09:54.7568558	Tags for minecraft:item mod id artifacts
+// 1.20.1	2023-08-15T13:09:56.1066462	Tags for minecraft:item mod id artifacts
 e6da33714dc6f02de7616fffaaafd4829586dff0 data/artifacts/tags/items/artifacts.json
 ca485f07958acb2443c5b49cc46bf32ba3bef275 data/minecraft/tags/items/piglin_loved.json
 67ac1f7771168c71238c74d91631b361e0a3934c data/origins/tags/items/meat.json
+159e2d82f9583dca9566cf0a02f01f3485a2f3eb data/origins/tags/items/shields.json
