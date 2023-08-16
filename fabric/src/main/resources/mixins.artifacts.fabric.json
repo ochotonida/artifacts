@@ -21,6 +21,7 @@
     "item.wearable.superstitioushat.EnchantmentHelperMixin"
   ],
   "client": [
+    "client.GuiMixin",
     "item.umbrella.client.ItemRendererMixin",
     "item.umbrella.client.LivingEntityRendererMixin",
     "item.wearable.heliumflamingo.client.GuiMixin"

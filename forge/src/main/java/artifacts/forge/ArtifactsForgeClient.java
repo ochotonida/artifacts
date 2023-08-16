@@ -3,6 +3,7 @@ package artifacts.forge;
 import artifacts.Artifacts;
 import artifacts.client.item.ArtifactRenderers;
 import artifacts.forge.client.ArmRenderHandler;
+import artifacts.forge.client.ArtifactCooldownOverlayRenderer;
 import artifacts.forge.client.HeliumFlamingoOverlayRenderer;
 import artifacts.forge.client.UmbrellaArmPoseHandler;
 import artifacts.registry.ModItems;
@@ -38,5 +39,6 @@ public class ArtifactsForgeClient {
 
     public void onRegisterGuiOverlays(RegisterGuiOverlaysEvent event) {
         event.registerAbove(VanillaGuiOverlay.AIR_LEVEL.id(), "helium_flamingo_charge", HeliumFlamingoOverlayRenderer::render);
+        event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "artifact_cooldowns", ArtifactCooldownOverlayRenderer::render);
     }
 }

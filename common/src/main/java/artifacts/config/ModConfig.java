@@ -66,11 +66,11 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
                 return Math.max(0, count);
             }
 
-            @ConfigEntry.Gui.Tooltip()
+            @ConfigEntry.Gui.Tooltip
             @Comment("The minimum height campsites can spawn at")
             public int minY = -60;
 
-            @ConfigEntry.Gui.Tooltip()
+            @ConfigEntry.Gui.Tooltip
             @Comment("The maximum height campsites can spawn at")
             public int maxY = 40;
 
@@ -102,5 +102,17 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
         @ConfigEntry.Gui.Tooltip
         @Comment("Whether mimics can use textures from Lootr or Quark")
         public boolean useModdedMimicTextures = true;
+
+        @ConfigEntry.Gui.Tooltip
+        @Comment("Display artifacts on cooldown next to the hotbar")
+        public boolean enableCooldownOverlay = false;
+
+        @ConfigEntry.Gui.Tooltip(count = 2)
+        @Comment("""
+                Location of the artifact cooldown gui element
+                Distance from the hotbar measured in pixels
+                Negative values place the element left of the hotbar
+                """)
+        public int cooldownOverlayOffset = 10;
     }
 }
