@@ -5,12 +5,14 @@ import artifacts.client.item.renderer.GloveArtifactRenderer;
 import artifacts.fabric.client.CosmeticsHelper;
 import artifacts.item.wearable.WearableArtifactItem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,18 +39,18 @@ public abstract class PlayerRendererMixin {
         }
 
         String groupId = handSide == player.getMainArm() ? "hand" : "offhand";
-        TrinketsApi.getTrinketComponent(player).ifPresent(component -> component
-                .getAllEquipped()
-                .stream()
-                .filter(pair -> pair.getA().inventory().getSlotType().getGroup().equals(groupId))
-                .map(Tuple::getB)
-                .filter(stack -> stack.getItem() instanceof WearableArtifactItem)
-                .filter(stack -> !CosmeticsHelper.isCosmeticsDisabled(stack))
-                .forEach(stack -> {
+        TrinketsApi.getTrinketComponent(player).ifPresent(component -> {
+            for (Tuple<SlotReference, ItemStack> pair : component.getAllEquipped()) {
+                ItemStack stack = pair.getB();
+                if (pair.getA().inventory().getSlotType().getGroup().equals(groupId)
+                        && stack.getItem() instanceof WearableArtifactItem
+                        && !CosmeticsHelper.isCosmeticsDisabled(stack)) {
                     GloveArtifactRenderer gloveRenderer = GloveArtifactRenderer.getGloveRenderer(stack);
                     if (gloveRenderer != null) {
                         gloveRenderer.renderFirstPersonArm(matrixStack, buffer, light, player, handSide, stack.hasFoil());
                     }
-                }));
+                }
+            }
+        });
     }
 }
