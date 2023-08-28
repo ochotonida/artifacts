@@ -46,3 +46,10 @@ description='''Adds various new powerful uncraftable items to make exploration a
     versionRange = "[11.0.99,)"
     ordering = "NONE"
     side = "BOTH"
+
+[[dependencies.artifacts]]
+    modId = "architectury"
+    mandatory = true
+    versionRange = "[9.0.8,)"
+    ordering="NONE"
+    side="BOTH"
