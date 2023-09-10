@@ -12,7 +12,7 @@ import java.util.List;
 public class FlamePendantItem extends PendantItem {
 
     public FlamePendantItem() {
-        super(ModGameRules.FLAME_PENDANT_STRIKE_CHANCE);
+        super(ModGameRules.FLAME_PENDANT_STRIKE_CHANCE, ModGameRules.FLAME_PENDANT_COOLDOWN);
     }
 
     @Override

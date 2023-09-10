@@ -35,12 +35,7 @@ public class EverlastingFoodItem extends ArtifactItem {
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entity) {
         if (isEdible()) {
             entity.eat(world, stack.copy());
-            if (!world.isClientSide && entity instanceof Player player) {
-                int cooldown = eatingCooldown.get() * 20;
-                if (cooldown > 0) {
-                    player.getCooldowns().addCooldown(this, cooldown);
-                }
-            }
+            addCooldown(entity, eatingCooldown.get());
         }
 
         return stack;

@@ -19,7 +19,7 @@ import java.util.List;
 public class ShockPendantItem extends PendantItem {
 
     public ShockPendantItem() {
-        super(ModGameRules.SHOCK_PENDANT_STRIKE_CHANCE);
+        super(ModGameRules.SHOCK_PENDANT_STRIKE_CHANCE, ModGameRules.SHOCK_PENDANT_COOLDOWN);
         EntityEvent.LIVING_HURT.register(this::onLivingHurt);
     }
 

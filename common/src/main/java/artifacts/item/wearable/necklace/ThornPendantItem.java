@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 public class ThornPendantItem extends PendantItem {
 
     public ThornPendantItem() {
-        super(ModGameRules.THORN_PENDANT_STRIKE_CHANCE);
+        super(ModGameRules.THORN_PENDANT_STRIKE_CHANCE, ModGameRules.THORN_PENDANT_COOLDOWN);
     }
 
     @Override

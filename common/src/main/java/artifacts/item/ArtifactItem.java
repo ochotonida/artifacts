@@ -6,6 +6,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -56,4 +58,17 @@ public abstract class ArtifactItem extends Item {
     }
 
     protected abstract boolean isCosmetic();
+
+    public boolean isOnCooldown(LivingEntity entity) {
+        if (entity instanceof Player player) {
+            return player.getCooldowns().isOnCooldown(this);
+        }
+        return false;
+    }
+
+    public void addCooldown(LivingEntity entity, int seconds) {
+        if (seconds > 0 && !entity.level().isClientSide() && entity instanceof Player player) {
+            player.getCooldowns().addCooldown(this, seconds * 20);
+        }
+    }
 }

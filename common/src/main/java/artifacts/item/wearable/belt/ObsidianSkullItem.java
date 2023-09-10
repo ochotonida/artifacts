@@ -30,17 +30,14 @@ public class ObsidianSkullItem extends WearableArtifactItem {
                 && !entity.level().isClientSide
                 && amount >= 1
                 && damageSource.is(DamageTypeTags.IS_FIRE)
-                && entity instanceof Player player
-                && !player.getCooldowns().isOnCooldown(ModItems.OBSIDIAN_SKULL.get())
+                && entity instanceof Player
+                && !ModItems.OBSIDIAN_SKULL.get().isOnCooldown(entity)
         ) {
-            int cooldown = ModGameRules.OBSIDIAN_SKULL_FIRE_RESISTANCE_COOLDOWN.get() * 20;
             int fireResistanceDuration = ModGameRules.OBSIDIAN_SKULL_FIRE_RESISTANCE_DURATION.get() * 20;
 
             if (fireResistanceDuration > 0) {
                 entity.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceDuration, 0, false, false, true));
-                if (cooldown > 0) {
-                    player.getCooldowns().addCooldown(ModItems.OBSIDIAN_SKULL.get(), cooldown);
-                }
+                ModItems.OBSIDIAN_SKULL.get().addCooldown(entity, ModGameRules.OBSIDIAN_SKULL_FIRE_RESISTANCE_COOLDOWN.get());
             }
         }
     }

@@ -26,7 +26,7 @@ public class UniversalAttractorItem extends WearableArtifactItem {
 
     EventResult onItemToss(Player player, ItemEntity entity) {
         if (ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get() && isEquippedBy(player)) {
-            player.getCooldowns().addCooldown(this, 100);
+            addCooldown(player, 5);
         }
         return EventResult.pass();
     }
@@ -37,7 +37,7 @@ public class UniversalAttractorItem extends WearableArtifactItem {
                 !ModGameRules.UNIVERSAL_ATTRACTOR_ENABLED.get()
                 || !(entity instanceof Player player)
                 || player.isSpectator()
-                || player.getCooldowns().isOnCooldown(this)
+                || isOnCooldown(entity)
                 || !isActivated(stack)
         ) {
             return;
