@@ -18,7 +18,7 @@ public class DiggingClawsItem extends CurioItem {
 
     public DiggingClawsItem() {
         addListener(EventPriority.LOW, PlayerEvent.BreakSpeed.class, this::onBreakSpeed);
-        addListener(PlayerEvent.HarvestCheck.class, this::onHarvestCheck);
+        addListener(EventPriority.HIGH, PlayerEvent.HarvestCheck.class, this::onHarvestCheck);
     }
 
     private boolean canHarvest(BlockState state) {
