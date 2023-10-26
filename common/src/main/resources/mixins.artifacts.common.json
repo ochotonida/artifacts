@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "accessors.MobAccessor",
+    "debug.TagLoaderMixin",
     "gamerule.BooleanValueInvoker",
     "gamerule.IntegerValueInvoker",
     "item.hurtsound.LivingEntityMixin",
