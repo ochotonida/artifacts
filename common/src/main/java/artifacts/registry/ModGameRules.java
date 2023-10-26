@@ -57,7 +57,7 @@ public class ModGameRules {
             DIGGING_CLAWS_TOOL_TIER = integerValue(createName(ModItems.DIGGING_CLAWS, "toolTier"), 2),
             ETERNAL_STEAK_COOLDOWN = integerValue(createName(ModItems.ETERNAL_STEAK, "cooldown"), 15),
             EVERLASTING_BEEF_COOLDOWN = integerValue(createName(ModItems.EVERLASTING_BEEF, "cooldown"), 15),
-            FERAL_CLAWS_ATTACK_SPEED_BONUS = integerValue(createName(ModItems.FERAL_CLAWS, "attackSpeedBonus"), 50),
+            FERAL_CLAWS_ATTACK_SPEED_BONUS = integerValue(createName(ModItems.FERAL_CLAWS, "attackSpeedBonus"), 40),
             FIRE_GAUNTLET_FIRE_DURATION = integerValue(createName(ModItems.FIRE_GAUNTLET, "fireDuration"), 8),
             FLAME_PENDANT_COOLDOWN = integerValue(createName(ModItems.FLAME_PENDANT, "cooldown"), 0),
             FLAME_PENDANT_FIRE_DURATION = integerValue(createName(ModItems.FLAME_PENDANT, "fireDuration"), 10),
