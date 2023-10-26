@@ -119,6 +119,7 @@
   "gamerule.artifacts.shockPendant.doCancelLightningDamage": "Artifacts: Shock Pendant cancels lightning damage",
   "gamerule.artifacts.shockPendant.strikeChance": "Artifacts: Shock Pendant strike chance",
   "gamerule.artifacts.snorkel.enabled": "Artifacts: Snorkel enabled",
+  "gamerule.artifacts.snorkel.waterBreathingDuration": "Artifacts: Snorkel water breathing duration",
   "gamerule.artifacts.steadfastSpikes.enabled": "Artifacts: Steadfast Spikes enabled",
   "gamerule.artifacts.superstitiousHat.lootingLevelBonus": "Artifacts: Superstitious Hat looting level bonus",
   "gamerule.artifacts.thornPendant.cooldown": "Artifacts: Thorn Pendant cooldown",

@@ -81,6 +81,7 @@ public class ModGameRules {
             RUNNING_SHOES_SPEED_BONUS = integerValue(createName(ModItems.RUNNING_SHOES, "speedBonus"), 40),
             SHOCK_PENDANT_COOLDOWN = integerValue(createName(ModItems.SHOCK_PENDANT, "cooldown"), 0),
             SHOCK_PENDANT_STRIKE_CHANCE = integerValue(createName(ModItems.SHOCK_PENDANT, "strikeChance"), 25),
+            SNORKEL_WATER_BREATHING_DURATION = integerValue(createName(ModItems.SNORKEL, "waterBreathingDuration"), 15),
             SUPERSTITIOUS_HAT_LOOTING_LEVEL_BONUS = integerValue(createName(ModItems.SUPERSTITIOUS_HAT, "lootingLevelBonus"), 1),
             THORN_PENDANT_COOLDOWN = integerValue(createName(ModItems.THORN_PENDANT, "cooldown"), 0),
             THORN_PENDANT_MAX_DAMAGE = integerValue(createName(ModItems.THORN_PENDANT, "maxDamage"), 6),

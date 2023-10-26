@@ -50,10 +50,18 @@ public class MobEffectItem extends WearableArtifactItem {
         return Math.max(0, Math.min(127, this.amplifier.get() - 1));
     }
 
+    protected int getDuration(LivingEntity entity) {
+        return duration;
+    }
+
+    protected boolean shouldShowIcon() {
+        return false;
+    }
+
     @Override
     public void wornTick(LivingEntity entity, ItemStack stack) {
         if (isEffectActive(entity) && !entity.level().isClientSide()) {
-            entity.addEffect(new MobEffectInstance(mobEffect, duration - 1, getAmplifier(), true, false));
+            entity.addEffect(new MobEffectInstance(mobEffect, getDuration(entity) - 1, getAmplifier(), false, false, shouldShowIcon()));
         }
     }
 
@@ -65,11 +73,10 @@ public class MobEffectItem extends WearableArtifactItem {
     private void removeRemainingEffect(LivingEntity entity) {
         if (isEnabled.get() && !entity.level().isClientSide()) {
             MobEffectInstance effectInstance = entity.getEffect(mobEffect);
-            if (effectInstance != null && effectInstance.getAmplifier() == getAmplifier() && !effectInstance.isVisible() && effectInstance.getDuration() < duration) {
+            if (effectInstance != null && effectInstance.getAmplifier() == getAmplifier() && !effectInstance.isVisible() && effectInstance.getDuration() < getDuration(entity)) {
                 entity.removeEffect(mobEffect);
             }
         }
-
     }
 
     @Override
