@@ -35,13 +35,17 @@ public class ItemStackMixin {
         tooltip.add(Component.translatable("trinkets.tooltip.attributes.all").withStyle(ChatFormatting.GRAY));
         double amount = item.getAmount();
 
-        if (item.getAttribute().equals(Attributes.KNOCKBACK_RESISTANCE)) {
-            amount *= 10;
+        if (item.getOperation() == AttributeModifier.Operation.ADDITION) {
+            if (item.getAttribute().equals(Attributes.KNOCKBACK_RESISTANCE)) {
+                amount *= 10;
+            }
+        } else {
+            amount *= 100;
         }
 
         Component text = Component.translatable(item.getAttribute().getDescriptionId());
         if (amount > 0) {
-            tooltip.add(Component.translatable("attribute.modifier.plus." + AttributeModifier.Operation.ADDITION.toValue(),
+            tooltip.add(Component.translatable("attribute.modifier.plus." + item.getOperation().toValue(),
                     ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(amount), text).withStyle(ChatFormatting.BLUE));
         }
     }

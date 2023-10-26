@@ -5,6 +5,7 @@ import artifacts.item.wearable.AttributeModifyingItem;
 import artifacts.registry.ModGameRules;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import java.util.UUID;
@@ -18,6 +19,11 @@ public class FeralClawsItem extends AttributeModifyingItem {
     @Override
     public double getAmount() {
         return Math.max(0, ModGameRules.FERAL_CLAWS_ATTACK_SPEED_BONUS.get() / 100D);
+    }
+
+    @Override
+    public AttributeModifier.Operation getOperation() {
+        return AttributeModifier.Operation.MULTIPLY_BASE;
     }
 
     @Override
