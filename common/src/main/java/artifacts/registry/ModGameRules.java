@@ -8,7 +8,6 @@ import artifacts.network.IntegerGameRuleChangedPacket;
 import artifacts.network.NetworkHandler;
 import com.google.common.base.CaseFormat;
 import dev.architectury.event.EventResult;
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;

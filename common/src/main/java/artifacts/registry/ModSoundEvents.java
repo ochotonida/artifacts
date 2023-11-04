@@ -2,7 +2,6 @@ package artifacts.registry;
 
 import artifacts.Artifacts;
 import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 
@@ -20,6 +19,6 @@ public class ModSoundEvents {
             WATER_STEP = register("block.water.step");
 
     private static RegistrySupplier<SoundEvent> register(String name) {
-        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(Artifacts.id(name)));
+        return RegistrySupplier.of(SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(Artifacts.id(name))));
     }
 }

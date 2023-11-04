@@ -4,7 +4,6 @@ import artifacts.Artifacts;
 import artifacts.loot.ConfigurableRandomChance;
 import artifacts.loot.EverlastingBeefChance;
 import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.Serializer;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -20,6 +19,6 @@ public class ModLootConditions {
     public static final RegistrySupplier<LootItemConditionType> EVERLASTING_BEEF_CHANCE = register("everlasting_beef_chance", EverlastingBeefChance.Serializer::new);
 
     private static RegistrySupplier<LootItemConditionType> register(String name, Supplier<Serializer<? extends LootItemCondition>> serializer) {
-        return LOOT_CONDITIONS.register(name, () -> new LootItemConditionType(serializer.get()));
+        return RegistrySupplier.of(LOOT_CONDITIONS.register(name, () -> new LootItemConditionType(serializer.get())));
     }
 }

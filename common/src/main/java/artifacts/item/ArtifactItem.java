@@ -21,7 +21,7 @@ public abstract class ArtifactItem extends Item {
 
     @SuppressWarnings("UnstableApiUsage")
     public ArtifactItem(Properties properties) {
-        super(properties.arch$tab(ModItems.CREATIVE_TAB).stacksTo(1).rarity(Rarity.RARE).fireResistant());
+        super(properties.arch$tab(ModItems.CREATIVE_TAB.getRegistrySupplier()).stacksTo(1).rarity(Rarity.RARE).fireResistant());
     }
 
     public ArtifactItem() {
