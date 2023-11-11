@@ -19,7 +19,7 @@ public class SnorkelItem extends MobEffectItem {
     protected int getDuration(LivingEntity entity) {
         int duration = ModGameRules.SNORKEL_WATER_BREATHING_DURATION.get() * 20;
 
-        if (duration < 0) {
+        if (duration <= 0) {
             return 40;
         } else if (entity instanceof Player && entity.getItemBySlot(EquipmentSlot.HEAD).is(Items.TURTLE_HELMET) && !entity.isEyeInFluid(FluidTags.WATER)) {
             duration += 200;
