@@ -55,7 +55,10 @@ public class ArtifactEventsForge {
     }
 
     private static void onGoldenHookExperienceDrop(LivingExperienceDropEvent event) {
-        event.setDroppedExperience(GoldenHookItem.getModifiedExperience(event.getOriginalExperience(), event.getEntity(), event.getAttackingPlayer()));
+        int originalXp = event.getOriginalExperience();
+        int droppedXp = event.getDroppedExperience();
+        int modifiedXp = droppedXp + GoldenHookItem.getExperienceBonus(originalXp, event.getEntity(), event.getAttackingPlayer());
+        event.setDroppedExperience(modifiedXp);
     }
 
     private static void onKittySlippersChangeTarget(LivingChangeTargetEvent event) {

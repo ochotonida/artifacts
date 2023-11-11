@@ -13,15 +13,12 @@ public class GoldenHookItem extends WearableArtifactItem {
         return ModGameRules.GOLDEN_HOOK_EXPERIENCE_BONUS.get() <= 0;
     }
 
-    public static int getModifiedExperience(int originalXP, LivingEntity entity, Player attacker) {
-        if (ModItems.GOLDEN_HOOK.get().isEquippedBy(attacker)) {
-            if (entity instanceof Player) {
-                return originalXP; // players shouldn't drop extra XP
-            }
-
-            int experienceBonus = (int) (originalXP * ModGameRules.GOLDEN_HOOK_EXPERIENCE_BONUS.get() / 100F);
-            return originalXP + Math.max(0, experienceBonus);
+    public static int getExperienceBonus(int originalXP, LivingEntity entity, Player attacker) {
+        if (!ModItems.GOLDEN_HOOK.get().isEquippedBy(attacker) || entity instanceof Player) {
+            return 0;
         }
-        return originalXP;
+
+        int experienceBonus = (int) (originalXP * ModGameRules.GOLDEN_HOOK_EXPERIENCE_BONUS.get() / 100F);
+        return Math.max(0, experienceBonus);
     }
 }
