@@ -8,7 +8,8 @@
     "1.12.2-1.2.0": "added korean localisation",
     "1.12.2-1.2.1": "fixed an item duplication bug",
     "1.12.2-1.2.2": "added a config option to always show tooltips",
-    "1.12.2-1.2.3": "fixed a crash related to mimics"
+    "1.12.2-1.2.3": "fixed a crash related to mimics",
+    "1.12.2-1.2.4": "added ru_ru.lang"
   },
   "promos": {
     "1.12.2-latest": "1.12.2-1.2.3",
