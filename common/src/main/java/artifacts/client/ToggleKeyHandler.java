@@ -18,7 +18,6 @@ public class ToggleKeyHandler {
     public static void register() {
         addToggleInputHandler(ModItems.NIGHT_VISION_GOGGLES.get(), ModKeyMappings.TOGGLE_NIGHT_VISION_GOGGLES);
         addToggleInputHandler(ModItems.UNIVERSAL_ATTRACTOR.get(), ModKeyMappings.TOGGLE_UNIVERSAL_ATTRACTOR);
-
     }
 
     public static KeyMapping getToggleKey(WearableArtifactItem item) {

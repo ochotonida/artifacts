@@ -24,6 +24,10 @@ public class ArtifactsClient {
     }
 
     public static void onClientStarted() {
+        if (!ModItems.NIGHT_VISION_GOGGLES.getRegistrySupplier().isPresent()) {
+            Artifacts.LOGGER.error("Detected broken mod state, skipping input registration");
+            return;
+        }
         ToggleKeyHandler.register();
         CloudInABottleInputHandler.register();
         HeliumFlamingoInputEventHandler.register();
