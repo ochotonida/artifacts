@@ -28,10 +28,11 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
 
     public static final ResourceLocation CHEST_ATLAS = new ResourceLocation("textures/atlas/chest.png");
 
-    public static final List<String> QUARK_CHEST_TYPES = Arrays.asList(
+    public static final List<String> QUARK_CHEST_MATERIALS = Arrays.asList(
             "oak",
             "spruce",
             "birch",
+            "cherry",
             "jungle",
             "acacia",
             "dark_oak",
@@ -50,13 +51,10 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
     @SuppressWarnings("deprecation")
     public MimicChestLayer(RenderLayerParent<MimicEntity, MimicModel> entityRenderer, EntityModelSet modelSet) {
         super(entityRenderer);
-
-        Calendar calendar = Calendar.getInstance();
-        boolean isChristmas = calendar.get(Calendar.MONTH) == Calendar.DECEMBER && calendar.get(Calendar.DATE) >= 24 && calendar.get(Calendar.DATE) <= 26
-                || calendar.get(Calendar.MONTH) == Calendar.APRIL && calendar.get(Calendar.DATE) == 1;
-
         chestModel = new MimicChestLayerModel(modelSet.bakeLayer(MimicChestLayerModel.LAYER_LOCATION));
         chestMaterials = new ArrayList<>();
+
+        boolean isChristmas = isChristmas();
         vanillaChestMaterial = isChristmas ? Sheets.CHEST_XMAS_LOCATION : Sheets.CHEST_LOCATION;
 
         if (isChristmas) {
@@ -64,19 +62,32 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
             return;
         }
 
+        Material defaultMaterial = vanillaChestMaterial;
+
         if (Platform.isModLoaded("lootr")) {
             ResourceLocation chestLocation = new ResourceLocation("lootr", "chest");
-            chestMaterials.add(new Material(TextureAtlas.LOCATION_BLOCKS, chestLocation));
+            defaultMaterial = new Material(TextureAtlas.LOCATION_BLOCKS, chestLocation);
         } else if (Platform.isModLoaded("myloot")) {
             ResourceLocation chestLocation = new ResourceLocation("myloot", "entity/chest/loot");
-            chestMaterials.add(new Material(CHEST_ATLAS, chestLocation));
-        } else {
-            chestMaterials.add(vanillaChestMaterial);
-            if (Platform.isModLoaded("quark")) {
-                for (String chestType : QUARK_CHEST_TYPES) {
-                    ResourceLocation chestLocation = new ResourceLocation("quark", String.format("model/chest/%s/normal", chestType));
-                    chestMaterials.add(new Material(CHEST_ATLAS, chestLocation));
-                }
+            defaultMaterial = new Material(CHEST_ATLAS, chestLocation);
+        }
+
+        chestMaterials.add(defaultMaterial);
+        addQuarkMaterials(chestMaterials);
+    }
+
+    private static boolean isChristmas() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.MONTH) == Calendar.DECEMBER && calendar.get(Calendar.DATE) >= 24 && calendar.get(Calendar.DATE) <= 26
+                || calendar.get(Calendar.MONTH) == Calendar.APRIL && calendar.get(Calendar.DATE) == 1;
+    }
+
+    private static void addQuarkMaterials(List<Material> chestMaterials) {
+        if (Platform.isModLoaded("quark")) {
+            String chestVariant = Platform.isModLoaded("lootr") ? "lootr_normal" : "normal";
+            for (String chestMaterial : QUARK_CHEST_MATERIALS) {
+                ResourceLocation chestLocation = new ResourceLocation("quark", String.format("quark_variant_chests/%s/%s", chestMaterial, chestVariant));
+                chestMaterials.add(new Material(CHEST_ATLAS, chestLocation));
             }
         }
     }

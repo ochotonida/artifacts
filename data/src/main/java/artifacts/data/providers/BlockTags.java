@@ -27,7 +27,7 @@ public class BlockTags extends BlockTagsProvider {
         tag(ModTags.MINEABLE_WITH_DIGGING_CLAWS).addTag(net.minecraft.tags.BlockTags.MINEABLE_WITH_HOE);
 
         tag(ModTags.CAMPSITE_CHESTS).add(Blocks.CHEST);
-        for (String chestType : MimicChestLayer.QUARK_CHEST_TYPES) {
+        for (String chestType : MimicChestLayer.QUARK_CHEST_MATERIALS) {
             tag(ModTags.CAMPSITE_CHESTS).addOptional(new ResourceLocation("quark", "%s_chest".formatted(chestType)));
         }
     }
