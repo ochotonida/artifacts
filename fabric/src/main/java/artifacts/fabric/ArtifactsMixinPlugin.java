@@ -10,8 +10,8 @@ import java.util.Set;
 
 public class ArtifactsMixinPlugin implements IMixinConfigPlugin {
 
-    // Base package for mixins as defined in mixins.artifacts.json
-    private static final String BASE_PACKAGE = "artifacts.fabric.mixin.mixins";
+    // Base package for mixins as defined in mixins.artifacts.fabric.json
+    private static final String BASE_PACKAGE = "artifacts.fabric.mixin";
 
     @Override
     public void onLoad(String mixinPackage) {
