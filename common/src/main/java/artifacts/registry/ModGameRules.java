@@ -86,6 +86,7 @@ public class ModGameRules {
             THORN_PENDANT_MAX_DAMAGE = integerValue(createName(ModItems.THORN_PENDANT, "maxDamage"), 6),
             THORN_PENDANT_MIN_DAMAGE = integerValue(createName(ModItems.THORN_PENDANT, "minDamage"), 2),
             THORN_PENDANT_STRIKE_CHANCE = integerValue(createName(ModItems.THORN_PENDANT, "strikeChance"), 50),
+            VAMPIRIC_GLOVE_ABSORPTION_CHANCE = integerValue(createName(ModItems.VAMPIRIC_GLOVE, "absorptionChance"), 100),
             VAMPIRIC_GLOVE_ABSORPTION_RATIO = integerValue(createName(ModItems.VAMPIRIC_GLOVE, "absorptionRatio"), 20),
             VAMPIRIC_GLOVE_MAX_HEALING_PER_HIT = integerValue(createName(ModItems.VAMPIRIC_GLOVE, "maxHealingPerHit"), 6),
             VILLAGER_HAT_REPUTATION_BONUS = integerValue(createName(ModItems.VILLAGER_HAT, "reputationBonus"), 100),

@@ -129,6 +129,7 @@
   "gamerule.artifacts.umbrella.isGlider": "Artifacts: Umbrella slows falling",
   "gamerule.artifacts.umbrella.isShield": "Artifacts: Umbrella can block",
   "gamerule.artifacts.universalAttractor.enabled": "Artifacts: Universal Attractor enabled",
+  "gamerule.artifacts.vampiricGlove.absorptionChance": "Artifacts: Vampiric Glove absorption chance",
   "gamerule.artifacts.vampiricGlove.absorptionRatio": "Artifacts: Vampiric Glove health absorption ratio",
   "gamerule.artifacts.vampiricGlove.maxHealingPerHit": "Artifacts: Vampiric Glove maximum healing per hit",
   "gamerule.artifacts.villagerHat.reputationBonus": "Artifacts: Villager Hat reputation bonus",
