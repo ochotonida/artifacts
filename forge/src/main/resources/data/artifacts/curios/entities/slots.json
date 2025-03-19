@@ -1,5 +1,5 @@
 {
-  "entities": ["player", "husk", "skeleton", "zombie", "drowned", "stray", "wither_skeleton", "piglin", "piglin_brute", "zombified_piglin"],
+  "entities": ["player", "husk", "skeleton", "zombie", "drowned", "stray", "wither_skeleton", "piglin", "piglin_brute", "zombified_piglin", "ghast"],
   "slots": [
     "head",
     "necklace",

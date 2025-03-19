@@ -1,19 +1,24 @@
 package artifacts.data.providers;
 
 import artifacts.loot.ConfigValueChance;
+import artifacts.loot.IsAprilFools;
 import artifacts.registry.ModItems;
 import artifacts.registry.ModLootTables;
 import com.google.common.collect.Sets;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.functions.SetEnchantmentsFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class EntityEquipment {
@@ -67,6 +72,24 @@ public class EntityEquipment {
         addItems(EntityType.PIGLIN_BRUTE,
                 ModItems.ONION_RING.get()
         );
+
+        LootPool.Builder pool = LootPool.lootPool();
+        for (Item item : List.of(
+                ModItems.PLASTIC_DRINKING_HAT.get(),
+                ModItems.ANGLERS_HAT.get(),
+                ModItems.COWBOY_HAT.get(),
+                ModItems.VILLAGER_HAT.get(),
+                ModItems.NIGHT_VISION_GOGGLES.get(),
+                ModItems.SNORKEL.get()
+        )) {
+            pool.add(item(item));
+        }
+        pool.apply(
+                new SetEnchantmentsFunction.Builder().withEnchantment(Enchantments.VANISHING_CURSE, ConstantValue.exactly(1))
+        );
+        LootTable.Builder builder = LootTable.lootTable().withPool(pool.when(IsAprilFools.builder()));
+        lootTables.addLootTable(ModLootTables.entityEquipmentLootTable(EntityType.GHAST).getPath(), builder, LootContextParamSets.ALL_PARAMS);
+        entityTypes.add(EntityType.GHAST);
 
         if (!entityTypes.equals(ModLootTables.ENTITY_EQUIPMENT.keySet())) {
             throw new IllegalStateException(Sets.symmetricDifference(entityTypes, ModLootTables.ENTITY_EQUIPMENT.keySet()).toString());

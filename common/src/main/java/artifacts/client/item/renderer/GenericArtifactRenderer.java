@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.item.ItemStack;
 
 public class GenericArtifactRenderer implements ArtifactRenderer {
@@ -48,12 +49,21 @@ public class GenericArtifactRenderer implements ArtifactRenderer {
             float netHeadYaw,
             float headPitch
     ) {
+        poseStack.pushPose();
         HumanoidModel<LivingEntity> model = getModel();
 
         model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
         ArtifactRenderer.followBodyRotations(entity, model);
-        render(poseStack, multiBufferSource, light, stack.hasFoil());
+
+        if (entity instanceof Ghast) {
+            model.head.yRot = model.body.yRot;
+            poseStack.scale(2.5F, 2.5F, 2.5F);
+            poseStack.translate(0, -2.5/16F, 0);
+        }
+
+        render(poseStack, multiBufferSource, light, stack.hasFoil() && !(entity instanceof Ghast));
+        poseStack.popPose();
     }
 
     protected void render(PoseStack matrixStack, MultiBufferSource buffer, int light, boolean hasFoil) {

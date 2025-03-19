@@ -1,0 +1,49 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "artifacts:is_april_fools"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:plastic_drinking_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:anglers_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:cowboy_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:villager_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:night_vision_goggles"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:snorkel"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "enchantments": {
+            "minecraft:vanishing_curse": 1.0
+          },
+          "function": "minecraft:set_enchantments"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "artifacts:entity_equipment/ghast"
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2024-05-30T17:59:40.9605179	Loot Tables
+// 1.20.1	2025-03-19T15:36:15.2450897	Loot Tables
 97006a2ccb7fa2afccd2c6706081c927d5454d7b data/artifacts/loot_tables/artifact.json
 f3a78338ff83006144edc4d5ad489611b10c4f67 data/artifacts/loot_tables/chests/campsite_barrel.json
 bf33f27678bf8410ac7a8f3cb8643d5d8adda98d data/artifacts/loot_tables/chests/campsite_barrel/cobblestone.json
@@ -14,6 +14,7 @@ f05dd05d6e23719cf771f5dc7c99c5263b8c6f00 data/artifacts/loot_tables/chests/camps
 d2ce91c0a560bf777aa89177f2015b33bccf118f data/artifacts/loot_tables/chests/campsite_chest.json
 2aca68ae468fbaf5312526f56ae6662b02d954a1 data/artifacts/loot_tables/entities/mimic.json
 891e2e0a3c8f7f88eaeb3d54d28a2647c362ef17 data/artifacts/loot_tables/entity_equipment/drowned.json
+f64a86c988effac50c39e1bb7d5a531b68b8ca02 data/artifacts/loot_tables/entity_equipment/ghast.json
 1dc4010a3ac6866ecff5704cfaac32b6cb0c9002 data/artifacts/loot_tables/entity_equipment/husk.json
 589a4890ef2a7ee042a16c6f3a7b511832f034a8 data/artifacts/loot_tables/entity_equipment/piglin.json
 4f8d10014a93abae45d1ee2723b135fd64078683 data/artifacts/loot_tables/entity_equipment/piglin_brute.json
