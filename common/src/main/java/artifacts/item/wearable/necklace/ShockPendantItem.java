@@ -38,7 +38,6 @@ public class ShockPendantItem extends PendantItem {
         }
     }
 
-    @Override
     protected EventResult onLivingHurt(LivingEntity entity, DamageSource damageSource, float amount) {
         if (
                 isEquippedBy(entity)
@@ -49,7 +48,7 @@ public class ShockPendantItem extends PendantItem {
         ) {
             return EventResult.interruptFalse();
         }
-        return super.onLivingHurt(entity, damageSource, amount);
+        return EventResult.pass();
     }
 
     @Override
