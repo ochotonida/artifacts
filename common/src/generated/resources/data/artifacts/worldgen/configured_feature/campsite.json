@@ -1,4 +1,436 @@
 {
   "type": "artifacts:campsite",
-  "config": {}
+  "config": {
+    "beds": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:red_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:yellow_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:cyan_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:gray_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:magenta_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:green_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "crafting_stations": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:crafting_table"
+          },
+          "weight": 5
+        },
+        {
+          "data": {
+            "Name": "minecraft:smithing_table"
+          },
+          "weight": 5
+        },
+        {
+          "data": {
+            "Name": "minecraft:fletching_table"
+          },
+          "weight": 5
+        },
+        {
+          "data": {
+            "Name": "minecraft:cartography_table"
+          },
+          "weight": 5
+        },
+        {
+          "data": {
+            "Name": "minecraft:anvil",
+            "Properties": {
+              "facing": "north"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "minecraft:chipped_anvil",
+            "Properties": {
+              "facing": "north"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "minecraft:damaged_anvil",
+            "Properties": {
+              "facing": "north"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "decorations": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:potted_dead_bush"
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "minecraft:potted_bamboo"
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "minecraft:potted_red_tulip"
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "minecraft:brewing_stand",
+            "Properties": {
+              "has_bottle_0": "false",
+              "has_bottle_1": "false",
+              "has_bottle_2": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:candle_cake",
+            "Properties": {
+              "lit": "true"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "floor": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:oak_planks"
+      }
+    },
+    "furnace_chimneys": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:cobblestone_wall",
+            "Properties": {
+              "east": "none",
+              "north": "none",
+              "south": "none",
+              "up": "true",
+              "waterlogged": "false",
+              "west": "none"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "minecraft:cobbled_deepslate_wall",
+            "Properties": {
+              "east": "none",
+              "north": "none",
+              "south": "none",
+              "up": "true",
+              "waterlogged": "false",
+              "west": "none"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "minecraft:stone_brick_wall",
+            "Properties": {
+              "east": "none",
+              "north": "none",
+              "south": "none",
+              "up": "true",
+              "waterlogged": "false",
+              "west": "none"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:deepslate_brick_wall",
+            "Properties": {
+              "east": "none",
+              "north": "none",
+              "south": "none",
+              "up": "true",
+              "waterlogged": "false",
+              "west": "none"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "furnaces": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:furnace",
+            "Properties": {
+              "facing": "north",
+              "lit": "false"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "minecraft:blast_furnace",
+            "Properties": {
+              "facing": "north",
+              "lit": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:smoker",
+            "Properties": {
+              "facing": "north",
+              "lit": "false"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "light_sources": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:lantern",
+            "Properties": {
+              "hanging": "false",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 4
+        },
+        {
+          "data": {
+            "Name": "minecraft:candle",
+            "Properties": {
+              "candles": "1",
+              "lit": "true",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:candle",
+            "Properties": {
+              "candles": "2",
+              "lit": "true",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:candle",
+            "Properties": {
+              "candles": "3",
+              "lit": "true",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:candle",
+            "Properties": {
+              "candles": "4",
+              "lit": "true",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:soul_lantern",
+            "Properties": {
+              "hanging": "false",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "lit_campfires": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:campfire",
+            "Properties": {
+              "facing": "north",
+              "lit": "true",
+              "signal_fire": "false",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 9
+        },
+        {
+          "data": {
+            "Name": "minecraft:soul_campfire",
+            "Properties": {
+              "facing": "north",
+              "lit": "true",
+              "signal_fire": "false",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "unlit_campfires": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:campfire",
+        "Properties": {
+          "facing": "north",
+          "lit": "false",
+          "signal_fire": "false",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "unlit_light_sources": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:candle",
+            "Properties": {
+              "candles": "1",
+              "lit": "false",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:candle",
+            "Properties": {
+              "candles": "2",
+              "lit": "false",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:candle",
+            "Properties": {
+              "candles": "3",
+              "lit": "false",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:candle",
+            "Properties": {
+              "candles": "4",
+              "lit": "false",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    }
+  }
 }
