@@ -26,8 +26,7 @@ public abstract class ArmRenderHandler {
         InteractionHand hand = event.getArm() == event.getPlayer().getMainArm() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
 
         CuriosApi.getCuriosInventory(event.getPlayer()).ifPresent(handler -> {
-            ICurioStacksHandler stacksHandler = handler.getCurios().get("hands");
-            if (stacksHandler != null) {
+            for (ICurioStacksHandler stacksHandler : handler.getCurios().values()) {
                 IDynamicStackHandler stacks = stacksHandler.getStacks();
                 IDynamicStackHandler cosmeticStacks = stacksHandler.getCosmeticStacks();
 
