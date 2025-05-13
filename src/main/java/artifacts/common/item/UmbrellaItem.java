@@ -60,7 +60,9 @@ public class UmbrellaItem extends ArtifactItem {
 
     @Override
     public boolean isShield(@Nullable ItemStack stack, @Nullable LivingEntity entity) {
-        return !ModConfig.server.isCosmetic(this) && ModConfig.server.umbrella.isShield.get();
+        return ModConfig.server != null
+                && !ModConfig.server.isCosmetic(this)
+                && ModConfig.server.umbrella.isShield.get();
     }
 
     public UseAction getUseAnimation(ItemStack stack) {
