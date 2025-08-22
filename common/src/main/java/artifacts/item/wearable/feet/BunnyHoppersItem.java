@@ -23,7 +23,7 @@ public class BunnyHoppersItem extends MobEffectItem {
 
     @Override
     protected void addEffectsTooltip(ItemStack stack, List<MutableComponent> tooltip) {
-        if (ModGameRules.BUNNY_HOPPERS_JUMP_BOOST_LEVEL.get() == 0) {
+        if (ModGameRules.BUNNY_HOPPERS_JUMP_BOOST_LEVEL.get() != 0) {
             tooltip.add(tooltipLine("jump_height"));
         }
         if (ModGameRules.BUNNY_HOPPERS_DO_CANCEL_FALL_DAMAGE.get()) {
