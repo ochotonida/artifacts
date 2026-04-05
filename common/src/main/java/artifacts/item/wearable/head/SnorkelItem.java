@@ -1,7 +1,9 @@
 package artifacts.item.wearable.head;
 
+import artifacts.integration.OriginsCompat;
 import artifacts.item.wearable.MobEffectItem;
 import artifacts.registry.ModGameRules;
+import dev.architectury.platform.Platform;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.effect.MobEffects;
@@ -34,11 +36,16 @@ public class SnorkelItem extends MobEffectItem {
         if (!ModGameRules.SNORKEL_IS_INFINITE.get()
                 && entity instanceof Player
                 && entity.getItemBySlot(EquipmentSlot.HEAD).is(Items.TURTLE_HELMET)
-                && !entity.isEyeInFluid(FluidTags.WATER)
+                && !isSubmerged(entity)
         ) {
             duration += 200;
         }
         return duration + 19;
+    }
+
+    private static boolean isSubmerged(LivingEntity entity) {
+        return entity.isEyeInFluid(FluidTags.WATER)
+                ^ (Platform.isModLoaded("origins") && OriginsCompat.hasWaterBreathing(entity));
     }
 
     @Override
@@ -48,7 +55,7 @@ public class SnorkelItem extends MobEffectItem {
 
     @Override
     public boolean isEffectActive(LivingEntity entity) {
-        if (!ModGameRules.SNORKEL_IS_INFINITE.get() && entity.isEyeInFluid(FluidTags.WATER)) {
+        if (!ModGameRules.SNORKEL_IS_INFINITE.get() && isSubmerged(entity)) {
             return false;
         }
         return super.isEffectActive(entity);
