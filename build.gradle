@@ -1,39 +1,30 @@
 plugins {
-    id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.5-SNAPSHOT" apply false
+    id 'base'
+    id 'dev.architectury.loom' version '1.11-SNAPSHOT' apply false
+    id 'architectury-plugin' version '3.4-SNAPSHOT'
+    id 'com.gradleup.shadow' version '8.3.6' apply false
 }
 
 architectury {
     minecraft = rootProject.minecraft_version
 }
 
-subprojects {
-    if (project.name != 'data') {
-        apply plugin: "dev.architectury.loom"
-
-        loom {
-            silentMojangMappingsLicense()
-        }
-
-        dependencies {
-            minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-            mappings loom.officialMojangMappings()
-        }
-    }
+allprojects {
+    group = rootProject.maven_group
+    version = rootProject.mod_version
 }
 
-allprojects {
+subprojects {
     apply plugin: "java"
     apply plugin: "architectury-plugin"
-    apply plugin: "maven-publish"
+
+    base {
+        archivesName = "$rootProject.archives_base_name-$project.name"
+    }
 
     sourceSets {
         main.resources.srcDirs = ['src/main/resources', 'src/generated/resources']
     }
-
-    archivesBaseName = rootProject.archives_base_name
-    version = rootProject.mod_version
-    group = rootProject.maven_group
 
     repositories {
         maven {
@@ -88,27 +79,36 @@ allprojects {
         }
     }
 
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
-        options.release = 17
+    if (project.name != 'data') {
+        apply plugin: "dev.architectury.loom"
+
+        loom {
+            silentMojangMappingsLicense()
+        }
+
+        dependencies {
+            minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+            mappings loom.officialMojangMappings()
+        }
     }
 
     java {
         withSourcesJar()
-    }
-}
-task collectJars(type: Copy) {
-    subprojects {
-        if (project.name != "common" && project.name != "data") {
-            def remapJar = project.tasks.named('remapJar')
-            dependsOn remapJar
-            from remapJar
-        }
+
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
-    into(buildDir.toPath().resolve("libs"))
+    tasks.withType(JavaCompile).configureEach {
+        it.options.release = 17
+    }
 }
 
-assemble {
-    dependsOn(collectJars)
+tasks.register('collectJars', Copy) {
+    dependsOn subprojects.findAll { it.name != 'common' && it.name != 'data' }.collect { it.tasks.named('remapJar') }
+
+    from(subprojects.findAll { it.name != 'common' && it.name != 'data'}.collect { it.tasks.named('remapJar').get().archiveFile })
+    into(layout.buildDirectory.dir('libs'))
 }
+
+tasks.assemble.dependsOn(collectJars)
