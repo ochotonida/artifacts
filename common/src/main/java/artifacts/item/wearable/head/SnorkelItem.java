@@ -45,7 +45,7 @@ public class SnorkelItem extends MobEffectItem {
 
     private static boolean isSubmerged(LivingEntity entity) {
         return entity.isEyeInFluid(FluidTags.WATER)
-                ^ (Platform.isModLoaded("origins") && OriginsCompat.hasWaterBreathing(entity));
+                ^ (Platform.isModLoaded("origins") && !Platform.isModLoaded("forge") && OriginsCompat.hasWaterBreathing(entity));
     }
 
     @Override
