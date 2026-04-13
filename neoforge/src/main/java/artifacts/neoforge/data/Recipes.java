@@ -23,7 +23,7 @@ public class Recipes extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
-        cookingRecipes(ModItems.ETERNAL_STEAK.value(), ModItems.EVERLASTING_BEEF.value());
+        cookingRecipes(ModItems.EVERLASTING_BEEF.value(), ModItems.ETERNAL_STEAK.value());
     }
 
     private void cookingRecipes(Item ingredient, Item result) {

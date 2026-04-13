@@ -3,9 +3,9 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": "artifacts:eternal_steak",
+  "ingredient": "artifacts:everlasting_beef",
   "result": {
     "count": 1,
-    "id": "artifacts:everlasting_beef"
+    "id": "artifacts:eternal_steak"
   }
 }

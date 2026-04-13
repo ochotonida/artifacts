@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_eternal_steak": {
+    "has_everlasting_beef": {
       "conditions": {
         "items": [
           {
-            "items": "artifacts:eternal_steak"
+            "items": "artifacts:everlasting_beef"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "artifacts:everlasting_beef_from_smoking"
+        "recipe": "artifacts:eternal_steak_from_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_eternal_steak"
+      "has_everlasting_beef"
     ]
   ],
   "rewards": {
     "recipes": [
-      "artifacts:everlasting_beef_from_smoking"
+      "artifacts:eternal_steak_from_smelting"
     ]
   }
 }
