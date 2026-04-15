@@ -24,8 +24,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
@@ -76,7 +78,7 @@ public class ModItems {
                             Optional.of(SoundEvents.SHIELD_BREAK)
                     )
             )
-            .component(DataComponents.SWING_ANIMATION, new SwingAnimation(SwingAnimationType.STAB, 20))
+            .component(DataComponents.SWING_ANIMATION, new SwingAnimation(SwingAnimationType.STAB, (int) (0.75F * 20)))
             .component(
                     DataComponents.PIERCING_WEAPON,
                     new PiercingWeapon(
@@ -86,8 +88,16 @@ public class ModItems {
                             Optional.of(SoundEvents.SPEAR_WOOD_HIT)
                     )
             )
+            .component(DataComponents.DAMAGE_TYPE, new EitherHolder<>(DamageTypes.SPEAR))
+            .component(DataComponents.ATTACK_RANGE, new AttackRange(0, 3.5F, 0, 5.5F, 0.25F, 0.5F))
+            .component(DataComponents.MINIMUM_ATTACK_CHARGE, 1F)
             .component(DataComponents.WEAPON, new Weapon(1))
             .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK)
+            .properties(p -> p.attributes(ItemAttributeModifiers.builder()
+                    .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, ToolMaterial.STONE.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                    .add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, (1 / 0.75F) - 4, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                    .build()
+            ))
     );
     public static final Holder<Item> EVERLASTING_BEEF = register("everlasting_beef", builder -> builder
             .component(DataComponents.FOOD, Artifacts.CONFIG.items.everlastingBeefEnabled, Foods.BEEF)
