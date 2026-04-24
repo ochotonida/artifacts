@@ -2,6 +2,7 @@ package artifacts.config;
 
 import artifacts.Artifacts;
 import artifacts.component.ability.ToolTierUpgrade;
+import artifacts.config.value.ConfigValue;
 import artifacts.config.value.Value;
 import artifacts.config.value.ValueTypes;
 import artifacts.network.NetworkHandler;
@@ -21,9 +22,9 @@ import java.util.Optional;
 
 public class ItemConfigs extends ConfigManager {
 
-    private final Map<ResourceKey<Item>, Value.ConfigValue<Boolean>> generateAsLoot = new HashMap<>();
+    private final Map<ResourceKey<Item>, ConfigValue<Boolean>> generateAsLoot = new HashMap<>();
 
-    public final Value.ConfigValue<Boolean>
+    public final ConfigValue<Boolean>
             antidoteVesselEnabled = defineBool(createKey(ModItems.ANTIDOTE_VESSEL, "enabled"),
                     "Whether the Antidote Vessel reduces the duration of negative effects"),
             aquaDashersEnabled = defineBool(createKey(ModItems.AQUA_DASHERS, "enabled"),
@@ -80,7 +81,7 @@ public class ItemConfigs extends ConfigManager {
             charmOfSinkingUnderwaterFallDamage = defineBool(createKey(ModItems.CHARM_OF_SINKING, "underwaterFallDamage"), false, true,
                     "Whether it is possible to take fall damage underwater when wearing the Charm of Sinking");
 
-    public final Value.ConfigValue<Double>
+    public final ConfigValue<Double>
             cloudInABottleSprintJumpVerticalVelocity = defineNonNegativeDouble(createKey(ModItems.CLOUD_IN_A_BOTTLE, "sprintJumpVerticalVelocity"), 0.25,
             "The amount of extra vertical velocity that is applied to players " +
                     "that double jump while sprinting using the Cloud in a Bottle"),
@@ -90,7 +91,7 @@ public class ItemConfigs extends ConfigManager {
             vampiricGloveAbsorptionRatio = defineNonNegativeDouble(createKey(ModItems.VAMPIRIC_GLOVE, "absorptionRatio"), 0.20,
                     "The proportion of melee damage dealt that is absorbed by the Vampiric Gloves");
 
-    public final Value.ConfigValue<Double>
+    public final ConfigValue<Double>
             bunnyHoppersFallDamageMultiplier = defineAttributeModifier(createKey(ModItems.BUNNY_HOPPERS, "fallDamageMultiplier"), 0,
             "How much the Bunny Hoppers reduce or increase fall damage",
             "Values between -1 and 0 reduce fall damage",
@@ -150,7 +151,7 @@ public class ItemConfigs extends ConfigManager {
             charmOfSinkingOxygenBonus = defineAttributeModifier(createKey(ModItems.CHARM_OF_SINKING, "oxygenBonus"), 1.5D,
                     "How much longer players wearing the Charm of Sinking can stay underwater");
 
-    public final Value.ConfigValue<Double>
+    public final ConfigValue<Double>
             whoopeeCushionFartChance = defineFraction(createKey(ModItems.WHOOPEE_CUSHION, "fartChance"), 0.12,
                     "The probability that a fart sound plays when sneaking " +
                     "or double jumping while wearing the Whoopee Cushion"),
@@ -173,7 +174,7 @@ public class ItemConfigs extends ConfigManager {
             cloudInABottleFallDamageMultiplier = defineFraction(createKey(ModItems.CLOUD_IN_A_BOTTLE, "fallDamageMultiplier"), 0D,
                     "How much fall damage is dealt when double jumping with the Cloud in a Bottle");
 
-    public final Value.ConfigValue<Integer>
+    public final ConfigValue<Integer>
             chorusTotemHealthRestored = defineNonNegativeInt(createKey(ModItems.CHORUS_TOTEM, "healthRestored"), 10,
                     "The amount of health points that are restored after the Chorus Totem activates"),
             thornPendantMaxDamage = defineNonNegativeInt(createKey(ModItems.THORN_PENDANT, "maxDamage"), 6,
@@ -186,7 +187,7 @@ public class ItemConfigs extends ConfigManager {
                     "The maximum amount of healing that can be absorbed in a single hit " +
                             "when attacking an entity while wearing the Vampiric Glove");
 
-    public final Value.ConfigValue<Integer>
+    public final ConfigValue<Integer>
             antidoteVesselMaxEffectDuration = defineDuration(createKey(ModItems.ANTIDOTE_VESSEL, "maxEffectDuration"), 5,
                     "The maximum duration in seconds negative mob effects can last when wearing the Antidote Vessel"),
             chorusTotemCooldown = defineDuration(createKey(ModItems.CHORUS_TOTEM, "cooldown"), 0,
@@ -233,7 +234,7 @@ public class ItemConfigs extends ConfigManager {
             witheredBraceletWitherDuration = defineDuration(createKey(ModItems.WITHERED_BRACELET, "witherDuration"), 8,
                     "The duration of the wither effect applied by the Withered Bracelet");
 
-    public final Value.ConfigValue<Integer>
+    public final ConfigValue<Integer>
             anglersHatLuckOfTheSeaLevelBonus = defineEnchantmentLevel(createKey(ModItems.ANGLERS_HAT, "luckOfTheSeaLevelBonus"), 1,
                     "The amount of extra levels of luck of the sea that are granted by the Angler's Hat"),
             anglersHatLureLevelBonus = defineEnchantmentLevel(createKey(ModItems.ANGLERS_HAT, "lureLevelBonus"), 1,
@@ -243,7 +244,7 @@ public class ItemConfigs extends ConfigManager {
             superstitiousHatLootingLevelBonus = defineEnchantmentLevel(createKey(ModItems.SUPERSTITIOUS_HAT, "lootingLevelBonus"), 1,
                     "The amount of extra levels of Looting that are granted by the Superstitious Hat");
 
-    public final Value.ConfigValue<Integer>
+    public final ConfigValue<Integer>
             onionRingHasteLevel = defineMobEffectLevel(createKey(ModItems.ONION_RING, "hasteLevel"), 2,
                     "The level of the haste effect that is applied by the Onion Ring"),
             panicNecklaceSpeedLevel = defineMobEffectLevel(createKey(ModItems.PANIC_NECKLACE, "speedLevel"), 1,
@@ -253,7 +254,7 @@ public class ItemConfigs extends ConfigManager {
             witheredBraceletWitherLevel = defineMobEffectLevel(createKey(ModItems.WITHERED_BRACELET, "witherLevel"), 2,
                     "The level of the wither effect that is inflicted by the Withered Bracelet");
 
-    public final Value.ConfigValue<ToolTierUpgrade.Tier>
+    public final ConfigValue<ToolTierUpgrade.Tier>
             diggingClawsToolTier = defineEnum(createKey(ModItems.DIGGING_CLAWS, "toolTier"), ValueTypes.TOOL_TIER, ToolTierUpgrade.Tier.STONE, false,
                     "The tool tier that the Digging Claws increase the wearer's mining level to");
 

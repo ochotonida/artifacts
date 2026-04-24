@@ -1,7 +1,7 @@
 package artifacts.config;
 
 import artifacts.Artifacts;
-import artifacts.config.value.Value;
+import artifacts.config.value.ConfigValue;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
 
@@ -37,12 +37,12 @@ public class GeneralConfig extends ConfigManager {
                 "Whether to use wooden chests from other mods when generating campsites");
         public final Supplier<Boolean> allowLightSources = defineBool("campsite.allowLightSources", true, false,
                 "Whether campsites can contain blocks that emit light");
-        public final Value.ConfigValue<Boolean> minimalistCampsites = defineBool("campsite.minimalistCampsites", false, false,
+        public final ConfigValue<Boolean> minimalistCampsites = defineBool("campsite.minimalistCampsites", false, false,
                 "Replaces campsites with a single chest/mimic"); // TODO implement
 
         @SuppressWarnings("unchecked")
-        public Codec<Value.ConfigValue<Boolean>> codec() {
-            return StringRepresentable.fromValues(() -> new Value.ConfigValue[]{
+        public Codec<ConfigValue<Boolean>> codec() {
+            return StringRepresentable.fromValues(() -> new ConfigValue[]{
                     Artifacts.CONFIG.general.campsite.minimalistCampsites
             });
         }
@@ -53,25 +53,25 @@ public class GeneralConfig extends ConfigManager {
     // FIXME: These don't work in dev
     public class Slots {
 
-        public final Value.ConfigValue<Boolean> enableAccessoriesCompat = defineBool("slots.enableAccessoriesCompat", true, true,
+        public final ConfigValue<Boolean> enableAccessoriesCompat = defineBool("slots.enableAccessoriesCompat", true, true,
                 "Whether Artifacts should add slots to the Accessories menu,",
                 "and allow artifacts to be equipped in them");
-        public final Value.ConfigValue<Boolean> enableCuriosCompat = defineBool("slots.enableCuriosCompat", true, true,
+        public final ConfigValue<Boolean> enableCuriosCompat = defineBool("slots.enableCuriosCompat", true, true,
                 "Whether Artifacts should add slots to the Curios menu,",
                 "and allow artifacts to be equipped in them");
-        public final Value.ConfigValue<Boolean> enableTrinketsCompat = defineBool("slots.enableTrinketsCompat", true, true,
+        public final ConfigValue<Boolean> enableTrinketsCompat = defineBool("slots.enableTrinketsCompat", true, true,
                 "Whether Artifacts should add slots to the Trinket menu,",
                 "and allow artifacts to be equipped in them");
-        public final Value.ConfigValue<Boolean> addFaceSlot = defineBool("slots.addFaceSlot", false, true,
+        public final ConfigValue<Boolean> addFaceSlot = defineBool("slots.addFaceSlot", false, true,
                 "When enabled, adds a separate slot for the Snorkel and Night Vision Goggles",
                 "(Trinkets only, currently not compatible with Curios or Accessories)");
-        public final Value.ConfigValue<Boolean> removeSlotRestrictions = defineBool("slots.removeSlotRestrictions", false, true,
+        public final ConfigValue<Boolean> removeSlotRestrictions = defineBool("slots.removeSlotRestrictions", false, true,
                 "When enabled, allows any artifact to be equipped in any slot",
                 "(Requires Curios or Trinkets, currently not compatible with Accessories)");
 
         @SuppressWarnings("unchecked")
-        public Codec<Value.ConfigValue<Boolean>> codec() {
-            return StringRepresentable.fromValues(() -> new Value.ConfigValue[]{
+        public Codec<ConfigValue<Boolean>> codec() {
+            return StringRepresentable.fromValues(() -> new ConfigValue[]{
                     Artifacts.CONFIG.general.slots.enableAccessoriesCompat,
                     Artifacts.CONFIG.general.slots.enableCuriosCompat,
                     Artifacts.CONFIG.general.slots.enableTrinketsCompat,

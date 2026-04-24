@@ -2,6 +2,7 @@ package artifacts.config.value.type;
 
 import artifacts.Artifacts;
 import artifacts.config.screen.ConfigEntries;
+import artifacts.config.value.ConfigValue;
 import artifacts.config.value.Value;
 import artifacts.util.ModCodecs;
 import com.mojang.serialization.Codec;
@@ -33,9 +34,14 @@ public abstract class ValueType<T, C> {
         return ModCodecs.xorAlternative(
                 configCodec().flatXmap(
                         DataResult::success,
-                        value -> value instanceof Value.ConfigValue<T> configValue && Artifacts.CONFIG.items.getValues(this).containsKey(configValue.getId())
-                                ? DataResult.success(configValue)
-                                : DataResult.error(() -> "Not a valid config value: %s".formatted(value))
+                        value -> {
+                            if (value instanceof ConfigValue<T> configValue
+                                    && Artifacts.CONFIG.items.getValues(this).containsKey(configValue.getId())
+                            ) {
+                                return DataResult.success(configValue);
+                            }
+                            return DataResult.error(() -> "Not a valid config value: %s".formatted(value));
+                        }
                 ),
                 constantCodec()
         );
@@ -50,33 +56,33 @@ public abstract class ValueType<T, C> {
         ).xmap(Value.Constant::new, Supplier::get);
     }
 
-    public final Codec<Value.ConfigValue<T>> configCodec() {
+    public final Codec<ConfigValue<T>> configCodec() {
         return StringRepresentable.fromValues(this::getConfigValues);
     }
 
     public final StreamCodec<ByteBuf, Value<T>> streamCodec() {
         return ByteBufCodecs.BOOL.dispatch(
-                value -> value instanceof Value.ConfigValue<?>,
+                value -> value instanceof ConfigValue<?>,
                 b -> b ? configReferenceStreamCodec() : valueStreamCodec().map(Value.Constant::new, Supplier::get)
         );
     }
 
     public abstract StreamCodec<ByteBuf, T> valueStreamCodec();
 
-    public final StreamCodec<ByteBuf, Value.ConfigValue<T>> configReferenceStreamCodec() {
-        Value.ConfigValue<T>[] values = getConfigValues();
+    public final StreamCodec<ByteBuf, ConfigValue<T>> configReferenceStreamCodec() {
+        ConfigValue<T>[] values = getConfigValues();
         return ByteBufCodecs.idMapper(i -> values[i], Util.createIndexLookup(Arrays.asList(values)));
     }
 
-    public final StreamCodec<ByteBuf, Value.ConfigValue<T>> directConfigStreamCodec(String id) {
-        return valueStreamCodec().map(v -> new Value.ConfigValue<>(this, id, v), Value.ConfigValue::get);
+    public final StreamCodec<ByteBuf, ConfigValue<T>> directConfigStreamCodec(String id) {
+        return valueStreamCodec().map(v -> new ConfigValue<>(this, id, v), ConfigValue::get);
     }
 
     @SuppressWarnings("unchecked")
-    private Value.ConfigValue<T>[] getConfigValues() {
-        List<Value.ConfigValue<T>> values = List.copyOf(Artifacts.CONFIG.items.getValues(this).values());
+    private ConfigValue<T>[] getConfigValues() {
+        List<ConfigValue<T>> values = List.copyOf(Artifacts.CONFIG.items.getValues(this).values());
         // yikes
-        Value.ConfigValue<T>[] result = (Value.ConfigValue<T>[]) java.lang.reflect.Array.newInstance(values.getFirst().getClass(), values.size());
+        ConfigValue<T>[] result = (ConfigValue<T>[]) java.lang.reflect.Array.newInstance(values.getFirst().getClass(), values.size());
         for (int i = 0; i < values.size(); i++) {
             result[i] = values.get(i);
         }

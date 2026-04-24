@@ -1,7 +1,7 @@
 package artifacts.world.placement;
 
 import artifacts.Artifacts;
-import artifacts.config.value.Value;
+import artifacts.config.value.ConfigValue;
 import artifacts.registry.ModPlacementModifierTypes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -19,15 +19,15 @@ public class ConfigValueFilter extends PlacementFilter {
             Codec.BOOL.fieldOf("expected").forGetter(f -> f.expected)
     ).apply(instance, ConfigValueFilter::new));
 
-    private final Value.ConfigValue<Boolean> value;
+    private final ConfigValue<Boolean> value;
     private final boolean expected;
 
-    private ConfigValueFilter(Value.ConfigValue<Boolean> value, boolean expected) {
+    private ConfigValueFilter(ConfigValue<Boolean> value, boolean expected) {
         this.value = value;
         this.expected = expected;
     }
 
-    public static ConfigValueFilter checkValue(Value.ConfigValue<Boolean> value, boolean expected) {
+    public static ConfigValueFilter checkValue(ConfigValue<Boolean> value, boolean expected) {
         return new ConfigValueFilter(value, expected);
     }
 

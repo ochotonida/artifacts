@@ -2,7 +2,7 @@ package artifacts.config.screen;
 
 import artifacts.Artifacts;
 import artifacts.config.ConfigManager;
-import artifacts.config.value.Value;
+import artifacts.config.value.ConfigValue;
 import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -60,7 +60,7 @@ public class ArtifactsConfigScreen {
                 .sorted(Comparator.comparing(key -> !key.endsWith("generateAsLoot")))
                 .forEach(key -> {
             String[] names = key.split("\\.");
-            Value.ConfigValue<?> value = config.getValues().get(key);
+            ConfigValue<?> value = config.getValues().get(key);
             AbstractConfigListEntry<?> field = createField(config, config.getName(), key, value, config.getDescription(key).size());
             if (names.length == 1) {
                 configBuilder.addEntry(field);
@@ -79,7 +79,7 @@ public class ArtifactsConfigScreen {
         return subCategories.get(key);
     }
 
-    private AbstractConfigListEntry<?> createField(ConfigManager config, String categoryName, String key, Value.ConfigValue<?> value, int tooltipCount) {
+    private AbstractConfigListEntry<?> createField(ConfigManager config, String categoryName, String key, ConfigValue<?> value, int tooltipCount) {
         String[] names = key.split("\\.");
         key = categoryName + '.' + key;
         String name = names[names.length - 1];
@@ -94,7 +94,7 @@ public class ArtifactsConfigScreen {
         return configEntry.build();
     }
 
-    private <T> FieldBuilder<?, ?, ?> createConfigEntry(ConfigManager config, Value.ConfigValue<T> value, Component title) {
+    private <T> FieldBuilder<?, ?, ?> createConfigEntry(ConfigManager config, ConfigValue<T> value, Component title) {
         FieldBuilder<?, ?, ?> configEntry = value.type().getConfigEntryFactory().createConfigEntry(config, builder.entryBuilder(), title, value);
         configEntry.requireRestart(value.requiresRestart());
         return configEntry;

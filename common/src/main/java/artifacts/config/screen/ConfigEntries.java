@@ -1,7 +1,7 @@
 package artifacts.config.screen;
 
 import artifacts.config.ConfigManager;
-import artifacts.config.value.Value;
+import artifacts.config.value.ConfigValue;
 import artifacts.config.value.type.EnumValueType;
 import artifacts.config.value.type.NumberValueType;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
@@ -46,7 +46,7 @@ public class ConfigEntries {
 
     public interface ConfigEntryFactory<T> {
 
-        FieldBuilder<?, ?, ?> createConfigEntry(ConfigManager config, ConfigEntryBuilder entryBuilder, Component title, Value.ConfigValue<T> value);
+        FieldBuilder<?, ?, ?> createConfigEntry(ConfigManager config, ConfigEntryBuilder entryBuilder, Component title, ConfigValue<T> value);
 
     }
 }

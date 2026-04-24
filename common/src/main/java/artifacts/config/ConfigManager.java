@@ -1,7 +1,7 @@
 package artifacts.config;
 
 import artifacts.Artifacts;
-import artifacts.config.value.Value;
+import artifacts.config.value.ConfigValue;
 import artifacts.config.value.ValueTypes;
 import artifacts.config.value.type.EnumValueType;
 import artifacts.config.value.type.NumberValueType;
@@ -29,7 +29,7 @@ public abstract class ConfigManager {
     private final Path configPath;
     private final String name;
 
-    private final Map<String, Value.ConfigValue<?>> values = new HashMap<>();
+    private final Map<String, ConfigValue<?>> values = new HashMap<>();
     private final Map<String, List<String>> tooltips = new HashMap<>();
 
     private final Map<ValueType<?, ?>, ValueMap<?>> typeToValues = new HashMap<>();
@@ -90,12 +90,12 @@ public abstract class ConfigManager {
         return name;
     }
 
-    public Map<String, Value.ConfigValue<?>> getValues() {
+    public Map<String, ConfigValue<?>> getValues() {
         return values;
     }
 
     @SuppressWarnings("unchecked")
-    public <T> Map<String, Value.ConfigValue<T>> getValues(ValueType<T, ?> type) {
+    public <T> Map<String, ConfigValue<T>> getValues(ValueType<T, ?> type) {
         ValueMap<T> valueMap = (ValueMap<T>) typeToValues.get(type);
         return valueMap.getMap();
     }
@@ -112,11 +112,11 @@ public abstract class ConfigManager {
         config.set(key, type.write(value));
     }
 
-    private <T> void reset(String key, Value.ConfigValue<T> value) {
+    private <T> void reset(String key, ConfigValue<T> value) {
         config.add(key, value.type().write(value.getDefaultValue()));
     }
 
-    protected <T> void readValueFromConfig(String key, Value.ConfigValue<T> value) {
+    protected <T> void readValueFromConfig(String key, ConfigValue<T> value) {
         value.set(read(value.type(), key));
     }
 
@@ -125,13 +125,13 @@ public abstract class ConfigManager {
     }
 
     protected void addMissingKeys() {
-        Map<String, Value.ConfigValue<?>> values = getValues();
+        Map<String, ConfigValue<?>> values = getValues();
 
         List<String> keys = new ArrayList<>(values.keySet());
         Collections.sort(keys);
         for (String key : keys) {
             if (!config.contains(key)) {
-                Value.ConfigValue<?> value = values.get(key);
+                ConfigValue<?> value = values.get(key);
                 reset(key, value);
                 StringBuilder builder = new StringBuilder();
                 for (String tooltip : getDescription(key)) {
@@ -168,58 +168,58 @@ public abstract class ConfigManager {
         }
     }
 
-    protected Value.ConfigValue<Boolean> defineBool(String key, String... tooltips) {
+    protected ConfigValue<Boolean> defineBool(String key, String... tooltips) {
         return defineBool(key, true, false, tooltips);
     }
 
-    protected Value.ConfigValue<Boolean> defineBool(String key, boolean defaultValue, boolean requiresRestart, String... tooltips) {
-        Value.ConfigValue<Boolean> value = createValue(key, ValueTypes.BOOLEAN, defaultValue, requiresRestart, tooltips);
+    protected ConfigValue<Boolean> defineBool(String key, boolean defaultValue, boolean requiresRestart, String... tooltips) {
+        ConfigValue<Boolean> value = createValue(key, ValueTypes.BOOLEAN, defaultValue, requiresRestart, tooltips);
         spec.define(key, defaultValue);
         return value;
     }
 
-    protected Value.ConfigValue<Integer> defineNonNegativeInt(String key, int defaultValue, String... tooltips) {
+    protected ConfigValue<Integer> defineNonNegativeInt(String key, int defaultValue, String... tooltips) {
         return defineNumber(key, ValueTypes.NON_NEGATIVE_INT, defaultValue, false, tooltips);
     }
 
-    protected Value.ConfigValue<Integer> defineInt(String key, int defaultValue, String... tooltips) {
+    protected ConfigValue<Integer> defineInt(String key, int defaultValue, String... tooltips) {
         return defineNumber(key, ValueTypes.INT, defaultValue, false, tooltips);
     }
 
-    protected Value.ConfigValue<Double> defineAttributeModifier(String key, double defaultValue, String... tooltips) {
+    protected ConfigValue<Double> defineAttributeModifier(String key, double defaultValue, String... tooltips) {
         return defineNumber(key, ValueTypes.ATTRIBUTE_MODIFIER_AMOUNT, defaultValue, false, tooltips);
     }
 
-    protected Value.ConfigValue<Double> defineNonNegativeDouble(String key, double defaultValue, String... tooltips) {
+    protected ConfigValue<Double> defineNonNegativeDouble(String key, double defaultValue, String... tooltips) {
         return defineNumber(key, ValueTypes.NON_NEGATIVE_DOUBLE, defaultValue, false, tooltips);
     }
 
-    protected Value.ConfigValue<Double> defineFraction(String key, double defaultValue, String... tooltips) {
+    protected ConfigValue<Double> defineFraction(String key, double defaultValue, String... tooltips) {
         return defineNumber(key, ValueTypes.FRACTION, defaultValue, false, tooltips);
     }
 
-    protected Value.ConfigValue<Integer> defineDuration(String key, int defaultValue, String... tooltips) {
+    protected ConfigValue<Integer> defineDuration(String key, int defaultValue, String... tooltips) {
         return defineNumber(key, ValueTypes.DURATION, defaultValue, false, tooltips);
     }
 
     @SuppressWarnings("SameParameterValue")
-    protected Value.ConfigValue<Integer> defineEnchantmentLevel(String key, int defaultValue, String... tooltips) {
+    protected ConfigValue<Integer> defineEnchantmentLevel(String key, int defaultValue, String... tooltips) {
         return defineNumber(key, ValueTypes.ENCHANTMENT_LEVEL, defaultValue, false, tooltips);
     }
 
-    protected Value.ConfigValue<Integer> defineMobEffectLevel(String key, int defaultValue, String... tooltips) {
+    protected ConfigValue<Integer> defineMobEffectLevel(String key, int defaultValue, String... tooltips) {
         return defineNumber(key, ValueTypes.MOB_EFFECT_LEVEL, defaultValue, false, tooltips);
     }
 
-    private <T extends Number & Comparable<T>> Value.ConfigValue<T> defineNumber(String key, NumberValueType<T> type, T defaultValue, boolean requiresRestart, String... tooltips) {
-        Value.ConfigValue<T> value = createValue(key, type, defaultValue, requiresRestart, tooltips);
+    private <T extends Number & Comparable<T>> ConfigValue<T> defineNumber(String key, NumberValueType<T> type, T defaultValue, boolean requiresRestart, String... tooltips) {
+        ConfigValue<T> value = createValue(key, type, defaultValue, requiresRestart, tooltips);
         spec.defineInRange(key, defaultValue, type.getMin(), type.getMax());
         return value;
     }
 
     @SuppressWarnings("SameParameterValue")
-    protected <T extends Enum<T> & StringRepresentable> Value.ConfigValue<T> defineEnum(String key, EnumValueType<T> type, T defaultValue, boolean requiresRestart, String... tooltips) {
-        Value.ConfigValue<T> value = createValue(key, type, defaultValue, requiresRestart, tooltips);
+    protected <T extends Enum<T> & StringRepresentable> ConfigValue<T> defineEnum(String key, EnumValueType<T> type, T defaultValue, boolean requiresRestart, String... tooltips) {
+        ConfigValue<T> value = createValue(key, type, defaultValue, requiresRestart, tooltips);
         List<String> allowedValues = new ArrayList<>();
         allowedValues.addAll(type.getValues().stream().map(StringRepresentable::getSerializedName).toList());
         allowedValues.addAll(type.getValues().stream().map(StringRepresentable::getSerializedName).map(String::toUpperCase).toList());
@@ -227,8 +227,8 @@ public abstract class ConfigManager {
         return value;
     }
 
-    protected <T> Value.ConfigValue<T> createValue(String key, ValueType<T, ?> type, T defaultValue, boolean requiresRestart, String... tooltips) {
-        Value.ConfigValue<T> value = new Value.ConfigValue<>(type, key, defaultValue, requiresRestart);
+    protected <T> ConfigValue<T> createValue(String key, ValueType<T, ?> type, T defaultValue, boolean requiresRestart, String... tooltips) {
+        ConfigValue<T> value = new ConfigValue<>(type, key, defaultValue, requiresRestart);
         values.put(key, value);
         this.tooltips.put(key, List.of(tooltips));
         if (!this.typeToValues.containsKey(type)) {
@@ -240,9 +240,9 @@ public abstract class ConfigManager {
     }
 
     private static class ValueMap<T> {
-        private final Map<String, Value.ConfigValue<T>> map = new HashMap<>();
+        private final Map<String, ConfigValue<T>> map = new HashMap<>();
 
-        public Map<String, Value.ConfigValue<T>> getMap() {
+        public Map<String, ConfigValue<T>> getMap() {
             return map;
         }
     }
