@@ -8,7 +8,6 @@ import artifacts.config.value.ValueTypes;
 import artifacts.network.NetworkHandler;
 import artifacts.network.UpdateItemConfigPacket;
 import artifacts.registry.ModItems;
-import artifacts.registry.RegistryHolder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -20,269 +19,723 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class ItemConfigs extends ConfigManager {
+public final class ItemConfigs extends ConfigManager {
 
-    private final Map<ResourceKey<Item>, ConfigValue<Boolean>> generateAsLoot = new HashMap<>();
+    private final Map<ResourceKey<Item>, ItemCategory> itemCategories = new HashMap<>();
 
-    public final ConfigValue<Boolean>
-            antidoteVesselEnabled = defineBool(createKey(ModItems.ANTIDOTE_VESSEL, "enabled"),
-                    "Whether the Antidote Vessel reduces the duration of negative effects"),
-            aquaDashersEnabled = defineBool(createKey(ModItems.AQUA_DASHERS, "enabled"),
-                    "Whether the Aqua-Dashers allow the wearer to sprint on water"),
-            charmOfSinkingEnabled = defineBool(createKey(ModItems.CHARM_OF_SINKING, "enabled"), true, true,
-                    "Whether the Charm of Sinking removes the wearer's collision with water"),
-            cloudInABottleEnabled = defineBool(createKey(ModItems.CLOUD_IN_A_BOTTLE, "enabled"),
-                    "Whether the Cloud in a Bottle allows the wearer to double jump"),
-            eternalSteakEnabled = defineBool(createKey(ModItems.ETERNAL_STEAK, "enabled"),
-                    "Whether the Eternal Steak can be eaten"),
-            everlastingBeefEnabled = defineBool(createKey(ModItems.EVERLASTING_BEEF, "enabled"),
-                    "Whether the Everlasting Beef can be eaten"),
-            pickaxeHeaterEnabled = defineBool(createKey(ModItems.PICKAXE_HEATER, "enabled"),
-                    "Whether the Pickaxe Heater smelts mined ores"),
-            rootedBootsEnabled = defineBool(createKey(ModItems.ROOTED_BOOTS, "enabled"),
-                    "Whether the Rooted Boots replenish hunger when standing on grass"),
-            scarfOfInvisibilityEnabled = defineBool(createKey(ModItems.SCARF_OF_INVISIBILITY, "enabled"), true, true,
-                    "Whether the Scarf of Invisibility makes players invisible"),
-            striderShoesEnabled = defineBool(createKey(ModItems.STRIDER_SHOES, "enabled"),
-                    "Whether the Strider Shoes allow sneaking on lava"),
-            warpDriveEnabled = defineBool(createKey(ModItems.WARP_DRIVE, "enabled"),
-                    "Whether the Warp Drive causes ender pearls to not be consumed"),
+    public final AnglersHat anglersHat = new AnglersHat();
+    public final AntidoteVessel antidoteVessel = new AntidoteVessel();
+    public final AquaDashers aquaDashers = new AquaDashers();
+    public final BunnyHoppers bunnyHoppers = new BunnyHoppers();
+    public final CharmOfShrinking charmOfShrinking = new CharmOfShrinking();
+    public final CharmOfSinking charmOfSinking = new CharmOfSinking();
+    public final ChorusTotem chorusTotem = new ChorusTotem();
+    public final CloudInABottle cloudInABottle = new CloudInABottle();
+    public final CowboyHat cowboyHat = new CowboyHat();
+    public final CrossNecklace crossNecklace = new CrossNecklace();
+    public final CrystalHeart crystalHeart = new CrystalHeart();
+    public final DiggingClaws diggingClaws = new DiggingClaws();
+    public final EternalSteak eternalSteak = new EternalSteak();
+    public final EverlastingBeef everlastingBeef = new EverlastingBeef();
+    public final FeralClaws feralClaws = new FeralClaws();
+    public final FireGauntlet fireGauntlet = new FireGauntlet();
+    public final FlamePendant flamePendant = new FlamePendant();
+    public final Flippers flippers = new Flippers();
+    public final GoldenHook goldenHook = new GoldenHook();
+    public final HeliumFlamingo heliumFlamingo = new HeliumFlamingo();
+    public final KittySlippers kittySlippers = new KittySlippers();
+    public final LuckyScarf luckyScarf = new LuckyScarf();
+    public final NightVisionGoggles nightVisionGoggles = new NightVisionGoggles();
+    public final DrinkingHat noveltyDrinkingHat = new DrinkingHat(ModItems.NOVELTY_DRINKING_HAT, "Novelty Drinking Hat");
+    public final ObsidianSkull obsidianSkull = new ObsidianSkull();
+    public final OnionRing onionRing = new OnionRing();
+    public final PanicNecklace panicNecklace = new PanicNecklace();
+    public final PickaxeHeater pickaxeHeater = new PickaxeHeater();
+    public final DrinkingHat plasticDrinkingHat = new DrinkingHat(ModItems.PLASTIC_DRINKING_HAT, "Plastic Drinking Hat");
+    public final PocketPiston pocketPiston = new PocketPiston();
+    public final PowerGlove powerGlove = new PowerGlove();
+    public final RootedBoots rootedBoots = new RootedBoots();
+    public final RunningShoes runningShoes = new RunningShoes();
+    public final ScarfOfInvisibility scarfOfInvisibility = new ScarfOfInvisibility();
+    public final ShockPendant shockPendant = new ShockPendant();
+    public final Snorkel snorkel = new Snorkel();
+    public final Snowshoes snowshoes = new Snowshoes();
+    public final SteadfastSpikes steadfastSpikes = new SteadfastSpikes();
+    public final StriderShoes striderShoes = new StriderShoes();
+    public final SuperstitiousHat superstitiousHat = new SuperstitiousHat();
+    public final ThornPendant thornPendant = new ThornPendant();
+    public final Umbrella umbrella = new Umbrella();
+    public final UniversalAttractor universalAttractor = new UniversalAttractor();
+    public final VampiricGlove vampiricGlove = new VampiricGlove();
+    public final VillagerHat villagerHat = new VillagerHat();
+    public final WarpDrive warpDrive = new WarpDrive();
+    public final WhoopeeCushion whoopeeCushion = new WhoopeeCushion();
+    public final WitheredBracelet witheredBracelet = new WitheredBracelet();
 
-            chorusTotemConsumeOnUse = defineBool(createKey(ModItems.CHORUS_TOTEM, "consumeOnUse"),
-                    "Whether the Chorus Totem is consumed after activating"),
-            flamePendantGrantFireResistance = defineBool(createKey(ModItems.FLAME_PENDANT, "grantFireResistance"),
-                    "Whether the Flame Pendant grants Fire Resistance after igniting an entity"),
-            rootedBootsGrowPlantsAfterEating = defineBool(createKey(ModItems.ROOTED_BOOTS, "growPlantsAfterEating"),
-                    "Whether the Rooted Boots apply a bone meal effect after eating food"),
-            scarfOfInvisibilityHideWhenInvisible = defineBool(createKey(ModItems.SCARF_OF_INVISIBILITY, "hideWhenInvisible"), false, false,
-                    "Whether the Scarf of Invisibility is hidden when the wearer is invisible"),
-            shockPendantCancelLightningDamage = defineBool(createKey(ModItems.SHOCK_PENDANT, "cancelLightningDamage"),
-                    "Whether the Shock Pendant cancels damage from lightning"),
-            snorkelIsInfinite = defineBool(createKey(ModItems.SNORKEL, "isInfinite"), false, true,
-                    "Whether the Snorkel's water breathing effect depletes when underwater"),
-            snowshoesAllowWalkingOnPowderedSnow = defineBool(createKey(ModItems.SNOWSHOES, "allowWalkingOnPowderedSnow"),
-                    "Whether the Snowshoes allow the wearer to walk on powdered snow"),
-            striderShoesCancelHotFloorDamage = defineBool(createKey(ModItems.STRIDER_SHOES, "cancelHotFloorDamage"),
-                    "Whether the Strider Shoes make the wearer immune to hot floor damage"),
-            umbrellaIsShield = defineBool(createKey(ModItems.UMBRELLA, "isShield"),
-                    "Whether the Umbrella can be used as a shield"),
-            umbrellaIsGlider = defineBool(createKey(ModItems.UMBRELLA, "isGlider"),
-                    "Whether the Umbrella slows the player's falling speed when held"),
-            warpDriveNullifyEnderPearlDamage = defineBool(createKey(ModItems.WARP_DRIVE, "nullifyEnderPearlDamage"),
-                    "Whether the Warp Drive causes Ender Pearls not to deal any damage"),
-            bunnyHoppersModifyHurtSounds = defineBool(createKey(ModItems.BUNNY_HOPPERS, "modifyHurtSounds"),
-                    "Whether the Bunny Hoppers change the player's hurt sounds"),
-            kittySlippersModifyHurtSounds = defineBool(createKey(ModItems.KITTY_SLIPPERS, "modifyHurtSounds"),
-                    "Whether the Kitty Slippers change the player's hurt sounds"),
-            kittySlippersRepelCreepers = defineBool(createKey(ModItems.KITTY_SLIPPERS, "repelCreepers"),
-                    "Whether the Kitty Slippers scare nearby creepers"),
-            kittySlippersRepelPhantoms = defineBool(createKey(ModItems.KITTY_SLIPPERS, "repelPhantoms"),
-                    "Whether the Kitty Slippers hiss at nearby phantoms"),
-            charmOfSinkingUnderwaterFallDamage = defineBool(createKey(ModItems.CHARM_OF_SINKING, "underwaterFallDamage"), false, true,
-                    "Whether it is possible to take fall damage underwater when wearing the Charm of Sinking");
-
-    public final ConfigValue<Double>
-            cloudInABottleSprintJumpVerticalVelocity = defineNonNegativeDouble(createKey(ModItems.CLOUD_IN_A_BOTTLE, "sprintJumpVerticalVelocity"), 0.25,
-            "The amount of extra vertical velocity that is applied to players " +
-                    "that double jump while sprinting using the Cloud in a Bottle"),
-            cloudInABottleSprintJumpHorizontalVelocity = defineNonNegativeDouble(createKey(ModItems.CLOUD_IN_A_BOTTLE, "sprintJumpHorizontalVelocity"), 0.25,
-                    "The amount of extra horizontal velocity that is applied to players " +
-                    "that double jump while sprinting using the Cloud in a Bottle"),
-            vampiricGloveAbsorptionRatio = defineNonNegativeDouble(createKey(ModItems.VAMPIRIC_GLOVE, "absorptionRatio"), 0.20,
-                    "The proportion of melee damage dealt that is absorbed by the Vampiric Gloves");
-
-    public final ConfigValue<Double>
-            bunnyHoppersFallDamageMultiplier = defineAttributeModifier(createKey(ModItems.BUNNY_HOPPERS, "fallDamageMultiplier"), 0,
-            "How much the Bunny Hoppers reduce or increase fall damage",
-            "Values between -1 and 0 reduce fall damage",
-            "Values above 0 increase fall damage"),
-            bunnyHoppersJumpStrengthBonus = defineAttributeModifier(createKey(ModItems.BUNNY_HOPPERS, "jumpStrengthBonus"), 0.40,
-                    "The amount of extra jump strength the Bunny Hoppers apply to players"),
-            bunnyHoppersSafeFallDistanceBonus = defineAttributeModifier(createKey(ModItems.BUNNY_HOPPERS, "safeFallDistanceBonus"), 10,
-                    "The amount of extra safe fall distance in blocks that is granted by the Bunny Hoppers"),
-            charmOfShrinkingScaleModifier = defineAttributeModifier(createKey(ModItems.CHARM_OF_SHRINKING, "scaleModifier"), -0.50,
-                    "How much the Charm of Shrinking decreases or increases the player's Scale",
-                    "Values between -1 and 0 reduce the player's scale",
-                    "Values above 0 increase the player's scale"),
-            cloudInABottleSafeFallDistanceBonus = defineAttributeModifier(createKey(ModItems.CLOUD_IN_A_BOTTLE, "safeFallDistanceBonus"), 3,
-                    "The amount of extra safe fall distance in blocks that is granted by the Cloud in a Bottle"),
-            cowboyHatMountSpeedBonus = defineAttributeModifier(createKey(ModItems.COWBOY_HAT, "mountSpeedBonus"), 0.40,
-                    "How much the Cowboy Hat increases the speed of ridden mounts"),
-            crossNecklaceBonusInvincibilityTicks = defineAttributeModifier(createKey(ModItems.CROSS_NECKLACE, "bonusInvincibilityTicks"), 20,
-                    "The amount of extra ticks the player stays invincible for " +
-                    "after taking damage while wearing the Cross Necklace"),
-            crystalHeartHealthBonus = defineAttributeModifier(createKey(ModItems.CRYSTAL_HEART, "healthBonus"), 10,
-                    "The amount of extra health points that are granted by the Crystal Heart"),
-            diggingClawsBlockBreakSpeedBonus = defineAttributeModifier(createKey(ModItems.DIGGING_CLAWS, "blockBreakSpeedBonus"), 0.30,
-                    "How much the Digging Claws increase the wearer's mining speed"),
-            feralClawsAttackSpeedBonus = defineAttributeModifier(createKey(ModItems.FERAL_CLAWS, "attackSpeedBonus"), 0.30,
-                    "How much the Feral Claws increase the wearer's attack speed"),
-            fireGauntletFireDuration = defineAttributeModifier(createKey(ModItems.FIRE_GAUNTLET, "fireDuration"), 8,
-                    "How long an entity is set on fire for after being attacked by an entity wearing the Fire Gauntlet"),
-            flippersSwimSpeedBonus = defineAttributeModifier(createKey(ModItems.FLIPPERS, "swimSpeedBonus"), 0.70,
-                    "How much the Flippers increase the wearer's swim speed"),
-            goldenHookEntityExperienceBonus = defineAttributeModifier(createKey(ModItems.GOLDEN_HOOK, "entityExperienceBonus"), 0.50,
-                    "The amount of extra experience dropped by entities " +
-                    "that are killed by players wearing the Golden Hook"),
-            noveltyDrinkingHatDrinkingSpeedBonus = defineAttributeModifier(createKey(ModItems.NOVELTY_DRINKING_HAT, "drinkingSpeedBonus"), 1.50,
-                    "How much the Novelty Drinking Hat increases the wearer's drinking speed"),
-            noveltyDrinkingHatEatingSpeedBonus = defineAttributeModifier(createKey(ModItems.NOVELTY_DRINKING_HAT, "eatingSpeedBonus"), 0.50,
-                    "How much the Novelty Drinking Hat increases the wearer's eating speed"),
-            plasticDrinkingHatDrinkingSpeedBonus = defineAttributeModifier(createKey(ModItems.PLASTIC_DRINKING_HAT, "drinkingSpeedBonus"), 1.50,
-                    "How much the Plastic Drinking Hat increases the wearer's drinking speed"),
-            plasticDrinkingHatEatingSpeedBonus = defineAttributeModifier(createKey(ModItems.PLASTIC_DRINKING_HAT, "eatingSpeedBonus"), 0.50,
-                    "How much the Plastic Drinking Hat increases the wearer's eating speed"),
-            pocketPistonAttackKnockbackBonus = defineAttributeModifier(createKey(ModItems.POCKET_PISTON, "attackKnockbackBonus"), 0.75,
-                    "The amount of extra knockback that is granted by the Pocket Piston"),
-            powerGloveAttackDamageBonus = defineAttributeModifier(createKey(ModItems.POWER_GLOVE, "attackDamageBonus"), 4,
-                    "The amount of extra damage that is dealt by melee attacks from players wearing the Power Glove"),
-            runningShoesSprintingSpeedBonus = defineAttributeModifier(createKey(ModItems.RUNNING_SHOES, "sprintingSpeedBonus"), 0.40,
-                    "How much the Running Shoes increase the wearer's sprinting speed"),
-            runningShoesSprintingStepHeightBonus = defineAttributeModifier(createKey(ModItems.RUNNING_SHOES, "sprintingStepHeightBonus"), 0.5,
-                    "How much the Running Shoes increase the wearer's step height while sprinting"),
-            snowshoesMovementSpeedOnSnowBonus = defineAttributeModifier(createKey(ModItems.SNOWSHOES, "movementSpeedOnSnowBonus"), 0.30,
-                    "How much the Snowshoes increase the wearer's movement speed on snow blocks"),
-            steadfastSpikesKnockbackResistance = defineAttributeModifier(createKey(ModItems.STEADFAST_SPIKES, "knockbackResistance"), 1.00,
-                    "How much knockback resistance is granted by the Steadfast Spikes"),
-            steadfastSpikesSlipperinessReduction = defineAttributeModifier(createKey(ModItems.STEADFAST_SPIKES, "slipperinessReduction"), 1.00,
-                    "How much the Steadfast Spikes reduce the slipperiness of ice"),
-            villagerHatReputationBonus = defineAttributeModifier(createKey(ModItems.VILLAGER_HAT, "reputationBonus"), 75,
-                    "The amount of extra reputation that is granted by the Villager Hat when trading with villagers"),
-            charmOfSinkingOxygenBonus = defineAttributeModifier(createKey(ModItems.CHARM_OF_SINKING, "oxygenBonus"), 1.5D,
-                    "How much longer players wearing the Charm of Sinking can stay underwater");
-
-    public final ConfigValue<Double>
-            whoopeeCushionFartChance = defineFraction(createKey(ModItems.WHOOPEE_CUSHION, "fartChance"), 0.12,
-                    "The probability that a fart sound plays when sneaking " +
-                    "or double jumping while wearing the Whoopee Cushion"),
-            chorusTotemTeleportationChance = defineFraction(createKey(ModItems.CHORUS_TOTEM, "teleportationChance"), 1.00,
-                    "The probability that the Chorus Totem activates when a player dies"),
-            flamePendantStrikeChance = defineFraction(createKey(ModItems.FLAME_PENDANT, "strikeChance"), 0.40,
-                    "The probability that the Flame Pendant lights an attacker on fire"),
-            nightVisionGogglesStrength = defineFraction(createKey(ModItems.NIGHT_VISION_GOGGLES, "strength"), 0.15,
-                    "The strength of the night vision effect applied by the Night Vision Goggles"),
-            thornPendantStrikeChance = defineFraction(createKey(ModItems.THORN_PENDANT, "strikeChance"), 0.50,
-                    "The probability that the Thorn Pendant damages an attacking entity"),
-            shockPendantStrikeChance = defineFraction(createKey(ModItems.SHOCK_PENDANT, "strikeChance"), 0.25,
-                    "The probability that the Shock Pendant strikes an attacking entity with lightning"),
-            vampiricGloveAbsorptionChance = defineFraction(createKey(ModItems.VAMPIRIC_GLOVE, "absorptionChance"), 1,
-                    "The probability that damage is absorbed when attacking an entity with the Vampiric Gloves"),
-            witheredBraceletWitherChance = defineFraction(createKey(ModItems.WITHERED_BRACELET, "witherChance"), 0.3,
-                    "The probability that the Withered Bracelet inflicts a wither effect"),
-            everlastingBeefDropRate = defineFraction(createKey(ModItems.EVERLASTING_BEEF, "dropRate"), 1 / 500D,
-                    "The probability that Everlasting Beef drops when a cow or mooshroom is killed by a player"),
-            cloudInABottleFallDamageMultiplier = defineFraction(createKey(ModItems.CLOUD_IN_A_BOTTLE, "fallDamageMultiplier"), 0D,
-                    "How much fall damage is dealt when double jumping with the Cloud in a Bottle");
-
-    public final ConfigValue<Integer>
-            chorusTotemHealthRestored = defineNonNegativeInt(createKey(ModItems.CHORUS_TOTEM, "healthRestored"), 10,
-                    "The amount of health points that are restored after the Chorus Totem activates"),
-            thornPendantMaxDamage = defineNonNegativeInt(createKey(ModItems.THORN_PENDANT, "maxDamage"), 6,
-                    "The minimum amount of damage that is dealt when the Thorn Pendant activates"),
-            thornPendantMinDamage = defineNonNegativeInt(createKey(ModItems.THORN_PENDANT, "minDamage"), 2,
-                    "The maximum amount of damage that is dealt when the Thorn Pendant activates"),
-            warpDriveHungerCost = defineNonNegativeInt(createKey(ModItems.WARP_DRIVE, "hungerCost"), 2,
-                    "How many hunger points it costs to throw an Ender Pearl using the Warp Drive"),
-            vampiricGloveMaxHealingPerHit = defineNonNegativeInt(createKey(ModItems.VAMPIRIC_GLOVE, "maxHealingPerHit"), 6,
-                    "The maximum amount of healing that can be absorbed in a single hit " +
-                            "when attacking an entity while wearing the Vampiric Glove");
-
-    public final ConfigValue<Integer>
-            antidoteVesselMaxEffectDuration = defineDuration(createKey(ModItems.ANTIDOTE_VESSEL, "maxEffectDuration"), 5,
-                    "The maximum duration in seconds negative mob effects can last when wearing the Antidote Vessel"),
-            chorusTotemCooldown = defineDuration(createKey(ModItems.CHORUS_TOTEM, "cooldown"), 0,
-                    "The duration in seconds the Chorus Totem goes on cooldown for after activating"),
-            crossNecklaceCooldown = defineDuration(createKey(ModItems.CROSS_NECKLACE, "cooldown"), 0,
-                    "The duration in seconds the Cross Necklace goes on cooldown for after activating"),
-            eternalSteakCooldown = defineDuration(createKey(ModItems.ETERNAL_STEAK, "cooldown"), 15,
-                    "The duration in seconds the Eternal Steak goes on cooldown for after being eaten"),
-            everlastingBeefCooldown = defineDuration(createKey(ModItems.EVERLASTING_BEEF, "cooldown"), 15,
-                    "The duration in seconds the Everlasting Beef goes on cooldown for after being eaten"),
-            flamePendantCooldown = defineDuration(createKey(ModItems.FLAME_PENDANT, "cooldown"), 0,
-                    "The duration in seconds the Flame Pendant goes on cooldown for after setting an entity on fire"),
-            flamePendantFireDuration = defineDuration(createKey(ModItems.FLAME_PENDANT, "fireDuration"), 10,
-                    "How long an attacking entity is set on fire for when the Flame Pendant activates"),
-            heliumFlamingoFlightDuration = defineDuration(createKey(ModItems.HELIUM_FLAMINGO, "flightDuration"), 8,
-                    "The amount of time in seconds a player can fly with the Helium Flamingo before needing to recharge"),
-            heliumFlamingoRechargeDuration = defineDuration(createKey(ModItems.HELIUM_FLAMINGO, "rechargeDuration"), 15,
-                    "The amount of time in seconds it takes for the Helium Flamingo to recharge"),
-            heliumFlamingoCooldown = defineDuration(createKey(ModItems.HELIUM_FLAMINGO, "cooldown"), 3,
-                    "The duration in seconds the Helium Flamingo goes on cooldown for when stopping flight"),
-            obsidianSkullCooldown = defineDuration(createKey(ModItems.OBSIDIAN_SKULL, "cooldown"), 60,
-                    "The amount of time in seconds the Obsidian Skull goes on cooldown for after taking fire damage"),
-            obsidianSkullFireResistanceDuration = defineDuration(createKey(ModItems.OBSIDIAN_SKULL, "fireResistanceDuration"), 30,
-                    "The duration of the fire resistance effect that is applied when taking fire damage while wearing the Obsidian Skull"),
-            onionRingHasteDurationPerFoodPoint = defineDuration(createKey(ModItems.ONION_RING, "hasteDurationPerFoodPoint"), 6,
-                    "The duration of haste that is applied per food point eaten while wearing the Onion Ring"),
-            panicNecklaceCooldown = defineDuration(createKey(ModItems.PANIC_NECKLACE, "cooldown"), 0,
-                    "The duration in seconds the Panic Necklace goes on cooldown for after taking damage"),
-            panicNecklaceSpeedDuration = defineDuration(createKey(ModItems.PANIC_NECKLACE, "speedDuration"), 8,
-                    "The duration in seconds of the speed effect that is applied when taking damage while wearing the Panic Necklace"),
-            rootedBootsHungerReplenishingDuration = defineDuration(createKey(ModItems.ROOTED_BOOTS, "hungerReplenishingDuration"), 10,
-                    "The amount of time in seconds it takes to replenish a single point of hunger while wearing the Rooted Boots"),
-            shockPendantCooldown = defineDuration(createKey(ModItems.SHOCK_PENDANT, "cooldown"), 0,
-                    "The amount of time in seconds the Shock Pendant goes on cooldown for " +
-                            "after striking an attacker with lightning"),
-            snorkelWaterBreathingDuration = defineDuration(createKey(ModItems.SNORKEL, "waterBreathingDuration"), 30,
-                    "The duration of the water breathing effect that is applied by the Snorkel"),
-            thornPendantCooldown = defineDuration(createKey(ModItems.THORN_PENDANT, "cooldown"), 0,
-                    "The duration in seconds the Thorn Pendant goes on cooldown for after activating"),
-            warpDriveCooldown = defineDuration(createKey(ModItems.WARP_DRIVE, "cooldown"), 0,
-                    "The duration Ender Pearls go on cooldown for after being thrown using the Warp Drive"),
-            witheredBraceletCooldown = defineDuration(createKey(ModItems.WITHERED_BRACELET, "cooldown"), 0,
-                    "The duration the Withered Bracelet goes on cooldown for after inflicting wither on an entity"),
-            witheredBraceletWitherDuration = defineDuration(createKey(ModItems.WITHERED_BRACELET, "witherDuration"), 8,
-                    "The duration of the wither effect applied by the Withered Bracelet");
-
-    public final ConfigValue<Integer>
-            anglersHatLuckOfTheSeaLevelBonus = defineEnchantmentLevel(createKey(ModItems.ANGLERS_HAT, "luckOfTheSeaLevelBonus"), 1,
-                    "The amount of extra levels of luck of the sea that are granted by the Angler's Hat"),
-            anglersHatLureLevelBonus = defineEnchantmentLevel(createKey(ModItems.ANGLERS_HAT, "lureLevelBonus"), 1,
-                    "The amount of extra levels of lure that are granted by the Angler's Hat"),
-            luckScarfFortuneBonus = defineEnchantmentLevel(createKey(ModItems.LUCKY_SCARF, "fortuneLevelBonus"), 1,
-                    "The amount of extra levels of fortune that are granted by the Lucky Scarf"),
-            superstitiousHatLootingLevelBonus = defineEnchantmentLevel(createKey(ModItems.SUPERSTITIOUS_HAT, "lootingLevelBonus"), 1,
-                    "The amount of extra levels of Looting that are granted by the Superstitious Hat");
-
-    public final ConfigValue<Integer>
-            onionRingHasteLevel = defineMobEffectLevel(createKey(ModItems.ONION_RING, "hasteLevel"), 2,
-                    "The level of the haste effect that is applied by the Onion Ring"),
-            panicNecklaceSpeedLevel = defineMobEffectLevel(createKey(ModItems.PANIC_NECKLACE, "speedLevel"), 1,
-                    "The level of the speed effect that is applied by the Panic Necklace"),
-            universalAttractorMagnetismLevel = defineMobEffectLevel(createKey(ModItems.UNIVERSAL_ATTRACTOR, "magnetismLevel"), 5,
-                    "The level of the magnetism effect that is applied by the Universal Attractor"),
-            witheredBraceletWitherLevel = defineMobEffectLevel(createKey(ModItems.WITHERED_BRACELET, "witherLevel"), 2,
-                    "The level of the wither effect that is inflicted by the Withered Bracelet");
-
-    public final ConfigValue<ToolTierUpgrade.Tier>
-            diggingClawsToolTier = defineEnum(createKey(ModItems.DIGGING_CLAWS, "toolTier"), ValueTypes.TOOL_TIER, ToolTierUpgrade.Tier.STONE, false,
-                    "The tool tier that the Digging Claws increase the wearer's mining level to");
-
-    protected ItemConfigs() {
+    ItemConfigs() {
         super("items");
-        for (RegistryHolder<Item, ?> entry : ModItems.ITEMS.getEntries()) {
-            if (entry != ModItems.ETERNAL_STEAK && entry != ModItems.MIMIC_SPAWN_EGG) {
-                generateAsLoot.put(entry.unwrapKey().orElseThrow(), defineBool(createKey(entry, "generateAsLoot"),
-                        "Whether this item can be found in structures or drop from entities"
-                ));
-            }
+    }
+
+    public final class AnglersHat extends ItemCategory {
+
+        public final ConfigValue<Integer> luckOfTheSeaLevelBonus = define("luckOfTheSeaLevelBonus", ValueTypes.ENCHANTMENT_LEVEL, 1)
+                .tooltipLine("The amount of extra levels of luck of the sea that are granted by the Angler's Hat").build();
+
+        public final ConfigValue<Integer> lureLevelBonus = define("lureLevelBonus", ValueTypes.ENCHANTMENT_LEVEL, 1)
+                .tooltipLine("The amount of extra levels of lure that are granted by the Angler's Hat").build();
+
+        private AnglersHat() {
+            super(ModItems.ANGLERS_HAT);
         }
     }
 
-    private static String createKey(Holder<? extends Item> holder, String name) {
-        return holder.unwrapKey().orElseThrow().location().getPath() + '.' + name;
+    public final class AntidoteVessel extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Antidote Vessel reduces the duration of negative effects").build();
+
+        public final ConfigValue<Integer> maxEffectDuration = define("maxEffectDuration", ValueTypes.DURATION, 5)
+                .tooltipLine("The maximum duration in seconds negative mob effects can last when wearing the Antidote Vessel").build();
+
+        private AntidoteVessel() {
+            super(ModItems.ANTIDOTE_VESSEL);
+        }
+    }
+
+    public final class AquaDashers extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Aqua-Dashers allow the wearer to sprint on water").build();
+
+        private AquaDashers() {
+            super(ModItems.AQUA_DASHERS);
+        }
+    }
+
+    public final class BunnyHoppers extends ItemCategory {
+
+        public final ConfigValue<Boolean> modifyHurtSounds = define("modifyHurtSounds", true)
+                .tooltipLine("Whether the Bunny Hoppers change the player's hurt sounds").build();
+
+        public final ConfigValue<Double> fallDamageMultiplier = define("fallDamageMultiplier", ValueTypes.ATTRIBUTE_MODIFIER, 0D)
+                .tooltipLine("How much the Bunny Hoppers reduce or increase fall damage")
+                .tooltipLine("Values between -1 and 0 reduce fall damage")
+                .tooltipLine("Values above 0 increase fall damage").build();
+
+        public final ConfigValue<Double> jumpStrengthBonus = define("jumpStrengthBonus", ValueTypes.ATTRIBUTE_MODIFIER, 0.40)
+                .tooltipLine("The amount of extra jump strength the Bunny Hoppers apply to players").build();
+
+        public final ConfigValue<Double> safeFallDistanceBonus = define("safeFallDistanceBonus", ValueTypes.ATTRIBUTE_MODIFIER, 10D)
+                .tooltipLine("The amount of extra safe fall distance in blocks that is granted by the Bunny Hoppers").build();
+
+        private BunnyHoppers() {
+            super(ModItems.BUNNY_HOPPERS);
+        }
+    }
+
+    public final class CharmOfShrinking extends ItemCategory {
+
+        public final ConfigValue<Double> scaleModifier = define("scaleModifier", ValueTypes.ATTRIBUTE_MODIFIER, -0.50)
+                .tooltipLine("How much the Charm of Shrinking decreases or increases the player's Scale")
+                .tooltipLine("Values between -1 and 0 reduce the player's scale")
+                .tooltipLine("Values above 0 increase the player's scale").build();
+
+        private CharmOfShrinking() {
+            super(ModItems.CHARM_OF_SHRINKING);
+        }
+    }
+
+    public final class CharmOfSinking extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Charm of Sinking removes the wearer's collision with water")
+                .requiresRestart().build();
+
+        public final ConfigValue<Boolean> underwaterFallDamage = define("underwaterFallDamage", false)
+                .tooltipLine("Whether it is possible to take fall damage underwater when wearing the Charm of Sinking")
+                .requiresRestart().build();
+
+        public final ConfigValue<Double> oxygenBonus = define("oxygenBonus", ValueTypes.ATTRIBUTE_MODIFIER, 1.5)
+                .tooltipLine("How much longer players wearing the Charm of Sinking can stay underwater").build();
+
+        private CharmOfSinking() {
+            super(ModItems.CHARM_OF_SINKING);
+        }
+    }
+
+    public final class ChorusTotem extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Chorus Totem prevents the wearer's death")
+                .requiresRestart().build();
+
+        public final ConfigValue<Boolean> consumeOnUse = define("consumeOnUse", true)
+                .tooltipLine("Whether the Chorus Totem is consumed after activating").build();
+
+        public final ConfigValue<Double> teleportationChance = define("teleportationChance", ValueTypes.FRACTION, 1.00)
+                .tooltipLine("The probability that the Chorus Totem activates when a player dies").build();
+
+        public final ConfigValue<Integer> healthRestored = define("healthRestored", ValueTypes.NON_NEGATIVE_INT, 9)
+                .tooltipLine("The amount of health points that are restored after the Chorus Totem activates").build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 0)
+                .tooltipLine("The duration in seconds the Chorus Totem goes on cooldown for after activating").build();
+
+        private ChorusTotem() {
+            super(ModItems.CHORUS_TOTEM);
+        }
+    }
+
+    public final class CloudInABottle extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Cloud in a Bottle allows the wearer to double jump").build();
+
+        public final ConfigValue<Double> sprintJumpVerticalVelocity
+                = define("sprintJumpVerticalVelocity", ValueTypes.NON_NEGATIVE_DOUBLE, 0.25)
+                .tooltipLine("The amount of extra vertical velocity that is applied to players that double jump while sprinting using the Cloud in a Bottle").build();
+
+        public final ConfigValue<Double> sprintJumpHorizontalVelocity
+                = define("sprintJumpHorizontalVelocity", ValueTypes.NON_NEGATIVE_DOUBLE, 0.25)
+                .tooltipLine("The amount of extra horizontal velocity that is applied to players that double jump while sprinting using the Cloud in a Bottle").build();
+
+        public final ConfigValue<Double> safeFallDistanceBonus = define("safeFallDistanceBonus", ValueTypes.ATTRIBUTE_MODIFIER, 3D)
+                .tooltipLine("The amount of extra safe fall distance in blocks that is granted by the Cloud in a Bottle").build();
+
+        public final ConfigValue<Double> fallDamageMultiplier = define("fallDamageMultiplier", ValueTypes.FRACTION, 0D)
+                .tooltipLine("How much fall damage is dealt when double jumping with the Cloud in a Bottle").build();
+
+        private CloudInABottle() {
+            super(ModItems.CLOUD_IN_A_BOTTLE);
+        }
+    }
+
+    public final class CowboyHat extends ItemCategory {
+
+        public final ConfigValue<Double> mountSpeedBonus = define("mountSpeedBonus", ValueTypes.ATTRIBUTE_MODIFIER, 0.40)
+                .tooltipLine("How much the Cowboy Hat increases the speed of ridden mounts").build();
+
+        private CowboyHat() {
+            super(ModItems.COWBOY_HAT);
+        }
+    }
+
+    public final class CrossNecklace extends ItemCategory {
+
+        public final ConfigValue<Double> bonusInvincibilityTicks = define("bonusInvincibilityTicks", ValueTypes.ATTRIBUTE_MODIFIER, 20D)
+                .tooltipLine("The amount of extra ticks the player stays invincible for after taking damage while wearing the Cross Necklace").build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 0)
+                .tooltipLine("The duration in seconds the Cross Necklace goes on cooldown for after activating").build();
+
+        private CrossNecklace() {
+            super(ModItems.CROSS_NECKLACE);
+        }
+    }
+
+    public final class CrystalHeart extends ItemCategory {
+
+        public final ConfigValue<Double> healthBonus = define("healthBonus", ValueTypes.ATTRIBUTE_MODIFIER, 10D)
+                .tooltipLine("The amount of extra health points that are granted by the Crystal Heart").build();
+
+        private CrystalHeart() {
+            super(ModItems.CRYSTAL_HEART);
+        }
+    }
+
+    public final class DiggingClaws extends ItemCategory {
+
+        public final ConfigValue<Double> blockBreakSpeedBonus = define("blockBreakSpeedBonus", ValueTypes.ATTRIBUTE_MODIFIER, 0.30)
+                .tooltipLine("How much the Digging Claws increase the wearer's mining speed").build();
+
+        public final ConfigValue<ToolTierUpgrade.Tier> toolTier = define("toolTier", ValueTypes.TOOL_TIER, ToolTierUpgrade.Tier.STONE)
+                .tooltipLine("The tool tier that the Digging Claws increase the wearer's mining level to").build();
+
+        private DiggingClaws() {
+            super(ModItems.DIGGING_CLAWS);
+        }
+    }
+
+    public final class DrinkingHat extends ItemCategory {
+
+        public final ConfigValue<Double> drinkingSpeedBonus;
+        public final ConfigValue<Double> eatingSpeedBonus;
+
+        private DrinkingHat(Holder<Item> item, String itemName) {
+            super(item);
+            this.drinkingSpeedBonus = define("drinkingSpeedBonus", ValueTypes.ATTRIBUTE_MODIFIER, 1.50)
+                    .tooltipLine("How much the %s increases the wearer's drinking speed".formatted(itemName)).build();
+            this.eatingSpeedBonus = define("eatingSpeedBonus", ValueTypes.ATTRIBUTE_MODIFIER, 0.50)
+                    .tooltipLine("How much the %s increases the wearer's eating speed".formatted(itemName)).build();
+        }
+    }
+
+    public final class EternalSteak extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Eternal Steak can be eaten")
+                .requiresRestart().build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 15)
+                .tooltipLine("The duration in seconds the Eternal Steak goes on cooldown for after being eaten")
+                .requiresRestart().build();
+
+        private EternalSteak() {
+            super(ModItems.ETERNAL_STEAK);
+        }
+    }
+
+    public final class EverlastingBeef extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Everlasting Beef can be eaten")
+                .requiresRestart().build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 15)
+                .tooltipLine("The duration in seconds the Everlasting Beef goes on cooldown for after being eaten")
+                .requiresRestart().build();
+
+        public final ConfigValue<Double> dropRate = define("dropRate", ValueTypes.FRACTION, 1 / 500D)
+                .tooltipLine("The probability that Everlasting Beef drops when a cow or mooshroom is killed by a player").build();
+
+        private EverlastingBeef() {
+            super(ModItems.EVERLASTING_BEEF);
+        }
+    }
+
+    public final class FeralClaws extends ItemCategory {
+
+        public final ConfigValue<Double> attackSpeedBonus = define("attackSpeedBonus", ValueTypes.ATTRIBUTE_MODIFIER, 0.30)
+                .tooltipLine("How much the Feral Claws increase the wearer's attack speed").build();
+
+        private FeralClaws() {
+            super(ModItems.FERAL_CLAWS);
+        }
+    }
+
+    public final class FireGauntlet extends ItemCategory {
+
+        public final ConfigValue<Double> fireDuration = define("fireDuration", ValueTypes.ATTRIBUTE_MODIFIER, 8D)
+                .tooltipLine("How long an entity is set on fire for after being attacked by an entity wearing the Fire Gauntlet").build();
+
+        private FireGauntlet() {
+            super(ModItems.FIRE_GAUNTLET);
+        }
+    }
+
+    public final class FlamePendant extends ItemCategory {
+
+        public final ConfigValue<Double> strikeChance = define("strikeChance", ValueTypes.FRACTION, 0.40)
+                .tooltipLine("The probability that the Flame Pendant lights an attacker on fire").build();
+
+        public final ConfigValue<Integer> fireDuration = define("fireDuration", ValueTypes.DURATION, 10)
+                .tooltipLine("How long an attacking entity is set on fire for when the Flame Pendant activates").build();
+
+        public final ConfigValue<Boolean> grantFireResistance = define("grantFireResistance", true)
+                .tooltipLine("Whether the Flame Pendant grants Fire Resistance after igniting an entity").build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 0)
+                .tooltipLine("The duration in seconds the Flame Pendant goes on cooldown for after setting an entity on fire").build();
+
+        private FlamePendant() {
+            super(ModItems.FLAME_PENDANT);
+        }
+    }
+
+    public final class Flippers extends ItemCategory {
+
+        public final ConfigValue<Double> swimSpeedBonus = define("swimSpeedBonus", ValueTypes.ATTRIBUTE_MODIFIER, 0.70)
+                .tooltipLine("How much the Flippers increase the wearer's swim speed").build();
+
+        private Flippers() {
+            super(ModItems.FLIPPERS);
+        }
+    }
+
+    public final class GoldenHook extends ItemCategory {
+
+        public final ConfigValue<Double> entityExperienceBonus = define("entityExperienceBonus", ValueTypes.ATTRIBUTE_MODIFIER, 0.50)
+                .tooltipLine("The amount of extra experience dropped by entities that are killed by players wearing the Golden Hook").build();
+
+        private GoldenHook() {
+            super(ModItems.GOLDEN_HOOK);
+        }
+    }
+
+    public final class HeliumFlamingo extends ItemCategory {
+
+        public final ConfigValue<Integer> flightDuration = define("flightDuration", ValueTypes.DURATION, 8)
+                .tooltipLine("The amount of time in seconds a player can fly with the Helium Flamingo before needing to recharge").build();
+
+        public final ConfigValue<Integer> rechargeDuration = define("rechargeDuration", ValueTypes.DURATION, 15)
+                .tooltipLine("The amount of time in seconds it takes for the Helium Flamingo to recharge").build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 3)
+                .tooltipLine("The duration in seconds the Helium Flamingo goes on cooldown for when stopping flight").build();
+
+        private HeliumFlamingo() {
+            super(ModItems.HELIUM_FLAMINGO);
+        }
+    }
+
+    public final class KittySlippers extends ItemCategory {
+
+        public final ConfigValue<Boolean> modifyHurtSounds = define("modifyHurtSounds", true)
+                .tooltipLine("Whether the Kitty Slippers change the player's hurt sounds").build();
+
+        public final ConfigValue<Boolean> repelCreepers = define("repelCreepers", true)
+                .tooltipLine("Whether the Kitty Slippers scare nearby creepers").build();
+
+        public final ConfigValue<Boolean> repelPhantoms = define("repelPhantoms", true)
+                .tooltipLine("Whether the Kitty Slippers hiss at nearby phantoms").build();
+
+        private KittySlippers() {
+            super(ModItems.KITTY_SLIPPERS);
+        }
+    }
+
+    public final class LuckyScarf extends ItemCategory {
+
+        public final ConfigValue<Integer> fortuneLevelBonus = define("fortuneLevelBonus", ValueTypes.ENCHANTMENT_LEVEL, 1)
+                .tooltipLine("The amount of extra levels of fortune that are granted by the Lucky Scarf").build();
+
+        private LuckyScarf() {
+            super(ModItems.LUCKY_SCARF);
+        }
+    }
+
+    public final class NightVisionGoggles extends ItemCategory {
+
+        public final ConfigValue<Double> strength = define("strength", ValueTypes.FRACTION, 0.15)
+                .tooltipLine("The strength of the night vision effect applied by the Night Vision Goggles").build();
+
+        private NightVisionGoggles() {
+            super(ModItems.NIGHT_VISION_GOGGLES);
+        }
+    }
+
+    public final class ObsidianSkull extends ItemCategory {
+
+        public final ConfigValue<Integer> fireResistanceDuration = define("fireResistanceDuration", ValueTypes.DURATION, 30)
+                .tooltipLine("The duration of the fire resistance effect that is applied when taking fire damage while wearing the Obsidian Skull").build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 60)
+                .tooltipLine("The amount of time in seconds the Obsidian Skull goes on cooldown for after taking fire damage").build();
+
+        private ObsidianSkull() {
+            super(ModItems.OBSIDIAN_SKULL);
+        }
+    }
+
+    public final class OnionRing extends ItemCategory {
+
+        public final ConfigValue<Integer> hasteDurationPerFoodPoint = define("hasteDurationPerFoodPoint", ValueTypes.DURATION, 6)
+                .tooltipLine("The duration of haste that is applied per food point eaten while wearing the Onion Ring").build();
+
+        public final ConfigValue<Integer> hasteLevel = define("hasteLevel", ValueTypes.MOB_EFFECT_LEVEL, 2)
+                .tooltipLine("The level of the haste effect that is applied by the Onion Ring").build();
+
+        private OnionRing() {
+            super(ModItems.ONION_RING);
+        }
+    }
+
+    public final class PanicNecklace extends ItemCategory {
+
+        public final ConfigValue<Integer> speedLevel = define("speedLevel", ValueTypes.MOB_EFFECT_LEVEL, 1)
+                .tooltipLine("The level of the speed effect that is applied by the Panic Necklace").build();
+
+        public final ConfigValue<Integer> speedDuration = define("speedDuration", ValueTypes.DURATION, 8)
+                .tooltipLine("The duration in seconds of the speed effect that is applied when taking damage while wearing the Panic Necklace").build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 0)
+                .tooltipLine("The duration in seconds the Panic Necklace goes on cooldown for after taking damage").build();
+
+        private PanicNecklace() {
+            super(ModItems.PANIC_NECKLACE);
+        }
+    }
+
+    public final class PickaxeHeater extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Pickaxe Heater smelts mined ores").build();
+
+        private PickaxeHeater() {
+            super(ModItems.PICKAXE_HEATER);
+        }
+    }
+
+    public final class PocketPiston extends ItemCategory {
+
+        public final ConfigValue<Double> attackKnockbackBonus = define("attackKnockbackBonus", ValueTypes.ATTRIBUTE_MODIFIER, 0.75)
+                .tooltipLine("The amount of extra knockback that is granted by the Pocket Piston").build();
+
+        private PocketPiston() {
+            super(ModItems.POCKET_PISTON);
+        }
+    }
+
+    public final class PowerGlove extends ItemCategory {
+
+        public final ConfigValue<Double> attackDamageBonus = define("attackDamageBonus", ValueTypes.ATTRIBUTE_MODIFIER, 4D)
+                .tooltipLine("The amount of extra damage that is dealt by melee attacks from players wearing the Power Glove").build();
+
+        private PowerGlove() {
+            super(ModItems.POWER_GLOVE);
+        }
+    }
+
+    public final class RootedBoots extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Rooted Boots replenish hunger when standing on grass").build();
+
+        public final ConfigValue<Integer> hungerReplenishingDuration = define("hungerReplenishingDuration", ValueTypes.DURATION, 10)
+                .tooltipLine("The amount of time in seconds it takes to replenish a single point of hunger while wearing the Rooted Boots").build();
+
+        public final ConfigValue<Boolean> growPlantsAfterEating = define("growPlantsAfterEating", true)
+                .tooltipLine("Whether the Rooted Boots apply a bone meal effect after eating food").build();
+
+        private RootedBoots() {
+            super(ModItems.ROOTED_BOOTS);
+        }
+    }
+
+    public final class RunningShoes extends ItemCategory {
+
+        public final ConfigValue<Double> sprintingSpeedBonus = define("sprintingSpeedBonus", ValueTypes.ATTRIBUTE_MODIFIER, 0.40)
+                .tooltipLine("How much the Running Shoes increase the wearer's sprinting speed").build();
+
+        public final ConfigValue<Double> sprintingStepHeightBonus = define("sprintingStepHeightBonus", ValueTypes.ATTRIBUTE_MODIFIER, 0.5)
+                .tooltipLine("How much the Running Shoes increase the wearer's step height while sprinting").build();
+
+        private RunningShoes() {
+            super(ModItems.RUNNING_SHOES);
+        }
+    }
+
+    public final class ScarfOfInvisibility extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Scarf of Invisibility makes players invisible")
+                .requiresRestart().build();
+
+        public final ConfigValue<Boolean> hideWhenInvisible = define("hideWhenInvisible", false)
+                .tooltipLine("Whether the Scarf of Invisibility is hidden when the wearer is invisible").build();
+
+        private ScarfOfInvisibility() {
+            super(ModItems.SCARF_OF_INVISIBILITY);
+        }
+    }
+
+    public final class ShockPendant extends ItemCategory {
+
+        public final ConfigValue<Double> strikeChance = define("strikeChance", ValueTypes.FRACTION, 0.25)
+                .tooltipLine("The probability that the Shock Pendant strikes an attacking entity with lightning").build();
+
+        public final ConfigValue<Boolean> cancelLightningDamage = define("cancelLightningDamage", true)
+                .tooltipLine("Whether the Shock Pendant cancels damage from lightning").build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 0)
+                .tooltipLine("The amount of time in seconds the Shock Pendant goes on cooldown for after striking an attacker with lightning").build();
+
+        private ShockPendant() {
+            super(ModItems.SHOCK_PENDANT);
+        }
+    }
+
+    public final class Snorkel extends ItemCategory {
+
+        public final ConfigValue<Boolean> isInfinite = define("isInfinite", false)
+                .tooltipLine("Whether the Snorkel's water breathing effect depletes when underwater")
+                .requiresRestart().build();
+
+        public final ConfigValue<Integer> waterBreathingDuration = define("waterBreathingDuration", ValueTypes.DURATION, 30)
+                .tooltipLine("The duration of the water breathing effect that is applied by the Snorkel").build();
+
+        private Snorkel() {
+            super(ModItems.SNORKEL);
+        }
+    }
+
+    public final class Snowshoes extends ItemCategory {
+
+        public final ConfigValue<Boolean> allowWalkingOnPowderedSnow = define("allowWalkingOnPowderedSnow", true)
+                .tooltipLine("Whether the Snowshoes allow the wearer to walk on powdered snow").build();
+
+        public final ConfigValue<Double> movementSpeedOnSnowBonus = define("movementSpeedOnSnowBonus", ValueTypes.ATTRIBUTE_MODIFIER, 0.30)
+                .tooltipLine("How much the Snowshoes increase the wearer's movement speed on snow blocks").build();
+
+        private Snowshoes() {
+            super(ModItems.SNOWSHOES);
+        }
+    }
+
+    public final class SteadfastSpikes extends ItemCategory {
+
+        public final ConfigValue<Double> knockbackResistance = define("knockbackResistance", ValueTypes.ATTRIBUTE_MODIFIER, 1.00)
+                .tooltipLine("How much knockback resistance is granted by the Steadfast Spikes").build();
+
+        public final ConfigValue<Double> slipperinessReduction = define("slipperinessReduction", ValueTypes.ATTRIBUTE_MODIFIER, 1.00)
+                .tooltipLine("How much the Steadfast Spikes reduce the slipperiness of ice").build();
+
+        private SteadfastSpikes() {
+            super(ModItems.STEADFAST_SPIKES);
+        }
+    }
+
+    public final class StriderShoes extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Strider Shoes allow sneaking on lava").build();
+
+        public final ConfigValue<Boolean> cancelHotFloorDamage = define("cancelHotFloorDamage", true)
+                .tooltipLine("Whether the Strider Shoes make the wearer immune to hot floor damage").build();
+
+        private StriderShoes() {
+            super(ModItems.STRIDER_SHOES);
+        }
+    }
+
+    public final class SuperstitiousHat extends ItemCategory {
+
+        public final ConfigValue<Integer> lootingLevelBonus = define("lootingLevelBonus", ValueTypes.ENCHANTMENT_LEVEL, 1)
+                .tooltipLine("The amount of extra levels of Looting that are granted by the Superstitious Hat").build();
+
+        private SuperstitiousHat() {
+            super(ModItems.SUPERSTITIOUS_HAT);
+        }
+    }
+
+    public final class ThornPendant extends ItemCategory {
+
+        public final ConfigValue<Double> strikeChance = define("strikeChance", ValueTypes.FRACTION, 0.50)
+                .tooltipLine("The probability that the Thorn Pendant damages an attacking entity").build();
+
+        public final ConfigValue<Integer> maxDamage = define("maxDamage", ValueTypes.NON_NEGATIVE_INT, 6)
+                .tooltipLine("The minimum amount of damage that is dealt when the Thorn Pendant activates").build();
+
+        public final ConfigValue<Integer> minDamage = define("minDamage", ValueTypes.NON_NEGATIVE_INT, 2)
+                .tooltipLine("The maximum amount of damage that is dealt when the Thorn Pendant activates").build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 0)
+                .tooltipLine("The duration in seconds the Thorn Pendant goes on cooldown for after activating").build();
+
+        private ThornPendant() {
+            super(ModItems.THORN_PENDANT);
+        }
+    }
+
+    public final class Umbrella extends ItemCategory {
+
+        public final ConfigValue<Boolean> isShield = define("isShield", true)
+                .tooltipLine("Whether the Umbrella can be used as a shield")
+                .requiresRestart().build();
+
+        public final ConfigValue<Boolean> isGlider = define("isGlider", true)
+                .tooltipLine("Whether the Umbrella slows the player's falling speed when held").build();
+
+        private Umbrella() {
+            super(ModItems.UMBRELLA);
+        }
+    }
+
+    public final class UniversalAttractor extends ItemCategory {
+
+        public final ConfigValue<Integer> magnetismLevel = define("magnetismLevel", ValueTypes.MOB_EFFECT_LEVEL, 5)
+                .tooltipLine("The level of the magnetism effect that is applied by the Universal Attractor").build();
+
+        private UniversalAttractor() {
+            super(ModItems.UNIVERSAL_ATTRACTOR);
+        }
+    }
+
+    public final class VampiricGlove extends ItemCategory {
+
+        public final ConfigValue<Double> absorptionRatio = define("absorptionRatio", ValueTypes.NON_NEGATIVE_DOUBLE, 0.20)
+                .tooltipLine("The proportion of melee damage dealt that is absorbed by the Vampiric Gloves").build();
+
+        public final ConfigValue<Double> absorptionChance = define("absorptionChance", ValueTypes.FRACTION, 1D)
+                .tooltipLine("The probability that damage is absorbed when attacking an entity with the Vampiric Gloves").build();
+
+        public final ConfigValue<Integer> maxHealingPerHit = define("maxHealingPerHit", ValueTypes.NON_NEGATIVE_INT, 6)
+                .tooltipLine("The maximum amount of healing that can be absorbed in a single hit when attacking an entity while wearing the Vampiric Glove").build();
+
+        private VampiricGlove() {
+            super(ModItems.VAMPIRIC_GLOVE);
+        }
+    }
+
+    public final class VillagerHat extends ItemCategory {
+
+        public final ConfigValue<Double> reputationBonus = define("reputationBonus", ValueTypes.ATTRIBUTE_MODIFIER, 75D)
+                .tooltipLine("The amount of extra reputation that is granted by the Villager Hat when trading with villagers").build();
+
+        private VillagerHat() {
+            super(ModItems.VILLAGER_HAT);
+        }
+    }
+
+    public final class WarpDrive extends ItemCategory {
+
+        public final ConfigValue<Boolean> enabled = define("enabled", true)
+                .tooltipLine("Whether the Warp Drive causes ender pearls to not be consumed").build();
+
+        public final ConfigValue<Integer> hungerCost = define("hungerCost", ValueTypes.NON_NEGATIVE_INT, 2)
+                .tooltipLine("How many hunger points it costs to throw an Ender Pearl using the Warp Drive").build();
+
+        public final ConfigValue<Boolean> nullifyEnderPearlDamage = define("nullifyEnderPearlDamage", true)
+                .tooltipLine("Whether the Warp Drive causes Ender Pearls not to deal any damage").build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 0)
+                .tooltipLine("The duration Ender Pearls go on cooldown for after being thrown using the Warp Drive").build();
+
+        private WarpDrive() {
+            super(ModItems.WARP_DRIVE);
+        }
+    }
+
+    public final class WhoopeeCushion extends ItemCategory {
+
+        public final ConfigValue<Double> fartChance = define("fartChance", ValueTypes.FRACTION, 0.12)
+                .tooltipLine("The probability that a fart sound plays when sneaking or double jumping while wearing the Whoopee Cushion").build();
+
+        private WhoopeeCushion() {
+            super(ModItems.WHOOPEE_CUSHION);
+        }
+    }
+
+    public final class WitheredBracelet extends ItemCategory {
+
+        public final ConfigValue<Double> witherChance = define("witherChance", ValueTypes.FRACTION, 0.3)
+                .tooltipLine("The probability that the Withered Bracelet inflicts a wither effect").build();
+
+        public final ConfigValue<Integer> witherDuration = define("witherDuration", ValueTypes.DURATION, 8)
+                .tooltipLine("The duration of the wither effect applied by the Withered Bracelet").build();
+
+        public final ConfigValue<Integer> witherLevel = define("witherLevel", ValueTypes.MOB_EFFECT_LEVEL, 2)
+                .tooltipLine("The level of the wither effect that is inflicted by the Withered Bracelet").build();
+
+        public final ConfigValue<Integer> cooldown = define("cooldown", ValueTypes.DURATION, 0)
+                .tooltipLine("The duration the Withered Bracelet goes on cooldown for after inflicting wither on an entity").build();
+
+        private WitheredBracelet() {
+            super(ModItems.WITHERED_BRACELET);
+        }
     }
 
     public Value<Boolean> generatesAsLoot(Item item) {
         Optional<ResourceKey<Item>> key = BuiltInRegistries.ITEM.getResourceKey(item);
-        if (key.isEmpty() || !generateAsLoot.containsKey(key.get())) {
+        if (key.isEmpty() || !itemCategories.containsKey(key.get())) {
             return null;
         }
-        return generateAsLoot.get(key.get());
+        return itemCategories.get(key.get()).generateAsLoot;
     }
 
     @Override
     public void onConfigChanged() {
+        // Clients should always receive item configs from the server, only servers should read this config from disk
         if (Artifacts.getCurrentServer() != null) {
             Artifacts.LOGGER.info("Sending updated item configs to connected clients");
             readValuesFromConfig();
@@ -297,5 +750,17 @@ public class ItemConfigs extends ConfigManager {
     public void sendToClient(ServerPlayer player) {
         Artifacts.LOGGER.info("Sending item configs to client");
         getValues().forEach((key, value) -> NetworkHandler.sendToPlayer(player, new UpdateItemConfigPacket(value)));
+    }
+
+    private abstract class ItemCategory extends Category {
+
+        public final ConfigValue<Boolean> generateAsLoot = define("generateAsLoot", true)
+                .tooltipLine("Whether this item can be found in structures or drop from entities").build();
+
+        public ItemCategory(Holder<Item> holder) {
+            super(holder.unwrapKey().orElseThrow().location().getPath());
+            // shouldn't really do this from a constructor but whatever
+            ItemConfigs.this.itemCategories.put(holder.unwrapKey().orElseThrow(), this);
+        }
     }
 }

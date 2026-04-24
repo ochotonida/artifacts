@@ -59,7 +59,7 @@ public record AttributeModifiers(List<Entry> entries) implements TickingComposit
 
         public static final Codec<Entry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 BuiltInRegistries.ATTRIBUTE.holderByNameCodec().fieldOf("attribute").forGetter(Entry::attribute),
-                ValueTypes.ATTRIBUTE_MODIFIER_AMOUNT.codec().fieldOf("amount").forGetter(Entry::amount),
+                ValueTypes.ATTRIBUTE_MODIFIER.codec().fieldOf("amount").forGetter(Entry::amount),
                 AttributeModifier.Operation.CODEC.fieldOf("operation").forGetter(Entry::operation),
                 ResourceLocation.CODEC.fieldOf("id").forGetter(Entry::id),
                 Codec.BOOL.optionalFieldOf("ignore_cooldown", true).forGetter(Entry::ignoreCooldown)
@@ -68,7 +68,7 @@ public record AttributeModifiers(List<Entry> entries) implements TickingComposit
         public static final StreamCodec<RegistryFriendlyByteBuf, Entry> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.holderRegistry(Registries.ATTRIBUTE),
                 Entry::attribute,
-                ValueTypes.ATTRIBUTE_MODIFIER_AMOUNT.streamCodec(),
+                ValueTypes.ATTRIBUTE_MODIFIER.streamCodec(),
                 Entry::amount,
                 AttributeModifier.Operation.STREAM_CODEC,
                 Entry::operation,

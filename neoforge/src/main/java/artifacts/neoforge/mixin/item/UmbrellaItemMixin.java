@@ -18,6 +18,6 @@ public abstract class UmbrellaItemMixin extends Item {
 
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility toolAction) {
-        return ItemAbilities.DEFAULT_SHIELD_ACTIONS.contains(toolAction) && Artifacts.CONFIG.items.umbrellaIsShield.get();
+        return ItemAbilities.DEFAULT_SHIELD_ACTIONS.contains(toolAction) && Artifacts.CONFIG.items.umbrella.isShield.get();
     }
 }

@@ -55,7 +55,7 @@ public abstract class ConfigManager {
         } catch (ParsingException exception) {
             Artifacts.LOGGER.warn("Failed to load config file {}, attempting to recreate", configPath);
             try {
-                backUpConfig(config.getNioPath(), 5);
+                createBackup(config.getNioPath(), 5);
                 Files.delete(config.getNioPath());
                 config.load();
             } catch (Throwable t) {
@@ -147,7 +147,7 @@ public abstract class ConfigManager {
         readValuesFromConfig();
     }
 
-    public static void backUpConfig(final Path commentedFileConfig, final int maxBackups) {
+    public static void createBackup(final Path commentedFileConfig, final int maxBackups) {
         Path bakFileLocation = commentedFileConfig.getParent();
         String bakFileName = FilenameUtils.removeExtension(commentedFileConfig.getFileName().toString());
         String bakFileExtension = FilenameUtils.getExtension(commentedFileConfig.getFileName().toString()) + ".bak";
@@ -168,75 +168,34 @@ public abstract class ConfigManager {
         }
     }
 
-    protected ConfigValue<Boolean> defineBool(String key, String... tooltips) {
-        return defineBool(key, true, false, tooltips);
+    protected ConfigValueBuilder<Boolean> define(String key, boolean defaultValue) {
+        return new ConfigValueBuilder<>(key, ValueTypes.BOOLEAN, defaultValue) {
+            @Override
+            protected void defineInSpec() {
+                spec.define(key, defaultValue);
+            }
+        };
     }
 
-    protected ConfigValue<Boolean> defineBool(String key, boolean defaultValue, boolean requiresRestart, String... tooltips) {
-        ConfigValue<Boolean> value = createValue(key, ValueTypes.BOOLEAN, defaultValue, requiresRestart, tooltips);
-        spec.define(key, defaultValue);
-        return value;
+    protected <T extends Number & Comparable<T>> ConfigValueBuilder<T> define(String key, NumberValueType<T> type, T defaultValue) {
+        return new ConfigValueBuilder<>(key, type, defaultValue) {
+            @Override
+            protected void defineInSpec() {
+                spec.defineInRange(key, defaultValue, type.getMin(), type.getMax());
+            }
+        };
     }
 
-    protected ConfigValue<Integer> defineNonNegativeInt(String key, int defaultValue, String... tooltips) {
-        return defineNumber(key, ValueTypes.NON_NEGATIVE_INT, defaultValue, false, tooltips);
-    }
-
-    protected ConfigValue<Integer> defineInt(String key, int defaultValue, String... tooltips) {
-        return defineNumber(key, ValueTypes.INT, defaultValue, false, tooltips);
-    }
-
-    protected ConfigValue<Double> defineAttributeModifier(String key, double defaultValue, String... tooltips) {
-        return defineNumber(key, ValueTypes.ATTRIBUTE_MODIFIER_AMOUNT, defaultValue, false, tooltips);
-    }
-
-    protected ConfigValue<Double> defineNonNegativeDouble(String key, double defaultValue, String... tooltips) {
-        return defineNumber(key, ValueTypes.NON_NEGATIVE_DOUBLE, defaultValue, false, tooltips);
-    }
-
-    protected ConfigValue<Double> defineFraction(String key, double defaultValue, String... tooltips) {
-        return defineNumber(key, ValueTypes.FRACTION, defaultValue, false, tooltips);
-    }
-
-    protected ConfigValue<Integer> defineDuration(String key, int defaultValue, String... tooltips) {
-        return defineNumber(key, ValueTypes.DURATION, defaultValue, false, tooltips);
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    protected ConfigValue<Integer> defineEnchantmentLevel(String key, int defaultValue, String... tooltips) {
-        return defineNumber(key, ValueTypes.ENCHANTMENT_LEVEL, defaultValue, false, tooltips);
-    }
-
-    protected ConfigValue<Integer> defineMobEffectLevel(String key, int defaultValue, String... tooltips) {
-        return defineNumber(key, ValueTypes.MOB_EFFECT_LEVEL, defaultValue, false, tooltips);
-    }
-
-    private <T extends Number & Comparable<T>> ConfigValue<T> defineNumber(String key, NumberValueType<T> type, T defaultValue, boolean requiresRestart, String... tooltips) {
-        ConfigValue<T> value = createValue(key, type, defaultValue, requiresRestart, tooltips);
-        spec.defineInRange(key, defaultValue, type.getMin(), type.getMax());
-        return value;
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    protected <T extends Enum<T> & StringRepresentable> ConfigValue<T> defineEnum(String key, EnumValueType<T> type, T defaultValue, boolean requiresRestart, String... tooltips) {
-        ConfigValue<T> value = createValue(key, type, defaultValue, requiresRestart, tooltips);
-        List<String> allowedValues = new ArrayList<>();
-        allowedValues.addAll(type.getValues().stream().map(StringRepresentable::getSerializedName).toList());
-        allowedValues.addAll(type.getValues().stream().map(StringRepresentable::getSerializedName).map(String::toUpperCase).toList());
-        spec.defineInList(key, value.getDefaultValue().getSerializedName(), allowedValues);
-        return value;
-    }
-
-    protected <T> ConfigValue<T> createValue(String key, ValueType<T, ?> type, T defaultValue, boolean requiresRestart, String... tooltips) {
-        ConfigValue<T> value = new ConfigValue<>(type, key, defaultValue, requiresRestart);
-        values.put(key, value);
-        this.tooltips.put(key, List.of(tooltips));
-        if (!this.typeToValues.containsKey(type)) {
-            typeToValues.put(type, new ValueMap<>());
-        }
-        //noinspection unchecked
-        ((ValueMap<T>) typeToValues.get(type)).getMap().put(key, value);
-        return value;
+    protected <T extends Enum<T> & StringRepresentable> ConfigValueBuilder<T> define(String key, EnumValueType<T> type, T defaultValue) {
+        return new ConfigValueBuilder<>(key, type, defaultValue) {
+            @Override
+            protected void defineInSpec() {
+                List<String> allowedValues = new ArrayList<>();
+                allowedValues.addAll(type.getValues().stream().map(StringRepresentable::getSerializedName).toList());
+                allowedValues.addAll(type.getValues().stream().map(StringRepresentable::getSerializedName).map(String::toUpperCase).toList());
+                spec.defineInList(key, defaultValue.getSerializedName(), allowedValues);
+            }
+        };
     }
 
     private static class ValueMap<T> {
@@ -244,6 +203,79 @@ public abstract class ConfigManager {
 
         public Map<String, ConfigValue<T>> getMap() {
             return map;
+        }
+    }
+
+    public abstract class Category {
+
+        private final String name;
+
+        protected Category(String name) {
+            this.name = name;
+        }
+
+        protected ConfigValueBuilder<Boolean> define(String key, boolean defaultValue) {
+            return ConfigManager.this.define(addPrefix(key), defaultValue);
+        }
+
+        protected <T extends Number & Comparable<T>> ConfigValueBuilder<T> define(String key, NumberValueType<T> type, T defaultValue) {
+            return ConfigManager.this.define(addPrefix(key), type, defaultValue);
+        }
+
+        protected <T extends Enum<T> & StringRepresentable> ConfigValueBuilder<T> define(String key, EnumValueType<T> type, T defaultValue) {
+            return ConfigManager.this.define(addPrefix(key), type, defaultValue);
+        }
+
+        private String addPrefix(String key) {
+            return name + '.' + key;
+        }
+    }
+
+    public abstract class ConfigValueBuilder<T> {
+
+        private final String key;
+        private final ValueType<T, ?> type;
+        private final T defaultValue;
+
+        private final List<String> tooltip = new ArrayList<>();
+        private boolean requiresRestart = false;
+
+        public ConfigValueBuilder(String key, ValueType<T, ?> type, T defaultValue) {
+            this.key = key;
+            this.defaultValue = defaultValue;
+            this.type = type;
+        }
+
+        protected abstract void defineInSpec();
+
+        protected ConfigValue<T> createValue(String key, ValueType<T, ?> type, T defaultValue, boolean requiresRestart, String... tooltips) {
+            ConfigValue<T> value = new ConfigValue<>(type, key, defaultValue, requiresRestart);
+            values.put(key, value);
+            ConfigManager.this.tooltips.put(key, List.of(tooltips));
+            if (!ConfigManager.this.typeToValues.containsKey(type)) {
+                typeToValues.put(type, new ValueMap<>());
+            }
+            // noinspection unchecked
+            ((ValueMap<T>) typeToValues.get(type)).getMap().put(key, value);
+            return value;
+        }
+
+        public ConfigValue<T> build() {
+            defineInSpec();
+            return createValue(
+                    key, type, defaultValue, requiresRestart,
+                    tooltip.toArray(new String[0])
+            );
+        }
+
+        public ConfigValueBuilder<T> requiresRestart() {
+            requiresRestart = true;
+            return this;
+        }
+
+        public ConfigValueBuilder<T> tooltipLine(String line) {
+            tooltip.add(line);
+            return this;
         }
     }
 

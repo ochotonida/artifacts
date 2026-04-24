@@ -28,15 +28,15 @@ public class UmbrellaItem extends ArtifactItem {
 
     @Override
     public boolean isCosmetic() {
-        return !Artifacts.CONFIG.items.umbrellaIsGlider.get() && !Artifacts.CONFIG.items.umbrellaIsShield.get();
+        return !Artifacts.CONFIG.items.umbrella.isGlider.get() && !Artifacts.CONFIG.items.umbrella.isShield.get();
     }
 
     @Override
     protected void addEffectsTooltip(List<MutableComponent> tooltip) {
-        if (Artifacts.CONFIG.items.umbrellaIsGlider.get()) {
+        if (Artifacts.CONFIG.items.umbrella.isGlider.get()) {
             tooltip.add(tooltipLine("glider"));
         }
-        if (Artifacts.CONFIG.items.umbrellaIsShield.get()) {
+        if (Artifacts.CONFIG.items.umbrella.isShield.get()) {
             tooltip.add(tooltipLine("shield"));
         }
     }
@@ -54,7 +54,7 @@ public class UmbrellaItem extends ArtifactItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!Artifacts.CONFIG.items.umbrellaIsShield.get()) {
+        if (!Artifacts.CONFIG.items.umbrella.isShield.get()) {
             return super.use(level, player, hand);
         }
         player.startUsingItem(hand);
@@ -71,7 +71,7 @@ public class UmbrellaItem extends ArtifactItem {
         return !entity.onGround()
                 && entity.getDeltaMovement().y < 0
                 && !entity.hasEffect(MobEffects.SLOW_FALLING)
-                && Artifacts.CONFIG.items.umbrellaIsGlider.get()
+                && Artifacts.CONFIG.items.umbrella.isGlider.get()
                 && !(entity.isInWater() && !EquipmentHelper.hasAbilityActive(ModDataComponents.SINKING.get(), entity, true))
                 && UmbrellaItem.isHoldingUmbrellaUpright(entity);
     }
