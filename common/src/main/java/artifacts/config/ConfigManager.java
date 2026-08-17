@@ -273,7 +273,7 @@ public abstract class ConfigManager {
             return this;
         }
 
-        public ConfigValueBuilder<T> tooltipLine(String line) {
+        public ConfigValueBuilder<T> descriptionLine(String line) {
             tooltip.add(line);
             return this;
         }
