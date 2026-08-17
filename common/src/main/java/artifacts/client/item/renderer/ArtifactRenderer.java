@@ -32,6 +32,9 @@ public interface ArtifactRenderer {
             float headPitch
     ) {
         if (entity instanceof Player) {
+            if (!Artifacts.CONFIG.client.showArtifactsOnPlayers.get()) {
+                return;
+            }
             Value<Boolean> hideWhenInvisible = stack.get(ModDataComponents.HIDE_WHEN_INVISIBLE.get());
             if (entity.isInvisible() && hideWhenInvisible != null && hideWhenInvisible.get()) {
                 return;

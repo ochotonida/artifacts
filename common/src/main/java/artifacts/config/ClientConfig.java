@@ -6,6 +6,12 @@ import java.util.function.Supplier;
 
 public class ClientConfig extends ConfigManager {
 
+    public final Supplier<Boolean> showArtifactsOnPlayers
+            = define("showArtifactsOnPlayers", true)
+            .descriptionLine("Whether worn artifacts should be displayed on players")
+            .descriptionLine("This config option is purely client-side, it does not change what other players see")
+            .build();
+
     public final Supplier<Boolean> showFirstPersonGloves
             = define("showFirstPersonGloves", true)
             .descriptionLine("Whether models for gloves are shown in first person")
