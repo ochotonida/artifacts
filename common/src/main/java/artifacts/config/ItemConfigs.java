@@ -520,6 +520,9 @@ public final class ItemConfigs extends ConfigManager {
         public final ConfigValue<Boolean> hideWhenInvisible = define("hideWhenInvisible", false)
                 .descriptionLine("Whether the Scarf of Invisibility is hidden when the wearer is invisible").build();
 
+        public final ConfigValue<Boolean> hideEffectParticles = define("hidesEffectParticles", false)
+                .descriptionLine("Whether the Scarf of Invisibility should prevent all status effects from spawning particles").build();
+
         private ScarfOfInvisibility() {
             super(ModItems.SCARF_OF_INVISIBILITY);
         }

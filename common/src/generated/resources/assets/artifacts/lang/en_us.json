@@ -193,6 +193,8 @@
   "artifacts.config.items.scarf_of_invisibility.enabled.description": "Whether the Scarf of Invisibility makes players invisible",
   "artifacts.config.items.scarf_of_invisibility.hideWhenInvisible.description": "Whether the Scarf of Invisibility is hidden when the wearer is invisible",
   "artifacts.config.items.scarf_of_invisibility.hideWhenInvisible.title": "Hide When Invisible",
+  "artifacts.config.items.scarf_of_invisibility.hidesEffectParticles.description": "Whether the Scarf of Invisibility should prevent all status effects from spawning particles",
+  "artifacts.config.items.scarf_of_invisibility.hidesEffectParticles.title": "Hides Effect Particles",
   "artifacts.config.items.shock_pendant.cancelLightningDamage.description": "Whether the Shock Pendant cancels damage from lightning",
   "artifacts.config.items.shock_pendant.cancelLightningDamage.title": "Cancel Lightning Damage",
   "artifacts.config.items.shock_pendant.cooldown.description": "The amount of time in seconds the Shock Pendant goes on cooldown for after striking an attacker with lightning",

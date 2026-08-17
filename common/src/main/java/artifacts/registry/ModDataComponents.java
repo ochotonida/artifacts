@@ -50,6 +50,7 @@ public class ModDataComponents {
     public static final Supplier<DataComponentType<HurtSound>> HURT_SOUND = registerSynced("hurt_sound", HurtSound.CODEC, HurtSound.STREAM_CODEC);
     public static final Supplier<DataComponentType<Value<Double>>> REDUCED_NIGHT_VISION = registerSynced("reduced_night_vision", ValueTypes.FRACTION.codec(), ValueTypes.FRACTION.streamCodec());
     public static final Supplier<DataComponentType<Value<Boolean>>> HIDE_WHEN_INVISIBLE = registerSynced("hide_when_invisible", ValueTypes.enabledField().codec(), ValueTypes.BOOLEAN.streamCodec());
+    public static final Supplier<DataComponentType<Value<Boolean>>> HIDES_EFFECT_PARTICLES = registerSynced("hides_effect_particles", ValueTypes.enabledField().codec(), ValueTypes.BOOLEAN.streamCodec());
 
     // abilities
     public static final Supplier<DataComponentType<PostDamageCooldown>> POST_DAMAGE_COOLDOWN =

@@ -108,6 +108,7 @@ public class ModItems {
             )
             .component(ModDataComponents.TOGGLE_KEY.get(), ToggleIdentifier.SCARF_OF_INVISIBILITY)
             .component(ModDataComponents.HIDE_WHEN_INVISIBLE.get(), Artifacts.CONFIG.items.scarfOfInvisibility.hideWhenInvisible)
+            .component(ModDataComponents.HIDES_EFFECT_PARTICLES.get(), Artifacts.CONFIG.items.scarfOfInvisibility.hideEffectParticles)
     );
     public static final Holder<Item> CROSS_NECKLACE = wearableItem("cross_necklace", builder -> builder
             .equipSound(SoundEvents.ARMOR_EQUIP_DIAMOND)

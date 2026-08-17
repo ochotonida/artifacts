@@ -15,6 +15,7 @@
     "ability.enderpearldamageimmunity.ThrownEnderPearlMixin",
     "ability.enderpearlhungercost.EnderPearlItemMixin",
     "ability.fluidcollision.EntityMixin",
+    "ability.hideseffectparticles.LivingEntityMixin",
     "ability.hurtsound.LivingEntityMixin",
     "ability.phantomrepellent.PhantomSweepAttackGoalMixin",
     "ability.piglinloved.PiglinAiMixin",
