@@ -19,16 +19,6 @@
         },
         {
           "type": "minecraft:loot_table",
-          "functions": [
-            {
-              "components": {
-                "artifacts:hide_when_invisible": {
-                  "enabled": false
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
           "value": "artifacts:items/scarf_of_invisibility"
         }
       ],
