@@ -18,7 +18,7 @@ public class ClientConfig extends ConfigManager {
 
     public final Supplier<Boolean> useModdedMimicTextures
             = define("useModdedMimicTextures", true)
-            .tooltipLine("Whether mimics can use textures from Lootr or Quark")
+            .tooltipLine("Whether mimics can use textures from Quark")
             .build();
 
     public final Supplier<Boolean> enableCooldownOverlay

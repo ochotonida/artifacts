@@ -18,7 +18,7 @@
   "artifacts.config.client.showTooltips.description": "Whether artifacts have tooltips explaining their effects",
   "artifacts.config.client.showTooltips.title": "Show Tooltips",
   "artifacts.config.client.title": "Client",
-  "artifacts.config.client.useModdedMimicTextures.description": "Whether mimics can use textures from Lootr or Quark",
+  "artifacts.config.client.useModdedMimicTextures.description": "Whether mimics can use textures from Quark",
   "artifacts.config.client.useModdedMimicTextures.title": "Use Modded Mimic Textures",
   "artifacts.config.cooldown.title": "Cooldown",
   "artifacts.config.enabled.title": "Enabled",
