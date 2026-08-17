@@ -4,13 +4,12 @@ import artifacts.Artifacts;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ModLootTables {
 
@@ -57,25 +56,9 @@ public class ModLootTables {
             BuiltInLootTables.TRAIL_RUINS_ARCHAEOLOGY_RARE
     );
 
-    public static final Map<EntityType<?>, ResourceKey<LootTable>> ENTITY_EQUIPMENT;
-
-    static {
-        ENTITY_EQUIPMENT = new HashMap<>();
-        List.of(
-                EntityType.ZOMBIE,
-                EntityType.HUSK,
-                EntityType.DROWNED,
-                EntityType.SKELETON,
-                EntityType.STRAY,
-                EntityType.WITHER_SKELETON,
-                EntityType.PIGLIN,
-                EntityType.PIGLIN_BRUTE,
-                EntityType.ZOMBIFIED_PIGLIN,
-                EntityType.GHAST
-        ).forEach(type -> ENTITY_EQUIPMENT.put(type, entityEquipmentLootTable(type)));
-    }
-
-    public static ResourceKey<LootTable> entityEquipmentLootTable(EntityType<?> entityType) {
-        return ResourceKey.create(Registries.LOOT_TABLE, Artifacts.id("entity_equipment/%s", BuiltInRegistries.ENTITY_TYPE.getKey(entityType).getPath()));
+    public static ResourceKey<LootTable> getEntityEquipmentLootTable(EntityType<?> entityType) {
+        ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(entityType);
+        String path = id.toShortLanguageKey().replace('.', '/');
+        return ResourceKey.create(Registries.LOOT_TABLE, Artifacts.id("entity_equipment/" + path));
     }
 }

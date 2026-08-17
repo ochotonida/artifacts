@@ -1,6 +1,6 @@
 {
   "replace": false,
-  "entities": ["husk", "skeleton", "zombie", "drowned", "stray", "wither_skeleton", "piglin", "piglin_brute", "zombified_piglin", "ghast"],
+  "entities": ["husk", "skeleton", "zombie", "drowned", "stray", "bogged", "wither_skeleton", "piglin", "piglin_brute", "zombified_piglin", "ghast"],
   "slots": [
     "hat",
     "necklace",

@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-17T17:44:33.4938233	Loot Tables
+// 1.21.1	2026-08-17T18:01:10.2630872	Loot Tables
 22957f260d763b2dddcba834fc22246e5665bfe6 data/artifacts/loot_table/artifact.json
 91e2eaecc348b4654d9474d6ec3b6315447d12f3 data/artifacts/loot_table/chests/campsite_barrel.json
 bf33f27678bf8410ac7a8f3cb8643d5d8adda98d data/artifacts/loot_table/chests/campsite_barrel/cobblestone.json
@@ -13,6 +13,7 @@ f05dd05d6e23719cf771f5dc7c99c5263b8c6f00 data/artifacts/loot_table/chests/campsi
 45787f24a8f040507197ee3c2fabca9aed82d0ca data/artifacts/loot_table/chests/campsite_barrel/tnt.json
 7d62934b119f6314d56ff47407630be37b208bf0 data/artifacts/loot_table/chests/campsite_chest.json
 1c2592f6056449d32a9e20b8a3431ef49809098d data/artifacts/loot_table/entities/mimic.json
+565c2800e64922a19d82c8b46297b0ca7c9825c3 data/artifacts/loot_table/entity_equipment/bogged.json
 a477c754886503023b89588f81a94e8b6f216e90 data/artifacts/loot_table/entity_equipment/drowned.json
 d06e7ca95335de6c5e5198867c6e9c27283db837 data/artifacts/loot_table/entity_equipment/ghast.json
 b85a7740cf7985e6ffc404a885a1779d547ca205 data/artifacts/loot_table/entity_equipment/husk.json
