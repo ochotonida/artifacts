@@ -11,7 +11,7 @@ import io.wispforest.accessories.api.events.AccessoryChangeCallback;
 public class AccessoriesCompat {
 
     public static void setup() {
-        if (PlatformServices.getModList().isModLoaded(ModCompat.ACCESSORIES)) {
+        if (ModCompat.ACCESSORIES.isLoaded()) {
             EquipmentSlotManager.register(new AccessoriesSlotProvider());
         }
         PlatformServices.getPlatformHelper().addItemRegistryCallback(item -> {

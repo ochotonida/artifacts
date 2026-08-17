@@ -12,7 +12,7 @@ import top.theillusivec4.curios.api.event.CurioChangeEvent;
 public class CuriosCompat {
 
     public static void setup() {
-        if (!PlatformServices.getModList().isModLoaded(ModCompat.CCLAYER)) {
+        if (!ModCompat.CCLAYER.isLoaded()) {
             EquipmentSlotManager.register(new CuriosSlotProvider());
         }
         PlatformServices.getPlatformHelper().addItemRegistryCallback(item -> {

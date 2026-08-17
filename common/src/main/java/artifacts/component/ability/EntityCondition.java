@@ -2,7 +2,6 @@ package artifacts.component.ability;
 
 import artifacts.integration.ModCompat;
 import artifacts.integration.origins.OriginsCompat;
-import artifacts.platform.PlatformServices;
 import artifacts.registry.ModTags;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
@@ -51,6 +50,6 @@ public enum EntityCondition implements StringRepresentable {
 
     private static boolean isSubmerged(LivingEntity entity) {
         return entity.isEyeInFluid(FluidTags.WATER)
-                ^ (PlatformServices.getModList().isModLoaded(ModCompat.ORIGINS) && OriginsCompat.hasWaterBreathing(entity));
+                ^ (ModCompat.ORIGINS.isLoaded() && OriginsCompat.hasWaterBreathing(entity));
     }
 }

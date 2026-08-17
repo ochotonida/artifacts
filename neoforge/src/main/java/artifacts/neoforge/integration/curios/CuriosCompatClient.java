@@ -3,7 +3,6 @@ package artifacts.neoforge.integration.curios;
 import artifacts.equipment.client.EquipmentRenderingManager;
 import artifacts.integration.ModCompat;
 import artifacts.mixin.accessors.client.LivingEntityRendererAccessor;
-import artifacts.platform.PlatformServices;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
@@ -15,7 +14,7 @@ import top.theillusivec4.curios.client.render.CuriosLayer;
 public class CuriosCompatClient {
 
     public static void setup(IEventBus modBus) {
-        if (!PlatformServices.getModList().isModLoaded(ModCompat.CCLAYER)) {
+        if (!ModCompat.CCLAYER.isLoaded()) {
             EquipmentRenderingManager.register(new CuriosRenderingHandler());
         }
 

@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 public class TrinketsCompat {
 
     public static void setup() {
-        if (!PlatformServices.getModList().isModLoaded(ModCompat.TCLAYER)) {
+        if (!ModCompat.TCLAYER.isLoaded()) {
             EquipmentSlotManager.register(new TrinketsSlotProvider());
         }
         PlatformServices.getPlatformHelper().addItemRegistryCallback(item -> {

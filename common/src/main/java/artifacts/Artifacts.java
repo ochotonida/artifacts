@@ -8,7 +8,6 @@ import artifacts.integration.accessories.AccessoriesCompat;
 import artifacts.integration.minecraft.ArmorSlotProvider;
 import artifacts.integration.trinkets.TrinketsCompat;
 import artifacts.network.NetworkHandler;
-import artifacts.platform.PlatformServices;
 import artifacts.registry.*;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -48,10 +47,10 @@ public class Artifacts {
     public static void setup() {
         initConfigs();
         setupIntegrations();
-        if (PlatformServices.getModList().isModLoaded(ModCompat.TRINKETS)) {
+        if (ModCompat.TRINKETS.isLoaded()) {
             TrinketsCompat.setup();
         }
-        if (PlatformServices.getModList().isModLoaded(ModCompat.ACCESSORIES)) {
+        if (ModCompat.ACCESSORIES.isLoaded()) {
             AccessoriesCompat.setup();
         }
 

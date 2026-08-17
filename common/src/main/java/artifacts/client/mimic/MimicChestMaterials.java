@@ -4,7 +4,6 @@ import artifacts.Artifacts;
 import artifacts.entity.MimicEntity;
 import artifacts.integration.ModCompat;
 import artifacts.integration.lootr.LootrCompat;
-import artifacts.platform.PlatformServices;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
@@ -32,7 +31,7 @@ public class MimicChestMaterials {
             "bamboo"
     );
 
-    private static final Material CHEST_LOOTR = createMaterial(ModCompat.LOOTR, "entity/chest/normal");
+    private static final Material CHEST_LOOTR = createMaterial(ModCompat.LOOTR.id("entity/chest/normal"));
 
     private final boolean isChristmas;
     private final List<Material> moddedChestMaterials = new ArrayList<>();
@@ -46,15 +45,15 @@ public class MimicChestMaterials {
         addQuarkMaterials(moddedLootrChestMaterials, "lootr_normal");
     }
 
-    private static Material createMaterial(String modId, String location) {
+    private static Material createMaterial(ResourceLocation id) {
         ResourceLocation chestAtlas = ResourceLocation.withDefaultNamespace("textures/atlas/chest.png");
-        return new Material(chestAtlas, ResourceLocation.fromNamespaceAndPath(modId, location));
+        return new Material(chestAtlas, id);
     }
 
     private static void addQuarkMaterials(List<Material> chestMaterials, String chestVariant) {
-        if (PlatformServices.getModList().isModLoaded(ModCompat.QUARK)) {
+        if (ModCompat.QUARK.isLoaded()) {
             for (String chestMaterial : QUARK_WOODEN_CHEST_MATERIALS) {
-                chestMaterials.add(createMaterial(ModCompat.QUARK, String.format("quark_variant_chests/%s/%s", chestMaterial, chestVariant)));
+                chestMaterials.add(createMaterial(ModCompat.QUARK.id(String.format("quark_variant_chests/%s/%s", chestMaterial, chestVariant))));
             }
         }
     }
@@ -64,7 +63,7 @@ public class MimicChestMaterials {
             return Sheets.CHEST_XMAS_LOCATION;
         }
 
-        boolean useLootrTextures = PlatformServices.getModList().isModLoaded(ModCompat.LOOTR) && !LootrCompat.useVanillaTextures();
+        boolean useLootrTextures = ModCompat.LOOTR.isLoaded() && !LootrCompat.useVanillaTextures();
         Material defaultSprite = useLootrTextures ? CHEST_LOOTR : Sheets.CHEST_LOCATION;
         List<Material> moddedSprites = useLootrTextures ? moddedLootrChestMaterials : moddedChestMaterials;
 

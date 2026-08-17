@@ -9,7 +9,6 @@ import artifacts.component.ability.mobeffect.EquipmentMobEffects;
 import artifacts.component.ability.mobeffect.MobEffectProvider;
 import artifacts.config.value.Value;
 import artifacts.integration.ModCompat;
-import artifacts.platform.PlatformServices;
 import artifacts.registry.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -43,9 +42,9 @@ public class WearableArtifactItem extends Item {
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
         if (Artifacts.CONFIG.client.showTooltips.get()
-                && !PlatformServices.getModList().isModLoaded(ModCompat.CURIOS)
-                && !PlatformServices.getModList().isModLoaded(ModCompat.TRINKETS)
-                && !PlatformServices.getModList().isModLoaded(ModCompat.ACCESSORIES)
+                && !ModCompat.CURIOS.isLoaded()
+                && !ModCompat.TRINKETS.isLoaded()
+                && !ModCompat.ACCESSORIES.isLoaded()
         ) {
             list.add(Component.translatable("%s.tooltip.missing_dependency".formatted(Artifacts.MOD_ID)).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
         } else {

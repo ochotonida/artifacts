@@ -9,7 +9,6 @@ import artifacts.neoforge.network.NeoForgeNetworkHandler;
 import artifacts.neoforge.registry.ModAttachmentTypes;
 import artifacts.neoforge.registry.ModConditions;
 import artifacts.neoforge.registry.ModLootModifiers;
-import artifacts.platform.PlatformServices;
 import artifacts.registry.ModEntityTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.api.distmarker.Dist;
@@ -52,7 +51,7 @@ public class ArtifactsNeoForge {
         registerConfigScreen();
         ArtifactHooksNeoForge.register();
 
-        if (PlatformServices.getModList().isModLoaded(ModCompat.CURIOS)) {
+        if (ModCompat.CURIOS.isLoaded()) {
             CuriosCompat.setup();
         }
 
@@ -60,7 +59,7 @@ public class ArtifactsNeoForge {
     }
 
     private void registerConfigScreen() {
-        if (PlatformServices.getModList().isModLoaded(ModCompat.CLOTH_CONFIG)) {
+        if (ModCompat.CLOTH_CONFIG.isLoaded()) {
             ModLoadingContext.get().registerExtensionPoint(
                     IConfigScreenFactory.class,
                     () -> (client, parent) -> new ArtifactsConfigScreen(parent).build()

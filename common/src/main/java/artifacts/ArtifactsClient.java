@@ -9,7 +9,6 @@ import artifacts.event.SwimInAirInputHooks;
 import artifacts.integration.ModCompat;
 import artifacts.integration.accessories.AccessoriesCompatClient;
 import artifacts.integration.trinkets.TrinketsCompatClient;
-import artifacts.platform.PlatformServices;
 import artifacts.registry.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -25,10 +24,10 @@ import java.util.function.Supplier;
 public class ArtifactsClient {
 
     public static void setup() {
-        if (PlatformServices.getModList().isModLoaded(ModCompat.TRINKETS)) {
+        if (ModCompat.TRINKETS.isLoaded()) {
             TrinketsCompatClient.setup();
         }
-        if (PlatformServices.getModList().isModLoaded(ModCompat.ACCESSORIES)) {
+        if (ModCompat.ACCESSORIES.isLoaded()) {
             AccessoriesCompatClient.setup();
         }
     }
