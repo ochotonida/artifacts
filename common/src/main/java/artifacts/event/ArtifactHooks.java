@@ -67,13 +67,13 @@ public class ArtifactHooks {
     }
 
     public static void onItemChanged(LivingEntity entity, ItemStack oldStack, ItemStack newStack) {
-        if (entity.level().isClientSide() || oldStack == newStack) {
+        if (entity.level().isClientSide() || ItemStack.matches(oldStack, newStack)) {
             return;
         }
 
         boolean wasDisabled = oldStack.has(ModDataComponents.DISABLED_BY_TOGGLE.get());
         boolean isDisabled = newStack.has(ModDataComponents.DISABLED_BY_TOGGLE.get());
-        boolean wasToggledOff = wasDisabled ^ isDisabled && isDisabled;
+        boolean wasToggledOff = !wasDisabled && isDisabled;
 
         for (var type : ModDataComponents.TICKING_COMPONENTS) {
             TickingAbility oldAbility = oldStack.get(type.get());
