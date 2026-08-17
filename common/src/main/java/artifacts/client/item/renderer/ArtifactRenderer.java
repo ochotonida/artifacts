@@ -11,8 +11,8 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 public interface ArtifactRenderer {
@@ -31,9 +31,11 @@ public interface ArtifactRenderer {
             float netHeadYaw,
             float headPitch
     ) {
-        Value<Boolean> hideWhenInvisible = stack.get(ModDataComponents.HIDE_WHEN_INVISIBLE.get());
-        if (hideWhenInvisible != null && hideWhenInvisible.get() && entity.hasEffect(MobEffects.INVISIBILITY)) {
-            return;
+        if (entity instanceof Player) {
+            Value<Boolean> hideWhenInvisible = stack.get(ModDataComponents.HIDE_WHEN_INVISIBLE.get());
+            if (entity.isInvisible() && hideWhenInvisible != null && hideWhenInvisible.get()) {
+                return;
+            }
         }
         render(stack, entity, slotIndex, poseStack, multiBufferSource, light, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch);
     }
