@@ -100,7 +100,7 @@ public class Language extends LanguageProvider {
         addAbilityTooltip(ModDataComponents.ATTRIBUTE_MODIFIERS.get(), ModAttributes.ENTITY_EXPERIENCE, "Increases experience dropped by creatures");
         addAbilityTooltip(ModDataComponents.ATTRIBUTE_MODIFIERS.get(), ModAttributes.VILLAGER_REPUTATION, "Decreases the trading prices of villagers");
         addAbilityTooltip(ModDataComponents.ATTRIBUTE_MODIFIERS.get(), Attributes.OXYGEN_BONUS, "Increases the time the wearer can stay underwater");
-        addAbilityTooltip(ModDataComponents.DAMAGE_IMMUNITY.get(), ModTags.IS_HOT_FLOOR.location().getPath(), "Grants protection against hot floor damage");
+        addAbilityTooltip(ModDataComponents.DAMAGE_IMMUNITY.get(), DamageTypeTags.BURN_FROM_STEPPING.location().getPath(), "Grants protection against hot floor damage");
         addAbilityTooltip(ModDataComponents.DAMAGE_IMMUNITY.get(), DamageTypeTags.IS_LIGHTNING.location().getPath(), "Grants protection against lightning strikes");
         addAbilityTooltip(ModDataComponents.DOUBLE_JUMP.get(), "Allows the wearer to double jump");
         addAbilityTooltip(ModDataComponents.ENDER_PEARL_HUNGER_COST.get(), "free", "Ender Pearls are not consumed when thrown");

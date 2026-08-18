@@ -302,7 +302,7 @@
   "artifacts.tooltip.ability.cure_effects": "Greatly reduces the duration of negative effects",
   "artifacts.tooltip.ability.damage_absorption.chance": "The wearer's melee attacks have a %s%% chance to absorb health",
   "artifacts.tooltip.ability.damage_absorption.constant": "Causes the wearer's melee attacks to absorb health",
-  "artifacts.tooltip.ability.damage_immunity.is_hot_floor": "Grants protection against hot floor damage",
+  "artifacts.tooltip.ability.damage_immunity.burn_from_stepping": "Grants protection against hot floor damage",
   "artifacts.tooltip.ability.damage_immunity.is_lightning": "Grants protection against lightning strikes",
   "artifacts.tooltip.ability.death_protection_teleport.chance": "A fatal hit has a %s%% chance to teleport you somewhere else instead",
   "artifacts.tooltip.ability.death_protection_teleport.constant": "A fatal hit teleports you somewhere else instead",

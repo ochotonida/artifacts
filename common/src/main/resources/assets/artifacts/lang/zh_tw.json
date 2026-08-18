@@ -255,7 +255,7 @@
   "artifacts.tooltip.ability.cure_effects": "大幅縮短負面效果的持續時間",
   "artifacts.tooltip.ability.damage_absorption.chance": "穿戴者的近戰攻擊有機會吸收生命值",
   "artifacts.tooltip.ability.damage_absorption.constant": "使穿戴者的近戰攻擊吸收生命值",
-  "artifacts.tooltip.ability.damage_immunity.is_hot_floor": "賦予對岩漿塊傷害的保護",
+  "artifacts.tooltip.ability.damage_immunity.burn_from_stepping": "賦予對岩漿塊傷害的保護",
   "artifacts.tooltip.ability.damage_immunity.is_lightning": "賦予對閃電的保護",
   "artifacts.tooltip.ability.death_protection_teleport.chance": "受到致命一擊時，有機會傳送到其他地方",
   "artifacts.tooltip.ability.death_protection_teleport.constant": "受到致命一擊時，會傳送到其他地方",

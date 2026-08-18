@@ -9,6 +9,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class DamageTypeTags extends DamageTypeTagsProvider {
@@ -19,6 +20,10 @@ public class DamageTypeTags extends DamageTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider arg) {
-        tag(ModTags.IS_HOT_FLOOR).add(DamageTypes.HOT_FLOOR);
+        tag(ModTags.IS_MELEE).addAll(List.of(
+                DamageTypes.MOB_ATTACK,
+                DamageTypes.MOB_ATTACK_NO_AGGRO,
+                DamageTypes.PLAYER_ATTACK
+        ));
     }
 }

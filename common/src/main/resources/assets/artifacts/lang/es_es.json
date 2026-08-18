@@ -255,7 +255,7 @@
   "artifacts.tooltip.ability.cure_effects": "Reduce significativamente la duración de los efectos negativos",
   "artifacts.tooltip.ability.damage_absorption.chance": "Los ataques cuerpo a cuerpo del portador tienen una probabilidad de absorber vida",
   "artifacts.tooltip.ability.damage_absorption.constant": "Hace que los ataques cuerpo a cuerpo del portador absorban vida",
-  "artifacts.tooltip.ability.damage_immunity.is_hot_floor": "Te da protección contra el suelo caliente",
+  "artifacts.tooltip.ability.damage_immunity.burn_from_stepping": "Te da protección contra el suelo caliente",
   "artifacts.tooltip.ability.damage_immunity.is_lightning": "Te protege contra los rayos",
   "artifacts.tooltip.ability.death_protection_teleport.chance": "Un golpe fatal tiene una probabilidad de teletransportarte a otro lugar",
   "artifacts.tooltip.ability.death_protection_teleport.constant": "Un golpe fatal te teletransporta a otro lugar",

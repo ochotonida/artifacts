@@ -22,7 +22,7 @@ public class ModTags {
     public static final TagKey<Block> SNOW_LAYERS = create(Registries.BLOCK, "snow_layers");
     public static final TagKey<MobEffect> ANTIDOTE_VESSEL_CANCELLABLE = create(Registries.MOB_EFFECT, "antidote_vessel_cancellable");
     public static final TagKey<EntityType<?>> CREEPERS = create(Registries.ENTITY_TYPE, "creepers");
-    public static final TagKey<DamageType> IS_HOT_FLOOR = create(Registries.DAMAGE_TYPE, "is_hot_floor");
+    public static final TagKey<DamageType> IS_MELEE = create(Registries.DAMAGE_TYPE, "is_melee");
 
     public static final TagKey<Block> ORES = conventionTag(Registries.BLOCK, "ores");
     public static final TagKey<Item> RAW_MATERIALS = conventionTag(Registries.ITEM, "raw_materials");

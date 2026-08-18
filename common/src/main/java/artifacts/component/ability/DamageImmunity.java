@@ -2,7 +2,6 @@ package artifacts.component.ability;
 
 import artifacts.config.value.Value;
 import artifacts.config.value.ValueTypes;
-import artifacts.registry.ModTags;
 import artifacts.util.ModCodecs;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -20,7 +19,7 @@ public record DamageImmunity(Value<Boolean> enabled, TagKey<DamageType> tag, Ent
 
     private static final Set<TagKey<DamageType>> CUSTOM_TOOLTIP_TAGS = Set.of(
             DamageTypeTags.IS_LIGHTNING,
-            ModTags.IS_HOT_FLOOR
+            DamageTypeTags.BURN_FROM_STEPPING
     );
 
     public static final Codec<DamageImmunity> CODEC = RecordCodecBuilder.create(instance -> instance.group(

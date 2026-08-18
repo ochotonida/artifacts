@@ -350,7 +350,7 @@ public class ModItems {
             .component(ModDataComponents.FLUID_COLLISION.get(), new FluidCollision(Artifacts.CONFIG.items.striderShoes.enabled,
                     Optional.of(FluidTags.LAVA), EntityCondition.SNEAKING)
             ).component(ModDataComponents.DAMAGE_IMMUNITY.get(),
-                    new DamageImmunity(Artifacts.CONFIG.items.striderShoes.cancelHotFloorDamage, ModTags.IS_HOT_FLOOR, EntityCondition.ALWAYS)
+                    new DamageImmunity(Artifacts.CONFIG.items.striderShoes.cancelHotFloorDamage, DamageTypeTags.BURN_FROM_STEPPING, EntityCondition.ALWAYS)
             )
     );
 

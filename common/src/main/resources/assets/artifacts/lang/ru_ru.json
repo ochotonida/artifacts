@@ -252,7 +252,7 @@
   "artifacts.tooltip.ability.creeper_repellent": "Криперы избегают владельца",
   "artifacts.tooltip.ability.cure_effects": "Сильно сокращает продолжительность негативных эффектов",
   "artifacts.tooltip.ability.damage_absorption.constant": "Заставляет ближние атаки владельца поглощать здоровье",
-  "artifacts.tooltip.ability.damage_immunity.is_hot_floor": "Обеспечивают защиту от горячего пола",
+  "artifacts.tooltip.ability.damage_immunity.burn_from_stepping": "Обеспечивают защиту от горячего пола",
   "artifacts.tooltip.ability.damage_immunity.is_lightning": "Обеспечивает защиту от ударов молнии",
   "artifacts.tooltip.ability.death_protection_teleport.chance": "Смертельный урон может телепортировать вас в случайное место",
   "artifacts.tooltip.ability.death_protection_teleport.constant": "Смертельный урон телепортирует вас в случайное место",

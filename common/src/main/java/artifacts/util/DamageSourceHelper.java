@@ -1,8 +1,8 @@
 package artifacts.util;
 
 import artifacts.mixin.accessors.LivingEntityAccessor;
+import artifacts.registry.ModTags;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import org.jetbrains.annotations.Nullable;
@@ -18,10 +18,7 @@ public class DamageSourceHelper {
     }
 
     public static boolean isMeleeAttack(DamageSource source) {
-        return source.isDirect()
-                && (source.is(DamageTypes.MOB_ATTACK)
-                || source.is(DamageTypes.PLAYER_ATTACK)
-                || source.is(DamageTypes.MOB_ATTACK_NO_AGGRO));
+        return source.isDirect() && source.is(ModTags.IS_MELEE);
     }
 
     public static boolean shouldDestroyWornItemsOnDeath(LivingEntity entity) {

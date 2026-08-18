@@ -389,7 +389,7 @@
   "artifacts.tooltip.ability.attribute_modifiers.generic.oxygen_bonus": "착용자가 물속에서 머무를 수 있는 시간을 늘립니다",
   "artifacts.tooltip.ability.attribute_modifiers.generic.safe_fall_distance": "착용자의 최대 안전 낙하 거리를 늘립니다",
   "artifacts.tooltip.ability.attribute_modifiers.generic.scale": "착용자를 축소시킵니다",
-  "artifacts.tooltip.ability.damage_immunity.is_hot_floor": "뜨거운 바닥 피해에 대한 보호를 부여합니다",
+  "artifacts.tooltip.ability.damage_immunity.burn_from_stepping": "뜨거운 바닥 피해에 대한 보호를 부여합니다",
   "artifacts.tooltip.ability.ender_pearl_damage_immunity": "엔더 진주가 피해를 주지 않습니다",
   "artifacts.tooltip.ability.ender_pearl_hunger_cost.cost": "엔더 진주는 소모되지 않지만, 대신 허기가 소모됩니다",
   "artifacts.tooltip.ability.ender_pearl_hunger_cost.free": "엔더 진주를 던질 때 소모되지 않습니다",

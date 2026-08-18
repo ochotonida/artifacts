@@ -277,7 +277,7 @@
   "artifacts.tooltip.ability.cure_effects": "Суттєво скорочує тривалість негативних ефектів",
   "artifacts.tooltip.ability.damage_absorption.chance": "Ближні атаки носія мають %s%% шанс поглинути здоров'я",
   "artifacts.tooltip.ability.damage_absorption.constant": "Ближні атаки носія поглинають здоров'я",
-  "artifacts.tooltip.ability.damage_immunity.is_hot_floor": "Захищає від шкоди гарячої підлоги",
+  "artifacts.tooltip.ability.damage_immunity.burn_from_stepping": "Захищає від шкоди гарячої підлоги",
   "artifacts.tooltip.ability.damage_immunity.is_lightning": "Надає захист від блискавки",
   "artifacts.tooltip.ability.death_protection_teleport.chance": "Смертельний удар має %s%% шанс телепортувати вас замість загибелі",
   "artifacts.tooltip.ability.death_protection_teleport.constant": "Смертельний удар телепортує вас замість загибелі",

@@ -277,7 +277,7 @@
   "artifacts.tooltip.ability.cure_effects": "大幅降低负面效果的持续时间",
   "artifacts.tooltip.ability.damage_absorption.chance": "装备者的近战攻击有 %s%% 的几率吸收生命值",
   "artifacts.tooltip.ability.damage_absorption.constant": "让装备者的近战攻击可以吸收生命值",
-  "artifacts.tooltip.ability.damage_immunity.is_hot_floor": "为装备者提供炽热地板伤害保护",
+  "artifacts.tooltip.ability.damage_immunity.burn_from_stepping": "为装备者提供炽热地板伤害保护",
   "artifacts.tooltip.ability.damage_immunity.is_lightning": "提供雷电伤害保护",
   "artifacts.tooltip.ability.death_protection_teleport.chance": "受到致命伤害前，有概率将你传送到其他地方",
   "artifacts.tooltip.ability.death_protection_teleport.constant": "受到致命伤害前，将你传送到其他地方",

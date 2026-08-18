@@ -277,7 +277,7 @@
   "artifacts.tooltip.ability.cure_effects": "Negatif etkilerin süresini büyük ölçüde azaltır",
   "artifacts.tooltip.ability.damage_absorption.chance": "Kullanıcının yakın dövüş saldırılarının %s%% şansı sağlığı emmektir",
   "artifacts.tooltip.ability.damage_absorption.constant": "Kullanıcının yakın dövüş saldırılarının sağlığı emmesine neden olur",
-  "artifacts.tooltip.ability.damage_immunity.is_hot_floor": "Sıcak zemin hasarına karşı koruma sağlar",
+  "artifacts.tooltip.ability.damage_immunity.burn_from_stepping": "Sıcak zemin hasarına karşı koruma sağlar",
   "artifacts.tooltip.ability.damage_immunity.is_lightning": "Yıldırım çarpmalarına karşı koruma sağlar",
   "artifacts.tooltip.ability.death_protection_teleport.chance": "Ölümcül bir vuruşun sizi bunun yerine başka bir yere ışınlama şansı %s%%'dir",
   "artifacts.tooltip.ability.death_protection_teleport.constant": "Ölümcül bir vuruş sizi bunun yerine başka bir yere ışınlar",
