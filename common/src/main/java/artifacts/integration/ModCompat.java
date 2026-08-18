@@ -4,10 +4,12 @@ import artifacts.platform.PlatformServices;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
+
 public class ModCompat {
 
     // Required dependencies
-    public static final ModInfo EXPANDABILITY = new ModInfo("expandability");
+    public static final ModInfo NEOFORGE = new ModInfo("neoforge");
 
     // Optional dependencies
     public static final ModInfo CLOTH_CONFIG = new ModInfo("cloth-config", "cloth_config");
@@ -22,34 +24,26 @@ public class ModCompat {
     public static final ModInfo HARDCORE_REVIVAL = new ModInfo("hardcorerevival");
     public static final ModInfo LOOTR = new ModInfo("lootr");
     public static final ModInfo ORIGINS_LEGACY = new ModInfo("origins-legacy");
-    public static final ModInfo ORIGINS = new ModInfo("origins", ORIGINS_LEGACY);
+    public static final ModInfo ORIGINS = new ModInfo("origins", ORIGINS_LEGACY, NEOFORGE);
     public static final ModInfo QUARK = new ModInfo("quark");
 
     public static final class ModInfo {
 
         private final String modId;
         private final @Nullable String alias;
-        private final @Nullable ModInfo supersededBy;
+        private final Set<ModInfo> supersededBy;
 
-        private ModInfo(String modId) {
-            this(modId, null, null);
-        }
-
-        private ModInfo(String modId, String alias) {
-            this(modId, alias, null);
-        }
-
-        private ModInfo(String modId, ModInfo supersededBy) {
+        private ModInfo(String modId, ModInfo... supersededBy) {
             this(modId, null, supersededBy);
         }
 
-        private ModInfo(String modId, @Nullable String alias, @Nullable ModInfo supersededBy) {
+        private ModInfo(String modId, @Nullable String alias, ModInfo... supersededBy) {
             if (modId.equals(alias)) {
                 throw new IllegalArgumentException("Alias '%s' is the same as mod id".formatted(alias));
             }
             this.modId = modId;
             this.alias = alias;
-            this.supersededBy = supersededBy;
+            this.supersededBy = Set.of(supersededBy);
         }
 
         public String modId() {
@@ -61,9 +55,12 @@ public class ModCompat {
         }
 
         public boolean isLoaded() {
-            if (supersededBy != null && supersededBy.isLoaded()) {
-                return false;
+            for (ModInfo modInfo : supersededBy) {
+                if (modInfo.isLoaded()) {
+                    return false;
+                }
             }
+
             // Check both id's in case some idiot is running the fabric version of Cloth with Sinytra Connector
             return PlatformServices.getModList().isModLoaded(modId)
                     || alias != null && PlatformServices.getModList().isModLoaded(alias);
