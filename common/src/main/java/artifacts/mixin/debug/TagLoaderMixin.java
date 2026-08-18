@@ -22,7 +22,7 @@ public class TagLoaderMixin {
     private void detectClear(ResourceManager resourceManager, CallbackInfoReturnable<Map<ResourceLocation, List<TagLoader.EntryWithSource>>> cir, @Local(ordinal = 0) ResourceLocation resourceLocation, @Local Resource resource) {
         String namespace = resourceLocation.getNamespace();
 
-        if (namespace.equals(ModCompat.TRINKETS) || namespace.equals(ModCompat.CURIOS) || namespace.equals(ModCompat.ACCESSORIES) || namespace.equals("artifacts")) {
+        if (namespace.equals(ModCompat.TRINKETS.modId()) || namespace.equals(ModCompat.CURIOS.modId()) || namespace.equals(ModCompat.ACCESSORIES.modId()) || namespace.equals("artifacts")) {
             Artifacts.LOGGER.warn(
                     "Tag entries for {} cleared by {}, this is probably a bug. " +
                             "If you're unable to equip specific items, " +
