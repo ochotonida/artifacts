@@ -22,8 +22,7 @@ public class DamageTypeTags extends DamageTypeTagsProvider {
     protected void addTags(HolderLookup.Provider arg) {
         tag(ModTags.IS_MELEE).addAll(List.of(
                 DamageTypes.MOB_ATTACK,
-                DamageTypes.MOB_ATTACK_NO_AGGRO,
-                DamageTypes.PLAYER_ATTACK
-        ));
+                DamageTypes.MOB_ATTACK_NO_AGGRO
+        )).addTag(net.minecraft.tags.DamageTypeTags.IS_PLAYER_ATTACK);
     }
 }

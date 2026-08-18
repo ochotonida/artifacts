@@ -2,6 +2,6 @@
   "values": [
     "minecraft:mob_attack",
     "minecraft:mob_attack_no_aggro",
-    "minecraft:player_attack"
+    "#minecraft:is_player_attack"
   ]
 }
