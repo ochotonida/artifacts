@@ -111,7 +111,7 @@ public class Language extends LanguageProvider {
         addAbilityTooltip(ModDataComponents.ENCHANTMENT_LEVEL_MODIFIERS.get(), "looting", "multiple_levels", "Applies %s extra levels of looting to killed entities");
         addAbilityTooltip(ModDataComponents.ENCHANTMENT_LEVEL_MODIFIERS.get(), "looting", "single_level", "Applies an extra level of looting to killed entities");
         addAbilityTooltip(ModDataComponents.ENCHANTMENT_LEVEL_MODIFIERS.get(), "luck_of_the_sea", "multiple_levels", "Applies %s extra levels of Luck of the Sea when fishing");
-        addAbilityTooltip(ModDataComponents.ENCHANTMENT_LEVEL_MODIFIERS.get(), "luck_of_the_sea", "single_level", "Applies an extra Luck of the Sea when fishing");
+        addAbilityTooltip(ModDataComponents.ENCHANTMENT_LEVEL_MODIFIERS.get(), "luck_of_the_sea", "single_level", "Applies an extra level of Luck of the Sea when fishing");
         addAbilityTooltip(ModDataComponents.ENCHANTMENT_LEVEL_MODIFIERS.get(), "lure", "multiple_levels", "Applies %s extra levels of Lure when fishing");
         addAbilityTooltip(ModDataComponents.ENCHANTMENT_LEVEL_MODIFIERS.get(), "lure", "single_level", "Applies an extra level of Lure when fishing");
         addAbilityTooltip(ModDataComponents.MOB_EFFECTS.get(), "water_breathing", "infinite", "Allows the wearer to breathe underwater");

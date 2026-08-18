@@ -313,7 +313,7 @@
   "artifacts.tooltip.ability.enchantment_level_modifiers.looting.multiple_levels": "Applies %s extra levels of looting to killed entities",
   "artifacts.tooltip.ability.enchantment_level_modifiers.looting.single_level": "Applies an extra level of looting to killed entities",
   "artifacts.tooltip.ability.enchantment_level_modifiers.luck_of_the_sea.multiple_levels": "Applies %s extra levels of Luck of the Sea when fishing",
-  "artifacts.tooltip.ability.enchantment_level_modifiers.luck_of_the_sea.single_level": "Applies an extra Luck of the Sea when fishing",
+  "artifacts.tooltip.ability.enchantment_level_modifiers.luck_of_the_sea.single_level": "Applies an extra level of Luck of the Sea when fishing",
   "artifacts.tooltip.ability.enchantment_level_modifiers.lure.multiple_levels": "Applies %s extra levels of Lure when fishing",
   "artifacts.tooltip.ability.enchantment_level_modifiers.lure.single_level": "Applies an extra level of Lure when fishing",
   "artifacts.tooltip.ability.ender_pearl_damage_immunity": "Ender Pearls deal no damage",
