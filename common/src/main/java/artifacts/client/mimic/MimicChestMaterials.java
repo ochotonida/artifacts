@@ -31,7 +31,7 @@ public class MimicChestMaterials {
             "bamboo"
     );
 
-    private static final Material CHEST_LOOTR = createMaterial(ModCompat.LOOTR.id("entity/chest/normal"));
+    private static final Material CHEST_LOOTR = createMaterial(ModCompat.LOOTR.id("chest"));
 
     private final boolean isChristmas;
     private final List<Material> moddedChestMaterials = new ArrayList<>();
