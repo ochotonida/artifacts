@@ -195,7 +195,7 @@ public class ArtifactHooks {
     }
 
     public static int modifyExperience(int originalXp, LivingEntity entity, Player attacker) {
-        if (attacker == null || entity instanceof Player || originalXp <= 0) {
+        if (attacker == null || entity instanceof Player || originalXp <= 0 || !attacker.getAttributes().hasAttribute(ModAttributes.ENTITY_EXPERIENCE)) {
             return originalXp;
         }
 
