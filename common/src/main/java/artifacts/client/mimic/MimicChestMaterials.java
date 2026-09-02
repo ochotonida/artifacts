@@ -74,7 +74,7 @@ public class MimicChestMaterials {
     }
 
     private Material selectRandomSprite(Material defaultSprite, List<Material> moddedSprites, MimicEntity mimic) {
-        int spriteIndex = (int) Math.abs(mimic.getUUID().getMostSignificantBits()) % (moddedSprites.size() + 1);
+        int spriteIndex = (int) (Math.abs(mimic.getUUID().getMostSignificantBits()) % (moddedSprites.size() + 1));
         if (spriteIndex >= moddedSprites.size()) {
             return defaultSprite;
         }
