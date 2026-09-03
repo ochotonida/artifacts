@@ -1,6 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
+  "refmap": "artifacts.refmap.json",
   "mixinextras": {
     "minVersion": "0.5.0"
   },
