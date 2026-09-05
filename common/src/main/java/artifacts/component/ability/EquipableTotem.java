@@ -25,11 +25,10 @@ public record EquipableTotem(Value<Boolean> enabled) implements EquipmentAbility
     public static final StreamCodec<ByteBuf, EquipableTotem> STREAM_CODEC = ValueTypes.BOOLEAN.streamCodec()
             .map(EquipableTotem::new, EquipableTotem::enabled);
 
-    @Nullable
-    public static ItemStack findTotem(LivingEntity entity) {
-        AtomicReference<ItemStack> totem = new AtomicReference<>();
+    public static @Nullable ItemStack findTotem(LivingEntity entity) {
+        AtomicReference<@Nullable ItemStack> totem = new AtomicReference<>();
         ModDataComponents.EQUIPABLE_TOTEM.on(entity).iterate((_, slot) -> {
-            if (totem.get().isEmpty() && slot.get().has(DataComponents.DEATH_PROTECTION)) {
+            if (totem.get() == null && slot.get().has(DataComponents.DEATH_PROTECTION)) {
                 totem.set(slot.get());
             }
         });
