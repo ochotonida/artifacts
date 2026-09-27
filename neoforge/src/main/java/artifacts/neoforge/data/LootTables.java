@@ -6,8 +6,8 @@ import artifacts.loot.ArtifactRarityAdjustedChance;
 import artifacts.loot.ConfigValueCondition;
 import artifacts.registry.ModEntityTypes;
 import artifacts.registry.ModItems;
+import artifacts.registry.RegistryHolder;
 import artifacts.world.CampsiteFeature;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -117,14 +117,14 @@ public class LootTables extends LootTableProvider {
     }
 
     private void addItemLootTables() {
-        for (Holder<Item> item : ModItems.ITEMS.getEntries()) {
+        for (RegistryHolder<Item, ?> item : ModItems.ITEMS.getEntries()) {
             if (!List.of(
                     ModItems.MIMIC_SPAWN_EGG.value(),
                     ModItems.ETERNAL_STEAK.value(),
                     ModItems.PLASTIC_DRINKING_HAT.value(),
                     ModItems.NOVELTY_DRINKING_HAT.value()
             ).contains(item.value())) {
-                addLootTable("items/%s".formatted(item.unwrapKey().orElseThrow().identifier().getPath()), LootTable.lootTable()
+                addLootTable("items/%s".formatted(item.getKey().identifier().getPath()), LootTable.lootTable()
                         .withPool(
                                 LootPool.lootPool()
                                         .name("main")
@@ -213,7 +213,7 @@ public class LootTables extends LootTableProvider {
                         .setRolls(ConstantValue.exactly(1))
                         .add(item(Items.GOLD_BLOCK, 1, 1, 6))
                         .add(item(Items.IRON_BLOCK, 1, 1, 6))
-                        .add(item(Items.COPPER_BLOCK, 1, 4, 16))
+                        .add(item(Items.COPPER_BLOCK.weathering().unaffected(), 1, 4, 16))
                 )
         );
 

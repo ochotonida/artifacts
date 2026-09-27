@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
 
-    @ModifyReturnValue(method = "getNightVisionScale", at = @At("RETURN"))
+    @ModifyReturnValue(method = "nightVisionScale", at = @At("RETURN"))
     private static float getNightVisionScale(float original, LivingEntity camera, float a) {
         MobEffectInstance effect = camera.getEffect(MobEffects.NIGHT_VISION);
         if (effect == null || !effect.endsWithin(12 * 20)) {

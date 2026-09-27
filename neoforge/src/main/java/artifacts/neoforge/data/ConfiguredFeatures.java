@@ -8,6 +8,7 @@ import artifacts.world.SuspiciousChestFeatureConfiguration;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.random.Weighted;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -64,13 +65,11 @@ public class ConfiguredFeatures {
                         .add(Blocks.STONE_BRICK_WALL.defaultBlockState(), 1)
                         .add(Blocks.DEEPSLATE_BRICK_WALL.defaultBlockState(), 1)
                 ), // furnace chimneys
-                new WeightedStateProvider(WeightedList.<BlockState>builder()
-                        .add(Blocks.RED_BED.defaultBlockState(), 1)
-                        .add(Blocks.YELLOW_BED.defaultBlockState(), 1)
-                        .add(Blocks.CYAN_BED.defaultBlockState(), 1)
-                        .add(Blocks.GRAY_BED.defaultBlockState(), 1)
-                        .add(Blocks.MAGENTA_BED.defaultBlockState(), 1)
-                        .add(Blocks.GREEN_BED.defaultBlockState(), 1)
+                new WeightedStateProvider(WeightedList.<BlockState>builder().addAll(
+                        Blocks.BED.map(Block::defaultBlockState)
+                                .map(blockstate -> new Weighted<>(blockstate, 1))
+                                .asList()
+                        )
                 ), // beds
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                         .add(Blocks.LANTERN.defaultBlockState(), 4)

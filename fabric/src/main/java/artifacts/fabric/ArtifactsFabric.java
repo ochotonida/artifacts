@@ -31,7 +31,7 @@ public class ArtifactsFabric implements ModInitializer {
         ServerEntityEvents.ENTITY_LOAD.register((entity, _) -> ArtifactHooks.onEntityAdded(entity));
 
         ModGameEvents.VIBRATION_FREQUENCIES.forEach((holder, frequency) ->
-                VibrationFrequencyRegistry.register(holder.unwrapKey().orElseThrow(), frequency)
+                VibrationFrequencyRegistry.register(holder.getKey(), frequency)
         );
 
         ServerLifecycleEvents.SERVER_STARTING.register(Artifacts::onServerStarting);

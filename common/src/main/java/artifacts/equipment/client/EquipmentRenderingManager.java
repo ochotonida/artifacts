@@ -27,6 +27,7 @@ public class EquipmentRenderingManager {
         }
     }
 
+    // TODO unused
     @Nullable
     public static ArtifactRenderer getArtifactRenderer(Item item) {
         for (EquipmentRenderingHandler handler : RENDERING_HANDLERS) {

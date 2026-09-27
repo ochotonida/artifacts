@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.LightCoordsUtil;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,7 +53,7 @@ public abstract class ArtifactRenderer {
             SubmitNodeCollector submitNodeCollector,
             int light
     ) {
-        if (renderState.entityType == EntityType.PLAYER) {
+        if (renderState.entityType == EntityTypes.PLAYER) {
             if (!Artifacts.CONFIG.client.showArtifactsOnPlayers.get()) {
                 return;
             }

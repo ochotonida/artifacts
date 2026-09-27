@@ -3,7 +3,7 @@ package artifacts.client;
 import artifacts.Artifacts;
 import artifacts.component.SwimData;
 import artifacts.component.ability.SwimInAir;
-import artifacts.mixin.accessors.client.GuiAccessor;
+import artifacts.mixin.accessors.client.HudAccessor;
 import artifacts.platform.PlatformServices;
 import artifacts.registry.ModDataComponents;
 import net.minecraft.client.Minecraft;
@@ -35,13 +35,13 @@ public class HeliumFlamingoOverlay {
     private int lastBubblePopSoundPlayed = 0;
 
     // Largely identical to Gui::renderAirBubbles
-    public boolean renderOverlay(GuiGraphicsExtractor guiGraphics, Player player, int height) {
+    public boolean renderOverlay(GuiGraphicsExtractor graphics, Player player, int height) {
         SwimData swimData = PlatformServices.getPlatformHelper().getSwimData(player);
         if (!ModDataComponents.SWIM_IN_AIR.on(player).includeItemsOnCooldown().findAny() || swimData == null) {
             return false;
         }
 
-        GuiAccessor gui = (GuiAccessor) Minecraft.getInstance().gui;
+        HudAccessor hud = (HudAccessor) Minecraft.getInstance().gui.hud;
         boolean isLosingCharge = swimData.shouldDepleteSwimFlyingCharge(player);
 
         // duration in ticks to fully charge/deplete
@@ -57,9 +57,9 @@ public class HeliumFlamingoOverlay {
             return false;
         }
 
-        int hotbarEdge = guiGraphics.guiWidth() / 2 + 91;
+        int hotbarEdge = graphics.guiWidth() / 2 + 91;
         // Set height from bottom of screen, add config offset
-        height = guiGraphics.guiHeight() - height - Artifacts.CONFIG.client.heliumFlamingoOverlayOffset.get();
+        height = graphics.guiHeight() - height - Artifacts.CONFIG.client.heliumFlamingoOverlayOffset.get();
 
         // the number of full bubbles (rendered right to left, index starting at 1)
         int fullBubble = getCurrentAirSupplyBubble(progress, maxProgress, -AIR_BUBBLE_POPPING_DURATION);
@@ -93,14 +93,14 @@ public class HeliumFlamingoOverlay {
                 // frequency increases as air depletes, starting at 6 bubbles left and maxing out at 2 bubbles left
                 int y = height;
                 if (isLosingCharge
-                        && gui.getTickCount() % 2 == currentBubble % 2
+                        && hud.getTickCount() % 2 == currentBubble % 2
                         && fullBubble <= 6
-                        && gui.getRandom().nextInt(Math.max(1, (int) Math.pow(2, fullBubble - 2))) == 0
-                        && gui.getRandom().nextBoolean()
+                        && hud.getRandom().nextInt(Math.max(1, (int) Math.pow(2, fullBubble - 2))) == 0
+                        && hud.getRandom().nextBoolean()
                 ) {
                     y += 1;
                 }
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, bubbleSprite, x, y, AIR_BUBBLE_SIZE, AIR_BUBBLE_SIZE);
+                graphics.blitSprite(RenderPipelines.GUI_TEXTURED, bubbleSprite, x, y, AIR_BUBBLE_SIZE, AIR_BUBBLE_SIZE);
             }
         }
 

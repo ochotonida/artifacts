@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(ItemInHandRenderer.class)
 public abstract class ItemInHandRendererMixin {
 
-    @ModifyExpressionValue(method = "renderArmWithItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getUseAnimation()Lnet/minecraft/world/item/ItemUseAnimation;"))
+    @ModifyExpressionValue(method = "submitArmWithItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getUseAnimation()Lnet/minecraft/world/item/ItemUseAnimation;"))
     private ItemUseAnimation modifyUseAnimation(ItemUseAnimation original, AbstractClientPlayer player, float frameInterp, float xRot, InteractionHand hand, float attack, ItemStack itemStack) {
         if (itemStack.has(ModDataComponents.HANDHELD_GLIDER.get()) && original == ItemUseAnimation.BLOCK) {
             // ItemInHandLayer applies additional transforms when blocking with an item that doesn't subclass ShieldItem

@@ -25,6 +25,6 @@ public class NeoForgeRegister<R> extends Register<R> {
 
     @Override
     protected <T extends R> void bind(RegistryHolder<R, T> holder) {
-        holder.bind(register.register(holder.unwrapKey().orElseThrow().identifier().getPath(), holder.getFactory()));
+        holder.bind(register.register(holder.getKey().identifier().getPath(), holder.getFactory()));
     }
 }

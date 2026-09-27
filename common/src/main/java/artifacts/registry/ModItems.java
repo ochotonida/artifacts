@@ -15,7 +15,6 @@ import artifacts.component.ability.retaliation.ThornsEffect;
 import artifacts.config.value.Value;
 import artifacts.item.ArtifactProperties;
 import artifacts.item.consumeeffects.HealConsumeEffect;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -26,7 +25,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -53,7 +52,7 @@ public class ModItems {
     public static final Register<CreativeModeTab> CREATIVE_MODE_TABS = Register.create(Registries.CREATIVE_MODE_TAB);
 
     @SuppressWarnings({"DataFlowIssue", "unused"})
-    public static final Holder<CreativeModeTab> CREATIVE_MODE_TAB = ModItems.CREATIVE_MODE_TABS.register(
+    public static final RegistryHolder<CreativeModeTab, CreativeModeTab> CREATIVE_MODE_TAB = ModItems.CREATIVE_MODE_TABS.register(
             "main",
             () -> CreativeModeTab.builder(null, 0)
                     .title(Component.translatable("%s.creative_tab".formatted(Artifacts.MOD_ID)))
@@ -62,13 +61,13 @@ public class ModItems {
                     .build()
     );
 
-    public static final Holder<Item> MIMIC_SPAWN_EGG = register("mimic_spawn_egg", SpawnEggItem::new,
+    public static final RegistryHolder<Item, Item> MIMIC_SPAWN_EGG = register("mimic_spawn_egg", SpawnEggItem::new,
             () -> new Item.Properties().spawnEgg(ModEntityTypes.MIMIC.get())
     );
 
     // TODO: add some sort of overlay to display equipped items that are losing durability
     // handheld
-    public static final Holder<Item> UMBRELLA
+    public static final RegistryHolder<Item, Item> UMBRELLA
             = register("umbrella", () -> Artifacts.CONFIG.items.umbrella, (builder, config) -> builder
             .component(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.OFFHAND).setSwappable(false).build())
             .durability(config.durability)
@@ -128,7 +127,7 @@ public class ModItems {
                     )
             )
     );
-    public static final Holder<Item> EVERLASTING_BEEF
+    public static final RegistryHolder<Item, Item> EVERLASTING_BEEF
             = register("everlasting_beef", () -> Artifacts.CONFIG.items.everlastingBeef, (builder, config) -> builder
             .durability(config.durability)
             .damageWhenConsumed(config.enabled, config.durability.damageWhenConsumed)
@@ -136,7 +135,7 @@ public class ModItems {
             .component(DataComponents.FOOD, Foods.BEEF)
             .component(ModDataComponents.INFINITE_CONSUMABLE.get(), config.enabled)
     );
-    public static final Holder<Item> ETERNAL_STEAK
+    public static final RegistryHolder<Item, Item> ETERNAL_STEAK
             = register("eternal_steak", () -> Artifacts.CONFIG.items.eternalSteak, (builder, config) -> builder
             .durability(config.durability)
             .damageWhenConsumed(config.enabled, config.durability.damageWhenConsumed)
@@ -146,7 +145,7 @@ public class ModItems {
     );
 
     // head
-    public static final Holder<Item> PLASTIC_DRINKING_HAT
+    public static final RegistryHolder<Item, Item> PLASTIC_DRINKING_HAT
             = register("plastic_drinking_hat", () -> Artifacts.CONFIG.items.plasticDrinkingHat, (builder, config) -> builder
             .equipable(SoundEvents.BOTTLE_FILL)
             .durability(config.durability)
@@ -154,7 +153,7 @@ public class ModItems {
             .modifiesAttributeBase(ModAttributes.DRINKING_SPEED, config.drinkingSpeedBonus)
             .modifiesAttributeBase(ModAttributes.EATING_SPEED, config.eatingSpeedBonus)
     );
-    public static final Holder<Item> NOVELTY_DRINKING_HAT
+    public static final RegistryHolder<Item, Item> NOVELTY_DRINKING_HAT
             = register("novelty_drinking_hat", () -> Artifacts.CONFIG.items.noveltyDrinkingHat, (builder, config) -> builder
             .equipable(SoundEvents.BOTTLE_FILL)
             .durability(config.durability)
@@ -163,7 +162,7 @@ public class ModItems {
             .modifiesAttributeBase(ModAttributes.DRINKING_SPEED, config.drinkingSpeedBonus)
             .modifiesAttributeBase(ModAttributes.EATING_SPEED, config.eatingSpeedBonus)
     );
-    public static final Holder<Item> SNORKEL
+    public static final RegistryHolder<Item, Item> SNORKEL
             = register("snorkel", () -> Artifacts.CONFIG.items.snorkel, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -175,7 +174,7 @@ public class ModItems {
                     () -> config.isInfinite.get() ? EntityCondition.ALWAYS : EntityCondition.REPLENISHING_AIR
             )
     );
-    public static final Holder<Item> NIGHT_VISION_GOGGLES
+    public static final RegistryHolder<Item, Item> NIGHT_VISION_GOGGLES
             = register("night_vision_goggles", () -> Artifacts.CONFIG.items.nightVisionGoggles, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -184,28 +183,28 @@ public class ModItems {
             .mobEffect(MobEffects.NIGHT_VISION, Value.of(1), Value.of(10), () -> EntityCondition.ALWAYS)
             .component(ModDataComponents.REDUCED_NIGHT_VISION.get(), config.strength)
     );
-    public static final Holder<Item> VILLAGER_HAT
+    public static final RegistryHolder<Item, Item> VILLAGER_HAT
             = register("villager_hat", () -> Artifacts.CONFIG.items.villagerHat, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
             .component(ModDataComponents.DAMAGE_ON_TRADE.get(), config.durability.damagePerTrade)
             .increasesAttribute(ModAttributes.VILLAGER_REPUTATION, config.reputationBonus)
     );
-    public static final Holder<Item> SUPERSTITIOUS_HAT
+    public static final RegistryHolder<Item, Item> SUPERSTITIOUS_HAT
             = register("superstitious_hat", () -> Artifacts.CONFIG.items.superstitiousHat, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
             .damageOnKill(config.durability.damagePerKill)
             .increasesEnchantment(Enchantments.LOOTING, config.lootingLevelBonus)
     );
-    public static final Holder<Item> COWBOY_HAT
+    public static final RegistryHolder<Item, Item> COWBOY_HAT
             = register("cowboy_hat", () -> Artifacts.CONFIG.items.cowboyHat, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_LEATHER)
             .durability(config.durability)
             .damageOverTime(config.durability.damagePerSecondActive, EntityCondition.RIDING_MOUNT)
             .modifiesAttributeBase(ModAttributes.MOUNT_SPEED, config.mountSpeedBonus)
     );
-    public static final Holder<Item> ANGLERS_HAT
+    public static final RegistryHolder<Item, Item> ANGLERS_HAT
             = register("anglers_hat", () -> Artifacts.CONFIG.items.anglersHat, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_LEATHER)
             .durability(config.durability)
@@ -215,14 +214,14 @@ public class ModItems {
     );
 
     // necklace
-    public static final Holder<Item> LUCKY_SCARF
+    public static final RegistryHolder<Item, Item> LUCKY_SCARF
             = register("lucky_scarf", () -> Artifacts.CONFIG.items.luckyScarf, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
             .damageOnOreMined(config.durability.damagePerOreMined)
             .increasesEnchantment(Enchantments.FORTUNE, config.fortuneLevelBonus)
     );
-    public static final Holder<Item> SCARF_OF_INVISIBILITY
+    public static final RegistryHolder<Item, Item> SCARF_OF_INVISIBILITY
             = register("scarf_of_invisibility", () -> Artifacts.CONFIG.items.scarfOfInvisibility, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -237,7 +236,7 @@ public class ModItems {
             .component(ModDataComponents.HIDE_WHEN_INVISIBLE.get(), config.hideWhenInvisible)
             .component(ModDataComponents.HIDES_EFFECT_PARTICLES.get(), config.hideEffectParticles)
     );
-    public static final Holder<Item> CROSS_NECKLACE
+    public static final RegistryHolder<Item, Item> CROSS_NECKLACE
             = register("cross_necklace", () -> Artifacts.CONFIG.items.crossNecklace, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_DIAMOND)
             .piglinLoved()
@@ -251,7 +250,7 @@ public class ModItems {
                     () -> true, false
             )
     );
-    public static final Holder<Item> PANIC_NECKLACE
+    public static final RegistryHolder<Item, Item> PANIC_NECKLACE
             = register("panic_necklace", () -> Artifacts.CONFIG.items.panicNecklace, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_DIAMOND)
             .durability(config.durability)
@@ -272,7 +271,7 @@ public class ModItems {
                     )
             )
     );
-    public static final Holder<Item> SHOCK_PENDANT
+    public static final RegistryHolder<Item, Item> SHOCK_PENDANT
             = register("shock_pendant", () -> Artifacts.CONFIG.items.shockPendant, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -292,7 +291,7 @@ public class ModItems {
                     )
             )
     );
-    public static final Holder<Item> FLAME_PENDANT
+    public static final RegistryHolder<Item, Item> FLAME_PENDANT
             = register("flame_pendant", () -> Artifacts.CONFIG.items.flamePendant, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -305,7 +304,7 @@ public class ModItems {
                     )
             )
     );
-    public static final Holder<Item> THORN_PENDANT
+    public static final RegistryHolder<Item, Item> THORN_PENDANT
             = register("thorn_pendant", () -> Artifacts.CONFIG.items.thornPendant, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -318,7 +317,7 @@ public class ModItems {
                     )
             )
     );
-    public static final Holder<Item> CHARM_OF_SINKING
+    public static final RegistryHolder<Item, Item> CHARM_OF_SINKING
             = register("charm_of_sinking", () -> Artifacts.CONFIG.items.charmOfSinking, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -338,7 +337,7 @@ public class ModItems {
                     true
             )
     );
-    public static final Holder<Item> CHARM_OF_SHRINKING
+    public static final RegistryHolder<Item, Item> CHARM_OF_SHRINKING
             = register("charm_of_shrinking", () -> Artifacts.CONFIG.items.charmOfShrinking, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -348,7 +347,7 @@ public class ModItems {
     );
 
     // belt
-    public static final Holder<Item> CLOUD_IN_A_BOTTLE
+    public static final RegistryHolder<Item, Item> CLOUD_IN_A_BOTTLE
             = register("cloud_in_a_bottle", () -> Artifacts.CONFIG.items.cloudInABottle, (builder, config) -> builder
             .equipable(SoundEvents.BOTTLE_FILL_DRAGONBREATH)
             .durability(config.durability)
@@ -361,7 +360,7 @@ public class ModItems {
             ))
             .increasesAttribute(Attributes.SAFE_FALL_DISTANCE, config.safeFallDistanceBonus)
     );
-    public static final Holder<Item> OBSIDIAN_SKULL
+    public static final RegistryHolder<Item, Item> OBSIDIAN_SKULL
             = register("obsidian_skull", () -> Artifacts.CONFIG.items.obsidianSkull, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_IRON)
             .durability(config.durability)
@@ -382,7 +381,7 @@ public class ModItems {
                     )
             )
     );
-    public static final Holder<Item> ANTIDOTE_VESSEL
+    public static final RegistryHolder<Item, Item> ANTIDOTE_VESSEL
             = register("antidote_vessel", () -> Artifacts.CONFIG.items.antidoteVessel, (builder, config) -> builder
             .equipable(SoundEvents.BOTTLE_FILL)
             .piglinLoved()
@@ -393,7 +392,7 @@ public class ModItems {
                     config.durability.damagePerActivation
             ))
     );
-    public static final Holder<Item> UNIVERSAL_ATTRACTOR
+    public static final RegistryHolder<Item, Item> UNIVERSAL_ATTRACTOR
             = register("universal_attractor", () -> Artifacts.CONFIG.items.universalAttractor, (builder, config) -> builder
             .equipable()
             .piglinLoved()
@@ -402,16 +401,16 @@ public class ModItems {
             .toggleKey(ToggleIdentifier.UNIVERSAL_ATTRACTOR)
             .mobEffect(ModMobEffects.MAGNETISM, config.magnetismLevel, Value.of(10), () -> EntityCondition.ALWAYS)
     );
-    public static final Holder<Item> CRYSTAL_HEART
+    public static final RegistryHolder<Item, Item> CRYSTAL_HEART
             = register("crystal_heart", () -> Artifacts.CONFIG.items.crystalHeart, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_DIAMOND)
             .durability(config.durability)
             .damageOnHurt(config.durability.damageWhenHurt)
             .increasesAttribute(Attributes.MAX_HEALTH, config.healthBonus)
     );
-    public static final Holder<Item> HELIUM_FLAMINGO
+    public static final RegistryHolder<Item, Item> HELIUM_FLAMINGO
             = register("helium_flamingo", () -> Artifacts.CONFIG.items.heliumFlamingo, (builder, config) -> builder
-            .equipable(ModSoundEvents.POP)
+            .equipable(ModSoundEvents.POP.holder())
             .durability(config.durability)
             .damageOverTime(config.durability.damagePerSecondActive, EntityCondition.SWIM_FLYING)
             .component(ModDataComponents.SWIM_IN_AIR.get(), new SwimInAir(
@@ -420,7 +419,7 @@ public class ModItems {
                     config.cooldown
             ))
     );
-    public static final Holder<Item> CHORUS_TOTEM
+    public static final RegistryHolder<Item, Item> CHORUS_TOTEM
             = register("chorus_totem", () -> Artifacts.CONFIG.items.chorusTotem, (builder, config) -> builder
             .equipable()
             .component(ModDataComponents.EQUIPABLE_TOTEM.get(), new EquipableTotem(
@@ -436,7 +435,7 @@ public class ModItems {
                     )
             )
     );
-    public static final Holder<Item> WARP_DRIVE
+    public static final RegistryHolder<Item, Item> WARP_DRIVE
             = register("warp_drive", () -> Artifacts.CONFIG.items.warpDrive, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -450,7 +449,7 @@ public class ModItems {
     );
 
     // hands
-    public static final Holder<Item> DIGGING_CLAWS
+    public static final RegistryHolder<Item, Item> DIGGING_CLAWS
             = register("digging_claws", () -> Artifacts.CONFIG.items.diggingClaws, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_NETHERITE)
             .durability(config.durability)
@@ -459,35 +458,35 @@ public class ModItems {
             .modifiesAttributeBase(Attributes.BLOCK_BREAK_SPEED, config.blockBreakSpeedBonus)
             .component(ModDataComponents.TOOL_TIER_UPGRADE.get(), new ToolTierUpgrade(config.toolTier, config.durability.damagePerBlockHarvested))
     );
-    public static final Holder<Item> FERAL_CLAWS
+    public static final RegistryHolder<Item, Item> FERAL_CLAWS
             = register("feral_claws", () -> Artifacts.CONFIG.items.feralClaws, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_NETHERITE)
             .durability(config.durability)
             .damageOnMeleeAttack(config.durability.damagePerAttack)
             .modifiesAttributeBase(Attributes.ATTACK_SPEED, config.attackSpeedBonus)
     );
-    public static final Holder<Item> POWER_GLOVE
+    public static final RegistryHolder<Item, Item> POWER_GLOVE
             = register("power_glove", () -> Artifacts.CONFIG.items.powerGlove, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
             .damageOnMeleeAttack(config.durability.damagePerAttack)
             .increasesAttribute(Attributes.ATTACK_DAMAGE, config.attackDamageBonus)
     );
-    public static final Holder<Item> FIRE_GAUNTLET
+    public static final RegistryHolder<Item, Item> FIRE_GAUNTLET
             = register("fire_gauntlet", () -> Artifacts.CONFIG.items.fireGauntlet, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_IRON)
             .durability(config.durability)
             .damageOnMeleeAttack(config.durability.damagePerAttack)
             .increasesAttribute(ModAttributes.ATTACK_BURNING_DURATION, config.fireDuration)
     );
-    public static final Holder<Item> POCKET_PISTON
+    public static final RegistryHolder<Item, Item> POCKET_PISTON
             = register("pocket_piston", () -> Artifacts.CONFIG.items.pocketPiston, (builder, config) -> builder
             .equipable(SoundEvents.PISTON_EXTEND)
             .durability(config.durability)
             .damageOnMeleeAttack(config.durability.damagePerAttack)
             .increasesAttribute(Attributes.ATTACK_KNOCKBACK, config.attackKnockbackBonus)
     );
-    public static final Holder<Item> VAMPIRIC_GLOVE
+    public static final RegistryHolder<Item, Item> VAMPIRIC_GLOVE
             = register("vampiric_glove", () -> Artifacts.CONFIG.items.vampiricGlove, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -501,7 +500,7 @@ public class ModItems {
                     )
             )
     );
-    public static final Holder<Item> GOLDEN_HOOK
+    public static final RegistryHolder<Item, Item> GOLDEN_HOOK
             = register("golden_hook", () -> Artifacts.CONFIG.items.goldenHook, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -509,7 +508,7 @@ public class ModItems {
             .piglinLoved()
             .modifiesAttributeBase(ModAttributes.ENTITY_EXPERIENCE, config.entityExperienceBonus)
     );
-    public static final Holder<Item> ONION_RING
+    public static final RegistryHolder<Item, Item> ONION_RING
             = register("onion_ring", () -> Artifacts.CONFIG.items.onionRing, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -529,14 +528,14 @@ public class ModItems {
                     )
             )
     );
-    public static final Holder<Item> PICKAXE_HEATER
+    public static final RegistryHolder<Item, Item> PICKAXE_HEATER
             = register("pickaxe_heater", () -> Artifacts.CONFIG.items.pickaxeHeater, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_IRON)
             .durability(config.durability)
             .damageOnOreMined(config.durability.damagePerOreMined)
             .component(ModDataComponents.AUTO_SMELT.get(), config.enabled)
     );
-    public static final Holder<Item> WITHERED_BRACELET
+    public static final RegistryHolder<Item, Item> WITHERED_BRACELET
             = register("withered_bracelet", () -> Artifacts.CONFIG.items.witheredBracelet, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -559,7 +558,7 @@ public class ModItems {
     );
 
     // feet
-    public static final Holder<Item> AQUA_DASHERS
+    public static final RegistryHolder<Item, Item> AQUA_DASHERS
             = register("aqua_dashers", () -> Artifacts.CONFIG.items.aquaDashers, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -569,7 +568,7 @@ public class ModItems {
                     new FluidCollision(config.enabled, Optional.empty(), EntityCondition.SPRINTING)
             )
     );
-    public static final Holder<Item> BUNNY_HOPPERS
+    public static final RegistryHolder<Item, Item> BUNNY_HOPPERS
             = register("bunny_hoppers", () -> Artifacts.CONFIG.items.bunnyHoppers, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -587,12 +586,12 @@ public class ModItems {
             )
     );
     @SuppressWarnings("deprecation")
-    public static final Holder<Item> KITTY_SLIPPERS
+    public static final RegistryHolder<Item, Item> KITTY_SLIPPERS
             = register("kitty_slippers", () -> Artifacts.CONFIG.items.kittySlippers, (builder, config) -> builder
             .equipable(SoundEvents.CAT_SOUNDS.get(CatSoundVariants.SoundSet.CLASSIC).adultSounds().ambientSound())
             .durability(config.durability)
             .damageOnKill(config.durability.damagePerCreeperScared, registries -> registries.getOrThrow(ModTags.CREEPERS))
-            .damageOnKill(config.durability.damagePerPhantomScared, _ -> HolderSet.direct(EntityType.PHANTOM.builtInRegistryHolder()))
+            .damageOnKill(config.durability.damagePerPhantomScared, _ -> HolderSet.direct(EntityTypes.PHANTOM.builtInRegistryHolder()))
             .component(ModDataComponents.CREEPER_REPELLENT.get(), config.repelCreepers)
             .component(ModDataComponents.PHANTOM_REPELLENT.get(), config.repelPhantoms)
             .component(
@@ -603,7 +602,7 @@ public class ModItems {
                     )
             )
     );
-    public static final Holder<Item> RUNNING_SHOES
+    public static final RegistryHolder<Item, Item> RUNNING_SHOES
             = register("running_shoes", () -> Artifacts.CONFIG.items.runningShoes, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -611,7 +610,7 @@ public class ModItems {
             .modifiesAttributeBase(ModAttributes.SPRINTING_SPEED, config.sprintingSpeedBonus)
             .increasesAttribute(ModAttributes.SPRINTING_STEP_HEIGHT, config.sprintingStepHeightBonus)
     );
-    public static final Holder<Item> SNOWSHOES
+    public static final RegistryHolder<Item, Item> SNOWSHOES
             = register("snowshoes", () -> Artifacts.CONFIG.items.snowshoes, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -619,7 +618,7 @@ public class ModItems {
             .component(ModDataComponents.WALK_ON_POWDER_SNOW.get(), config.allowWalkingOnPowderedSnow)
             .modifiesAttributeBase(ModAttributes.MOVEMENT_SPEED_ON_SNOW, config.movementSpeedOnSnowBonus)
     );
-    public static final Holder<Item> STEADFAST_SPIKES
+    public static final RegistryHolder<Item, Item> STEADFAST_SPIKES
             = register("steadfast_spikes", () -> Artifacts.CONFIG.items.steadfastSpikes, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
@@ -627,14 +626,14 @@ public class ModItems {
             .increasesAttribute(ModAttributes.SLIP_RESISTANCE, config.slipperinessReduction)
             .damageOnHurt(config.durability.damageWhenAttacked, ModTags.IS_MELEE)
     );
-    public static final Holder<Item> FLIPPERS
+    public static final RegistryHolder<Item, Item> FLIPPERS
             = register("flippers", () -> Artifacts.CONFIG.items.flippers, (builder, config) -> builder
             .equipable()
             .durability(config.durability)
             .damageOverTime(config.durability.damagePerSecondActive, EntityCondition.SWIMMING)
             .modifiesAttributeBase(ModAttributes.SWIM_SPEED, config.swimSpeedBonus)
     );
-    public static final Holder<Item> ROOTED_BOOTS
+    public static final RegistryHolder<Item, Item> ROOTED_BOOTS
             = register("rooted_boots", () -> Artifacts.CONFIG.items.rootedBoots, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_LEATHER)
             .durability(config.durability)
@@ -648,7 +647,7 @@ public class ModItems {
             )
             .component(ModDataComponents.POST_EATING_PLANT_GROWTH.get(), config.growPlantsAfterEating)
     );
-    public static final Holder<Item> STRIDER_SHOES
+    public static final RegistryHolder<Item, Item> STRIDER_SHOES
             = register("strider_shoes", () -> Artifacts.CONFIG.items.striderShoes, (builder, config) -> builder
             .equipable(SoundEvents.ARMOR_EQUIP_LEATHER)
             .durability(config.durability)
@@ -663,15 +662,15 @@ public class ModItems {
     );
 
     // curio
-    public static final Holder<Item> WHOOPEE_CUSHION
+    public static final RegistryHolder<Item, Item> WHOOPEE_CUSHION
             = register("whoopee_cushion", () -> Artifacts.CONFIG.items.whoopeeCushion, (builder, config) -> builder
-            .equipable(ModSoundEvents.FART)
+            .equipable(ModSoundEvents.FART.holder())
             .durability(config.durability)
             .component(ModDataComponents.DAMAGE_ON_FART.get(), config.durability.damagePerActivation)
             .increasesAttribute(ModAttributes.FLATULENCE, config.fartChance)
     );
 
-    private static <CONFIG> Holder<Item> register(
+    private static <CONFIG> RegistryHolder<Item, Item> register(
             String name,
             Supplier<CONFIG> configSupplier,
             BiConsumer<ArtifactProperties, CONFIG> consumer
@@ -683,7 +682,7 @@ public class ModItems {
         });
     }
 
-    private static Holder<Item> register(String name, Function<Item.Properties, ? extends Item> factory, Supplier<Item.Properties> properties) {
+    private static RegistryHolder<Item, Item> register(String name, Function<Item.Properties, ? extends Item> factory, Supplier<Item.Properties> properties) {
         return ITEMS.register(name, () -> factory.apply(properties.get().setId(Artifacts.key(Registries.ITEM, name))));
     }
 }

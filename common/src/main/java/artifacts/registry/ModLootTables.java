@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
 
@@ -14,8 +15,8 @@ import java.util.List;
 public class ModLootTables {
 
     public static final List<ResourceKey<LootTable>> INJECTED_LOOT_TABLES = List.of(
-            EntityType.COW.getDefaultLootTable().orElseThrow(),
-            EntityType.MOOSHROOM.getDefaultLootTable().orElseThrow(),
+            EntityTypes.COW.getDefaultLootTable().orElseThrow(),
+            EntityTypes.MOOSHROOM.getDefaultLootTable().orElseThrow(),
             BuiltInLootTables.VILLAGE_DESERT_HOUSE,
             BuiltInLootTables.VILLAGE_PLAINS_HOUSE,
             BuiltInLootTables.VILLAGE_SAVANNA_HOUSE,

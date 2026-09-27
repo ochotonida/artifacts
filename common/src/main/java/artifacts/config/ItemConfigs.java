@@ -10,7 +10,7 @@ import artifacts.config.value.ValueTypes;
 import artifacts.item.ItemDamageProperties;
 import artifacts.lang.LangEntry;
 import artifacts.registry.ModItems;
-import net.minecraft.core.Holder;
+import artifacts.registry.RegistryHolder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -409,7 +409,7 @@ public final class ItemConfigs extends ConfigManager {
 
         public final Durability durability = new Durability();
 
-        private DrinkingHat(Holder<Item> item, String itemName) {
+        private DrinkingHat(RegistryHolder<Item, Item> item, String itemName) {
             super(item);
             this.drinkingSpeedBonus = define("drinkingSpeedBonus", ValueTypes.ATTRIBUTE_MODIFIER, 1.50)
                     .descriptionLine("How much the %s increases the wearer's drinking speed".formatted(itemName))
@@ -445,7 +445,7 @@ public final class ItemConfigs extends ConfigManager {
 
         public final Durability durability;
 
-        public EverlastingFood(Holder<Item> holder, String itemName) {
+        public EverlastingFood(RegistryHolder<Item, Item> holder, String itemName) {
             super(holder);
             enabled = defineEnabled(true)
                     .descriptionLine("Whether the %s can be eaten".formatted(itemName))
@@ -1243,11 +1243,11 @@ public final class ItemConfigs extends ConfigManager {
                 .displayPriority(-2)
                 .build();
 
-        public ItemSubCategory(Holder<Item> holder) {
-            super(holder.unwrapKey().orElseThrow().identifier().getPath());
+        public ItemSubCategory(RegistryHolder<Item, Item> holder) {
+            super(holder.getKey().identifier().getPath());
             setTitle(new LangEntry(getKey().joinedPath()).withPrefix("item.artifacts"));
             // shouldn't really do this from a constructor but whatever
-            ItemConfigs.this.itemCategories.put(holder.unwrapKey().orElseThrow(), this);
+            ItemConfigs.this.itemCategories.put(holder.getKey(), this);
         }
 
         protected ConfigValueBuilder<Boolean> defineEnabled(boolean defaultValue) {

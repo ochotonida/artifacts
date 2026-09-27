@@ -318,7 +318,7 @@ public class ArtifactHooks {
     public static boolean fart(LivingEntity entity) {
         double chance = entity.getAttributeValue(ModAttributes.FLATULENCE);
         if (!entity.level().isClientSide() && entity.getRandom().nextFloat() < chance) {
-            entity.gameEvent(ModGameEvents.FART);
+            entity.gameEvent(ModGameEvents.FART.holder());
             entity.level().playSound(null, entity, ModSoundEvents.FART.value(), SoundSource.PLAYERS, 1, 0.9F + entity.getRandom().nextFloat() * 0.2F);
             ModDataComponents.DAMAGE_ON_FART.on(entity)
                     .iterate((component, slot) -> slot.hurtAndBreak(component.get()));

@@ -6,14 +6,14 @@ import artifacts.loot.ConfigValueChance;
 import artifacts.neoforge.loot.ReplaceWithTableLootModifier;
 import artifacts.registry.ModItems;
 import artifacts.registry.ModLootTables;
-import net.minecraft.advancements.criterion.EntityFlagsPredicate;
-import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.predicates.entity.EntityFlagsPredicate;
+import net.minecraft.advancements.predicates.entity.EntityPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.context.ContextKeySet;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -45,8 +45,8 @@ public class LootModifiers extends GlobalLootModifierProvider {
 
     private void addLoot() {
         List<ResourceKey<LootTable>> cowLootTables = List.of(
-                EntityType.COW.getDefaultLootTable().orElseThrow(),
-                EntityType.MOOSHROOM.getDefaultLootTable().orElseThrow()
+                EntityTypes.COW.getDefaultLootTable().orElseThrow(),
+                EntityTypes.MOOSHROOM.getDefaultLootTable().orElseThrow()
         );
         for (ResourceKey<LootTable> lootTable : cowLootTables) {
             lootBuilders.add(

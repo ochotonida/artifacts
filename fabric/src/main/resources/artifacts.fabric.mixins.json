@@ -20,9 +20,9 @@
     "attribute.swimspeed.LivingEntityMixin"
   ],
   "client": [
-    "ability.swiminair.client.GuiMixin",
+    "ability.swiminair.client.HudMixin",
     "client.AvatarRendererMixin",
-    "client.GuiMixin"
+    "client.HudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

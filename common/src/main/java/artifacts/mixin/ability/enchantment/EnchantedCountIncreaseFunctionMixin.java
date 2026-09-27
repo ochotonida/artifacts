@@ -28,7 +28,7 @@ public class EnchantedCountIncreaseFunctionMixin {
 
         if (entity instanceof LivingEntity livingEntity) {
             level += ModDataComponents.ENCHANTMENT_LEVEL_MODIFIERS.on(livingEntity)
-                    .filter(ability -> ability.enchantment().equals(enchantment))
+                    .filter(ability -> enchantment.is(ability.enchantment()))
                     .sumInt(ability -> ability.amount().get());
         }
 

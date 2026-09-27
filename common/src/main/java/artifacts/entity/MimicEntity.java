@@ -28,6 +28,7 @@ import java.util.EnumSet;
 import java.util.Locale;
 import java.util.Objects;
 
+// TODO: rename to Mimic
 public class MimicEntity extends Mob implements Enemy {
 
     private static final int DORMANT_TICK_RATE = 20;
@@ -400,7 +401,7 @@ public class MimicEntity extends Mob implements Enemy {
         }
     }
 
-    protected static class MimicMovementController extends MoveControl {
+    protected static class MimicMovementController extends MoveControl<MimicEntity> {
 
         private final MimicEntity mimic;
         private float rotationDegrees;

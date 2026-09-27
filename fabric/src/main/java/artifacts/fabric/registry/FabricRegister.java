@@ -15,7 +15,7 @@ public class FabricRegister<R> extends Register<R> {
 
     @Override
     protected <T extends R> void bind(RegistryHolder<R, T> holder) {
-        holder.bind(Registry.registerForHolder(getRegistry(getRegistry()), Artifacts.key(getRegistry(), holder.unwrapKey().orElseThrow().identifier().getPath()), holder.getFactory().get()));
+        holder.bind(Registry.registerForHolder(getRegistry(getRegistry()), Artifacts.key(getRegistry(), holder.getKey().identifier().getPath()), holder.getFactory().get()));
     }
 
     @SuppressWarnings("unchecked")

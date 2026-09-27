@@ -3,7 +3,6 @@ package artifacts.util;
 import artifacts.registry.ModDataComponents;
 import artifacts.registry.ModTags;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;

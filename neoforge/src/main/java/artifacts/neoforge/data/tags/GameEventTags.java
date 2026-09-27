@@ -2,6 +2,7 @@ package artifacts.neoforge.data.tags;
 
 import artifacts.Artifacts;
 import artifacts.registry.ModGameEvents;
+import artifacts.registry.RegistryHolder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.GameEventTagsProvider;
@@ -17,10 +18,10 @@ public class GameEventTags extends GameEventTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider arg) {
         this.tag(net.minecraft.tags.GameEventTags.VIBRATIONS).addAll(
-                ModGameEvents.GAME_EVENTS.getEntries().stream().map(holder -> holder.unwrapKey().orElseThrow()).toList()
+                ModGameEvents.GAME_EVENTS.getEntries().stream().map(RegistryHolder::getKey).toList()
         );
         this.tag(net.minecraft.tags.GameEventTags.WARDEN_CAN_LISTEN).addAll(
-                ModGameEvents.GAME_EVENTS.getEntries().stream().map(holder -> holder.unwrapKey().orElseThrow()).toList()
+                ModGameEvents.GAME_EVENTS.getEntries().stream().map(RegistryHolder::getKey).toList()
         );
     }
 }

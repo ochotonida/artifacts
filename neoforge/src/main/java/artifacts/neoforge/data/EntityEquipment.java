@@ -4,6 +4,7 @@ import artifacts.loot.ConfigValueChance;
 import artifacts.registry.ModItems;
 import artifacts.registry.ModLootTables;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -18,51 +19,51 @@ public class EntityEquipment {
     }
 
     public void addLootTables() {
-        addItems(EntityType.ZOMBIE,
+        addItems(EntityTypes.ZOMBIE,
                 ModItems.COWBOY_HAT.value(),
                 ModItems.BUNNY_HOPPERS.value(),
                 ModItems.SCARF_OF_INVISIBILITY.value()
         );
-        addItems(EntityType.HUSK,
+        addItems(EntityTypes.HUSK,
                 ModItems.VAMPIRIC_GLOVE.value(),
                 ModItems.THORN_PENDANT.value()
         );
-        addItems(EntityType.DROWNED,
+        addItems(EntityTypes.DROWNED,
                 ModItems.SNORKEL.value(),
                 ModItems.FLIPPERS.value()
         );
-        addEquipment(EntityType.SKELETON, LootPool.lootPool()
+        addEquipment(EntityTypes.SKELETON, LootPool.lootPool()
                 .add(LootTables.item(ModItems.NIGHT_VISION_GOGGLES.value(), 1))
                 .add(LootTables.drinkingHat(1))
                 .add(LootTables.item(ModItems.FLAME_PENDANT.value(), 1))
         );
-        addItems(EntityType.STRAY,
+        addItems(EntityTypes.STRAY,
                 ModItems.SNOWSHOES.value(),
                 ModItems.STEADFAST_SPIKES.value()
         );
-        addItems(EntityType.BOGGED,
+        addItems(EntityTypes.BOGGED,
                 ModItems.ANTIDOTE_VESSEL.value(),
                 ModItems.ROOTED_BOOTS.value()
         );
-        addItems(EntityType.PARCHED,
+        addItems(EntityTypes.PARCHED,
                 ModItems.PANIC_NECKLACE.value(),
                 ModItems.PICKAXE_HEATER.value()
         );
-        addItems(EntityType.WITHER_SKELETON,
+        addItems(EntityTypes.WITHER_SKELETON,
                 ModItems.FIRE_GAUNTLET.value(),
                 ModItems.ANTIDOTE_VESSEL.value()
         );
-        addItems(EntityType.PIGLIN,
+        addItems(EntityTypes.PIGLIN,
                 ModItems.GOLDEN_HOOK.value(),
                 ModItems.UNIVERSAL_ATTRACTOR.value(),
                 ModItems.OBSIDIAN_SKULL.value()
         );
-        addItems(EntityType.ZOMBIFIED_PIGLIN,
+        addItems(EntityTypes.ZOMBIFIED_PIGLIN,
                 ModItems.GOLDEN_HOOK.value(),
                 ModItems.UNIVERSAL_ATTRACTOR.value(),
                 ModItems.OBSIDIAN_SKULL.value()
         );
-        addItems(EntityType.PIGLIN_BRUTE,
+        addItems(EntityTypes.PIGLIN_BRUTE,
                 ModItems.ONION_RING.value(),
                 ModItems.STRIDER_SHOES.value()
         );

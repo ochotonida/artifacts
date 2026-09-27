@@ -7,7 +7,7 @@ import artifacts.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypeIds;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.Arrays;
@@ -22,8 +22,9 @@ public class EntityTypeTags extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(Tags.EntityTypes.CAPTURING_NOT_SUPPORTED).add(ModEntityTypes.MIMIC.value());
-        tag(ModTags.CREEPERS).add(EntityType.CREEPER);
+        // noinspection ConstantConditions
+        tag(Tags.EntityTypes.CAPTURING_NOT_SUPPORTED).add(ModEntityTypes.MIMIC.getKey());
+        tag(ModTags.CREEPERS).add(EntityTypeIds.CREEPER);
 
         List<String> creepers = Arrays.asList(
                 "jungle_creeper",

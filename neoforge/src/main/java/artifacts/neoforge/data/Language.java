@@ -151,7 +151,7 @@ public class Language extends LanguageProvider {
 
     private void addAttributes() {
         for (RegistryHolder<Attribute, ?> attribute : ModAttributes.ATTRIBUTES.getEntries()) {
-            String[] path = attribute.unwrapKey().orElseThrow().identifier().getPath().split("\\.");
+            String[] path = attribute.getKey().identifier().getPath().split("\\.");
             String name = path[path.length - 1];
             add(attribute.get().getDescriptionId(), LangUtil.fromSnakeCasedString(name));
         }
@@ -160,7 +160,7 @@ public class Language extends LanguageProvider {
 
     private void addEntities() {
         for (RegistryHolder<EntityType<?>, ?> entityType : ModEntityTypes.ENTITY_TYPES.getEntries()) {
-            add(entityType.get().getDescriptionId(), LangUtil.fromSnakeCasedString(entityType.unwrapKey().orElseThrow().identifier().getPath()));
+            add(entityType.get().getDescriptionId(), LangUtil.fromSnakeCasedString(entityType.getKey().identifier().getPath()));
         }
         add(ModSoundEvents.MIMIC_CLOSE.value(), "Mimic closes");
         add(ModSoundEvents.MIMIC_DEATH.value(), "Mimic dies");
@@ -186,8 +186,8 @@ public class Language extends LanguageProvider {
     }
 
     private void addItems() {
-        for (Holder<Item> holder : ModItems.ITEMS.getEntries()) {
-            add(holder.value(), getItemName(holder.unwrapKey().orElseThrow()));
+        for (RegistryHolder<Item, ?> holder : ModItems.ITEMS.getEntries()) {
+            add(holder.value(), getItemName(holder.getKey()));
         }
     }
 
@@ -218,8 +218,8 @@ public class Language extends LanguageProvider {
         add(ModTags.ROOTED_BOOTS_GRASS, "Rooted Boots Grass");
         add(ModTags.SNOW_LAYERS, "Snow Layers");
 
-        for (Holder<Item> holder : ModItems.ITEMS.getEntries()) {
-            ResourceKey<Item> key = holder.unwrapKey().orElseThrow();
+        for (RegistryHolder<Item, ?> holder : ModItems.ITEMS.getEntries()) {
+            ResourceKey<Item> key = holder.getKey();
             if (Artifacts.CONFIG.items.get(key) != null) {
                 add(TagKey.create(Registries.ITEM, key.identifier().withPrefix("repairs_")), "Repairs " + getItemName(key));
             }

@@ -6,7 +6,7 @@ import artifacts.integration.ModCompat;
 import artifacts.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.references.BlockItemIds;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 
 import java.util.concurrent.CompletableFuture;
@@ -24,18 +24,19 @@ public class BlockTags extends BlockTagsProvider {
         tag(ModTags.MINEABLE_WITH_DIGGING_CLAWS).addTag(net.minecraft.tags.BlockTags.MINEABLE_WITH_AXE);
         tag(ModTags.MINEABLE_WITH_DIGGING_CLAWS).addTag(net.minecraft.tags.BlockTags.MINEABLE_WITH_HOE);
 
-        tag(ModTags.CAMPSITE_CHESTS).add(Blocks.CHEST);
+        tag(ModTags.CAMPSITE_CHESTS).add(BlockItemIds.CHEST.block());
         for (String chestType : MimicChestMaterials.QUARK_WOODEN_CHEST_MATERIALS) {
             getOrCreateRawBuilder(ModTags.CAMPSITE_CHESTS).addOptionalElement(ModCompat.QUARK.id("%s_chest".formatted(chestType)));
         }
 
+        //noinspection unchecked
         tag(ModTags.ROOTED_BOOTS_GRASS).add(
-                Blocks.GRASS_BLOCK,
-                Blocks.MOSS_BLOCK,
-                Blocks.MOSS_CARPET,
-                Blocks.DIRT_PATH,
-                Blocks.PODZOL
+                BlockItemIds.GRASS_BLOCK.block(),
+                BlockItemIds.MOSS_BLOCK.block(),
+                BlockItemIds.MOSS_CARPET.block(),
+                BlockItemIds.DIRT_PATH.block(),
+                BlockItemIds.PODZOL.block()
         );
-        tag(ModTags.SNOW_LAYERS).add(Blocks.SNOW);
+        tag(ModTags.SNOW_LAYERS).add(BlockItemIds.SNOW.block());
     }
 }

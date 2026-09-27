@@ -20,7 +20,7 @@ public class DataMaps extends DataMapProvider {
     protected void gather(HolderLookup.Provider provider) {
         Builder<VibrationFrequency, GameEvent> builder = builder(NeoForgeDataMaps.VIBRATION_FREQUENCIES);
         ModGameEvents.VIBRATION_FREQUENCIES.forEach((holder, frequency) ->
-                builder.add(holder, new VibrationFrequency(frequency), false)
+                builder.add(holder.getKey(), new VibrationFrequency(frequency), false)
         );
     }
 }
