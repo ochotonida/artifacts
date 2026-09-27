@@ -2,7 +2,6 @@
   "type": "minecraft:entity",
   "pools": [
     {
-      "bonus_rolls": 0.0,
       "conditions": [
         {
           "condition": "artifacts:config_value_chance",
@@ -22,7 +21,7 @@
                   "condition": "minecraft:entity_properties",
                   "entity": "this",
                   "predicate": {
-                    "flags": {
+                    "minecraft:flags": {
                       "is_on_fire": true
                     }
                   }

@@ -6,7 +6,7 @@
       "entries": [
         {
           "data": {
-            "Name": "minecraft:red_bed",
+            "Name": "minecraft:white_bed",
             "Properties": {
               "facing": "north",
               "occupied": "false",
@@ -17,29 +17,7 @@
         },
         {
           "data": {
-            "Name": "minecraft:yellow_bed",
-            "Properties": {
-              "facing": "north",
-              "occupied": "false",
-              "part": "foot"
-            }
-          },
-          "weight": 1
-        },
-        {
-          "data": {
-            "Name": "minecraft:cyan_bed",
-            "Properties": {
-              "facing": "north",
-              "occupied": "false",
-              "part": "foot"
-            }
-          },
-          "weight": 1
-        },
-        {
-          "data": {
-            "Name": "minecraft:gray_bed",
+            "Name": "minecraft:orange_bed",
             "Properties": {
               "facing": "north",
               "occupied": "false",
@@ -61,7 +39,139 @@
         },
         {
           "data": {
+            "Name": "minecraft:light_blue_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:yellow_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:lime_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:pink_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:gray_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:light_gray_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:cyan_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:purple_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:blue_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:brown_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
             "Name": "minecraft:green_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:red_bed",
+            "Properties": {
+              "facing": "north",
+              "occupied": "false",
+              "part": "foot"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:black_bed",
             "Properties": {
               "facing": "north",
               "occupied": "false",
