@@ -15,13 +15,7 @@ import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperties;
-import net.minecraft.resources.Identifier;
-import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 
 public class ArtifactsFabricClient implements ClientModInitializer {
 
@@ -30,6 +24,7 @@ public class ArtifactsFabricClient implements ClientModInitializer {
         ArtifactsClient.setup();
         ArtifactsClient.onClientStarted();
         FabricClientNetworkHandler.register();
+        ArtifactRenderers.register();
 
         ClientPlayConnectionEvents.DISCONNECT.register((_, _) -> Artifacts.onClientDisconnect());
 
@@ -39,23 +34,6 @@ public class ArtifactsFabricClient implements ClientModInitializer {
         ModKeyMappings.register(KeyMappingHelper::registerKeyMapping);
 
         ClientEntityEvents.ENTITY_LOAD.register((entity, _) -> ArtifactHooks.onEntityAdded(entity));
-        ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new IdentifiableArtifactRendererReloadListener());
-
         ArtifactsClient.registerConditionalItemModelProperties(ConditionalItemModelProperties.ID_MAPPER::put);
-    }
-
-    private static class IdentifiableArtifactRendererReloadListener implements ResourceManagerReloadListener, IdentifiableResourceReloadListener {
-
-        private static final Identifier ID = Artifacts.id("renderers");
-
-        @Override
-        public void onResourceManagerReload(ResourceManager resourceManager) {
-            ArtifactRenderers.register();
-        }
-
-        @Override
-        public Identifier getFabricId() {
-            return ID;
-        }
     }
 }
