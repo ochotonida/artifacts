@@ -29,7 +29,6 @@ dependencies {
     }
 
     compileOnly "eu.pb4:trinkets:${trinkets_version}"
-    compileOnly "dev.yumi.mc.core:yumi-mc-foundation:${yumi_version}"
 
     compileOnly("me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}") {
         exclude(group: 'net.fabricmc.fabric-api')

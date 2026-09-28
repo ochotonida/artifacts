@@ -16,7 +16,6 @@ dependencies {
 
     // optional dependencies
     implementation "eu.pb4:trinkets:${trinkets_version}"
-    compileOnly "dev.yumi.mc.core:yumi-mc-foundation:${yumi_version}"
 
     compileOnly "io.wispforest:accessories-fabric:${accessories_version}"
     compileOnly "io.wispforest:owo-lib:${owo_version}"

@@ -11,7 +11,6 @@ dependencies {
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
     implementation "eu.pb4:trinkets:${trinkets_version}"
-    compileOnly "dev.yumi.mc.core:yumi-mc-foundation:${yumi_version}"
 
     compileOnly "io.wispforest:accessories-neoforge:${accessories_version}"
     compileOnly "io.wispforest:owo-lib:${owo_version}"
