@@ -24,9 +24,6 @@
     ],
     "modmenu": [
       "artifacts.fabric.integration.ModMenuIntegration"
-    ],
-    "cardinal-components": [
-      "artifacts.fabric.registry.ModComponents"
     ]
   },
   "mixins": [

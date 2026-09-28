@@ -12,6 +12,6 @@ public class ModAttachmentTypes {
     public static final Register<AttachmentType<?>> ATTACHMENT_TYPES = Register.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES);
 
     public static final Supplier<AttachmentType<SwimData>> SWIM_DATA = ATTACHMENT_TYPES.register("swim_data", () ->
-            AttachmentType.builder(SwimData::new).build()
+            AttachmentType.builder(SwimData::new).serialize(SwimData.MAP_CODEC).build()
     );
 }

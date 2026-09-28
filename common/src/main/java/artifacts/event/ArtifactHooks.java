@@ -52,7 +52,7 @@ public class ArtifactHooks {
 
     public static void livingUpdate(LivingEntity entity) {
         if (entity instanceof Player player) {
-            SwimData swimData = PlatformServices.getPlatformHelper().getSwimData(entity);
+            SwimData swimData = PlatformServices.getPlatformHelper().getSwimData(player);
             if (swimData != null) {
                 swimData.update(player);
             }
@@ -306,7 +306,7 @@ public class ArtifactHooks {
 
     public static boolean onFluidCollision(LivingEntity entity, FluidState fluidState) {
         SwimData swimData = PlatformServices.getPlatformHelper().getSwimData(entity);
-        if (swimData == null || swimData.shouldBreakSurfaceTension() || swimData.isSwimFlying()) {
+        if (swimData != null && swimData.shouldBreakSurfaceTension()) {
             return false;
         }
         return ModDataComponents.FLUID_COLLISION.on(entity)

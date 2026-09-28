@@ -14,9 +14,6 @@ dependencies {
 
     include implementation("be.florens:expandability-fabric:${expandability_version}")
 
-    include implementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${cardinal_components_version}")
-    include implementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${cardinal_components_version}")
-
     // optional dependencies
     implementation "eu.pb4:trinkets:${trinkets_version}"
     compileOnly "dev.yumi.mc.core:yumi-mc-foundation:${yumi_version}"

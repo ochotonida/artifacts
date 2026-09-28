@@ -83,13 +83,16 @@ public abstract class EntityMixin {
 
     @Unique
     private boolean artifacts$isRunningWithAquaDashers() {
-        if ((Object) this instanceof LivingEntity entity) {
-            SwimData swimData = PlatformServices.getPlatformHelper().getSwimData(entity);
-            return swimData != null
-                    && ModDataComponents.FLUID_COLLISION.on(entity).findAny()
-                    && entity.isSprinting()
-                    && !swimData.shouldBreakSurfaceTension();
+        // noinspection ConstantValue
+        if (!((Object) this instanceof LivingEntity entity)) {
+            return false;
         }
-        return false;
+
+        SwimData swimData = PlatformServices.getPlatformHelper().getSwimData(entity);
+        if (swimData != null && swimData.shouldBreakSurfaceTension()) {
+            return false;
+        }
+
+        return entity.isSprinting() && ModDataComponents.FLUID_COLLISION.on(entity).findAny();
     }
 }

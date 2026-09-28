@@ -5,22 +5,43 @@ import artifacts.network.NetworkHandler;
 import artifacts.network.payload.UpdateSwimFlyingPacket;
 import artifacts.registry.ModDataComponents;
 import artifacts.registry.ModSoundEvents;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 public class SwimData {
 
+    public static final MapCodec<SwimData> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Codec.BOOL.optionalFieldOf("is_swim_flying", false).forGetter(SwimData::isSwimFlying),
+            Codec.BOOL.optionalFieldOf("should_break_surface_tension", false).forGetter(swimData -> swimData.shouldBreakSurfaceTension),
+            Codec.DOUBLE.optionalFieldOf("swim_flying_charge", 1D).forGetter(SwimData::getSwimFlyingCharge)
+    ).apply(instance, SwimData::new));
+    public static final Codec<SwimData> CODEC = MAP_CODEC.codec();
+
     protected boolean isSwimFlying;
     protected boolean shouldBreakSurfaceTension;
 
-    protected double swimFlyingCharge = 1;
+    // TODO: might want to sync this to clients when logging in or on laggy servers
+    protected double swimFlyingCharge;
+
+    public SwimData() {
+        this(false, false, 1);
+    }
+
+    public SwimData(boolean isSwimFlying, boolean shouldBreakSurfaceTension, double swimFlyingCharge) {
+        this.isSwimFlying = isSwimFlying;
+        this.shouldBreakSurfaceTension = shouldBreakSurfaceTension;
+        this.swimFlyingCharge = swimFlyingCharge;
+    }
 
     public boolean isSwimFlying() {
         return isSwimFlying;
     }
 
     public boolean shouldBreakSurfaceTension() {
-        return shouldBreakSurfaceTension;
+        return shouldBreakSurfaceTension || isSwimFlying();
     }
 
     public double getSwimFlyingCharge() {

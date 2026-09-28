@@ -14,6 +14,9 @@ import java.nio.file.Path;
 
 public interface PlatformHelper {
 
+    /**
+     * Returns null for non-player entities
+     */
     @Nullable
     SwimData getSwimData(LivingEntity entity);
 

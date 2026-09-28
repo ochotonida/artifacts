@@ -1,9 +1,9 @@
 package artifacts.fabric.platform;
 
 import artifacts.component.SwimData;
+import artifacts.fabric.extensions.PlayerExtensions;
 import artifacts.fabric.registry.FabricRegister;
 import artifacts.fabric.registry.ModAttributesFabric;
-import artifacts.fabric.registry.ModComponents;
 import artifacts.platform.PlatformHelper;
 import artifacts.registry.Register;
 import net.fabricmc.api.EnvType;
@@ -24,7 +24,10 @@ public class FabricPlatformHelper implements PlatformHelper {
     @Nullable
     @Override
     public SwimData getSwimData(LivingEntity entity) {
-        return ModComponents.SWIM_DATA.getNullable(entity);
+        if (entity instanceof PlayerExtensions playerExtensions) {
+            return playerExtensions.artifacts$getSwimData();
+        }
+        return null;
     }
 
     @Override

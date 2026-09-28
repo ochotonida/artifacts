@@ -9,6 +9,7 @@
   "plugin": "artifacts.ArtifactsMixinPlugin",
   "mixins": [
     "ability.LivingEntityMixin",
+    "ability.PlayerMixin",
     "ability.autosmelt.LootTableMixin",
     "ability.creeperrepellent.HurtByTargetGoalMixin",
     "ability.creeperrepellent.NearestAttackableTargetGoalMixin",
