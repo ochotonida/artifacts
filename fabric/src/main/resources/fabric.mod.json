@@ -37,7 +37,6 @@
   },
   "suggests": {
     "trinkets_updated": "*",
-    "accessories": "*",
     "cloth-config": "*",
     "modmenu": "*"
   },

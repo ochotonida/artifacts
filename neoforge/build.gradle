@@ -12,9 +12,6 @@ dependencies {
 
     implementation "eu.pb4:trinkets:${trinkets_version}"
 
-    compileOnly "io.wispforest:accessories-neoforge:${accessories_version}"
-    compileOnly "io.wispforest:owo-lib:${owo_version}"
-
     implementation "me.shedaniel.cloth:cloth-config-neoforge:${cloth_config_version}"
 
     // compat & integration

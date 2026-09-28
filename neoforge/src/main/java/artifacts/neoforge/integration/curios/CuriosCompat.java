@@ -2,7 +2,6 @@ package artifacts.neoforge.integration.curios;
 
 import artifacts.equipment.EquipmentSlotManager;
 import artifacts.event.ArtifactHooks;
-import artifacts.integration.ModCompat;
 import artifacts.util.DamageSourceHelper;
 import net.neoforged.neoforge.common.NeoForge;
 import top.theillusivec4.curios.api.common.DropRule;
@@ -12,10 +11,7 @@ import top.theillusivec4.curios.api.event.DropRulesEvent;
 public class CuriosCompat {
 
     public static void setup() {
-        if (!ModCompat.CCLAYER.isLoaded()) {
-            EquipmentSlotManager.register(new CuriosSlotProvider());
-        }
-
+        EquipmentSlotManager.register(new CuriosSlotProvider());
         NeoForge.EVENT_BUS.addListener(
                 (CurioChangeEvent.State event) -> ArtifactHooks.onItemChanged(event.getEntity(), event.getFrom(), event.getTo())
         );

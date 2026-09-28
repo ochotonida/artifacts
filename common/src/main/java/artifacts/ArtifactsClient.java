@@ -8,7 +8,6 @@ import artifacts.client.item.property.NeedsRepair;
 import artifacts.client.mimic.MimicModel;
 import artifacts.event.SwimInAirInputHooks;
 import artifacts.integration.ModCompat;
-import artifacts.integration.accessories.AccessoriesCompatClient;
 import artifacts.integration.trinkets.TrinketsCompatClient;
 import artifacts.registry.ModItems;
 import com.mojang.serialization.MapCodec;
@@ -25,9 +24,6 @@ public class ArtifactsClient {
     public static void setup() {
         if (ModCompat.TRINKETS.isLoaded()) {
             TrinketsCompatClient.setup();
-        }
-        if (ModCompat.ACCESSORIES.isLoaded()) {
-            AccessoriesCompatClient.setup();
         }
     }
 

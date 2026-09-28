@@ -341,8 +341,7 @@ public class TooltipHelper {
         return stack.has(ModDataComponents.DEPENDENCY_CHECK_TOOLTIP.get())
                 && display.shows(ModDataComponents.DEPENDENCY_CHECK_TOOLTIP.get())
                 && !ModCompat.CURIOS.isLoaded()
-                && !ModCompat.TRINKETS.isLoaded()
-                && !ModCompat.ACCESSORIES.isLoaded();
+                && !ModCompat.TRINKETS.isLoaded();
     }
 
     private static boolean showsCosmeticTooltip(ItemStack stack, TooltipDisplay display) {

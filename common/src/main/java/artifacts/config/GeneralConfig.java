@@ -39,7 +39,6 @@ public final class GeneralConfig extends ConfigManager {
     @SuppressWarnings("unchecked")
     public Codec<ConfigValue<Boolean>> codec() {
         return StringRepresentable.fromValues(() -> new ConfigValue[]{
-                slots.enableAccessoriesCompat,
                 slots.enableCuriosCompat,
                 slots.enableTrinketsCompat,
                 slots.addFaceSlot,
@@ -118,12 +117,6 @@ public final class GeneralConfig extends ConfigManager {
 
     public final class Slots extends SubCategory {
 
-        public final ConfigValue<Boolean> enableAccessoriesCompat
-                = define("enableAccessoriesCompat", true)
-                .descriptionLine("Whether Artifacts should add slots to the Accessories menu,")
-                .descriptionLine("and allow artifacts to be equipped in them")
-                .requiresRestart().build();
-
         public final ConfigValue<Boolean> enableCuriosCompat
                 = define("enableCuriosCompat", true)
                 .descriptionLine("Whether Artifacts should add slots to the Curios menu,")
@@ -139,13 +132,12 @@ public final class GeneralConfig extends ConfigManager {
         public final ConfigValue<Boolean> addFaceSlot
                 = define("addFaceSlot", false)
                 .descriptionLine("When enabled, adds a separate slot for the Snorkel and Night Vision Goggles")
-                .descriptionLine("(Trinkets only, currently not compatible with Curios or Accessories)")
+                .descriptionLine("(Trinkets only, currently not compatible with Curios)")
                 .requiresRestart().build();
 
         public final ConfigValue<Boolean> removeSlotRestrictions
                 = define("removeSlotRestrictions", false)
                 .descriptionLine("When enabled, allows any artifact to be equipped in any slot")
-                .descriptionLine("(Requires Curios or Trinkets, currently not compatible with Accessories)")
                 .requiresRestart().build();
 
         private Slots() {

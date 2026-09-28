@@ -21,16 +21,6 @@
         }
       },
       {
-        "directory": "overlay_disable_accessories",
-        "condition": {
-          "condition": "fabric:not",
-          "value": {
-            "condition": "artifacts:config_value",
-            "value": "general.slots.enableAccessoriesCompat"
-          }
-        }
-      },
-      {
         "directory": "overlay_disable_curios",
         "condition": {
           "condition": "fabric:not",

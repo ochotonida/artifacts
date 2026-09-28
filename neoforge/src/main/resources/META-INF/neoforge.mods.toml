@@ -40,13 +40,6 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.artifacts]]
-modId = "accessories"
-type="optional"
-versionRange = "*"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.artifacts]]
 modId = "trinkets_updated"
 type="optional"
 versionRange = "*"

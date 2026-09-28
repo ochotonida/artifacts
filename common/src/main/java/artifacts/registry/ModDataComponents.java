@@ -39,7 +39,7 @@ public class ModDataComponents {
     /** Marker used by the toggle_key component */
     public static final ComponentType.Singleton<Unit> DISABLED_BY_TOGGLE =
             registerSynced("disabled_by_toggle", Unit.CODEC, Unit.STREAM_CODEC);
-    /** Adds the missing dependency tooltip when none of Curios, Trinkets, or Accessories is installed */
+    /** Adds the missing dependency tooltip when Curios or Trinkets isn't installed */
     public static final ComponentType.Singleton<Unit> DEPENDENCY_CHECK_TOOLTIP =
             registerSynced("dependency_check_tooltip", Unit.CODEC, Unit.STREAM_CODEC);
     /** Adds the *Cosmetic* tooltip when the item has no (enabled) abilities */

@@ -6,11 +6,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-// TODO: Double-check integration with Accessories Compatibility Layer
-//  - Add cclayer/tclayer to curios/trinkets supersededBy to make checks explicit, or keep it as-is?
-//  - Does cclayer/tclayer replace curios/trinkets, or are can the curios/trinkets menu still be used?
-//    - Assuming the former, all curios/trinkets compat should probably be disabled in favor of using the
-//      built-in accessories compatibility
 public class ModCompat {
 
     // Required dependencies
@@ -19,11 +14,8 @@ public class ModCompat {
 
     // Optional dependencies
     public static final ModInfo CLOTH_CONFIG = new ModInfo("cloth-config", "cloth_config");
-    public static final ModInfo CCLAYER = new ModInfo("cclayer");
     public static final ModInfo CURIOS = new ModInfo("curios");
-    public static final ModInfo TCLAYER = new ModInfo("tclayer");
     public static final ModInfo TRINKETS = new ModInfo("trinkets_updated");
-    public static final ModInfo ACCESSORIES = new ModInfo("accessories");
 
     // Compat & integration
     public static final ModInfo CREEPER_OVERHAUL = new ModInfo("creeperoverhaul");

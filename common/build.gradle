@@ -24,10 +24,6 @@ dependencies {
     compileOnly "com.electronwill.night-config:toml:${night_config_version}"
 
     // optional dependencies
-    compileOnly("io.wispforest:accessories-common:${accessories_version}") {
-        exclude(group: 'net.fabricmc.fabric-api')
-    }
-
     compileOnly "eu.pb4:trinkets:${trinkets_version}"
 
     compileOnly("me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}") {

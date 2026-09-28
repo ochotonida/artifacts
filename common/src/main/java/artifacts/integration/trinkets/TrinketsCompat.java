@@ -2,7 +2,6 @@ package artifacts.integration.trinkets;
 
 import artifacts.equipment.EquipmentSlotManager;
 import artifacts.event.ArtifactHooks;
-import artifacts.integration.ModCompat;
 import artifacts.util.DamageSourceHelper;
 import eu.pb4.trinkets.api.TrinketDropRule;
 import eu.pb4.trinkets.api.event.TrinketDropCallback;
@@ -14,9 +13,7 @@ import net.minecraft.world.item.ItemStack;
 public class TrinketsCompat {
 
     public static void setup() {
-        if (!ModCompat.TCLAYER.isLoaded()) {
-            EquipmentSlotManager.register(new TrinketsSlotProvider());
-        }
+        EquipmentSlotManager.register(new TrinketsSlotProvider());
 
         TrinketEquipmentChangedCallback.EVENT.register(
                 (oldStack, newStack, _, entity) -> ArtifactHooks.onItemChanged(entity, oldStack, newStack)

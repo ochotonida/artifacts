@@ -4,7 +4,6 @@ import artifacts.config.ConfigManager;
 import artifacts.config.ModConfig;
 import artifacts.equipment.EquipmentSlotManager;
 import artifacts.integration.ModCompat;
-import artifacts.integration.accessories.AccessoriesCompat;
 import artifacts.integration.minecraft.ArmorSlotProvider;
 import artifacts.integration.trinkets.TrinketsCompat;
 import artifacts.network.ConfigurationNetworkHandler;
@@ -55,9 +54,6 @@ public class Artifacts {
         setupIntegrations();
         if (ModCompat.TRINKETS.isLoaded()) {
             TrinketsCompat.setup();
-        }
-        if (ModCompat.ACCESSORIES.isLoaded()) {
-            AccessoriesCompat.setup();
         }
 
         ConfigurationNetworkHandler.registerPayloads();

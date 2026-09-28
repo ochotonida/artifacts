@@ -29,20 +29,6 @@
         ]
       },
       {
-        "directory": "overlay_disable_accessories",
-        "min_format": 82,
-        "max_format": 2147483647,
-        "neoforge:conditions": [
-          {
-            "type": "neoforge:not",
-            "value": {
-              "type": "artifacts:config_value",
-              "value": "general.slots.enableAccessoriesCompat"
-            }
-          }
-        ]
-      },
-      {
         "directory": "overlay_disable_curios",
         "min_format": 82,
         "max_format": 2147483647,

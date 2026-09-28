@@ -17,9 +17,6 @@ dependencies {
     // optional dependencies
     implementation "eu.pb4:trinkets:${trinkets_version}"
 
-    compileOnly "io.wispforest:accessories-fabric:${accessories_version}"
-    compileOnly "io.wispforest:owo-lib:${owo_version}"
-
     implementation "me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}"
 
     implementation("com.terraformersmc:modmenu:${mod_menu_version}") { transitive = false }
