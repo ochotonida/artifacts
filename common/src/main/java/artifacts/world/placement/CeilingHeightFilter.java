@@ -1,32 +1,25 @@
 package artifacts.world.placement;
 
-import artifacts.registry.ModPlacementModifierTypes;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementFilter;
-import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 
-public class CeilingHeightFilter extends PlacementFilter {
+public record CeilingHeightFilter(int maxHeight) implements PlacementFilter {
 
     public static final MapCodec<CeilingHeightFilter> CODEC = ExtraCodecs.NON_NEGATIVE_INT
             .fieldOf("max_height")
-            .xmap(CeilingHeightFilter::new, f -> f.maxHeight);
+            .xmap(CeilingHeightFilter::new, CeilingHeightFilter::maxHeight);
 
-    private final int maxHeight;
-
-    private CeilingHeightFilter(int maxHeight) {
-        this.maxHeight = maxHeight;
-    }
-
-    public static CeilingHeightFilter maxCeilingHeight(int maxHeight) {
-        return new CeilingHeightFilter(maxHeight);
+    @Override
+    public MapCodec<? extends PlacementFilter> codec() {
+        return CODEC;
     }
 
     @Override
-    protected boolean shouldPlace(PlacementContext context, RandomSource random, BlockPos pos) {
+    public boolean shouldPlace(PlacementContext context, RandomSource random, BlockPos pos) {
         if (maxHeight == 0) {
             return true;
         }
@@ -39,8 +32,7 @@ public class CeilingHeightFilter extends PlacementFilter {
         return false;
     }
 
-    @Override
-    public PlacementModifierType<?> type() {
-        return ModPlacementModifierTypes.CEILING_HEIGHT_FILTER.value();
+    public static CeilingHeightFilter maxCeilingHeight(int maxHeight) {
+        return new CeilingHeightFilter(maxHeight);
     }
 }

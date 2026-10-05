@@ -19,7 +19,7 @@ public class ArtifactRenderers {
         // head
         register(ModItems.PLASTIC_DRINKING_HAT.value(), () -> SimpleArtifactRenderer.create("plastic_drinking_hat", new HumanoidModel<>(bakeLayer(ArtifactLayers.DRINKING_HAT), RenderTypes::armorCutoutNoCull)));
         register(ModItems.NOVELTY_DRINKING_HAT.value(), () -> SimpleArtifactRenderer.create("novelty_drinking_hat", new HumanoidModel<>(bakeLayer(ArtifactLayers.DRINKING_HAT), RenderTypes::armorCutoutNoCull)));
-        register(ModItems.SNORKEL.value(), () -> SimpleArtifactRenderer.create("snorkel", new HumanoidModel<>(bakeLayer(ArtifactLayers.SNORKEL), RenderTypes::armorTranslucent)));
+        register(ModItems.SNORKEL.value(), () -> SimpleArtifactRenderer.create("snorkel", new HumanoidModel<>(bakeLayer(ArtifactLayers.SNORKEL), RenderTypes::entityTranslucent)));
         register(ModItems.NIGHT_VISION_GOGGLES.value(), () -> SimpleArtifactRenderer.createGlowing("night_vision_goggles", new HumanoidModel<>(bakeLayer(ArtifactLayers.NIGHT_VISION_GOGGLES), RenderTypes::armorCutoutNoCull)));
         register(ModItems.SUPERSTITIOUS_HAT.value(), () -> SimpleArtifactRenderer.create("superstitious_hat", new HumanoidModel<>(bakeLayer(ArtifactLayers.SUPERSTITIOUS_HAT), RenderTypes::armorCutoutNoCull)));
         register(ModItems.VILLAGER_HAT.value(), () -> SimpleArtifactRenderer.create("villager_hat", new HumanoidModel<>(bakeLayer(ArtifactLayers.BRIMMED_HAT), RenderTypes::armorCutoutNoCull)));
@@ -28,21 +28,21 @@ public class ArtifactRenderers {
 
         // necklace
         register(ModItems.LUCKY_SCARF.value(), () -> SimpleArtifactRenderer.create("lucky_scarf", new ScarfModel(bakeLayer(ArtifactLayers.SCARF))));
-        register(ModItems.SCARF_OF_INVISIBILITY.value(), () -> SimpleArtifactRenderer.create("scarf_of_invisibility",  new ScarfModel(bakeLayer(ArtifactLayers.SCARF), RenderTypes::armorTranslucent)));
-        register(ModItems.CROSS_NECKLACE.value(), () -> SimpleArtifactRenderer.create("cross_necklace", new HumanoidModel<>(bakeLayer(ArtifactLayers.CROSS_NECKLACE), RenderTypes::armorTranslucent)));
-        register(ModItems.PANIC_NECKLACE.value(), () -> SimpleArtifactRenderer.create("panic_necklace", new HumanoidModel<>(bakeLayer(ArtifactLayers.PANIC_NECKLACE), RenderTypes::armorTranslucent)));
-        register(ModItems.SHOCK_PENDANT.value(), () -> SimpleArtifactRenderer.create("shock_pendant", new HumanoidModel<>(bakeLayer(ArtifactLayers.PENDANT), RenderTypes::armorTranslucent)));
-        register(ModItems.FLAME_PENDANT.value(), () -> SimpleArtifactRenderer.create("flame_pendant", new HumanoidModel<>(bakeLayer(ArtifactLayers.PENDANT), RenderTypes::armorTranslucent)));
-        register(ModItems.THORN_PENDANT.value(), () -> SimpleArtifactRenderer.create("thorn_pendant", new HumanoidModel<>(bakeLayer(ArtifactLayers.PENDANT), RenderTypes::armorTranslucent)));
-        register(ModItems.CHARM_OF_SINKING.value(), () -> SimpleArtifactRenderer.create("charm_of_sinking", new HumanoidModel<>(bakeLayer(ArtifactLayers.CHARM_OF_SINKING), RenderTypes::armorTranslucent)));
-        register(ModItems.CHARM_OF_SHRINKING.value(), () -> SimpleArtifactRenderer.create("charm_of_shrinking", new HumanoidModel<>(bakeLayer(ArtifactLayers.CHARM_OF_SHRINKING), RenderTypes::armorTranslucent)));
+        register(ModItems.SCARF_OF_INVISIBILITY.value(), () -> SimpleArtifactRenderer.create("scarf_of_invisibility",  new ScarfModel(bakeLayer(ArtifactLayers.SCARF), RenderTypes::entityTranslucent))); // TODO check if glint still works on these
+        register(ModItems.CROSS_NECKLACE.value(), () -> SimpleArtifactRenderer.create("cross_necklace", new HumanoidModel<>(bakeLayer(ArtifactLayers.CROSS_NECKLACE), RenderTypes::entityTranslucent)));
+        register(ModItems.PANIC_NECKLACE.value(), () -> SimpleArtifactRenderer.create("panic_necklace", new HumanoidModel<>(bakeLayer(ArtifactLayers.PANIC_NECKLACE), RenderTypes::entityTranslucent)));
+        register(ModItems.SHOCK_PENDANT.value(), () -> SimpleArtifactRenderer.create("shock_pendant", new HumanoidModel<>(bakeLayer(ArtifactLayers.PENDANT), RenderTypes::entityTranslucent)));
+        register(ModItems.FLAME_PENDANT.value(), () -> SimpleArtifactRenderer.create("flame_pendant", new HumanoidModel<>(bakeLayer(ArtifactLayers.PENDANT), RenderTypes::entityTranslucent)));
+        register(ModItems.THORN_PENDANT.value(), () -> SimpleArtifactRenderer.create("thorn_pendant", new HumanoidModel<>(bakeLayer(ArtifactLayers.PENDANT), RenderTypes::entityTranslucent)));
+        register(ModItems.CHARM_OF_SINKING.value(), () -> SimpleArtifactRenderer.create("charm_of_sinking", new HumanoidModel<>(bakeLayer(ArtifactLayers.CHARM_OF_SINKING), RenderTypes::entityTranslucent)));
+        register(ModItems.CHARM_OF_SHRINKING.value(), () -> SimpleArtifactRenderer.create("charm_of_shrinking", new HumanoidModel<>(bakeLayer(ArtifactLayers.CHARM_OF_SHRINKING), RenderTypes::entityTranslucent)));
 
         // belt
-        register(ModItems.CLOUD_IN_A_BOTTLE.value(), () -> BeltArtifactRenderer.create("cloud_in_a_bottle", CloudInABottleModel.create(ArtifactRenderers.bakeLayer(ArtifactLayers.CLOUD_IN_A_BOTTLE), RenderTypes::armorTranslucent, CharmPose.CLOUD_IN_A_BOTTLE)));
+        register(ModItems.CLOUD_IN_A_BOTTLE.value(), () -> BeltArtifactRenderer.create("cloud_in_a_bottle", CloudInABottleModel.create(ArtifactRenderers.bakeLayer(ArtifactLayers.CLOUD_IN_A_BOTTLE), RenderTypes::entityTranslucent, CharmPose.CLOUD_IN_A_BOTTLE)));
         register(ModItems.OBSIDIAN_SKULL.value(), () -> BeltArtifactRenderer.create("obsidian_skull", BeltModel.create(ArtifactRenderers.bakeLayer(ArtifactLayers.OBSIDIAN_SKULL), CharmPose.OBSIDIAN_SKULL)));
         register(ModItems.ANTIDOTE_VESSEL.value(), () -> BeltArtifactRenderer.create("antidote_vessel", BeltModel.create(ArtifactRenderers.bakeLayer(ArtifactLayers.ANTIDOTE_VESSEL), CharmPose.ANTIDOTE_VESSEL)));
         register(ModItems.UNIVERSAL_ATTRACTOR.value(), () -> BeltArtifactRenderer.create("universal_attractor", BeltModel.create(ArtifactRenderers.bakeLayer(ArtifactLayers.UNIVERSAL_ATTRACTOR), CharmPose.UNIVERSAL_ATTRACTOR)));
-        register(ModItems.CRYSTAL_HEART.value(), () -> BeltArtifactRenderer.create("crystal_heart", BeltModel.create(ArtifactRenderers.bakeLayer(ArtifactLayers.CRYSTAL_HEART), RenderTypes::armorTranslucent, CharmPose.CRYSTAL_HEART)));
+        register(ModItems.CRYSTAL_HEART.value(), () -> BeltArtifactRenderer.create("crystal_heart", BeltModel.create(ArtifactRenderers.bakeLayer(ArtifactLayers.CRYSTAL_HEART), RenderTypes::entityTranslucent, CharmPose.CRYSTAL_HEART)));
         register(ModItems.HELIUM_FLAMINGO.value(), () -> SimpleArtifactRenderer.create("helium_flamingo", new HumanoidModel<>(ArtifactRenderers.bakeLayer(ArtifactLayers.HELIUM_FLAMINGO), RenderTypes::armorCutoutNoCull)));
         register(ModItems.CHORUS_TOTEM.value(), () -> BeltArtifactRenderer.create("chorus_totem", BeltModel.create(ArtifactRenderers.bakeLayer(ArtifactLayers.CHORUS_TOTEM), CharmPose.CHORUS_TOTEM)));
         register(ModItems.WARP_DRIVE.value(), () -> new WarpDriveRenderer("warp_drive", BeltModel.create(ArtifactRenderers.bakeLayer(ArtifactLayers.WARP_DRIVE), CharmPose.WARP_DRIVE)));

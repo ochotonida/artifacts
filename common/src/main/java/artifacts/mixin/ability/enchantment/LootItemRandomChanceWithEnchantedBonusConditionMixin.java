@@ -24,7 +24,7 @@ public class LootItemRandomChanceWithEnchantedBonusConditionMixin {
 
     @ModifyExpressionValue(method = "test(Lnet/minecraft/world/level/storage/loot/LootContext;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getEnchantmentLevel(Lnet/minecraft/core/Holder;Lnet/minecraft/world/entity/LivingEntity;)I"))
     private int addLootingLevel(int level, LootContext context) {
-        Entity entity = context.getOptionalParameter(LootContextParams.ATTACKING_ENTITY);
+        Entity entity = context.getOptional(LootContextParams.ATTACKING_ENTITY);
 
         if (this.enchantment.is(Enchantments.LOOTING) && entity instanceof LivingEntity livingEntity) {
             level += ModDataComponents.ENCHANTMENT_LEVEL_MODIFIERS.on(livingEntity)

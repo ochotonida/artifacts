@@ -8,6 +8,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
+import java.util.Objects;
+
 public final class UmbrellaHelper {
 
     public static void onLivingUpdate(LivingEntity entity) {
@@ -30,7 +32,7 @@ public final class UmbrellaHelper {
                 && !ItemDamageUtil.isDisabledOrBroken(entity.getItemInHand(hand))
                 && (allowCosmetic || gliderAbility.isNonCosmetic())
                 && (!entity.isUsingItem() || entity.getUsedItemHand() != hand)
-                && (!entity.swinging || entity.swingingArm != hand);
+                && (!entity.isSwinging() || Objects.requireNonNull(entity.getCurrentSwing()).hand() != hand);
     }
 
     public static boolean isHoldingUmbrellaUpright(Entity entity, boolean allowCosmetic) {

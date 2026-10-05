@@ -96,19 +96,21 @@ public abstract class ArtifactRenderer {
                 renderType,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                renderState.outlineColor,
-                null
+                0xFFFFFFFF,
+                null,
+                renderState.outlineColor
         );
         if (hasFoil) {
             submitNodeCollector.order(1).submitModel(
                     model,
                     renderState,
                     poseStack,
-                    RenderTypes.armorEntityGlint(),
+                    RenderTypes.trimmedArmorGlint(),
                     packedLight,
                     OverlayTexture.NO_OVERLAY,
-                    renderState.outlineColor,
-                    null
+                    0xFFFFFFFF,
+                    null,
+                    renderState.outlineColor
             );
         }
     }

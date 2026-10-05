@@ -5,11 +5,11 @@ import artifacts.client.item.renderer.GloveArtifactRenderer;
 import artifacts.equipment.client.EquipmentRenderingHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.state.level.PlayerRenderState;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.Item;
@@ -38,8 +38,11 @@ public class CuriosRenderingHandler implements EquipmentRenderingHandler {
     }
 
     @Override
-    public void renderArm(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, AbstractClientPlayer player, HumanoidArm side) {
-        InteractionHand hand = side == player.getMainArm() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+    public void renderArm(PlayerRenderState renderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, HumanoidArm side) {
+        if (renderState.avatarRenderState == null) {
+            return;
+        }
+        InteractionHand hand = side == renderState.avatarRenderState.mainArm ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
 
         CuriosApi.getCuriosInventory(player).ifPresent(handler -> handler.getCurios().values().forEach(stacksHandler -> {
             if (stacksHandler != null) {

@@ -15,12 +15,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
-    @Inject(method = "hurtServer", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/LivingEntity;invulnerableTime:I", opcode = Opcodes.PUTFIELD, shift = At.Shift.AFTER))
+    @Inject(method = "hurtServer", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/LivingEntity;damageCooldownTime:I", opcode = Opcodes.PUTFIELD, shift = At.Shift.AFTER))
     private void hurt(ServerLevel level, DamageSource source, float damage, CallbackInfoReturnable<Boolean> cir) {
         artifacts$applyBonusTicks();
     }
 
-    @Inject(method = "handleDamageEvent", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/LivingEntity;invulnerableTime:I", opcode = Opcodes.PUTFIELD, shift = At.Shift.AFTER))
+    @Inject(method = "handleDamageEvent", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/LivingEntity;damageCooldownTime:I", opcode = Opcodes.PUTFIELD, shift = At.Shift.AFTER))
     private void handleDamageEvent(DamageSource source, CallbackInfo ci) {
         artifacts$applyBonusTicks();
     }
@@ -29,6 +29,6 @@ public abstract class LivingEntityMixin {
     private void artifacts$applyBonusTicks() {
         LivingEntity entity = (LivingEntity) (Object) this;
         int bonusTicks = (int) entity.getAttributeValue(ModAttributes.INVINCIBILITY_TICKS);
-        entity.invulnerableTime += bonusTicks;
+        entity.damageCooldownTime += bonusTicks;
     }
 }

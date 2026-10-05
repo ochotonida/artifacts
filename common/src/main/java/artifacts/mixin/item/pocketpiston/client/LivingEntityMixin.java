@@ -3,7 +3,6 @@ package artifacts.mixin.item.pocketpiston.client;
 import artifacts.extensions.item.pocketpiston.LivingEntityExtensions;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,9 +17,6 @@ public abstract class LivingEntityMixin implements LivingEntityExtensions {
     @Unique
     private static final int RETRACTION_DELAY = 4;
 
-    @Shadow
-    public int swingTime;
-
     @Unique
     private float artifacts$pocketPistonLength;
 
@@ -32,7 +28,9 @@ public abstract class LivingEntityMixin implements LivingEntityExtensions {
         float d = (artifacts$pocketPistonTimeRemaining < RETRACTION_DURATION ? -1F : 1F) / RETRACTION_DURATION;
         artifacts$pocketPistonLength = Math.clamp(artifacts$pocketPistonLength + d, 0, 1);
 
-        if (swingTime != 0) {
+        LivingEntity self = (LivingEntity) (Object) this;
+
+        if (self.isSwinging()) {
             artifacts$pocketPistonTimeRemaining = RETRACTION_DELAY + RETRACTION_DURATION;
         }
 

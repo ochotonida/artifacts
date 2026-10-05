@@ -3,8 +3,8 @@ package artifacts.equipment.client;
 import artifacts.Artifacts;
 import artifacts.client.item.renderer.ArtifactRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.state.level.PlayerRenderState;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.Item;
 
@@ -26,10 +26,10 @@ public class EquipmentRenderingManager {
         }
     }
 
-    public static void renderFirstPersonArm(PoseStack matrixStack, SubmitNodeCollector submitNodeCollector, int light, AbstractClientPlayer player, HumanoidArm side) {
+    public static void renderFirstPersonArm(PlayerRenderState renderState, PoseStack matrixStack, SubmitNodeCollector submitNodeCollector, int light, HumanoidArm side) {
         if (Artifacts.CONFIG.client.showFirstPersonGloves.get()) {
             for (EquipmentRenderingHandler handler : RENDERING_HANDLERS) {
-                handler.renderArm(matrixStack, submitNodeCollector, light, player, side);
+                handler.renderArm(renderState, matrixStack, submitNodeCollector, light, side);
             }
         }
     }

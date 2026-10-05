@@ -26,7 +26,7 @@ public class ModKeyMappings {
 
     private static KeyMapping createUnboundKeyMapping(ResourceKey<Item> itemKey, String action) {
         String id = "artifacts.key.%s.%s".formatted(itemKey.identifier().getPath(), action);
-        return new KeyMapping(id, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
+        return new KeyMapping(id, InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), CATEGORY);
     }
 
     public static KeyMapping getHeliumFlamingoKey() {

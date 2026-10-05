@@ -19,14 +19,14 @@ public class ArtifactsData {
     public static void gatherServerData(GatherDataEvent.Client event) {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> registries = event.getLookupProvider();
+        CompletableFuture<HolderLookup.Provider> registries = event.getReloadableLookupProvider();
 
         LootModifiers lootModifiers = new LootModifiers(packOutput, registries);
 
         event.addProvider(new BlockTags(packOutput, registries));
         event.addProvider(new ItemTags(packOutput, registries));
         event.addProvider(lootModifiers);
-        event.addProvider(new LootTables(packOutput, lootModifiers, registries));
+        event.addProvider(new LootTables(lootModifiers));
         event.addProvider(new EntityTypeTags(packOutput, registries));
         event.addProvider(new MobEffectTags(packOutput, registries));
         event.addProvider(new DamageTypeTags(packOutput, registries));
@@ -36,7 +36,7 @@ public class ArtifactsData {
         event.addProvider(new DataMaps(packOutput, registries));
         event.addProvider(new Recipes.Runner(packOutput, registries));
 
-        var worldGen = new DatapackBuiltinEntriesProvider(packOutput, registries, createLevelProvider(), Set.of(Artifacts.MOD_ID));
+        var worldGen = new DatapackBuiltinEntriesProvider(packOutput, "test", createLevelProvider(), registries, Set.of(Artifacts.MOD_ID));
         event.addProvider(worldGen);
 
         event.addProvider(new Language(packOutput));

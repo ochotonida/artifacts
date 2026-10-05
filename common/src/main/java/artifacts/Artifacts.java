@@ -70,7 +70,7 @@ public class Artifacts {
         ModConsumeEffects.CONSUME_EFFECT_TYPES.register();
         ModItems.ITEMS.register();
         ModItems.CREATIVE_MODE_TABS.register();
-        ModFeatures.FEATURES.register();
+        ModFeatures.FEATURE_TYPES.register();
         ModGameEvents.GAME_EVENTS.register();
     }
 

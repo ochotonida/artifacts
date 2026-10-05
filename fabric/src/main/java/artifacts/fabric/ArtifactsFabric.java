@@ -39,6 +39,6 @@ public class ArtifactsFabric implements ModInitializer {
 
         ServerConfigurationConnectionEvents.CONFIGURE.register((listener, _) -> Artifacts.onSendConfiguration(listener::send));
 
-        LootTableEvents.MODIFY.register((key, builder, source, _) -> ModLootTablesFabric.onLootTableLoad(key, builder, source));
+        LootTableEvents.MODIFY.register(ModLootTablesFabric::onLootTableLoad);
     }
 }

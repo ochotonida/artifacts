@@ -1,6 +1,5 @@
 package artifacts.fabric.mixin.client;
 
-import artifacts.equipment.client.EquipmentRenderingManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -31,7 +30,7 @@ public abstract class AvatarRendererMixin {
     private static void artifacts$renderArm(PoseStack matrixStack, SubmitNodeCollector submitNodeCollector, int light, HumanoidArm handSide) {
         AbstractClientPlayer player = Minecraft.getInstance().player;
         if (player != null) {
-            EquipmentRenderingManager.renderFirstPersonArm(matrixStack, submitNodeCollector, light, player, handSide);
+            // FIXME EquipmentRenderingManager.renderFirstPersonArm(matrixStack, submitNodeCollector, light, player, handSide);
         }
     }
 }
