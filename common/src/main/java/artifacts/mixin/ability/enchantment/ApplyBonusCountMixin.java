@@ -24,7 +24,7 @@ public class ApplyBonusCountMixin {
 
     @ModifyExpressionValue(method = "run", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getItemEnchantmentLevel(Lnet/minecraft/core/Holder;Lnet/minecraft/world/item/ItemInstance;)I"))
     private int addFortuneLevel(int level, ItemStack itemStack, LootContext context) {
-        Entity entity = context.getOptionalParameter(LootContextParams.THIS_ENTITY);
+        Entity entity = context.getOptional(LootContextParams.THIS_ENTITY);
 
         if (entity instanceof LivingEntity livingEntity) {
             level += ModDataComponents.ENCHANTMENT_LEVEL_MODIFIERS.on(livingEntity)

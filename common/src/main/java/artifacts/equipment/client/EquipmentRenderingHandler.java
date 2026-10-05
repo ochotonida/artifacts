@@ -3,8 +3,8 @@ package artifacts.equipment.client;
 import artifacts.client.item.renderer.ArtifactRenderer;
 import artifacts.client.item.renderer.GloveArtifactRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.state.level.PlayerRenderState;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -27,6 +27,6 @@ public interface EquipmentRenderingHandler {
         return null;
     }
 
-    void renderArm(PoseStack matrixStack, SubmitNodeCollector submitNodeCollector, int packedLight, AbstractClientPlayer player, HumanoidArm side);
+    void renderArm(PlayerRenderState renderState, PoseStack matrixStack, SubmitNodeCollector submitNodeCollector, int packedLight, HumanoidArm side);
 
 }

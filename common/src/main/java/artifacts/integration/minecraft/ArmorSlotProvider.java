@@ -40,7 +40,7 @@ public class ArmorSlotProvider implements EquipmentSlotProvider {
 
         @Override
         public void broadcastBreakEvent(LivingEntity entity) {
-            entity.onEquippedItemBroken(stack.getItem(), slot);
+            entity.onEquippedItemBroken(stack, slot);
         }
     }
 }

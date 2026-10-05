@@ -2,13 +2,11 @@ package artifacts.client.item.renderer;
 
 import artifacts.client.item.ArmsModelSet;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
@@ -16,7 +14,6 @@ import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.PlayerModelType;
@@ -100,7 +97,7 @@ public class GloveArtifactRenderer extends ArtifactRenderer {
         if (player.isSpectator()) {
             return;
         }
-
+        /* FIXME
         // there's no render state available, so we have to extract one
         // there might be a better way to do this
         AvatarRenderer<AbstractClientPlayer> playerRenderer = Minecraft.getInstance().getEntityRenderDispatcher().getPlayerRenderer(player);
@@ -126,13 +123,14 @@ public class GloveArtifactRenderer extends ArtifactRenderer {
         if (glowTexture != null) {
             renderModelPartWithFoil(model, modelPart, poseStack, submitNodeCollector, glowTexture, LightCoordsUtil.FULL_BRIGHT, hasFoil);
         }
+        */
     }
 
     private void renderModelPartWithFoil(Model<?> model, ModelPart modelPart, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, Identifier texture, int packedLight, boolean hasFoil) {
         RenderType renderType = model.renderType(texture);
         submitNodeCollector.order(0).submitModelPart(modelPart, poseStack, renderType, packedLight, OverlayTexture.NO_OVERLAY, null);
         if (hasFoil) {
-            submitNodeCollector.order(1).submitModelPart(modelPart, poseStack, RenderTypes.armorEntityGlint(), packedLight, OverlayTexture.NO_OVERLAY, null);
+            submitNodeCollector.order(1).submitModelPart(modelPart, poseStack, RenderTypes.trimmedArmorGlint(), packedLight, OverlayTexture.NO_OVERLAY, null);
         }
     }
 }

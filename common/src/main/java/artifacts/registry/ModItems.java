@@ -89,7 +89,7 @@ public class ModItems {
                             Optional.of(SoundEvents.SHIELD_BREAK)
                     )
             )
-            .component(DataComponents.SWING_ANIMATION, new SwingAnimation(SwingAnimationType.STAB, (int) (0.75F * 20)))
+            .component(DataComponents.ATTACK_ANIMATION, new SwingAnimation(SwingAnimationType.STAB, (int) (0.75F * 20)))
             .component(
                     DataComponents.PIERCING_WEAPON,
                     new PiercingWeapon(
@@ -430,7 +430,7 @@ public class ModItems {
                     config.enabled,
                     _ -> new DeathProtection(List.of(
                             new ClearAllStatusEffectsConsumeEffect(),
-                            new TeleportRandomlyConsumeEffect(32),
+                            new TeleportRandomlyConsumeEffect(32, true),
                             new HealConsumeEffect(config.healthRestored))
                     )
             )

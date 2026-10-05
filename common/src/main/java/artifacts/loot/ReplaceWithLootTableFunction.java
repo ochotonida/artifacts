@@ -4,6 +4,7 @@ import artifacts.Artifacts;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
-import java.util.List;
+import java.util.Optional;
 
 public class ReplaceWithLootTableFunction extends LootItemConditionalFunction {
 
@@ -23,8 +24,8 @@ public class ReplaceWithLootTableFunction extends LootItemConditionalFunction {
 
     private final ResourceKey<LootTable> lootTable;
 
-    public ReplaceWithLootTableFunction(List<LootItemCondition> conditions, ResourceKey<LootTable> lootTable) {
-        super(conditions);
+    public ReplaceWithLootTableFunction(Optional<Holder<LootItemCondition>> condition, ResourceKey<LootTable> lootTable) {
+        super(condition);
         this.lootTable = lootTable;
     }
 

@@ -1,18 +1,16 @@
 package artifacts.integration.trinkets;
 
 import artifacts.client.item.renderer.ArtifactRenderer;
-import artifacts.client.item.renderer.GloveArtifactRenderer;
 import artifacts.equipment.client.EquipmentRenderingHandler;
 import com.google.common.base.Suppliers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import eu.pb4.trinkets.api.TrinketSlotAccess;
-import eu.pb4.trinkets.api.TrinketsApi;
 import eu.pb4.trinkets.api.client.TrinketRenderer;
 import eu.pb4.trinkets.api.client.TrinketRendererRegistry;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.state.level.PlayerRenderState;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -40,10 +38,11 @@ public class TrinketsRenderingHandler implements EquipmentRenderingHandler {
     }
 
     @Override
-    public void renderArm(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, AbstractClientPlayer player, HumanoidArm side) {
+    public void renderArm(PlayerRenderState renderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, HumanoidArm side) {
         if (!TrinketRenderer.renderInFirstPerson()) {
             return;
         }
+        /* FIXME
         String groupId = side == player.getMainArm() ? "hand" : "offhand";
         TrinketsApi.getAttachment(player).forEachVisible(((slotAccess, stack) -> {
             if (slotAccess.inventory().slotType().group().equals(groupId)) {
@@ -53,6 +52,7 @@ public class TrinketsRenderingHandler implements EquipmentRenderingHandler {
                 }
             }
         }));
+         */
     }
 
     public record ArtifactTrinketRenderer(Supplier<ArtifactRenderer> renderer) implements TrinketRenderer {

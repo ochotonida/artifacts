@@ -23,8 +23,8 @@ public abstract class SpearAnimationsMixin {
     }
 
     @ModifyExpressionValue(method = "thirdPersonHandUse", at = @At(value = "FIELD", opcode = Opcodes.GETFIELD, ordinal = 0, target = "Lnet/minecraft/client/model/geom/ModelPart;yRot:F"))
-    private static <T extends HumanoidRenderState> float modifyViewingDirectionPitch(float original, ModelPart arm, ModelPart head, boolean holdingInRightArm, ItemStack stack, T renderState) {
-        if (stack.has(ModDataComponents.HANDHELD_GLIDER.get())) {
+    private static <T extends HumanoidRenderState> float modifyViewingDirectionPitch(float original, ModelPart arm, ModelPart head, HumanoidArm holdingArm, ItemStack item, T state) {
+        if (item.has(ModDataComponents.HANDHELD_GLIDER.get())) {
             // reduce the amount of left/right sway
             return original / 2;
         }
@@ -32,9 +32,9 @@ public abstract class SpearAnimationsMixin {
     }
 
     @ModifyExpressionValue(method = "thirdPersonHandUse", at = @At(value = "FIELD", opcode = Opcodes.GETFIELD, ordinal = 0, target = "Lnet/minecraft/client/model/geom/ModelPart;xRot:F"))
-    private static <T extends HumanoidRenderState> float modifyViewingDirectionYaw(float original, ModelPart arm, ModelPart head, boolean holdingInRightArm, ItemStack item, T state) {
+    private static <T extends HumanoidRenderState> float modifyViewingDirectionYaw(float original, ModelPart arm, ModelPart head, HumanoidArm holdingArm, ItemStack item, T state) {
         if (item.has(ModDataComponents.HANDHELD_GLIDER.get())) {
-            float attackTime = holdingInRightArm ^ state.mainArm == HumanoidArm.RIGHT ? 0 : state.attackTime;
+            float attackTime = holdingArm == state.mainArm ? state.swingAnimation : 0;
             // use the same ease-in and ease-out used in SpearAnimations::thirdPersonAttackHand
             float easeIn = 1 - Ease.inOutSine(progress(attackTime, 0, 0.05F));
             float easeOut = Ease.inOutExpo(progress(attackTime, 0.4F, 1));

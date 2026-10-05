@@ -5,6 +5,7 @@ import artifacts.loot.ConfigValueChance;
 import artifacts.loot.ReplaceWithLootTableFunction;
 import artifacts.registry.ModLootTables;
 import net.fabricmc.fabric.api.loot.v3.LootTableSource;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -13,10 +14,11 @@ import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 
 public class ModLootTablesFabric {
 
-    public static void onLootTableLoad(ResourceKey<LootTable> key, LootTable.Builder builder, LootTableSource source) {
+    public static void onLootTableLoad(ResourceKey<LootTable> key, LootTable.Builder builder, LootTableSource source, HolderLookup.Provider provider) {
         if (source.isBuiltin()) {
             if (ModLootTables.INJECTED_LOOT_TABLES.contains(key)) {
-                builder.withPool(LootPool.lootPool().add(NestedLootTable.lootTableReference(getInjectName(key))));
+                var reference = NestedLootTable.lootTableReference(provider.getOrThrow(getInjectName(key)));
+                builder.withPool(LootPool.lootPool().add(reference));
             }
             if (ModLootTables.ARCHAEOLOGY_LOOT_TABLES.contains(key)) {
                 builder.modifyPools(pool -> pool.apply(ReplaceWithLootTableFunction

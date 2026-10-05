@@ -11,7 +11,6 @@ import artifacts.world.CampsiteFeature;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.context.ContextKeySet;
@@ -24,31 +23,27 @@ import net.minecraft.world.level.storage.loot.functions.EnchantWithLevelsFunctio
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
+import net.minecraft.world.level.storage.loot.providers.number.ints.UniformGenerator;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 public class LootTables extends LootTableProvider {
 
     public static final ResourceKey<LootTable> CHEST_LOOT = Artifacts.key(Registries.LOOT_TABLE, "chests/campsite_chest");
 
-    private final List<SubProviderEntry> tables = new ArrayList<>();
-
     private final LootModifiers lootModifiers;
 
-    public LootTables(PackOutput packOutput, LootModifiers lootModifiers, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(packOutput, Set.of(), List.of(), lookupProvider);
+    public LootTables(LootModifiers lootModifiers) {
+        super(Set.of(), getTables());
         this.lootModifiers = lootModifiers;
     }
 
-    @Override
-    public List<SubProviderEntry> getTables() {
+    public static List<SubProviderEntry> getTables() {
         tables.clear();
         addDrinkingHatsLootTable();
         addItemLootTables();
@@ -144,16 +139,16 @@ public class LootTables extends LootTableProvider {
         addLootTable(barrel, new LootTable.Builder()
                 .withPool(new LootPool.Builder()
                         .when(LootItemRandomChanceCondition.randomChance(0.7F))
-                        .add(item(Items.COD, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
-                        .add(item(Items.SALMON, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
-                        .add(item(Items.ROTTEN_FLESH, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
-                        .add(item(Items.BONE, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 10))))
-                        .add(item(Items.PAPER, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
-                        .add(item(Items.SUGAR_CANE, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
-                        .add(item(Items.WHEAT, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
-                        .add(item(Items.BOOK, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
-                        .add(item(Items.SUGAR, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
-                        .add(item(Items.COAL, 1).apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 16))))
+                        .add(item(Items.COD, 1).apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 16))))
+                        .add(item(Items.SALMON, 1).apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 16))))
+                        .add(item(Items.ROTTEN_FLESH, 1).apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 16))))
+                        .add(item(Items.BONE, 1).apply(SetItemCountFunction.setCount(ContextIntProviders.between(2, 10))))
+                        .add(item(Items.PAPER, 1).apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 16))))
+                        .add(item(Items.SUGAR_CANE, 1).apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 16))))
+                        .add(item(Items.WHEAT, 1).apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 16))))
+                        .add(item(Items.BOOK, 1).apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 16))))
+                        .add(item(Items.SUGAR, 1).apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 16))))
+                        .add(item(Items.COAL, 1).apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 16))))
                         .add(lootTable(barrel + "/tnt", 1))
                         .add(lootTable(barrel + "/cobwebs", 1))
                         .add(lootTable(barrel + "/ores", 1))

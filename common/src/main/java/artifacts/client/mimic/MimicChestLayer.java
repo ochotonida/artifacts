@@ -28,13 +28,13 @@ public class MimicChestLayer extends RenderLayer<MimicRenderState, MimicModel> {
         if (!renderState.isInvisible) {
             poseStack.pushPose();
 
-            poseStack.mulPose(Axis.XP.rotationDegrees(180));
+            poseStack.rotateDegrees(Axis.XP, 180);
             poseStack.translate(-0.5, -1.5, -0.5);
 
             chestModel.setupAnim(renderState);
             TextureAtlasSprite textureAtlasSprite = materials.get(renderState.chestMaterial);
             RenderType renderType = renderState.chestMaterial.renderType(RenderTypes::entityCutout);
-            submitNodeCollector.submitModel(chestModel, renderState, poseStack, renderType, packedLight, LivingEntityRenderer.getOverlayCoords(renderState, 0), 0xFFFFFFFF, textureAtlasSprite, 0, null);
+            submitNodeCollector.submitModel(chestModel, renderState, poseStack, renderType, packedLight, LivingEntityRenderer.getOverlayCoords(renderState, 0), 0xFFFFFFFF, textureAtlasSprite, renderState.outlineColor);
 
             poseStack.popPose();
         }
