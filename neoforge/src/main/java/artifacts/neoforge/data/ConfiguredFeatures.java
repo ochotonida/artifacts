@@ -1,6 +1,7 @@
 package artifacts.neoforge.data;
 
 import artifacts.Artifacts;
+import artifacts.registry.ModLootTables;
 import artifacts.world.CampsiteChestConfiguration;
 import artifacts.world.CampsiteFeature;
 import artifacts.world.SuspiciousChestFeature;
@@ -94,6 +95,6 @@ public class ConfiguredFeatures {
     }
 
     private static CampsiteChestConfiguration createChestConfig(double trappedChestChance) {
-        return new CampsiteChestConfiguration(Optional.empty(), trappedChestChance, Optional.of(LootTables.CHEST_LOOT));
+        return new CampsiteChestConfiguration(Optional.empty(), trappedChestChance, Optional.of(ModLootTables.CAMPSITE_CHEST));
     }
 }

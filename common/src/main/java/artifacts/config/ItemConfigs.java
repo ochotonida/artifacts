@@ -1223,7 +1223,7 @@ public final class ItemConfigs extends ConfigManager {
         }
     }
 
-    public Value<Boolean> generatesAsLoot(Item item) {
+    public @Nullable Value<Boolean> generatesAsLoot(Item item) {
         Optional<ResourceKey<Item>> key = BuiltInRegistries.ITEM.getResourceKey(item);
         if (key.isEmpty() || !itemCategories.containsKey(key.get())) {
             return null;

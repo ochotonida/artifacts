@@ -8,6 +8,7 @@ import artifacts.registry.ModItems;
 import artifacts.registry.ModLootTables;
 import net.minecraft.advancements.predicates.entity.EntityFlagsPredicate;
 import net.minecraft.advancements.predicates.entity.EntityPredicate;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.AllOfCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
@@ -33,6 +35,7 @@ import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class LootModifiers extends GlobalLootModifierProvider {
@@ -314,6 +317,8 @@ public class LootModifiers extends GlobalLootModifierProvider {
         if (!ModLootTables.ARCHAEOLOGY_LOOT_TABLES.contains(lootTable)) {
             throw new IllegalArgumentException("Missing archaeology loot table: %s".formatted(lootTable));
         }
+
+        // FIXME: items in archeology loot tables might need an extra canGenerateAsLoot check to prevent an empty loot item from being selected
         Builder builder = new Builder(lootTable).replace();
         builder.lootModifierCondition(LootTableIdCondition.builder(lootTable.identifier()));
         builder.lootModifierCondition(ConfigValueChance.archaeologyChance());
@@ -333,7 +338,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
 
         private final ResourceKey<LootTable> lootTable;
         private final LootPool.Builder lootPool = LootPool.lootPool();
-        private final List<LootItemCondition> conditions;
+        private final List<LootItemCondition.Builder> conditions;
         private boolean replace = false;
 
         private ContextKeySet contextKeySet = LootContextParamSets.CHEST;
@@ -344,12 +349,17 @@ public class LootModifiers extends GlobalLootModifierProvider {
         }
 
         private LootModifier build() {
-            LootItemCondition[] conditions = this.conditions.toArray(new LootItemCondition[]{});
+            if (this.conditions.isEmpty()) {
+                throw new IllegalStateException();
+            }
+
+            LootItemCondition.Builder condition = AllOfCondition.allOf(this.conditions.toArray(LootItemCondition.Builder[]::new));
+            Optional<Holder<LootItemCondition>> conditionHolder = Optional.of(Holder.direct(condition.build()));
             ResourceKey<LootTable> table = Artifacts.key(Registries.LOOT_TABLE, "inject/" + lootTable.identifier().getPath());
             if (replace) {
-                return new ReplaceWithTableLootModifier(conditions, IGlobalLootModifier.DEFAULT_PRIORITY / 2, table);
+                return new ReplaceWithTableLootModifier(conditionHolder, IGlobalLootModifier.DEFAULT_PRIORITY / 2, table);
             }
-            return new AddTableLootModifier(conditions, IGlobalLootModifier.DEFAULT_PRIORITY, table);
+            return new AddTableLootModifier(conditionHolder, IGlobalLootModifier.DEFAULT_PRIORITY, table);
         }
 
         protected LootTable.Builder createLootTable() {
@@ -380,7 +390,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
         }
 
         private Builder lootModifierCondition(LootItemCondition.Builder condition) {
-            conditions.add(condition.build());
+            conditions.add(condition);
             return this;
         }
 

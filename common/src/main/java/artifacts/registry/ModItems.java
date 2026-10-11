@@ -685,4 +685,9 @@ public class ModItems {
     private static RegistryHolder<Item, Item> register(String name, Function<Item.Properties, ? extends Item> factory, Supplier<Item.Properties> properties) {
         return ITEMS.register(name, () -> factory.apply(properties.get().setId(Artifacts.key(Registries.ITEM, name))));
     }
+
+    public static boolean isArtifact(Item item) {
+        // TODO: replace this with something less hardcoded
+        return BuiltInRegistries.ITEM.getKey(item).getNamespace().equals(Artifacts.MOD_ID) && item != ModItems.MIMIC_SPAWN_EGG.get();
+    }
 }

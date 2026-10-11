@@ -1,13 +1,12 @@
 package artifacts.world;
 
 import artifacts.Artifacts;
+import artifacts.registry.ModLootTables;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.RandomizableContainer;
 import net.minecraft.world.level.WorldGenLevel;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.storage.loot.LootTable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,8 +39,6 @@ public record CampsiteFeature(
         Holder<BlockStateProvider> unlitLightSources,
         Holder<BlockStateProvider> floor
 ) implements AbstractCampsiteFeature {
-
-    public static final ResourceKey<LootTable> BARREL_LOOT = Artifacts.key(Registries.LOOT_TABLE, "chests/campsite_barrel");
 
     public static final MapCodec<CampsiteFeature> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
@@ -176,6 +172,6 @@ public record CampsiteFeature(
             barrel = barrel.setValue(BarrelBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random));
         }
         setBlock(level, pos, barrel);
-        RandomizableContainer.setBlockEntityLootTable(level, random, pos, BARREL_LOOT);
+        RandomizableContainer.setBlockEntityLootTable(level, random, pos, ModLootTables.CAMPSITE_BARREL);
     }
 }
