@@ -32,7 +32,6 @@ public class LootTables extends LootTableProvider {
 
     public List<SubProviderEntry> getTables() {
         tables.clear();
-        new EntityEquipment(this).addLootTables();
 
         for (LootModifiers.Builder lootBuilder : lootModifiers.lootBuilders) {
             addLootTable("inject/" + lootBuilder.getName(), _ -> lootBuilder.createLootTable(), lootBuilder.getContextKeySet());
