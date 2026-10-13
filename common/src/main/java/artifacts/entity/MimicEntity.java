@@ -152,7 +152,7 @@ public class MimicEntity extends Mob implements Enemy {
             attackCooldown--;
         }
 
-        if (this.level().isClientSide() && ModCompat.LOOTR.isLoaded()) {
+        if (isDormant && this.level().isClientSide() && ModCompat.LOOTR.isLoaded()) {
             LootrCompat.maybeSpawnParticles(this);
         }
     }
