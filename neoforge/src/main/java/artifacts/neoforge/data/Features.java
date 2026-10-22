@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStatePr
 
 import java.util.Optional;
 
-public class ConfiguredFeatures {
+public class Features {
 
     public static final ResourceKey<Feature> CAMPSITE = Artifacts.key(Registries.FEATURE, "campsite");
     public static final ResourceKey<Feature> MINIMALIST_CAMPSITE = Artifacts.key(Registries.FEATURE, "minimalist_campsite");

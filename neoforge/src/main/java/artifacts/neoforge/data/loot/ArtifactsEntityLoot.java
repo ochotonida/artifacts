@@ -14,7 +14,7 @@ public class ArtifactsEntityLoot extends EntityLootSubProvider {
 
     private final HolderGetter<LootTable> lootTables;
 
-    protected ArtifactsEntityLoot(Context output) {
+    public ArtifactsEntityLoot(Context output) {
         super(FeatureFlags.DEFAULT_FLAGS, output);
         lootTables = this.output.lookup(Registries.LOOT_TABLE);
     }

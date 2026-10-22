@@ -1,6 +1,7 @@
 package artifacts.neoforge.data;
 
 import artifacts.Artifacts;
+import artifacts.config.value.Value;
 import artifacts.loot.ArtifactRarityAdjustedChance;
 import artifacts.loot.ConfigValueChance;
 import artifacts.neoforge.loot.ReplaceWithTableLootModifier;
@@ -10,6 +11,7 @@ import net.minecraft.advancements.predicates.entity.EntityFlagsPredicate;
 import net.minecraft.advancements.predicates.entity.EntityPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
@@ -20,12 +22,17 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.AllOfCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 import net.neoforged.neoforge.common.loot.AddTableLootModifier;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
@@ -44,6 +51,10 @@ public class LootModifiers extends GlobalLootModifierProvider {
 
     public LootModifiers(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, Artifacts.MOD_ID);
+    }
+
+    public List<Builder> getLootBuilders() {
+        return lootBuilders;
     }
 
     private void addLoot() {
@@ -334,7 +345,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
         }
     }
 
-    protected static class Builder {
+    public static class Builder {
 
         private final ResourceKey<LootTable> lootTable;
         private final LootPool.Builder lootPool = LootPool.lootPool();
@@ -362,7 +373,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
             return new AddTableLootModifier(conditionHolder, IGlobalLootModifier.DEFAULT_PRIORITY, table);
         }
 
-        protected LootTable.Builder createLootTable() {
+        public LootTable.Builder createLootTable() {
             return new LootTable.Builder().withPool(lootPool);
         }
 
@@ -370,7 +381,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
             return contextKeySet;
         }
 
-        protected String getName() {
+        public String getName() {
             return lootTable.identifier().getPath();
         }
 
@@ -395,7 +406,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
         }
 
         private Builder item(Item item, int weight) {
-            lootPool.add(LootTables.item(item, weight));
+            lootPool.add(LootModifiers.item(item, weight));
             return this;
         }
 
@@ -404,17 +415,17 @@ public class LootModifiers extends GlobalLootModifierProvider {
         }
 
         private Builder artifact(int weight) {
-            lootPool.add(LootTables.artifact(weight));
+            lootPool.add(LootModifiers.artifact(weight));
             return this;
         }
 
         private Builder drinkingHat(int weight) {
-            lootPool.add(LootTables.drinkingHat(weight));
+            lootPool.add(LootModifiers.drinkingHat(weight));
             return this;
         }
 
         private Builder everlastingBeef() {
-            lootPool.add(LootTables.item(ModItems.EVERLASTING_BEEF.value(), 1)
+            lootPool.add(LootModifiers.item(ModItems.EVERLASTING_BEEF.value(), 1)
                     .apply(
                             SmeltItemFunction.smelted().when(
                                     LootItemEntityPropertyCondition.hasProperties(
@@ -429,5 +440,34 @@ public class LootModifiers extends GlobalLootModifierProvider {
             );
             return this;
         }
+    }
+
+    // TODO cleanup
+    protected static LootPoolEntryContainer.Builder<?> item(Item item, int weight) {
+        Value<Boolean> generatesAsLoot = Artifacts.CONFIG.items.generatesAsLoot(item);
+        if (generatesAsLoot == null) {
+            return LootItem.lootTableItem(item).setWeight(weight);
+        } else if (item == ModItems.PLASTIC_DRINKING_HAT.value() || item == ModItems.NOVELTY_DRINKING_HAT.value()) {
+            throw new IllegalArgumentException();
+        } else {
+            String itemName = BuiltInRegistries.ITEM.getKey(item).getPath();
+            return NestedLootTable.lootTableReference(Artifacts.key(Registries.LOOT_TABLE, "items/%s".formatted(itemName))).setWeight(weight);
+        }
+    }
+
+    protected static LootPoolEntryContainer.Builder<?> item(Item item, int weight, int min, int max) {
+        return LootItem.lootTableItem(item).setWeight(weight).apply(SetItemCountFunction.setCount(ContextIntProviders.between(min, max)));
+    }
+
+    protected static LootPoolEntryContainer.Builder<?> artifact(int weight) {
+        return lootTable("artifact", weight);
+    }
+
+    protected static LootPoolEntryContainer.Builder<?> drinkingHat(int weight) {
+        return lootTable("items/drinking_hat", weight);
+    }
+
+    private static LootPoolEntryContainer.Builder<?> lootTable(String lootTable, int weight) {
+        return NestedLootTable.lootTableReference(Artifacts.key(Registries.LOOT_TABLE, lootTable)).setWeight(weight);
     }
 }

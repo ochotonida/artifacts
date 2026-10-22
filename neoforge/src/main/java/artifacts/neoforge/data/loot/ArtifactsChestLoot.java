@@ -23,7 +23,7 @@ public class ArtifactsChestLoot implements LootTableSubProvider {
     private final HolderGetter<LootTable> lootTables;
     private final HolderGetter<Enchantment> enchantments;
 
-    protected ArtifactsChestLoot(Context output) {
+    public ArtifactsChestLoot(Context output) {
         this.output = output;
         this.lootTables = output.lookup(Registries.LOOT_TABLE);
         this.enchantments = output.lookup(Registries.ENCHANTMENT);

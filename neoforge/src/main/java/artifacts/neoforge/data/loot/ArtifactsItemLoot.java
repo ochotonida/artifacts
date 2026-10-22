@@ -21,7 +21,7 @@ public class ArtifactsItemLoot implements LootTableSubProvider {
     private final Context output;
     private final HolderGetter<LootTable> lootTables;
 
-    protected ArtifactsItemLoot(Context output) {
+    public ArtifactsItemLoot(Context output) {
         this.output = output;
         lootTables = output.lookup(Registries.LOOT_TABLE);
     }

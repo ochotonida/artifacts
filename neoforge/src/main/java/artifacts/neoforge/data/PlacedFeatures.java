@@ -20,8 +20,8 @@ public class PlacedFeatures {
     public static void create(BootstrapContext<PlacedFeature> context) {
         HolderGetter<Feature> configuredFeatures = context.lookup(Registries.FEATURE);
 
-        Holder<Feature> campsite = configuredFeatures.getOrThrow(ConfiguredFeatures.CAMPSITE);
-        Holder<Feature> minimalistCampsite = configuredFeatures.getOrThrow(ConfiguredFeatures.MINIMALIST_CAMPSITE);
+        Holder<Feature> campsite = configuredFeatures.getOrThrow(Features.CAMPSITE);
+        Holder<Feature> minimalistCampsite = configuredFeatures.getOrThrow(Features.MINIMALIST_CAMPSITE);
 
         PlacedFeature undergroundCampsite = new PlacedFeature(
                 campsite,

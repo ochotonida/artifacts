@@ -46,7 +46,8 @@ public class Language extends LanguageProvider {
         addTags();
         addTooltips();
         addEffects();
-        Advancements.TRANSLATIONS.forEach(this::add);
+        addAdvancements();
+        ArtifactsAdvancementSubProvider.TRANSLATIONS.forEach(this::add);
     }
 
     public void override(String key, String value) {
@@ -278,6 +279,17 @@ public class Language extends LanguageProvider {
 
     private void addEffects() {
         addEffect(ModMobEffects.MAGNETISM::value, "Magnetism");
+    }
+
+    private void addAdvancements() {
+        addAdvancement(ModAdvancements.AMATEUR_ARCHAEOLOGIST, "Amateur Archaeologist", "Find an Artifact");
+        addAdvancement(ModAdvancements.CHEST_SLAYER, "Chest Slayer", "Kill a Mimic");
+        addAdvancement(ModAdvancements.ADVENTUROUS_EATER, "Adventurous Eater", "Eat an Artifact");
+    }
+
+    private void addAdvancement(Identifier id, String title, String description) {
+        add("%s.advancements.%s.title".formatted(id.getNamespace(), id.getPath()), title);
+        add("%s.advancements.%s.description".formatted(id.getNamespace(), id.getPath()), description);
     }
 
     private void tooltip(String key, String value) {

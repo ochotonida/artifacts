@@ -19,7 +19,7 @@ public class ArtifactsEntityEquipmentLoot implements LootTableSubProvider {
     private final Context output;
     private final HolderGetter<LootTable> lootTables;
 
-    protected ArtifactsEntityEquipmentLoot(Context output) {
+    public ArtifactsEntityEquipmentLoot(Context output) {
         this.output = output;
         this.lootTables = output.lookup(Registries.LOOT_TABLE);
     }
