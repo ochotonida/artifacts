@@ -33,7 +33,7 @@ public record PostDamageCooldown(Value<Integer> cooldown, Optional<TagKey<Damage
     );
 
     public static void onLivingDamaged(LivingEntity entity, DamageSource damageSource) {
-        if (entity.level().isClientSide()) {
+        if (!entity.level().isClientSide()) {
             ModDataComponents.POST_DAMAGE_COOLDOWN.on(entity)
                     .filter(ability -> ability.tag().isEmpty() || damageSource.is(ability.tag().get()))
                     .iterate((ability, slot) -> slot.addCooldown(ability.cooldown.get() * 20));
