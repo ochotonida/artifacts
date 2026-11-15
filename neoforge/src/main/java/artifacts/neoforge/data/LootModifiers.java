@@ -7,8 +7,6 @@ import artifacts.loot.ConfigValueChance;
 import artifacts.neoforge.loot.ReplaceWithTableLootModifier;
 import artifacts.registry.ModItems;
 import artifacts.registry.ModLootTables;
-import net.minecraft.advancements.predicates.entity.EntityFlagsPredicate;
-import net.minecraft.advancements.predicates.entity.EntityPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -16,22 +14,17 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.context.ContextKeySet;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.AllOfCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 import net.neoforged.neoforge.common.loot.AddTableLootModifier;
@@ -57,20 +50,6 @@ public class LootModifiers extends GlobalLootModifierProvider {
     }
 
     private void addLoot() {
-        List<ResourceKey<LootTable>> cowLootTables = List.of(
-                EntityTypes.COW.getDefaultLootTable().orElseThrow(),
-                EntityTypes.MOOSHROOM.getDefaultLootTable().orElseThrow()
-        );
-        for (ResourceKey<LootTable> lootTable : cowLootTables) {
-            lootBuilders.add(
-                    new Builder(lootTable)
-                            .lootPoolCondition(ConfigValueChance.everlastingBeefChance())
-                            .lootModifierCondition(LootTableIdCondition.builder(lootTable.identifier()))
-                            .parameterSet(LootContextParamSets.ENTITY)
-                            .lootPoolCondition(LootItemKilledByPlayerCondition.killedByPlayer())
-                            .everlastingBeef()
-            );
-        }
 
 
 
@@ -223,22 +202,6 @@ public class LootModifiers extends GlobalLootModifierProvider {
             return this;
         }
 
-        private Builder everlastingBeef() {
-            lootPool.add(LootModifiers.item(ModItems.EVERLASTING_BEEF.value(), 1)
-                    .apply(
-                            SmeltItemFunction.smelted().when(
-                                    LootItemEntityPropertyCondition.hasProperties(
-                                            LootContext.EntityTarget.THIS,
-                                            EntityPredicate.Builder.entity().flags(
-                                                    EntityFlagsPredicate.Builder.flags()
-                                                            .setOnFire(true)
-                                            )
-                                    )
-                            )
-                    )
-            );
-            return this;
-        }
     }
 
     // TODO cleanup
