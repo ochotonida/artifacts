@@ -1,7 +1,6 @@
 package artifacts.neoforge.integration.curios;
 
 import artifacts.client.item.renderer.ArtifactRenderer;
-import artifacts.client.item.renderer.GloveArtifactRenderer;
 import artifacts.equipment.client.EquipmentRenderingHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.EntityModel;
@@ -15,10 +14,8 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
-import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.function.Supplier;
 
@@ -44,6 +41,7 @@ public class CuriosRenderingHandler implements EquipmentRenderingHandler {
         }
         InteractionHand hand = side == renderState.avatarRenderState.mainArm ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
 
+        /* FIXME: use built-in first person rendering for curios if possible
         CuriosApi.getCuriosInventory(player).ifPresent(handler -> handler.getCurios().values().forEach(stacksHandler -> {
             if (stacksHandler != null) {
                 IDynamicStackHandler stacks = stacksHandler.getStacks();
@@ -62,6 +60,7 @@ public class CuriosRenderingHandler implements EquipmentRenderingHandler {
                 }
             }
         }));
+        */
     }
 
     public record ArtifactCurioRenderer(ArtifactRenderer renderer) implements ICurioRenderer {
