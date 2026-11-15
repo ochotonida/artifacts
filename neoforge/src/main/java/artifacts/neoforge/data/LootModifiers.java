@@ -29,7 +29,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
 
     protected void start() {
         for (ResourceKey<LootTable> target : ModLootTables.INJECTED_LOOT_TABLES) {
-            ResourceKey<LootTable> injectedLootTable = ModLootTables.getInjectedArchaeologyLootTable(target);
+            ResourceKey<LootTable> injectedLootTable = ModLootTables.getInjectedLootTable(target);
             LootItemCondition condition = LootTableIdCondition.builder(target.identifier()).build();
             LootModifier lootModifier = new AddTableLootModifier(
                     Optional.of(Holder.direct(condition)),
