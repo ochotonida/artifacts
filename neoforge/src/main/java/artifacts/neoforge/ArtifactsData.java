@@ -45,7 +45,7 @@ public class ArtifactsData {
                 new LootTableProvider.SubProviderEntry(ArtifactsChestLoot::new, LootContextParamSets.CHEST),
                 new LootTableProvider.SubProviderEntry(ArtifactsEntityEquipmentLoot::new, LootContextParamSets.EQUIPMENT),
                 new LootTableProvider.SubProviderEntry(ArtifactsEntityLoot::new, LootContextParamSets.ENTITY),
-                new LootTableProvider.SubProviderEntry(ArtifactsInjectedLoot::new, LootContextParamSets.ALL_PARAMS),
+                new LootTableProvider.SubProviderEntry(ArtifactsInjectedStructureLoot::new, LootContextParamSets.ALL_PARAMS),
                 new LootTableProvider.SubProviderEntry(ArtifactsItemLoot::new, LootContextParamSets.ALL_PARAMS)
         )));
         event.add(Registries.ADVANCEMENT, new AdvancementProvider(List.of(ArtifactsAdvancementSubProvider::new)));

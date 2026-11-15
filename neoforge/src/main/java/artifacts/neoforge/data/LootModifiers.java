@@ -40,7 +40,6 @@ import net.neoforged.neoforge.common.loot.LootModifier;
 import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -73,200 +72,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
             );
         }
 
-        for (ResourceKey<LootTable> lootTable : Arrays.asList(
-                BuiltInLootTables.VILLAGE_DESERT_HOUSE,
-                BuiltInLootTables.VILLAGE_PLAINS_HOUSE,
-                BuiltInLootTables.VILLAGE_SAVANNA_HOUSE
-        )) {
-            builder(lootTable, 0.05F)
-                    .item(ModItems.VILLAGER_HAT.value());
-        }
-        for (ResourceKey<LootTable> lootTable : Arrays.asList(
-                BuiltInLootTables.VILLAGE_SNOWY_HOUSE,
-                BuiltInLootTables.VILLAGE_TAIGA_HOUSE
-        )) {
-            builder(lootTable, 0.08F)
-                    .item(ModItems.VILLAGER_HAT.value())
-                    .item(ModItems.SNOWSHOES.value());
-        }
 
-        builder(BuiltInLootTables.SPAWN_BONUS_CHEST, 1)
-                .item(ModItems.WHOOPEE_CUSHION.value());
-        builder(BuiltInLootTables.VILLAGE_ARMORER, 0.1F)
-                .item(ModItems.STEADFAST_SPIKES.value())
-                .item(ModItems.SUPERSTITIOUS_HAT.value())
-                .item(ModItems.RUNNING_SHOES.value())
-                .item(ModItems.VAMPIRIC_GLOVE.value());
-        builder(BuiltInLootTables.VILLAGE_BUTCHER, 0.05F)
-                .item(ModItems.EVERLASTING_BEEF.value());
-        builder(BuiltInLootTables.VILLAGE_TANNERY, 0.2F)
-                .item(ModItems.UMBRELLA.value(), 3)
-                .item(ModItems.WHOOPEE_CUSHION.value(), 2)
-                .item(ModItems.KITTY_SLIPPERS.value())
-                .item(ModItems.BUNNY_HOPPERS.value())
-                .item(ModItems.SCARF_OF_INVISIBILITY.value())
-                .item(ModItems.ANGLERS_HAT.value());
-        builder(BuiltInLootTables.VILLAGE_TEMPLE, 0.2F)
-                .item(ModItems.CROSS_NECKLACE.value())
-                .item(ModItems.ANTIDOTE_VESSEL.value())
-                .item(ModItems.CHARM_OF_SINKING.value())
-                .item(ModItems.WARP_DRIVE.value());
-        builder(BuiltInLootTables.VILLAGE_TOOLSMITH, 0.15F)
-                .item(ModItems.DIGGING_CLAWS.value())
-                .item(ModItems.POCKET_PISTON.value());
-        builder(BuiltInLootTables.VILLAGE_WEAPONSMITH, 0.1F)
-                .item(ModItems.FERAL_CLAWS.value(), 2)
-                .item(ModItems.CHARM_OF_SHRINKING.value());
-        builder(BuiltInLootTables.ABANDONED_MINESHAFT, 0.3F)
-                .item(ModItems.ONION_RING.value(), 2)
-                .item(ModItems.NIGHT_VISION_GOGGLES.value())
-                .item(ModItems.PANIC_NECKLACE.value())
-                .item(ModItems.OBSIDIAN_SKULL.value())
-                .item(ModItems.SUPERSTITIOUS_HAT.value())
-                .item(ModItems.DIGGING_CLAWS.value())
-                .item(ModItems.CLOUD_IN_A_BOTTLE.value())
-                .item(ModItems.VAMPIRIC_GLOVE.value())
-                .item(ModItems.AQUA_DASHERS.value())
-                .item(ModItems.PICKAXE_HEATER.value())
-                .drinkingHat(1);
-        builder(BuiltInLootTables.BASTION_HOGLIN_STABLE, 0.25F)
-                .artifact(5)
-                .item(ModItems.BUNNY_HOPPERS.value(), 3)
-                .item(ModItems.FLAME_PENDANT.value(), 3)
-                .item(ModItems.COWBOY_HAT.value(), 3)
-                .item(ModItems.PICKAXE_HEATER.value(), 3)
-                .item(ModItems.WITHERED_BRACELET.value(), 3)
-                .item(ModItems.EVERLASTING_BEEF.value());
-        builder(BuiltInLootTables.BASTION_TREASURE, 0.65F)
-                .artifact(6)
-                .item(ModItems.GOLDEN_HOOK.value(), 3)
-                .item(ModItems.CROSS_NECKLACE.value(), 3)
-                .item(ModItems.FIRE_GAUNTLET.value(), 2)
-                .item(ModItems.STEADFAST_SPIKES.value())
-                .item(ModItems.PANIC_NECKLACE.value())
-                .item(ModItems.CRYSTAL_HEART.value())
-                .item(ModItems.ANTIDOTE_VESSEL.value());
-        builder(BuiltInLootTables.BURIED_TREASURE, 0.25F)
-                .item(ModItems.SNORKEL.value(), 5)
-                .item(ModItems.FLIPPERS.value(), 5)
-                .item(ModItems.UMBRELLA.value(), 5)
-                .item(ModItems.GOLDEN_HOOK.value(), 5)
-                .item(ModItems.FERAL_CLAWS.value(), 3)
-                .item(ModItems.DIGGING_CLAWS.value(), 3)
-                .item(ModItems.KITTY_SLIPPERS.value(), 3)
-                .item(ModItems.BUNNY_HOPPERS.value(), 3)
-                .item(ModItems.LUCKY_SCARF.value(), 3)
-                .item(ModItems.AQUA_DASHERS.value(), 3)
-                .item(ModItems.ANGLERS_HAT.value(), 3)
-                .drinkingHat(3);
-        builder(BuiltInLootTables.DESERT_PYRAMID, 0.2F)
-                .item(ModItems.FLAME_PENDANT.value(), 2)
-                .item(ModItems.THORN_PENDANT.value(), 2)
-                .item(ModItems.WHOOPEE_CUSHION.value(), 2)
-                .item(ModItems.CHARM_OF_SINKING.value(), 2)
-                .item(ModItems.SHOCK_PENDANT.value())
-                .item(ModItems.UMBRELLA.value())
-                .item(ModItems.SCARF_OF_INVISIBILITY.value())
-                .item(ModItems.UNIVERSAL_ATTRACTOR.value())
-                .item(ModItems.VAMPIRIC_GLOVE.value())
-                .item(ModItems.ONION_RING.value());
-        builder(BuiltInLootTables.END_CITY_TREASURE, 0.3F)
-                .item(ModItems.CHORUS_TOTEM.value(), 6)
-                .item(ModItems.HELIUM_FLAMINGO.value(), 4)
-                .item(ModItems.WARP_DRIVE.value(), 2)
-                .item(ModItems.CRYSTAL_HEART.value())
-                .item(ModItems.CLOUD_IN_A_BOTTLE.value());
-        builder(BuiltInLootTables.JUNGLE_TEMPLE, 0.35F)
-                .item(ModItems.KITTY_SLIPPERS.value(), 2)
-                .item(ModItems.ROOTED_BOOTS.value(), 2)
-                .item(ModItems.BUNNY_HOPPERS.value())
-                .item(ModItems.ANGLERS_HAT.value());
-        builder(BuiltInLootTables.NETHER_BRIDGE, 0.15F)
-                .item(ModItems.CROSS_NECKLACE.value())
-                .item(ModItems.NIGHT_VISION_GOGGLES.value())
-                .item(ModItems.POCKET_PISTON.value())
-                .item(ModItems.RUNNING_SHOES.value())
-                .item(ModItems.COWBOY_HAT.value())
-                .item(ModItems.CHARM_OF_SHRINKING.value())
-                .item(ModItems.STRIDER_SHOES.value())
-                .item(ModItems.WITHERED_BRACELET.value())
-                .drinkingHat(1);
-        builder(BuiltInLootTables.PILLAGER_OUTPOST, 0.25F)
-                .item(ModItems.PANIC_NECKLACE.value())
-                .item(ModItems.POCKET_PISTON.value())
-                .item(ModItems.STEADFAST_SPIKES.value())
-                .item(ModItems.POWER_GLOVE.value())
-                .item(ModItems.CROSS_NECKLACE.value())
-                .item(ModItems.SCARF_OF_INVISIBILITY.value())
-                .item(ModItems.CRYSTAL_HEART.value())
-                .item(ModItems.CLOUD_IN_A_BOTTLE.value())
-                .item(ModItems.SUPERSTITIOUS_HAT.value())
-                .item(ModItems.ROOTED_BOOTS.value());
-        builder(BuiltInLootTables.RUINED_PORTAL, 0.15F)
-                .item(ModItems.NIGHT_VISION_GOGGLES.value())
-                .item(ModItems.THORN_PENDANT.value())
-                .item(ModItems.FIRE_GAUNTLET.value())
-                .item(ModItems.POWER_GLOVE.value())
-                .item(ModItems.UNIVERSAL_ATTRACTOR.value())
-                .item(ModItems.OBSIDIAN_SKULL.value())
-                .item(ModItems.LUCKY_SCARF.value())
-                .item(ModItems.COWBOY_HAT.value())
-                .item(ModItems.CHARM_OF_SHRINKING.value())
-                .item(ModItems.STRIDER_SHOES.value());
-        builder(BuiltInLootTables.SHIPWRECK_TREASURE, 0.15F)
-                .item(ModItems.GOLDEN_HOOK.value(), 3)
-                .item(ModItems.SNORKEL.value())
-                .item(ModItems.FLIPPERS.value())
-                .item(ModItems.SCARF_OF_INVISIBILITY.value())
-                .item(ModItems.STEADFAST_SPIKES.value())
-                .item(ModItems.UNIVERSAL_ATTRACTOR.value())
-                .item(ModItems.FERAL_CLAWS.value())
-                .item(ModItems.NIGHT_VISION_GOGGLES.value())
-                .item(ModItems.OBSIDIAN_SKULL.value())
-                .item(ModItems.RUNNING_SHOES.value())
-                .item(ModItems.CHARM_OF_SINKING.value());
-        builder(BuiltInLootTables.SIMPLE_DUNGEON, 0.15F)
-                .item(ModItems.CHARM_OF_SHRINKING.value())
-                .item(ModItems.WARP_DRIVE.value())
-                .item(ModItems.WITHERED_BRACELET.value())
-                .item(ModItems.STRIDER_SHOES.value());
-        builder(BuiltInLootTables.STRONGHOLD_CORRIDOR, 0.3F)
-                .item(ModItems.POWER_GLOVE.value())
-                .item(ModItems.ANTIDOTE_VESSEL.value())
-                .item(ModItems.SUPERSTITIOUS_HAT.value())
-                .item(ModItems.LUCKY_SCARF.value())
-                .item(ModItems.AQUA_DASHERS.value())
-                .item(ModItems.HELIUM_FLAMINGO.value())
-                .item(ModItems.ROOTED_BOOTS.value())
-                .item(ModItems.PICKAXE_HEATER.value());
-        builder(BuiltInLootTables.UNDERWATER_RUIN_BIG, 0.45F)
-                .item(ModItems.SNORKEL.value(), 3)
-                .item(ModItems.FLIPPERS.value(), 3)
-                .item(ModItems.SUPERSTITIOUS_HAT.value())
-                .item(ModItems.LUCKY_SCARF.value())
-                .item(ModItems.FIRE_GAUNTLET.value())
-                .item(ModItems.CROSS_NECKLACE.value())
-                .item(ModItems.POWER_GLOVE.value())
-                .item(ModItems.CLOUD_IN_A_BOTTLE.value())
-                .item(ModItems.ANGLERS_HAT.value());
-        builder(BuiltInLootTables.WOODLAND_MANSION, 0.4F)
-                .item(ModItems.CHORUS_TOTEM.value(), 2)
-                .artifact(1);
-        builder(BuiltInLootTables.IGLOO_CHEST, 0.3F)
-                .item(ModItems.SNOWSHOES.value(), 2)
-                .item(ModItems.VILLAGER_HAT.value())
-                .item(ModItems.LUCKY_SCARF.value());
-        builder(BuiltInLootTables.ANCIENT_CITY_ICE_BOX, 0.2F)
-                .item(ModItems.SNOWSHOES.value());
-        builder(BuiltInLootTables.ANCIENT_CITY, 0.15F)
-                .item(ModItems.ROOTED_BOOTS.value())
-                .item(ModItems.PICKAXE_HEATER.value())
-                .item(ModItems.ONION_RING.value())
-                .item(ModItems.AQUA_DASHERS.value())
-                .item(ModItems.CHARM_OF_SINKING.value())
-                .item(ModItems.SHOCK_PENDANT.value())
-                .item(ModItems.HELIUM_FLAMINGO.value())
-                .item(ModItems.WARP_DRIVE.value());
 
         archaeologyBuilder(BuiltInLootTables.DESERT_PYRAMID_ARCHAEOLOGY)
                 .item(ModItems.COWBOY_HAT.value())
@@ -373,13 +179,6 @@ public class LootModifiers extends GlobalLootModifierProvider {
             return new AddTableLootModifier(conditionHolder, IGlobalLootModifier.DEFAULT_PRIORITY, table);
         }
 
-        public LootTable.Builder createLootTable() {
-            return new LootTable.Builder().withPool(lootPool);
-        }
-
-        public ContextKeySet getContextKeySet() {
-            return contextKeySet;
-        }
 
         public String getName() {
             return lootTable.identifier().getPath();
@@ -451,7 +250,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
             throw new IllegalArgumentException();
         } else {
             String itemName = BuiltInRegistries.ITEM.getKey(item).getPath();
-            return NestedLootTable.lootTableReference(Artifacts.key(Registries.LOOT_TABLE, "items/%s".formatted(itemName))).setWeight(weight);
+            return NestedLootTable.lootTableReference(ModLootTables.getArtifactLootTable(item)).setWeight(weight);
         }
     }
 
