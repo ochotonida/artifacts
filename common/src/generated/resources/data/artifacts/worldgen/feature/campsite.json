@@ -1,0 +1,301 @@
+{
+  "type": "artifacts:campsite",
+  "beds": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "minecraft:white_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:orange_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:magenta_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:light_blue_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:yellow_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:lime_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:pink_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:gray_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:light_gray_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:cyan_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:purple_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:blue_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:brown_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:green_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:red_bed",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:black_bed",
+        "weight": 1
+      }
+    ]
+  },
+  "chest": {
+    "chest_loot_table": "artifacts:chests/campsite_chest",
+    "trapped_chest_chance": 0.125
+  },
+  "crafting_stations": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "minecraft:crafting_table",
+        "weight": 5
+      },
+      {
+        "data": "minecraft:smithing_table",
+        "weight": 5
+      },
+      {
+        "data": "minecraft:fletching_table",
+        "weight": 5
+      },
+      {
+        "data": "minecraft:cartography_table",
+        "weight": 5
+      },
+      {
+        "data": "minecraft:anvil",
+        "weight": 2
+      },
+      {
+        "data": "minecraft:chipped_anvil",
+        "weight": 2
+      },
+      {
+        "data": "minecraft:damaged_anvil",
+        "weight": 1
+      }
+    ]
+  },
+  "decorations": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "minecraft:potted_dead_bush",
+        "weight": 2
+      },
+      {
+        "data": "minecraft:potted_bamboo",
+        "weight": 2
+      },
+      {
+        "data": "minecraft:potted_red_tulip",
+        "weight": 2
+      },
+      {
+        "data": "minecraft:brewing_stand",
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:candle_cake",
+          "properties": {
+            "lit": "true"
+          }
+        },
+        "weight": 1
+      }
+    ]
+  },
+  "floor": {
+    "id": "minecraft:oak_planks"
+  },
+  "furnace_chimneys": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "minecraft:cobblestone_wall",
+        "weight": 2
+      },
+      {
+        "data": "minecraft:cobbled_deepslate_wall",
+        "weight": 2
+      },
+      {
+        "data": "minecraft:stone_brick_wall",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:deepslate_brick_wall",
+        "weight": 1
+      }
+    ]
+  },
+  "furnaces": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "minecraft:furnace",
+        "weight": 2
+      },
+      {
+        "data": "minecraft:blast_furnace",
+        "weight": 1
+      },
+      {
+        "data": "minecraft:smoker",
+        "weight": 1
+      }
+    ]
+  },
+  "light_sources": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "minecraft:lantern",
+        "weight": 4
+      },
+      {
+        "data": {
+          "id": "minecraft:candle",
+          "properties": {
+            "candles": "1",
+            "lit": "true",
+            "waterlogged": "false"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:candle",
+          "properties": {
+            "candles": "2",
+            "lit": "true",
+            "waterlogged": "false"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:candle",
+          "properties": {
+            "candles": "3",
+            "lit": "true",
+            "waterlogged": "false"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:candle",
+          "properties": {
+            "candles": "4",
+            "lit": "true",
+            "waterlogged": "false"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": "minecraft:soul_lantern",
+        "weight": 1
+      }
+    ]
+  },
+  "lit_campfires": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "minecraft:campfire",
+        "weight": 9
+      },
+      {
+        "data": "minecraft:soul_campfire",
+        "weight": 1
+      }
+    ]
+  },
+  "unlit_campfires": {
+    "id": "minecraft:campfire",
+    "properties": {
+      "facing": "north",
+      "lit": "false",
+      "signal_fire": "false",
+      "waterlogged": "false"
+    }
+  },
+  "unlit_light_sources": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "minecraft:candle",
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:candle",
+          "properties": {
+            "candles": "2",
+            "lit": "false",
+            "waterlogged": "false"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:candle",
+          "properties": {
+            "candles": "3",
+            "lit": "false",
+            "waterlogged": "false"
+          }
+        },
+        "weight": 1
+      },
+      {
+        "data": {
+          "id": "minecraft:candle",
+          "properties": {
+            "candles": "4",
+            "lit": "false",
+            "waterlogged": "false"
+          }
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

@@ -1,4 +1,5 @@
 {
+  "type": "minecraft:empty",
   "pools": [
     {
       "entries": [
@@ -7,12 +8,10 @@
           "children": [
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "artifacts:config_value",
-                  "value": "items.chorus_totem.generateAsLoot"
-                }
-              ],
+              "condition": {
+                "type": "artifacts:config_value",
+                "value": "items.chorus_totem.generateAsLoot"
+              },
               "name": "artifacts:chorus_totem"
             },
             {
@@ -21,8 +20,7 @@
           ]
         }
       ],
-      "name": "main",
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "artifacts:items/chorus_totem"

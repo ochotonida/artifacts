@@ -1,0 +1,5 @@
+// 26.3	2026-11-15T23:40:57.8496712	Registries for World (artifacts[0]): [artifacts]
+573aa19f5fe1d2768d01ef6df027fe45c3b5db42 data/artifacts/worldgen/feature/campsite.json
+35269faedb3da1c9a29c93155ec46aadc6eb6070 data/artifacts/worldgen/feature/minimalist_campsite.json
+1bb3546e40214888b684e1aa986676c985d63e15 data/artifacts/worldgen/placed_feature/underground_campsite.json
+5e0e9b4e9b2064857ea2bd6bebe9bfbd21130dbf data/artifacts/worldgen/placed_feature/underground_minimalist_campsite.json

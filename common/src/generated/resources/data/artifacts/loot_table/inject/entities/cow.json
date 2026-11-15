@@ -2,38 +2,37 @@
   "type": "minecraft:entity",
   "pools": [
     {
-      "conditions": [
-        {
-          "condition": "artifacts:config_value_chance",
-          "config": "everlasting_beef"
-        },
-        {
-          "condition": "minecraft:killed_by_player"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "artifacts:config_value_chance",
+            "config": "everlasting_beef"
+          },
+          {
+            "type": "minecraft:killed_by_player"
+          }
+        ]
+      },
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "functions": [
-            {
-              "conditions": [
-                {
-                  "condition": "minecraft:entity_properties",
-                  "entity": "this",
-                  "predicate": {
-                    "minecraft:flags": {
-                      "is_on_fire": true
-                    }
-                  }
+          "modifier": {
+            "type": "minecraft:furnace_smelt",
+            "condition": {
+              "type": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "minecraft:flags": {
+                  "is_on_fire": true
                 }
-              ],
-              "function": "minecraft:furnace_smelt"
+              }
             }
-          ],
+          },
           "value": "artifacts:items/everlasting_beef"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "artifacts:inject/entities/cow"

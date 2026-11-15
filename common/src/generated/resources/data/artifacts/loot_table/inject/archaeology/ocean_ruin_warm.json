@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:chest",
+  "type": "minecraft:archaeology",
   "pools": [
     {
       "entries": [
@@ -28,7 +28,7 @@
           "value": "artifacts:items/strider_shoes"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "artifacts:inject/archaeology/ocean_ruin_warm"

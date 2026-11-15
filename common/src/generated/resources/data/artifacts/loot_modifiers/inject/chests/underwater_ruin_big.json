@@ -1,10 +1,8 @@
 {
   "type": "neoforge:add_table",
-  "conditions": [
-    {
-      "condition": "neoforge:loot_table_id",
-      "loot_table_id": "minecraft:chests/underwater_ruin_big"
-    }
-  ],
+  "condition": {
+    "type": "neoforge:loot_table_id",
+    "loot_table_id": "minecraft:chests/underwater_ruin_big"
+  },
   "table": "artifacts:inject/chests/underwater_ruin_big"
 }

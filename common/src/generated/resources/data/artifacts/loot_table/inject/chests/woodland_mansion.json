@@ -2,12 +2,10 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "conditions": [
-        {
-          "condition": "artifacts:artifact_rarity_adjusted_chance",
-          "default_probability": 0.4
-        }
-      ],
+      "condition": {
+        "type": "artifacts:artifact_rarity_adjusted_chance",
+        "default_probability": 0.4
+      },
       "entries": [
         {
           "type": "minecraft:loot_table",
@@ -19,7 +17,7 @@
           "value": "artifacts:artifact"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "artifacts:inject/chests/woodland_mansion"

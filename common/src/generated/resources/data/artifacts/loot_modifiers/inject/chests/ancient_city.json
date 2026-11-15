@@ -1,10 +1,8 @@
 {
   "type": "neoforge:add_table",
-  "conditions": [
-    {
-      "condition": "neoforge:loot_table_id",
-      "loot_table_id": "minecraft:chests/ancient_city"
-    }
-  ],
+  "condition": {
+    "type": "neoforge:loot_table_id",
+    "loot_table_id": "minecraft:chests/ancient_city"
+  },
   "table": "artifacts:inject/chests/ancient_city"
 }

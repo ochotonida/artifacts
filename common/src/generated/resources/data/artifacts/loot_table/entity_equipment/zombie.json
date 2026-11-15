@@ -1,12 +1,11 @@
 {
+  "type": "minecraft:equipment",
   "pools": [
     {
-      "conditions": [
-        {
-          "condition": "artifacts:config_value_chance",
-          "config": "entity_equipment"
-        }
-      ],
+      "condition": {
+        "type": "artifacts:config_value_chance",
+        "config": "entity_equipment"
+      },
       "entries": [
         {
           "type": "minecraft:loot_table",
@@ -21,7 +20,7 @@
           "value": "artifacts:items/scarf_of_invisibility"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "artifacts:entity_equipment/zombie"

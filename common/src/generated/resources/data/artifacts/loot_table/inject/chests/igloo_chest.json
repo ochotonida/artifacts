@@ -2,12 +2,10 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "conditions": [
-        {
-          "condition": "artifacts:artifact_rarity_adjusted_chance",
-          "default_probability": 0.3
-        }
-      ],
+      "condition": {
+        "type": "artifacts:artifact_rarity_adjusted_chance",
+        "default_probability": 0.3
+      },
       "entries": [
         {
           "type": "minecraft:loot_table",
@@ -23,7 +21,7 @@
           "value": "artifacts:items/lucky_scarf"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "artifacts:inject/chests/igloo_chest"

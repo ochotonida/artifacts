@@ -1,4 +1,5 @@
 {
+  "type": "minecraft:empty",
   "pools": [
     {
       "entries": [
@@ -7,12 +8,10 @@
           "children": [
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "artifacts:config_value",
-                  "value": "items.aqua_dashers.generateAsLoot"
-                }
-              ],
+              "condition": {
+                "type": "artifacts:config_value",
+                "value": "items.aqua_dashers.generateAsLoot"
+              },
               "name": "artifacts:aqua_dashers"
             },
             {
@@ -21,8 +20,7 @@
           ]
         }
       ],
-      "name": "main",
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "artifacts:items/aqua_dashers"

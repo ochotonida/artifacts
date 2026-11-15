@@ -1,15 +1,18 @@
 {
   "type": "artifacts:replace_with_table",
-  "conditions": [
-    {
-      "condition": "neoforge:loot_table_id",
-      "loot_table_id": "minecraft:archaeology/desert_pyramid"
-    },
-    {
-      "condition": "artifacts:config_value_chance",
-      "config": "archaeology"
-    }
-  ],
+  "condition": {
+    "type": "minecraft:all_of",
+    "terms": [
+      {
+        "type": "neoforge:loot_table_id",
+        "loot_table_id": "minecraft:archaeology/desert_pyramid"
+      },
+      {
+        "type": "artifacts:config_value_chance",
+        "config": "archaeology"
+      }
+    ]
+  },
   "priority": 500,
   "table": "artifacts:inject/archaeology/desert_pyramid"
 }

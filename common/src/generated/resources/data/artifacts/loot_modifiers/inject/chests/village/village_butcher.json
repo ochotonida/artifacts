@@ -1,10 +1,8 @@
 {
   "type": "neoforge:add_table",
-  "conditions": [
-    {
-      "condition": "neoforge:loot_table_id",
-      "loot_table_id": "minecraft:chests/village/village_butcher"
-    }
-  ],
+  "condition": {
+    "type": "neoforge:loot_table_id",
+    "loot_table_id": "minecraft:chests/village/village_butcher"
+  },
   "table": "artifacts:inject/chests/village/village_butcher"
 }

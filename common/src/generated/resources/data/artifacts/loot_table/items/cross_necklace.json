@@ -1,4 +1,5 @@
 {
+  "type": "minecraft:empty",
   "pools": [
     {
       "entries": [
@@ -7,12 +8,10 @@
           "children": [
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "artifacts:config_value",
-                  "value": "items.cross_necklace.generateAsLoot"
-                }
-              ],
+              "condition": {
+                "type": "artifacts:config_value",
+                "value": "items.cross_necklace.generateAsLoot"
+              },
               "name": "artifacts:cross_necklace"
             },
             {
@@ -21,8 +20,7 @@
           ]
         }
       ],
-      "name": "main",
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "artifacts:items/cross_necklace"

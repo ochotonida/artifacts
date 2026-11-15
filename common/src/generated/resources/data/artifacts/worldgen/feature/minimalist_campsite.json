@@ -1,0 +1,6 @@
+{
+  "type": "artifacts:suspicious_chest",
+  "chest": {
+    "chest_loot_table": "artifacts:chests/campsite_chest"
+  }
+}

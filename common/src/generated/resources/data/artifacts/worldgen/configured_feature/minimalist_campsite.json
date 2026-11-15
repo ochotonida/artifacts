@@ -1,8 +1,0 @@
-{
-  "type": "artifacts:suspicious_chest",
-  "config": {
-    "chest": {
-      "chest_loot_table": "artifacts:chests/campsite_chest"
-    }
-  }
-}

@@ -1,525 +1,433 @@
 {
+  "type": "minecraft:empty",
   "pools": [
     {
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.anglers_hat.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/anglers_hat",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.antidote_vessel.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/antidote_vessel",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.aqua_dashers.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/aqua_dashers",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.bunny_hoppers.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/bunny_hoppers",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.charm_of_shrinking.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/charm_of_shrinking",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.charm_of_sinking.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/charm_of_sinking",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.chorus_totem.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/chorus_totem",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.cloud_in_a_bottle.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/cloud_in_a_bottle",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.cowboy_hat.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/cowboy_hat",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.cross_necklace.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/cross_necklace",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.crystal_heart.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/crystal_heart",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.digging_claws.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/digging_claws",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.feral_claws.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/feral_claws",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.fire_gauntlet.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/fire_gauntlet",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.flame_pendant.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/flame_pendant",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.flippers.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/flippers",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.golden_hook.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/golden_hook",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.kitty_slippers.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/kitty_slippers",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.lucky_scarf.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/lucky_scarf",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.night_vision_goggles.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/night_vision_goggles",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.obsidian_skull.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/obsidian_skull",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.onion_ring.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/onion_ring",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.panic_necklace.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/panic_necklace",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.pickaxe_heater.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/pickaxe_heater",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.pocket_piston.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/pocket_piston",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.power_glove.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/power_glove",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.rooted_boots.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/rooted_boots",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.running_shoes.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/running_shoes",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.scarf_of_invisibility.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/scarf_of_invisibility",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.shock_pendant.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/shock_pendant",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.snorkel.generateAsLoot"
-            }
-          ],
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.snorkel.generateAsLoot"
+          },
           "value": "artifacts:items/snorkel",
           "weight": 8
         },
         {
           "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.snowshoes.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/snowshoes",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.night_vision_goggles.generateAsLoot"
+          },
+          "value": "artifacts:items/night_vision_goggles",
           "weight": 8
         },
         {
           "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.steadfast_spikes.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/steadfast_spikes",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.strider_shoes.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/strider_shoes",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.superstitious_hat.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/superstitious_hat",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.thorn_pendant.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/thorn_pendant",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.universal_attractor.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/universal_attractor",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.vampiric_glove.generateAsLoot"
-            }
-          ],
-          "value": "artifacts:items/vampiric_glove",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.villager_hat.generateAsLoot"
-            }
-          ],
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.villager_hat.generateAsLoot"
+          },
           "value": "artifacts:items/villager_hat",
           "weight": 8
         },
         {
           "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.warp_drive.generateAsLoot"
-            }
-          ],
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.superstitious_hat.generateAsLoot"
+          },
+          "value": "artifacts:items/superstitious_hat",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.cowboy_hat.generateAsLoot"
+          },
+          "value": "artifacts:items/cowboy_hat",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.anglers_hat.generateAsLoot"
+          },
+          "value": "artifacts:items/anglers_hat",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.lucky_scarf.generateAsLoot"
+          },
+          "value": "artifacts:items/lucky_scarf",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.scarf_of_invisibility.generateAsLoot"
+          },
+          "value": "artifacts:items/scarf_of_invisibility",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.cross_necklace.generateAsLoot"
+          },
+          "value": "artifacts:items/cross_necklace",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.panic_necklace.generateAsLoot"
+          },
+          "value": "artifacts:items/panic_necklace",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.shock_pendant.generateAsLoot"
+          },
+          "value": "artifacts:items/shock_pendant",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.flame_pendant.generateAsLoot"
+          },
+          "value": "artifacts:items/flame_pendant",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.thorn_pendant.generateAsLoot"
+          },
+          "value": "artifacts:items/thorn_pendant",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.charm_of_sinking.generateAsLoot"
+          },
+          "value": "artifacts:items/charm_of_sinking",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.charm_of_shrinking.generateAsLoot"
+          },
+          "value": "artifacts:items/charm_of_shrinking",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.cloud_in_a_bottle.generateAsLoot"
+          },
+          "value": "artifacts:items/cloud_in_a_bottle",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.obsidian_skull.generateAsLoot"
+          },
+          "value": "artifacts:items/obsidian_skull",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.antidote_vessel.generateAsLoot"
+          },
+          "value": "artifacts:items/antidote_vessel",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.universal_attractor.generateAsLoot"
+          },
+          "value": "artifacts:items/universal_attractor",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.crystal_heart.generateAsLoot"
+          },
+          "value": "artifacts:items/crystal_heart",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.chorus_totem.generateAsLoot"
+          },
+          "value": "artifacts:items/chorus_totem",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.warp_drive.generateAsLoot"
+          },
           "value": "artifacts:items/warp_drive",
           "weight": 8
         },
         {
           "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.withered_bracelet.generateAsLoot"
-            }
-          ],
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.digging_claws.generateAsLoot"
+          },
+          "value": "artifacts:items/digging_claws",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.feral_claws.generateAsLoot"
+          },
+          "value": "artifacts:items/feral_claws",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.power_glove.generateAsLoot"
+          },
+          "value": "artifacts:items/power_glove",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.fire_gauntlet.generateAsLoot"
+          },
+          "value": "artifacts:items/fire_gauntlet",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.pocket_piston.generateAsLoot"
+          },
+          "value": "artifacts:items/pocket_piston",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.vampiric_glove.generateAsLoot"
+          },
+          "value": "artifacts:items/vampiric_glove",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.golden_hook.generateAsLoot"
+          },
+          "value": "artifacts:items/golden_hook",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.onion_ring.generateAsLoot"
+          },
+          "value": "artifacts:items/onion_ring",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.pickaxe_heater.generateAsLoot"
+          },
+          "value": "artifacts:items/pickaxe_heater",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.withered_bracelet.generateAsLoot"
+          },
           "value": "artifacts:items/withered_bracelet",
           "weight": 8
         },
         {
           "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "minecraft:any_of",
-              "terms": [
-                {
-                  "condition": "artifacts:config_value",
-                  "value": "items.plastic_drinking_hat.generateAsLoot"
-                },
-                {
-                  "condition": "artifacts:config_value",
-                  "value": "items.novelty_drinking_hat.generateAsLoot"
-                }
-              ]
-            }
-          ],
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.aqua_dashers.generateAsLoot"
+          },
+          "value": "artifacts:items/aqua_dashers",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.bunny_hoppers.generateAsLoot"
+          },
+          "value": "artifacts:items/bunny_hoppers",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.kitty_slippers.generateAsLoot"
+          },
+          "value": "artifacts:items/kitty_slippers",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.running_shoes.generateAsLoot"
+          },
+          "value": "artifacts:items/running_shoes",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.snowshoes.generateAsLoot"
+          },
+          "value": "artifacts:items/snowshoes",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.steadfast_spikes.generateAsLoot"
+          },
+          "value": "artifacts:items/steadfast_spikes",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.flippers.generateAsLoot"
+          },
+          "value": "artifacts:items/flippers",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.rooted_boots.generateAsLoot"
+          },
+          "value": "artifacts:items/rooted_boots",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.strider_shoes.generateAsLoot"
+          },
+          "value": "artifacts:items/strider_shoes",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:loot_table",
+          "condition": {
+            "type": "minecraft:any_of",
+            "terms": [
+              {
+                "type": "artifacts:config_value",
+                "value": "items.plastic_drinking_hat.generateAsLoot"
+              },
+              {
+                "type": "artifacts:config_value",
+                "value": "items.novelty_drinking_hat.generateAsLoot"
+              }
+            ]
+          },
           "value": "artifacts:items/drinking_hat",
           "weight": 8
         },
         {
           "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.umbrella.generateAsLoot"
-            }
-          ],
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.umbrella.generateAsLoot"
+          },
           "value": "artifacts:items/umbrella",
           "weight": 5
         },
         {
           "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.whoopee_cushion.generateAsLoot"
-            }
-          ],
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.whoopee_cushion.generateAsLoot"
+          },
           "value": "artifacts:items/whoopee_cushion",
           "weight": 5
         },
         {
           "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.helium_flamingo.generateAsLoot"
-            }
-          ],
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.helium_flamingo.generateAsLoot"
+          },
           "value": "artifacts:items/helium_flamingo",
           "weight": 4
         },
         {
           "type": "minecraft:loot_table",
-          "conditions": [
-            {
-              "condition": "artifacts:config_value",
-              "value": "items.everlasting_beef.generateAsLoot"
-            }
-          ],
+          "condition": {
+            "type": "artifacts:config_value",
+            "value": "items.everlasting_beef.generateAsLoot"
+          },
           "value": "artifacts:items/everlasting_beef",
           "weight": 2
         }
       ],
-      "name": "main",
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "artifacts:artifact"

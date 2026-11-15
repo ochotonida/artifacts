@@ -3,15 +3,13 @@
   "criteria": {
     "kill_mimic": {
       "conditions": {
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:entity_type": "artifacts:mimic"
-            }
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "artifacts:mimic"
           }
-        ]
+        }
       },
       "trigger": "minecraft:player_killed_entity"
     }
