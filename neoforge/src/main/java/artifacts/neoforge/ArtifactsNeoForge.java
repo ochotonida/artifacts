@@ -44,7 +44,8 @@ public class ArtifactsNeoForge {
         ModLootModifiers.LOOT_MODIFIERS.register();
         ModAttachmentTypes.ATTACHMENT_TYPES.register();
 
-        modBus.addListener(ArtifactsData::gatherServerData);
+        modBus.addListener(ArtifactsData::gatherData);
+        modBus.addListener(ArtifactsData::gatherDatapackRegistryData);
         modBus.addListener(NeoForgeNetworkHandler::registerPayloadHandlers);
         modBus.addListener(this::registerConfigurationTasks);
         NeoForge.EVENT_BUS.addListener((ServerStartingEvent event) -> Artifacts.onServerStarting(event.getServer()));

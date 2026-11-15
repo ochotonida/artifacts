@@ -1,28 +1,21 @@
 package artifacts.neoforge.data;
 
 import artifacts.Artifacts;
-import artifacts.config.value.Value;
 import artifacts.loot.ArtifactRarityAdjustedChance;
 import artifacts.loot.ConfigValueChance;
 import artifacts.neoforge.loot.ReplaceWithTableLootModifier;
-import artifacts.registry.ModItems;
 import artifacts.registry.ModLootTables;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.context.ContextKeySet;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.AllOfCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
@@ -45,57 +38,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
         super(output, registries, Artifacts.MOD_ID);
     }
 
-    public List<Builder> getLootBuilders() {
-        return lootBuilders;
-    }
-
     private void addLoot() {
-
-
-
-        archaeologyBuilder(BuiltInLootTables.DESERT_PYRAMID_ARCHAEOLOGY)
-                .item(ModItems.COWBOY_HAT.value())
-                .item(ModItems.OBSIDIAN_SKULL.value())
-                .item(ModItems.SNORKEL.value())
-                .item(ModItems.POWER_GLOVE.value())
-                .item(ModItems.KITTY_SLIPPERS.value())
-                .item(ModItems.NIGHT_VISION_GOGGLES.value())
-                .item(ModItems.SHOCK_PENDANT.value());
-        archaeologyBuilder(BuiltInLootTables.DESERT_WELL_ARCHAEOLOGY)
-                .item(ModItems.CHARM_OF_SINKING.value())
-                .item(ModItems.UNIVERSAL_ATTRACTOR.value())
-                .item(ModItems.SUPERSTITIOUS_HAT.value())
-                .item(ModItems.UMBRELLA.value())
-                .item(ModItems.WARP_DRIVE.value())
-                .drinkingHat(1);
-        archaeologyBuilder(BuiltInLootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY)
-                .item(ModItems.LUCKY_SCARF.value())
-                .item(ModItems.FIRE_GAUNTLET.value())
-                .item(ModItems.ANGLERS_HAT.value())
-                .item(ModItems.DIGGING_CLAWS.value())
-                .item(ModItems.ANTIDOTE_VESSEL.value())
-                .item(ModItems.WITHERED_BRACELET.value());
-        archaeologyBuilder(BuiltInLootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY)
-                .item(ModItems.AQUA_DASHERS.value())
-                .item(ModItems.ONION_RING.value())
-                .item(ModItems.RUNNING_SHOES.value())
-                .item(ModItems.BUNNY_HOPPERS.value())
-                .item(ModItems.VAMPIRIC_GLOVE.value())
-                .item(ModItems.STRIDER_SHOES.value());
-        archaeologyBuilder(BuiltInLootTables.TRAIL_RUINS_ARCHAEOLOGY_RARE)
-                .item(ModItems.ROOTED_BOOTS.value())
-                .item(ModItems.PICKAXE_HEATER.value())
-                .item(ModItems.AQUA_DASHERS.value())
-                .item(ModItems.SNOWSHOES.value())
-                .item(ModItems.STEADFAST_SPIKES.value())
-                .item(ModItems.VILLAGER_HAT.value())
-                .item(ModItems.CLOUD_IN_A_BOTTLE.value())
-                .item(ModItems.FERAL_CLAWS.value())
-                .item(ModItems.POCKET_PISTON.value())
-                .item(ModItems.WHOOPEE_CUSHION.value())
-                .item(ModItems.FLAME_PENDANT.value())
-                .item(ModItems.THORN_PENDANT.value())
-                .item(ModItems.CHARM_OF_SHRINKING.value());
     }
 
     protected Builder builder(ResourceKey<LootTable> lootTable, float baseChance) {
@@ -137,8 +80,6 @@ public class LootModifiers extends GlobalLootModifierProvider {
         private final List<LootItemCondition.Builder> conditions;
         private boolean replace = false;
 
-        private ContextKeySet contextKeySet = LootContextParamSets.CHEST;
-
         private Builder(ResourceKey<LootTable> lootTable) {
             this.lootTable = lootTable;
             this.conditions = new ArrayList<>();
@@ -163,11 +104,6 @@ public class LootModifiers extends GlobalLootModifierProvider {
             return lootTable.identifier().getPath();
         }
 
-        private Builder parameterSet(ContextKeySet contextKeySet) {
-            this.contextKeySet = contextKeySet;
-            return this;
-        }
-
         public Builder replace() {
             this.replace = true;
             return this;
@@ -183,53 +119,9 @@ public class LootModifiers extends GlobalLootModifierProvider {
             return this;
         }
 
-        private Builder item(Item item, int weight) {
-            lootPool.add(LootModifiers.item(item, weight));
-            return this;
-        }
-
-        private Builder item(Item item) {
-            return item(item, 1);
-        }
-
-        private Builder artifact(int weight) {
-            lootPool.add(LootModifiers.artifact(weight));
-            return this;
-        }
-
-        private Builder drinkingHat(int weight) {
-            lootPool.add(LootModifiers.drinkingHat(weight));
-            return this;
-        }
-
-    }
-
-    // TODO cleanup
-    protected static LootPoolEntryContainer.Builder<?> item(Item item, int weight) {
-        Value<Boolean> generatesAsLoot = Artifacts.CONFIG.items.generatesAsLoot(item);
-        if (generatesAsLoot == null) {
-            return LootItem.lootTableItem(item).setWeight(weight);
-        } else if (item == ModItems.PLASTIC_DRINKING_HAT.value() || item == ModItems.NOVELTY_DRINKING_HAT.value()) {
-            throw new IllegalArgumentException();
-        } else {
-            String itemName = BuiltInRegistries.ITEM.getKey(item).getPath();
-            return NestedLootTable.lootTableReference(ModLootTables.getArtifactLootTable(item)).setWeight(weight);
-        }
     }
 
     protected static LootPoolEntryContainer.Builder<?> item(Item item, int weight, int min, int max) {
         return LootItem.lootTableItem(item).setWeight(weight).apply(SetItemCountFunction.setCount(ContextIntProviders.between(min, max)));
-    }
-
-    protected static LootPoolEntryContainer.Builder<?> artifact(int weight) {
-        return lootTable("artifact", weight);
-    }
-
-    protected static LootPoolEntryContainer.Builder<?> drinkingHat(int weight) {
-        return lootTable("items/drinking_hat", weight);
-    }
-
-    private static LootPoolEntryContainer.Builder<?> lootTable(String lootTable, int weight) {
-        return NestedLootTable.lootTableReference(Artifacts.key(Registries.LOOT_TABLE, lootTable)).setWeight(weight);
     }
 }

@@ -19,6 +19,7 @@ public class ModLootTables {
     private static final String CHEST_LOOT_PREFIX = "chests/";
     private static final String CAMPSITE_BARREL_PREFIX = CHEST_LOOT_PREFIX + "campsite_barrel/";
     private static final String ENTITY_EQUIPMENT_PREFIX = "entity_equipment/";
+    private static final String INJECTED_LOOT_TABLE_PREFIX = "inject/";
 
     public static final ResourceKey<LootTable> ARTIFACT = Artifacts.key(Registries.LOOT_TABLE, "artifact");
     public static final ResourceKey<LootTable> DRINKING_HAT = Artifacts.key(Registries.LOOT_TABLE, ARTIFACT_LOOT_TABLE_PREFIX + "drinking_hat");
@@ -91,5 +92,19 @@ public class ModLootTables {
         }
         return BuiltInRegistries.ITEM.getResourceKey(item).orElseThrow()
                 .dependent(Registries.LOOT_TABLE, ARTIFACT_LOOT_TABLE_PREFIX::concat);
+    }
+
+    public static ResourceKey<LootTable> getInjectedLootTable(ResourceKey<LootTable> target) {
+        if (!INJECTED_LOOT_TABLES.contains(target)) {
+            throw new IllegalArgumentException("Invalid loot injection target: %s".formatted(target));
+        }
+        return Artifacts.key(Registries.LOOT_TABLE, INJECTED_LOOT_TABLE_PREFIX + target.identifier().getPath());
+    }
+
+    public static ResourceKey<LootTable> getInjectedArchaeologyLootTable(ResourceKey<LootTable> target) {
+        if (!ARCHAEOLOGY_LOOT_TABLES.contains(target)) {
+            throw new IllegalArgumentException("Invalid archaeology injection target: %s".formatted(target));
+        }
+        return Artifacts.key(Registries.LOOT_TABLE, INJECTED_LOOT_TABLE_PREFIX + target.identifier().getPath());
     }
 }

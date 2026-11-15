@@ -4,6 +4,7 @@ import artifacts.Artifacts;
 import artifacts.config.ConfigManager;
 import artifacts.lang.LangEntry;
 import artifacts.lang.LangUtil;
+import artifacts.neoforge.data.advancement.ArtifactsAdvancementSubProvider;
 import artifacts.neoforge.data.tags.ItemTags;
 import artifacts.registry.*;
 import net.minecraft.core.Holder;

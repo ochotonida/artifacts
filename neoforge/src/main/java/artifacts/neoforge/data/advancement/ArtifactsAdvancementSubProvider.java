@@ -1,4 +1,4 @@
-package artifacts.neoforge.data;
+package artifacts.neoforge.data.advancement;
 
 import artifacts.Artifacts;
 import artifacts.neoforge.data.tags.ItemTags;

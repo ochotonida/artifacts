@@ -1,6 +1,5 @@
 package artifacts.neoforge.data.loot;
 
-import artifacts.Artifacts;
 import artifacts.loot.ArtifactRarityAdjustedChance;
 import artifacts.registry.ModItems;
 import artifacts.registry.ModLootTables;
@@ -268,7 +267,7 @@ public class ArtifactsInjectedStructureLoot implements LootTableSubProvider {
     }
 
     private void inject(ResourceKey<LootTable> target, LootTable.Builder builder) {
-        ResourceKey<LootTable> key = Artifacts.key(Registries.LOOT_TABLE, "inject/" + target.identifier().getPath());
+        ResourceKey<LootTable> key = ModLootTables.getInjectedLootTable(target);
         output.accept(key, builder);
     }
 
