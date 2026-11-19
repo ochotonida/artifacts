@@ -8,7 +8,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
@@ -17,6 +19,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,20 +42,6 @@ public abstract class ArtifactRenderer {
             SubmitNodeCollector submitNodeCollector,
             int light
     ) {
-        if (entityModel instanceof HumanoidModel<?> humanoidModel) {
-            render(stack, cast(renderState), humanoidModel, slotIndex, poseStack, submitNodeCollector, light);
-        }
-    }
-
-    private <S extends HumanoidRenderState> void render(
-            ItemStack stack,
-            S renderState,
-            HumanoidModel<S> entityModel,
-            int slotIndex,
-            PoseStack poseStack,
-            SubmitNodeCollector submitNodeCollector,
-            int light
-    ) {
         if (renderState.entityType == EntityTypes.PLAYER) {
             if (!Artifacts.CONFIG.client.showArtifactsOnPlayers.get()) {
                 return;
@@ -63,6 +52,57 @@ public abstract class ArtifactRenderer {
             }
         }
 
+        if (entityModel instanceof HumanoidModel<?> humanoidModel) {
+            renderVisible(stack, cast(renderState), humanoidModel, slotIndex, poseStack, submitNodeCollector, light);
+        }
+    }
+
+    public boolean isVisibleInFirstPerson(int slotIndex, HumanoidArm arm, HumanoidArm mainHandSide) {
+        return false;
+    }
+
+    public final void renderFirstPerson(
+            ItemStack stack,
+            int slotIndex,
+            HumanoidArm arm,
+            PoseStack poseStack,
+            SubmitNodeCollector submitNodeCollector,
+            AvatarRenderState renderState,
+            AbstractClientPlayer clientPlayer,
+            int packedLight
+    ) {
+        if (!Artifacts.CONFIG.client.showFirstPersonGloves.get() || !isVisibleInFirstPerson(slotIndex, arm, renderState.mainArm)) {
+            return;
+        }
+        Value<Boolean> hideWhenInvisible = stack.get(ModDataComponents.HIDE_WHEN_INVISIBLE.get());
+        if (renderState.isInvisible && hideWhenInvisible != null && hideWhenInvisible.get()) {
+            return;
+        }
+        renderVisibleFirstPerson(stack, slotIndex, arm, poseStack, submitNodeCollector, renderState, clientPlayer, packedLight);
+    }
+
+    protected void renderVisibleFirstPerson(
+            ItemStack stack,
+            int slotIndex,
+            HumanoidArm arm,
+            PoseStack poseStack,
+            SubmitNodeCollector submitNodeCollector,
+            AvatarRenderState renderState,
+            AbstractClientPlayer clientPlayer,
+            int packedLight
+    ) {
+        // NO-OP
+    }
+
+    private <S extends HumanoidRenderState> void renderVisible(
+            ItemStack stack,
+            S renderState,
+            HumanoidModel<S> entityModel,
+            int slotIndex,
+            PoseStack poseStack,
+            SubmitNodeCollector submitNodeCollector,
+            int light
+    ) {
         HumanoidModel<HumanoidRenderState> artifactModel = getModel(renderState, slotIndex);
         Model<S> model = TransformCopyingHumanoidModel.create(entityModel, artifactModel);
 

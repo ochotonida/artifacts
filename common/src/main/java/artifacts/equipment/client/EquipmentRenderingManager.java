@@ -1,11 +1,6 @@
 package artifacts.equipment.client;
 
-import artifacts.Artifacts;
 import artifacts.client.item.renderer.ArtifactRenderer;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.state.level.PlayerRenderState;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.Item;
 
 import java.util.LinkedHashSet;
@@ -23,14 +18,6 @@ public class EquipmentRenderingManager {
     public static void registerArtifactRenderer(Item item, Supplier<ArtifactRenderer> rendererFactory) {
         for (EquipmentRenderingHandler handler : RENDERING_HANDLERS) {
             handler.registerArtifactRenderer(item, rendererFactory);
-        }
-    }
-
-    public static void renderFirstPersonArm(PlayerRenderState renderState, PoseStack matrixStack, SubmitNodeCollector submitNodeCollector, int light, HumanoidArm side) {
-        if (Artifacts.CONFIG.client.showFirstPersonGloves.get()) {
-            for (EquipmentRenderingHandler handler : RENDERING_HANDLERS) {
-                handler.renderArm(renderState, matrixStack, submitNodeCollector, light, side);
-            }
         }
     }
 }

@@ -6,7 +6,6 @@ import artifacts.client.CooldownOverlayRenderer;
 import artifacts.client.item.ArtifactRenderers;
 import artifacts.client.mimic.MimicRenderer;
 import artifacts.integration.ModCompat;
-import artifacts.neoforge.client.ArmRenderHandler;
 import artifacts.neoforge.client.HeliumFlamingoOverlayRenderer;
 import artifacts.neoforge.integration.curios.CuriosCompatClient;
 import artifacts.registry.ModEntityTypes;
@@ -30,9 +29,6 @@ public class ArtifactsNeoForgeClient {
         modBus.addListener((RegisterKeyMappingsEvent event) -> ModKeyMappings.register(event::register));
         modBus.addListener(this::registerConditionalItemModelProperties);
 
-        if (ModCompat.CURIOS.isLoaded() || ModCompat.TRINKETS.isLoaded()) {
-            ArmRenderHandler.setup();
-        }
         if (ModCompat.CURIOS.isLoaded()) {
             CuriosCompatClient.setup(modBus);
         }

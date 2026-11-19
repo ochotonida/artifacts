@@ -14,9 +14,11 @@ import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.PlayerModelType;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public class GloveArtifactRenderer extends ArtifactRenderer {
@@ -63,9 +65,9 @@ public class GloveArtifactRenderer extends ArtifactRenderer {
         return renderState instanceof AvatarRenderState avatarRenderState ? avatarRenderState.skin.model() : PlayerModelType.WIDE;
     }
 
-    private static HumanoidArm getArm(HumanoidRenderState renderState, int slotIndex) {
+    private static HumanoidArm getArm(HumanoidArm mainArm, int slotIndex) {
         InteractionHand hand = slotIndex % 2 == 0 ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
-        return hand == InteractionHand.MAIN_HAND ? renderState.mainArm : renderState.mainArm.getOpposite();
+        return hand == InteractionHand.MAIN_HAND ? mainArm : mainArm.getOpposite();
     }
 
     @Override
@@ -86,24 +88,21 @@ public class GloveArtifactRenderer extends ArtifactRenderer {
 
     @Override
     protected HumanoidModel<HumanoidRenderState> getModel(HumanoidRenderState renderState, int slotIndex) {
-        return models.get(getArm(renderState, slotIndex), getModelType(renderState));
+        return getModel(renderState, getArm(renderState.mainArm, slotIndex));
     }
 
     private HumanoidModel<HumanoidRenderState> getModel(HumanoidRenderState renderState, HumanoidArm arm) {
         return models.get(arm, getModelType(renderState));
     }
 
-    public final void renderFirstPersonArm(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, AbstractClientPlayer player, HumanoidArm arm, boolean hasFoil) {
-        if (player.isSpectator()) {
-            return;
-        }
-        /* FIXME
-        // there's no render state available, so we have to extract one
-        // there might be a better way to do this
-        AvatarRenderer<AbstractClientPlayer> playerRenderer = Minecraft.getInstance().getEntityRenderDispatcher().getPlayerRenderer(player);
-        AvatarRenderState renderState = playerRenderer.createRenderState(player, Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(true));
+    @Override
+    public boolean isVisibleInFirstPerson(int slotIndex, HumanoidArm arm, HumanoidArm mainArm) {
+        return getArm(mainArm, slotIndex) == arm;
+    }
 
-        HumanoidModel<HumanoidRenderState> model = getModel(renderState, arm);
+    @Override
+    protected void renderVisibleFirstPerson(ItemStack stack, int slotIndex, HumanoidArm arm, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, AvatarRenderState renderState, AbstractClientPlayer clientPlayer, int packedLight) {
+       HumanoidModel<HumanoidRenderState> model = getModel(renderState, arm);
 
         // animate artifacts and then reset arms to default position
         model.setupAnim(renderState);
@@ -119,11 +118,10 @@ public class GloveArtifactRenderer extends ArtifactRenderer {
         Identifier texture = getTexture(renderState);
         Identifier glowTexture = getFullBrightOverlayTexture(renderState);
 
-        renderModelPartWithFoil(model, modelPart, poseStack, submitNodeCollector, texture, packedLight, hasFoil);
+        renderModelPartWithFoil(model, modelPart, poseStack, submitNodeCollector, texture, packedLight, stack.hasFoil());
         if (glowTexture != null) {
-            renderModelPartWithFoil(model, modelPart, poseStack, submitNodeCollector, glowTexture, LightCoordsUtil.FULL_BRIGHT, hasFoil);
+            renderModelPartWithFoil(model, modelPart, poseStack, submitNodeCollector, glowTexture, LightCoordsUtil.FULL_BRIGHT, stack.hasFoil());
         }
-        */
     }
 
     private void renderModelPartWithFoil(Model<?> model, ModelPart modelPart, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, Identifier texture, int packedLight, boolean hasFoil) {
