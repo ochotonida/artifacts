@@ -10,14 +10,14 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.entity.player.Player;
 
-public record UpdateSwimFlyingPacket(boolean shouldSwim) implements CustomPacketPayload {
+public record ToggleSwimFlyingPacket(boolean shouldSwim) implements CustomPacketPayload {
 
-    public static final Type<UpdateSwimFlyingPacket> TYPE = new Type<>(Artifacts.id("update_swim_flying"));
+    public static final Type<ToggleSwimFlyingPacket> TYPE = new Type<>(Artifacts.id("toggle_swim_flying"));
 
-    public static final StreamCodec<FriendlyByteBuf, UpdateSwimFlyingPacket> CODEC = StreamCodec.composite(
+    public static final StreamCodec<FriendlyByteBuf, ToggleSwimFlyingPacket> CODEC = StreamCodec.composite(
             ByteBufCodecs.BOOL,
-            UpdateSwimFlyingPacket::shouldSwim,
-            UpdateSwimFlyingPacket::new
+            ToggleSwimFlyingPacket::shouldSwim,
+            ToggleSwimFlyingPacket::new
     );
 
     public void apply(PayloadContext context) {

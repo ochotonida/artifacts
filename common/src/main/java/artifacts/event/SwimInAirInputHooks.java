@@ -33,7 +33,7 @@ public class SwimInAirInputHooks {
         if (isSwimKeyPressed) {
             if (swimData.isSwimFlying() ? player.isSwimming() && swimData.shouldDepleteSwimFlyingCharge(player) : SwimInAir.canSwim(player)) {
                 swimData.toggleSwimFlying(player);
-                swimData.syncSwimming(player);
+                swimData.syncToServer(player);
             }
         }
     }

@@ -24,10 +24,10 @@ public class NetworkHandler {
     public static void registerPayloads() {
         registerClientbound(PlaySoundAtPlayerPacket.TYPE, PlaySoundAtPlayerPacket.CODEC, PlaySoundAtPlayerPacket::apply);
         registerClientbound(UpdateConfigValuePacket.TYPE, UpdateConfigValuePacket.CODEC, UpdateConfigValuePacket::apply);
-        registerClientbound(UpdateSwimFlyingPacket.TYPE, UpdateSwimFlyingPacket.CODEC, UpdateSwimFlyingPacket::apply);
+        registerClientbound(UpdateSwimDataPacket.TYPE, UpdateSwimDataPacket.CODEC, UpdateSwimDataPacket::apply);
 
         registerServerbound(DoubleJumpPacket.TYPE, DoubleJumpPacket.CODEC, DoubleJumpPacket::apply);
-        registerServerbound(UpdateSwimFlyingPacket.TYPE, UpdateSwimFlyingPacket.CODEC, UpdateSwimFlyingPacket::apply);
+        registerServerbound(ToggleSwimFlyingPacket.TYPE, ToggleSwimFlyingPacket.CODEC, ToggleSwimFlyingPacket::apply);
         registerServerbound(ToggleKeyPressedPacket.TYPE, ToggleKeyPressedPacket.CODEC, ToggleKeyPressedPacket::apply);
     }
 
