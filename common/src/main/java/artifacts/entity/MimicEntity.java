@@ -1,6 +1,9 @@
 package artifacts.entity;
 
 import artifacts.Artifacts;
+import artifacts.integration.ModCompat;
+import artifacts.integration.lootr.LootrCompat;
+import artifacts.platform.ModListProvider;
 import artifacts.registry.ModSoundEvents;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -27,6 +30,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootTable;
+import noobanidus.mods.lootr.common.api.LootrAPI;
 
 import java.util.EnumSet;
 
@@ -146,6 +150,10 @@ public class MimicEntity extends Mob implements Enemy {
 
         if (attackCooldown > 0) {
             attackCooldown--;
+        }
+
+        if (isDormant && this.level().isClientSide() && ModCompat.LOOTR.isLoaded()) {
+            LootrCompat.maybeSpawnParticles(this);
         }
     }
 
