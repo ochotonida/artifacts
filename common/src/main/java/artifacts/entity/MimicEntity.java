@@ -3,11 +3,13 @@ package artifacts.entity;
 import artifacts.Artifacts;
 import artifacts.integration.ModCompat;
 import artifacts.integration.lootr.LootrCompat;
-import artifacts.platform.ModListProvider;
 import artifacts.registry.ModSoundEvents;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -30,7 +32,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootTable;
-import noobanidus.mods.lootr.common.api.LootrAPI;
 
 import java.util.EnumSet;
 
@@ -38,11 +39,13 @@ public class MimicEntity extends Mob implements Enemy {
 
     public static final ResourceKey<LootTable> LOOT_TABLE = Artifacts.key(Registries.LOOT_TABLE, "entities/mimic");
 
+    // TODO: sync facing as well, clean up this entire class
+    private static final EntityDataAccessor<Boolean> IS_DORMANT = SynchedEntityData.defineId(MimicEntity.class, EntityDataSerializers.BOOLEAN);
+
     private static final int DORMANT_TICK_RATE = 20;
 
     public int ticksInAir;
     public int attackCooldown;
-    public boolean isDormant;
     public Direction facing;
     private int tickRate = 1;
 
@@ -69,10 +72,14 @@ public class MimicEntity extends Mob implements Enemy {
     }
 
     public void setDormant(boolean isDormant) {
-        this.isDormant = isDormant;
+        entityData.set(IS_DORMANT, isDormant);
         if (!isDormant) {
             facing = null;
         }
+    }
+
+    private boolean isDormant() {
+        return entityData.get(IS_DORMANT);
     }
 
     @Override
@@ -97,11 +104,16 @@ public class MimicEntity extends Mob implements Enemy {
         targetSelector.addGoal(1, new NearestPlayerTargetGoal());
     }
 
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(IS_DORMANT, false);
+    }
+
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putInt("ticksInAir", ticksInAir);
-        compound.putBoolean("isDormant", isDormant);
+        compound.putBoolean("isDormant", isDormant());
         if (facing != null) {
             compound.putString("facing", facing.name());
         }
@@ -122,7 +134,7 @@ public class MimicEntity extends Mob implements Enemy {
     @Override
     public void tick() {
         if (tickCount % 20 == 0) {
-            if (!isDormant || level().isClientSide()
+            if (!isDormant() || level().isClientSide()
                     || !onGround() || isDeadOrDying()
                     || isPassenger() || !getPassengers().isEmpty()
                     || level().getNearestPlayer(this, 32) != null) {
@@ -152,7 +164,7 @@ public class MimicEntity extends Mob implements Enemy {
             attackCooldown--;
         }
 
-        if (isDormant && this.level().isClientSide() && ModCompat.LOOTR.isLoaded()) {
+        if (isDormant() && this.level().isClientSide() && ModCompat.LOOTR.isLoaded()) {
             LootrCompat.maybeSpawnParticles(this);
         }
     }
@@ -184,12 +196,12 @@ public class MimicEntity extends Mob implements Enemy {
 
     @Override
     public boolean isPushedByFluid() {
-        return !isDormant;
+        return !isDormant();
     }
 
     @Override
     protected int decreaseAirSupply(int i) {
-        return isDormant ? i : super.decreaseAirSupply(i);
+        return isDormant() ? i : super.decreaseAirSupply(i);
     }
 
     @Override
@@ -274,7 +286,7 @@ public class MimicEntity extends Mob implements Enemy {
         public void tick() {
             super.tick();
 
-            if (mimic.isDormant) {
+            if (mimic.isDormant()) {
                 return;
             }
 
@@ -324,7 +336,7 @@ public class MimicEntity extends Mob implements Enemy {
         public void tick() {
             super.tick();
 
-            if (isDormant) {
+            if (isDormant()) {
                 return;
             }
 
@@ -352,7 +364,7 @@ public class MimicEntity extends Mob implements Enemy {
 
         @Override
         public void tick() {
-            if (mimic.isDormant) {
+            if (mimic.isDormant()) {
                 return;
             }
 
@@ -404,7 +416,7 @@ public class MimicEntity extends Mob implements Enemy {
 
         @Override
         public boolean canUse() {
-            return !mimic.isDormant && !mimic.isPassenger();
+            return !mimic.isDormant() && !mimic.isPassenger();
         }
 
         @Override
@@ -421,7 +433,7 @@ public class MimicEntity extends Mob implements Enemy {
             super(MimicEntity.this, Player.class, 1, true, false, null);
             // noinspection ConstantConditions
             super.targetConditions = TargetingConditions.forNonCombat().range(this.getFollowDistance()).selector(
-                    (entity) -> entity.canBeSeenAsEnemy() && (!isDormant || distanceTo(entity) < getAttribute(Attributes.FOLLOW_RANGE).getValue() / 2.5)
+                    (entity) -> entity.canBeSeenAsEnemy() && (!isDormant() || distanceTo(entity) < getAttribute(Attributes.FOLLOW_RANGE).getValue() / 2.5)
             );
         }
     }
