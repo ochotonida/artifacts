@@ -23,7 +23,17 @@ public class ModCompat {
     public static final ModInfo CREEPER_OVERHAUL = new ModInfo("creeperoverhaul");
     public static final ModInfo HARDCORE_REVIVAL = new ModInfo("hardcorerevival");
     public static final ModInfo LOOTR = new ModInfo("lootr");
+    // `origins-legacy` is the actual mod id defined in the fabric.mod.json,
+    // with `origins` and `origins_legacy` defined as aliases (`origins` still registers as loaded when checked).
+    // Origins Legacy is (currently) incompatible with Sinytra Connector
     public static final ModInfo ORIGINS_LEGACY = new ModInfo("origins-legacy");
+    // The compatibility code specifically requires the modern Fabric version of Origins.
+    // Origins Legacy and Origins (Neoforge) are based on an older version and cause it to crash.
+    // Origins is currently incompatible with Sinytra, but might not be in the future
+    // TODO:
+    //  Compatibility mixins use the raw package name for mod loaded checks, and as a result ignore aliases and supersededBy checks
+    //  For Origins (NeoForge) this isn't an issue, since Apoli's code is included in Origins rather than bundled as a separate mod
+    //  With Origins Legacy, an error is thrown in the logs for the umbrella mixin
     public static final ModInfo ORIGINS = new ModInfo("origins", ORIGINS_LEGACY, NEOFORGE);
     public static final ModInfo QUARK = new ModInfo("quark");
 
