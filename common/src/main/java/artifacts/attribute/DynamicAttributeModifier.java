@@ -30,7 +30,8 @@ public abstract class DynamicAttributeModifier {
     ) {
         @Override
         protected boolean shouldApply(LivingEntity entity) {
-            return entity.getControllingPassenger() != null;
+            return entity.getControllingPassenger() != null
+                    && !hasDefaultAttributeValue(entity.getControllingPassenger(), ModAttributes.MOUNT_SPEED);
         }
 
         @Override
@@ -46,7 +47,12 @@ public abstract class DynamicAttributeModifier {
     ) {
         @Override
         protected boolean shouldApply(LivingEntity entity) {
-            return entity.isSprinting();
+            return entity.isSprinting()
+                    // Punching an entity while sprinting and holding the sprint key causes a vanilla desync bug (in 1.21.1 at least)
+                    // Adding an attribute modifier forces the server to sync the movement speed attribute,
+                    // this puts the client in a state where the player is sprinting but doesn't have the additional movement speed
+                    // This line prevents that bug from being triggered except when needed
+                    && !hasDefaultAttributeValue(entity, ModAttributes.SPRINTING_SPEED);
         }
 
         @Override
@@ -62,7 +68,7 @@ public abstract class DynamicAttributeModifier {
     ) {
         @Override
         protected boolean shouldApply(LivingEntity entity) {
-            return entity.isSprinting();
+            return entity.isSprinting() && !hasDefaultAttributeValue(entity, ModAttributes.SPRINTING_STEP_HEIGHT);
         }
 
         @Override
@@ -95,7 +101,7 @@ public abstract class DynamicAttributeModifier {
         @Override
         protected boolean shouldApply(LivingEntity entity) {
             if (entity.onGround() && entity instanceof EntityAccessor entityAccessor) {
-                if (entity.getAttributeValue(ModAttributes.MOVEMENT_SPEED_ON_SNOW) != 1) {
+                if (!hasDefaultAttributeValue(entity, ModAttributes.MOVEMENT_SPEED_ON_SNOW)) {
                     BlockState onState = entity.level().getBlockState(entityAccessor.callGetBlockPosBelowThatAffectsMyMovement());
                     if (onState.is(BlockTags.SNOW)) {
                         return true;
@@ -142,6 +148,10 @@ public abstract class DynamicAttributeModifier {
         } else if (attributeInstance.hasModifier(id)) {
             attributeInstance.removeModifier(id);
         }
+    }
+
+    private static boolean hasDefaultAttributeValue(LivingEntity entity, Holder<Attribute> attribute) {
+        return entity.getAttributeValue(attribute) == attribute.value().getDefaultValue();
     }
 
     private static boolean shouldUpdateModifiers(LivingEntity entity) {
